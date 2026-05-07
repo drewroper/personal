@@ -405,6 +405,11 @@
 
     const DARK   = [12, 12, 13];
     const LIGHT  = [244, 241, 236];
+    const ACCENT = [214, 255, 56];
+
+    // Toggled by click/tap on the canvas. When true, every "light"
+    // pixel renders in the accent (lime); off goes back to cream.
+    let accent = false;
 
     let gray = null;
     let raf = 0;
@@ -470,7 +475,7 @@
           const idx = yw + x;
           const v = gray[idx] + ts;
           const m = BAYER[rowBase + ((x + ox) & 7)];
-          const c = ACCENT_SET.has(idx) ? ACCENT : (v > m ? LIGHT : DARK);
+          const c = v > m ? (accent ? ACCENT : LIGHT) : DARK;
           const oi = idx * 4;
           data[oi]     = c[0];
           data[oi + 1] = c[1];
@@ -510,6 +515,12 @@
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) stop();
       else if (visible) start();
+    });
+
+    // Click / tap toggles all light dots between cream and accent.
+    canvas.addEventListener('click', () => {
+      accent = !accent;
+      if (gray) render(performance.now()); // immediate repaint
     });
   })();
 

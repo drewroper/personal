@@ -400,9 +400,9 @@ section {
   position: relative;
   aspect-ratio: 3 / 2;
   background: #0e0e10;
-  border: var(--hairline) solid var(--line);
   overflow: hidden;
 }
+.portrait__canvas { cursor: pointer; }
 .portrait__canvas {
   position: absolute;
   inset: 0;

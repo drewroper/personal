@@ -481,6 +481,20 @@
       return out;
     };
 
+    // Thick diagonal line from (x1,y1) to (x2,y2). Stamps a small cross
+    // at every step so the line reads as 3 pixels wide.
+    const thickLine = (x1, y1, x2, y2) => {
+      const out = [];
+      const steps = Math.max(Math.abs(x2 - x1), Math.abs(y2 - y1));
+      for (let i = 0; i <= steps; i++) {
+        const t = i / steps;
+        const x = Math.round(x1 + (x2 - x1) * t);
+        const y = Math.round(y1 + (y2 - y1) * t);
+        out.push([x, y], [x + 1, y], [x - 1, y], [x, y + 1], [x, y - 1]);
+      }
+      return out;
+    };
+
     // Face landmarks in normalized coords. The photo subject sits
     // upper-center, biased a touch right of frame center.
     const FACE = {
@@ -599,27 +613,32 @@
         return out;
       },
 
-      // 5 — Handlebar mustache with pronounced upward curls
+      // 5 — Classic handlebar mustache: thick body with curl loops at
+      // each end (visible interior holes — reads as a clear curl).
       function mustache(W, H) {
         const out = [];
         const cx = N(FACE.nose.x, W);
         const cy = Math.round((N(FACE.nose.y, H) + N(FACE.mouth.y, H)) / 2);
 
-        // Tall curls at each end rise four rows above the body and
-        // flare out at the top so the silhouette reads as a handlebar
-        // with clear upturned tips.
+        // Each end has a 4×4 closed loop drawn so the hole inside is
+        // visible. The loop's bottom row meets the leftmost columns of
+        // the body so it integrates as one continuous mustache.
         const rows = [
-          { dy: -4, dxs: [-10, -9, 9, 10] },                                                       // tippy top
-          { dy: -3, dxs: [-11, -10, -9, -8, 8, 9, 10, 11] },                                       // curl flair
-          { dy: -2, dxs: [-10, -9, 9, 10] },                                                       // curl side
-          { dy: -1, dxs: [-10, -9, 9, 10] },                                                       // curl side
-          // Main body — solid horizontal bar with a philtrum gap at the center.
-          { dy:  0, dxs: [-10, -9, -8, -7, -6, -5, -4, -3, -2, 2, 3, 4, 5, 6, 7, 8, 9, 10] },
-          { dy:  1, dxs: [-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] },
-          { dy:  2, dxs: [-9, -8, -7, -6, -5, -4, -3, -2, 2, 3, 4, 5, 6, 7, 8, 9] },
+          // The loops themselves (rows -3 to 0)
+          { dy: -3, dxs: [-12, -11,                                                                 11, 12] },
+          { dy: -2, dxs: [-13, -12, -11, -10,                                                       10, 11, 12, 13] },
+          { dy: -1, dxs: [-13,           -10,                                                       10,         13] },
+          { dy:  0, dxs: [-13, -12, -11, -10,                                                       10, 11, 12, 13] },
+          // Body — thick horizontal bar with a 3-col philtrum gap
+          { dy:  1, dxs: [-12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2,
+                                                              2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12] },
+          { dy:  2, dxs: [-11, -10, -9, -8, -7, -6, -5, -4, -3,
+                                                          3,  4,  5,  6,  7,  8,  9, 10, 11] },
+          { dy:  3, dxs: [-10, -9, -8, -7, -6, -5, -4, -3,
+                                                       3,  4,  5,  6,  7,  8,  9, 10] },
           // Tapering bottom
-          { dy:  3, dxs: [-7, -6, -5, -4, -3, 3, 4, 5, 6, 7] },
-          { dy:  4, dxs: [-5, -4, 4, 5] }
+          { dy:  4, dxs: [-9, -8, -7, -6, -5, -4,        4,  5,  6,  7,  8,  9] },
+          { dy:  5, dxs: [-7, -6, -5, -4,                4,  5,  6,  7] }
         ];
         for (const r of rows) {
           for (const dx of r.dxs) out.push([cx + dx, cy + r.dy]);
@@ -627,47 +646,53 @@
         return out;
       },
 
-      // 6 — Smiley face: happy arched eyes (closed/laughing) + wide smile
+      // 6 — Smiley face: tall pill eyes + a wide thick smile
       function smiley(W, H) {
         const out = [];
         const lx = N(FACE.leftEye.x, W),  ly = N(FACE.leftEye.y, H);
         const rx = N(FACE.rightEye.x, W), ry = N(FACE.rightEye.y, H);
 
-        // Arched eye: 9-wide opening-down arc, like ⌒. Reads as a
-        // laughing/squinting closed eye.
+        // 5-wide × 9-tall vertical pill — reads as a happy almond eye.
         const eyeRows = [
-          '..#####..',
-          '.#######.',
-          '##.....##'
+          '.###.',
+          '#####',
+          '#####',
+          '#####',
+          '#####',
+          '#####',
+          '#####',
+          '#####',
+          '.###.'
         ];
-        const halfEye = 4;
+        const halfEyeW = 2;
+        const halfEyeH = 4;
         const drawEye = (cx, cy) => {
           for (let r = 0; r < eyeRows.length; r++) {
             for (let c = 0; c < eyeRows[r].length; c++) {
-              if (eyeRows[r][c] === '#') out.push([cx + c - halfEye, cy - 1 + r]);
+              if (eyeRows[r][c] === '#') {
+                out.push([cx + c - halfEyeW, cy + r - halfEyeH]);
+              }
             }
           }
         };
         drawEye(lx, ly);
         drawEye(rx, ry);
 
-        // Smile: wider arc, 3-pixel thick
+        // Smile: wide arc, 3-pixel thick.
         const mx = N(FACE.mouth.x, W);
         const my = N(FACE.mouth.y, H);
         out.push(...smileArc(mx, my, Math.round(W * 0.10), Math.round(H * 0.07), 3));
         return out;
       },
 
-      // 7 — Necklace with an obnoxious dollar pendant
+      // 7 — Necklace with a more obnoxious dollar pendant
       function chain(W, H) {
         const out = [];
-        // Narrower than before — neck-width, not shoulder-width. Sits
-        // a bit lower in the frame too.
+        // Shifted a few pixels left to better center on Drew's neck.
         const chainCenterY = N(0.56, H);
-        const chainCenterX = N(0.52, W);
+        const chainCenterX = N(0.49, W);
         const halfSpan = Math.round(W * 0.10);
         for (let dx = -halfSpan; dx <= halfSpan; dx++) {
-          // Parabolic dip: lowest at center, rises at the ends.
           const t = dx / halfSpan;
           const dy = Math.round((1 - t * t) * 3);
           const x = chainCenterX + dx;
@@ -676,29 +701,35 @@
           out.push([x, y], [x, y + 1]);
         }
 
-        // 13×16 obnoxious dollar sign with 2-pixel-thick strokes.
+        // 17×21 big-big dollar sign. 3-pixel-thick strokes; vertical
+        // bar runs through the whole thing.
         const dollarRows = [
-          '.....##......',  // -7
-          '.....##......',  // -6
-          '.##########..',  // -5
-          '.##########..',  // -4
-          '##........##.',  // -3
-          '##...........',  // -2
-          '##...........',  // -1
-          '.##########..',  //  0
-          '.##########..',  //  1
-          '...........##',  //  2
-          '...........##',  //  3
-          '##........##.',  // -—
-          '.##########..',  //  5
-          '.##########..',  //  6
-          '.....##......',  //  7
-          '.....##......'   //  8
+          '.......###.......',  // -10
+          '.......###.......',  //  -9
+          '.......###.......',  //  -8
+          '.###############.',  //  -7
+          '.###############.',  //  -6
+          '.###############.',  //  -5
+          '##...............',  //  -4
+          '##...............',  //  -3
+          '##...............',  //  -2
+          '.###############.',  //  -1
+          '.###############.',  //   0
+          '.###############.',  //   1
+          '...............##',  //   2
+          '...............##',  //   3
+          '...............##',  //   4
+          '.###############.',  //   5
+          '.###############.',  //   6
+          '.###############.',  //   7
+          '.......###.......',  //   8
+          '.......###.......',  //   9
+          '.......###.......'   //  10
         ];
-        const halfDX = 6;
-        const halfDY = 7;
+        const halfDX = 8;   // (17-1)/2
+        const halfDY = 10;  // (21-1)/2
         const cx = chainCenterX;
-        const cy = chainCenterY + 14; // sits lower, on the upper chest
+        const cy = chainCenterY + 16; // pendant hangs squarely on the chest
         for (let r = 0; r < dollarRows.length; r++) {
           const row = dollarRows[r];
           for (let c = 0; c < row.length; c++) {
@@ -706,6 +737,18 @@
           }
         }
         return out;
+      },
+
+      // 8 — Big lime X across the face
+      function bigX(W, H) {
+        const cx = N(FACE.nose.x, W);
+        const cy = N(FACE.nose.y, H);
+        const hw = Math.round(W * 0.22);
+        const hh = Math.round(H * 0.22);
+        return [
+          ...thickLine(cx - hw, cy - hh, cx + hw, cy + hh),
+          ...thickLine(cx + hw, cy - hh, cx - hw, cy + hh)
+        ];
       }
     ];
 

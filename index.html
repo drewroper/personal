@@ -142,8 +142,8 @@
             <canvas
               class="portrait__canvas"
               id="js-portrait"
-              width="120"
-              height="80"
+              width="132"
+              height="88"
               data-src="assets/portrait.jpg"
               aria-hidden="true"></canvas>
             <span class="portrait__corner portrait__corner--tl" aria-hidden="true"></span>
@@ -153,7 +153,8 @@
           </div>
           <figcaption>
             <span>Fig. 01</span>
-            <span>Portrait · circa 2024</span>
+            <span>Dithered portrait</span>
+            <span>Circa 2024</span>
           </figcaption>
         </figure>
 
@@ -174,29 +175,31 @@
     </section>
 
     <!-- HISTORY ========================================================== -->
-    <section class="history" id="history" aria-label="Work history">
+    <section class="history" id="history" aria-labelledby="history-h">
+      <h2 id="history-h" class="history__title">Incomplete history</h2>
+
       <ul class="history__list" role="list">
         <li class="history__item">
           <div class="history__top">
             <h2 class="history__company">Anthropic</h2>
-            <span class="history__year">2026</span>
+            <span class="history__year">2025</span>
           </div>
           <div class="history__bottom">
-            <span class="history__role">Member of Technical Staff</span>
+            <span class="history__role">Design Lead</span>
             <span class="history__rule" aria-hidden="true"></span>
-            <span class="history__loc">Remote · Current</span>
+            <span class="history__loc">Current · Remote</span>
           </div>
         </li>
 
         <li class="history__item">
           <div class="history__top">
             <h2 class="history__company">Stripe</h2>
-            <span class="history__year">2021</span>
+            <span class="history__year">2019</span>
           </div>
           <div class="history__bottom">
             <span class="history__role">Staff Brand Designer</span>
             <span class="history__rule" aria-hidden="true"></span>
-            <span class="history__loc">San Francisco</span>
+            <span class="history__loc">Remote</span>
           </div>
         </li>
 
@@ -204,7 +207,7 @@
           <div class="history__top">
             <h2 class="history__company">Trunk Club</h2>
             <span class="history__pill" aria-label="Contract role">Contract</span>
-            <span class="history__year">2018</span>
+            <span class="history__year">2016</span>
           </div>
           <div class="history__bottom">
             <span class="history__role">Senior Designer</span>
@@ -217,7 +220,7 @@
           <div class="history__top">
             <h2 class="history__company">Dropbox</h2>
             <span class="history__pill" aria-label="Contract role">Contract</span>
-            <span class="history__year">2016</span>
+            <span class="history__year">2014</span>
           </div>
           <div class="history__bottom">
             <span class="history__role">Designer</span>
@@ -228,11 +231,23 @@
 
         <li class="history__item">
           <div class="history__top">
+            <h2 class="history__company">Factory Design Labs</h2>
+            <span class="history__year">2013</span>
+          </div>
+          <div class="history__bottom">
+            <span class="history__role">Art Director · Oakley / Aspen Snowmass / Revo</span>
+            <span class="history__rule" aria-hidden="true"></span>
+            <span class="history__loc">Denver</span>
+          </div>
+        </li>
+
+        <li class="history__item">
+          <div class="history__top">
             <h2 class="history__company">Obama for America</h2>
             <span class="history__year">2012</span>
           </div>
           <div class="history__bottom">
-            <span class="history__role">Designer · Digital</span>
+            <span class="history__role">Designer</span>
             <span class="history__rule" aria-hidden="true"></span>
             <span class="history__loc">Chicago HQ</span>
           </div>
@@ -270,6 +285,13 @@
 
   <!-- FOOTER ============================================================= -->
   <footer class="footer" aria-label="Site footer">
+    <nav class="footer__social" aria-label="Elsewhere">
+      <a href="https://www.linkedin.com/in/drewroper" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://www.behance.net/drewroper" target="_blank" rel="noopener">Behance</a>
+      <a href="https://www.instagram.com/drewroper" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://music.apple.com/profile/drewroper" target="_blank" rel="noopener">Apple Music</a>
+    </nav>
+
     <div class="footer__meta">
       <span class="footer__copy">© 2010–<span id="js-year">2026</span> &nbsp;Drew Roper. All rights reserved.</span>
       <a class="claude-badge" href="https://claude.com/code" rel="noopener" target="_blank" aria-label="Created with Claude Code">

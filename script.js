@@ -617,55 +617,53 @@
       },
 
       // 5 — Mustache traced as a single continuous line: horizontal "M"
-      // shape — curl at each end, swoop up to nose-height peak, dip
-      // down to a valley in the middle, mirrored on the right. Line
-      // is thinner at the tips and at the middle point, thicker
-      // through the swoops.
+      // shape — curl at each end, swoop up to a peak, dip to a valley
+      // in the middle. Line is thinner at the tips and the middle
+      // point, thicker through the swoops.
       function mustache(W, H) {
         const out = [];
-        const cx = N(FACE.nose.x, W);
-        // Anchor so the line's bottom sits at mouth height; peaks rise
-        // up to roughly nostril height (cy - 6 ≈ FACE.nose.y).
+        // Anchor a couple pixels left of the FACE.nose center so the
+        // mustache lands over Drew's actual upper lip.
+        const cx = N(FACE.nose.x, W) - 2;
         const cy = N(FACE.mouth.y, H);
 
-        // Path: [dx, centerline_dy, thickness].
-        // dy is rows ABOVE the anchor (so -6 is the highest point).
-        // thickness stamps that many pixels downward from the centerline.
+        // Path: [dx, centerline_dy, thickness]. Half the prior peak
+        // height for a flatter, less-zigzag silhouette.
         const path = [
-          [-17,  0, 1],  // far-left tip (thin)
-          [-16, -1, 1],  // curl rising
-          [-15, -2, 2],  // curl peak (subtle)
-          [-14, -1, 2],  // back down from curl
-          [-13,  0, 2],  // bottom of post-curl dip
-          [-12, -1, 3],  // start of swoop up — getting thicker
-          [-11, -2, 3],
-          [-10, -3, 4],
-          [ -9, -4, 4],
-          [ -8, -5, 4],
-          [ -7, -6, 3],  // left peak (thinner at the point)
-          [ -6, -6, 3],
-          [ -5, -5, 4],  // descending from peak through swoop
-          [ -4, -4, 4],
-          [ -3, -3, 4],
-          [ -2, -2, 3],
+          [-17,  0, 1],
+          [-16,  0, 1],
+          [-15, -1, 2],
+          [-14, -1, 2],
+          [-13,  0, 2],
+          [-12, -1, 3],
+          [-11, -1, 3],
+          [-10, -2, 4],
+          [ -9, -2, 4],
+          [ -8, -3, 4],   // approaching peak
+          [ -7, -3, 3],   // left peak (thinner)
+          [ -6, -3, 3],
+          [ -5, -3, 4],
+          [ -4, -2, 4],
+          [ -3, -2, 4],
+          [ -2, -1, 3],
           [ -1, -1, 2],
-          [  0,  0, 1],  // middle valley (thin)
+          [  0,  0, 1],   // valley (thin)
           [  1, -1, 2],
-          [  2, -2, 3],
-          [  3, -3, 4],
-          [  4, -4, 4],
-          [  5, -5, 4],
-          [  6, -6, 3],  // right peak
-          [  7, -6, 3],
-          [  8, -5, 4],
-          [  9, -4, 4],
-          [ 10, -3, 4],
-          [ 11, -2, 3],
+          [  2, -1, 3],
+          [  3, -2, 4],
+          [  4, -2, 4],
+          [  5, -3, 4],
+          [  6, -3, 3],   // right peak
+          [  7, -3, 3],
+          [  8, -3, 4],
+          [  9, -2, 4],
+          [ 10, -2, 4],
+          [ 11, -1, 3],
           [ 12, -1, 3],
           [ 13,  0, 2],
           [ 14, -1, 2],
-          [ 15, -2, 2],
-          [ 16, -1, 1],
+          [ 15, -1, 2],
+          [ 16,  0, 1],
           [ 17,  0, 1]
         ];
         for (const [dx, yc, thick] of path) {

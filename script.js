@@ -91,13 +91,14 @@
   /* ============================================================
      2. DENVER CLOCK
      Always Mountain Time, regardless of the visitor's location.
-     A subtle tell that Drew is based in Denver. Click toggles a
-     reveal that says so.
+     A subtle tell that Drew is based in Denver. Tap toggles the
+     time text out for the location label for ~3 seconds.
      ============================================================ */
   const clock     = document.getElementById('js-clock');
-  const clockTime = document.getElementById('js-clock-time');
-  if (clock && clockTime) {
-    const tick = () => {
+  const clockText = document.getElementById('js-clock-time');
+  if (clock && clockText) {
+    let locating = false;
+    const formatTime = () => {
       const now = new Date();
       const time = now.toLocaleTimeString('en-US', {
         hour: '2-digit',
@@ -105,23 +106,32 @@
         hour12: false,
         timeZone: 'America/Denver'
       });
-      // Resolve MST or MDT depending on DST.
       const parts = new Intl.DateTimeFormat('en-US', {
         timeZone: 'America/Denver',
         timeZoneName: 'short'
       }).formatToParts(now);
       const tz = (parts.find(p => p.type === 'timeZoneName') || {}).value || 'MT';
-      clockTime.textContent = `${time} ${tz}`;
+      return `${time} ${tz}`;
     };
-    tick();
-    setInterval(tick, 30 * 1000);
+    const paint = () => {
+      clockText.textContent = locating
+        ? (clock.dataset.loc || 'Denver, CO · 5,280 ft')
+        : formatTime();
+    };
+    paint();
+    setInterval(paint, 30 * 1000);
 
-    // Click toggles a "Denver" reveal for ~3 seconds.
     let revealTimer = 0;
     clock.addEventListener('click', () => {
+      locating = true;
       clock.classList.add('is-locating');
+      paint();
       clearTimeout(revealTimer);
-      revealTimer = setTimeout(() => clock.classList.remove('is-locating'), 3000);
+      revealTimer = setTimeout(() => {
+        locating = false;
+        clock.classList.remove('is-locating');
+        paint();
+      }, 3000);
     });
   }
 

@@ -102,6 +102,7 @@ main a:not(.claude-badge):hover {
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: .75rem;
+  min-height: 44px;
   padding: .65rem var(--gutter);
   font-family: var(--font-mono);
   font-size: 11px;
@@ -112,47 +113,23 @@ main a:not(.claude-badge):hover {
   -webkit-backdrop-filter: saturate(140%) blur(10px);
   border-bottom: var(--hairline) solid var(--line);
 }
-.topbar__brand   { justify-self: start;  }
-.topbar__clock   { justify-self: center; }
-.font-switch     { justify-self: end;    }
+.topbar__brand   { justify-self: start;  min-width: 0; }
+.topbar__clock   { justify-self: center; min-width: 0; }
+.font-switch     { justify-self: end;    min-width: 0; }
 .topbar__cell    { white-space: nowrap; }
 
-/* DENVER CLOCK — pinned to MT, click toggles location reveal --- */
+/* DENVER CLOCK — pinned to MT, click toggles a Denver label ---- */
 .topbar__clock {
-  position: relative;
   display: inline-flex;
   align-items: center;
   cursor: pointer;
   color: var(--text-muted);
   transition: color .2s ease;
   -webkit-tap-highlight-color: transparent;
-  overflow: hidden;
 }
 .topbar__clock:hover { color: var(--text); }
-.topbar__clock-time,
-.topbar__clock-loc {
-  display: inline-block;
-  transition: transform .35s cubic-bezier(.2,.8,.2,1), opacity .25s ease;
-}
-.topbar__clock-loc {
-  position: absolute;
-  inset: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-end;
-  opacity: 0;
-  transform: translateY(8px);
-  color: var(--accent);
-  pointer-events: none;
-}
-.topbar__clock.is-locating .topbar__clock-time {
-  opacity: 0;
-  transform: translateY(-8px);
-}
-.topbar__clock.is-locating .topbar__clock-loc {
-  opacity: 1;
-  transform: translateY(0);
-}
+.topbar__clock.is-locating { color: var(--accent); }
+.topbar__clock-text { display: inline-block; }
 
 /* Brand mark — used in topbar + footer ----------------------- */
 .brand-mark {

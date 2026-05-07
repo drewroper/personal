@@ -186,25 +186,31 @@
   /* ============================================================
      4. WORK — image pool, desktop cycling grid, mobile slideshow
      -----------------------------------------------------------
-     Single source of truth for the ~50 image pool. Replace the
-     URLs below with paths into /assets/work/ when you have your
-     real photos. For now we render Lorem Picsum placeholders in
-     grayscale so the layout reads cohesively on the dark site.
+     Pool of project covers pulled from Drew's Behance profile.
+     Swap to local /assets/work/* paths once images are mirrored
+     into the repo. object-fit: cover handles aspect cropping.
      ============================================================ */
-  const WORK_IMAGES = Array.from({ length: 50 }, (_, i) => {
-    // Vary heights to give the masonry a natural rhythm.
-    const heights = [600, 720, 800, 900, 1000, 720, 800];
-    const h = heights[i % heights.length];
-    return `https://picsum.photos/seed/dr-work-${i + 1}/720/${h}?grayscale`;
-  });
-  // Vary aspect ratios for the desktop grid cells (independent of image height
-  // since object-fit: cover will crop). This gives the masonry visual variety.
+  const WORK_IMAGES = [
+    'https://mir-s3-cdn-cf.behance.net/projects/404/64ae8d110754963.Y3JvcCwyMTczLDE3MDAsMTkzLDA.png',
+    'https://mir-s3-cdn-cf.behance.net/projects/404/37dab197905583.Y3JvcCwyMjc4LDE3ODIsNTMwLDM5.jpg',
+    'https://mir-s3-cdn-cf.behance.net/projects/404/f1a7dd103213279.Y3JvcCwxMzgwLDEwODAsMjcwLDA.png',
+    'https://mir-s3-cdn-cf.behance.net/projects/404/8bf4d1103228781.Y3JvcCwxMzgwLDEwODAsMjcwLDA.jpg',
+    'https://mir-s3-cdn-cf.behance.net/projects/404/572758103290303.Y3JvcCwxMzgwLDEwODAsMjcwLDA.jpg',
+    'https://mir-s3-cdn-cf.behance.net/projects/404/b36aee13619493.6172d816aed10.jpg',
+    'https://mir-s3-cdn-cf.behance.net/projects/404/0c367119796977.Y3JvcCwxMzgwLDEwODAsMjcwLDA.png',
+    'https://mir-s3-cdn-cf.behance.net/projects/404/684f27103167265.Y3JvcCwxMzgwLDEwODAsMjcwLDA.jpg',
+    'https://mir-s3-cdn-cf.behance.net/projects/404/f3085d48534019.Y3JvcCwxMzgwLDEwODAsMjcwLDA.jpg',
+    'https://mir-s3-cdn-cf.behance.net/projects/404/51a76e21733267.Y3JvcCw4NzksNjg4LDYwLDA.jpg',
+    'https://mir-s3-cdn-cf.behance.net/projects/404/72bba813608983.5f5aeef869291.jpg',
+    'https://mir-s3-cdn-cf.behance.net/projects/404/59498216106531.61f0f0e5eb6d9.jpg'
+  ];
+  // Aspect ratios for desktop grid cells. object-fit: cover crops as needed
+  // so cell ratios don't have to match source images.
   const CELL_RATIOS = [
     '4 / 5', '3 / 4', '1 / 1', '4 / 5', '3 / 4', '5 / 4',
-    '4 / 5', '1 / 1', '3 / 4', '4 / 5', '5 / 7', '3 / 4',
-    '4 / 5', '1 / 1', '3 / 4', '4 / 5'
+    '4 / 5', '1 / 1', '3 / 4', '4 / 5', '5 / 7', '3 / 4'
   ];
-  const VISIBLE_CELLS = 12;
+  const VISIBLE_CELLS = 8;
 
   function shuffleIndices(n, exclude = new Set()) {
     const arr = [];

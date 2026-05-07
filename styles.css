@@ -380,7 +380,7 @@ section {
 .hero__portrait { margin: 0; }
 .portrait__frame {
   position: relative;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 3 / 2;
   background: #0e0e10;
   border: var(--hairline) solid var(--line);
   overflow: hidden;
@@ -769,7 +769,7 @@ section {
     column-gap: 0;
   }
   .hero__portrait {
-    max-width: 320px;
+    max-width: none;
     width: 100%;
   }
   .hero__name h1 { font-size: clamp(3.75rem, 14vw, 8rem); }

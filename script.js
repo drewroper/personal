@@ -616,36 +616,24 @@
         return out;
       },
 
-      // 5 — Classic handlebar mustache: wide horizontal body with a
-      // closed loop curl at each end (clear hole inside the curl) plus
-      // a tapering bottom edge. Sized to match a "real mustache" silhouette.
+      // 5 — Thin wavy mustache: subtle upturned tip flicks at each end,
+      // body two rows thick. Modeled on Drew's reference doodle.
       function mustache(W, H) {
         const out = [];
         const cx = N(FACE.nose.x, W);
         const cy = Math.round((N(FACE.nose.y, H) + N(FACE.mouth.y, H)) / 2);
 
-        // Curl loops at each end live at rows -3 to 0; body runs from
-        // row 0 down through row 3.
-        //
-        //   Left curl visualization:
-        //     -3:   . # # .       (top)
-        //     -2:   # # # #
-        //     -1:   # . . #       (visible interior)
-        //      0:   # # # #       (bottom — meets body)
-        //
         const rows = [
-          { dy: -3, dxs: [-10, -9,                                          9, 10] },
-          { dy: -2, dxs: [-11, -10, -9, -8,                                 8,  9, 10, 11] },
-          { dy: -1, dxs: [-11,           -8,                                8,         11] },
-          // Curl bottom + body top fuse here
-          { dy:  0, dxs: [-11, -10, -9, -8, -7, -6, -5, -4, -3, -2,
-                                                              2,  3,  4,  5,  6,  7,  8,  9, 10, 11] },
-          { dy:  1, dxs: [-10,  -9, -8, -7, -6, -5, -4, -3, -2,
-                                                              2,  3,  4,  5,  6,  7,  8,  9, 10] },
-          { dy:  2, dxs: [-9,   -8, -7, -6, -5, -4, -3,
-                                                          3,  4,  5,  6,  7,  8,  9] },
-          { dy:  3, dxs: [-7,   -6, -5, -4,
-                                                       4,  5,  6,  7] }
+          // Upturned tip flicks (rise one row above body)
+          { dy: -1, dxs: [-12, -11,                                                              11, 12] },
+          // Top of the body — wide horizontal bar with a small philtrum gap
+          { dy:  0, dxs: [-12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2,
+                                                              2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12] },
+          { dy:  1, dxs: [-11, -10, -9, -8, -7, -6, -5, -4, -3, -2,
+                                                          2,  3,  4,  5,  6,  7,  8,  9, 10, 11] },
+          // Tapering bottom edge
+          { dy:  2, dxs: [-9, -8, -7, -6, -5, -4, -3,
+                                                       3,  4,  5,  6,  7,  8,  9] }
         ];
         for (const r of rows) {
           for (const dx of r.dxs) out.push([cx + dx, cy + r.dy]);
@@ -655,15 +643,16 @@
 
       // 6 — Smiley face: tall pill eyes + a wide thick smile.
       // Eyes drop a few rows below the FACE landmark and pull closer
-      // together; mouth comes up. Tuned per Drew's feedback.
+      // together; mouth comes up. Whole face shifts a touch left.
       function smiley(W, H) {
         const out = [];
+        const xShift = -2;     // nudge whole face left
         const eyeYOff = 4;     // down
         const eyeXSqueeze = 2; // each eye toward center
         const mouthYOff = -4;  // mouth up
 
-        const lx = N(FACE.leftEye.x, W)  + eyeXSqueeze, ly = N(FACE.leftEye.y, H)  + eyeYOff;
-        const rx = N(FACE.rightEye.x, W) - eyeXSqueeze, ry = N(FACE.rightEye.y, H) + eyeYOff;
+        const lx = N(FACE.leftEye.x, W)  + eyeXSqueeze + xShift, ly = N(FACE.leftEye.y, H)  + eyeYOff;
+        const rx = N(FACE.rightEye.x, W) - eyeXSqueeze + xShift, ry = N(FACE.rightEye.y, H) + eyeYOff;
 
         // 5-wide × 9-tall vertical pill — reads as a happy almond eye.
         const eyeRows = [
@@ -692,7 +681,7 @@
         drawEye(rx, ry);
 
         // Smile: wide arc, 3-pixel thick.
-        const mx = N(FACE.mouth.x, W);
+        const mx = N(FACE.mouth.x, W) + xShift;
         const my = N(FACE.mouth.y, H) + mouthYOff;
         out.push(...smileArc(mx, my, Math.round(W * 0.10), Math.round(H * 0.07), 3));
         return out;

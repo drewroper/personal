@@ -416,9 +416,16 @@
   (function initDitherPortrait() {
     const canvas = document.getElementById('js-portrait');
     if (!canvas) return;
+    // Desktop gets ~10% more pixel density than mobile. Same image,
+    // tighter dots; the chunky aesthetic is preserved.
+    const isDesktop = window.matchMedia('(min-width: 760px)').matches;
+    if (isDesktop) {
+      canvas.width  = 132;   // 120 * 1.10
+      canvas.height = 88;    //  80 * 1.10
+    }
     const ctx = canvas.getContext('2d', { willReadFrequently: true });
-    const W = canvas.width;   // 240
-    const H = canvas.height;  // 300
+    const W = canvas.width;
+    const H = canvas.height;
 
     // Bayer 8x8, scaled to 0..252 to match 0..255 grayscale comparison.
     const BAYER = [

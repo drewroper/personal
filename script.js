@@ -616,24 +616,28 @@
         return out;
       },
 
-      // 5 — Thin wavy mustache: subtle upturned tip flicks at each end,
-      // body two rows thick. Modeled on Drew's reference doodle.
+      // 5 — Wide thick handlebar mustache. Each half is a chunky
+      // rounded shape with a clear upturned tip at the outer end and
+      // a small philtrum gap at center.
       function mustache(W, H) {
         const out = [];
         const cx = N(FACE.nose.x, W);
         const cy = Math.round((N(FACE.nose.y, H) + N(FACE.mouth.y, H)) / 2);
 
         const rows = [
-          // Upturned tip flicks (rise one row above body)
-          { dy: -1, dxs: [-12, -11,                                                              11, 12] },
-          // Top of the body — wide horizontal bar with a small philtrum gap
-          { dy:  0, dxs: [-12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2,
-                                                              2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12] },
-          { dy:  1, dxs: [-11, -10, -9, -8, -7, -6, -5, -4, -3, -2,
-                                                          2,  3,  4,  5,  6,  7,  8,  9, 10, 11] },
+          // Outer tip flicks (rise 2 rows above body)
+          { dy: -2, dxs: [-15, -14,                                                                          14, 15] },
+          { dy: -1, dxs: [-15, -14, -13, -12,                                                          12, 13, 14, 15] },
+          // Body — wide and thick, with a small philtrum gap at center
+          { dy:  0, dxs: [-15, -14, -13, -12, -11, -10, -9, -8, -7, -6, -5, -4, -3,
+                                                              3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15] },
+          { dy:  1, dxs: [-14, -13, -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2,
+                                                          2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14] },
+          { dy:  2, dxs: [-13, -12, -11, -10, -9, -8, -7, -6, -5, -4, -3,
+                                                              3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13] },
           // Tapering bottom edge
-          { dy:  2, dxs: [-9, -8, -7, -6, -5, -4, -3,
-                                                       3,  4,  5,  6,  7,  8,  9] }
+          { dy:  3, dxs: [-11, -10, -9, -8, -7, -6, -5, -4,
+                                                              4,  5,  6,  7,  8,  9, 10, 11] }
         ];
         for (const r of rows) {
           for (const dx of r.dxs) out.push([cx + dx, cy + r.dy]);

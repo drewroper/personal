@@ -553,12 +553,9 @@ section {
 }
 .work-slides__stage img.is-active { opacity: 1; }
 .work-slides__dots {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  justify-content: center;
-  margin-top: 1rem;
-  padding: 0 .5rem;
+  /* Hidden visually; the dots stay in the DOM (with their tab roles)
+     for accessibility but the user opted out of the indicator row. */
+  display: none;
 }
 .work-slides__dots .dot {
   width: 5px; height: 5px;

@@ -191,17 +191,17 @@
      into the repo. object-fit: cover handles aspect cropping.
      ============================================================ */
   const WORK_IMAGES = [
-    'https://mir-s3-cdn-cf.behance.net/projects/404/37dab197905583.Y3JvcCwyMjc4LDE3ODIsNTMwLDM5.jpg',
-    'https://mir-s3-cdn-cf.behance.net/projects/404/f1a7dd103213279.Y3JvcCwxMzgwLDEwODAsMjcwLDA.png',
-    'https://mir-s3-cdn-cf.behance.net/projects/404/8bf4d1103228781.Y3JvcCwxMzgwLDEwODAsMjcwLDA.jpg',
-    'https://mir-s3-cdn-cf.behance.net/projects/404/572758103290303.Y3JvcCwxMzgwLDEwODAsMjcwLDA.jpg',
-    'https://mir-s3-cdn-cf.behance.net/projects/404/b36aee13619493.6172d816aed10.jpg',
-    'https://mir-s3-cdn-cf.behance.net/projects/404/0c367119796977.Y3JvcCwxMzgwLDEwODAsMjcwLDA.png',
-    'https://mir-s3-cdn-cf.behance.net/projects/404/684f27103167265.Y3JvcCwxMzgwLDEwODAsMjcwLDA.jpg',
-    'https://mir-s3-cdn-cf.behance.net/projects/404/f3085d48534019.Y3JvcCwxMzgwLDEwODAsMjcwLDA.jpg',
-    'https://mir-s3-cdn-cf.behance.net/projects/404/51a76e21733267.Y3JvcCw4NzksNjg4LDYwLDA.jpg',
-    'https://mir-s3-cdn-cf.behance.net/projects/404/72bba813608983.5f5aeef869291.jpg',
-    'https://mir-s3-cdn-cf.behance.net/projects/404/59498216106531.61f0f0e5eb6d9.jpg'
+    'https://mir-s3-cdn-cf.behance.net/projects/404/64ae8d110754963.Y3JvcCwyMTczLDE3MDAsMTkzLDA.png',  // Element
+    'https://mir-s3-cdn-cf.behance.net/projects/404/37dab197905583.Y3JvcCwyMjc4LDE3ODIsNTMwLDM5.jpg',  // Increment Issue 13 — Frontend
+    'https://mir-s3-cdn-cf.behance.net/projects/404/f1a7dd103213279.Y3JvcCwxMzgwLDEwODAsMjcwLDA.png',  // ōLiv
+    'https://mir-s3-cdn-cf.behance.net/projects/404/8bf4d1103228781.Y3JvcCwxMzgwLDEwODAsMjcwLDA.jpg',  // Clyde
+    'https://mir-s3-cdn-cf.behance.net/projects/404/572758103290303.Y3JvcCwxMzgwLDEwODAsMjcwLDA.jpg',  // Prost!Cards
+    'https://mir-s3-cdn-cf.behance.net/projects/404/b36aee13619493.6172d816aed10.jpg',                  // TYPEFIGHT
+    'https://mir-s3-cdn-cf.behance.net/projects/404/0c367119796977.Y3JvcCwxMzgwLDEwODAsMjcwLDA.png',  // Scooters Sandwich Shop
+    'https://mir-s3-cdn-cf.behance.net/projects/404/684f27103167265.Y3JvcCwxMzgwLDEwODAsMjcwLDA.jpg',  // East Hampton Sandwich Co.
+    'https://mir-s3-cdn-cf.behance.net/projects/404/f3085d48534019.Y3JvcCwxMzgwLDEwODAsMjcwLDA.jpg',  // trunkclub.com
+    'https://mir-s3-cdn-cf.behance.net/projects/404/51a76e21733267.Y3JvcCw4NzksNjg4LDYwLDA.jpg',      // Missouri License Plate
+    'https://mir-s3-cdn-cf.behance.net/projects/404/72bba813608983.5f5aeef869291.jpg'                   // MyBread
   ];
   // Aspect ratios for desktop grid cells. object-fit: cover crops as needed
   // so cell ratios don't have to match source images.

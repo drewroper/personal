@@ -297,7 +297,10 @@ section {
   /* Pin variable-font weight axis to whatever the rotating font asks for.
      Set per-load by script.js via --h1-weight (defaults to 400). */
   font-variation-settings: 'wght' var(--h1-weight, 400);
-  font-size: clamp(3.5rem, 7vw, 5.75rem);
+  /* Per-font size multiplier so we can quiet down dominant display
+     faces (Boldonse) and bump up tiny ones (VT323). Defaults to 1. */
+  --h1-base-size: clamp(3.5rem, 7vw, 5.75rem);
+  font-size: calc(var(--h1-base-size) * var(--h1-scale, 1));
   line-height: .95;
   letter-spacing: -.025em;
   color: var(--text);
@@ -846,7 +849,7 @@ section {
     max-width: none;
     width: 100%;
   }
-  .hero__name h1 { font-size: clamp(3.25rem, 9vw, 5rem); }
+  .hero__name h1 { --h1-base-size: clamp(3.25rem, 9vw, 5rem); }
   .lede { font-size: 1rem; }
 }
 
@@ -870,7 +873,7 @@ section {
   /* Hero */
   .hero { padding-top: clamp(2rem, 8vw, 3rem); }
   .hero__name h1 {
-    font-size: clamp(3rem, 12vw, 4.5rem);
+    --h1-base-size: clamp(3rem, 12vw, 4.5rem);
     letter-spacing: -.025em;
   }
   .lede { font-size: 1rem; line-height: 1.55; }
@@ -911,7 +914,7 @@ section {
   .font-switch__name { display: none; }      /* Aa + ↻ only */
   .font-switch { padding: .25rem .5rem; gap: .4rem; }
 
-  .hero__name h1 { font-size: clamp(2.75rem, 13vw, 3.75rem); }
+  .hero__name h1 { --h1-base-size: clamp(2.75rem, 13vw, 3.75rem); }
   .lede { font-size: 1.05rem; }
 
   .history__company { font-size: 1rem; }

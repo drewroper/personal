@@ -100,9 +100,14 @@
 
         <div class="hero__name">
           <p class="eyebrow"><span>§ 00</span> &nbsp;·&nbsp; Designer · Est. 2010</p>
-          <h1 id="hero-name">
-            <span class="h1__line">Drew</span>
-            <span class="h1__line"><em>Roper.</em></span>
+          <h1 id="hero-name" class="h1--placeholder"
+              contenteditable="true"
+              spellcheck="false"
+              role="textbox"
+              aria-label="Editable headline — type anything"
+              title="Click to type your own headline">
+            <span class="h1__line">Waiting on</span>
+            <span class="h1__line"><em>final copy.</em></span>
           </h1>
           <p class="hero__tag">
             <span class="hero__tag-rule" aria-hidden="true"></span>
@@ -132,7 +137,7 @@
         <div class="hero__about">
           <p class="lede">
             Drew Roper is a designer working on creative tools, brand systems, and product
-            interfaces for ambitious companies. He is currently a Member of Technical Staff
+            marketing for ambitious companies. He is currently a Member of Technical Staff
             at <a href="https://anthropic.com">Anthropic</a>, where he helps shape the way
             people meet and make things with AI. Previously
             <a href="https://stripe.com">Stripe</a>,
@@ -147,34 +152,6 @@
           </p>
         </div>
 
-      </div>
-    </section>
-
-    <!-- Z-SPACE LOGO STACK =============================================== -->
-    <section class="zspace" aria-label="Past employers, in receding order">
-      <header class="zspace__head">
-        <span class="zspace__rule" aria-hidden="true"></span>
-        <span class="zspace__head-text">A history, receding into the distance</span>
-        <span class="zspace__rule" aria-hidden="true"></span>
-      </header>
-
-      <div class="zspace__stage" id="js-zstage" aria-hidden="true">
-        <div class="zspace__floor" aria-hidden="true"></div>
-        <div class="zspace__camera" id="js-zcamera">
-          <div class="zspace__layer" data-z="0"><span class="zlogo">Anthropic</span></div>
-          <div class="zspace__layer" data-z="1"><span class="zlogo">Stripe</span></div>
-          <div class="zspace__layer" data-z="2"><span class="zlogo">Trunk Club</span></div>
-          <div class="zspace__layer" data-z="3"><span class="zlogo">Dropbox</span></div>
-          <div class="zspace__layer" data-z="4"><span class="zlogo">Obama</span></div>
-          <div class="zspace__layer" data-z="5"><span class="zlogo">Mizzou</span></div>
-        </div>
-        <div class="zspace__vignette" aria-hidden="true"></div>
-      </div>
-
-      <div class="zspace__legend">
-        <span>← present</span>
-        <span class="zspace__legend-rule" aria-hidden="true"></span>
-        <span>past →</span>
       </div>
     </section>
 
@@ -421,12 +398,101 @@
       </svg>
     </div>
 
-    <p class="footer__colophon">
-      Display set in <em id="js-fontname-foot">Instrument Serif</em>,
-      drawn from a rotating library of 20.
-      Body in <em>Inter</em>; meta in <em>JetBrains Mono</em>.
-      Built static. No tracking. No cookies.
-    </p>
+    <section class="colophon" aria-labelledby="colophon-h">
+      <header class="colophon__head">
+        <span class="colophon__num">§ ∞</span>
+        <h3 id="colophon-h" class="colophon__title">Colophon</h3>
+        <span class="colophon__rule" aria-hidden="true"></span>
+        <span class="colophon__micro">For the curious · revised continually</span>
+      </header>
+
+      <dl class="colophon__list">
+        <div class="colophon__row">
+          <dt>Display</dt>
+          <dd>
+            <a id="js-fontlink" href="https://fonts.google.com/specimen/Instrument+Serif" target="_blank" rel="noopener">
+              <span id="js-fontname-foot">Instrument Serif</span>
+              <span class="ext" aria-hidden="true">↗</span>
+            </a>
+            <span class="dim">— rotating, <span id="js-fontposition">1 of 20</span> per visit</span>
+          </dd>
+        </div>
+
+        <div class="colophon__row">
+          <dt>Body</dt>
+          <dd>
+            <a href="https://fonts.google.com/specimen/Inter" target="_blank" rel="noopener">Inter <span class="ext" aria-hidden="true">↗</span></a>
+            <span class="dim">— Rasmus Andersson, 2017</span>
+          </dd>
+        </div>
+
+        <div class="colophon__row">
+          <dt>Meta</dt>
+          <dd>
+            <a href="https://fonts.google.com/specimen/JetBrains+Mono" target="_blank" rel="noopener">JetBrains Mono <span class="ext" aria-hidden="true">↗</span></a>
+            <span class="dim">— Philipp Nurullin, 2020</span>
+          </dd>
+        </div>
+
+        <div class="colophon__row">
+          <dt>Palette</dt>
+          <dd class="swatches">
+            <span class="sw" style="--c:#0c0c0d"><span class="sw__chip"></span><span class="sw__hex">#0C0C0D</span></span>
+            <span class="sw" style="--c:#f4f1ec"><span class="sw__chip"></span><span class="sw__hex">#F4F1EC</span></span>
+            <span class="sw" style="--c:#c8a978"><span class="sw__chip"></span><span class="sw__hex">#C8A978</span></span>
+          </dd>
+        </div>
+
+        <div class="colophon__row">
+          <dt>Build</dt>
+          <dd>One HTML, one stylesheet, one script. Zero dependencies. <span class="dim">~30&nbsp;KB on the wire.</span></dd>
+        </div>
+
+        <div class="colophon__row">
+          <dt>Hosting</dt>
+          <dd><a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages <span class="ext" aria-hidden="true">↗</span></a> <span class="dim">— HTTPS, no edge cache fuss</span></dd>
+        </div>
+
+        <div class="colophon__row">
+          <dt>Source</dt>
+          <dd><a href="https://github.com/drewroper/personal" target="_blank" rel="noopener">github.com/drewroper/personal <span class="ext" aria-hidden="true">↗</span></a></dd>
+        </div>
+
+        <div class="colophon__row">
+          <dt>Inspirations</dt>
+          <dd>
+            <a href="https://legrand.design" target="_blank" rel="noopener">legrand.design</a> ·
+            <a href="https://klim.co.nz" target="_blank" rel="noopener">klim.co.nz</a> ·
+            <a href="https://lynnandtonic.com" target="_blank" rel="noopener">lynnandtonic.com</a> ·
+            <a href="https://robinrendle.com" target="_blank" rel="noopener">robinrendle.com</a>
+          </dd>
+        </div>
+
+        <div class="colophon__row">
+          <dt>Privacy</dt>
+          <dd>No analytics, no cookies, no third-party tracking. <span class="dim">Google Fonts requests only the typeface chosen this visit.</span></dd>
+        </div>
+
+        <div class="colophon__row">
+          <dt>Made with</dt>
+          <dd>
+            <a href="https://claude.com/code" target="_blank" rel="noopener">Claude Code <span class="ext" aria-hidden="true">↗</span></a>
+            <span class="dim">— pair-designed late one evening</span>
+          </dd>
+        </div>
+
+        <div class="colophon__row">
+          <dt>Last touched</dt>
+          <dd id="js-lastmod" class="dim">—</dd>
+        </div>
+      </dl>
+
+      <p class="colophon__sigil" aria-hidden="true">
+        <span class="colophon__sigil-rule"></span>
+        <span class="colophon__sigil-glyph">✦</span>
+        <span class="colophon__sigil-rule"></span>
+      </p>
+    </section>
   </footer>
 
   <script src="script.js" defer></script>

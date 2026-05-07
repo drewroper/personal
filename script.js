@@ -14,11 +14,16 @@
      the topbar button to cycle to the next entry.
      ============================================================ */
   const FONTS = window.__FONTS__ || [];
-  const root        = document.documentElement;
-  const switchBtn   = document.getElementById('js-fontswitch');
-  const nameEl      = document.getElementById('js-fontname');
-  const nameElFoot  = document.getElementById('js-fontname-foot');
-  const loaded      = new Set();
+  const root         = document.documentElement;
+  const switchBtn    = document.getElementById('js-fontswitch');
+  const nameEl       = document.getElementById('js-fontname');
+  const nameElFoot   = document.getElementById('js-fontname-foot');
+  const linkEl       = document.getElementById('js-fontlink');
+  const positionEl   = document.getElementById('js-fontposition');
+  const loaded       = new Set();
+
+  const slugOf = (font) => (font.g || '').split(':')[0] || encodeURIComponent(font.name);
+  const specimenUrl = (font) => `https://fonts.google.com/specimen/${slugOf(font)}`;
 
   // Mark the head-injected font as already loaded so we don't double-add.
   document.querySelectorAll('link[data-font-id]').forEach(l => loaded.add(l.dataset.fontId));
@@ -41,6 +46,8 @@
     root.style.setProperty('--font-display', font.stack);
     if (nameEl)     nameEl.textContent     = font.name;
     if (nameElFoot) nameElFoot.textContent = font.name;
+    if (linkEl)     linkEl.href            = specimenUrl(font);
+    if (positionEl) positionEl.textContent = `${index + 1} of ${FONTS.length}`;
     if (switchBtn)  switchBtn.setAttribute('data-font-id', font.id);
 
     try { localStorage.setItem('dr.lastIndex', String(index)); } catch (_) {}
@@ -55,9 +62,12 @@
   let current = (typeof window.__FONT_INDEX__ === 'number') ? window.__FONT_INDEX__ : 0;
   // Reflect the head-picked font in the UI without re-loading anything.
   if (FONTS[current]) {
-    if (nameEl)     nameEl.textContent     = FONTS[current].name;
-    if (nameElFoot) nameElFoot.textContent = FONTS[current].name;
-    if (switchBtn)  switchBtn.setAttribute('data-font-id', FONTS[current].id);
+    const f = FONTS[current];
+    if (nameEl)     nameEl.textContent     = f.name;
+    if (nameElFoot) nameElFoot.textContent = f.name;
+    if (linkEl)     linkEl.href            = specimenUrl(f);
+    if (positionEl) positionEl.textContent = `${current + 1} of ${FONTS.length}`;
+    if (switchBtn)  switchBtn.setAttribute('data-font-id', f.id);
   }
 
   if (switchBtn && FONTS.length) {
@@ -94,64 +104,55 @@
   }
 
   /* ============================================================
-     3. FOOTER YEAR
+     3. FOOTER YEAR + LAST TOUCHED
      ============================================================ */
   const year = document.getElementById('js-year');
   if (year) year.textContent = String(new Date().getFullYear());
 
-  /* ============================================================
-     4. Z-SPACE PARALLAX
-     ============================================================ */
-  const stage  = document.getElementById('js-zstage');
-  const camera = document.getElementById('js-zcamera');
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const fine   = window.matchMedia('(pointer: fine)').matches;
-
-  if (stage && camera && !reduce) {
-    let raf = 0;
-    let tx = 0, ty = 0; // target
-    let cx = 0, cy = 0; // current
-
-    const requestLoop = () => { if (!raf) raf = requestAnimationFrame(loop); };
-
-    const loop = () => {
-      cx += (tx - cx) * 0.08;
-      cy += (ty - cy) * 0.08;
-      stage.style.setProperty('--mx', cx.toFixed(3));
-      stage.style.setProperty('--my', cy.toFixed(3));
-      camera.style.transform = `rotateX(${6 - cy * 3}deg) rotateY(${cx * 4}deg)`;
-      if (Math.abs(tx - cx) > 0.001 || Math.abs(ty - cy) > 0.001) {
-        raf = requestAnimationFrame(loop);
-      } else {
-        raf = 0;
-      }
-    };
-
-    if (fine) {
-      stage.addEventListener('mousemove', (e) => {
-        const rect = stage.getBoundingClientRect();
-        tx = ((e.clientX - rect.left) / rect.width  - 0.5) * 2;
-        ty = ((e.clientY - rect.top)  / rect.height - 0.5) * 2;
-        requestLoop();
-      }, { passive: true });
-      stage.addEventListener('mouseleave', () => { tx = 0; ty = 0; requestLoop(); }, { passive: true });
-    } else {
-      // Touch / mobile: subtle scroll-driven parallax
-      const onScroll = () => {
-        const rect = stage.getBoundingClientRect();
-        const vh = window.innerHeight || 1;
-        const center = rect.top + rect.height / 2;
-        const t = Math.max(-1, Math.min(1, (center - vh / 2) / (vh / 2)));
-        ty = t * 0.6;
-        requestLoop();
-      };
-      window.addEventListener('scroll', onScroll, { passive: true });
-      onScroll();
-    }
+  const lastMod = document.getElementById('js-lastmod');
+  if (lastMod) {
+    const d = new Date(document.lastModified || Date.now());
+    const fmt = d.toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' });
+    const time = d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+    lastMod.textContent = `${fmt} · ${time}`;
   }
 
   /* ============================================================
-     5. CONSOLE SIGNATURE
+     3b. EDITABLE HEADLINE — easter egg
+     The hero h1 is contenteditable; visitors can type whatever
+     they want. Doesn't persist across reloads.
+     ============================================================ */
+  const headline = document.getElementById('hero-name');
+  if (headline) {
+    let firstFocus = true;
+    headline.addEventListener('focus', () => {
+      // Drop any existing selection and put caret at the end on first focus
+      // so typing extends rather than replaces. Holds for visitors who just
+      // want to add a flourish.
+      if (firstFocus) {
+        const range = document.createRange();
+        range.selectNodeContents(headline);
+        range.collapse(false); // to end
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        firstFocus = false;
+      }
+    });
+    headline.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') headline.blur();
+    });
+    // Paste as plain text only — keeps the layout intact if someone
+    // pastes a screenshot or rich content from a doc.
+    headline.addEventListener('paste', (e) => {
+      e.preventDefault();
+      const text = (e.clipboardData || window.clipboardData).getData('text/plain');
+      document.execCommand('insertText', false, text);
+    });
+  }
+
+  /* ============================================================
+     4. CONSOLE SIGNATURE
      ============================================================ */
   if (typeof console !== 'undefined' && console.log) {
     const css = 'font-family: serif; font-size: 14px; font-style: italic; color: #c8a978; padding: 4px 0';

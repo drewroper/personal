@@ -9,8 +9,8 @@
   /* --font-display rotates on each page load; set by script.js. */
   --font-display: 'Instrument Serif', 'Times New Roman', Times, serif;
   --font-serif:   'Instrument Serif', 'Times New Roman', Times, serif;
-  --font-sans:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-  --font-mono:    'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --font-sans:    'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-mono:    'Geist Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
   /* Color ----------------------------------------------------- */
   --bg:          #0c0c0d;

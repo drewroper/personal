@@ -82,17 +82,12 @@ def dither_portrait():
     return Image.fromarray(out, "RGB").resize((PORTRAIT_W, PORTRAIT_H), Image.NEAREST)
 
 
-def load_font(size, prefer=("Geist", "Inter", "DejaVuSans")):
-    paths = [
-        "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
-        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
-    ]
-    for p in paths:
-        try:
-            return ImageFont.truetype(p, size)
-        except Exception:
-            continue
-    return ImageFont.load_default()
+def load_font(size, bold=False):
+    """Silkscreen is the OG canvas's only typeface. Pixel font reads as
+    crisp blocks at every size we use here."""
+    name = "Silkscreen-Bold.ttf" if bold else "Silkscreen-Regular.ttf"
+    path = ROOT / "assets" / "fonts" / name
+    return ImageFont.truetype(str(path), size)
 
 
 def main():

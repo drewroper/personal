@@ -332,6 +332,42 @@
       }, 4500);
     }
     restartTimer();
+
+    /* Touch + click navigation -----------------------------------
+       - horizontal swipe ≥ 40px advances (left = next, right = prev)
+       - a tap (or click on desktop) advances to the next slide */
+    const SWIPE_THRESHOLD = 40;
+    let startX = 0, startY = 0, startTime = 0, swiping = false;
+
+    stage.addEventListener('touchstart', (e) => {
+      const t = e.changedTouches[0];
+      startX = t.clientX;
+      startY = t.clientY;
+      startTime = Date.now();
+      swiping = true;
+    }, { passive: true });
+
+    stage.addEventListener('touchend', (e) => {
+      if (!swiping) return;
+      swiping = false;
+      const t = e.changedTouches[0];
+      const dx = t.clientX - startX;
+      const dy = t.clientY - startY;
+      const dt = Date.now() - startTime;
+
+      // If movement is mostly vertical, let the page scroll instead.
+      if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 20) return;
+
+      if (Math.abs(dx) >= SWIPE_THRESHOLD) {
+        goTo(dx < 0 ? idx + 1 : idx - 1, true);
+      } else if (Math.abs(dx) < 8 && dt < 400) {
+        goTo(idx + 1, true);
+      }
+    }, { passive: true });
+
+    // Desktop / non-touch click: also advance.
+    stage.addEventListener('click', () => goTo(idx + 1, true));
+    stage.style.cursor = 'pointer';
   }
 
   // Bootstrap based on viewport — keep both initialised so a resize works.
@@ -367,8 +403,18 @@
       63, 31, 55, 23, 61, 29, 53, 21
     ].map(v => v * 4);
 
-    const DARK  = [12, 12, 13];
-    const LIGHT = [244, 241, 236];
+    const DARK   = [12, 12, 13];
+    const LIGHT  = [244, 241, 236];
+    const ACCENT = [214, 255, 56];
+
+    // Pre-pick a sprinkle of pixel positions to render in the accent
+    // color. Stays put across animation frames so the dots feel like
+    // grain on the photo rather than noise.
+    const ACCENT_DENSITY = 0.012; // ~1.2% of pixels
+    const ACCENT_SET = new Set();
+    for (let p = 0; p < W * H; p++) {
+      if (Math.random() < ACCENT_DENSITY) ACCENT_SET.add(p);
+    }
 
     let gray = null;
     let raf = 0;
@@ -434,7 +480,7 @@
           const idx = yw + x;
           const v = gray[idx] + ts;
           const m = BAYER[rowBase + ((x + ox) & 7)];
-          const c = v > m ? LIGHT : DARK;
+          const c = ACCENT_SET.has(idx) ? ACCENT : (v > m ? LIGHT : DARK);
           const oi = idx * 4;
           data[oi]     = c[0];
           data[oi + 1] = c[1];
@@ -481,7 +527,7 @@
      6. CONSOLE SIGNATURE
      ============================================================ */
   if (typeof console !== 'undefined' && console.log) {
-    const css = 'font-family: serif; font-size: 14px; font-style: italic; color: #c8a978; padding: 4px 0';
+    const css = 'font-family: serif; font-size: 14px; font-style: italic; color: #d6ff38; padding: 4px 0';
     console.log('%cHello, curious one. — Drew', css);
   }
 })();

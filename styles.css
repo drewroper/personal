@@ -22,8 +22,8 @@
   --line:        #1f1f21;
   --line-faint: #161618;
   --line-bright:#2a2a2d;
-  --accent:      #c8a978;   /* warm sand, used sparingly */
-  --pill-bg:    rgba(200,169,120,.10);
+  --accent:      #d6ff38;   /* electric lime — used sparingly */
+  --pill-bg:    rgba(214, 255, 56, .12);
 
   /* Layout ---------------------------------------------------- */
   --container: 1280px;

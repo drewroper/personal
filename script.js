@@ -477,13 +477,13 @@
     };
 
     // Face landmarks in normalized coords. The photo subject sits
-    // upper-center; these are tuned by eye against the live render.
+    // upper-center, biased a touch right of frame center.
     const FACE = {
-      headTop:  { x: 0.49, y: 0.11 },
-      leftEye:  { x: 0.43, y: 0.28 },
-      rightEye: { x: 0.55, y: 0.28 },
-      nose:     { x: 0.49, y: 0.36 },
-      mouth:    { x: 0.49, y: 0.43 }
+      headTop:  { x: 0.52, y: 0.11 },
+      leftEye:  { x: 0.46, y: 0.22 },
+      rightEye: { x: 0.58, y: 0.22 },
+      nose:     { x: 0.52, y: 0.30 },
+      mouth:    { x: 0.52, y: 0.37 }
     };
     const N = (n, max) => Math.round(n * max);
 
@@ -510,12 +510,14 @@
       return out;
     };
 
-    // Tiny pixel heart, ~5×4, centered at (cx, cy).
+    // Pixel heart, ~7×6, centered at (cx, cy).
     const HEART = [
-      [-2, -1], [-1, -1], [1, -1], [2, -1],
-      [-2,  0], [-1,  0], [0,  0], [1,  0], [2,  0],
-      [-1,  1], [0,  1], [1,  1],
-      [0,  2]
+      [-2, -2], [-1, -2],          [ 1, -2], [ 2, -2],
+      [-3, -1], [-2, -1], [-1, -1], [ 0, -1], [ 1, -1], [ 2, -1], [ 3, -1],
+      [-3,  0], [-2,  0], [-1,  0], [ 0,  0], [ 1,  0], [ 2,  0], [ 3,  0],
+                [-2,  1], [-1,  1], [ 0,  1], [ 1,  1], [ 2,  1],
+                          [-1,  2], [ 0,  2], [ 1,  2],
+                                    [ 0,  3]
     ];
     const heart = (cx, cy) => HEART.map(([dx, dy]) => [cx + dx, cy + dy]);
 
@@ -544,24 +546,31 @@
         return ring(cx, cy, Math.round(W * 0.13), Math.round(H * 0.04));
       },
 
-      // 3 — Devil horns — curve up and out, then the tip curls back inward
+      // 3 — Devil horns — wide base on the head, tapering to a curling tip
       function horns(W, H) {
         const out = [];
         const baseY = N(FACE.headTop.y, H);
         const cx = N(FACE.headTop.x, W);
         const off = Math.round(W * 0.06);
-        // Path traced from base to tip: outward swing, then a curl back inward.
-        // dx is in pixels relative to base; dy is rows above the base.
-        const path = [
-          [0, 0], [1, -1], [2, -2], [3, -3], [4, -4],
-          [4, -5], [4, -6], [3, -7], [2, -7], [2, -8]
+        // Each entry: row offset (dy) + array of dx offsets for that row.
+        // dx >= 0 = outward (away from head center). 4-wide base tapering
+        // to a single-pixel tip that curls back inward.
+        const shape = [
+          { dy:  0, dxs: [-1, 0, 1, 2] },     // 4-wide base on the head
+          { dy: -1, dxs: [-1, 0, 1, 2, 3] },  // 5-wide, leaning outward
+          { dy: -2, dxs: [ 0, 1, 2, 3] },     // 4-wide, shifted out
+          { dy: -3, dxs: [ 1, 2, 3, 4] },     // 4-wide, more outward
+          { dy: -4, dxs: [ 2, 3, 4] },        // 3-wide
+          { dy: -5, dxs: [ 3, 4] },           // 2-wide
+          { dy: -6, dxs: [ 3] },              // 1-wide, peak
+          { dy: -7, dxs: [ 2] },              // curling back
+          { dy: -8, dxs: [ 1] }               // tip pointing inward
         ];
         const horn = (baseX, dir) => {
-          for (const [dx, dy] of path) {
-            const x = baseX + dir * dx;
-            const y = baseY + dy;
-            // 2-pixel thick along the curve
-            out.push([x, y], [x + dir, y]);
+          for (const r of shape) {
+            for (const dx of r.dxs) {
+              out.push([baseX + dir * dx, baseY + r.dy]);
+            }
           }
         };
         horn(cx - off, -1);
@@ -602,32 +611,51 @@
         return out;
       },
 
-      // 7 — Big chain with $ pendant
+      // 7 — Chain across the neck with an obnoxiously large $ pendant
       function chain(W, H) {
         const out = [];
-        const chainY = N(0.52, H);
-        const startX = N(0.30, W);
-        const endX   = N(0.68, W);
-        // 2×2 link blocks with 1-pixel gaps for chain-link feel
-        for (let x = startX; x <= endX; x += 3) {
-          out.push([x, chainY], [x + 1, chainY]);
-          out.push([x, chainY + 1], [x + 1, chainY + 1]);
+        // Chain dips slightly at the center like a real necklace.
+        const chainCenterY = N(0.50, H);
+        const chainCenterX = N(0.52, W);
+        const halfSpan = Math.round(W * 0.16);
+        for (let dx = -halfSpan; dx <= halfSpan; dx++) {
+          // Parabolic dip: lowest at center, rises at the ends.
+          const t = dx / halfSpan;
+          const dy = Math.round((1 - t * t) * 3);
+          const x = chainCenterX + dx;
+          const y = chainCenterY + dy;
+          // Skip every third pixel for a chain-link feel.
+          if (((dx + halfSpan) % 3) === 2) continue;
+          out.push([x, y]);
+          out.push([x, y + 1]);
         }
-        // Cord connecting chain to $ pendant
-        const cx = N(0.49, W);
-        for (let y = chainY + 2; y <= chainY + 4; y++) out.push([cx, y]);
-        // 5×7 dollar sign hanging below
-        const cy = chainY + 8;
-        const dollarOffsets = [
-          [0, -3],
-          [-1, -2], [0, -2], [1, -2],
-          [-2, -1], [0, -1],
-          [-1, 0], [0, 0], [1, 0],
-          [0, 1], [2, 1],
-          [-1, 2], [0, 2], [1, 2],
-          [0, 3]
+
+        // 11×13 obnoxious dollar sign, centered at the lowest point of
+        // the chain so it reads as the pendant.
+        const dollarRows = [
+          '.....#.....',  // -6
+          '....###....',  // -5
+          '.#########.',  // -4
+          '##.......##',  // -3
+          '##.........',  // -2
+          '##.........',  // -1
+          '.#########.',  //  0
+          '.........##',  //  1
+          '.........##',  //  2
+          '##.......##',  //  3
+          '.#########.',  //  4
+          '....###....',  //  5
+          '.....#.....'   //  6
         ];
-        for (const [dx, dy] of dollarOffsets) out.push([cx + dx, cy + dy]);
+        const dx0 = -5, dy0 = -6;
+        const cx = chainCenterX;
+        const cy = chainCenterY + 9; // hangs squarely on the upper chest
+        for (let r = 0; r < dollarRows.length; r++) {
+          const row = dollarRows[r];
+          for (let c = 0; c < row.length; c++) {
+            if (row[c] === '#') out.push([cx + dx0 + c, cy + dy0 + r]);
+          }
+        }
         return out;
       }
     ];

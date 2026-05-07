@@ -466,12 +466,17 @@
       }
       return out;
     };
-    const ring = (cx, cy, rx, ry) => {
+    const ring = (cx, cy, rx, ry, thickness = 1) => {
       const out = [];
-      const steps = 64;
-      for (let s = 0; s < steps; s++) {
-        const a = (s / steps) * Math.PI * 2;
-        out.push([Math.round(cx + Math.cos(a) * rx), Math.round(cy + Math.sin(a) * ry)]);
+      const steps = 96;
+      for (let t = 0; t < thickness; t++) {
+        for (let s = 0; s < steps; s++) {
+          const a = (s / steps) * Math.PI * 2;
+          out.push([
+            Math.round(cx + Math.cos(a) * (rx + t)),
+            Math.round(cy + Math.sin(a) * (ry + t))
+          ]);
+        }
       }
       return out;
     };
@@ -499,26 +504,38 @@
     };
 
     // Smile arc: bottom half of an ellipse centered at (cx, cy).
-    const smileArc = (cx, cy, rx, ry) => {
+    const smileArc = (cx, cy, rx, ry, thickness = 2) => {
       const out = [];
-      for (let a = 0; a <= Math.PI; a += 0.06) {
+      for (let a = 0; a <= Math.PI; a += 0.04) {
         const x = Math.round(cx - rx + (1 - Math.cos(a)) * rx);
         const y = Math.round(cy + Math.sin(a) * ry);
-        out.push([x, y]);
-        out.push([x, y + 1]); // 2-pixel thick
+        for (let t = 0; t < thickness; t++) out.push([x, y + t]);
       }
       return out;
     };
 
-    // Pixel heart, ~7×6, centered at (cx, cy).
-    const HEART = [
-      [-2, -2], [-1, -2],          [ 1, -2], [ 2, -2],
-      [-3, -1], [-2, -1], [-1, -1], [ 0, -1], [ 1, -1], [ 2, -1], [ 3, -1],
-      [-3,  0], [-2,  0], [-1,  0], [ 0,  0], [ 1,  0], [ 2,  0], [ 3,  0],
-                [-2,  1], [-1,  1], [ 0,  1], [ 1,  1], [ 2,  1],
-                          [-1,  2], [ 0,  2], [ 1,  2],
-                                    [ 0,  3]
-    ];
+    // Pixel heart, 9 wide × 7 tall, centered horizontally at col 4,
+    // top of bitmap at -3 from center.
+    const HEART = (() => {
+      const rows = [
+        '..##.##..',  // -3 (top lobes)
+        '#########',  // -2
+        '#########',  // -1
+        '.#######.',  //  0
+        '..#####..',  //  1
+        '...###...',  //  2
+        '....#....',  //  3
+      ];
+      const halfW = 4;
+      const dyStart = -3;
+      const out = [];
+      for (let r = 0; r < rows.length; r++) {
+        for (let c = 0; c < rows[r].length; c++) {
+          if (rows[r][c] === '#') out.push([c - halfW, dyStart + r]);
+        }
+      }
+      return out;
+    })();
     const heart = (cx, cy) => HEART.map(([dx, dy]) => [cx + dx, cy + dy]);
 
     const DOODLES = [
@@ -543,7 +560,7 @@
       function halo(W, H) {
         const cx = N(FACE.headTop.x, W);
         const cy = N(FACE.headTop.y - 0.06, H);
-        return ring(cx, cy, Math.round(W * 0.13), Math.round(H * 0.04));
+        return ring(cx, cy, Math.round(W * 0.13), Math.round(H * 0.04), 2);
       },
 
       // 3 — Devil horns — wide base on the head, tapering to a curling tip
@@ -553,18 +570,19 @@
         const cx = N(FACE.headTop.x, W);
         const off = Math.round(W * 0.06);
         // Each entry: row offset (dy) + array of dx offsets for that row.
-        // dx >= 0 = outward (away from head center). 4-wide base tapering
-        // to a single-pixel tip that curls back inward.
+        // dx >= 0 = outward (away from head center). 5-wide base tapering
+        // to a 2-pixel tip that curls back inward.
         const shape = [
-          { dy:  0, dxs: [-1, 0, 1, 2] },     // 4-wide base on the head
-          { dy: -1, dxs: [-1, 0, 1, 2, 3] },  // 5-wide, leaning outward
-          { dy: -2, dxs: [ 0, 1, 2, 3] },     // 4-wide, shifted out
-          { dy: -3, dxs: [ 1, 2, 3, 4] },     // 4-wide, more outward
-          { dy: -4, dxs: [ 2, 3, 4] },        // 3-wide
-          { dy: -5, dxs: [ 3, 4] },           // 2-wide
-          { dy: -6, dxs: [ 3] },              // 1-wide, peak
-          { dy: -7, dxs: [ 2] },              // curling back
-          { dy: -8, dxs: [ 1] }               // tip pointing inward
+          { dy:  1, dxs: [-1, 0, 1, 2, 3] },     // base bottom, on head
+          { dy:  0, dxs: [-1, 0, 1, 2, 3] },     // 5-wide base
+          { dy: -1, dxs: [-1, 0, 1, 2, 3, 4] },  // 6-wide, leaning out
+          { dy: -2, dxs: [ 0, 1, 2, 3, 4] },     // 5-wide
+          { dy: -3, dxs: [ 1, 2, 3, 4, 5] },     // 5-wide, more outward
+          { dy: -4, dxs: [ 2, 3, 4, 5] },        // 4-wide
+          { dy: -5, dxs: [ 3, 4, 5] },           // 3-wide
+          { dy: -6, dxs: [ 3, 4] },              // 2-wide peak
+          { dy: -7, dxs: [ 2, 3] },              // 2-wide, curling back
+          { dy: -8, dxs: [ 1, 2] }               // 2-wide tip pointing inward
         ];
         const horn = (baseX, dir) => {
           for (const r of shape) {
@@ -578,82 +596,95 @@
         return out;
       },
 
-      // 5 — Mustache (handlebar) between nose and mouth
+      // 5 — Handlebar mustache between nose and mouth
       function mustache(W, H) {
         const out = [];
         const cx = N(FACE.nose.x, W);
         const cy = Math.round((N(FACE.nose.y, H) + N(FACE.mouth.y, H)) / 2);
-        const half = Math.max(5, Math.round(W * 0.07));
-        // 2-pixel thick horizontal bar
-        for (let dx = -half + 1; dx <= half - 1; dx++) {
-          out.push([cx + dx, cy]);
-          out.push([cx + dx, cy + 1]);
+
+        // Row-based bitmap. dxs are absolute column offsets from cx (so
+        // negatives are left of center, positives right). Center column
+        // is empty to suggest the philtrum gap.
+        const rows = [
+          // Curling tips poking up at the ends
+          { dy: -3, dxs: [-9, -8, 8, 9] },
+          { dy: -2, dxs: [-9, -8, -7, 7, 8, 9] },
+          { dy: -1, dxs: [-9, -8, -7, -6, 6, 7, 8, 9] },
+          // Main body
+          { dy:  0, dxs: [-8, -7, -6, -5, -4, -3, 3, 4, 5, 6, 7, 8] },
+          { dy:  1, dxs: [-7, -6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7] },
+          { dy:  2, dxs: [-6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6] },
+          // Tapering bottom
+          { dy:  3, dxs: [-5, -4, -3, -2, 2, 3, 4, 5] }
+        ];
+        for (const r of rows) {
+          for (const dx of r.dxs) {
+            out.push([cx + dx, cy + r.dy]);
+          }
         }
-        // Slight dip in the middle
-        out.push([cx - 1, cy + 2], [cx, cy + 2], [cx + 1, cy + 2]);
-        // Curls flicking up at each end
-        out.push([cx - half, cy], [cx - half, cy - 1], [cx - half + 1, cy - 1]);
-        out.push([cx + half, cy], [cx + half, cy - 1], [cx + half - 1, cy - 1]);
         return out;
       },
 
-      // 6 — Smiley face: filled lime eyes + a wide smile
+      // 6 — Smiley face: filled lime eyes + a wide thick smile
       function smiley(W, H) {
         const out = [];
         const lx = N(FACE.leftEye.x, W),  ly = N(FACE.leftEye.y, H);
         const rx = N(FACE.rightEye.x, W), ry = N(FACE.rightEye.y, H);
-        const eyeR = Math.max(2, Math.round(W * 0.022));
+        const eyeR = Math.max(3, Math.round(W * 0.038)); // bumped up
         out.push(...filledCircle(lx, ly, eyeR));
         out.push(...filledCircle(rx, ry, eyeR));
         const mx = N(FACE.mouth.x, W);
         const my = N(FACE.mouth.y, H);
-        out.push(...smileArc(mx, my, Math.round(W * 0.075), Math.round(H * 0.05)));
+        // Smile: bigger arc, 3-pixel thick
+        out.push(...smileArc(mx, my, Math.round(W * 0.09), Math.round(H * 0.06), 3));
         return out;
       },
 
-      // 7 — Chain across the neck with an obnoxiously large $ pendant
+      // 7 — Necklace with an obnoxious dollar pendant
       function chain(W, H) {
         const out = [];
-        // Chain dips slightly at the center like a real necklace.
-        const chainCenterY = N(0.50, H);
+        // Narrower than before — neck-width, not shoulder-width. Sits
+        // a bit lower in the frame too.
+        const chainCenterY = N(0.56, H);
         const chainCenterX = N(0.52, W);
-        const halfSpan = Math.round(W * 0.16);
+        const halfSpan = Math.round(W * 0.10);
         for (let dx = -halfSpan; dx <= halfSpan; dx++) {
           // Parabolic dip: lowest at center, rises at the ends.
           const t = dx / halfSpan;
           const dy = Math.round((1 - t * t) * 3);
           const x = chainCenterX + dx;
           const y = chainCenterY + dy;
-          // Skip every third pixel for a chain-link feel.
-          if (((dx + halfSpan) % 3) === 2) continue;
-          out.push([x, y]);
-          out.push([x, y + 1]);
+          if (((dx + halfSpan) % 3) === 2) continue; // chain-link gaps
+          out.push([x, y], [x, y + 1]);
         }
 
-        // 11×13 obnoxious dollar sign, centered at the lowest point of
-        // the chain so it reads as the pendant.
+        // 13×16 obnoxious dollar sign with 2-pixel-thick strokes.
         const dollarRows = [
-          '.....#.....',  // -6
-          '....###....',  // -5
-          '.#########.',  // -4
-          '##.......##',  // -3
-          '##.........',  // -2
-          '##.........',  // -1
-          '.#########.',  //  0
-          '.........##',  //  1
-          '.........##',  //  2
-          '##.......##',  //  3
-          '.#########.',  //  4
-          '....###....',  //  5
-          '.....#.....'   //  6
+          '.....##......',  // -7
+          '.....##......',  // -6
+          '.##########..',  // -5
+          '.##########..',  // -4
+          '##........##.',  // -3
+          '##...........',  // -2
+          '##...........',  // -1
+          '.##########..',  //  0
+          '.##########..',  //  1
+          '...........##',  //  2
+          '...........##',  //  3
+          '##........##.',  // -—
+          '.##########..',  //  5
+          '.##########..',  //  6
+          '.....##......',  //  7
+          '.....##......'   //  8
         ];
-        const dx0 = -5, dy0 = -6;
+        const halfDX = 6;
+        const halfDY = 7;
         const cx = chainCenterX;
-        const cy = chainCenterY + 9; // hangs squarely on the upper chest
+        const cy = chainCenterY + 14; // sits lower, on the upper chest
         for (let r = 0; r < dollarRows.length; r++) {
           const row = dollarRows[r];
           for (let c = 0; c < row.length; c++) {
-            if (row[c] === '#') out.push([cx + dx0 + c, cy + dy0 + r]);
+            if (row[c] === '#') out.push([cx + (c - halfDX), cy + (r - halfDY)]);
           }
         }
         return out;

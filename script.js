@@ -616,31 +616,62 @@
         return out;
       },
 
-      // 5 — Wide thick handlebar mustache. Each half is a chunky
-      // rounded shape with a clear upturned tip at the outer end and
-      // a small philtrum gap at center.
+      // 5 — Mustache traced as a single continuous line: horizontal "M"
+      // shape — curl at each end, swoop up to nose-height peak, dip
+      // down to a valley in the middle, mirrored on the right. Line
+      // is thinner at the tips and at the middle point, thicker
+      // through the swoops.
       function mustache(W, H) {
         const out = [];
         const cx = N(FACE.nose.x, W);
-        const cy = Math.round((N(FACE.nose.y, H) + N(FACE.mouth.y, H)) / 2);
+        // Anchor so the line's bottom sits at mouth height; peaks rise
+        // up to roughly nostril height (cy - 6 ≈ FACE.nose.y).
+        const cy = N(FACE.mouth.y, H);
 
-        const rows = [
-          // Outer tip flicks (rise 2 rows above body)
-          { dy: -2, dxs: [-15, -14,                                                                          14, 15] },
-          { dy: -1, dxs: [-15, -14, -13, -12,                                                          12, 13, 14, 15] },
-          // Body — wide and thick, with a small philtrum gap at center
-          { dy:  0, dxs: [-15, -14, -13, -12, -11, -10, -9, -8, -7, -6, -5, -4, -3,
-                                                              3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15] },
-          { dy:  1, dxs: [-14, -13, -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2,
-                                                          2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14] },
-          { dy:  2, dxs: [-13, -12, -11, -10, -9, -8, -7, -6, -5, -4, -3,
-                                                              3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13] },
-          // Tapering bottom edge
-          { dy:  3, dxs: [-11, -10, -9, -8, -7, -6, -5, -4,
-                                                              4,  5,  6,  7,  8,  9, 10, 11] }
+        // Path: [dx, centerline_dy, thickness].
+        // dy is rows ABOVE the anchor (so -6 is the highest point).
+        // thickness stamps that many pixels downward from the centerline.
+        const path = [
+          [-17,  0, 1],  // far-left tip (thin)
+          [-16, -1, 1],  // curl rising
+          [-15, -2, 2],  // curl peak (subtle)
+          [-14, -1, 2],  // back down from curl
+          [-13,  0, 2],  // bottom of post-curl dip
+          [-12, -1, 3],  // start of swoop up — getting thicker
+          [-11, -2, 3],
+          [-10, -3, 4],
+          [ -9, -4, 4],
+          [ -8, -5, 4],
+          [ -7, -6, 3],  // left peak (thinner at the point)
+          [ -6, -6, 3],
+          [ -5, -5, 4],  // descending from peak through swoop
+          [ -4, -4, 4],
+          [ -3, -3, 4],
+          [ -2, -2, 3],
+          [ -1, -1, 2],
+          [  0,  0, 1],  // middle valley (thin)
+          [  1, -1, 2],
+          [  2, -2, 3],
+          [  3, -3, 4],
+          [  4, -4, 4],
+          [  5, -5, 4],
+          [  6, -6, 3],  // right peak
+          [  7, -6, 3],
+          [  8, -5, 4],
+          [  9, -4, 4],
+          [ 10, -3, 4],
+          [ 11, -2, 3],
+          [ 12, -1, 3],
+          [ 13,  0, 2],
+          [ 14, -1, 2],
+          [ 15, -2, 2],
+          [ 16, -1, 1],
+          [ 17,  0, 1]
         ];
-        for (const r of rows) {
-          for (const dx of r.dxs) out.push([cx + dx, cy + r.dy]);
+        for (const [dx, yc, thick] of path) {
+          for (let t = 0; t < thick; t++) {
+            out.push([cx + dx, cy + yc + t]);
+          }
         }
         return out;
       },

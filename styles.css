@@ -31,6 +31,9 @@
   --rhythm:    clamp(48px, 9vw, 96px);
   --hairline:    1px;     /* high-hierarchy rule */
   --hairline-fine: 0.5px; /* low-hierarchy rule (renders as 1 device px on retina) */
+
+  /* Single mono size, used everywhere mono lives. */
+  --mono-size: 11px;
 }
 
 /* Reset --------------------------------------------------------- */
@@ -91,7 +94,7 @@ main a:hover {
 .skip {
   position: absolute; left: -9999px;
   background: var(--bg-elev); color: var(--text);
-  padding: .5rem 1rem; font-family: var(--font-mono); font-size: 12px;
+  padding: .5rem 1rem; font-family: var(--font-mono); font-size: var(--mono-size);
 }
 .skip:focus { left: 1rem; top: 1rem; z-index: 200; }
 
@@ -105,7 +108,7 @@ main a:hover {
   min-height: 44px;
   padding: .65rem var(--gutter);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--mono-size);
   letter-spacing: .04em;
   color: var(--text-muted);
   background: rgba(12,12,13,.78);
@@ -170,7 +173,7 @@ main a:hover {
   background: var(--bg-elev);
   color: var(--text);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--mono-size);
   letter-spacing: .04em;
   line-height: 1;
   min-height: 28px;
@@ -185,7 +188,7 @@ main a:hover {
 }
 .font-switch__aa {
   font-family: var(--font-display);
-  font-size: 12px;
+  font-size: 12px;          /* display, not mono — kept as fixed pixel */
   line-height: 1;
   letter-spacing: -.02em;
   color: var(--text);
@@ -201,7 +204,7 @@ main a:hover {
   color: var(--text-faint);
   text-transform: uppercase;
   letter-spacing: .12em;
-  font-size: 10px;
+  font-size: var(--mono-size);
 }
 .font-switch__name {
   color: var(--text);
@@ -211,7 +214,7 @@ main a:hover {
 }
 .font-switch__icon {
   color: var(--text-faint);
-  font-size: 12px;
+  font-size: var(--mono-size);
   transition: transform .5s cubic-bezier(.2,.8,.2,1), color .2s ease;
 }
 .font-switch:hover .font-switch__icon,
@@ -279,7 +282,7 @@ section {
 .eyebrow {
   margin: 0 0 1.5rem;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--mono-size);
   letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--text-muted);
@@ -424,7 +427,7 @@ section {
   gap: 1rem;
   margin-top: .85rem;
   font-family: var(--font-mono);
-  font-size: 10.5px;
+  font-size: var(--mono-size);
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--text-faint);
@@ -462,7 +465,7 @@ section {
   background: var(--pill-bg);
   color: var(--accent);
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: var(--mono-size);
   letter-spacing: .12em;
   text-transform: uppercase;
   align-self: center;
@@ -470,7 +473,7 @@ section {
 .history__year {
   margin-left: auto;
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: var(--mono-size);
   letter-spacing: .08em;
   color: var(--text-muted);
   font-feature-settings: 'tnum';
@@ -482,7 +485,7 @@ section {
 .history__bottom {
   display: flex; align-items: center; gap: 1rem;
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: var(--mono-size);
   letter-spacing: .04em;
   color: var(--text-muted);
 }
@@ -496,7 +499,7 @@ section {
   color: var(--text-faint);
   text-transform: uppercase;
   letter-spacing: .12em;
-  font-size: 10.5px;
+  font-size: var(--mono-size);
 }
 
 /* WORK ---------------------------------------------------------- */
@@ -594,7 +597,7 @@ section {
   flex-wrap: wrap;
   gap: 1.5rem;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--mono-size);
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--text-muted);
@@ -613,14 +616,17 @@ section {
 .footer__meta {
   max-width: var(--container);
   margin: 2.5rem auto 0;
-  display: flex; flex-wrap: wrap;
-  gap: 1.5rem;
-  align-items: center; justify-content: space-between;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--mono-size);
   letter-spacing: .04em;
   color: var(--text-faint);
 }
+.footer__copy {
+  display: grid;
+  gap: .25rem;
+  color: var(--text-faint);
+}
+.footer__copy-line { display: block; }
 
 /* Claude mark — used inline in the colophon "Created with" link */
 .claude-mark {
@@ -695,7 +701,7 @@ section {
 
 .colophon__row dt {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: var(--mono-size);
   letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--text-faint);
@@ -703,7 +709,7 @@ section {
 .colophon__row dd {
   margin: 0;
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: var(--mono-size);
   letter-spacing: .02em;
   color: var(--text-muted);
   line-height: 1.5;
@@ -722,7 +728,7 @@ section {
 .colophon__row dd .ext {
   display: inline-block;
   margin-left: 2px;
-  font-size: 10px;
+  font-size: var(--mono-size);
   vertical-align: 1px;
   color: var(--text-faint);
 }
@@ -739,7 +745,7 @@ section {
   align-items: center;
   gap: .45rem;
   font-family: var(--font-mono);
-  font-size: 10.5px;
+  font-size: var(--mono-size);
   letter-spacing: .04em;
   color: var(--text-muted);
 }
@@ -755,7 +761,7 @@ section {
 /* CHANGELOG drawer — easter egg under "Last touched" ----------- */
 .changelog {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--mono-size);
   font-weight: 400;
   letter-spacing: .04em;
 }
@@ -775,7 +781,7 @@ section {
 .changelog__summary::-webkit-details-marker { display: none; }
 .changelog__summary::marker { content: ''; }
 .changelog__key {
-  font-size: 10px;
+  font-size: var(--mono-size);
   letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--text-faint);
@@ -788,7 +794,7 @@ section {
 }
 .changelog__caret {
   display: inline-block;
-  font-size: 14px;
+  font-size: var(--mono-size);
   line-height: 1;
   color: var(--text-faint);
   transition: transform .25s cubic-bezier(.2,.8,.2,1), color .2s ease;
@@ -854,7 +860,7 @@ section {
 
   /* Topbar: keep three-column grid, just shrink everything */
   .topbar {
-    font-size: 10px;
+    font-size: var(--mono-size);
     gap: .4rem;
     padding: .5rem var(--gutter);
   }
@@ -902,7 +908,7 @@ section {
 
 /* SMALL MOBILE (≤380px) — iPhone SE / Android small ----------- */
 @media (max-width: 380px) {
-  .topbar { font-size: 9.5px; }
+  .topbar { font-size: var(--mono-size); }
   .font-switch__name { display: none; }      /* Aa + ↻ only */
   .font-switch { padding: .25rem .5rem; gap: .4rem; }
 

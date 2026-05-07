@@ -339,12 +339,22 @@
 
         <div class="colophon__row">
           <dt>Build</dt>
-          <dd>One HTML, one stylesheet, one script. Zero dependencies. <span class="dim">~30&nbsp;KB on the wire.</span></dd>
+          <dd>One page, one stylesheet, one script. <span class="dim">About 30&nbsp;KB total — smaller than most phone photos.</span></dd>
+        </div>
+
+        <div class="colophon__row">
+          <dt>Loaded in</dt>
+          <dd><span id="js-loadtime">measuring…</span> <span class="dim">on this visit.</span></dd>
+        </div>
+
+        <div class="colophon__row">
+          <dt>Resources</dt>
+          <dd><span id="js-resources">—</span> <span class="dim">files fetched (page, fonts, images).</span></dd>
         </div>
 
         <div class="colophon__row">
           <dt>Hosting</dt>
-          <dd><a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages <span class="ext" aria-hidden="true">↗</span></a> <span class="dim">— HTTPS, no edge cache fuss</span></dd>
+          <dd><a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages <span class="ext" aria-hidden="true">↗</span></a> <span class="dim">— served free, over HTTPS.</span></dd>
         </div>
 
         <div class="colophon__row">
@@ -378,6 +388,7 @@
           </span>
         </summary>
         <ol class="changelog__list">
+          <li><time>2026-05-07 17:30Z</time><span class="changelog__msg">Build copy rewritten in plain English; new "Loaded in" + "Resources" rows in the Colophon read live from the Performance API on each visit</span></li>
           <li><time>2026-05-07 17:00Z</time><span class="changelog__msg">H1 dropped one size class on desktop (max 5.75rem) with mobile rescaled to match; history items now use a brighter 1px divider; the inline rule between role and location is gone; work cells take each image's natural aspect ratio so landscapes stay landscape; copyright reflows to a single line on desktop with the disclaimer pinned right; removed the rule beside Colophon</span></li>
           <li><time>2026-05-07 16:30Z</time><span class="changelog__msg">All mono text routed through a single --mono-size token (11px); footer copyright split into two dim mono lines, ending with an honest disclaimer</span></li>
           <li><time>2026-05-07 16:05Z</time><span class="changelog__msg">H1 collapsed to a single wrappable line so balance can pair "Waiting on / final copy" instead of forcing each block</span></li>

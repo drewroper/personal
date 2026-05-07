@@ -151,6 +151,32 @@
   }
 
   /* ============================================================
+     3a. LIVE PERFORMANCE STATS
+     Reads the Performance API after the page has fully loaded and
+     reports the real numbers — load time and resource count — back
+     into the Colophon. Honest, no estimation.
+     ============================================================ */
+  const fmtMs = (ms) => ms < 1000 ? `${Math.round(ms)} ms` : `${(ms / 1000).toFixed(2)} s`;
+  const reportPerf = () => {
+    const loadEl = document.getElementById('js-loadtime');
+    const resEl  = document.getElementById('js-resources');
+    try {
+      const nav = performance.getEntriesByType('navigation')[0];
+      if (loadEl && nav) {
+        const dur = nav.loadEventEnd > 0 ? nav.loadEventEnd : nav.domContentLoadedEventEnd;
+        loadEl.textContent = fmtMs(dur);
+      }
+      if (resEl) {
+        const count = 1 /* the document itself */ +
+                      performance.getEntriesByType('resource').length;
+        resEl.textContent = String(count);
+      }
+    } catch (_) { /* Performance API not available — leave defaults */ }
+  };
+  if (document.readyState === 'complete') reportPerf();
+  else window.addEventListener('load', () => setTimeout(reportPerf, 0));
+
+  /* ============================================================
      3b. EDITABLE HEADLINE — easter egg
      The hero h1 is contenteditable; visitors can type whatever
      they want. Doesn't persist across reloads.

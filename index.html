@@ -23,26 +23,54 @@
        the body renders (avoids flicker / fallback-to-Times). -->
   <script>
   window.__FONTS__ = [
-    { id:'instrument-serif',   name:'Instrument Serif',   stack:"'Instrument Serif', 'Times New Roman', serif",     g:'Instrument+Serif:ital@0;1' },
-    { id:'fraunces',           name:'Fraunces',           stack:"'Fraunces', 'Times New Roman', serif",             g:'Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900' },
-    { id:'eb-garamond',        name:'EB Garamond',        stack:"'EB Garamond', Garamond, serif",                   g:'EB+Garamond:ital,wght@0,400..800;1,400..800' },
-    { id:'cormorant-garamond', name:'Cormorant Garamond', stack:"'Cormorant Garamond', Garamond, serif",            g:'Cormorant+Garamond:ital,wght@0,300..700;1,300..700' },
-    { id:'playfair-display',   name:'Playfair Display',   stack:"'Playfair Display', serif",                        g:'Playfair+Display:ital,wght@0,400..900;1,400..900' },
-    { id:'libre-caslon-text',  name:'Libre Caslon Text',  stack:"'Libre Caslon Text', serif",                       g:'Libre+Caslon+Text:ital,wght@0,400;0,700;1,400' },
-    { id:'pt-serif',           name:'PT Serif',           stack:"'PT Serif', serif",                                g:'PT+Serif:ital,wght@0,400;0,700;1,400;1,700' },
-    { id:'spectral',           name:'Spectral',           stack:"'Spectral', serif",                                g:'Spectral:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700' },
-    { id:'crimson-pro',        name:'Crimson Pro',        stack:"'Crimson Pro', serif",                             g:'Crimson+Pro:ital,wght@0,300..700;1,300..700' },
-    { id:'lora',               name:'Lora',               stack:"'Lora', serif",                                    g:'Lora:ital,wght@0,400..700;1,400..700' },
-    { id:'source-serif-4',     name:'Source Serif 4',     stack:"'Source Serif 4', serif",                          g:'Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700' },
-    { id:'newsreader',         name:'Newsreader',         stack:"'Newsreader', serif",                              g:'Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700' },
-    { id:'italiana',           name:'Italiana',           stack:"'Italiana', serif",                                g:'Italiana' },
-    { id:'dm-serif-display',   name:'DM Serif Display',   stack:"'DM Serif Display', serif",                        g:'DM+Serif+Display:ital@0;1' },
-    { id:'bodoni-moda',        name:'Bodoni Moda',        stack:"'Bodoni Moda', serif",                             g:'Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900' },
-    { id:'cardo',              name:'Cardo',              stack:"'Cardo', serif",                                   g:'Cardo:ital,wght@0,400;0,700;1,400' },
-    { id:'old-standard-tt',    name:'Old Standard TT',    stack:"'Old Standard TT', serif",                         g:'Old+Standard+TT:ital,wght@0,400;0,700;1,400' },
-    { id:'marcellus',          name:'Marcellus',          stack:"'Marcellus', serif",                               g:'Marcellus' },
-    { id:'young-serif',        name:'Young Serif',        stack:"'Young Serif', serif",                             g:'Young+Serif' },
-    { id:'literata',           name:'Literata',           stack:"'Literata', serif",                                g:'Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900' }
+    { id:'vt323',                 name:'VT323',                  stack:"'VT323', monospace",                          g:'VT323' },
+    { id:'boldonse',              name:'Boldonse',               stack:"'Boldonse', serif",                           g:'Boldonse' },
+    { id:'pixelify-sans',         name:'Pixelify Sans',          stack:"'Pixelify Sans', monospace",                  g:'Pixelify+Sans:wght@400..700' },
+    { id:'bangers',               name:'Bangers',                stack:"'Bangers', cursive",                          g:'Bangers' },
+    { id:'acme',                  name:'Acme',                   stack:"'Acme', sans-serif",                          g:'Acme' },
+    { id:'silkscreen',            name:'Silkscreen',             stack:"'Silkscreen', monospace",                     g:'Silkscreen:wght@400;700' },
+    { id:'beth-ellen',            name:'Beth Ellen',             stack:"'Beth Ellen', cursive",                       g:'Beth+Ellen' },
+    { id:'miniver',               name:'Miniver',                stack:"'Miniver', cursive",                          g:'Miniver' },
+    { id:'fasthand',              name:'Fasthand',               stack:"'Fasthand', cursive",                         g:'Fasthand' },
+    { id:'neuton',                name:'Neuton',                 stack:"'Neuton', serif",                             g:'Neuton:ital,wght@0,200;0,300;0,400;0,700;0,800;1,400' },
+    { id:'ibm-plex-serif',        name:'IBM Plex Serif',         stack:"'IBM Plex Serif', serif",                     g:'IBM+Plex+Serif:ital,wght@0,300;0,400;0,500;0,700;1,400;1,700' },
+    { id:'newsreader',            name:'Newsreader',             stack:"'Newsreader', serif",                         g:'Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700' },
+    { id:'noto-serif',            name:'Noto Serif',             stack:"'Noto Serif', serif",                         g:'Noto+Serif:ital,wght@0,400;0,700;1,400;1,700' },
+    { id:'danfo',                 name:'Danfo',                  stack:"'Danfo', sans-serif",                         g:'Danfo' },
+    { id:'archivo-narrow',        name:'Archivo Narrow',         stack:"'Archivo Narrow', sans-serif",                g:'Archivo+Narrow:ital,wght@0,400..700;1,400..700' },
+    { id:'open-sans',             name:'Open Sans',              stack:"'Open Sans', sans-serif",                     g:'Open+Sans:ital,wght@0,400;0,600;0,700;1,400' },
+    { id:'ojuju',                 name:'Ojuju',                  stack:"'Ojuju', sans-serif",                         g:'Ojuju:wght@200..800' },
+    { id:'news-cycle',            name:'News Cycle',             stack:"'News Cycle', sans-serif",                    g:'News+Cycle:wght@400;700' },
+    { id:'ibm-plex-sans',         name:'IBM Plex Sans',          stack:"'IBM Plex Sans', sans-serif",                 g:'IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400;1,700' },
+    { id:'freeman',               name:'Freeman',                stack:"'Freeman', sans-serif",                       g:'Freeman' },
+    { id:'national-park',         name:'National Park',          stack:"'National Park', sans-serif",                 g:'National+Park:wght@200..800' },
+    { id:'molle',                 name:'Molle',                  stack:"'Molle', cursive",                            g:'Molle:ital@1' },
+    { id:'climate-crisis',        name:'Climate Crisis',         stack:"'Climate Crisis', sans-serif",                g:'Climate+Crisis' },
+    { id:'instrument-serif',      name:'Instrument Serif',       stack:"'Instrument Serif', serif",                   g:'Instrument+Serif:ital@0;1' },
+    { id:'phudu',                 name:'Phudu',                  stack:"'Phudu', sans-serif",                         g:'Phudu:wght@300..900' },
+    { id:'outfit',                name:'Outfit',                 stack:"'Outfit', sans-serif",                        g:'Outfit:wght@100..900' },
+    { id:'faculty-glyphic',       name:'Faculty Glyphic',        stack:"'Faculty Glyphic', serif",                    g:'Faculty+Glyphic' },
+    { id:'grenze',                name:'Grenze',                 stack:"'Grenze', serif",                             g:'Grenze:ital,wght@0,400;0,700;1,400;1,700' },
+    { id:'erica-one',             name:'Erica One',              stack:"'Erica One', sans-serif",                     g:'Erica+One' },
+    { id:'fraunces',              name:'Fraunces',               stack:"'Fraunces', serif",                           g:'Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900' },
+    { id:'big-shoulders',         name:'Big Shoulders',          stack:"'Big Shoulders', sans-serif",                 g:'Big+Shoulders:wght@100..900' },
+    { id:'gasoek-one',            name:'Gasoek One',             stack:"'Gasoek One', sans-serif",                    g:'Gasoek+One' },
+    { id:'galdeano',              name:'Galdeano',               stack:"'Galdeano', sans-serif",                      g:'Galdeano' },
+    { id:'tilt-prism',            name:'Tilt Prism',             stack:"'Tilt Prism', sans-serif",                    g:'Tilt+Prism' },
+    { id:'yatra-one',             name:'Yatra One',              stack:"'Yatra One', serif",                          g:'Yatra+One' },
+    { id:'epilogue',              name:'Epilogue',               stack:"'Epilogue', sans-serif",                      g:'Epilogue:ital,wght@0,100..900;1,100..900' },
+    { id:'syne',                  name:'Syne',                   stack:"'Syne', sans-serif",                          g:'Syne:wght@400..800' },
+    { id:'chakra-petch',          name:'Chakra Petch',           stack:"'Chakra Petch', sans-serif",                  g:'Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700' },
+    { id:'monoton',               name:'Monoton',                stack:"'Monoton', sans-serif",                       g:'Monoton' },
+    { id:'averia-serif-libre',    name:'Averia Serif Libre',     stack:"'Averia Serif Libre', serif",                 g:'Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700' },
+    { id:'manufacturing-consent', name:'Manufacturing Consent',  stack:"'Manufacturing Consent', serif",              g:'Manufacturing+Consent' },
+    { id:'stardos-stencil',       name:'Stardos Stencil',        stack:"'Stardos Stencil', sans-serif",               g:'Stardos+Stencil:wght@400;700' },
+    { id:'caprasimo',             name:'Caprasimo',              stack:"'Caprasimo', serif",                          g:'Caprasimo' },
+    { id:'modak',                 name:'Modak',                  stack:"'Modak', cursive",                            g:'Modak' },
+    { id:'young-serif',           name:'Young Serif',            stack:"'Young Serif', serif",                        g:'Young+Serif' },
+    { id:'fahkwang',              name:'Fahkwang',               stack:"'Fahkwang', serif",                           g:'Fahkwang:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,400;1,500' },
+    { id:'bricolage-grotesque',   name:'Bricolage Grotesque',    stack:"'Bricolage Grotesque', sans-serif",           g:'Bricolage+Grotesque:opsz,wght@12..96,200..800' },
+    { id:'asul',                  name:'Asul',                   stack:"'Asul', sans-serif",                          g:'Asul:wght@400;700' }
   ];
   (function () {
     var fonts = window.__FONTS__;
@@ -266,7 +294,7 @@
     <div class="footer__meta">
       <span class="footer__copy">© 2010–<span id="js-year">2026</span> &nbsp;Drew Roper. All rights reserved.</span>
       <a class="claude-badge" href="https://claude.com/code" rel="noopener" target="_blank" aria-label="Created with Claude Code">
-        <span class="claude-mark" aria-hidden="true">❉</span>
+        <span class="claude-mark" aria-hidden="true">✽</span>
         <span class="claude-badge__text">
           <span class="claude-badge__line">Created with</span>
           <span class="claude-badge__brand">Claude Code</span>
@@ -298,7 +326,7 @@
               <span id="js-fontname-foot">Instrument Serif</span>
               <span class="ext" aria-hidden="true">↗</span>
             </a>
-            <span class="dim">— rotating, <span id="js-fontposition">1 of 20</span> per visit</span>
+            <span class="dim">— rotating, <span id="js-fontposition">1 of 48</span> per visit</span>
           </dd>
         </div>
 

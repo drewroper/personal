@@ -191,7 +191,6 @@
      into the repo. object-fit: cover handles aspect cropping.
      ============================================================ */
   const WORK_IMAGES = [
-    'https://mir-s3-cdn-cf.behance.net/projects/404/64ae8d110754963.Y3JvcCwyMTczLDE3MDAsMTkzLDA.png',
     'https://mir-s3-cdn-cf.behance.net/projects/404/37dab197905583.Y3JvcCwyMjc4LDE3ODIsNTMwLDM5.jpg',
     'https://mir-s3-cdn-cf.behance.net/projects/404/f1a7dd103213279.Y3JvcCwxMzgwLDEwODAsMjcwLDA.png',
     'https://mir-s3-cdn-cf.behance.net/projects/404/8bf4d1103228781.Y3JvcCwxMzgwLDEwODAsMjcwLDA.jpg',

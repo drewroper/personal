@@ -525,7 +525,7 @@ section {
 .work-slides__stage {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 3 / 2;
   background: var(--bg-elev);
   border: var(--hairline-fine) solid var(--line);
   overflow: hidden;

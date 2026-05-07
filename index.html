@@ -36,16 +36,13 @@
     { id:'noto-serif',            name:'Noto Serif',             stack:"'Noto Serif', serif",                         g:'Noto+Serif:ital,wght@0,400;0,700;1,400;1,700' },
     { id:'danfo',                 name:'Danfo',                  stack:"'Danfo', sans-serif",                         g:'Danfo' },
     { id:'archivo-narrow',        name:'Archivo Narrow',         stack:"'Archivo Narrow', sans-serif",                g:'Archivo+Narrow:ital,wght@0,400..700;1,400..700' },
-    { id:'open-sans',             name:'Open Sans',              stack:"'Open Sans', sans-serif",                     g:'Open+Sans:ital,wght@0,400;0,600;0,700;1,400' },
     { id:'ojuju',                 name:'Ojuju',                  stack:"'Ojuju', sans-serif",                         g:'Ojuju:wght@200..800' },
-    { id:'news-cycle',            name:'News Cycle',             stack:"'News Cycle', sans-serif",                    g:'News+Cycle:wght@400;700' },
     { id:'freeman',               name:'Freeman',                stack:"'Freeman', sans-serif",                       g:'Freeman' },
-    { id:'national-park',         name:'National Park',          stack:"'National Park', sans-serif",                 g:'National+Park:wght@200..800' },
+    { id:'national-park',         name:'National Park',          stack:"'National Park', sans-serif",                 g:'National+Park:wght@200..800', wght:700 },
     { id:'molle',                 name:'Molle',                  stack:"'Molle', cursive",                            g:'Molle:ital@1' },
     { id:'climate-crisis',        name:'Climate Crisis',         stack:"'Climate Crisis', sans-serif",                g:'Climate+Crisis' },
     { id:'instrument-serif',      name:'Instrument Serif',       stack:"'Instrument Serif', serif",                   g:'Instrument+Serif:ital@0;1' },
     { id:'phudu',                 name:'Phudu',                  stack:"'Phudu', sans-serif",                         g:'Phudu:wght@300..900' },
-    { id:'outfit',                name:'Outfit',                 stack:"'Outfit', sans-serif",                        g:'Outfit:wght@100..900' },
     { id:'faculty-glyphic',       name:'Faculty Glyphic',        stack:"'Faculty Glyphic', serif",                    g:'Faculty+Glyphic' },
     { id:'grenze',                name:'Grenze',                 stack:"'Grenze', serif",                             g:'Grenze:ital,wght@0,400;0,700;1,400;1,700' },
     { id:'erica-one',             name:'Erica One',              stack:"'Erica One', sans-serif",                     g:'Erica+One' },
@@ -55,8 +52,8 @@
     { id:'galdeano',              name:'Galdeano',               stack:"'Galdeano', sans-serif",                      g:'Galdeano' },
     { id:'tilt-prism',            name:'Tilt Prism',             stack:"'Tilt Prism', sans-serif",                    g:'Tilt+Prism' },
     { id:'yatra-one',             name:'Yatra One',              stack:"'Yatra One', serif",                          g:'Yatra+One' },
-    { id:'epilogue',              name:'Epilogue',               stack:"'Epilogue', sans-serif",                      g:'Epilogue:ital,wght@0,100..900;1,100..900' },
-    { id:'syne',                  name:'Syne',                   stack:"'Syne', sans-serif",                          g:'Syne:wght@400..800' },
+    { id:'epilogue',              name:'Epilogue',               stack:"'Epilogue', sans-serif",                      g:'Epilogue:ital,wght@0,100..900;1,100..900', wght:700 },
+    { id:'syne',                  name:'Syne',                   stack:"'Syne', sans-serif",                          g:'Syne:wght@400..800', wght:700 },
     { id:'chakra-petch',          name:'Chakra Petch',           stack:"'Chakra Petch', sans-serif",                  g:'Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700' },
     { id:'averia-serif-libre',    name:'Averia Serif Libre',     stack:"'Averia Serif Libre', serif",                 g:'Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700' },
     { id:'manufacturing-consent', name:'Manufacturing Consent',  stack:"'Manufacturing Consent', serif",              g:'Manufacturing+Consent' },
@@ -64,8 +61,8 @@
     { id:'caprasimo',             name:'Caprasimo',              stack:"'Caprasimo', serif",                          g:'Caprasimo' },
     { id:'modak',                 name:'Modak',                  stack:"'Modak', cursive",                            g:'Modak' },
     { id:'young-serif',           name:'Young Serif',            stack:"'Young Serif', serif",                        g:'Young+Serif' },
-    { id:'fahkwang',              name:'Fahkwang',               stack:"'Fahkwang', serif",                           g:'Fahkwang:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,400;1,500' },
-    { id:'bricolage-grotesque',   name:'Bricolage Grotesque',    stack:"'Bricolage Grotesque', sans-serif",           g:'Bricolage+Grotesque:opsz,wght@12..96,200..800' },
+    { id:'fahkwang',              name:'Fahkwang',               stack:"'Fahkwang', serif",                           g:'Fahkwang:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,400;1,500', wght:700 },
+    { id:'bricolage-grotesque',   name:'Bricolage Grotesque',    stack:"'Bricolage Grotesque', sans-serif",           g:'Bricolage+Grotesque:opsz,wght@12..96,200..800', wght:700 },
     { id:'asul',                  name:'Asul',                   stack:"'Asul', sans-serif",                          g:'Asul:wght@400;700' }
   ];
   (function () {
@@ -77,6 +74,7 @@
     try { localStorage.setItem('dr.lastIndex', String(i)); } catch (e) {}
     var f = fonts[i];
     document.documentElement.style.setProperty('--font-display', f.stack);
+    document.documentElement.style.setProperty('--h1-weight', String(f.wght || 400));
     if (f.g) {
       var l = document.createElement('link');
       l.rel = 'stylesheet';
@@ -317,7 +315,7 @@
               <span id="js-fontname-foot">Instrument Serif</span>
               <span class="ext" aria-hidden="true">↗</span>
             </a>
-            <span class="dim">— <span id="js-fontposition">1 of 44</span> in rotation</span>
+            <span class="dim">— <span id="js-fontposition">1 of 41</span> in rotation</span>
           </dd>
         </div>
 

@@ -44,6 +44,7 @@
     ensureLoaded(font);
 
     root.style.setProperty('--font-display', font.stack);
+    root.style.setProperty('--h1-weight', String(font.wght || 400));
     if (nameEl)     nameEl.textContent     = font.name;
     if (nameElFoot) nameElFoot.textContent = font.name;
     if (linkEl)     linkEl.href            = specimenUrl(font);

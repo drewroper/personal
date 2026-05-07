@@ -289,11 +289,11 @@ section {
 .hero__name h1 {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: var(--h1-weight, 400);
   font-style: normal;
-  /* Pin variable-font weight axis to 400 so display faces with weight
-     ranges (Big Shoulders, Bricolage, Phudu, Outfit, …) don't shift. */
-  font-variation-settings: 'wght' 400;
+  /* Pin variable-font weight axis to whatever the rotating font asks for.
+     Set per-load by script.js via --h1-weight (defaults to 400). */
+  font-variation-settings: 'wght' var(--h1-weight, 400);
   font-size: clamp(4.5rem, 14vw, 11rem);
   line-height: .92;
   letter-spacing: -.025em;
@@ -305,14 +305,18 @@ section {
   -webkit-hyphens: auto;
   overflow-wrap: anywhere;
   word-break: normal;
+  /* Try to even out line lengths when the rotating display face is wide
+     enough to push words to new lines. Falls back gracefully on browsers
+     that don't support text-wrap: balance yet. */
+  text-wrap: balance;
   max-width: 100%;
 }
-/* Force single weight throughout — including any markup the browser
-   inserts when the visitor edits the contenteditable headline. */
+/* Force consistent weight across the editable contenteditable markup
+   — anything the browser inserts inherits the same weight. */
 .hero__name h1,
 .hero__name h1 * {
-  font-weight: 400 !important;
-  font-variation-settings: 'wght' 400 !important;
+  font-weight: var(--h1-weight, 400) !important;
+  font-variation-settings: 'wght' var(--h1-weight, 400) !important;
 }
 .h1__line { display: block; }
 .h1__line:nth-child(2) { padding-left: .15em; }

@@ -113,6 +113,35 @@ main a:not(.ask__cta):not(.claude-badge):hover {
 .topbar__spacer { flex: 1; }
 .topbar__status { display: inline-flex; align-items: center; gap: .45rem; }
 
+/* Brand mark — used in topbar + footer ----------------------- */
+.brand-mark {
+  width: auto;
+  height: 1em;
+  display: inline-block;
+  flex: none;
+  color: currentColor;
+  vertical-align: -0.12em;
+}
+.brand-mark--lg { height: 28px; }
+
+.topbar__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  color: var(--text);
+  white-space: nowrap;
+  text-decoration: none;
+  transition: color .2s ease;
+}
+.topbar__brand:hover { color: var(--accent); }
+.topbar__brand .brand-mark {
+  height: 13px;
+  color: var(--text);
+  transition: color .2s ease;
+}
+.topbar__brand:hover .brand-mark { color: var(--accent); }
+.topbar__brand-text { color: inherit; }
+
 /* FONT SWITCHER (in topbar) ------------------------------------ */
 .font-switch {
   display: inline-flex; align-items: center; gap: .5rem;
@@ -793,6 +822,24 @@ section:first-of-type { border-top: 0; }
   margin: 2.5rem auto 1.25rem;
   height: 1px;
   background: var(--line);
+}
+.footer__signoff {
+  max-width: var(--container);
+  margin: 0 auto 1.25rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.footer__signoff::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--line-faint);
+}
+.footer__signoff .brand-mark { color: var(--text); }
+@media (max-width: 640px) {
+  .footer__signoff .brand-mark { height: 22px; }
 }
 .footer__colophon {
   max-width: var(--container);

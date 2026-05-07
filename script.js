@@ -459,10 +459,11 @@
     const cross = (cx, cy, r) => {
       const out = [];
       for (let i = -r; i <= r; i++) {
-        out.push([cx + i, cy + i]);
-        out.push([cx + i, cy - i]);
-        out.push([cx + i + 1, cy + i]); // +1 px thickness
-        out.push([cx + i + 1, cy - i]);
+        // 3-pixel-thick X, symmetric around the center column (no right-skew).
+        for (let t = -1; t <= 1; t++) {
+          out.push([cx + i + t, cy + i]);
+          out.push([cx + i + t, cy - i]);
+        }
       }
       return out;
     };
@@ -558,24 +559,26 @@
     const DOODLES = [
       null, // 0 — off (the photo as photographed)
 
-      // 1 — Xs over the eyes
+      // 1 — Xs over the eyes (shifted slightly left for alignment)
       function xEyes(W, H) {
-        const lx = N(FACE.leftEye.x, W),  ly = N(FACE.leftEye.y, H);
-        const rx = N(FACE.rightEye.x, W), ry = N(FACE.rightEye.y, H);
+        const lx = N(FACE.leftEye.x, W)  - 2, ly = N(FACE.leftEye.y, H);
+        const rx = N(FACE.rightEye.x, W) - 2, ry = N(FACE.rightEye.y, H);
         const r = Math.max(2, Math.round(W * 0.025));
         return [...cross(lx, ly, r), ...cross(rx, ry, r)];
       },
 
-      // 2 — Heart eyes
+      // 2 — Heart eyes (sit a few pixels lower than the eye landmarks
+      // and a touch left so they land on the actual irises)
       function heartEyes(W, H) {
-        const lx = N(FACE.leftEye.x, W),  ly = N(FACE.leftEye.y, H);
-        const rx = N(FACE.rightEye.x, W), ry = N(FACE.rightEye.y, H);
+        const dx = -1, dy = 3;
+        const lx = N(FACE.leftEye.x, W)  + dx, ly = N(FACE.leftEye.y, H)  + dy;
+        const rx = N(FACE.rightEye.x, W) + dx, ry = N(FACE.rightEye.y, H) + dy;
         return [...heart(lx, ly), ...heart(rx, ry)];
       },
 
       // 3 — Halo above the head
       function halo(W, H) {
-        const cx = N(FACE.headTop.x, W);
+        const cx = N(FACE.headTop.x, W) - 2;
         const cy = N(FACE.headTop.y - 0.06, H);
         return ring(cx, cy, Math.round(W * 0.13), Math.round(H * 0.04), 2);
       },
@@ -613,32 +616,36 @@
         return out;
       },
 
-      // 5 — Classic handlebar mustache: thick body with curl loops at
-      // each end (visible interior holes — reads as a clear curl).
+      // 5 — Classic handlebar mustache: wide horizontal body with a
+      // closed loop curl at each end (clear hole inside the curl) plus
+      // a tapering bottom edge. Sized to match a "real mustache" silhouette.
       function mustache(W, H) {
         const out = [];
         const cx = N(FACE.nose.x, W);
         const cy = Math.round((N(FACE.nose.y, H) + N(FACE.mouth.y, H)) / 2);
 
-        // Each end has a 4×4 closed loop drawn so the hole inside is
-        // visible. The loop's bottom row meets the leftmost columns of
-        // the body so it integrates as one continuous mustache.
+        // Curl loops at each end live at rows -3 to 0; body runs from
+        // row 0 down through row 3.
+        //
+        //   Left curl visualization:
+        //     -3:   . # # .       (top)
+        //     -2:   # # # #
+        //     -1:   # . . #       (visible interior)
+        //      0:   # # # #       (bottom — meets body)
+        //
         const rows = [
-          // The loops themselves (rows -3 to 0)
-          { dy: -3, dxs: [-12, -11,                                                                 11, 12] },
-          { dy: -2, dxs: [-13, -12, -11, -10,                                                       10, 11, 12, 13] },
-          { dy: -1, dxs: [-13,           -10,                                                       10,         13] },
-          { dy:  0, dxs: [-13, -12, -11, -10,                                                       10, 11, 12, 13] },
-          // Body — thick horizontal bar with a 3-col philtrum gap
-          { dy:  1, dxs: [-12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2,
-                                                              2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12] },
-          { dy:  2, dxs: [-11, -10, -9, -8, -7, -6, -5, -4, -3,
-                                                          3,  4,  5,  6,  7,  8,  9, 10, 11] },
-          { dy:  3, dxs: [-10, -9, -8, -7, -6, -5, -4, -3,
-                                                       3,  4,  5,  6,  7,  8,  9, 10] },
-          // Tapering bottom
-          { dy:  4, dxs: [-9, -8, -7, -6, -5, -4,        4,  5,  6,  7,  8,  9] },
-          { dy:  5, dxs: [-7, -6, -5, -4,                4,  5,  6,  7] }
+          { dy: -3, dxs: [-10, -9,                                          9, 10] },
+          { dy: -2, dxs: [-11, -10, -9, -8,                                 8,  9, 10, 11] },
+          { dy: -1, dxs: [-11,           -8,                                8,         11] },
+          // Curl bottom + body top fuse here
+          { dy:  0, dxs: [-11, -10, -9, -8, -7, -6, -5, -4, -3, -2,
+                                                              2,  3,  4,  5,  6,  7,  8,  9, 10, 11] },
+          { dy:  1, dxs: [-10,  -9, -8, -7, -6, -5, -4, -3, -2,
+                                                              2,  3,  4,  5,  6,  7,  8,  9, 10] },
+          { dy:  2, dxs: [-9,   -8, -7, -6, -5, -4, -3,
+                                                          3,  4,  5,  6,  7,  8,  9] },
+          { dy:  3, dxs: [-7,   -6, -5, -4,
+                                                       4,  5,  6,  7] }
         ];
         for (const r of rows) {
           for (const dx of r.dxs) out.push([cx + dx, cy + r.dy]);
@@ -646,11 +653,17 @@
         return out;
       },
 
-      // 6 — Smiley face: tall pill eyes + a wide thick smile
+      // 6 — Smiley face: tall pill eyes + a wide thick smile.
+      // Eyes drop a few rows below the FACE landmark and pull closer
+      // together; mouth comes up. Tuned per Drew's feedback.
       function smiley(W, H) {
         const out = [];
-        const lx = N(FACE.leftEye.x, W),  ly = N(FACE.leftEye.y, H);
-        const rx = N(FACE.rightEye.x, W), ry = N(FACE.rightEye.y, H);
+        const eyeYOff = 4;     // down
+        const eyeXSqueeze = 2; // each eye toward center
+        const mouthYOff = -4;  // mouth up
+
+        const lx = N(FACE.leftEye.x, W)  + eyeXSqueeze, ly = N(FACE.leftEye.y, H)  + eyeYOff;
+        const rx = N(FACE.rightEye.x, W) - eyeXSqueeze, ry = N(FACE.rightEye.y, H) + eyeYOff;
 
         // 5-wide × 9-tall vertical pill — reads as a happy almond eye.
         const eyeRows = [
@@ -680,7 +693,7 @@
 
         // Smile: wide arc, 3-pixel thick.
         const mx = N(FACE.mouth.x, W);
-        const my = N(FACE.mouth.y, H);
+        const my = N(FACE.mouth.y, H) + mouthYOff;
         out.push(...smileArc(mx, my, Math.round(W * 0.10), Math.round(H * 0.07), 3));
         return out;
       },

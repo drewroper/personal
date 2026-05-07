@@ -204,13 +204,13 @@
     'https://mir-s3-cdn-cf.behance.net/projects/404/51a76e21733267.Y3JvcCw4NzksNjg4LDYwLDA.jpg',      // Missouri License Plate
     'https://mir-s3-cdn-cf.behance.net/projects/404/72bba813608983.5f5aeef869291.jpg'                   // MyBread
   ];
-  // Aspect ratios for desktop grid cells. object-fit: cover crops as needed
-  // so cell ratios don't have to match source images.
-  const CELL_RATIOS = [
-    '4 / 5', '3 / 4', '1 / 1', '4 / 5', '3 / 4', '5 / 4',
-    '4 / 5', '1 / 1', '3 / 4', '4 / 5', '5 / 7', '3 / 4'
-  ];
   const VISIBLE_CELLS = 8;
+  // Each cell's aspect ratio is computed from the loaded image so
+  // landscape work stays landscape and portrait stays portrait.
+  const setCellRatio = (cell, img) => {
+    if (!img.naturalWidth || !img.naturalHeight) return;
+    cell.style.setProperty('--ratio', `${img.naturalWidth} / ${img.naturalHeight}`);
+  };
 
   function shuffleIndices(n, exclude = new Set()) {
     const arr = [];
@@ -231,16 +231,16 @@
     const inPool  = new Set(visible);
 
     grid.innerHTML = '';
-    visible.forEach((imgIdx, cellIdx) => {
+    visible.forEach((imgIdx) => {
       const cell = document.createElement('div');
       cell.className = 'work-cell';
-      cell.style.setProperty('--ratio', CELL_RATIOS[cellIdx % CELL_RATIOS.length]);
       cell.dataset.imgIdx = String(imgIdx);
 
       const img = new Image();
       img.alt = '';
       img.loading = 'lazy';
       img.decoding = 'async';
+      img.onload = () => setCellRatio(cell, img);
       img.src = WORK_IMAGES[imgIdx];
       cell.appendChild(img);
 
@@ -262,7 +262,8 @@
       inPool.delete(oldIdx);
       inPool.add(newIdx);
 
-      // Preload, then swap.
+      // Preload, then swap. Cell aspect ratio is updated to match the
+      // new image so landscapes don't get cropped into portraits.
       const next = new Image();
       next.onload = () => {
         cell.classList.add('is-fading');
@@ -270,6 +271,7 @@
           const img = cell.querySelector('img');
           if (img) img.src = next.src;
           cell.dataset.imgIdx = String(newIdx);
+          setCellRatio(cell, next);
           requestAnimationFrame(() => cell.classList.remove('is-fading'));
         }, FADE_MS);
       };

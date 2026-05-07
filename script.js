@@ -514,20 +514,23 @@
       return out;
     };
 
-    // Pixel heart, 9 wide × 7 tall, centered horizontally at col 4,
-    // top of bitmap at -3 from center.
+    // Pixel heart, 13 wide × 10 tall, centered horizontally at col 6,
+    // top of bitmap at -5 from center. Big-big.
     const HEART = (() => {
       const rows = [
-        '..##.##..',  // -3 (top lobes)
-        '#########',  // -2
-        '#########',  // -1
-        '.#######.',  //  0
-        '..#####..',  //  1
-        '...###...',  //  2
-        '....#....',  //  3
+        '.####...####.',  // -5 (two top lobes)
+        '#############',  // -4
+        '#############',  // -3
+        '#############',  // -2
+        '.###########.',  // -1
+        '..#########..',  //  0
+        '...#######...',  //  1
+        '....#####....',  //  2
+        '.....###.....',  //  3
+        '......#......',  //  4
       ];
-      const halfW = 4;
-      const dyStart = -3;
+      const halfW = 6;
+      const dyStart = -5;
       const out = [];
       for (let r = 0; r < rows.length; r++) {
         for (let c = 0; c < rows[r].length; c++) {
@@ -596,47 +599,62 @@
         return out;
       },
 
-      // 5 — Handlebar mustache between nose and mouth
+      // 5 — Handlebar mustache with pronounced upward curls
       function mustache(W, H) {
         const out = [];
         const cx = N(FACE.nose.x, W);
         const cy = Math.round((N(FACE.nose.y, H) + N(FACE.mouth.y, H)) / 2);
 
-        // Row-based bitmap. dxs are absolute column offsets from cx (so
-        // negatives are left of center, positives right). Center column
-        // is empty to suggest the philtrum gap.
+        // Tall curls at each end rise four rows above the body and
+        // flare out at the top so the silhouette reads as a handlebar
+        // with clear upturned tips.
         const rows = [
-          // Curling tips poking up at the ends
-          { dy: -3, dxs: [-9, -8, 8, 9] },
-          { dy: -2, dxs: [-9, -8, -7, 7, 8, 9] },
-          { dy: -1, dxs: [-9, -8, -7, -6, 6, 7, 8, 9] },
-          // Main body
-          { dy:  0, dxs: [-8, -7, -6, -5, -4, -3, 3, 4, 5, 6, 7, 8] },
-          { dy:  1, dxs: [-7, -6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7] },
-          { dy:  2, dxs: [-6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6] },
+          { dy: -4, dxs: [-10, -9, 9, 10] },                                                       // tippy top
+          { dy: -3, dxs: [-11, -10, -9, -8, 8, 9, 10, 11] },                                       // curl flair
+          { dy: -2, dxs: [-10, -9, 9, 10] },                                                       // curl side
+          { dy: -1, dxs: [-10, -9, 9, 10] },                                                       // curl side
+          // Main body — solid horizontal bar with a philtrum gap at the center.
+          { dy:  0, dxs: [-10, -9, -8, -7, -6, -5, -4, -3, -2, 2, 3, 4, 5, 6, 7, 8, 9, 10] },
+          { dy:  1, dxs: [-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] },
+          { dy:  2, dxs: [-9, -8, -7, -6, -5, -4, -3, -2, 2, 3, 4, 5, 6, 7, 8, 9] },
           // Tapering bottom
-          { dy:  3, dxs: [-5, -4, -3, -2, 2, 3, 4, 5] }
+          { dy:  3, dxs: [-7, -6, -5, -4, -3, 3, 4, 5, 6, 7] },
+          { dy:  4, dxs: [-5, -4, 4, 5] }
         ];
         for (const r of rows) {
-          for (const dx of r.dxs) {
-            out.push([cx + dx, cy + r.dy]);
-          }
+          for (const dx of r.dxs) out.push([cx + dx, cy + r.dy]);
         }
         return out;
       },
 
-      // 6 — Smiley face: filled lime eyes + a wide thick smile
+      // 6 — Smiley face: happy arched eyes (closed/laughing) + wide smile
       function smiley(W, H) {
         const out = [];
         const lx = N(FACE.leftEye.x, W),  ly = N(FACE.leftEye.y, H);
         const rx = N(FACE.rightEye.x, W), ry = N(FACE.rightEye.y, H);
-        const eyeR = Math.max(3, Math.round(W * 0.038)); // bumped up
-        out.push(...filledCircle(lx, ly, eyeR));
-        out.push(...filledCircle(rx, ry, eyeR));
+
+        // Arched eye: 9-wide opening-down arc, like ⌒. Reads as a
+        // laughing/squinting closed eye.
+        const eyeRows = [
+          '..#####..',
+          '.#######.',
+          '##.....##'
+        ];
+        const halfEye = 4;
+        const drawEye = (cx, cy) => {
+          for (let r = 0; r < eyeRows.length; r++) {
+            for (let c = 0; c < eyeRows[r].length; c++) {
+              if (eyeRows[r][c] === '#') out.push([cx + c - halfEye, cy - 1 + r]);
+            }
+          }
+        };
+        drawEye(lx, ly);
+        drawEye(rx, ry);
+
+        // Smile: wider arc, 3-pixel thick
         const mx = N(FACE.mouth.x, W);
         const my = N(FACE.mouth.y, H);
-        // Smile: bigger arc, 3-pixel thick
-        out.push(...smileArc(mx, my, Math.round(W * 0.09), Math.round(H * 0.06), 3));
+        out.push(...smileArc(mx, my, Math.round(W * 0.10), Math.round(H * 0.07), 3));
         return out;
       },
 

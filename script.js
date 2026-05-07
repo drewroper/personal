@@ -480,12 +480,44 @@
     // upper-center; these are tuned by eye against the live render.
     const FACE = {
       headTop:  { x: 0.49, y: 0.11 },
-      leftEye:  { x: 0.43, y: 0.40 },
-      rightEye: { x: 0.55, y: 0.40 },
-      nose:     { x: 0.49, y: 0.50 },
-      mouth:    { x: 0.49, y: 0.62 }
+      leftEye:  { x: 0.43, y: 0.28 },
+      rightEye: { x: 0.55, y: 0.28 },
+      nose:     { x: 0.49, y: 0.36 },
+      mouth:    { x: 0.49, y: 0.43 }
     };
     const N = (n, max) => Math.round(n * max);
+
+    const filledCircle = (cx, cy, r) => {
+      const out = [];
+      const r2 = r * r;
+      for (let dy = -r; dy <= r; dy++) {
+        for (let dx = -r; dx <= r; dx++) {
+          if (dx * dx + dy * dy <= r2) out.push([cx + dx, cy + dy]);
+        }
+      }
+      return out;
+    };
+
+    // Smile arc: bottom half of an ellipse centered at (cx, cy).
+    const smileArc = (cx, cy, rx, ry) => {
+      const out = [];
+      for (let a = 0; a <= Math.PI; a += 0.06) {
+        const x = Math.round(cx - rx + (1 - Math.cos(a)) * rx);
+        const y = Math.round(cy + Math.sin(a) * ry);
+        out.push([x, y]);
+        out.push([x, y + 1]); // 2-pixel thick
+      }
+      return out;
+    };
+
+    // Tiny pixel heart, ~5×4, centered at (cx, cy).
+    const HEART = [
+      [-2, -1], [-1, -1], [1, -1], [2, -1],
+      [-2,  0], [-1,  0], [0,  0], [1,  0], [2,  0],
+      [-1,  1], [0,  1], [1,  1],
+      [0,  2]
+    ];
+    const heart = (cx, cy) => HEART.map(([dx, dy]) => [cx + dx, cy + dy]);
 
     const DOODLES = [
       null, // 0 — off (the photo as photographed)
@@ -498,65 +530,75 @@
         return [...cross(lx, ly, r), ...cross(rx, ry, r)];
       },
 
-      // 2 — Halo above the head
+      // 2 — Heart eyes
+      function heartEyes(W, H) {
+        const lx = N(FACE.leftEye.x, W),  ly = N(FACE.leftEye.y, H);
+        const rx = N(FACE.rightEye.x, W), ry = N(FACE.rightEye.y, H);
+        return [...heart(lx, ly), ...heart(rx, ry)];
+      },
+
+      // 3 — Halo above the head
       function halo(W, H) {
         const cx = N(FACE.headTop.x, W);
         const cy = N(FACE.headTop.y - 0.06, H);
         return ring(cx, cy, Math.round(W * 0.13), Math.round(H * 0.04));
       },
 
-      // 3 — Devil horns
+      // 3 — Devil horns — curve up and out, then the tip curls back inward
       function horns(W, H) {
         const out = [];
         const baseY = N(FACE.headTop.y, H);
-        const off = Math.round(W * 0.07);
         const cx = N(FACE.headTop.x, W);
-        const horn = (hx) => {
-          for (let i = 0; i < 5; i++) {
-            const half = i;
-            for (let j = -half; j <= half; j++) {
-              if (i === 4 || j === -half || j === half) out.push([hx + j, baseY - i]);
-            }
+        const off = Math.round(W * 0.06);
+        // Path traced from base to tip: outward swing, then a curl back inward.
+        // dx is in pixels relative to base; dy is rows above the base.
+        const path = [
+          [0, 0], [1, -1], [2, -2], [3, -3], [4, -4],
+          [4, -5], [4, -6], [3, -7], [2, -7], [2, -8]
+        ];
+        const horn = (baseX, dir) => {
+          for (const [dx, dy] of path) {
+            const x = baseX + dir * dx;
+            const y = baseY + dy;
+            // 2-pixel thick along the curve
+            out.push([x, y], [x + dir, y]);
           }
         };
-        horn(cx - off);
-        horn(cx + off);
+        horn(cx - off, -1);
+        horn(cx + off,  1);
         return out;
       },
 
-      // 4 — Sunglasses (two lens rectangles + bridge)
-      function sunglasses(W, H) {
+      // 5 — Mustache (handlebar) between nose and mouth
+      function mustache(W, H) {
         const out = [];
-        const ly = N(FACE.leftEye.y, H);
-        const lx = N(FACE.leftEye.x, W);
-        const rx = N(FACE.rightEye.x, W);
-        const lensW = Math.max(3, Math.round(W * 0.045));
-        const lensH = Math.max(2, Math.round(H * 0.05));
-        const lens = (cx, cy) => {
-          for (let i = -lensW; i <= lensW; i++) {
-            for (let j = -lensH; j <= lensH; j++) {
-              if (Math.abs(i) === lensW || Math.abs(j) === lensH) out.push([cx + i, cy + j]);
-            }
-          }
-        };
-        lens(lx, ly);
-        lens(rx, ly);
-        // bridge
-        for (let x = lx + lensW + 1; x < rx - lensW; x++) out.push([x, ly]);
-        return out;
-      },
-
-      // 5 — Smile arc over the mouth
-      function smile(W, H) {
-        const out = [];
-        const cx = N(FACE.mouth.x, W);
-        const cy = N(FACE.mouth.y, H);
-        const rx = Math.round(W * 0.07);
-        const ry = Math.round(H * 0.06);
-        // bottom half of an ellipse
-        for (let a = 0; a <= Math.PI; a += 0.08) {
-          out.push([Math.round(cx - rx + (1 - Math.cos(a)) * rx), Math.round(cy + Math.sin(a) * ry)]);
+        const cx = N(FACE.nose.x, W);
+        const cy = Math.round((N(FACE.nose.y, H) + N(FACE.mouth.y, H)) / 2);
+        const half = Math.max(5, Math.round(W * 0.07));
+        // 2-pixel thick horizontal bar
+        for (let dx = -half + 1; dx <= half - 1; dx++) {
+          out.push([cx + dx, cy]);
+          out.push([cx + dx, cy + 1]);
         }
+        // Slight dip in the middle
+        out.push([cx - 1, cy + 2], [cx, cy + 2], [cx + 1, cy + 2]);
+        // Curls flicking up at each end
+        out.push([cx - half, cy], [cx - half, cy - 1], [cx - half + 1, cy - 1]);
+        out.push([cx + half, cy], [cx + half, cy - 1], [cx + half - 1, cy - 1]);
+        return out;
+      },
+
+      // 6 — Smiley face: filled lime eyes + a wide smile
+      function smiley(W, H) {
+        const out = [];
+        const lx = N(FACE.leftEye.x, W),  ly = N(FACE.leftEye.y, H);
+        const rx = N(FACE.rightEye.x, W), ry = N(FACE.rightEye.y, H);
+        const eyeR = Math.max(2, Math.round(W * 0.022));
+        out.push(...filledCircle(lx, ly, eyeR));
+        out.push(...filledCircle(rx, ry, eyeR));
+        const mx = N(FACE.mouth.x, W);
+        const my = N(FACE.mouth.y, H);
+        out.push(...smileArc(mx, my, Math.round(W * 0.075), Math.round(H * 0.05)));
         return out;
       }
     ];

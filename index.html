@@ -97,29 +97,24 @@
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
-  <!-- Top utility bar — utilitarian microcopy -->
+  <!-- Top utility bar: logo · time · font-pill -->
   <header class="topbar" aria-label="Site meta">
     <a class="topbar__brand" href="/" aria-label="Drew Roper — home">
       <svg class="brand-mark" viewBox="0 0 71 58" aria-hidden="true" focusable="false">
         <path fill="currentColor" fill-rule="evenodd" d="M40.508 0H0v8.395h40.508c12.207 0 21.77 9.05 21.77 20.603 0 10.936-8.564 19.63-19.877 20.53l-6.288-7.554h4.116l.114.001c7.132 0 12.935-5.821 12.935-12.976 0-7.154-5.803-12.972-12.935-12.972H0v8.395h9.284v25.184H0V58h25.53v-8.395h-7.736v-7.631h7.307l12.064 14.492L38.496 58h2.012c16.979 0 30.28-12.739 30.28-29.002C70.788 12.737 57.487 0 40.508 0Zm-22.714 24.421h22.55c2.397 0 4.424 2.096 4.424 4.577 0 2.483-2.027 4.581-4.424 4.581h-.115H17.794v-9.158Z"/>
       </svg>
-      <span class="topbar__brand-text">drewroper.com</span>
     </a>
-    <span class="topbar__sep" aria-hidden="true">/</span>
-    <span class="topbar__cell">Index</span>
-    <span class="topbar__sep" aria-hidden="true">/</span>
+
+    <button class="topbar__cell topbar__clock" id="js-clock" type="button" aria-label="Local time in Denver — tap to see where Drew is based">
+      <span class="topbar__clock-time" id="js-clock-time">— —</span>
+      <span class="topbar__clock-loc" aria-hidden="true">Denver, CO · 5,280 ft</span>
+    </button>
+
     <button class="topbar__cell font-switch" id="js-fontswitch" type="button" aria-label="Cycle to next typeface" title="Click to change typeface">
       <span class="font-switch__aa" aria-hidden="true">Aa</span>
       <span class="font-switch__label">Set in</span>
       <span class="font-switch__name" id="js-fontname">—</span>
       <span class="font-switch__icon" aria-hidden="true">↻</span>
-    </button>
-    <span class="topbar__spacer"></span>
-    <span class="topbar__cell topbar__status"><span class="dot dot--live" aria-hidden="true"></span> Available for work</span>
-    <span class="topbar__sep" aria-hidden="true">/</span>
-    <button class="topbar__cell topbar__clock" id="js-clock" type="button" aria-label="Local time in Denver — tap to see where Drew is based">
-      <span class="topbar__clock-time" id="js-clock-time">— —</span>
-      <span class="topbar__clock-loc" aria-hidden="true">Denver, CO 38° / 7,200 ft</span>
     </button>
   </header>
 
@@ -139,22 +134,19 @@
               aria-label="Editable headline — type anything"
               title="Click to type your own headline">
             <span class="h1__line">Waiting on</span>
-            <span class="h1__line"><em>final copy</em></span>
+            <span class="h1__line">final copy</span>
           </h1>
-          <p class="hero__tag">
-            <span class="hero__tag-rule" aria-hidden="true"></span>
-            <span>A portfolio &amp; index, in one page.</span>
-          </p>
         </div>
 
         <figure class="hero__portrait" aria-hidden="true">
           <div class="portrait__frame">
-            <div class="portrait__inner">
-              <span class="portrait__placeholder">
-                <span class="portrait__caps">Drop portrait here</span>
-                <span class="portrait__hint">/assets/portrait.jpg · 4:5</span>
-              </span>
-            </div>
+            <canvas
+              class="portrait__canvas"
+              id="js-portrait"
+              width="240"
+              height="300"
+              data-src="assets/portrait.jpg"
+              aria-hidden="true"></canvas>
             <span class="portrait__corner portrait__corner--tl" aria-hidden="true"></span>
             <span class="portrait__corner portrait__corner--tr" aria-hidden="true"></span>
             <span class="portrait__corner portrait__corner--bl" aria-hidden="true"></span>
@@ -162,7 +154,7 @@
           </div>
           <figcaption>
             <span>Fig. 01</span>
-            <span>Self portrait, 2026</span>
+            <span>Self portrait · dithered, animated</span>
           </figcaption>
         </figure>
 
@@ -187,7 +179,7 @@
       <ul class="history__list" role="list">
         <li class="history__item">
           <div class="history__top">
-            <h3 class="history__company">Anthropic</h3>
+            <h2 class="history__company">Anthropic</h2>
             <span class="history__year">2026</span>
           </div>
           <div class="history__bottom">
@@ -199,7 +191,7 @@
 
         <li class="history__item">
           <div class="history__top">
-            <h3 class="history__company">Stripe</h3>
+            <h2 class="history__company">Stripe</h2>
             <span class="history__year">2021</span>
           </div>
           <div class="history__bottom">
@@ -211,7 +203,7 @@
 
         <li class="history__item">
           <div class="history__top">
-            <h3 class="history__company">Trunk Club</h3>
+            <h2 class="history__company">Trunk Club</h2>
             <span class="history__pill" aria-label="Contract role">Contract</span>
             <span class="history__year">2018</span>
           </div>
@@ -224,7 +216,7 @@
 
         <li class="history__item">
           <div class="history__top">
-            <h3 class="history__company">Dropbox</h3>
+            <h2 class="history__company">Dropbox</h2>
             <span class="history__pill" aria-label="Contract role">Contract</span>
             <span class="history__year">2016</span>
           </div>
@@ -237,7 +229,7 @@
 
         <li class="history__item">
           <div class="history__top">
-            <h3 class="history__company">Obama for America</h3>
+            <h2 class="history__company">Obama for America</h2>
             <span class="history__year">2012</span>
           </div>
           <div class="history__bottom">
@@ -249,7 +241,7 @@
 
         <li class="history__item">
           <div class="history__top">
-            <h3 class="history__company">University of Missouri</h3>
+            <h2 class="history__company">University of Missouri</h2>
             <span class="history__year">2010</span>
           </div>
           <div class="history__bottom">
@@ -262,7 +254,9 @@
     </section>
 
     <!-- WORK ============================================================= -->
-    <section class="work" id="work" aria-label="Selected work">
+    <section class="work" id="work" aria-labelledby="work-h">
+      <h2 id="work-h" class="work__title">Work</h2>
+
       <!-- Desktop: cycling masonry of N visible cells from a pool of ~50 -->
       <div class="work-grid" id="js-work-grid" aria-hidden="true"></div>
 
@@ -277,20 +271,6 @@
 
   <!-- FOOTER ============================================================= -->
   <footer class="footer" aria-label="Site footer">
-    <nav class="footer__nav" aria-label="Index">
-      <a href="#main">About</a>
-      <a href="#work">Work</a>
-      <a href="#history">History</a>
-    </nav>
-
-    <nav class="footer__social" aria-label="Social">
-      <a href="https://twitter.com/drewroper">Twitter</a>
-      <a href="https://github.com/drewroper">GitHub</a>
-      <a href="https://www.linkedin.com/in/drewroper">LinkedIn</a>
-      <a href="https://dribbble.com/drewroper">Dribbble</a>
-      <a href="https://www.behance.net/drewroper">Behance</a>
-    </nav>
-
     <div class="footer__meta">
       <span class="footer__copy">© 2010–<span id="js-year">2026</span> &nbsp;Drew Roper. All rights reserved.</span>
       <a class="claude-badge" href="https://claude.com/code" rel="noopener" target="_blank" aria-label="Created with Claude Code">
@@ -313,7 +293,7 @@
     <section class="colophon" aria-labelledby="colophon-h">
       <header class="colophon__head">
         <span class="colophon__num">§ ∞</span>
-        <h3 id="colophon-h" class="colophon__title">Colophon</h3>
+        <h2 id="colophon-h" class="colophon__title">Colophon</h2>
         <span class="colophon__rule" aria-hidden="true"></span>
         <span class="colophon__micro">For the curious · revised continually</span>
       </header>

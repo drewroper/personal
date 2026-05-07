@@ -324,7 +324,145 @@
   initWorkSlides();
 
   /* ============================================================
-     5. CONSOLE SIGNATURE
+     5. DITHERED PORTRAIT — ambient animation
+     -----------------------------------------------------------
+     Loads /assets/portrait.jpg, samples it into a low-res Bayer
+     8x8 ordered-dither, and animates by slowly shifting the
+     dither matrix offset + threshold. The canvas is small and
+     scaled with image-rendering:pixelated for chunky grain.
+     If the image is missing, paints a placeholder gradient.
+     ============================================================ */
+  (function initDitherPortrait() {
+    const canvas = document.getElementById('js-portrait');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    const W = canvas.width;   // 240
+    const H = canvas.height;  // 300
+
+    // Bayer 8x8, scaled to 0..252 to match 0..255 grayscale comparison.
+    const BAYER = [
+       0, 32,  8, 40,  2, 34, 10, 42,
+      48, 16, 56, 24, 50, 18, 58, 26,
+      12, 44,  4, 36, 14, 46,  6, 38,
+      60, 28, 52, 20, 62, 30, 54, 22,
+       3, 35, 11, 43,  1, 33,  9, 41,
+      51, 19, 59, 27, 49, 17, 57, 25,
+      15, 47,  7, 39, 13, 45,  5, 37,
+      63, 31, 55, 23, 61, 29, 53, 21
+    ].map(v => v * 4);
+
+    const DARK  = [12, 12, 13];
+    const LIGHT = [244, 241, 236];
+
+    let gray = null;
+    let raf = 0;
+    let last = 0;
+    const t0 = performance.now();
+    let visible = true;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload  = () => { sample(); render(performance.now()); start(); };
+    img.onerror = () => { fillPlaceholder(); render(performance.now()); start(); };
+    img.src = canvas.dataset.src || 'assets/portrait.jpg';
+
+    function sample() {
+      const tmp = document.createElement('canvas');
+      tmp.width = W; tmp.height = H;
+      const tctx = tmp.getContext('2d');
+      // Object-fit cover semantics
+      const iar = img.naturalWidth / img.naturalHeight;
+      const car = W / H;
+      let sx, sy, sw, sh;
+      if (iar > car) { sh = img.naturalHeight; sw = sh * car; sx = (img.naturalWidth - sw) / 2; sy = 0; }
+      else           { sw = img.naturalWidth;  sh = sw / car; sx = 0; sy = (img.naturalHeight - sh) / 2; }
+      tctx.drawImage(img, sx, sy, sw, sh, 0, 0, W, H);
+      const src = tctx.getImageData(0, 0, W, H).data;
+      gray = new Uint8Array(W * H);
+      for (let i = 0; i < W * H; i++) {
+        const r = src[i * 4], g = src[i * 4 + 1], b = src[i * 4 + 2];
+        // Stretch contrast slightly so the dither pops against the dark bg.
+        let v = 0.299 * r + 0.587 * g + 0.114 * b;
+        v = (v - 128) * 1.18 + 128;
+        gray[i] = Math.max(0, Math.min(255, v | 0));
+      }
+    }
+
+    function fillPlaceholder() {
+      // Soft radial vignette at portrait position so the layout reads even
+      // before /assets/portrait.jpg is uploaded.
+      gray = new Uint8Array(W * H);
+      for (let y = 0; y < H; y++) {
+        for (let x = 0; x < W; x++) {
+          const cx = (x - W * 0.5) / W;
+          const cy = (y - H * 0.42) / H;
+          const d = Math.sqrt(cx*cx + cy*cy);
+          gray[y * W + x] = Math.max(0, Math.min(255, (220 - d * 280) | 0));
+        }
+      }
+    }
+
+    function render(now) {
+      const t = reduce ? 0 : (now - t0) / 1000;
+      const ox = (Math.sin(t * 0.25) * 6) | 0;
+      const oy = (Math.cos(t * 0.18) * 6) | 0;
+      const ts = Math.sin(t * 0.40) * 12;
+
+      const out = ctx.createImageData(W, H);
+      const data = out.data;
+      for (let y = 0; y < H; y++) {
+        const rowBase = ((y + oy) & 7) * 8;
+        const yw = y * W;
+        for (let x = 0; x < W; x++) {
+          const idx = yw + x;
+          const v = gray[idx] + ts;
+          const m = BAYER[rowBase + ((x + ox) & 7)];
+          const c = v > m ? LIGHT : DARK;
+          const oi = idx * 4;
+          data[oi]     = c[0];
+          data[oi + 1] = c[1];
+          data[oi + 2] = c[2];
+          data[oi + 3] = 255;
+        }
+      }
+      ctx.putImageData(out, 0, 0);
+    }
+
+    function loop(now) {
+      // Cap to ~15 fps for an ambient feel and a kinder battery profile.
+      if (now - last >= 65 && visible) { last = now; render(now); }
+      if (!reduce && visible) raf = requestAnimationFrame(loop);
+      else raf = 0;
+    }
+    function start() {
+      if (raf) return;
+      if (reduce) { render(performance.now()); return; }
+      raf = requestAnimationFrame(loop);
+    }
+    function stop() {
+      if (raf) cancelAnimationFrame(raf);
+      raf = 0;
+    }
+
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        for (const e of entries) {
+          visible = e.isIntersecting;
+          if (visible) start(); else stop();
+        }
+      });
+      io.observe(canvas);
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stop();
+      else if (visible) start();
+    });
+  })();
+
+  /* ============================================================
+     6. CONSOLE SIGNATURE
      ============================================================ */
   if (typeof console !== 'undefined' && console.log) {
     const css = 'font-family: serif; font-size: 14px; font-style: italic; color: #c8a978; padding: 4px 0';

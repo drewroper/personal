@@ -754,48 +754,70 @@ section {
   display: inline-block;
 }
 
-/* CHANGELOG drawer at the bottom of the colophon ---------------- */
+/* CHANGELOG drawer — easter egg under "Last touched" ----------- */
 .changelog {
-  margin-top: 1.5rem;
-  border-top: var(--hairline-fine) solid var(--line);
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 400;
   letter-spacing: .04em;
 }
+/* The summary acts as the visible "Last touched" row, matching the
+   colophon row layout exactly so it reads as part of the dl above. */
 .changelog__summary {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  gap: 1rem;
   padding: .85rem 0;
+  border-top: var(--hairline-fine) solid var(--line);
+  align-items: baseline;
   cursor: pointer;
   list-style: none;
-  color: var(--text-muted);
-  user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
 .changelog__summary::-webkit-details-marker { display: none; }
 .changelog__summary::marker { content: ''; }
-.changelog__summary:hover { color: var(--text); }
+.changelog__key {
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+.changelog__value {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .65rem;
+  color: var(--text-faint);
+}
 .changelog__caret {
   display: inline-block;
-  font-size: 12px;
+  font-size: 14px;
+  line-height: 1;
   color: var(--text-faint);
-  transition: transform .2s ease;
+  transition: transform .25s cubic-bezier(.2,.8,.2,1), color .2s ease;
+  transform-origin: 50% 50%;
 }
+.changelog__summary:hover .changelog__caret,
+.changelog[open] .changelog__caret { color: var(--accent); }
 .changelog[open] .changelog__caret { transform: rotate(90deg); }
 
+/* List: hierarchy through spacing, color, and indent — never size/weight. */
 .changelog__list {
   list-style: none;
   margin: 0;
-  padding: .25rem 0 1rem;
+  padding: 1rem 0 1.5rem;
   display: grid;
-  gap: .35rem;
-  color: var(--text-faint);
-  line-height: 1.55;
+  gap: 1.25rem;       /* generous breathing room between entries */
+}
+.changelog__list li {
+  display: grid;
+  gap: .35rem;        /* time -> message */
   font-feature-settings: 'tnum';
 }
-.changelog__list li { white-space: pre-wrap; }
+.changelog__list time { color: var(--text-faint); }
+.changelog__msg {
+  color: var(--text-muted);
+  padding-left: 1.5rem;   /* indented under the timestamp */
+}
 
 /* =============================================================
    RESPONSIVE — mobile-first considered, layered breakpoints

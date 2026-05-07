@@ -376,8 +376,10 @@ section {
 }
 
 /* Company names: same h2 hierarchy, but in the body sans (Geist).
-   A medium weight gives them heading presence without leaving body. */
-.history__company {
+   A medium weight gives them heading presence without leaving body.
+   Specificity bumped (.history descendant) to win against any earlier
+   .history__company rule that might still be in stale caches. */
+.history .history__company {
   margin: 0;
   font-family: var(--font-sans);
   font-weight: 500;

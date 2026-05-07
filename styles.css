@@ -384,9 +384,9 @@ section {
   font-family: var(--font-sans);
   font-weight: 500;
   font-style: normal;
-  font-size: clamp(1.125rem, 1.6vw, 1.375rem);
-  line-height: 1.15;
-  letter-spacing: -.01em;
+  font-size: 1rem;
+  line-height: 1.55;
+  letter-spacing: 0;
   color: var(--text);
 }
 
@@ -838,7 +838,7 @@ section {
     flex-wrap: wrap;
     gap: .55rem .75rem;
   }
-  .history__company { font-size: clamp(1.125rem, 4.5vw, 1.375rem); }
+  .history__company { font-size: 1rem; }
   .history__year { margin-left: auto; }
   .history__bottom {
     flex-wrap: wrap;
@@ -873,7 +873,7 @@ section {
   .hero__name h1 { font-size: clamp(3rem, 19vw, 4.75rem); }
   .lede { font-size: 1.05rem; }
 
-  .history__company { font-size: clamp(1.35rem, 7.5vw, 1.75rem); }
+  .history__company { font-size: 1rem; }
 }
 
 /* TOUCH-FIRST MOTION GUARD ------------------------------------ */

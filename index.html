@@ -146,6 +146,11 @@
               height="88"
               data-src="assets/portrait.jpg"
               aria-hidden="true"></canvas>
+            <button
+              class="portrait__draw"
+              id="js-portrait-draw"
+              type="button"
+              aria-label="Draw on the portrait">Draw</button>
             <span class="portrait__corner portrait__corner--tl" aria-hidden="true"></span>
             <span class="portrait__corner portrait__corner--tr" aria-hidden="true"></span>
             <span class="portrait__corner portrait__corner--bl" aria-hidden="true"></span>
@@ -389,6 +394,7 @@
           </span>
         </summary>
         <ol class="changelog__list">
+          <li><time>2026-05-07 20:30Z</time><span class="changelog__msg">Draw pill added to the portrait corner (desktop): click to enter draw mode, paint your own lime pixels on Drew's face, click Clear to wipe + exit. Plus a new Chain + $ doodle joins the click-to-cycle rotation</span></li>
           <li><time>2026-05-07 20:00Z</time><span class="changelog__msg">Doodle tuning: face landmarks moved up so X eyes hit the eyes; sunglasses cut; devil horns rebuilt with a curve that arcs out and curls back in; smile relocated and combined with solid lime eyes for a full emoji-style smiley</span></li>
           <li><time>2026-05-07 19:30Z</time><span class="changelog__msg">Desktop dither density bumped further (132×88 → 144×96). Mobile stays at 120×80 — chunky pixels read better on small screens</span></li>
           <li><time>2026-05-07 19:00Z</time><span class="changelog__msg">Click the dithered portrait to cycle doodles in lime: X eyes → halo → devil horns → sunglasses → smile → clean. Coordinates are face-relative so they stay aligned at both desktop and mobile dither resolutions</span></li>

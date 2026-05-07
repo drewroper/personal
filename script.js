@@ -600,11 +600,43 @@
         const my = N(FACE.mouth.y, H);
         out.push(...smileArc(mx, my, Math.round(W * 0.075), Math.round(H * 0.05)));
         return out;
+      },
+
+      // 7 — Big chain with $ pendant
+      function chain(W, H) {
+        const out = [];
+        const chainY = N(0.52, H);
+        const startX = N(0.30, W);
+        const endX   = N(0.68, W);
+        // 2×2 link blocks with 1-pixel gaps for chain-link feel
+        for (let x = startX; x <= endX; x += 3) {
+          out.push([x, chainY], [x + 1, chainY]);
+          out.push([x, chainY + 1], [x + 1, chainY + 1]);
+        }
+        // Cord connecting chain to $ pendant
+        const cx = N(0.49, W);
+        for (let y = chainY + 2; y <= chainY + 4; y++) out.push([cx, y]);
+        // 5×7 dollar sign hanging below
+        const cy = chainY + 8;
+        const dollarOffsets = [
+          [0, -3],
+          [-1, -2], [0, -2], [1, -2],
+          [-2, -1], [0, -1],
+          [-1, 0], [0, 0], [1, 0],
+          [0, 1], [2, 1],
+          [-1, 2], [0, 2], [1, 2],
+          [0, 3]
+        ];
+        for (const [dx, dy] of dollarOffsets) out.push([cx + dx, cy + dy]);
+        return out;
       }
     ];
 
     // Index into DOODLES — 0 is the clean photo. Each click cycles.
     let doodle = 0;
+
+    // Pixels painted by the visitor in Draw mode (set of "x,y").
+    const userPixels = new Set();
 
     let gray = null;
     let raf = 0;
@@ -695,6 +727,20 @@
         }
       }
 
+      // User-drawn pixels (Draw mode) — same lime accent.
+      if (userPixels.size) {
+        for (const key of userPixels) {
+          const ci = key.indexOf(',');
+          const x = +key.slice(0, ci), y = +key.slice(ci + 1);
+          if (x < 0 || x >= W || y < 0 || y >= H) continue;
+          const oi = (y * W + x) * 4;
+          data[oi]     = ACCENT[0];
+          data[oi + 1] = ACCENT[1];
+          data[oi + 2] = ACCENT[2];
+          data[oi + 3] = 255;
+        }
+      }
+
       ctx.putImageData(out, 0, 0);
     }
 
@@ -729,12 +775,92 @@
       else if (visible) start();
     });
 
-    // Each click reveals the next doodle: X eyes → halo → horns →
-    // sunglasses → smile → off → loop.
+    // Each click reveals the next doodle. Draw mode disables this so
+    // clicks paint instead.
     canvas.addEventListener('click', () => {
+      if (drawMode) return;
       doodle = (doodle + 1) % DOODLES.length;
-      if (gray) render(performance.now()); // immediate repaint
+      if (gray) render(performance.now());
     });
+
+    /* ----------------------------------------------------------
+       Draw mode (desktop only — pill is hidden on mobile).
+       Click "Draw" → enter draw mode, doodle resets to clean photo,
+       button becomes "Clear", crosshair cursor, mouse paints lime
+       pixels (Bresenham line for smooth strokes). Click "Clear" →
+       wipe user pixels and exit draw mode.
+       ---------------------------------------------------------- */
+    const drawBtn = document.getElementById('js-portrait-draw');
+    let drawMode = false;
+    let isDrawing = false;
+    let lastPx = -1, lastPy = -1;
+
+    const evToPixel = (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const px = Math.round((e.clientX - rect.left) * canvas.width  / rect.width);
+      const py = Math.round((e.clientY - rect.top)  * canvas.height / rect.height);
+      return [px, py];
+    };
+    const stamp = (px, py) => {
+      // 1-pixel cross brush
+      const offsets = [[0,0],[1,0],[-1,0],[0,1],[0,-1]];
+      for (const [dx, dy] of offsets) userPixels.add(`${px+dx},${py+dy}`);
+    };
+    const lineStamp = (x0, y0, x1, y1) => {
+      const dx = Math.abs(x1 - x0), dy = Math.abs(y1 - y0);
+      const sx = x0 < x1 ? 1 : -1, sy = y0 < y1 ? 1 : -1;
+      let err = dx - dy, x = x0, y = y0;
+      while (true) {
+        stamp(x, y);
+        if (x === x1 && y === y1) break;
+        const e2 = err * 2;
+        if (e2 > -dy) { err -= dy; x += sx; }
+        if (e2 <  dx) { err += dx; y += sy; }
+      }
+    };
+
+    if (drawBtn) {
+      drawBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (drawMode) {
+          // Clear + exit
+          userPixels.clear();
+          drawMode = false;
+          drawBtn.textContent = 'Draw';
+          drawBtn.classList.remove('is-active');
+          canvas.classList.remove('is-drawing');
+        } else {
+          // Enter draw mode on a clean photo
+          drawMode = true;
+          doodle = 0;
+          drawBtn.textContent = 'Clear';
+          drawBtn.classList.add('is-active');
+          canvas.classList.add('is-drawing');
+        }
+        if (gray) render(performance.now());
+      });
+    }
+
+    canvas.addEventListener('pointerdown', (e) => {
+      if (!drawMode) return;
+      e.preventDefault();
+      isDrawing = true;
+      const [x, y] = evToPixel(e);
+      lastPx = x; lastPy = y;
+      stamp(x, y);
+      if (gray) render(performance.now());
+    });
+    canvas.addEventListener('pointermove', (e) => {
+      if (!drawMode || !isDrawing) return;
+      const [x, y] = evToPixel(e);
+      lineStamp(lastPx, lastPy, x, y);
+      lastPx = x; lastPy = y;
+      if (gray) render(performance.now());
+    });
+    const stopDraw = () => { isDrawing = false; };
+    canvas.addEventListener('pointerup', stopDraw);
+    canvas.addEventListener('pointerleave', stopDraw);
+    canvas.addEventListener('pointercancel', stopDraw);
   })();
 
   /* ============================================================

@@ -403,6 +403,39 @@ section {
   overflow: hidden;
 }
 .portrait__canvas { cursor: pointer; }
+.portrait__canvas.is-drawing { cursor: crosshair; }
+
+/* Draw-mode pill in the top-right of the portrait. Desktop only. */
+.portrait__draw {
+  position: absolute;
+  top: .65rem;
+  right: .65rem;
+  z-index: 2;
+  padding: .3rem .7rem;
+  border: var(--hairline) solid var(--line-bright);
+  border-radius: 999px;
+  background: rgba(12, 12, 13, .82);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: var(--mono-size);
+  letter-spacing: .04em;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: color .2s ease, border-color .2s ease;
+}
+.portrait__draw:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.portrait__draw.is-active {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+@media (max-width: 760px) {
+  .portrait__draw { display: none; }
+}
 .portrait__canvas {
   position: absolute;
   inset: 0;

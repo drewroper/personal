@@ -443,9 +443,124 @@
     const LIGHT  = [244, 241, 236];
     const ACCENT = [214, 255, 56];
 
-    // Toggled by click/tap on the canvas. When true, every "light"
-    // pixel renders in the accent (lime); off goes back to cream.
-    let accent = false;
+    /* Doodle overlays — drawn in the accent color over the dither.
+       Each function takes the canvas dimensions and returns a flat
+       array of [x, y] pixel coordinates. Coordinates are relative to
+       the photo so they shift slightly between desktop (132×88) and
+       mobile (120×80) but stay aligned with the face. */
+    const lineH = (y, x1, x2, dx) => {
+      const out = [];
+      for (let x = x1; x <= x2; x += (dx || 1)) out.push([x, y]);
+      return out;
+    };
+    const dot = (x, y) => [[x, y]];
+    const cross = (cx, cy, r) => {
+      const out = [];
+      for (let i = -r; i <= r; i++) {
+        out.push([cx + i, cy + i]);
+        out.push([cx + i, cy - i]);
+        out.push([cx + i + 1, cy + i]); // +1 px thickness
+        out.push([cx + i + 1, cy - i]);
+      }
+      return out;
+    };
+    const ring = (cx, cy, rx, ry) => {
+      const out = [];
+      const steps = 64;
+      for (let s = 0; s < steps; s++) {
+        const a = (s / steps) * Math.PI * 2;
+        out.push([Math.round(cx + Math.cos(a) * rx), Math.round(cy + Math.sin(a) * ry)]);
+      }
+      return out;
+    };
+
+    // Face landmarks in normalized coords. The photo subject sits
+    // upper-center; these are tuned by eye against the live render.
+    const FACE = {
+      headTop:  { x: 0.49, y: 0.11 },
+      leftEye:  { x: 0.43, y: 0.40 },
+      rightEye: { x: 0.55, y: 0.40 },
+      nose:     { x: 0.49, y: 0.50 },
+      mouth:    { x: 0.49, y: 0.62 }
+    };
+    const N = (n, max) => Math.round(n * max);
+
+    const DOODLES = [
+      null, // 0 — off (the photo as photographed)
+
+      // 1 — Xs over the eyes
+      function xEyes(W, H) {
+        const lx = N(FACE.leftEye.x, W),  ly = N(FACE.leftEye.y, H);
+        const rx = N(FACE.rightEye.x, W), ry = N(FACE.rightEye.y, H);
+        const r = Math.max(2, Math.round(W * 0.025));
+        return [...cross(lx, ly, r), ...cross(rx, ry, r)];
+      },
+
+      // 2 — Halo above the head
+      function halo(W, H) {
+        const cx = N(FACE.headTop.x, W);
+        const cy = N(FACE.headTop.y - 0.06, H);
+        return ring(cx, cy, Math.round(W * 0.13), Math.round(H * 0.04));
+      },
+
+      // 3 — Devil horns
+      function horns(W, H) {
+        const out = [];
+        const baseY = N(FACE.headTop.y, H);
+        const off = Math.round(W * 0.07);
+        const cx = N(FACE.headTop.x, W);
+        const horn = (hx) => {
+          for (let i = 0; i < 5; i++) {
+            const half = i;
+            for (let j = -half; j <= half; j++) {
+              if (i === 4 || j === -half || j === half) out.push([hx + j, baseY - i]);
+            }
+          }
+        };
+        horn(cx - off);
+        horn(cx + off);
+        return out;
+      },
+
+      // 4 — Sunglasses (two lens rectangles + bridge)
+      function sunglasses(W, H) {
+        const out = [];
+        const ly = N(FACE.leftEye.y, H);
+        const lx = N(FACE.leftEye.x, W);
+        const rx = N(FACE.rightEye.x, W);
+        const lensW = Math.max(3, Math.round(W * 0.045));
+        const lensH = Math.max(2, Math.round(H * 0.05));
+        const lens = (cx, cy) => {
+          for (let i = -lensW; i <= lensW; i++) {
+            for (let j = -lensH; j <= lensH; j++) {
+              if (Math.abs(i) === lensW || Math.abs(j) === lensH) out.push([cx + i, cy + j]);
+            }
+          }
+        };
+        lens(lx, ly);
+        lens(rx, ly);
+        // bridge
+        for (let x = lx + lensW + 1; x < rx - lensW; x++) out.push([x, ly]);
+        return out;
+      },
+
+      // 5 — Smile arc over the mouth
+      function smile(W, H) {
+        const out = [];
+        const cx = N(FACE.mouth.x, W);
+        const cy = N(FACE.mouth.y, H);
+        const rx = Math.round(W * 0.07);
+        const ry = Math.round(H * 0.06);
+        // bottom half of an ellipse
+        for (let a = 0; a <= Math.PI; a += 0.08) {
+          out.push([Math.round(cx - rx + (1 - Math.cos(a)) * rx), Math.round(cy + Math.sin(a) * ry)]);
+        }
+        return out;
+      }
+    ];
+
+    // Index into DOODLES — 0 is the clean photo. Each click cycles.
+    let doodle = 0;
 
     let gray = null;
     let raf = 0;
@@ -511,7 +626,7 @@
           const idx = yw + x;
           const v = gray[idx] + ts;
           const m = BAYER[rowBase + ((x + ox) & 7)];
-          const c = v > m ? (accent ? ACCENT : LIGHT) : DARK;
+          const c = v > m ? LIGHT : DARK;
           const oi = idx * 4;
           data[oi]     = c[0];
           data[oi + 1] = c[1];
@@ -519,6 +634,23 @@
           data[oi + 3] = 255;
         }
       }
+
+      // Doodle overlay: paint accent pixels at face-relative coordinates
+      // on top of the dither.
+      const fn = DOODLES[doodle];
+      if (fn) {
+        const pts = fn(W, H);
+        for (let p = 0; p < pts.length; p++) {
+          const [x, y] = pts[p];
+          if (x < 0 || x >= W || y < 0 || y >= H) continue;
+          const oi = (y * W + x) * 4;
+          data[oi]     = ACCENT[0];
+          data[oi + 1] = ACCENT[1];
+          data[oi + 2] = ACCENT[2];
+          data[oi + 3] = 255;
+        }
+      }
+
       ctx.putImageData(out, 0, 0);
     }
 
@@ -553,9 +685,10 @@
       else if (visible) start();
     });
 
-    // Click / tap toggles all light dots between cream and accent.
+    // Each click reveals the next doodle: X eyes → halo → horns →
+    // sunglasses → smile → off → loop.
     canvas.addEventListener('click', () => {
-      accent = !accent;
+      doodle = (doodle + 1) % DOODLES.length;
       if (gray) render(performance.now()); // immediate repaint
     });
   })();

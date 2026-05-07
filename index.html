@@ -13,7 +13,54 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <!-- UI fonts (stable across loads). Display serif rotates per visit. -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Font registry + early picker.
+       Synchronous in <head> so the chosen typeface is requested before
+       the body renders (avoids flicker / fallback-to-Times). -->
+  <script>
+  window.__FONTS__ = [
+    { id:'instrument-serif',   name:'Instrument Serif',   stack:"'Instrument Serif', 'Times New Roman', serif",     g:'Instrument+Serif:ital@0;1' },
+    { id:'fraunces',           name:'Fraunces',           stack:"'Fraunces', 'Times New Roman', serif",             g:'Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900' },
+    { id:'eb-garamond',        name:'EB Garamond',        stack:"'EB Garamond', Garamond, serif",                   g:'EB+Garamond:ital,wght@0,400..800;1,400..800' },
+    { id:'cormorant-garamond', name:'Cormorant Garamond', stack:"'Cormorant Garamond', Garamond, serif",            g:'Cormorant+Garamond:ital,wght@0,300..700;1,300..700' },
+    { id:'playfair-display',   name:'Playfair Display',   stack:"'Playfair Display', serif",                        g:'Playfair+Display:ital,wght@0,400..900;1,400..900' },
+    { id:'libre-caslon-text',  name:'Libre Caslon Text',  stack:"'Libre Caslon Text', serif",                       g:'Libre+Caslon+Text:ital,wght@0,400;0,700;1,400' },
+    { id:'pt-serif',           name:'PT Serif',           stack:"'PT Serif', serif",                                g:'PT+Serif:ital,wght@0,400;0,700;1,400;1,700' },
+    { id:'spectral',           name:'Spectral',           stack:"'Spectral', serif",                                g:'Spectral:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700' },
+    { id:'crimson-pro',        name:'Crimson Pro',        stack:"'Crimson Pro', serif",                             g:'Crimson+Pro:ital,wght@0,300..700;1,300..700' },
+    { id:'lora',               name:'Lora',               stack:"'Lora', serif",                                    g:'Lora:ital,wght@0,400..700;1,400..700' },
+    { id:'source-serif-4',     name:'Source Serif 4',     stack:"'Source Serif 4', serif",                          g:'Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700' },
+    { id:'newsreader',         name:'Newsreader',         stack:"'Newsreader', serif",                              g:'Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700' },
+    { id:'italiana',           name:'Italiana',           stack:"'Italiana', serif",                                g:'Italiana' },
+    { id:'dm-serif-display',   name:'DM Serif Display',   stack:"'DM Serif Display', serif",                        g:'DM+Serif+Display:ital@0;1' },
+    { id:'bodoni-moda',        name:'Bodoni Moda',        stack:"'Bodoni Moda', serif",                             g:'Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900' },
+    { id:'cardo',              name:'Cardo',              stack:"'Cardo', serif",                                   g:'Cardo:ital,wght@0,400;0,700;1,400' },
+    { id:'old-standard-tt',    name:'Old Standard TT',    stack:"'Old Standard TT', serif",                         g:'Old+Standard+TT:ital,wght@0,400;0,700;1,400' },
+    { id:'marcellus',          name:'Marcellus',          stack:"'Marcellus', serif",                               g:'Marcellus' },
+    { id:'young-serif',        name:'Young Serif',        stack:"'Young Serif', serif",                             g:'Young+Serif' },
+    { id:'literata',           name:'Literata',           stack:"'Literata', serif",                                g:'Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900' }
+  ];
+  (function () {
+    var fonts = window.__FONTS__;
+    var last = -1;
+    try { last = parseInt(localStorage.getItem('dr.lastIndex'), 10); } catch (e) {}
+    var i;
+    do { i = Math.floor(Math.random() * fonts.length); } while (fonts.length > 1 && i === last);
+    try { localStorage.setItem('dr.lastIndex', String(i)); } catch (e) {}
+    var f = fonts[i];
+    document.documentElement.style.setProperty('--font-display', f.stack);
+    if (f.g) {
+      var l = document.createElement('link');
+      l.rel = 'stylesheet';
+      l.href = 'https://fonts.googleapis.com/css2?family=' + f.g + '&display=swap';
+      l.dataset.fontId = f.id;
+      document.head.appendChild(l);
+    }
+    window.__FONT_INDEX__ = i;
+  })();
+  </script>
 
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -26,7 +73,12 @@
     <span class="topbar__sep" aria-hidden="true">/</span>
     <span class="topbar__cell">Index</span>
     <span class="topbar__sep" aria-hidden="true">/</span>
-    <span class="topbar__cell">v 1.0</span>
+    <button class="topbar__cell font-switch" id="js-fontswitch" type="button" aria-label="Cycle to next typeface" title="Click to change typeface">
+      <span class="font-switch__aa" aria-hidden="true">Aa</span>
+      <span class="font-switch__label">Set in</span>
+      <span class="font-switch__name" id="js-fontname">—</span>
+      <span class="font-switch__icon" aria-hidden="true">↻</span>
+    </button>
     <span class="topbar__spacer"></span>
     <span class="topbar__cell topbar__status"><span class="dot dot--live" aria-hidden="true"></span> Available for work</span>
     <span class="topbar__sep" aria-hidden="true">/</span>
@@ -356,7 +408,9 @@
 
     <div class="footer__rule" aria-hidden="true"></div>
     <p class="footer__colophon">
-      Set in <em>Instrument Serif</em>, <em>Inter</em>, and <em>JetBrains Mono</em>.
+      Display set in <em id="js-fontname-foot">Instrument Serif</em>,
+      drawn from a rotating library of 20.
+      Body in <em>Inter</em>; meta in <em>JetBrains Mono</em>.
       Built static. No tracking. No cookies.
     </p>
   </footer>

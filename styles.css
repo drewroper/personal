@@ -361,9 +361,8 @@ section {
 }
 .lede a { color: var(--text); }
 
-/* H2 — unified for company names + section titles ------------- */
+/* H2 — section titles use the rotating display face */
 .h2,
-.history__company,
 .history__title,
 .work__title,
 .colophon__title {
@@ -374,6 +373,19 @@ section {
   font-size: clamp(1.75rem, 3vw, 2.25rem);
   line-height: 1.05;
   letter-spacing: -.012em;
+  color: var(--text);
+}
+
+/* Company names: same h2 hierarchy, but in the body sans (Geist).
+   A medium weight gives them heading presence without leaving body. */
+.history__company {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-style: normal;
+  font-size: clamp(1.5rem, 2.6vw, 1.875rem);
+  line-height: 1.1;
+  letter-spacing: -.01em;
   color: var(--text);
 }
 
@@ -678,19 +690,14 @@ section {
 }
 .colophon__head {
   display: grid;
-  grid-template-columns: auto auto 1fr auto;
+  grid-template-columns: auto 1fr;
   align-items: baseline;
   column-gap: 1rem;
   padding-bottom: 1.25rem;
   margin-bottom: 1.5rem;
   border-bottom: var(--hairline) solid var(--line);
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: .12em;
-  text-transform: uppercase;
   color: var(--text-muted);
 }
-.colophon__num { color: var(--text-faint); font-feature-settings: 'tnum'; }
 /* .colophon__title visual style lives in the unified H2 rule above. */
 .colophon__title { text-transform: none; }
 .colophon__rule {
@@ -698,11 +705,6 @@ section {
   background: var(--line);
   align-self: center;
   transform: translateY(-2px);
-}
-.colophon__micro {
-  white-space: nowrap;
-  color: var(--text-faint);
-  font-size: 10px;
 }
 
 .colophon__list {
@@ -855,18 +857,7 @@ section {
   .claude-badge { padding: .5rem .7rem; }
 
   /* Colophon — collapse to label-over-value on phones */
-  .colophon__head {
-    grid-template-columns: auto 1fr;
-    row-gap: .5rem;
-  }
   .colophon__rule { display: none; }
-  .colophon__title { grid-column: 1 / -1; grid-row: 2; }
-  .colophon__num { grid-row: 1; grid-column: 1; }
-  .colophon__micro {
-    grid-row: 1; grid-column: 2;
-    justify-self: end;
-    font-size: 9.5px;
-  }
   .colophon__row {
     grid-template-columns: 1fr;
     gap: .25rem;

@@ -416,12 +416,14 @@
   (function initDitherPortrait() {
     const canvas = document.getElementById('js-portrait');
     if (!canvas) return;
-    // Desktop gets ~10% more pixel density than mobile. Same image,
-    // tighter dots; the chunky aesthetic is preserved.
+    // Desktop gets a denser dither than mobile. Mobile stays at 120×80
+    // (set on the canvas element); desktop bumps up to 144×96 — same
+    // 3:2 aspect, +20% per axis (~44% more pixels). Tighter grain on
+    // a bigger screen; chunky aesthetic preserved.
     const isDesktop = window.matchMedia('(min-width: 760px)').matches;
     if (isDesktop) {
-      canvas.width  = 132;   // 120 * 1.10
-      canvas.height = 88;    //  80 * 1.10
+      canvas.width  = 144;
+      canvas.height = 96;
     }
     const ctx = canvas.getContext('2d', { willReadFrequently: true });
     const W = canvas.width;

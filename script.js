@@ -405,16 +405,6 @@
 
     const DARK   = [12, 12, 13];
     const LIGHT  = [244, 241, 236];
-    const ACCENT = [214, 255, 56];
-
-    // Pre-pick a sprinkle of pixel positions to render in the accent
-    // color. Stays put across animation frames so the dots feel like
-    // grain on the photo rather than noise.
-    const ACCENT_DENSITY = 0.012; // ~1.2% of pixels
-    const ACCENT_SET = new Set();
-    for (let p = 0; p < W * H; p++) {
-      if (Math.random() < ACCENT_DENSITY) ACCENT_SET.add(p);
-    }
 
     let gray = null;
     let raf = 0;

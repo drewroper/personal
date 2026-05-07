@@ -77,11 +77,11 @@ body::before {
 }
 
 a { color: inherit; text-decoration: none; }
-main a:not(.claude-badge) {
+main a {
   border-bottom: 1px solid var(--line-bright);
   transition: border-color .15s ease, color .15s ease;
 }
-main a:not(.claude-badge):hover {
+main a:hover {
   color: var(--accent);
   border-bottom-color: var(--accent);
 }
@@ -625,40 +625,19 @@ section {
   color: var(--text-faint);
 }
 
-.claude-badge {
-  display: inline-flex; align-items: center; gap: .65rem;
-  padding: .55rem .8rem;
-  border: var(--hairline) solid var(--line-bright);
-  border-radius: 999px;
-  background: var(--bg-elev);
-  color: var(--text);
-  transition: border-color .2s ease, color .2s ease, transform .3s ease;
-}
-.claude-badge:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
+/* Claude mark — used inline in the colophon "Created with" link */
 .claude-mark {
   display: inline-block;
-  font-size: 14px;
+  font-size: 1em;
   line-height: 1;
   color: var(--accent);
+  margin-right: .15em;
   transform-origin: 50% 55%;
   transition: transform .6s cubic-bezier(.2,.8,.2,1);
 }
-.claude-badge:hover .claude-mark {
+.colophon__row a:hover .claude-mark {
   transform: rotate(60deg);
 }
-.claude-badge__text {
-  display: inline-flex; gap: .35rem; align-items: baseline;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: .04em;
-}
-.claude-badge__line { color: var(--text-muted); }
-.claude-badge__brand { color: var(--text); font-weight: 500; }
-.claude-badge:hover .claude-badge__line,
-.claude-badge:hover .claude-badge__brand { color: var(--accent); }
 
 .footer__rule {
   max-width: var(--container);
@@ -672,13 +651,6 @@ section {
   color: var(--text-muted);
   display: flex;
   align-items: center;
-  gap: 1rem;
-}
-.footer__signoff::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--line-faint);
 }
 .footer__signoff .brand-mark { color: var(--text); }
 @media (max-width: 640px) {
@@ -856,7 +828,6 @@ section {
     align-items: flex-start;
     gap: 1rem;
   }
-  .claude-badge { padding: .5rem .7rem; }
 
   /* Colophon — collapse to label-over-value on phones */
   .colophon__rule { display: none; }
@@ -883,6 +854,6 @@ section {
 /* TOUCH-FIRST MOTION GUARD ------------------------------------ */
 @media (hover: none) {
   /* Disable hover-only transforms that look weird on tap */
-  .claude-badge:hover .claude-mark { transform: none; }
+  .colophon__row a:hover .claude-mark { transform: none; }
   .font-switch:hover .font-switch__icon { transform: none; }
 }

@@ -89,18 +89,40 @@
   }
 
   /* ============================================================
-     2. LIVE CLOCK
+     2. DENVER CLOCK
+     Always Mountain Time, regardless of the visitor's location.
+     A subtle tell that Drew is based in Denver. Click toggles a
+     reveal that says so.
      ============================================================ */
-  const clock = document.getElementById('js-clock');
-  if (clock) {
+  const clock     = document.getElementById('js-clock');
+  const clockTime = document.getElementById('js-clock-time');
+  if (clock && clockTime) {
     const tick = () => {
       const now = new Date();
-      const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
-      const tz   = now.toLocaleTimeString('en-US', { timeZoneName: 'short' }).split(' ').pop();
-      clock.textContent = `${time} ${tz}`;
+      const time = now.toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+        timeZone: 'America/Denver'
+      });
+      // Resolve MST or MDT depending on DST.
+      const parts = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Denver',
+        timeZoneName: 'short'
+      }).formatToParts(now);
+      const tz = (parts.find(p => p.type === 'timeZoneName') || {}).value || 'MT';
+      clockTime.textContent = `${time} ${tz}`;
     };
     tick();
     setInterval(tick, 30 * 1000);
+
+    // Click toggles a "Denver" reveal for ~3 seconds.
+    let revealTimer = 0;
+    clock.addEventListener('click', () => {
+      clock.classList.add('is-locating');
+      clearTimeout(revealTimer);
+      revealTimer = setTimeout(() => clock.classList.remove('is-locating'), 3000);
+    });
   }
 
   /* ============================================================
@@ -152,7 +174,157 @@
   }
 
   /* ============================================================
-     4. CONSOLE SIGNATURE
+     4. WORK — image pool, desktop cycling grid, mobile slideshow
+     -----------------------------------------------------------
+     Single source of truth for the ~50 image pool. Replace the
+     URLs below with paths into /assets/work/ when you have your
+     real photos. For now we render Lorem Picsum placeholders in
+     grayscale so the layout reads cohesively on the dark site.
+     ============================================================ */
+  const WORK_IMAGES = Array.from({ length: 50 }, (_, i) => {
+    // Vary heights to give the masonry a natural rhythm.
+    const heights = [600, 720, 800, 900, 1000, 720, 800];
+    const h = heights[i % heights.length];
+    return `https://picsum.photos/seed/dr-work-${i + 1}/720/${h}?grayscale`;
+  });
+  // Vary aspect ratios for the desktop grid cells (independent of image height
+  // since object-fit: cover will crop). This gives the masonry visual variety.
+  const CELL_RATIOS = [
+    '4 / 5', '3 / 4', '1 / 1', '4 / 5', '3 / 4', '5 / 4',
+    '4 / 5', '1 / 1', '3 / 4', '4 / 5', '5 / 7', '3 / 4',
+    '4 / 5', '1 / 1', '3 / 4', '4 / 5'
+  ];
+  const VISIBLE_CELLS = 12;
+
+  function shuffleIndices(n, exclude = new Set()) {
+    const arr = [];
+    for (let i = 0; i < n; i++) if (!exclude.has(i)) arr.push(i);
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  function initWorkGrid() {
+    const grid = document.getElementById('js-work-grid');
+    if (!grid) return;
+
+    // Pick the initial visible set + remember which images are "in pool".
+    const visible = shuffleIndices(WORK_IMAGES.length).slice(0, VISIBLE_CELLS);
+    const inPool  = new Set(visible);
+
+    grid.innerHTML = '';
+    visible.forEach((imgIdx, cellIdx) => {
+      const cell = document.createElement('div');
+      cell.className = 'work-cell';
+      cell.style.setProperty('--ratio', CELL_RATIOS[cellIdx % CELL_RATIOS.length]);
+      cell.dataset.imgIdx = String(imgIdx);
+
+      const img = new Image();
+      img.alt = '';
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.src = WORK_IMAGES[imgIdx];
+      cell.appendChild(img);
+
+      grid.appendChild(cell);
+    });
+
+    // Cycle: every ~5s, swap one cell to a non-visible image.
+    const FADE_MS = 550;
+    const swapOne = () => {
+      if (document.hidden) return;
+      const cells = grid.querySelectorAll('.work-cell');
+      if (!cells.length) return;
+      const cell = cells[Math.floor(Math.random() * cells.length)];
+      const oldIdx = parseInt(cell.dataset.imgIdx, 10);
+      // Pick a new image not currently visible.
+      const candidates = shuffleIndices(WORK_IMAGES.length, inPool);
+      if (!candidates.length) return;
+      const newIdx = candidates[0];
+      inPool.delete(oldIdx);
+      inPool.add(newIdx);
+
+      // Preload, then swap.
+      const next = new Image();
+      next.onload = () => {
+        cell.classList.add('is-fading');
+        setTimeout(() => {
+          const img = cell.querySelector('img');
+          if (img) img.src = next.src;
+          cell.dataset.imgIdx = String(newIdx);
+          requestAnimationFrame(() => cell.classList.remove('is-fading'));
+        }, FADE_MS);
+      };
+      next.onerror = () => {}; // skip silently
+      next.src = WORK_IMAGES[newIdx];
+    };
+    setInterval(swapOne, 5000);
+  }
+
+  function initWorkSlides() {
+    const root  = document.getElementById('js-work-slides');
+    const stage = document.getElementById('js-slide-stage');
+    const dots  = document.getElementById('js-slide-dots');
+    if (!root || !stage || !dots) return;
+
+    // Render two img elements that we cross-fade between.
+    const a = new Image(); a.alt = ''; a.className = 'is-active';
+    const b = new Image(); b.alt = '';
+    a.loading = 'eager'; b.loading = 'eager';
+    a.decoding = 'async'; b.decoding = 'async';
+    stage.append(a, b);
+
+    // Render dots.
+    dots.innerHTML = '';
+    WORK_IMAGES.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'dot';
+      dot.setAttribute('role', 'tab');
+      dot.setAttribute('aria-label', `Slide ${i + 1} of ${WORK_IMAGES.length}`);
+      dot.addEventListener('click', () => goTo(i, true));
+      dots.appendChild(dot);
+    });
+
+    let idx = 0;
+    let front = a, back = b;
+
+    function goTo(next, fromUser) {
+      idx = ((next % WORK_IMAGES.length) + WORK_IMAGES.length) % WORK_IMAGES.length;
+      back.onload = () => {
+        front.classList.remove('is-active');
+        back.classList.add('is-active');
+        [front, back] = [back, front]; // swap roles
+      };
+      back.src = WORK_IMAGES[idx];
+      Array.from(dots.children).forEach((d, i) => d.classList.toggle('is-active', i === idx));
+      if (fromUser) restartTimer();
+    }
+
+    // Prime the first slide.
+    a.src = WORK_IMAGES[0];
+    Array.from(dots.children)[0].classList.add('is-active');
+
+    let timer = 0;
+    function restartTimer() {
+      clearInterval(timer);
+      timer = setInterval(() => {
+        if (document.hidden) return;
+        goTo(idx + 1, false);
+      }, 4500);
+    }
+    restartTimer();
+  }
+
+  // Bootstrap based on viewport — keep both initialised so a resize works.
+  // The CSS handles which one shows.
+  initWorkGrid();
+  initWorkSlides();
+
+  /* ============================================================
+     5. CONSOLE SIGNATURE
      ============================================================ */
   if (typeof console !== 'undefined' && console.log) {
     const css = 'font-family: serif; font-size: 14px; font-style: italic; color: #c8a978; padding: 4px 0';

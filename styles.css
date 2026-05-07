@@ -318,19 +318,17 @@ section {
   font-weight: var(--h1-weight, 400) !important;
   font-variation-settings: 'wght' var(--h1-weight, 400) !important;
 }
-.h1__line { display: block; }
-
 /* EDITABLE HEADLINE -------------------------------------------- */
 .h1--placeholder {
   cursor: text;
   outline: none;
   caret-color: var(--accent);
   -webkit-tap-highlight-color: transparent;
-  /* keep the contenteditable from inheriting browser focus rings */
 }
-/* Blinking caret sits inline at the end of the LAST h1 line, not after
-   the whole h1 (which would put it on a new visual line below). */
-.h1--placeholder .h1__line:last-child::after {
+/* Blinking caret sits at the trailing edge of the last visual line.
+   Because the H1 is one inline text node now (no block spans), the
+   ::after pseudo lands inline at the end of whatever wrapped down. */
+.h1--placeholder::after {
   content: '';
   display: inline-block;
   width: 0.05em;
@@ -341,14 +339,14 @@ section {
   animation: h1-blink 1s steps(1) infinite;
   pointer-events: none;
 }
-.h1--placeholder:focus .h1__line:last-child::after { display: none; }
+.h1--placeholder:focus::after { display: none; }
 .h1--placeholder:hover { color: var(--text); }
 @keyframes h1-blink {
   0%, 49%   { opacity: 1; }
   50%, 100% { opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .h1--placeholder .h1__line:last-child::after { animation: none; }
+  .h1--placeholder::after { animation: none; }
 }
 
 .lede {

@@ -482,6 +482,26 @@
       return out;
     };
 
+    // Hand-drawn ring — same as ring() but with deterministic noise on
+    // the radius so the line wobbles slightly, like a sketch.
+    const handRing = (cx, cy, rx, ry, thickness = 1) => {
+      const out = [];
+      const steps = 128;
+      for (let t = 0; t < thickness; t++) {
+        for (let s = 0; s < steps; s++) {
+          const a = (s / steps) * Math.PI * 2;
+          // Two layered sines give an organic wobble that doesn't repeat
+          const wobble = Math.sin(a * 5 + 0.7) * 0.9
+                       + Math.sin(a * 11 + 1.4) * 0.5;
+          out.push([
+            Math.round(cx + Math.cos(a) * (rx + t + wobble)),
+            Math.round(cy + Math.sin(a) * (ry + t + wobble))
+          ]);
+        }
+      }
+      return out;
+    };
+
     // Thick diagonal line from (x1,y1) to (x2,y2). Stamps a small cross
     // at every step so the line reads as 3 pixels wide.
     const thickLine = (x1, y1, x2, y2) => {
@@ -718,29 +738,31 @@
         const my = N(FACE.mouth.y, H) + mouthYOff;
         out.push(...smileArc(mx, my, Math.round(W * 0.10), Math.round(H * 0.07), 3));
 
-        // Head outline — a 2-pixel ring drawn around the eyes + mouth
-        // and extending up over the forehead so it reads as a full
-        // smiley face floating over Drew's portrait.
+        // Head outline — a hand-drawn 2-pixel ring around the eyes
+        // and mouth. Closer to circular than oval. Sits low enough
+        // that the smiley reads as a face floating over Drew's head.
         const headCx = N(FACE.nose.x, W) - 1;
-        const headCy = Math.round((N(FACE.leftEye.y, H) + N(FACE.mouth.y, H)) / 2 - 1);
-        out.push(...ring(headCx, headCy, Math.round(W * 0.20), Math.round(H * 0.23), 2));
+        const headCy = Math.round((N(FACE.leftEye.y, H) + N(FACE.mouth.y, H)) / 2 + 4);
+        out.push(...handRing(headCx, headCy, Math.round(W * 0.16), Math.round(H * 0.23), 2));
         return out;
       },
 
       // 7 — Necklace with a more obnoxious dollar pendant
       function chain(W, H) {
         const out = [];
-        // Shifted a few pixels left to better center on Drew's neck.
         const chainCenterY = N(0.56, H);
         const chainCenterX = N(0.49, W);
         const halfSpan = Math.round(W * 0.10);
+        // Chain hangs in a deep parabolic dip and is 3 rows thick so
+        // it has weight; the deepest point reaches the top of the
+        // pendant below.
         for (let dx = -halfSpan; dx <= halfSpan; dx++) {
           const t = dx / halfSpan;
-          const dy = Math.round((1 - t * t) * 3);
+          const dy = Math.round((1 - t * t) * 9);
           const x = chainCenterX + dx;
           const y = chainCenterY + dy;
           if (((dx + halfSpan) % 3) === 2) continue; // chain-link gaps
-          out.push([x, y], [x, y + 1]);
+          out.push([x, y], [x, y + 1], [x, y + 2]);
         }
 
         // 17×21 big-big dollar sign. 3-col vertical bar runs all the
@@ -773,7 +795,7 @@
         const halfDX = 8;   // (17-1)/2
         const halfDY = 10;  // (21-1)/2
         const cx = chainCenterX;
-        const cy = chainCenterY + 16; // pendant hangs squarely on the chest
+        const cy = chainCenterY + 21; // pendant hangs lower, touching the chain dip
         for (let r = 0; r < dollarRows.length; r++) {
           const row = dollarRows[r];
           for (let c = 0; c < row.length; c++) {

@@ -704,12 +704,13 @@
       function smiley(W, H) {
         const out = [];
         const xShift = -2;     // nudge whole face left
+        const yShift = -1;     // nudge whole face up
         const eyeYOff = 4;     // down
         const eyeXSqueeze = 2; // each eye toward center
         const mouthYOff = -4;  // mouth up
 
-        const lx = N(FACE.leftEye.x, W)  + eyeXSqueeze + xShift, ly = N(FACE.leftEye.y, H)  + eyeYOff;
-        const rx = N(FACE.rightEye.x, W) - eyeXSqueeze + xShift, ry = N(FACE.rightEye.y, H) + eyeYOff;
+        const lx = N(FACE.leftEye.x, W)  + eyeXSqueeze + xShift, ly = N(FACE.leftEye.y, H)  + eyeYOff + yShift;
+        const rx = N(FACE.rightEye.x, W) - eyeXSqueeze + xShift, ry = N(FACE.rightEye.y, H) + eyeYOff + yShift;
 
         // 5-wide × 9-tall vertical pill — reads as a happy almond eye.
         const eyeRows = [
@@ -739,14 +740,14 @@
 
         // Smile: wide arc, 3-pixel thick.
         const mx = N(FACE.mouth.x, W) + xShift;
-        const my = N(FACE.mouth.y, H) + mouthYOff;
+        const my = N(FACE.mouth.y, H) + mouthYOff + yShift;
         out.push(...smileArc(mx, my, Math.round(W * 0.10), Math.round(H * 0.07), 3));
 
         // Head outline — a hand-drawn 2-pixel ring around the eyes
         // and mouth. Closer to circular than oval. Sits low enough
         // that the smiley reads as a face floating over Drew's head.
         const headCx = N(FACE.nose.x, W) - 1;
-        const headCy = Math.round((N(FACE.leftEye.y, H) + N(FACE.mouth.y, H)) / 2 + 2);
+        const headCy = Math.round((N(FACE.leftEye.y, H) + N(FACE.mouth.y, H)) / 2 + 2) + yShift;
         out.push(...handRing(headCx, headCy, Math.round(W * 0.16), Math.round(H * 0.23), 2));
         return out;
       },

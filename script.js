@@ -742,7 +742,7 @@
         // and mouth. Closer to circular than oval. Sits low enough
         // that the smiley reads as a face floating over Drew's head.
         const headCx = N(FACE.nose.x, W) - 1;
-        const headCy = Math.round((N(FACE.leftEye.y, H) + N(FACE.mouth.y, H)) / 2 + 4);
+        const headCy = Math.round((N(FACE.leftEye.y, H) + N(FACE.mouth.y, H)) / 2 + 2);
         out.push(...handRing(headCx, headCy, Math.round(W * 0.16), Math.round(H * 0.23), 2));
         return out;
       },

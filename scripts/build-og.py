@@ -79,7 +79,38 @@ def dither_portrait():
     out[binary]  = LIGHT
     out[~binary] = DARK
 
+    # Stamp the big-X doodle right onto the low-res grid so the X
+    # scales up pixelated alongside the dither.
+    _stamp_big_x(out)
+
     return Image.fromarray(out, "RGB").resize((PORTRAIT_W, PORTRAIT_H), Image.NEAREST)
+
+
+def _stamp_big_x(arr):
+    """Two thick diagonal lines crossing at the face. Pixel art on the
+    same grid as the dither so they share aesthetics after upscale."""
+    h, w, _ = arr.shape
+    cx = int(round(w * 0.52))
+    cy = int(round(h * 0.30))
+    hw = int(round(w * 0.22))
+    hh = int(round(h * 0.22))
+
+    # 3-pixel cross brush stamped along each diagonal.
+    brush = [(0, 0), (1, 0), (-1, 0), (0, 1), (0, -1)]
+
+    for x1, y1, x2, y2 in [
+        (cx - hw, cy - hh, cx + hw, cy + hh),
+        (cx + hw, cy - hh, cx - hw, cy + hh),
+    ]:
+        steps = max(abs(x2 - x1), abs(y2 - y1))
+        for i in range(steps + 1):
+            t = i / steps
+            x = int(round(x1 + (x2 - x1) * t))
+            y = int(round(y1 + (y2 - y1) * t))
+            for dx, dy in brush:
+                nx, ny = x + dx, y + dy
+                if 0 <= nx < w and 0 <= ny < h:
+                    arr[ny, nx] = ACCENT
 
 
 def load_font(size, bold=False):

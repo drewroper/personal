@@ -582,7 +582,7 @@
       // 1 — Xs over the eyes (shifted slightly left for alignment)
       function xEyes(W, H) {
         const lx = N(FACE.leftEye.x, W)  - 2, ly = N(FACE.leftEye.y, H);
-        const rx = N(FACE.rightEye.x, W) - 2, ry = N(FACE.rightEye.y, H);
+        const rx = N(FACE.rightEye.x, W) - 2, ry = N(FACE.rightEye.y, H) + 2;
         const r = Math.max(4, Math.round(W * 0.056));
         return [...cross(lx, ly, r), ...cross(rx, ry, r)];
       },
@@ -631,7 +631,7 @@
             }
           }
         };
-        horn(cx - off - 1, -1);
+        horn(cx - off - 2, -1);
         horn(cx + off,      1);
         return out;
       },

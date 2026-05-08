@@ -855,8 +855,15 @@ section {
 }
 .changelog__list time { color: var(--text-faint); }
 .changelog__msg {
+  position: relative;
+  padding-left: 1.5rem;   /* aligns wrapped lines flush with body text */
   color: var(--text-muted);
-  padding-left: 1.5rem;   /* indented under the timestamp */
+}
+.changelog__msg::before {
+  content: '└';
+  position: absolute;
+  left: 0;
+  color: var(--text-faint);
 }
 
 /* =============================================================

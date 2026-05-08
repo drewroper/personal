@@ -645,7 +645,7 @@
         // Anchor a couple pixels left of the FACE.nose center so the
         // mustache lands over Drew's actual upper lip.
         const cx = N(FACE.nose.x, W) - 2;
-        const cy = N(FACE.mouth.y, H);
+        const cy = N(FACE.mouth.y, H) - 1;
 
         // Path: [dx, centerline_dy, thickness]. Tips rise into a curl
         // before the line drops to the swoop, peaks at -3 above anchor.

@@ -583,7 +583,7 @@
       function xEyes(W, H) {
         const lx = N(FACE.leftEye.x, W)  - 2, ly = N(FACE.leftEye.y, H);
         const rx = N(FACE.rightEye.x, W) - 2, ry = N(FACE.rightEye.y, H);
-        const r = Math.max(2, Math.round(W * 0.025));
+        const r = Math.max(3, Math.round(W * 0.0375));
         return [...cross(lx, ly, r), ...cross(rx, ry, r)];
       },
 

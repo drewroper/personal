@@ -647,19 +647,21 @@
         const cx = N(FACE.nose.x, W) - 2;
         const cy = N(FACE.mouth.y, H);
 
-        // Path: [dx, centerline_dy, thickness]. Half the prior peak
-        // height for a flatter, less-zigzag silhouette.
+        // Path: [dx, centerline_dy, thickness]. Tips rise into a curl
+        // before the line drops to the swoop, peaks at -3 above anchor.
         const path = [
-          [-17,  0, 1],
-          [-16,  0, 1],
-          [-15, -1, 2],
-          [-14, -1, 2],
-          [-13,  0, 2],
+          [-19, -2, 1],  // far-left tip (curling up)
+          [-18, -3, 1],  // top of curl
+          [-17, -2, 2],
+          [-16, -1, 2],
+          [-15,  0, 2],
+          [-14,  0, 2],
+          [-13, -1, 3],
           [-12, -1, 3],
-          [-11, -1, 3],
+          [-11, -2, 3],
           [-10, -2, 4],
-          [ -9, -2, 4],
-          [ -8, -3, 4],   // approaching peak
+          [ -9, -3, 4],
+          [ -8, -3, 4],
           [ -7, -3, 3],   // left peak (thinner)
           [ -6, -3, 3],
           [ -5, -3, 4],
@@ -676,15 +678,17 @@
           [  6, -3, 3],   // right peak
           [  7, -3, 3],
           [  8, -3, 4],
-          [  9, -2, 4],
+          [  9, -3, 4],
           [ 10, -2, 4],
-          [ 11, -1, 3],
+          [ 11, -2, 3],
           [ 12, -1, 3],
-          [ 13,  0, 2],
-          [ 14, -1, 2],
-          [ 15, -1, 2],
-          [ 16,  0, 1],
-          [ 17,  0, 1]
+          [ 13, -1, 3],
+          [ 14,  0, 2],
+          [ 15,  0, 2],
+          [ 16, -1, 2],
+          [ 17, -2, 2],
+          [ 18, -3, 1],   // top of right curl
+          [ 19, -2, 1]    // far-right tip
         ];
         for (const [dx, yc, thick] of path) {
           for (let t = 0; t < thick; t++) {

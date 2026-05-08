@@ -736,9 +736,10 @@
           out.push([x, y], [x, y + 1]);
         }
 
-        // 17×21 big-big dollar sign with extra-thick S-curve verticals
-        // (3 cols wide on each side instead of 2 — feels like real
-        // heavy metal).
+        // 17×21 big-big dollar sign. 3-col vertical bar runs all the
+        // way through (top, S-curves, bottom) so it reads as a proper
+        // dollar sign — not just a bar at the ends. Side curves are
+        // also 3 cols thick for that heavy-metal weight.
         const dollarRows = [
           '.......###.......',  // -10
           '.......###.......',  //  -9
@@ -746,15 +747,15 @@
           '.###############.',  //  -7
           '.###############.',  //  -6
           '.###############.',  //  -5
-          '###..............',  //  -4
-          '###..............',  //  -3
-          '###..............',  //  -2
+          '###....###.......',  //  -4
+          '###....###.......',  //  -3
+          '###....###.......',  //  -2
           '.###############.',  //  -1
           '.###############.',  //   0
           '.###############.',  //   1
-          '..............###',  //   2
-          '..............###',  //   3
-          '..............###',  //   4
+          '.......###....###',  //   2
+          '.......###....###',  //   3
+          '.......###....###',  //   4
           '.###############.',  //   5
           '.###############.',  //   6
           '.###############.',  //   7

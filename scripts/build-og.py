@@ -136,6 +136,16 @@ def load_mono(size):
     return ImageFont.truetype(str(ROOT / "assets" / "fonts" / "GeistMono-Regular.ttf"), size)
 
 
+def draw_tracked(draw, xy, text, font, fill, tracking_em):
+    """Draw text with extra letter-spacing (tracking_em is fraction of font size)."""
+    extra = font.size * tracking_em
+    x, y = xy
+    for ch in text:
+        draw.text((x, y), ch, font=font, fill=fill)
+        adv = font.getlength(ch)
+        x += adv + extra
+
+
 def build_frame(gray, t):
     """Compose one full OG frame (portrait + text) for animation time t."""
     canvas = Image.new("RGB", (OG_W, OG_H), BG)
@@ -145,16 +155,16 @@ def build_frame(gray, t):
     text_x = 70
 
     eyebrow = load_mono(18)
-    draw.text((text_x, PAD_Y + 10), "DESIGNER · EST. 1986",
-              font=eyebrow, fill=(140, 138, 134))
+    draw_tracked(draw, (text_x, PAD_Y + 10), "DESIGNER · EST. 1986",
+                 eyebrow, (140, 138, 134), 0.14)
 
     title = load_font(140)
     draw.text((text_x, PAD_Y + 60), "Drew",  font=title, fill=LIGHT)
     draw.text((text_x, PAD_Y + 200), "Roper", font=title, fill=LIGHT)
 
     url_font = load_mono(20)
-    draw.text((text_x, OG_H - PAD_Y - 26), "drewroper.com",
-              font=url_font, fill=ACCENT)
+    draw_tracked(draw, (text_x, OG_H - PAD_Y - 26), "DREWROPER.COM",
+                 url_font, ACCENT, 0.14)
 
     return canvas
 

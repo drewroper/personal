@@ -583,7 +583,7 @@
       function xEyes(W, H) {
         const lx = N(FACE.leftEye.x, W)  - 2, ly = N(FACE.leftEye.y, H);
         const rx = N(FACE.rightEye.x, W) - 2, ry = N(FACE.rightEye.y, H);
-        const r = Math.max(3, Math.round(W * 0.0375));
+        const r = Math.max(4, Math.round(W * 0.056));
         return [...cross(lx, ly, r), ...cross(rx, ry, r)];
       },
 
@@ -631,8 +631,8 @@
             }
           }
         };
-        horn(cx - off, -1);
-        horn(cx + off,  1);
+        horn(cx - off - 1, -1);
+        horn(cx + off,      1);
         return out;
       },
 
@@ -645,7 +645,7 @@
         // Anchor a couple pixels left of the FACE.nose center so the
         // mustache lands over Drew's actual upper lip.
         const cx = N(FACE.nose.x, W) - 2;
-        const cy = N(FACE.mouth.y, H) - 1;
+        const cy = N(FACE.mouth.y, H) - 2;
 
         // Path: [dx, centerline_dy, thickness]. Tips rise into a curl
         // before the line drops to the swoop, peaks at -3 above anchor.

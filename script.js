@@ -717,6 +717,13 @@
         const mx = N(FACE.mouth.x, W) + xShift;
         const my = N(FACE.mouth.y, H) + mouthYOff;
         out.push(...smileArc(mx, my, Math.round(W * 0.10), Math.round(H * 0.07), 3));
+
+        // Head outline — a 2-pixel ring drawn around the eyes + mouth
+        // and extending up over the forehead so it reads as a full
+        // smiley face floating over Drew's portrait.
+        const headCx = N(FACE.nose.x, W) - 1;
+        const headCy = Math.round((N(FACE.leftEye.y, H) + N(FACE.mouth.y, H)) / 2 - 1);
+        out.push(...ring(headCx, headCy, Math.round(W * 0.20), Math.round(H * 0.23), 2));
         return out;
       },
 

@@ -793,27 +793,6 @@
           ...thickLine(cx - hw, cy - hh, cx + hw, cy + hh),
           ...thickLine(cx + hw, cy - hh, cx - hw, cy + hh)
         ];
-      },
-
-      // 9 — Scribble: a continuous zigzag drawn back and forth across
-      // the face area. Lissajous-style trace with a fast x oscillation
-      // and a slow y sweep gives a hand-scribble feel without true
-      // randomness (so it looks the same every time).
-      function scribble(W, H) {
-        const out = [];
-        const cx = N(FACE.nose.x, W) - 1;
-        const cy = N(FACE.nose.y, H) + 2;
-        const rx = Math.round(W * 0.18);
-        const ry = Math.round(H * 0.16);
-        const steps = 360;
-        for (let i = 0; i < steps; i++) {
-          const t = (i / steps) * Math.PI * 2;
-          const x = Math.round(cx + Math.cos(t * 7) * rx);
-          const y = Math.round(cy + Math.sin(t)     * ry);
-          // 2-pixel stamp so the strokes fill the area
-          out.push([x, y], [x + 1, y], [x, y + 1]);
-        }
-        return out;
       }
     ];
 

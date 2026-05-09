@@ -219,17 +219,33 @@
      into the repo. object-fit: cover handles aspect cropping.
      ============================================================ */
   const WORK_IMAGES = [
-    'https://mir-s3-cdn-cf.behance.net/projects/404/64ae8d110754963.Y3JvcCwyMTczLDE3MDAsMTkzLDA.png',  // Element
-    'https://mir-s3-cdn-cf.behance.net/projects/404/37dab197905583.Y3JvcCwyMjc4LDE3ODIsNTMwLDM5.jpg',  // Increment Issue 13 — Frontend
-    'https://mir-s3-cdn-cf.behance.net/projects/404/f1a7dd103213279.Y3JvcCwxMzgwLDEwODAsMjcwLDA.png',  // ōLiv
-    'https://mir-s3-cdn-cf.behance.net/projects/404/8bf4d1103228781.Y3JvcCwxMzgwLDEwODAsMjcwLDA.jpg',  // Clyde
-    'https://mir-s3-cdn-cf.behance.net/projects/404/572758103290303.Y3JvcCwxMzgwLDEwODAsMjcwLDA.jpg',  // Prost!Cards
-    'https://mir-s3-cdn-cf.behance.net/projects/404/b36aee13619493.6172d816aed10.jpg',                  // TYPEFIGHT
-    'https://mir-s3-cdn-cf.behance.net/projects/404/0c367119796977.Y3JvcCwxMzgwLDEwODAsMjcwLDA.png',  // Scooters Sandwich Shop
-    'https://mir-s3-cdn-cf.behance.net/projects/404/684f27103167265.Y3JvcCwxMzgwLDEwODAsMjcwLDA.jpg',  // East Hampton Sandwich Co.
-    'https://mir-s3-cdn-cf.behance.net/projects/404/f3085d48534019.Y3JvcCwxMzgwLDEwODAsMjcwLDA.jpg',  // trunkclub.com
-    'https://mir-s3-cdn-cf.behance.net/projects/404/51a76e21733267.Y3JvcCw4NzksNjg4LDYwLDA.jpg',      // Missouri License Plate
-    'https://mir-s3-cdn-cf.behance.net/projects/404/72bba813608983.5f5aeef869291.jpg'                   // MyBread
+    'https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/470a2519895231.5f5bdbaf65706.jpg',
+    'https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/1888c216106531.5f983e6d0ca14.png',
+    'https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/d2b14b16106531.5f5a81e2c56a6.png',
+    'https://mir-s3-cdn-cf.behance.net/project_modules/hd_webp/153c9216106531.5f5a81e2c109c.png',
+    'https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/b16be216106531.5f5a8bd3bf8d4.png',
+    'https://mir-s3-cdn-cf.behance.net/project_modules/hd_webp/04f61516106531.5f5a81e2c2501.png',
+    'https://mir-s3-cdn-cf.behance.net/project_modules/hd_still/14f6b313608983.5f5abddb46075.jpg',
+    'https://mir-s3-cdn-cf.behance.net/project_modules/hd_still/6ec3a513608983.5f5abddb46621.jpg',
+    'https://mir-s3-cdn-cf.behance.net/project_modules/hd_webp/79a89221733267.5f4755f73ff59.png',
+    'https://mir-s3-cdn-cf.behance.net/project_modules/hd_webp/f8364c103167265.5f472cee7f8ed.jpg',
+    'https://mir-s3-cdn-cf.behance.net/project_modules/hd_webp/fc436a103167265.5f46ef490430b.png',
+    'https://mir-s3-cdn-cf.behance.net/project_modules/hd_webp/43fce8103167265.5f4728f8b4f0d.png',
+    'https://mir-s3-cdn-cf.behance.net/project_modules/hd_webp/23ddbd19796977.562e06cadfd98.png',
+    'https://mir-s3-cdn-cf.behance.net/project_modules/max_632_webp/3f122019796977.562e06ca31a91.jpg',
+    'https://mir-s3-cdn-cf.behance.net/project_modules/hd_webp/8cb90213619493.57c6cc31171ac.jpg',
+    'https://mir-s3-cdn-cf.behance.net/project_modules/max_632_webp/673f5713619493.56279c8756603.jpg',
+    'https://mir-s3-cdn-cf.behance.net/project_modules/max_632_webp/d7008f13619493.56279c13ad7bf.png',
+    'https://mir-s3-cdn-cf.behance.net/project_modules/max_632_webp/b3883713619493.562996d7e6aaf.jpg',
+    'https://mir-s3-cdn-cf.behance.net/project_modules/max_632_webp/2f3c8113619493.56279e5966f2b.jpg',
+    'https://mir-s3-cdn-cf.behance.net/project_modules/hd/abb75797905583.5ecff5126eb5f.jpg',
+    'https://mir-s3-cdn-cf.behance.net/project_modules/hd/a75b6197905583.5ecff5126db73.jpg',
+    'https://mir-s3-cdn-cf.behance.net/project_modules/hd_webp/5218be97905583.5ecff5131f91d.png',
+    'https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/a03eb597905583.5ecff51321485.png',
+    'https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/b832be97905583.5ecff5131c628.jpg',
+    'https://mir-s3-cdn-cf.behance.net/project_modules/hd_webp/700547110754963.5ff52a2a6d595.jpg',
+    'https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/ffd76b110754963.5ff52a2a6c313.jpg',
+    'https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/67cc4d110754963.5ff52a2a6df83.jpg'
   ];
   const VISIBLE_CELLS = 8;
   // Each cell's aspect ratio is computed from the loaded image so

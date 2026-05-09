@@ -561,7 +561,7 @@ section {
 .work-cell img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
   opacity: 1;
   transition: opacity .55s ease;
@@ -577,17 +577,18 @@ section {
 .work-slides__stage {
   position: relative;
   width: 100%;
-  aspect-ratio: 3 / 2;
+  aspect-ratio: var(--ratio, 3 / 2);
   background: var(--bg-elev);
   border: var(--hairline-fine) solid var(--line);
   overflow: hidden;
+  transition: aspect-ratio .35s ease;
 }
 .work-slides__stage img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   opacity: 0;
   transition: opacity .5s ease;
 }

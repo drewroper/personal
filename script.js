@@ -245,7 +245,13 @@
     'https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/b832be97905583.5ecff5131c628.jpg',
     'https://mir-s3-cdn-cf.behance.net/project_modules/hd_webp/700547110754963.5ff52a2a6d595.jpg',
     'https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/ffd76b110754963.5ff52a2a6c313.jpg',
-    'https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/67cc4d110754963.5ff52a2a6df83.jpg'
+    'https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/67cc4d110754963.5ff52a2a6df83.jpg',
+    'https://mir-cdn.behance.net/v1/rendition/project_modules/hd_webp/46773513618371.5f475a9f3efc7.jpg',
+    'https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/2914af13618371.5f475a9f3df17.jpg',
+    'https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/df0e1513618371.5f475a9f3e881.jpg',
+    'https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/e5ba4713619279.5f4765af9f939.jpg',
+    'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/db22e814062025.5627c9a4da41a.jpg',
+    'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/2e8e4014062025.5627c99416861.jpg'
   ];
   const VISIBLE_CELLS = 8;
   // Each cell's aspect ratio is computed from the loaded image so
@@ -352,9 +358,16 @@
     let idx = 0;
     let front = a, back = b;
 
+    const setStageRatio = (img) => {
+      if (img.naturalWidth && img.naturalHeight) {
+        stage.style.setProperty('--ratio', `${img.naturalWidth} / ${img.naturalHeight}`);
+      }
+    };
+
     function goTo(next, fromUser) {
       idx = ((next % WORK_IMAGES.length) + WORK_IMAGES.length) % WORK_IMAGES.length;
       back.onload = () => {
+        setStageRatio(back);
         front.classList.remove('is-active');
         back.classList.add('is-active');
         [front, back] = [back, front]; // swap roles
@@ -365,6 +378,7 @@
     }
 
     // Prime the first slide.
+    a.onload = () => setStageRatio(a);
     a.src = WORK_IMAGES[0];
     Array.from(dots.children)[0].classList.add('is-active');
 

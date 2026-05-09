@@ -251,7 +251,11 @@
     'https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/df0e1513618371.5f475a9f3e881.jpg',
     'https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/e5ba4713619279.5f4765af9f939.jpg',
     'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/db22e814062025.5627c9a4da41a.jpg',
-    'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/2e8e4014062025.5627c99416861.jpg'
+    'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/2e8e4014062025.5627c99416861.jpg',
+    'https://cdn.dribbble.com/users/58866/screenshots/1029223/attachments/124052/derby-party_800.jpg',
+    'https://cdn.dribbble.com/userupload/22194261/file/original-99773e67f3c0640908be411ac25b9b8d.jpg?resize=752x564&vertical=center',
+    'https://cdn.dribbble.com/userupload/21894247/file/original-c69072010c75071b7cd7e0e2afdff921.jpg?resize=800x600&vertical=center',
+    'https://cdn.dribbble.com/userupload/41708673/file/original-1f5bcabbf930f9e34fa0c6ababfc72db.jpg?resize=800x600&vertical=center'
   ];
   const VISIBLE_CELLS = 8;
   // Each cell's aspect ratio is computed from the loaded image so
@@ -351,11 +355,14 @@
       dot.className = 'dot';
       dot.setAttribute('role', 'tab');
       dot.setAttribute('aria-label', `Slide ${i + 1} of ${WORK_IMAGES.length}`);
-      dot.addEventListener('click', () => goTo(i, true));
+      dot.addEventListener('click', () => goToImage(i, true));
       dots.appendChild(dot);
     });
 
-    let idx = 0;
+    // Maintain a shuffled play order; reshuffle when we wrap past the
+    // end so every cycle is a fresh random sequence.
+    let order = shuffleIndices(WORK_IMAGES.length);
+    let pos = 0;
     let front = a, back = b;
 
     const setStageRatio = (img) => {
@@ -364,30 +371,44 @@
       }
     };
 
-    function goTo(next, fromUser) {
-      idx = ((next % WORK_IMAGES.length) + WORK_IMAGES.length) % WORK_IMAGES.length;
+    function showCurrent() {
+      const imgIdx = order[pos];
       back.onload = () => {
         setStageRatio(back);
         front.classList.remove('is-active');
         back.classList.add('is-active');
         [front, back] = [back, front]; // swap roles
       };
-      back.src = WORK_IMAGES[idx];
-      Array.from(dots.children).forEach((d, i) => d.classList.toggle('is-active', i === idx));
+      back.src = WORK_IMAGES[imgIdx];
+      Array.from(dots.children).forEach((d, i) => d.classList.toggle('is-active', i === imgIdx));
+    }
+
+    function step(direction, fromUser) {
+      pos += direction;
+      if (pos >= order.length) { order = shuffleIndices(WORK_IMAGES.length); pos = 0; }
+      if (pos < 0)             { order = shuffleIndices(WORK_IMAGES.length); pos = order.length - 1; }
+      showCurrent();
       if (fromUser) restartTimer();
     }
 
-    // Prime the first slide.
+    function goToImage(imgIdx, fromUser) {
+      const found = order.indexOf(imgIdx);
+      pos = found >= 0 ? found : 0;
+      showCurrent();
+      if (fromUser) restartTimer();
+    }
+
+    // Prime the first slide (random — order is shuffled).
     a.onload = () => setStageRatio(a);
-    a.src = WORK_IMAGES[0];
-    Array.from(dots.children)[0].classList.add('is-active');
+    a.src = WORK_IMAGES[order[0]];
+    Array.from(dots.children)[order[0]].classList.add('is-active');
 
     let timer = 0;
     function restartTimer() {
       clearInterval(timer);
       timer = setInterval(() => {
         if (document.hidden) return;
-        goTo(idx + 1, false);
+        step(1, false);
       }, 4500);
     }
     restartTimer();
@@ -418,14 +439,14 @@
       if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 20) return;
 
       if (Math.abs(dx) >= SWIPE_THRESHOLD) {
-        goTo(dx < 0 ? idx + 1 : idx - 1, true);
+        step(dx < 0 ? 1 : -1, true);
       } else if (Math.abs(dx) < 8 && dt < 400) {
-        goTo(idx + 1, true);
+        step(1, true);
       }
     }, { passive: true });
 
     // Desktop / non-touch click: also advance.
-    stage.addEventListener('click', () => goTo(idx + 1, true));
+    stage.addEventListener('click', () => step(1, true));
     stage.style.cursor = 'pointer';
   }
 

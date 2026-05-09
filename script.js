@@ -257,6 +257,13 @@
     'https://cdn.dribbble.com/userupload/21894247/file/original-c69072010c75071b7cd7e0e2afdff921.jpg?resize=800x600&vertical=center',
     'https://cdn.dribbble.com/userupload/41708673/file/original-1f5bcabbf930f9e34fa0c6ababfc72db.jpg?resize=800x600&vertical=center'
   ];
+  // URLs whose source assets are transparent / need a white plate
+  // behind them so they don't lose their edges on the dark page.
+  const WHITE_BG_URLS = new Set([
+    'https://mir-s3-cdn-cf.behance.net/project_modules/hd_webp/153c9216106531.5f5a81e2c109c.png',
+    'https://mir-s3-cdn-cf.behance.net/project_modules/hd_webp/04f61516106531.5f5a81e2c2501.png',
+    'https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/d2b14b16106531.5f5a81e2c56a6.png'
+  ]);
   const VISIBLE_CELLS = 8;
   // Each cell's aspect ratio is computed from the loaded image so
   // landscape work stays landscape and portrait stays portrait.
@@ -283,11 +290,16 @@
     const visible = shuffleIndices(WORK_IMAGES.length).slice(0, VISIBLE_CELLS);
     const inPool  = new Set(visible);
 
+    const applyWhiteBg = (cell, url) => {
+      cell.classList.toggle('work-cell--white', WHITE_BG_URLS.has(url));
+    };
+
     grid.innerHTML = '';
     visible.forEach((imgIdx) => {
       const cell = document.createElement('div');
       cell.className = 'work-cell';
       cell.dataset.imgIdx = String(imgIdx);
+      applyWhiteBg(cell, WORK_IMAGES[imgIdx]);
 
       const img = new Image();
       img.alt = '';
@@ -324,6 +336,7 @@
           const img = cell.querySelector('img');
           if (img) img.src = next.src;
           cell.dataset.imgIdx = String(newIdx);
+          applyWhiteBg(cell, WORK_IMAGES[newIdx]);
           setCellRatio(cell, next);
           requestAnimationFrame(() => cell.classList.remove('is-fading'));
         }, FADE_MS);
@@ -373,13 +386,15 @@
 
     function showCurrent() {
       const imgIdx = order[pos];
+      const url = WORK_IMAGES[imgIdx];
       back.onload = () => {
         setStageRatio(back);
+        stage.classList.toggle('work-slides__stage--white', WHITE_BG_URLS.has(url));
         front.classList.remove('is-active');
         back.classList.add('is-active');
         [front, back] = [back, front]; // swap roles
       };
-      back.src = WORK_IMAGES[imgIdx];
+      back.src = url;
       Array.from(dots.children).forEach((d, i) => d.classList.toggle('is-active', i === imgIdx));
     }
 
@@ -399,8 +414,12 @@
     }
 
     // Prime the first slide (random — order is shuffled).
-    a.onload = () => setStageRatio(a);
-    a.src = WORK_IMAGES[order[0]];
+    const firstUrl = WORK_IMAGES[order[0]];
+    a.onload = () => {
+      setStageRatio(a);
+      stage.classList.toggle('work-slides__stage--white', WHITE_BG_URLS.has(firstUrl));
+    };
+    a.src = firstUrl;
     Array.from(dots.children)[order[0]].classList.add('is-active');
 
     let timer = 0;

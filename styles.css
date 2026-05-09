@@ -567,6 +567,9 @@ section {
   transition: opacity .55s ease;
 }
 .work-cell.is-fading img { opacity: 0; }
+/* Some PNG sources are transparent; plate them on white so they
+   keep their edges on the dark page. */
+.work-cell--white { background: #fff; }
 
 @media (max-width: 1100px) {
   .work-grid { column-count: 3; }
@@ -593,6 +596,7 @@ section {
   transition: opacity .5s ease;
 }
 .work-slides__stage img.is-active { opacity: 1; }
+.work-slides__stage--white { background: #fff; }
 .work-slides__dots {
   /* Hidden visually; the dots stay in the DOM (with their tab roles)
      for accessibility but the user opted out of the indicator row. */

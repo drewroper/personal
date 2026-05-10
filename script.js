@@ -482,11 +482,23 @@
     a.src = firstUrl;
     Array.from(dots.children)[order[0]].classList.add('is-active');
 
+    // Pause autoplay when the slideshow scrolls out of view, so a
+    // reshape (each slide has a different aspect-ratio) doesn't push
+    // the footer up and down while you're reading the colophon.
+    let inView = true;
+    if ('IntersectionObserver' in window) {
+      inView = false;
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { inView = e.isIntersecting; });
+      });
+      io.observe(root);
+    }
+
     let timer = 0;
     function restartTimer() {
       clearInterval(timer);
       timer = setInterval(() => {
-        if (document.hidden) return;
+        if (document.hidden || !inView) return;
         step(1, false);
       }, 4500);
     }

@@ -301,7 +301,6 @@
     'https://mir-s3-cdn-cf.behance.net/project_modules/hd_webp/04f61516106531.5f5a81e2c2501.png',
     'https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/d2b14b16106531.5f5a81e2c56a6.png'
   ]);
-  const VISIBLE_CELLS = 12;
   // Each cell's aspect ratio is computed from the loaded image so
   // landscape work stays landscape and portrait stays portrait.
   const setCellRatio = (cell, img) => {
@@ -323,96 +322,40 @@
     const grid = document.getElementById('js-work-grid');
     if (!grid) return;
 
-    // Pick the initial visible set + remember which images are "in pool".
-    const visible = shuffleIndices(WORK_IMAGES.length).slice(0, VISIBLE_CELLS);
-    const inPool  = new Set(visible);
-
     const applyWhiteBg = (cell, url) => {
       cell.classList.toggle('work-cell--white', WHITE_BG_URLS.has(url));
     };
 
-    // Each cell holds two img layers stacked; we cross-dissolve
-    // between them by toggling .is-active. This means a swap never
-    // drops to a blank cell mid-animation.
-    const makeLayer = () => {
+    // Shuffle every image into a single random order and render the
+    // whole pool. loading="lazy" defers each fetch until the cell
+    // approaches the viewport, so scrolling effectively streams the
+    // grid in. Each cell takes its image's natural aspect-ratio once
+    // the load lands, which animates the fallback 4/5 into shape.
+    const order = shuffleIndices(WORK_IMAGES.length);
+
+    grid.innerHTML = '';
+    order.forEach((imgIdx) => {
+      const url = WORK_IMAGES[imgIdx];
+      const cell = document.createElement('div');
+      cell.className = 'work-cell';
+      applyWhiteBg(cell, url);
+
       const img = new Image();
       img.alt = '';
       img.loading = 'lazy';
       img.decoding = 'async';
       img.className = 'work-cell__layer';
-      return img;
-    };
+      img.onload = () => {
+        setCellRatio(cell, img);
+        // requestAnimationFrame so the ratio change is flushed before
+        // the fade-in starts; otherwise the image flashes at 4/5.
+        requestAnimationFrame(() => img.classList.add('is-active'));
+      };
+      img.src = url;
 
-    grid.innerHTML = '';
-    visible.forEach((imgIdx) => {
-      const cell = document.createElement('div');
-      cell.className = 'work-cell';
-      cell.dataset.imgIdx = String(imgIdx);
-      applyWhiteBg(cell, WORK_IMAGES[imgIdx]);
-
-      const front = makeLayer();
-      const back  = makeLayer();
-      front.classList.add('is-active');
-      front.onload = () => setCellRatio(cell, front);
-      front.src = WORK_IMAGES[imgIdx];
-
-      cell.append(front, back);
+      cell.appendChild(img);
       grid.appendChild(cell);
     });
-
-    // Cross-dissolve duration; lines up with the .work-cell__layer
-    // opacity transition in CSS and the aspect-ratio transition.
-    const FADE_MS    = 700;
-    const RESHAPE_MS = 700;
-
-    // Single-flight lock: only one cell ever cross-dissolves at a
-    // time. Any tick that arrives while a swap is animating is
-    // skipped, so the new image effectively waits for the rest of
-    // the grid to settle before appearing.
-    let swapping = false;
-
-    const swapOne = () => {
-      if (swapping) return;
-      if (document.hidden) return;
-      const cells = grid.querySelectorAll('.work-cell');
-      if (!cells.length) return;
-      const cell = cells[Math.floor(Math.random() * cells.length)];
-      const oldIdx = parseInt(cell.dataset.imgIdx, 10);
-      const candidates = shuffleIndices(WORK_IMAGES.length, inPool);
-      if (!candidates.length) return;
-      const newIdx = candidates[0];
-
-      const front = cell.querySelector('.work-cell__layer.is-active');
-      const back  = cell.querySelector('.work-cell__layer:not(.is-active)');
-      if (!front || !back) return;
-
-      swapping = true;
-
-      const probe = new Image();
-      probe.onload = () => {
-        // Reshape the cell first (eases over RESHAPE_MS) so the
-        // cells below in the same column slide gracefully. Set the
-        // back layer up while the reshape is in flight, then fire
-        // the cross-dissolve once layout has settled.
-        applyWhiteBg(cell, WORK_IMAGES[newIdx]);
-        setCellRatio(cell, probe);
-        back.src = probe.src;
-        cell.dataset.imgIdx = String(newIdx);
-        inPool.delete(oldIdx);
-        inPool.add(newIdx);
-
-        setTimeout(() => {
-          requestAnimationFrame(() => {
-            back.classList.add('is-active');
-            front.classList.remove('is-active');
-          });
-          setTimeout(() => { swapping = false; }, FADE_MS);
-        }, RESHAPE_MS);
-      };
-      probe.onerror = () => { swapping = false; };
-      probe.src = WORK_IMAGES[newIdx];
-    };
-    setInterval(swapOne, 2400);
   }
 
   function initWorkSlides() {

@@ -564,11 +564,10 @@ section {
 @media (prefers-reduced-motion: reduce) {
   .work-cell { transition: none; }
 }
-/* Two img layers per cell, stacked. Active is opaque; the other
-   sits behind at 0. A swap toggles .is-active for a cross-dissolve. */
+/* One image per cell; lazy-loaded as the cell approaches the
+   viewport. Image is transparent until the load fires, then fades
+   in — so scrolling the masonry feels like images streaming in. */
 .work-cell__layer {
-  position: absolute;
-  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: contain;

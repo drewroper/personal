@@ -239,7 +239,6 @@
     'https://mir-s3-cdn-cf.behance.net/project_modules/max_632_webp/2f3c8113619493.56279e5966f2b.jpg',
     'https://mir-s3-cdn-cf.behance.net/project_modules/hd/abb75797905583.5ecff5126eb5f.jpg',
     'https://mir-s3-cdn-cf.behance.net/project_modules/hd/a75b6197905583.5ecff5126db73.jpg',
-    'https://mir-s3-cdn-cf.behance.net/project_modules/hd_webp/5218be97905583.5ecff5131f91d.png',
     'https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/a03eb597905583.5ecff51321485.png',
     'https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/b832be97905583.5ecff5131c628.jpg',
     'https://mir-s3-cdn-cf.behance.net/project_modules/hd_webp/700547110754963.5ff52a2a6d595.jpg',
@@ -382,10 +381,7 @@
       next.onerror = () => {}; // skip silently
       next.src = WORK_IMAGES[newIdx];
     };
-    // Aggressive cadence — a new cell starts fading roughly every
-    // 1.2s; the 550ms fade window means multiple cells are usually
-    // mid-crossfade at once and the grid feels constantly alive.
-    setInterval(swapOne, 1200);
+    setInterval(swapOne, 2400);
   }
 
   function initWorkSlides() {

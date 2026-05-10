@@ -555,8 +555,14 @@ section {
   overflow: hidden;
   /* aspect-ratio is set per-image by JS once the image loads, so each
      cell takes its photo's natural orientation. 4/5 is just a fallback
-     for the brief moment before load. */
+     for the brief moment before load. Transitioning the property makes
+     the height change smoothly so cells below ease into their new spot
+     instead of snapping. */
   aspect-ratio: var(--ratio, 4 / 5);
+  transition: aspect-ratio .7s cubic-bezier(.4, 0, .2, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .work-cell { transition: none; }
 }
 .work-cell img {
   width: 100%;

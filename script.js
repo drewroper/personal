@@ -177,6 +177,21 @@
   if (document.readyState === 'complete') reportPerf();
   else window.addEventListener('load', () => setTimeout(reportPerf, 0));
 
+  /* Visit count — fetched from GoatCounter's public counter endpoint
+     and rendered into the colophon. Requires "Allow public access to
+     the counter" turned on in the GoatCounter site settings. */
+  (function reportVisits() {
+    const el = document.getElementById('js-visits');
+    if (!el) return;
+    fetch('https://drewroper.goatcounter.com/counter/TOTAL.json', { cache: 'no-store' })
+      .then((r) => r.ok ? r.json() : Promise.reject())
+      .then((data) => {
+        const n = parseInt(data.count, 10);
+        if (Number.isFinite(n)) el.textContent = n.toLocaleString();
+      })
+      .catch(() => { /* leave the em-dash placeholder */ });
+  })();
+
   /* ============================================================
      3b. EDITABLE HEADLINE — easter egg
      The hero h1 is contenteditable; visitors can type whatever

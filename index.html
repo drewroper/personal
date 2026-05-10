@@ -26,6 +26,11 @@
   <!-- UI fonts (stable across loads). Display face rotates per visit. -->
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
+  <!-- Anonymous, cookie-free visit counter. Dashboard at
+       drewroper.goatcounter.com. Read back into the colophon below. -->
+  <script data-goatcounter="https://drewroper.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+
   <!-- Font registry + early picker.
        Synchronous in <head> so the chosen typeface is requested before
        the body renders (avoids flicker / fallback-to-Times). -->
@@ -396,6 +401,11 @@
         <div class="colophon__row">
           <dt>Resources</dt>
           <dd><span id="js-resources">—</span> <span class="dim">files fetched (page, fonts, images).</span></dd>
+        </div>
+
+        <div class="colophon__row">
+          <dt>Visits</dt>
+          <dd><span id="js-visits">—</span> <span class="dim">total since launch, counted by <a href="https://www.goatcounter.com/" target="_blank" rel="noopener">GoatCounter <span class="ext" aria-hidden="true">↗</span></a>.</span></dd>
         </div>
 
         <div class="colophon__row">

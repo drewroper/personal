@@ -311,11 +311,9 @@
       <!-- Desktop: cycling masonry of N visible cells from a pool of ~50 -->
       <div class="work-grid" id="js-work-grid" aria-hidden="true"></div>
 
-      <!-- Mobile: single-image autoplay slideshow with dot indicators -->
-      <div class="work-slides" id="js-work-slides" aria-hidden="true">
-        <div class="work-slides__stage" id="js-slide-stage"></div>
-        <div class="work-slides__dots" id="js-slide-dots" role="tablist" aria-label="Work slides"></div>
-      </div>
+      <!-- Mobile: horizontal scroll-snap row of all images, peeking the
+           next card on the right edge. Lazy-loaded; no auto-advance. -->
+      <div class="work-slides" id="js-work-slides" aria-hidden="true"></div>
     </section>
 
   </main>

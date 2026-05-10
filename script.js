@@ -188,7 +188,7 @@
     setInterval(() => {
       i = (i + 1) % FRAMES.length;
       el.textContent = FRAMES[i];
-    }, 130);
+    }, 260);
   })();
 
   /* Time-on-page ticker — increments every second from page load. */
@@ -407,138 +407,34 @@
     });
   }
 
+  /* Mobile: render every image as a card in a native horizontal
+     scroll-snap row. The next card peeks at the right edge so the
+     swipe gesture telegraphs itself; no auto-advance, no reshape,
+     so the footer never jumps. */
   function initWorkSlides() {
-    const root  = document.getElementById('js-work-slides');
-    const stage = document.getElementById('js-slide-stage');
-    const dots  = document.getElementById('js-slide-dots');
-    if (!root || !stage || !dots) return;
+    const root = document.getElementById('js-work-slides');
+    if (!root) return;
 
-    // Render two img elements that we cross-fade between.
-    const a = new Image(); a.alt = ''; a.className = 'is-active';
-    const b = new Image(); b.alt = '';
-    a.loading = 'eager'; b.loading = 'eager';
-    a.decoding = 'async'; b.decoding = 'async';
-    stage.append(a, b);
+    const order = shuffleIndices(WORK_IMAGES.length);
+    root.innerHTML = '';
 
-    // Render dots.
-    dots.innerHTML = '';
-    WORK_IMAGES.forEach((_, i) => {
-      const dot = document.createElement('button');
-      dot.type = 'button';
-      dot.className = 'dot';
-      dot.setAttribute('role', 'tab');
-      dot.setAttribute('aria-label', `Slide ${i + 1} of ${WORK_IMAGES.length}`);
-      dot.addEventListener('click', () => goToImage(i, true));
-      dots.appendChild(dot);
+    order.forEach((imgIdx) => {
+      const url  = WORK_IMAGES[imgIdx];
+      const card = document.createElement('div');
+      card.className = 'work-slides__card';
+      if (WHITE_BG_URLS.has(url)) card.classList.add('work-slides__card--white');
+
+      const img = new Image();
+      img.alt = '';
+      img.loading  = 'lazy';
+      img.decoding = 'async';
+      img.className = 'work-slides__img';
+      img.onload = () => requestAnimationFrame(() => img.classList.add('is-loaded'));
+      img.src = url;
+
+      card.appendChild(img);
+      root.appendChild(card);
     });
-
-    // Maintain a shuffled play order; reshuffle when we wrap past the
-    // end so every cycle is a fresh random sequence.
-    let order = shuffleIndices(WORK_IMAGES.length);
-    let pos = 0;
-    let front = a, back = b;
-
-    const setStageRatio = (img) => {
-      if (img.naturalWidth && img.naturalHeight) {
-        stage.style.setProperty('--ratio', `${img.naturalWidth} / ${img.naturalHeight}`);
-      }
-    };
-
-    function showCurrent() {
-      const imgIdx = order[pos];
-      const url = WORK_IMAGES[imgIdx];
-      back.onload = () => {
-        setStageRatio(back);
-        stage.classList.toggle('work-slides__stage--white', WHITE_BG_URLS.has(url));
-        front.classList.remove('is-active');
-        back.classList.add('is-active');
-        [front, back] = [back, front]; // swap roles
-      };
-      back.src = url;
-      Array.from(dots.children).forEach((d, i) => d.classList.toggle('is-active', i === imgIdx));
-    }
-
-    function step(direction, fromUser) {
-      pos += direction;
-      if (pos >= order.length) { order = shuffleIndices(WORK_IMAGES.length); pos = 0; }
-      if (pos < 0)             { order = shuffleIndices(WORK_IMAGES.length); pos = order.length - 1; }
-      showCurrent();
-      if (fromUser) restartTimer();
-    }
-
-    function goToImage(imgIdx, fromUser) {
-      const found = order.indexOf(imgIdx);
-      pos = found >= 0 ? found : 0;
-      showCurrent();
-      if (fromUser) restartTimer();
-    }
-
-    // Prime the first slide (random — order is shuffled).
-    const firstUrl = WORK_IMAGES[order[0]];
-    a.onload = () => {
-      setStageRatio(a);
-      stage.classList.toggle('work-slides__stage--white', WHITE_BG_URLS.has(firstUrl));
-    };
-    a.src = firstUrl;
-    Array.from(dots.children)[order[0]].classList.add('is-active');
-
-    // Pause autoplay when the slideshow scrolls out of view, so a
-    // reshape (each slide has a different aspect-ratio) doesn't push
-    // the footer up and down while you're reading the colophon.
-    let inView = true;
-    if ('IntersectionObserver' in window) {
-      inView = false;
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach((e) => { inView = e.isIntersecting; });
-      });
-      io.observe(root);
-    }
-
-    let timer = 0;
-    function restartTimer() {
-      clearInterval(timer);
-      timer = setInterval(() => {
-        if (document.hidden || !inView) return;
-        step(1, false);
-      }, 4500);
-    }
-    restartTimer();
-
-    /* Touch + click navigation -----------------------------------
-       - horizontal swipe ≥ 40px advances (left = next, right = prev)
-       - a tap (or click on desktop) advances to the next slide */
-    const SWIPE_THRESHOLD = 40;
-    let startX = 0, startY = 0, startTime = 0, swiping = false;
-
-    stage.addEventListener('touchstart', (e) => {
-      const t = e.changedTouches[0];
-      startX = t.clientX;
-      startY = t.clientY;
-      startTime = Date.now();
-      swiping = true;
-    }, { passive: true });
-
-    stage.addEventListener('touchend', (e) => {
-      if (!swiping) return;
-      swiping = false;
-      const t = e.changedTouches[0];
-      const dx = t.clientX - startX;
-      const dy = t.clientY - startY;
-      const dt = Date.now() - startTime;
-
-      // If movement is mostly vertical, let the page scroll instead.
-      if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 20) return;
-
-      if (Math.abs(dx) >= SWIPE_THRESHOLD) {
-        step(dx < 0 ? 1 : -1, true);
-      } else if (Math.abs(dx) < 8 && dt < 400) {
-        step(1, true);
-      }
-    }, { passive: true });
-
-    // Desktop / non-touch click: also advance.
-    stage.addEventListener('click', () => step(1, true));
-    stage.style.cursor = 'pointer';
   }
 
   // Bootstrap based on viewport — keep both initialised so a resize works.

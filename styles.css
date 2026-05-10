@@ -640,52 +640,48 @@ section {
   .work-grid { column-count: 3; }
 }
 
-/* WORK — mobile autoplay slideshow ----------------------------- */
+/* WORK — mobile horizontal scroller --------------------------- */
+/* One row of every image, fixed-shape cards that don't reshape on
+   scroll, with a peek of the next card at the right edge so the
+   swipe gesture telegraphs itself. Hidden on desktop. */
 .work-slides { display: none; }
-.work-slides__stage {
-  position: relative;
-  width: 100%;
-  aspect-ratio: var(--ratio, 3 / 2);
+.work-slides__card {
+  flex: 0 0 80vw;
+  aspect-ratio: 4 / 5;
+  scroll-snap-align: start;
   background: var(--bg-elev);
-  border: var(--hairline-fine) solid var(--line);
   overflow: hidden;
-  transition: aspect-ratio .35s ease;
+  position: relative;
 }
-.work-slides__stage img {
-  position: absolute;
-  inset: 0;
+.work-slides__card--white { background: #fff; }
+.work-slides__img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  display: block;
   opacity: 0;
-  transition: opacity .5s ease;
+  transition: opacity .6s ease;
 }
-.work-slides__stage img.is-active { opacity: 1; }
-.work-slides__stage--white { background: #fff; }
-.work-slides__dots {
-  /* Hidden visually; the dots stay in the DOM (with their tab roles)
-     for accessibility but the user opted out of the indicator row. */
-  display: none;
-}
-.work-slides__dots .dot {
-  width: 5px; height: 5px;
-  background: var(--text-faint);
-  border-radius: 50%;
-  padding: 0;
-  border: 0;
-  cursor: pointer;
-  transition: background-color .2s ease, transform .2s ease;
-  -webkit-tap-highlight-color: transparent;
-}
-.work-slides__dots .dot.is-active {
-  background: var(--text);
-  transform: scale(1.4);
-}
+.work-slides__img.is-loaded { opacity: 1; }
 
-/* On tablets and below, swap masonry for the slideshow */
+/* On tablets and below, swap the masonry for the scroll row. */
 @media (max-width: 760px) {
-  .work-grid   { display: none; }
-  .work-slides { display: block; }
+  .work-grid { display: none; }
+  .work-slides {
+    display: flex;
+    gap: clamp(.5rem, 2vw, .75rem);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: var(--gutter);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    /* Full-bleed inside the section gutter so the right-edge peek
+       extends to the viewport edge. */
+    padding: 0 var(--gutter);
+    margin: 0 calc(-1 * var(--gutter));
+  }
+  .work-slides::-webkit-scrollbar { display: none; }
 }
 
 /* FOOTER -------------------------------------------------------- */

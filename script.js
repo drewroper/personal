@@ -227,7 +227,6 @@
     'https://mir-s3-cdn-cf.behance.net/project_modules/hd_webp/04f61516106531.5f5a81e2c2501.png',
     'https://mir-s3-cdn-cf.behance.net/project_modules/hd_still/14f6b313608983.5f5abddb46075.jpg',
     'https://mir-s3-cdn-cf.behance.net/project_modules/hd_still/6ec3a513608983.5f5abddb46621.jpg',
-    'https://mir-s3-cdn-cf.behance.net/project_modules/hd_webp/79a89221733267.5f4755f73ff59.png',
     'https://mir-s3-cdn-cf.behance.net/project_modules/hd_webp/f8364c103167265.5f472cee7f8ed.jpg',
     'https://mir-s3-cdn-cf.behance.net/project_modules/hd_webp/fc436a103167265.5f46ef490430b.png',
     'https://mir-s3-cdn-cf.behance.net/project_modules/hd_webp/43fce8103167265.5f4728f8b4f0d.png',

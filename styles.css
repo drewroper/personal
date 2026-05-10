@@ -495,7 +495,7 @@ section {
   gap: .75rem;
   width: max-content;
   padding-left: var(--gutter);
-  animation: clients-scroll 55s linear infinite;
+  animation: clients-scroll 110s linear infinite;
 }
 .clients__marquee:hover .clients__track,
 .clients__marquee:focus-within .clients__track {

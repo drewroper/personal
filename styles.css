@@ -564,15 +564,19 @@ section {
 @media (prefers-reduced-motion: reduce) {
   .work-cell { transition: none; }
 }
-.work-cell img {
+/* Two img layers per cell, stacked. Active is opaque; the other
+   sits behind at 0. A swap toggles .is-active for a cross-dissolve. */
+.work-cell__layer {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: contain;
   display: block;
-  opacity: 1;
-  transition: opacity .55s ease;
+  opacity: 0;
+  transition: opacity .7s ease;
 }
-.work-cell.is-fading img { opacity: 0; }
+.work-cell__layer.is-active { opacity: 1; }
 /* Some PNG sources are transparent; plate them on white so they
    keep their edges on the dark page. */
 .work-cell--white { background: #fff; }

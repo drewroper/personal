@@ -538,6 +538,13 @@
     marquee.addEventListener('focusin',    () => { hovered = true; });
     marquee.addEventListener('focusout',   () => { hovered = false; });
 
+    // A real click on a pill (i.e. the user committed to a link, not a
+    // swipe) releases the hover lock so the chyron keeps moving.
+    marquee.addEventListener('click', (e) => {
+      if (e.defaultPrevented) return; // swallowed by a drag
+      if (e.target.closest('.clients__pill')) hovered = false;
+    });
+
     marquee.addEventListener('touchstart', (e) => {
       if (e.touches.length !== 1) return;
       measure();

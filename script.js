@@ -1258,7 +1258,7 @@
           // Clear + exit
           userPixels.clear();
           drawMode = false;
-          drawBtn.textContent = 'Draw';
+          drawBtn.textContent = 'Doodle';
           drawBtn.classList.remove('is-active');
           canvas.classList.remove('is-drawing');
         } else {

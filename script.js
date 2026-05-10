@@ -177,6 +177,20 @@
   if (document.readyState === 'complete') reportPerf();
   else window.addEventListener('load', () => setTimeout(reportPerf, 0));
 
+  /* Claude Code spinner — same pulsing-star cycle the CLI shows
+     while it's thinking. Loops the symbol next to "Claude Code" in
+     the colophon so the mark feels alive. */
+  (function spinnerClaudeMark() {
+    const el = document.getElementById('js-claude-spinner');
+    if (!el) return;
+    const FRAMES = ['·', '✢', '✳', '∗', '✻', '✽'];
+    let i = 0;
+    setInterval(() => {
+      i = (i + 1) % FRAMES.length;
+      el.textContent = FRAMES[i];
+    }, 130);
+  })();
+
   /* Time-on-page ticker — increments every second from page load. */
   (function reportTimeHere() {
     const el = document.getElementById('js-timeonpage');

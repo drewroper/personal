@@ -495,15 +495,9 @@ section {
   gap: .75rem;
   width: max-content;
   padding-left: var(--gutter);
-  animation: clients-scroll 110s linear infinite;
-  /* Held at frame 0 until the section scrolls into view, so the
-     user always lands on Anthropic. JS toggles .clients--in-view. */
-  animation-play-state: paused;
-}
-.clients--in-view .clients__track { animation-play-state: running; }
-.clients__marquee:hover .clients__track,
-.clients__marquee:focus-within .clients__track {
-  animation-play-state: paused;
+  /* Position is driven by JS rAF (see initClientsMarquee in script.js)
+     so we can pause on hover/viewport-gate and let touch drag it. */
+  will-change: transform;
 }
 .clients__pill {
   display: inline-flex;
@@ -527,15 +521,13 @@ section {
   border-color: var(--accent);
   outline: 0;
 }
-@keyframes clients-scroll {
-  to { transform: translateX(-50%); }
-}
 @media (prefers-reduced-motion: reduce) {
   .clients__track {
-    animation: none;
     flex-wrap: wrap;
     padding: 0 var(--gutter);
+    transform: none !important;
   }
+  .clients__pill[aria-hidden="true"] { display: none; }
 }
 
 /* HISTORY LIST -------------------------------------------------- */

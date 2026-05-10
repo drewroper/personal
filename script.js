@@ -485,24 +485,90 @@
   initWorkGrid();
   initWorkSlides();
 
-  /* Hold the clients marquee at frame 0 until the section actually
-     enters the viewport, so the user always sees Anthropic first. */
+  /* Clients chyron — rAF-driven so touch can drag it. Auto-advance
+     waits until the section enters the viewport (Anthropic-first
+     guarantee), pauses on hover/focus, and yields to touch drags. */
   (function initClientsMarquee() {
-    const clients = document.querySelector('.clients');
-    if (!clients) return;
-    if (!('IntersectionObserver' in window)) {
-      clients.classList.add('clients--in-view');
-      return;
+    const section = document.querySelector('.clients');
+    const marquee = document.querySelector('.clients__marquee');
+    const track   = document.querySelector('.clients__track');
+    if (!section || !marquee || !track) return;
+
+    const PX_PER_S = 35;
+    const reduced  = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    let x = 0, halfW = 0;
+    let inView = false, dragging = false, hovered = false;
+    let dragStartX = 0, dragStartTrackX = 0;
+    let lastT = 0, touchDist = 0;
+
+    const measure = () => { halfW = track.scrollWidth / 2; };
+    const apply   = () => { track.style.transform = `translateX(${x}px)`; };
+    const wrap    = () => {
+      if (!halfW) measure();
+      if (!halfW) return;
+      while (x <= -halfW) x += halfW;
+      while (x > 0)       x -= halfW;
+    };
+
+    function tick(t) {
+      requestAnimationFrame(tick);
+      if (!lastT) { lastT = t; return; }
+      const dt = (t - lastT) / 1000;
+      lastT = t;
+      if (!inView || dragging || hovered || reduced) return;
+      x -= PX_PER_S * dt;
+      wrap();
+      apply();
     }
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          clients.classList.add('clients--in-view');
-          io.disconnect();
-        }
-      });
-    }, { threshold: 0.15 });
-    io.observe(clients);
+
+    if (!('IntersectionObserver' in window)) {
+      inView = true;
+    } else {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) { inView = true; io.disconnect(); }
+        });
+      }, { threshold: 0.15 });
+      io.observe(section);
+    }
+
+    marquee.addEventListener('mouseenter', () => { hovered = true; });
+    marquee.addEventListener('mouseleave', () => { hovered = false; });
+    marquee.addEventListener('focusin',    () => { hovered = true; });
+    marquee.addEventListener('focusout',   () => { hovered = false; });
+
+    marquee.addEventListener('touchstart', (e) => {
+      if (e.touches.length !== 1) return;
+      measure();
+      dragging = true;
+      dragStartX = e.touches[0].clientX;
+      dragStartTrackX = x;
+      touchDist = 0;
+    }, { passive: true });
+
+    marquee.addEventListener('touchmove', (e) => {
+      if (!dragging || e.touches.length !== 1) return;
+      const dx = e.touches[0].clientX - dragStartX;
+      touchDist = Math.abs(dx);
+      x = dragStartTrackX + dx;
+      wrap();
+      apply();
+    }, { passive: true });
+
+    marquee.addEventListener('touchend', () => {
+      dragging = false;
+      // If the finger actually moved, swallow the synthesized click
+      // so a swipe doesn't accidentally launch a pill's link.
+      if (touchDist > 8) {
+        const swallow = (ev) => { ev.preventDefault(); ev.stopPropagation(); };
+        marquee.addEventListener('click', swallow, { capture: true, once: true });
+      }
+    });
+
+    window.addEventListener('resize', measure);
+    setTimeout(measure, 250);
+    requestAnimationFrame(tick);
   })();
 
   /* ============================================================

@@ -403,7 +403,12 @@ section {
   overflow: hidden;
 }
 .portrait__canvas { cursor: pointer; }
-.portrait__canvas.is-drawing { cursor: crosshair; }
+.portrait__canvas.is-drawing {
+  cursor: crosshair;
+  /* Suppress page-pan/zoom while finger-painting on mobile so the
+     drag stays inside the canvas. */
+  touch-action: none;
+}
 
 /* Draw-mode pill in the top-right of the portrait. Desktop only. */
 .portrait__draw {
@@ -434,7 +439,10 @@ section {
   border-color: var(--accent);
 }
 @media (max-width: 760px) {
+  /* Hidden on mobile until the user has cycled through every preset
+     doodle once — at which point JS adds .portrait__draw--unlocked. */
   .portrait__draw { display: none; }
+  .portrait__draw.portrait__draw--unlocked { display: inline-block; }
 }
 .portrait__canvas {
   position: absolute;

@@ -1156,19 +1156,25 @@
     });
 
     // Each click reveals the next doodle. Draw mode disables this so
-    // clicks paint instead.
+    // clicks paint instead. Once the visitor has wrapped past every
+    // preset, expose the Draw pill on mobile too.
     canvas.addEventListener('click', () => {
       if (drawMode) return;
       doodle = (doodle + 1) % DOODLES.length;
+      if (doodle === 0) {
+        const btn = document.getElementById('js-portrait-draw');
+        if (btn) btn.classList.add('portrait__draw--unlocked');
+      }
       if (gray) render(performance.now());
     });
 
     /* ----------------------------------------------------------
-       Draw mode (desktop only — pill is hidden on mobile).
+       Draw mode. Pill ships visible on desktop and unlocks on mobile
+       once the visitor has cycled through every preset doodle.
        Click "Draw" → enter draw mode, doodle resets to clean photo,
-       button becomes "Clear", crosshair cursor, mouse paints lime
-       pixels (Bresenham line for smooth strokes). Click "Clear" →
-       wipe user pixels and exit draw mode.
+       button becomes "Clear", crosshair cursor, pointer (mouse or
+       finger) paints lime pixels (Bresenham line for smooth strokes).
+       Click "Clear" → wipe user pixels and exit draw mode.
        ---------------------------------------------------------- */
     const drawBtn = document.getElementById('js-portrait-draw');
     let drawMode = false;

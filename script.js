@@ -177,6 +177,26 @@
   if (document.readyState === 'complete') reportPerf();
   else window.addEventListener('load', () => setTimeout(reportPerf, 0));
 
+  /* Time-on-page ticker — increments every second from page load. */
+  (function reportTimeHere() {
+    const el = document.getElementById('js-timeonpage');
+    if (!el) return;
+    const startedAt = Date.now();
+    const fmt = (s) => {
+      const h = Math.floor(s / 3600);
+      const m = Math.floor((s % 3600) / 60);
+      const sec = s % 60;
+      return h > 0
+        ? `${h}:${String(m).padStart(2, '0')}:${String(sec).padStart(2, '0')}`
+        : `${m}:${String(sec).padStart(2, '0')}`;
+    };
+    const tick = () => {
+      el.textContent = fmt(Math.floor((Date.now() - startedAt) / 1000));
+    };
+    tick();
+    setInterval(tick, 1000);
+  })();
+
   /* Visit count — fetched from GoatCounter's public counter endpoint
      and rendered into the colophon. Requires "Allow public access to
      the counter" turned on in the GoatCounter site settings. */

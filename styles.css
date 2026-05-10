@@ -496,7 +496,11 @@ section {
   width: max-content;
   padding-left: var(--gutter);
   animation: clients-scroll 110s linear infinite;
+  /* Held at frame 0 until the section scrolls into view, so the
+     user always lands on Anthropic. JS toggles .clients--in-view. */
+  animation-play-state: paused;
 }
+.clients--in-view .clients__track { animation-play-state: running; }
 .clients__marquee:hover .clients__track,
 .clients__marquee:focus-within .clients__track {
   animation-play-state: paused;

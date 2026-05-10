@@ -485,6 +485,26 @@
   initWorkGrid();
   initWorkSlides();
 
+  /* Hold the clients marquee at frame 0 until the section actually
+     enters the viewport, so the user always sees Anthropic first. */
+  (function initClientsMarquee() {
+    const clients = document.querySelector('.clients');
+    if (!clients) return;
+    if (!('IntersectionObserver' in window)) {
+      clients.classList.add('clients--in-view');
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          clients.classList.add('clients--in-view');
+          io.disconnect();
+        }
+      });
+    }, { threshold: 0.15 });
+    io.observe(clients);
+  })();
+
   /* ============================================================
      5. DITHERED PORTRAIT — ambient animation
      -----------------------------------------------------------

@@ -559,18 +559,6 @@ section {
 .history__top {
   display: flex; align-items: baseline; gap: .9rem;
 }
-.history__pill {
-  display: inline-block;
-  padding: .25rem .55rem;
-  border-radius: 999px;
-  background: var(--pill-bg);
-  color: var(--accent);
-  font-family: var(--font-mono);
-  font-size: var(--mono-size);
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  align-self: center;
-}
 .history__year {
   margin-left: auto;
   font-family: var(--font-mono);

@@ -255,7 +255,46 @@
     'https://cdn.dribbble.com/users/58866/screenshots/1029223/attachments/124052/derby-party_800.jpg',
     'https://cdn.dribbble.com/userupload/22194261/file/original-99773e67f3c0640908be411ac25b9b8d.jpg?resize=752x564&vertical=center',
     'https://cdn.dribbble.com/userupload/21894247/file/original-c69072010c75071b7cd7e0e2afdff921.jpg?resize=800x600&vertical=center',
-    'https://cdn.dribbble.com/userupload/41708673/file/original-1f5bcabbf930f9e34fa0c6ababfc72db.jpg?resize=800x600&vertical=center'
+    'https://cdn.dribbble.com/userupload/41708673/file/original-1f5bcabbf930f9e34fa0c6ababfc72db.jpg?resize=800x600&vertical=center',
+    'assets/12.jpg',
+    'assets/15.jpg',
+    'assets/1strokers.png',
+    'assets/35d79c13772667.56278079f07be.png',
+    'assets/46684c23795559.56328eed3145f.jpg',
+    'assets/4854d216106531.562a57a9848db.jpg',
+    'assets/4c9f6c13608983.5c54c6944cbe1.jpg',
+    'assets/53c96313889503.56279ee3c5b68.png',
+    'assets/6.jpg',
+    'assets/68210e13889503.56279eca5a64c.jpg',
+    'assets/6fccbc23795559.56328f3c0004e.jpg',
+    'assets/7.jpg',
+    'assets/753e0223795559.56328f3bd86f3.jpg',
+    'assets/8.jpg',
+    'assets/9.jpg',
+    'assets/Artboard.png',
+    'assets/DrewRoper_FreshHeir.jpeg',
+    'assets/DrewRoper_LocalNatives.jpeg',
+    'assets/Fence-MockUp-Tempe.jpg',
+    'assets/Flatirons%20poster.png',
+    'assets/Gemini_Generated_Image_7nc3tm7nc3tm7nc3.png',
+    'assets/Gemini_Generated_Image_argc5xargc5xargc.png',
+    'assets/Gemini_Generated_Image_dctoq8dctoq8dcto.png',
+    'assets/HACK_People.png',
+    'assets/HACK_bbb-CloseUp.png',
+    'assets/HW_Award_Individual01.png',
+    'assets/Hat-Boulder.jpg',
+    'assets/Screen%20Shot%202015-07-30%20at%204.05.58%20PM.png',
+    'assets/Screen%20Shot%202015-07-30%20at%204.59.59%20PM.png',
+    'assets/Screen%20Shot%202015-07-30%20at%205.00.28%20PM.png',
+    'assets/a4f35013608983.5c54c6944dafb.jpg',
+    'assets/ads.png',
+    'assets/b22b2214002221.5627bb6e294f1.png',
+    'assets/b68adc13772667.56277f16a2084.png',
+    'assets/cc31ee13772667.56277e8618184.png',
+    'assets/email.png',
+    'assets/grace-weber.jpeg',
+    'assets/icons.png',
+    'assets/scooters2.png'
   ];
   // URLs whose source assets are transparent / need a white plate
   // behind them so they don't lose their edges on the dark page.
@@ -344,7 +383,10 @@
       next.onerror = () => {}; // skip silently
       next.src = WORK_IMAGES[newIdx];
     };
-    setInterval(swapOne, 5000);
+    // Aggressive cadence — a new cell starts fading roughly every
+    // 1.2s; the 550ms fade window means multiple cells are usually
+    // mid-crossfade at once and the grid feels constantly alive.
+    setInterval(swapOne, 1200);
   }
 
   function initWorkSlides() {

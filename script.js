@@ -378,9 +378,29 @@
     // Shuffle every image into a single random order and render the
     // whole pool. loading="lazy" defers each fetch until the cell
     // approaches the viewport, so scrolling effectively streams the
-    // grid in. Each cell takes its image's natural aspect-ratio once
-    // the load lands, which animates the fallback 4/5 into shape.
+    // grid in. Each cell fades in only once it has BOTH loaded and
+    // entered the viewport, so the user always sees the reveal as
+    // they scroll (not 500px before the cell is on screen).
     const order = shuffleIndices(WORK_IMAGES.length);
+
+    const reveal = (cell) => {
+      if (cell.dataset.loaded === '1' && cell.dataset.inView === '1') {
+        const img = cell.querySelector('.work-cell__layer');
+        if (img) requestAnimationFrame(() => img.classList.add('is-active'));
+      }
+    };
+
+    let io = null;
+    if ('IntersectionObserver' in window) {
+      io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.dataset.inView = '1';
+          reveal(entry.target);
+          io.unobserve(entry.target);
+        });
+      }, { threshold: 0.08 });
+    }
 
     grid.innerHTML = '';
     order.forEach((imgIdx) => {
@@ -396,14 +416,15 @@
       img.className = 'work-cell__layer';
       img.onload = () => {
         setCellRatio(cell, img);
-        // requestAnimationFrame so the ratio change is flushed before
-        // the fade-in starts; otherwise the image flashes at 4/5.
-        requestAnimationFrame(() => img.classList.add('is-active'));
+        cell.dataset.loaded = '1';
+        if (io) reveal(cell);
+        else    requestAnimationFrame(() => img.classList.add('is-active'));
       };
       img.src = url;
 
       cell.appendChild(img);
       grid.appendChild(cell);
+      if (io) io.observe(cell);
     });
   }
 

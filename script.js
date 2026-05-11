@@ -480,6 +480,10 @@
     const order = shuffleIndices(WORK_IMAGES.length);
     root.innerHTML = '';
 
+    // Render every card with NO src — we drip-load them so the one
+    // directly to the right is always queued the moment the current
+    // card finishes loading. Avoids the pop-in-on-swipe delay.
+    const items = [];
     order.forEach((imgIdx) => {
       const url  = WORK_IMAGES[imgIdx];
       const card = document.createElement('div');
@@ -488,15 +492,26 @@
 
       const img = new Image();
       img.alt = '';
-      img.loading  = 'lazy';
       img.decoding = 'async';
       img.className = 'work-slides__img';
-      img.onload = () => requestAnimationFrame(() => img.classList.add('is-loaded'));
-      img.src = url;
-
       card.appendChild(img);
       root.appendChild(card);
+      items.push({ img, url });
     });
+
+    const triggerLoad = (idx) => {
+      if (idx < 0 || idx >= items.length) return;
+      const it = items[idx];
+      if (it.img.src) return;
+      it.img.onload = () => {
+        requestAnimationFrame(() => it.img.classList.add('is-loaded'));
+        triggerLoad(idx + 1);
+      };
+      it.img.onerror = () => triggerLoad(idx + 1);
+      it.img.src = it.url;
+    };
+
+    triggerLoad(0);
   }
 
   // Bootstrap based on viewport — keep both initialised so a resize works.

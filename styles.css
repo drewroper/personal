@@ -368,7 +368,8 @@ section {
 .h2,
 .history__title,
 .work__title,
-.colophon__title {
+.colophon__title,
+.footer__social-title {
   margin: 0;
   font-family: var(--font-display);
   font-weight: 400;
@@ -744,11 +745,9 @@ section {
 
 .footer__social-title {
   max-width: var(--container);
-  margin: 0 auto 1rem;
-  font-family: var(--font-sans);
-  font-weight: 500;
-  font-size: 1rem;
-  color: var(--text-muted);
+  margin: 0 auto 1.25rem;
+  /* Typography inherits the unified H2 ramp (display font, clamp
+     size, etc.) defined alongside .history__title / .work__title. */
 }
 .footer__social {
   max-width: var(--container);

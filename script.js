@@ -323,7 +323,6 @@
     'assets/Fence-MockUp-Tempe.jpg',
     'assets/Flatirons%20poster.png',
     'assets/Gemini_Generated_Image_7nc3tm7nc3tm7nc3.png',
-    'assets/Gemini_Generated_Image_argc5xargc5xargc.png',
     'assets/Gemini_Generated_Image_dctoq8dctoq8dcto.png',
     'assets/HACK_People.png',
     'assets/HACK_bbb-CloseUp.png',

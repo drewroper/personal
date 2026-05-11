@@ -322,8 +322,6 @@
     'assets/DrewRoper_LocalNatives.jpeg',
     'assets/Fence-MockUp-Tempe.jpg',
     'assets/Flatirons%20poster.png',
-    'assets/Gemini_Generated_Image_7nc3tm7nc3tm7nc3.png',
-    'assets/Gemini_Generated_Image_dctoq8dctoq8dcto.png',
     'assets/HACK_People.png',
     'assets/HACK_bbb-CloseUp.png',
     'assets/HW_Award_Individual01.png',
@@ -339,7 +337,19 @@
     'assets/email.png',
     'assets/grace-weber.jpeg',
     'assets/icons.png',
-    'assets/scooters2.png'
+    'assets/scooters2.png',
+    'assets/como.png',
+    'assets/jeff.png',
+    'assets/kc.png',
+    'assets/sessions-2024-2.png',
+    'assets/sessions-2024-3.png',
+    'assets/sessions-2024-4.png',
+    'assets/sessions-2024-5.png',
+    'assets/sessions-2024-6.png',
+    'assets/sessions-2024-7.png',
+    'assets/spring.png',
+    'assets/sticks.png',
+    'assets/stl.png'
   ];
   // URLs whose source assets are transparent / need a white plate
   // behind them so they don't lose their edges on the dark page.

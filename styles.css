@@ -494,6 +494,9 @@ section {
 .clients__marquee {
   overflow: hidden;
   width: 100%;
+  /* Lock horizontal swipes inside the chyron — the page can't
+     pan vertically while a finger is on this row. */
+  touch-action: pan-x;
   /* Fade the leading + trailing edges so pills don't slam into the
      viewport boundary. */
   -webkit-mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);

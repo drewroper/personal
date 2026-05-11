@@ -700,7 +700,7 @@ section {
 .work-slides { display: none; }
 .work-slides__card {
   flex: 0 0 auto;
-  height: min(65vh, 560px);
+  height: min(49vh, 420px);
   scroll-snap-align: start;
   background: var(--bg-elev);
   overflow: hidden;

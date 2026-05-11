@@ -157,7 +157,7 @@
      reports the real numbers — load time and resource count — back
      into the Colophon. Honest, no estimation.
      ============================================================ */
-  const fmtMs = (ms) => ms < 1000 ? `${Math.round(ms)} ms` : `${(ms / 1000).toFixed(2)} s`;
+  const fmtMs = (ms) => `${Math.round(ms)} ms`;
   const reportPerf = () => {
     const loadEl = document.getElementById('js-loadtime');
     const resEl  = document.getElementById('js-resources');

@@ -691,6 +691,14 @@ section {
   background: var(--bg-deep);
 }
 
+.footer__social-title {
+  max-width: var(--container);
+  margin: 0 auto 1rem;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--text-muted);
+}
 .footer__social {
   max-width: var(--container);
   margin: 0 auto 2rem;

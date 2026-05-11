@@ -693,13 +693,13 @@ section {
 }
 
 /* WORK — mobile horizontal scroller --------------------------- */
-/* One row of every image, fixed-shape cards that don't reshape on
-   scroll, with a peek of the next card at the right edge so the
-   swipe gesture telegraphs itself. Hidden on desktop. */
+/* One row of every image at a shared height, each card sized to
+   its image's natural aspect ratio (no letterboxing inside a
+   container). A sliver of the next card peeks at the right edge. */
 .work-slides { display: none; }
 .work-slides__card {
-  flex: 0 0 80vw;
-  aspect-ratio: 4 / 5;
+  flex: 0 0 auto;
+  height: min(65vh, 560px);
   scroll-snap-align: start;
   background: var(--bg-elev);
   overflow: hidden;
@@ -707,9 +707,8 @@ section {
 }
 .work-slides__card--white { background: #fff; }
 .work-slides__img {
-  width: 100%;
   height: 100%;
-  object-fit: contain;
+  width: auto;
   display: block;
   opacity: 0;
   transition: opacity .6s ease;

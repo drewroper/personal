@@ -703,7 +703,7 @@ section {
 .work-slides { display: none; }
 .work-slides__card {
   flex: 0 0 auto;
-  height: min(49vh, 420px);
+  height: 350px;
   scroll-snap-align: start;
   background: var(--bg-elev);
   overflow: hidden;

@@ -272,7 +272,6 @@
     'https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/1888c216106531.5f983e6d0ca14.png',
     'https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/d2b14b16106531.5f5a81e2c56a6.png',
     'https://mir-s3-cdn-cf.behance.net/project_modules/hd_webp/153c9216106531.5f5a81e2c109c.png',
-    'https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/b16be216106531.5f5a8bd3bf8d4.png',
     'https://mir-s3-cdn-cf.behance.net/project_modules/hd_webp/04f61516106531.5f5a81e2c2501.png',
     'https://mir-s3-cdn-cf.behance.net/project_modules/hd_still/14f6b313608983.5f5abddb46075.jpg',
     'https://mir-s3-cdn-cf.behance.net/project_modules/hd_still/6ec3a513608983.5f5abddb46621.jpg',
@@ -425,6 +424,39 @@
       cell.appendChild(img);
       grid.appendChild(cell);
       if (io) io.observe(cell);
+
+      cell.addEventListener('click', () => openLightbox(url, WHITE_BG_URLS.has(url)));
+    });
+  }
+
+  /* Lightbox — desktop only (mobile cells are display:none). Clicks
+     on the dim backdrop, on the X, or Escape close. Clicks on the
+     image itself stay open. */
+  const lightbox = document.getElementById('js-lightbox');
+  const lightImg = document.getElementById('js-lightbox-img');
+  const lightCls = document.getElementById('js-lightbox-close');
+
+  function openLightbox(url, isWhite) {
+    if (!lightbox || !lightImg) return;
+    lightImg.src = url;
+    lightbox.classList.toggle('lightbox--white', !!isWhite);
+    lightbox.hidden = false;
+    document.documentElement.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    if (!lightbox) return;
+    lightbox.hidden = true;
+    if (lightImg) lightImg.removeAttribute('src');
+    document.documentElement.style.overflow = '';
+  }
+  if (lightbox && lightImg && lightCls) {
+    lightCls.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+      // Only close when the click landed on the backdrop itself.
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !lightbox.hidden) closeLightbox();
     });
   }
 

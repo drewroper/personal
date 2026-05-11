@@ -368,8 +368,7 @@ section {
 .h2,
 .history__title,
 .work__title,
-.colophon__title,
-.footer__social-title {
+.colophon__title {
   margin: 0;
   font-family: var(--font-display);
   font-weight: 400;
@@ -746,12 +745,6 @@ section {
   background: var(--bg-deep);
 }
 
-.footer__social-title {
-  max-width: var(--container);
-  margin: 0 auto 1.25rem;
-  /* Typography inherits the unified H2 ramp (display font, clamp
-     size, etc.) defined alongside .history__title / .work__title. */
-}
 .footer__social {
   max-width: var(--container);
   margin: 0 auto 2rem;
@@ -823,14 +816,14 @@ section {
 }
 .footer__signoff {
   max-width: var(--container);
-  margin: 0 auto 1.25rem;
-  color: var(--text-muted);
+  margin: 0 auto 1.5rem;
   display: flex;
   align-items: center;
+  color: var(--text);
 }
-.footer__signoff .brand-mark { color: var(--text); }
+.footer__signoff .brand-mark { color: var(--text); height: 36px; }
 @media (max-width: 640px) {
-  .footer__signoff .brand-mark { height: 22px; }
+  .footer__signoff .brand-mark { height: 30px; }
 }
 /* COLOPHON ----------------------------------------------------- */
 .colophon {

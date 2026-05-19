@@ -349,7 +349,8 @@
     'assets/sessions-2024-7.png',
     'assets/spring.png',
     'assets/sticks.png',
-    'assets/stl.png'
+    'assets/stl.png',
+    'assets/university-posters%20copy.png'
   ];
   // URLs whose source assets are transparent / need a white plate
   // behind them so they don't lose their edges on the dark page.

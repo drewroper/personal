@@ -600,33 +600,35 @@ section {
   max-width: var(--container);
   margin: 0 auto clamp(1rem, 2vw, 1.75rem);
 }
+/* JS column-distribution masonry (not CSS multi-column). Each
+   .work-col is an independent vertical stack, so a cell's height
+   never causes cross-column reflow. Column count is set by JS. */
 .work-grid {
   max-width: var(--container);
   margin: 0 auto;
-  column-count: 4;
-  column-gap: clamp(.6rem, 1.4vw, 1.1rem);
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(.6rem, 1.4vw, 1.1rem);
+}
+.work-col {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(.6rem, 1.4vw, 1.1rem);
 }
 .work-cell {
   position: relative;
-  break-inside: avoid;
   cursor: zoom-in;
-  margin: 0 0 clamp(.6rem, 1.4vw, 1.1rem);
   background: var(--bg-elev);
   overflow: hidden;
-  /* aspect-ratio is set per-image by JS once the image loads, so each
-     cell takes its photo's natural orientation. 4/5 is just a fallback
-     for the brief moment before load. Transitioning the property makes
-     the height change smoothly so cells below ease into their new spot
-     instead of snapping. */
+  /* The true aspect ratio is set by JS at the moment the cell is
+     inserted (after its image has loaded), so the cell never resizes
+     after placement — no reflow, no transition, no jump. */
   aspect-ratio: var(--ratio, 4 / 5);
-  transition: aspect-ratio .7s cubic-bezier(.4, 0, .2, 1);
 }
-@media (prefers-reduced-motion: reduce) {
-  .work-cell { transition: none; }
-}
-/* One image per cell; lazy-loaded as the cell approaches the
-   viewport. Image is transparent until the load fires, then fades
-   in — so scrolling the masonry feels like images streaming in. */
+/* One image per cell; placed already-loaded, then faded in so the
+   grid streams in smoothly as you scroll. */
 .work-cell__layer {
   width: 100%;
   height: 100%;
@@ -636,13 +638,12 @@ section {
   transition: opacity .7s ease;
 }
 .work-cell__layer.is-active { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .work-cell__layer { transition: none; }
+}
 /* Some PNG sources are transparent; plate them on white so they
    keep their edges on the dark page. */
 .work-cell--white { background: #fff; }
-
-@media (max-width: 1100px) {
-  .work-grid { column-count: 3; }
-}
 
 /* LIGHTBOX (desktop) — full-viewport image preview ------------- */
 .lightbox {

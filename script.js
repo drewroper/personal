@@ -359,13 +359,6 @@
     'https://mir-s3-cdn-cf.behance.net/project_modules/hd_webp/04f61516106531.5f5a81e2c2501.png',
     'https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/d2b14b16106531.5f5a81e2c56a6.png'
   ]);
-  // Each cell's aspect ratio is computed from the loaded image so
-  // landscape work stays landscape and portrait stays portrait.
-  const setCellRatio = (cell, img) => {
-    if (!img.naturalWidth || !img.naturalHeight) return;
-    cell.style.setProperty('--ratio', `${img.naturalWidth} / ${img.naturalHeight}`);
-  };
-
   function shuffleIndices(n, exclude = new Set()) {
     const arr = [];
     for (let i = 0; i < n; i++) if (!exclude.has(i)) arr.push(i);
@@ -376,66 +369,132 @@
     return arr;
   }
 
+  /* Desktop masonry — JS column distribution.
+
+     CSS multi-column (column-count) was rebalancing the entire grid
+     every time a lazily-loaded image resolved and its cell snapped
+     from the 4/5 placeholder to the real aspect ratio: cells jumped
+     between columns and rows juddered as you scrolled.
+
+     Here each column is an independent stack, and a cell is inserted
+     only AFTER its image has loaded — with the true ratio baked in —
+     so nothing ever resizes or moves once placed. Images load with a
+     small concurrency limit, gated to a little ahead of the viewport,
+     so the grid still streams in as you scroll but never reflows. */
   function initWorkGrid() {
     const grid = document.getElementById('js-work-grid');
     if (!grid) return;
 
-    const applyWhiteBg = (cell, url) => {
-      cell.classList.toggle('work-cell--white', WHITE_BG_URLS.has(url));
+    const DESKTOP        = '(min-width: 761px)';
+    const colCount       = () => (window.matchMedia('(max-width: 1100px)').matches ? 3 : 4);
+    const MAX_CONCURRENT = 5;
+    const LOOKAHEAD       = 1.8;   // screens of images kept loaded ahead
+
+    let columns = [];
+    let queue   = [];
+    let active  = 0;
+    let built   = false;
+
+    // Layout is reserved the instant a cell is placed (stable), but
+    // the opacity fade is gated on the cell entering view so the grid
+    // still reveals itself as you scroll.
+    const fadeIO = ('IntersectionObserver' in window)
+      ? new IntersectionObserver((entries, obs) => {
+          entries.forEach((e) => {
+            if (!e.isIntersecting) return;
+            e.target.classList.add('is-active');
+            obs.unobserve(e.target);
+          });
+        }, { rootMargin: '200px 0px' })
+      : null;
+
+    const shortestCol = () =>
+      columns.reduce((a, b) => (b.h < a.h ? b : a), columns[0]);
+
+    const needMore = () => {
+      const rect = grid.getBoundingClientRect();
+      return rect.bottom < window.innerHeight * LOOKAHEAD;
     };
 
-    // Shuffle every image into a single random order and render the
-    // whole pool. loading="lazy" defers each fetch until the cell
-    // approaches the viewport, so scrolling effectively streams the
-    // grid in. Each cell fades in only once it has BOTH loaded and
-    // entered the viewport, so the user always sees the reveal as
-    // they scroll (not 500px before the cell is on screen).
-    const order = shuffleIndices(WORK_IMAGES.length);
-
-    const reveal = (cell) => {
-      if (cell.dataset.loaded === '1' && cell.dataset.inView === '1') {
-        const img = cell.querySelector('.work-cell__layer');
-        if (img) requestAnimationFrame(() => img.classList.add('is-active'));
-      }
-    };
-
-    let io = null;
-    if ('IntersectionObserver' in window) {
-      io = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.dataset.inView = '1';
-          reveal(entry.target);
-          io.unobserve(entry.target);
-        });
-      }, { threshold: 0.08 });
-    }
-
-    grid.innerHTML = '';
-    order.forEach((imgIdx) => {
-      const url = WORK_IMAGES[imgIdx];
+    function place(url, img) {
+      if (!columns.length) return;
+      const col  = shortestCol();
       const cell = document.createElement('div');
       cell.className = 'work-cell';
-      applyWhiteBg(cell, url);
+      if (WHITE_BG_URLS.has(url)) cell.classList.add('work-cell--white');
+      cell.style.setProperty('--ratio', `${img.naturalWidth} / ${img.naturalHeight}`);
+      img.className = 'work-cell__layer';
+      cell.appendChild(img);
+      cell.addEventListener('click', () => openLightbox(url, WHITE_BG_URLS.has(url)));
+      col.el.appendChild(cell);
+      // aspect-ratio gives the cell a definite height before the image
+      // decodes, so this read reflects the column's true height.
+      col.h = col.el.offsetHeight;
+      if (fadeIO) fadeIO.observe(img);
+      else requestAnimationFrame(() => img.classList.add('is-active'));
+    }
 
+    function loadNext() {
+      const imgIdx = queue.shift();
+      const url = WORK_IMAGES[imgIdx];
+      active++;
       const img = new Image();
       img.alt = '';
-      img.loading = 'lazy';
       img.decoding = 'async';
-      img.className = 'work-cell__layer';
-      img.onload = () => {
-        setCellRatio(cell, img);
-        cell.dataset.loaded = '1';
-        if (io) reveal(cell);
-        else    requestAnimationFrame(() => img.classList.add('is-active'));
-      };
+      img.onload  = () => { active--; if (built) place(url, img); pump(); };
+      img.onerror = () => { active--; pump(); };
       img.src = url;
+    }
 
-      cell.appendChild(img);
-      grid.appendChild(cell);
-      if (io) io.observe(cell);
+    function pump() {
+      while (active < MAX_CONCURRENT && queue.length && needMore()) loadNext();
+    }
 
-      cell.addEventListener('click', () => openLightbox(url, WHITE_BG_URLS.has(url)));
+    function build() {
+      grid.innerHTML = '';
+      columns = [];
+      const n = colCount();
+      for (let i = 0; i < n; i++) {
+        const col = document.createElement('div');
+        col.className = 'work-col';
+        grid.appendChild(col);
+        columns.push({ el: col, h: 0 });
+      }
+      queue  = shuffleIndices(WORK_IMAGES.length);
+      active = 0;
+      built  = true;
+      pump();
+    }
+
+    function teardown() {
+      grid.innerHTML = '';
+      columns = [];
+      queue   = [];
+      built   = false;
+    }
+
+    // Only run on desktop — mobile uses the horizontal scroller, and
+    // we don't want to fetch the whole pool into a hidden grid.
+    if (window.matchMedia(DESKTOP).matches) build();
+
+    let scrollTick = false;
+    window.addEventListener('scroll', () => {
+      if (scrollTick || !built) return;
+      scrollTick = true;
+      requestAnimationFrame(() => { scrollTick = false; pump(); });
+    }, { passive: true });
+
+    let lastN = colCount();
+    let resizeTimer = 0;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        const desktop = window.matchMedia(DESKTOP).matches;
+        if (!desktop) { if (built) teardown(); return; }
+        const n = colCount();
+        if (!built || n !== lastN) { lastN = n; build(); }
+        else pump();   // same column count — just top up if now taller
+      }, 200);
     });
   }
 

@@ -359,13 +359,21 @@
     'assets/IMM_Holiday_Coffee.jpg',
     'assets/IMM_Holiday_Whiskey.jpg',
     'assets/Tote-Boulder.jpg',
-    'assets/__ck.png',
+    'assets/db-__ck.png',
     'assets/allied.png',
     'assets/greenway.png',
     'assets/obama-stickers.png',
     'assets/old-icons.png',
     'assets/sessions-2024-11.png',
-    'assets/stevie.jpg'
+    'assets/stevie.jpg',
+    'assets/DrewRoper_G.jpg',
+    'assets/Drew_H_Large.jpg',
+    'assets/Roper_E.jpg',
+    'assets/J---DrewRoper.jpg',
+    'assets/Roper_C.jpg',
+    'assets/I---DrewRoper.jpg',
+    'assets/Roper_D.jpg',
+    'assets/Final-B.png'
   ];
   // URLs whose source assets are transparent / need a white plate
   // behind them so they don't lose their edges on the dark page.

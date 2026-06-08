@@ -358,7 +358,7 @@
     'assets/dean-logo.png',
     'assets/imm-holiday-coffee.jpg',
     'assets/imm-holiday-whiskey.jpg',
-    'assets/Tote-Boulder.jpg',
+    'assets/oliv-boulder-tote.jpg',
     'assets/db-__ck.png',
     'assets/allied.png',
     'assets/greenway.png',

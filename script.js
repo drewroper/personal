@@ -373,7 +373,12 @@
     'assets/Roper_C.jpg',
     'assets/I---DrewRoper.jpg',
     'assets/Roper_D.jpg',
-    'assets/Final-B.png'
+    'assets/Final-B.png',
+    'assets/Avenue_dribbble.png',
+    'assets/Frame%201.png',
+    'assets/lucha.png',
+    'assets/prost.png',
+    'assets/STATEPLATE_MO_DR_UPDATED.gif'
   ];
   // URLs whose source assets are transparent / need a white plate
   // behind them so they don't lose their edges on the dark page.

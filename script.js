@@ -326,9 +326,9 @@
     'assets/hack-string-wall-closeup.png',
     'assets/db-hackweek-award.png',
     'assets/oliv-boulder-hat.jpg',
-    'assets/Screen%20Shot%202015-07-30%20at%204.05.58%20PM.png',
-    'assets/Screen%20Shot%202015-07-30%20at%204.59.59%20PM.png',
-    'assets/Screen%20Shot%202015-07-30%20at%205.00.28%20PM.png',
+    'assets/db-hack-week-card-1.png',
+    'assets/db-hack-week-poster-1.png',
+    'assets/db-hack-week-poster-2.png',
     'assets/a4f35013608983.5c54c6944dafb.jpg',
     'assets/ads.png',
     'assets/b22b2214002221.5627bb6e294f1.png',
@@ -368,17 +368,17 @@
     'assets/stevie.jpg',
     'assets/typefight-g.jpg',
     'assets/typefight-h.jpg',
-    'assets/Roper_E.jpg',
+    'assets/typefight-e.jpg',
     'assets/typefight-j.jpg',
-    'assets/Roper_C.jpg',
+    'assets/typefight-c.jpg',
     'assets/typefight-i.jpg',
-    'assets/Roper_D.jpg',
+    'assets/typefight-d.jpg',
     'assets/typefight-b.png',
     'assets/germ-illo.png',
     'assets/typefight-logo.png',
     'assets/lucha.png',
     'assets/prost.png',
-    'assets/STATEPLATE_MO_DR_UPDATED.gif'
+    'assets/state-plates-missouri.gif'
   ];
   // URLs whose source assets are transparent / need a white plate
   // behind them so they don't lose their edges on the dark page.

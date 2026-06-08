@@ -406,17 +406,18 @@
 
      Here each column is an independent stack, and a cell is inserted
      only AFTER its image has loaded — with the true ratio baked in —
-     so nothing ever resizes or moves once placed. Images load with a
-     small concurrency limit, gated to a little ahead of the viewport,
-     so the grid still streams in as you scroll but never reflows. */
+     so nothing ever resizes or moves once placed. The queue drains
+     fully (no viewport gate) at a polite concurrency, so every image
+     in the pool ends up in the DOM; the lazy *reveal* (fade-in on
+     scroll into view) is handled separately by the IntersectionObserver
+     below, which is what makes scrolling feel like images stream in. */
   function initWorkGrid() {
     const grid = document.getElementById('js-work-grid');
     if (!grid) return;
 
     const DESKTOP        = '(min-width: 761px)';
     const colCount       = () => (window.matchMedia('(max-width: 1100px)').matches ? 3 : 4);
-    const MAX_CONCURRENT = 5;
-    const LOOKAHEAD       = 1.8;   // screens of images kept loaded ahead
+    const MAX_CONCURRENT = 6;
 
     let columns = [];
     let queue   = [];
@@ -438,11 +439,6 @@
 
     const shortestCol = () =>
       columns.reduce((a, b) => (b.h < a.h ? b : a), columns[0]);
-
-    const needMore = () => {
-      const rect = grid.getBoundingClientRect();
-      return rect.bottom < window.innerHeight * LOOKAHEAD;
-    };
 
     function place(url, img) {
       if (!columns.length) return;
@@ -475,7 +471,11 @@
     }
 
     function pump() {
-      while (active < MAX_CONCURRENT && queue.length && needMore()) loadNext();
+      // No viewport gate — drain the queue fully at a polite
+      // concurrency. The IntersectionObserver above keeps each cell
+      // invisible until you scroll close to it, so it still feels
+      // lazy even though everything's queued.
+      while (active < MAX_CONCURRENT && queue.length) loadNext();
     }
 
     function build() {
@@ -505,13 +505,6 @@
     // we don't want to fetch the whole pool into a hidden grid.
     if (window.matchMedia(DESKTOP).matches) build();
 
-    let scrollTick = false;
-    window.addEventListener('scroll', () => {
-      if (scrollTick || !built) return;
-      scrollTick = true;
-      requestAnimationFrame(() => { scrollTick = false; pump(); });
-    }, { passive: true });
-
     let lastN = colCount();
     let resizeTimer = 0;
     window.addEventListener('resize', () => {
@@ -521,7 +514,6 @@
         if (!desktop) { if (built) teardown(); return; }
         const n = colCount();
         if (!built || n !== lastN) { lastN = n; build(); }
-        else pump();   // same column count — just top up if now taller
       }, 200);
     });
   }

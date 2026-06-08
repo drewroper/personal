@@ -350,7 +350,22 @@
     'assets/spring.png',
     'assets/sticks.png',
     'assets/stl.png',
-    'assets/university-posters.png'
+    'assets/university-posters.png',
+    'assets/1.jpg',
+    'assets/2.jpg',
+    'assets/5dudes.jpg',
+    'assets/CMP.png',
+    'assets/DR.png',
+    'assets/IMM_Holiday_Coffee.jpg',
+    'assets/IMM_Holiday_Whiskey.jpg',
+    'assets/Tote-Boulder.jpg',
+    'assets/__ck.png',
+    'assets/allied.png',
+    'assets/greenway.png',
+    'assets/obama-stickers.png',
+    'assets/old-icons.png',
+    'assets/sessions-2024-11.png',
+    'assets/stevie.jpg'
   ];
   // URLs whose source assets are transparent / need a white plate
   // behind them so they don't lose their edges on the dark page.

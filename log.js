@@ -107,22 +107,32 @@
     // One unbroken stream — year pills are inserted inline at the
     // moment each year changes. The feed reads as a single flowing
     // chain of events; the pills act as ordering markers, not
-    // section dividers.
+    // section dividers. The pill is bound to the next entry via a
+    // non-breaking space so the album/film always sits right next
+    // to the year, never wrapping to a new line on its own.
     let lastYear = null;
     entries.forEach((e, i) => {
       const y = yearOf(e.date);
+      const yearChanged = y !== lastYear;
+
+      // Separator between entries: " / " before each entry except the
+      // very first. When the year just changed, the separator goes
+      // BEFORE the pill, and there's no separator between pill+entry —
+      // just a non-breaking space.
       if (i > 0) {
         const s = document.createElement('span');
         s.className = 'sep';
         s.textContent = '  /  ';
         root.appendChild(s);
       }
-      if (y !== lastYear) {
+      if (yearChanged) {
         const pill = document.createElement('span');
         pill.className = 'year__pill';
         pill.textContent = y;
         root.appendChild(pill);
-        root.appendChild(document.createTextNode(' '));
+        //   = non-breaking space, keeps pill + next entry on the
+        // same line as one wrap unit.
+        root.appendChild(document.createTextNode(' '));
         lastYear = y;
       }
       root.appendChild(entryEl(e));

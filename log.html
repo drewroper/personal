@@ -56,20 +56,19 @@
 
     /* Year pills are inserted inline into the stream of entries —
        they mark the moment a new year begins without breaking the
-       chain. display: inline (not inline-block) lets the pill flow
-       in the prose like a styled word, so it never gets orphaned to
-       its own line. */
+       chain. inline-block keeps the pill compact (only as wide as
+       the year text); a non-breaking space in JS binds pill + next
+       entry so they wrap as a unit. */
     .year__pill {
-      padding: 0 9px;
+      display: inline-block;
+      padding: 1px 9px;
       background: var(--accent);
       color: var(--bg);
       font-weight: 500;
       border-radius: 999px;
       letter-spacing: .02em;
-      /* Horizontal box-decoration so the rounded corners survive
-         a wrap mid-pill (rare, but possible on a long year string). */
-      -webkit-box-decoration-break: clone;
-              box-decoration-break: clone;
+      vertical-align: 1px;
+      white-space: nowrap;
     }
 
     /* Each entry is inline; the wall of text flows naturally. */

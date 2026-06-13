@@ -104,41 +104,29 @@
     root.innerHTML = '';
     if (count) count.textContent = String(entries.length);
 
-    // Group by year, preserving the already-sorted (desc) order.
-    const groups = [];
-    let cur = null;
-    for (const e of entries) {
+    // One unbroken stream — year pills are inserted inline at the
+    // moment each year changes. The feed reads as a single flowing
+    // chain of events; the pills act as ordering markers, not
+    // section dividers.
+    let lastYear = null;
+    entries.forEach((e, i) => {
       const y = yearOf(e.date);
-      if (!cur || cur.year !== y) {
-        cur = { year: y, items: [] };
-        groups.push(cur);
+      if (i > 0) {
+        const s = document.createElement('span');
+        s.className = 'sep';
+        s.textContent = '  /  ';
+        root.appendChild(s);
       }
-      cur.items.push(e);
-    }
-
-    for (const g of groups) {
-      const section = document.createElement('section');
-      section.className = 'year';
-
-      const pill = document.createElement('div');
-      pill.className = 'year__pill';
-      pill.textContent = g.year;
-      section.appendChild(pill);
-
-      const ents = document.createElement('div');
-      ents.className = 'year__entries';
-      g.items.forEach((e, i) => {
-        ents.appendChild(entryEl(e));
-        if (i < g.items.length - 1) {
-          const s = document.createElement('span');
-          s.className = 'sep';
-          s.textContent = '  /  ';
-          ents.appendChild(s);
-        }
-      });
-      section.appendChild(ents);
-      root.appendChild(section);
-    }
+      if (y !== lastYear) {
+        const pill = document.createElement('span');
+        pill.className = 'year__pill';
+        pill.textContent = y;
+        root.appendChild(pill);
+        root.appendChild(document.createTextNode(' '));
+        lastYear = y;
+      }
+      root.appendChild(entryEl(e));
+    });
   }
 
   fetch('data/life-log.json', { cache: 'no-store' })

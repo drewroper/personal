@@ -1,0 +1,40 @@
+name: Life log refresh
+
+# Pulls Letterboxd diary + Discogs collection, merges into
+# data/life-log.json, commits if changed. Runs hourly and on demand.
+
+on:
+  schedule:
+    - cron: '7 * * * *'   # 7 mins past every hour
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: life-log
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Fetch latest entries
+        run: python scripts/fetch-life-log.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name  "drewroper-life-log[bot]"
+          git config user.email "actions@drewroper.com"
+          if ! git diff --quiet -- data/life-log.json; then
+            git add data/life-log.json
+            git commit -m "life-log: refresh $(date -u +'%Y-%m-%dT%H:%MZ')"
+            git push
+          else
+            echo "no changes"
+          fi

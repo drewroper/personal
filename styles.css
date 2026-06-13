@@ -786,6 +786,20 @@ section {
 .footer__copy-line:first-child  { color: var(--text-muted); }
 .footer__copy-line:last-child   { color: var(--text-faint); }
 
+/* Easter-egg link to the life log — tucked inline in the disclaimer
+   so it reads as a quiet aside, brightens on hover. */
+.footer__log {
+  color: var(--text-faint);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  margin-left: .5em;
+  transition: color .15s ease, border-color .15s ease;
+}
+.footer__log:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
 /* Desktop ≥760px: one row, copyright pinned left, disclaimer pinned right */
 @media (min-width: 760px) {
   .footer__copy {

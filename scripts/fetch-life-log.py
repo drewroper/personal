@@ -703,10 +703,14 @@ def main():
     # Songkick — full refresh from locally-committed HTML pages. If
     # no pages are present, leaves any existing Songkick entries
     # alone (so a missing data/raw-songkick/ never wipes history).
+    # Only wipes ids that look like the parser's numeric ones
+    # ("songkick-43023656") so manual additions (e.g.
+    # "songkick-manual-…") survive every refresh.
     try:
         fresh = parse_songkick_local()
         if fresh:
-            by_id = {k: v for k, v in by_id.items() if not k.startswith("songkick-")}
+            by_id = {k: v for k, v in by_id.items()
+                     if not (k.startswith("songkick-") and k[len("songkick-"):].isdigit())}
             for e in fresh:
                 by_id[e["id"]] = e
     except Exception as ex:

@@ -32,6 +32,13 @@ GH_USER = "drewroper"
 
 UA = "drewroper-life-log/1.0 (+https://drewroper.com)"
 
+# Entries pulled in by a source's full-refresh that Drew has flagged
+# as "not actually me" (e.g. Songkick auto-attended a show he wasn't
+# at). Re-add their ids here so they stay filtered every refresh.
+SKIP_IDS = {
+    "songkick-42573853",  # Hotline TNT, 2025-09-24 — not attended
+}
+
 
 def fetch_bytes(url: str) -> bytes:
     req = urllib.request.Request(url, headers={"User-Agent": UA})
@@ -435,7 +442,7 @@ def main():
     except Exception as ex:
         print(f"WARN: GitHub fetch failed: {ex}", file=sys.stderr)
 
-    entries = list(by_id.values())
+    entries = [e for e in by_id.values() if e.get("id") not in SKIP_IDS]
     entries.sort(key=lambda e: (e.get("date") or "", e.get("id") or ""), reverse=True)
 
     OUT.write_text(json.dumps(entries, separators=(",", ":")) + "\n")

@@ -70,6 +70,7 @@
   function entryEl(e) {
     const span = document.createElement('span');
     span.className = 'entry';
+    span.dataset.source = e.source || '';
 
     // No text tag — the icon itself carries the source identity (the
     // legend in the meta row up top maps icons → sources).
@@ -198,6 +199,30 @@
     const name = el.getAttribute('data-icon');
     if (ICONS[name]) el.appendChild(iconEl(name));
   });
+
+  // Legend filter — click a source in the meta row to highlight just
+  // that source's entries. Click the same one again to clear.
+  (function initFilter() {
+    const log = document.getElementById('js-log');
+    if (!log) return;
+    const buttons = document.querySelectorAll('.meta__filter');
+    function apply(activeSource) {
+      log.classList.toggle('is-filtered', !!activeSource);
+      buttons.forEach((b) => {
+        b.classList.toggle('is-active', b.dataset.source === activeSource);
+      });
+      document.querySelectorAll('.entry').forEach((entry) => {
+        entry.classList.toggle('is-match', activeSource && entry.dataset.source === activeSource);
+      });
+    }
+    buttons.forEach((b) => {
+      b.addEventListener('click', () => {
+        const src = b.dataset.source;
+        const already = b.classList.contains('is-active');
+        apply(already ? null : src);
+      });
+    });
+  })();
 
   fetch('data/life-log.json', { cache: 'no-store' })
     .then((r) => (r.ok ? r.json() : Promise.reject(new Error('fetch failed'))))

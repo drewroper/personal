@@ -126,107 +126,79 @@ MONTHS_FULL = {
 }
 
 
-class SongkickListingParser(HTMLParser):
-    """Walks a Songkick gigography page and pulls out every event
-    listing element. Songkick's gigography uses <li class="event-listings-element">
-    blocks (or .event-listings li with various inner shapes); we
-    collect each one as a chunk of inner HTML for downstream regex
-    extraction so we're tolerant of small markup drift."""
-
-    def __init__(self):
-        super().__init__(convert_charrefs=True)
-        self.depth = 0          # >0 while inside a listing element
-        self.depth_at_start = 0
-        self.buf = []
-        self.items = []
-
-    def _is_listing(self, attrs):
-        cls = dict(attrs).get('class', '') or ''
-        return 'event-listings-element' in cls or 'event-listing' in cls.split()
-
-    def handle_starttag(self, tag, attrs):
-        if self.depth == 0 and tag == 'li' and self._is_listing(attrs):
-            self.depth = 1
-            self.depth_at_start = 1
-            self.buf = []
-            return
-        if self.depth:
-            if tag == 'li':
-                self.depth += 1
-            attr_str = ''.join(f' {k}="{(v or "")}"' for k, v in attrs)
-            self.buf.append(f'<{tag}{attr_str}>')
-
-    def handle_endtag(self, tag):
-        if not self.depth:
-            return
-        if tag == 'li':
-            self.depth -= 1
-            if self.depth == 0:
-                self.items.append(''.join(self.buf))
-                self.buf = []
-                return
-        self.buf.append(f'</{tag}>')
-
-    def handle_data(self, data):
-        if self.depth:
-            self.buf.append(data)
-
-
-def _first_match(pattern, html, flags=re.S | re.I):
-    m = re.search(pattern, html, flags)
-    return (m.group(1).strip() if m else None) if m else None
-
-
 def _strip_tags(s):
-    return re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', s or '')).strip()
+    # Tags → space (so adjacent words don't fuse), collapse whitespace,
+    # then close up the " ," / " ." artifacts produced when a tag sat
+    # right before punctuation in the source HTML.
+    s = re.sub(r'<[^>]+>', ' ', s or '')
+    s = re.sub(r'\s+', ' ', s).strip()
+    s = re.sub(r'\s+([,.;:])', r'\1', s)
+    return s
 
 
-def parse_songkick_event(html):
-    """Extract one event from a listing HTML chunk. Defensive — tries
-    several known Songkick markup shapes."""
-    # ISO date — usually inside <time datetime="2026-06-11"> or similar.
-    date = _first_match(r'<time[^>]*datetime="([0-9]{4}-[0-9]{2}-[0-9]{2})', html)
-    if not date:
-        # Fallback: "Thursday, June 11, 2026" → ISO
-        m = re.search(r'(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2}),?\s+(\d{4})', html, re.I)
-        if m:
-            mo = MONTHS_FULL[m.group(1).lower()]
-            date = f"{m.group(3)}-{mo:02d}-{int(m.group(2)):02d}"
+def parse_songkick_event(chunk):
+    """Extract one Songkick event from a <li title="..."> block.
 
-    # Artist / headliner — Songkick's primary heading inside each listing.
-    artist = (
-        _first_match(r'<p[^>]*class="[^"]*artists[^"]*"[^>]*>(.*?)</p>', html) or
-        _first_match(r'<strong[^>]*class="[^"]*primary-detail[^"]*"[^>]*>(.*?)</strong>', html) or
-        _first_match(r'<a[^>]*class="[^"]*summary[^"]*"[^>]*>(.*?)</a>', html) or
-        _first_match(r'<span[^>]*itemprop="name"[^>]*>(.*?)</span>', html)
-    )
-    artist = _strip_tags(artist or '')
-    # Strip leading "with " on supporting acts, drop trailing "at <venue>".
-    artist = re.sub(r'\s+at\s+.+$', '', artist).strip()
+    Real-world structure (from drewroper's gigography pages, June 2026):
 
-    # Venue + city.
-    venue = _strip_tags(
-        _first_match(r'<[^>]*class="[^"]*venue-name[^"]*"[^>]*>(.*?)</[^>]+>', html) or
-        _first_match(r'<[^>]*itemprop="location"[^>]*>(.*?)</[^>]+>', html) or
-        ''
-    )
-    city = _strip_tags(
-        _first_match(r'<[^>]*class="[^"]*location[^"]*"[^>]*>(.*?)</[^>]+>', html) or
-        _first_match(r'<[^>]*class="[^"]*city[^"]*"[^>]*>(.*?)</[^>]+>', html) or
-        ''
-    )
+        <li title="Thursday 11 June 2026">
+          <time datetime="2026-06-11T17:30:00-0600"></time>
+          <a href="/concerts/43023656-metric-at-fillmore-auditorium" class="thumb">…</a>
+          <p class="artists summary">
+            <a href="/concerts/…"><span><strong>Metric, Broken Social Scene, and Stars</strong></span></a>
+          </p>
+          <p class="location">
+            <span class="venue-name"><a>Fillmore Auditorium</a></span>,
+            <span>
+              <span>Denver, CO, US </span>
+              <span class="street-address">…</span>
+            </span>
+          </p>
+          …
+        </li>
+    """
+    # ISO date — first <time datetime="…"> attribute in the chunk.
+    m = re.search(r'<time[^>]*datetime="(\d{4}-\d{2}-\d{2})', chunk)
+    date = m.group(1) if m else None
 
-    # Event URL.
-    href = _first_match(r'<a[^>]*class="[^"]*(?:summary|event-link)[^"]*"[^>]*href="([^"]+)"', html)
-    if not href:
-        href = _first_match(r'href="(/concerts/[^"]+)"', html)
-    url = f"https://www.songkick.com{href}" if href and href.startswith('/') else href
+    # Event URL + numeric id (the first /concerts/<id>-slug link).
+    m = re.search(r'href="(/concerts/(\d+)-[^"]+)"', chunk)
+    href, event_id = (m.group(1), m.group(2)) if m else ('', '')
+    url = f"https://www.songkick.com{href}" if href else ''
 
-    # ID — last numeric run in the URL is the Songkick event id.
-    event_id = ''
-    if href:
-        m = re.search(r'/(\d+)-', href)
-        event_id = m.group(1) if m else ''
+    # Artists: contents of <p class="artists summary">.
+    # Songkick wraps the HEADLINER in <strong> and dumps supporting acts
+    # as plain trailing text — insert a comma at the </strong> boundary
+    # so they read cleanly as a comma-separated bill.
+    m = re.search(r'<p[^>]*class="artists\s+summary"[^>]*>(.*?)</p>', chunk, re.S)
+    artists_html = m.group(1) if m else ''
+    artists_html = re.sub(r'</strong>(\s*)(?=\S)', r'</strong>, ', artists_html)
+    artist = _strip_tags(artists_html)
+    artist = re.sub(r'\s*,\s*$', '', artist)
+
+    # Venue.
+    m = re.search(r'<span[^>]*class="venue-name"[^>]*>(.*?)</span>', chunk, re.S)
+    venue = _strip_tags(m.group(1) if m else '')
+
+    # City — the bare <span>City, ST, CC </span> inside .location,
+    # explicitly NOT the street-address span. The .location block
+    # contains: venue-name span, comma text, outer <span> wrapping a
+    # city <span> followed by a street-address <span>. We grab the
+    # first <span> child of that outer wrapper that doesn't carry
+    # class="street-address".
+    city = ''
+    loc = re.search(r'<p[^>]*class="location"[^>]*>(.*?)</p>', chunk, re.S)
+    if loc:
+        # find spans without a class attribute (or with no street-address class)
+        for m2 in re.finditer(r'<span(\s+[^>]*)?>(.*?)</span>', loc.group(1), re.S):
+            attrs = m2.group(1) or ''
+            if 'street-address' in attrs or 'venue-name' in attrs:
+                continue
+            text = _strip_tags(m2.group(2))
+            # Heuristic: a city line looks like "City, ST, CC".
+            if ',' in text and len(text) < 80 and 'venue' not in text.lower():
+                city = text
+                break
 
     if not (artist and date):
         return None
@@ -238,7 +210,7 @@ def parse_songkick_event(html):
         "title":  artist,
         "venue":  venue,
         "city":   city,
-        "url":    url or "",
+        "url":    url,
     }
 
 
@@ -247,22 +219,26 @@ def parse_songkick_local():
     out = []
     if not SK_DIR.is_dir():
         return out
+    # Each event is a <li title="…">…</li> inside <ul class="event-listings">.
+    # The date headings inside the same <ul> use <li class="with-date">,
+    # which we skip because they don't carry a title attribute.
+    listing_block_re = re.compile(r'<ul\s+class="event-listings\s*">(.*?)</ul>', re.S)
+    event_li_re      = re.compile(r'<li\s+title="[^"]+">.*?</li>\s*(?=<li|</ul)', re.S)
+
     for path in sorted(SK_DIR.glob('*.html')):
         try:
             html = path.read_text(encoding='utf-8', errors='replace')
         except OSError:
             continue
-        parser = SongkickListingParser()
-        try:
-            parser.feed(html)
-        except Exception as ex:
-            print(f"WARN: parsing {path.name}: {ex}", file=sys.stderr)
-            continue
-        for chunk in parser.items:
-            ev = parse_songkick_event(chunk)
-            if ev:
-                out.append(ev)
-        print(f"  songkick: {path.name} → {len(parser.items)} listings parsed", file=sys.stderr)
+        n_block = n_event = 0
+        for block in listing_block_re.findall(html):
+            n_block += 1
+            for chunk in event_li_re.findall(block):
+                ev = parse_songkick_event(chunk)
+                if ev:
+                    out.append(ev)
+                    n_event += 1
+        print(f"  songkick: {path.name} → {n_event} events from {n_block} list block(s)", file=sys.stderr)
     return out
 
 

@@ -61,6 +61,24 @@
     }
     .meta__icon svg { width: 100%; height: 100%; }
 
+    /* Clickable source filters in the legend row — each one toggles
+       a filter that dims every non-matching entry below. */
+    .meta__filter {
+      font: inherit;
+      color: var(--text-faint);
+      background: none;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: color .15s ease, opacity .15s ease;
+    }
+    .meta__filter:hover { color: var(--text-muted); }
+    /* When ANY filter is active, dim the un-active legend buttons. */
+    .log.is-filtered .meta__filter             { opacity: .35; }
+    .log.is-filtered .meta__filter.is-active   { opacity: 1; color: var(--text); }
+    .meta__filter.is-active .meta__icon        { color: var(--accent); }
+
     /* Year pills are inserted inline into the stream of entries —
        they mark the moment a new year begins without breaking the
        chain. inline-block keeps the pill compact (only as wide as
@@ -89,6 +107,13 @@
       color: var(--accent);
       border-bottom-color: var(--accent);
     }
+
+    /* Filter state — when a source is selected, every entry that
+       isn't that source fades back. The chain stays unbroken
+       (separators + year pills are untouched) but only the chosen
+       source pops. */
+    .log.is-filtered .entry          { opacity: .18; transition: opacity .2s ease; }
+    .log.is-filtered .entry.is-match { opacity: 1; }
     .entry__tag    { color: var(--text-faint); }
     .entry__icon   {
       color: var(--accent);
@@ -111,13 +136,13 @@
     <div class="meta">
       <a href="/">← drewroper.com</a>
       &nbsp;·&nbsp; <span id="js-count">…</span> entries
-      &nbsp;·&nbsp; <span class="meta__icon" data-icon="film-reel" aria-hidden="true"></span> letterboxd
-      &nbsp;·&nbsp; <span class="meta__icon" data-icon="vinyl-record" aria-hidden="true"></span> discogs
-      &nbsp;·&nbsp; <span class="meta__icon" data-icon="microphone-stage" aria-hidden="true"></span> songkick
+      &nbsp;·&nbsp; <button type="button" class="meta__filter" data-source="letterboxd"><span class="meta__icon" data-icon="film-reel" aria-hidden="true"></span> letterboxd</button>
+      &nbsp;·&nbsp; <button type="button" class="meta__filter" data-source="discogs"><span class="meta__icon" data-icon="vinyl-record" aria-hidden="true"></span> discogs</button>
+      &nbsp;·&nbsp; <button type="button" class="meta__filter" data-source="songkick"><span class="meta__icon" data-icon="microphone-stage" aria-hidden="true"></span> songkick</button>
     </div>
     <div id="js-feed" class="empty">Loading…</div>
   </main>
 
-  <script src="log.js?v=2"></script>
+  <script src="log.js?v=3"></script>
 </body>
 </html>

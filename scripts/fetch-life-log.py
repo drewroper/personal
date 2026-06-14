@@ -16,6 +16,7 @@ import os
 import re
 import sys
 import time
+import urllib.error
 import urllib.request
 import xml.etree.ElementTree as ET
 from html import unescape
@@ -124,25 +125,33 @@ def fetch_discogs():
 
 # ----- GitHub -------------------------------------------------------
 #
-# Public REST API, unauthenticated. Lists Drew's own (non-fork) public
-# repos and records each repo's creation date as a "started building"
-# entry. Unauth quota is 60 req/hr per IP — well above what one page
-# of repos costs.
+# Two endpoints, both public REST:
+#   1. /users/{user}/repos — one "started" entry per public, non-fork
+#      repo, dated to repo creation. Permanent record.
+#   2. /users/{user}/events/public — last ~90 days of activity. Push
+#      events are rolled up per (date, repo) so a busy day reads as
+#      "drewroper/personal · pushed 12 commits · 14 jun" instead of
+#      twelve separate entries. PR opens/merges + releases each get
+#      their own row.
+#
+# Auth via GITHUB_TOKEN (workflow passes the runner's default) when
+# present — bumps the unauth 60 req/hr quota to 5000.
 
-def fetch_github():
-    out = []
-    page = 1
-    headers = {
-        "User-Agent": UA,
-        "Accept": "application/vnd.github+json",
-    }
+def _gh_headers():
+    h = {"User-Agent": UA, "Accept": "application/vnd.github+json"}
     token = os.environ.get("GITHUB_TOKEN")
     if token:
-        headers["Authorization"] = f"Bearer {token}"
+        h["Authorization"] = f"Bearer {token}"
+    return h
+
+
+def _fetch_github_repos():
+    out = []
+    page = 1
     while True:
         url = (f"https://api.github.com/users/{GH_USER}/repos"
                f"?per_page=100&type=owner&sort=created&direction=desc&page={page}")
-        req = urllib.request.Request(url, headers=headers)
+        req = urllib.request.Request(url, headers=_gh_headers())
         with urllib.request.urlopen(req, timeout=30) as r:
             batch = json.loads(r.read())
         if not batch:
@@ -152,23 +161,143 @@ def fetch_github():
                 continue
             rid     = repo.get("id")
             name    = repo.get("name") or ""
+            full    = repo.get("full_name") or name
             created = (repo.get("created_at") or "")[:10]
             html    = repo.get("html_url") or ""
             desc    = (repo.get("description") or "").strip()
             if not (rid and name and created):
                 continue
+            # Description reads like "started <repo description>" so
+            # the row carries the verb even when GH's blurb is empty.
+            blurb = f"started — {desc}" if desc else "started"
             out.append({
                 "source": "github",
-                "id":     f"github-{rid}",
+                "id":     f"github-repo-{rid}",
                 "date":   created,
-                "title":  name,
-                "description": desc,
+                "title":  full,
+                "description": blurb,
                 "url":    html,
             })
         if len(batch) < 100:
             break
         page += 1
         time.sleep(1)
+    return out
+
+
+def _fetch_github_events():
+    raw = []
+    page = 1
+    while page <= 10:  # GH caps the events feed at ~300 entries (10 pages of 30)
+        url = (f"https://api.github.com/users/{GH_USER}/events/public"
+               f"?per_page=100&page={page}")
+        req = urllib.request.Request(url, headers=_gh_headers())
+        try:
+            with urllib.request.urlopen(req, timeout=30) as r:
+                batch = json.loads(r.read())
+        except urllib.error.HTTPError as e:
+            # 422 = page past end of available window
+            if e.code in (404, 422):
+                break
+            raise
+        if not batch:
+            break
+        raw.extend(batch)
+        if len(batch) < 100:
+            break
+        page += 1
+        time.sleep(1)
+
+    out = []
+    pushes = {}   # (date, repo_full_name) -> {commits, last_eid, url}
+
+    for ev in raw:
+        typ = ev.get("type")
+        repo_name = ((ev.get("repo") or {}).get("name") or "").strip()
+        date = (ev.get("created_at") or "")[:10]
+        eid  = ev.get("id")
+        payload = ev.get("payload") or {}
+        if not (typ and repo_name and date and eid):
+            continue
+        repo_url = f"https://github.com/{repo_name}"
+
+        if typ == "PushEvent":
+            distinct = payload.get("distinct_size")
+            if distinct is None:
+                distinct = len(payload.get("commits") or []) or payload.get("size", 0)
+            if not distinct:
+                continue
+            head = (payload.get("head") or "")[:7]
+            before = (payload.get("before") or "")[:7]
+            url = (f"{repo_url}/compare/{before}...{head}"
+                   if head and before else repo_url)
+            key = (date, repo_name)
+            rec = pushes.setdefault(key, {
+                "commits": 0, "eid": eid, "url": url,
+            })
+            rec["commits"] += distinct
+            # latest event id wins so the compare link points at the
+            # most-recent push of the day
+            if eid > rec["eid"]:
+                rec["eid"] = eid
+                rec["url"] = url
+
+        elif typ == "PullRequestEvent":
+            action = payload.get("action")
+            pr = payload.get("pull_request") or {}
+            if action == "closed" and pr.get("merged"):
+                verb = "merged"
+            elif action == "opened":
+                verb = "opened"
+            else:
+                continue
+            num = pr.get("number")
+            title = (pr.get("title") or "").strip()
+            out.append({
+                "source": "github",
+                "id":     f"github-evt-{eid}",
+                "date":   date,
+                "title":  repo_name,
+                "description": f"{verb} PR #{num}: {title}" if title else f"{verb} PR #{num}",
+                "url":    pr.get("html_url") or repo_url,
+            })
+
+        elif typ == "ReleaseEvent" and payload.get("action") == "published":
+            rel = payload.get("release") or {}
+            tag = (rel.get("tag_name") or "").strip()
+            out.append({
+                "source": "github",
+                "id":     f"github-evt-{eid}",
+                "date":   date,
+                "title":  repo_name,
+                "description": f"released {tag}" if tag else "released",
+                "url":    rel.get("html_url") or repo_url,
+            })
+
+        # CreateEvent (ref_type=repository) is intentionally skipped —
+        # we already cover repo creation via _fetch_github_repos(),
+        # which goes back further than the 90-day events window.
+
+    for (date, repo_name), rec in pushes.items():
+        n = rec["commits"]
+        out.append({
+            "source": "github",
+            "id":     f"github-push-{date}-{repo_name.replace('/', '-')}",
+            "date":   date,
+            "title":  repo_name,
+            "description": f"pushed {n} commit{'s' if n != 1 else ''}",
+            "url":    rec["url"],
+        })
+
+    return out
+
+
+def fetch_github():
+    out = _fetch_github_repos()
+    try:
+        out.extend(_fetch_github_events())
+    except Exception as ex:
+        print(f"WARN: GitHub events fetch failed: {ex}", file=sys.stderr)
     return out
 
 

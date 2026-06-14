@@ -17,6 +17,7 @@ import re
 import sys
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
 from html import unescape
@@ -30,6 +31,8 @@ SK_DIR = ROOT / "data" / "raw-songkick"
 LB_USER = "drewroper"
 DC_USER = "drewroper"
 GH_USER = "drewroper"
+STRAVA_TOKEN_URL = "https://www.strava.com/api/v3/oauth/token"
+STRAVA_ACTIVITIES_URL = "https://www.strava.com/api/v3/athlete/activities"
 
 UA = "drewroper-life-log/1.0 (+https://drewroper.com)"
 
@@ -126,13 +129,17 @@ def fetch_discogs():
 # ----- GitHub -------------------------------------------------------
 #
 # Two endpoints, both public REST:
-#   1. /users/{user}/repos — one "started" entry per public, non-fork
-#      repo, dated to repo creation. Permanent record.
-#   2. /users/{user}/events/public — last ~90 days of activity. Push
-#      events are rolled up per (date, repo) so a busy day reads as
-#      "drewroper/personal · pushed 12 commits · 14 jun" instead of
-#      twelve separate entries. PR opens/merges + releases each get
-#      their own row.
+#   1. /users/{user}/repos — used to source repo creation dates that
+#      go back further than the events feed (which is capped at 90
+#      days). Each repo contributes a "started <repo>" item to the
+#      day it was created on.
+#   2. /users/{user}/events/public — last ~90 days. Pushes, PR opens/
+#      merges, and releases.
+#
+# Everything is rolled up into ONE entry per day, e.g.
+#   "drewroper/personal · 12 commits, opened PR #4, released v1.0 · 14 jun"
+# or, on a multi-repo day, the title falls back to "@drewroper" and
+# the description spans repos.
 #
 # Auth via GITHUB_TOKEN (workflow passes the runner's default) when
 # present — bumps the unauth 60 req/hr quota to 5000.
@@ -145,7 +152,7 @@ def _gh_headers():
     return h
 
 
-def _fetch_github_repos():
+def _fetch_github_raw_repos():
     out = []
     page = 1
     while True:
@@ -156,28 +163,7 @@ def _fetch_github_repos():
             batch = json.loads(r.read())
         if not batch:
             break
-        for repo in batch:
-            if repo.get("fork") or repo.get("private"):
-                continue
-            rid     = repo.get("id")
-            name    = repo.get("name") or ""
-            full    = repo.get("full_name") or name
-            created = (repo.get("created_at") or "")[:10]
-            html    = repo.get("html_url") or ""
-            desc    = (repo.get("description") or "").strip()
-            if not (rid and name and created):
-                continue
-            # Description reads like "started <repo description>" so
-            # the row carries the verb even when GH's blurb is empty.
-            blurb = f"started — {desc}" if desc else "started"
-            out.append({
-                "source": "github",
-                "id":     f"github-repo-{rid}",
-                "date":   created,
-                "title":  full,
-                "description": blurb,
-                "url":    html,
-            })
+        out.extend(batch)
         if len(batch) < 100:
             break
         page += 1
@@ -185,10 +171,10 @@ def _fetch_github_repos():
     return out
 
 
-def _fetch_github_events():
+def _fetch_github_raw_events():
     raw = []
     page = 1
-    while page <= 10:  # GH caps the events feed at ~300 entries (10 pages of 30)
+    while page <= 10:  # GH caps the events feed at ~300 entries
         url = (f"https://api.github.com/users/{GH_USER}/events/public"
                f"?per_page=100&page={page}")
         req = urllib.request.Request(url, headers=_gh_headers())
@@ -196,8 +182,7 @@ def _fetch_github_events():
             with urllib.request.urlopen(req, timeout=30) as r:
                 batch = json.loads(r.read())
         except urllib.error.HTTPError as e:
-            # 422 = page past end of available window
-            if e.code in (404, 422):
+            if e.code in (404, 422):   # 422 = past end of window
                 break
             raise
         if not batch:
@@ -207,97 +192,263 @@ def _fetch_github_events():
             break
         page += 1
         time.sleep(1)
+    return raw
 
+
+def _short(repo_full):
+    # "drewroper/personal" → "personal"; lone names pass through.
+    return repo_full.split("/", 1)[-1] if "/" in repo_full else repo_full
+
+
+def fetch_github():
+    # Day -> repo_full_name -> bucket of {commits, prs, releases, started}
+    by_day = {}
+
+    def bucket(date, repo):
+        return by_day.setdefault(date, {}).setdefault(repo, {
+            "commits": 0,
+            "prs": [],         # list of (verb, number, title)
+            "releases": [],    # list of tag strings
+            "started": False,
+            "started_blurb": None,
+            "push_url": None,
+        })
+
+    # Repos (permanent record of creation days).
+    try:
+        for repo in _fetch_github_raw_repos():
+            if repo.get("fork") or repo.get("private"):
+                continue
+            full    = repo.get("full_name") or repo.get("name") or ""
+            created = (repo.get("created_at") or "")[:10]
+            desc    = (repo.get("description") or "").strip()
+            if not (full and created):
+                continue
+            b = bucket(created, full)
+            b["started"] = True
+            b["started_blurb"] = desc
+    except Exception as ex:
+        print(f"WARN: GitHub repos fetch failed: {ex}", file=sys.stderr)
+
+    # Events (last ~90 days).
+    try:
+        for ev in _fetch_github_raw_events():
+            typ = ev.get("type")
+            repo_name = ((ev.get("repo") or {}).get("name") or "").strip()
+            date = (ev.get("created_at") or "")[:10]
+            payload = ev.get("payload") or {}
+            if not (typ and repo_name and date):
+                continue
+            repo_url = f"https://github.com/{repo_name}"
+
+            if typ == "PushEvent":
+                distinct = payload.get("distinct_size")
+                if distinct is None:
+                    distinct = len(payload.get("commits") or []) or payload.get("size", 0)
+                if not distinct:
+                    continue
+                b = bucket(date, repo_name)
+                b["commits"] += distinct
+                head = (payload.get("head") or "")[:7]
+                before = (payload.get("before") or "")[:7]
+                if head and before:
+                    b["push_url"] = f"{repo_url}/compare/{before}...{head}"
+
+            elif typ == "PullRequestEvent":
+                action = payload.get("action")
+                pr = payload.get("pull_request") or {}
+                if action == "closed" and pr.get("merged"):
+                    verb = "merged"
+                elif action == "opened":
+                    verb = "opened"
+                else:
+                    continue
+                bucket(date, repo_name)["prs"].append(
+                    (verb, pr.get("number"), (pr.get("title") or "").strip())
+                )
+
+            elif typ == "ReleaseEvent" and payload.get("action") == "published":
+                rel = payload.get("release") or {}
+                tag = (rel.get("tag_name") or "").strip()
+                bucket(date, repo_name)["releases"].append(tag)
+    except Exception as ex:
+        print(f"WARN: GitHub events fetch failed: {ex}", file=sys.stderr)
+
+    # Compose one entry per day.
     out = []
-    pushes = {}   # (date, repo_full_name) -> {commits, last_eid, url}
-
-    for ev in raw:
-        typ = ev.get("type")
-        repo_name = ((ev.get("repo") or {}).get("name") or "").strip()
-        date = (ev.get("created_at") or "")[:10]
-        eid  = ev.get("id")
-        payload = ev.get("payload") or {}
-        if not (typ and repo_name and date and eid):
+    for date, repos in by_day.items():
+        active_repos = {r: b for r, b in repos.items()
+                        if b["commits"] or b["prs"] or b["releases"] or b["started"]}
+        if not active_repos:
             continue
-        repo_url = f"https://github.com/{repo_name}"
 
-        if typ == "PushEvent":
-            distinct = payload.get("distinct_size")
-            if distinct is None:
-                distinct = len(payload.get("commits") or []) or payload.get("size", 0)
-            if not distinct:
-                continue
-            head = (payload.get("head") or "")[:7]
-            before = (payload.get("before") or "")[:7]
-            url = (f"{repo_url}/compare/{before}...{head}"
-                   if head and before else repo_url)
-            key = (date, repo_name)
-            rec = pushes.setdefault(key, {
-                "commits": 0, "eid": eid, "url": url,
-            })
-            rec["commits"] += distinct
-            # latest event id wins so the compare link points at the
-            # most-recent push of the day
-            if eid > rec["eid"]:
-                rec["eid"] = eid
-                rec["url"] = url
-
-        elif typ == "PullRequestEvent":
-            action = payload.get("action")
-            pr = payload.get("pull_request") or {}
-            if action == "closed" and pr.get("merged"):
-                verb = "merged"
-            elif action == "opened":
-                verb = "opened"
+        parts = []
+        # Commits — sum across repos.
+        total_commits = sum(b["commits"] for b in active_repos.values())
+        if total_commits:
+            push_repos = [r for r, b in active_repos.items() if b["commits"]]
+            if len(push_repos) == 1:
+                parts.append(f"{total_commits} commit{'s' if total_commits != 1 else ''}")
             else:
-                continue
-            num = pr.get("number")
-            title = (pr.get("title") or "").strip()
-            out.append({
-                "source": "github",
-                "id":     f"github-evt-{eid}",
-                "date":   date,
-                "title":  repo_name,
-                "description": f"{verb} PR #{num}: {title}" if title else f"{verb} PR #{num}",
-                "url":    pr.get("html_url") or repo_url,
-            })
+                parts.append(
+                    f"{total_commits} commit{'s' if total_commits != 1 else ''} "
+                    f"across {len(push_repos)} repos"
+                )
 
-        elif typ == "ReleaseEvent" and payload.get("action") == "published":
-            rel = payload.get("release") or {}
-            tag = (rel.get("tag_name") or "").strip()
-            out.append({
-                "source": "github",
-                "id":     f"github-evt-{eid}",
-                "date":   date,
-                "title":  repo_name,
-                "description": f"released {tag}" if tag else "released",
-                "url":    rel.get("html_url") or repo_url,
-            })
+        # PRs.
+        all_prs = [(r, *p) for r, b in active_repos.items() for p in b["prs"]]
+        if len(all_prs) == 1:
+            r, verb, num, title = all_prs[0]
+            parts.append(f"{verb} PR #{num}" + (f": {title}" if title else ""))
+        elif all_prs:
+            parts.append(f"{len(all_prs)} PRs")
 
-        # CreateEvent (ref_type=repository) is intentionally skipped —
-        # we already cover repo creation via _fetch_github_repos(),
-        # which goes back further than the 90-day events window.
+        # Releases.
+        all_releases = [(r, t) for r, b in active_repos.items() for t in b["releases"]]
+        if len(all_releases) == 1:
+            r, tag = all_releases[0]
+            parts.append(f"released {tag}" if tag else "released")
+        elif all_releases:
+            parts.append(f"{len(all_releases)} releases")
 
-    for (date, repo_name), rec in pushes.items():
-        n = rec["commits"]
+        # Started repos.
+        started_repos = [(r, b["started_blurb"]) for r, b in active_repos.items() if b["started"]]
+        if len(started_repos) == 1:
+            r, blurb = started_repos[0]
+            tail = f" — {blurb}" if blurb else ""
+            parts.append(f"started {_short(r)}{tail}")
+        elif started_repos:
+            parts.append(f"started {', '.join(_short(r) for r, _ in started_repos)}")
+
+        if not parts:
+            continue
+        description = ", ".join(parts)
+
+        # Title + url: if the day touches one repo, use it; else generic.
+        if len(active_repos) == 1:
+            only_repo = next(iter(active_repos))
+            title = only_repo
+            url = (active_repos[only_repo]["push_url"]
+                   or f"https://github.com/{only_repo}")
+        else:
+            title = f"@{GH_USER}"
+            url = f"https://github.com/{GH_USER}"
+
         out.append({
             "source": "github",
-            "id":     f"github-push-{date}-{repo_name.replace('/', '-')}",
+            "id":     f"github-day-{date}",
             "date":   date,
-            "title":  repo_name,
-            "description": f"pushed {n} commit{'s' if n != 1 else ''}",
-            "url":    rec["url"],
+            "title":  title,
+            "description": description,
+            "url":    url,
         })
 
     return out
 
 
-def fetch_github():
-    out = _fetch_github_repos()
-    try:
-        out.extend(_fetch_github_events())
-    except Exception as ex:
-        print(f"WARN: GitHub events fetch failed: {ex}", file=sys.stderr)
+# ----- Strava -------------------------------------------------------
+#
+# OAuth refresh-token flow: the workflow holds STRAVA_CLIENT_ID,
+# STRAVA_CLIENT_SECRET, STRAVA_REFRESH_TOKEN as repo secrets. Each
+# run, we trade the refresh token for a fresh access token (Strava
+# rotates the refresh token too, so the new one would need to be
+# written back — for now we accept that the workflow may need a
+# manual refresh-token rotation if Strava ever invalidates it).
+# Gracefully no-ops if any secret is missing, so the workflow won't
+# break before the secrets are wired.
+
+def _meters_to_miles(m):
+    return (m or 0) * 0.000621371
+
+
+def _fmt_duration(seconds):
+    seconds = int(seconds or 0)
+    h, rem = divmod(seconds, 3600)
+    m, _ = divmod(rem, 60)
+    if h:
+        return f"{h}h {m:02d}m"
+    return f"{m} min"
+
+
+def _strava_verb(activity_type):
+    # Strava `type` values: Run, Ride, Walk, Hike, Swim, VirtualRide,
+    # WeightTraining, Yoga, etc. Map to friendly verbs; unknown types
+    # fall through as the original lowercased word.
+    verbs = {
+        "Run": "run", "TrailRun": "trail run", "VirtualRun": "virtual run",
+        "Ride": "ride", "MountainBikeRide": "MTB", "VirtualRide": "virtual ride",
+        "GravelRide": "gravel ride", "EBikeRide": "e-bike ride",
+        "Walk": "walk", "Hike": "hike", "Swim": "swim",
+        "WeightTraining": "lift", "Workout": "workout",
+        "Yoga": "yoga",  "Crossfit": "crossfit", "Rowing": "row",
+        "AlpineSki": "ski", "BackcountrySki": "ski tour", "NordicSki": "nordic ski",
+        "Snowboard": "snowboard",
+    }
+    return verbs.get(activity_type, (activity_type or "activity").lower())
+
+
+def _strava_access_token():
+    cid = os.environ.get("STRAVA_CLIENT_ID")
+    sec = os.environ.get("STRAVA_CLIENT_SECRET")
+    rt  = os.environ.get("STRAVA_REFRESH_TOKEN")
+    if not (cid and sec and rt):
+        return None
+    body = urllib.parse.urlencode({
+        "client_id": cid,
+        "client_secret": sec,
+        "grant_type": "refresh_token",
+        "refresh_token": rt,
+    }).encode()
+    req = urllib.request.Request(STRAVA_TOKEN_URL, data=body, method="POST")
+    with urllib.request.urlopen(req, timeout=30) as r:
+        tok = json.loads(r.read())
+    return tok.get("access_token")
+
+
+def fetch_strava():
+    access = _strava_access_token()
+    if not access:
+        return []
+    out = []
+    page = 1
+    while True:
+        url = f"{STRAVA_ACTIVITIES_URL}?per_page=100&page={page}"
+        req = urllib.request.Request(url, headers={
+            "Authorization": f"Bearer {access}",
+            "User-Agent": UA,
+        })
+        with urllib.request.urlopen(req, timeout=30) as r:
+            batch = json.loads(r.read())
+        if not batch:
+            break
+        for a in batch:
+            aid   = a.get("id")
+            date  = (a.get("start_date_local") or a.get("start_date") or "")[:10]
+            name  = (a.get("name") or "").strip()
+            atype = a.get("type") or a.get("sport_type") or ""
+            dist  = _meters_to_miles(a.get("distance"))
+            secs  = a.get("moving_time") or 0
+            if not (aid and date):
+                continue
+            bits = []
+            if dist >= 0.1:
+                bits.append(f"{dist:.1f} mi")
+            if secs:
+                bits.append(_fmt_duration(secs))
+            verb = _strava_verb(atype)
+            desc = (", ".join(bits) + f" {verb}").strip() if bits else verb
+            out.append({
+                "source": "strava",
+                "id":     f"strava-{aid}",
+                "date":   date,
+                "title":  name or verb,
+                "description": desc,
+                "url":    f"https://www.strava.com/activities/{aid}",
+            })
+        if len(batch) < 100:
+            break
+        page += 1
+        time.sleep(1)
     return out
 
 
@@ -570,6 +721,17 @@ def main():
                 by_id[e["id"]] = e
     except Exception as ex:
         print(f"WARN: GitHub fetch failed: {ex}", file=sys.stderr)
+
+    # Strava — full refresh via OAuth refresh token. No-ops if the
+    # secrets aren't set, so the workflow stays green pre-wire-up.
+    try:
+        fresh = fetch_strava()
+        if fresh:
+            by_id = {k: v for k, v in by_id.items() if not k.startswith("strava-")}
+            for e in fresh:
+                by_id[e["id"]] = e
+    except Exception as ex:
+        print(f"WARN: Strava fetch failed: {ex}", file=sys.stderr)
 
     entries = [e for e in by_id.values() if e.get("id") not in SKIP_IDS]
     entries.sort(key=lambda e: (e.get("date") or "", e.get("id") or ""), reverse=True)

@@ -30,6 +30,10 @@ jobs:
           # runner, which matters because runner IPs are shared and the
           # unauth bucket fills fast.
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Strava: fetch_strava() no-ops if any of these are missing.
+          STRAVA_CLIENT_ID:     ${{ secrets.STRAVA_CLIENT_ID }}
+          STRAVA_CLIENT_SECRET: ${{ secrets.STRAVA_CLIENT_SECRET }}
+          STRAVA_REFRESH_TOKEN: ${{ secrets.STRAVA_REFRESH_TOKEN }}
         run: python scripts/fetch-life-log.py
 
       - name: Commit if changed

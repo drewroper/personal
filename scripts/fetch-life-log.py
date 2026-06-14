@@ -12,6 +12,7 @@ Stdlib only — no pip install at runtime.
 """
 
 import json
+import os
 import re
 import sys
 import time
@@ -27,6 +28,7 @@ SK_DIR = ROOT / "data" / "raw-songkick"
 
 LB_USER = "drewroper"
 DC_USER = "drewroper"
+GH_USER = "drewroper"
 
 UA = "drewroper-life-log/1.0 (+https://drewroper.com)"
 
@@ -110,6 +112,56 @@ def fetch_discogs():
             })
         url = (data.get("pagination", {}).get("urls", {}) or {}).get("next")
         time.sleep(1)   # under 60 req/min unauthenticated cap
+    return out
+
+
+# ----- GitHub -------------------------------------------------------
+#
+# Public REST API, unauthenticated. Lists Drew's own (non-fork) public
+# repos and records each repo's creation date as a "started building"
+# entry. Unauth quota is 60 req/hr per IP — well above what one page
+# of repos costs.
+
+def fetch_github():
+    out = []
+    page = 1
+    headers = {
+        "User-Agent": UA,
+        "Accept": "application/vnd.github+json",
+    }
+    token = os.environ.get("GITHUB_TOKEN")
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+    while True:
+        url = (f"https://api.github.com/users/{GH_USER}/repos"
+               f"?per_page=100&type=owner&sort=created&direction=desc&page={page}")
+        req = urllib.request.Request(url, headers=headers)
+        with urllib.request.urlopen(req, timeout=30) as r:
+            batch = json.loads(r.read())
+        if not batch:
+            break
+        for repo in batch:
+            if repo.get("fork") or repo.get("private"):
+                continue
+            rid     = repo.get("id")
+            name    = repo.get("name") or ""
+            created = (repo.get("created_at") or "")[:10]
+            html    = repo.get("html_url") or ""
+            desc    = (repo.get("description") or "").strip()
+            if not (rid and name and created):
+                continue
+            out.append({
+                "source": "github",
+                "id":     f"github-{rid}",
+                "date":   created,
+                "title":  name,
+                "description": desc,
+                "url":    html,
+            })
+        if len(batch) < 100:
+            break
+        page += 1
+        time.sleep(1)
     return out
 
 
@@ -372,6 +424,16 @@ def main():
                 by_id[e["id"]] = e
     except Exception as ex:
         print(f"WARN: Songkick parse failed: {ex}", file=sys.stderr)
+
+    # GitHub — full refresh of public, non-fork repos.
+    try:
+        fresh = fetch_github()
+        if fresh:
+            by_id = {k: v for k, v in by_id.items() if not k.startswith("github-")}
+            for e in fresh:
+                by_id[e["id"]] = e
+    except Exception as ex:
+        print(f"WARN: GitHub fetch failed: {ex}", file=sys.stderr)
 
     entries = list(by_id.values())
     entries.sort(key=lambda e: (e.get("date") or "", e.get("id") or ""), reverse=True)

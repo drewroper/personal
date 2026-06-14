@@ -126,6 +126,16 @@
       span.append(sep, v);
     }
 
+    // Repo description (github).
+    if (e.source === 'github' && e.description) {
+      const sep = document.createElement('span');
+      sep.className = 'sep'; sep.textContent = ' · ';
+      const v = document.createElement('span');
+      v.className = 'entry__venue';
+      v.textContent = e.description;
+      span.append(sep, v);
+    }
+
     // (Letterboxd star rating intentionally not rendered — the date
     // alone tells the story; ratings stay in the JSON in case we
     // want them back.)

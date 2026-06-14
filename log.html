@@ -44,7 +44,16 @@
 
     .meta {
       color: var(--text-faint);
-      margin-bottom: 18px;
+      /* Stick to viewport top while scrolling. Negative side+top
+         margins, then matching padding, let the bar extend past the
+         .log container's padding into a full-width strip — without
+         that, the entries underneath would peek out at the edges. */
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      margin: -20px -20px 18px;
+      padding: 20px 20px 12px;
+      background: var(--bg);
     }
     .meta a {
       color: var(--text-faint);
@@ -151,6 +160,6 @@
     <div id="js-feed" class="empty">Loading…</div>
   </main>
 
-  <script src="log.js?v=6"></script>
+  <script src="log.js?v=7"></script>
 </body>
 </html>

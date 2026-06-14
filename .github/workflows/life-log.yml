@@ -25,6 +25,11 @@ jobs:
           python-version: '3.11'
 
       - name: Fetch latest entries
+        env:
+          # Auth lifts the GitHub REST quota from 60 → 5000 req/hr per
+          # runner, which matters because runner IPs are shared and the
+          # unauth bucket fills fast.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python scripts/fetch-life-log.py
 
       - name: Commit if changed

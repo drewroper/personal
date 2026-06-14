@@ -109,10 +109,10 @@
     }
 
     /* Filter state — when a source is selected, every entry that
-       isn't that source fades back. The chain stays unbroken
-       (separators + year pills are untouched) but only the chosen
-       source pops. */
-    .log.is-filtered .entry          { opacity: .18; transition: opacity .2s ease; }
+       isn't that source fades to almost-not-there. The chain stays
+       unbroken (separators + year pills are untouched) but only the
+       chosen source pops. */
+    .log.is-filtered .entry          { opacity: .06; transition: opacity .2s ease; }
     .log.is-filtered .entry.is-match { opacity: 1; }
     .entry__tag    { color: var(--text-faint); }
     .entry__icon   {

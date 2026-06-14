@@ -41,10 +41,11 @@
     }
 
     .meta {
-      /* Four-level hierarchy across this row:
-         drewroper.com (white) > entry count (muted) >
-         filter verb (faint) > source paren (faintest).        */
-      color: var(--text-muted);
+      /* Hierarchy across this row:
+         drewroper.com (--text)        — white
+         movies / vinyl / etc.         — --text-muted
+         3271 entries + (letterboxd)   — --text-faint                 */
+      color: var(--text-faint);
       /* Stick to viewport top while scrolling. Negative side+top
          margins, then matching padding, let the bar extend past the
          .log container's padding into a full-width strip — without
@@ -75,7 +76,7 @@
        a filter that dims every non-matching entry below. */
     .meta__filter {
       font: inherit;
-      color: var(--text-faint);
+      color: var(--text-muted);
       background: none;
       border: 0;
       padding: 0;
@@ -83,10 +84,9 @@
       -webkit-tap-highlight-color: transparent;
       transition: color .15s ease, opacity .15s ease;
     }
-    .meta__filter:hover { color: var(--text-muted); }
-    /* Source name in the parens reads quietest — one tier below the
-       verb, so the four-step hierarchy stays clean. */
-    .meta__filter-src { color: var(--text-faint); opacity: .55; }
+    .meta__filter:hover { color: var(--text); }
+    /* Source name in the parens reads one tier below the verb. */
+    .meta__filter-src { color: var(--text-faint); }
     /* When ANY filter is active, dim the un-active legend buttons. */
     .log.is-filtered .meta__filter             { opacity: .35; }
     .log.is-filtered .meta__filter.is-active   { opacity: 1; color: var(--text); }

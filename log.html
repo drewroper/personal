@@ -78,6 +78,11 @@
     .log.is-filtered .meta__filter             { opacity: .35; }
     .log.is-filtered .meta__filter.is-active   { opacity: 1; color: var(--text); }
     .meta__filter.is-active .meta__icon        { color: var(--accent); }
+    /* Planned-but-empty sources read as ghosts in the legend so the
+       coming-soon ones telegraph themselves. */
+    .meta__filter--empty                       { opacity: .35; }
+    .meta__filter--empty .meta__icon           { color: var(--text-faint); }
+    .meta__filter--empty:hover::after          { content: ' (soon)'; color: var(--text-faint); }
 
     /* Year pills are inserted inline into the stream of entries —
        they mark the moment a new year begins without breaking the
@@ -136,13 +141,16 @@
     <div class="meta">
       <a href="/">← drewroper.com</a>
       &nbsp;·&nbsp; <span id="js-count">…</span> entries
-      &nbsp;·&nbsp; <button type="button" class="meta__filter" data-source="letterboxd"><span class="meta__icon" data-icon="film-reel" aria-hidden="true"></span> letterboxd</button>
-      &nbsp;·&nbsp; <button type="button" class="meta__filter" data-source="discogs"><span class="meta__icon" data-icon="vinyl-record" aria-hidden="true"></span> discogs</button>
-      &nbsp;·&nbsp; <button type="button" class="meta__filter" data-source="songkick"><span class="meta__icon" data-icon="microphone-stage" aria-hidden="true"></span> songkick</button>
+      &nbsp;·&nbsp; <button type="button" class="meta__filter" data-source="letterboxd"><span class="meta__icon" data-icon="film-reel" aria-hidden="true"></span> movies</button>
+      &nbsp;·&nbsp; <button type="button" class="meta__filter" data-source="discogs"><span class="meta__icon" data-icon="vinyl-record" aria-hidden="true"></span> vinyl</button>
+      &nbsp;·&nbsp; <button type="button" class="meta__filter" data-source="songkick"><span class="meta__icon" data-icon="microphone-stage" aria-hidden="true"></span> concerts</button>
+      &nbsp;·&nbsp; <button type="button" class="meta__filter" data-source="untappd"><span class="meta__icon" data-icon="beer-stein" aria-hidden="true"></span> beer</button>
+      &nbsp;·&nbsp; <button type="button" class="meta__filter" data-source="books"><span class="meta__icon" data-icon="book-bookmark" aria-hidden="true"></span> books</button>
+      &nbsp;·&nbsp; <button type="button" class="meta__filter" data-source="github"><span class="meta__icon" data-icon="git-branch" aria-hidden="true"></span> code</button>
     </div>
     <div id="js-feed" class="empty">Loading…</div>
   </main>
 
-  <script src="log.js?v=4"></script>
+  <script src="log.js?v=5"></script>
 </body>
 </html>

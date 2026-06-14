@@ -129,11 +129,89 @@ MONTHS_FULL = {
 def _strip_tags(s):
     # Tags → space (so adjacent words don't fuse), collapse whitespace,
     # then close up the " ," / " ." artifacts produced when a tag sat
-    # right before punctuation in the source HTML.
+    # right before punctuation in the source HTML, and decode entities
+    # like &#39; → '.
     s = re.sub(r'<[^>]+>', ' ', s or '')
+    s = unescape(s)
     s = re.sub(r'\s+', ' ', s).strip()
     s = re.sub(r'\s+([,.;:])', r'\1', s)
     return s
+
+
+# Trailing-parenthetical disambiguators on artist names that Songkick
+# inherits from MusicBrainz (e.g. "Automatic (band)", "Speed (AUS)",
+# "The Smile (UK)"). Stripped entirely — they're never part of the
+# brand a real fan would recognise.
+DISAMBIG_RE = re.compile(
+    r'\s*\(('
+    r'band|group|the band|duo|trio|quartet|quintet|sextet|septet|'
+    r'rapper|singer|producer|DJ|musician|artist|composer|orchestra|'
+    r'[A-Z]{2,4}|'   # country codes — UK, US, USA, AUS, NZ, …
+    r'\d+'           # numeric disambiguators — (2), (3), …
+    r')\)\s*$',
+    re.I,
+)
+
+def _strip_disambig(name):
+    prev = None
+    while name != prev:
+        prev = name
+        name = DISAMBIG_RE.sub('', name).strip()
+    return name
+
+
+# Anything matching this in the headliner string is treated as a
+# festival — we surface only the festival name and skip listing every
+# band on the bill. Drew's examples: Revolution Oktoberfest 2017,
+# 312 Block Party 2017, Riot Fest Chicago 2016, Telluride Bluegrass
+# Festival 2016.
+FESTIVAL_RE = re.compile(
+    r'\b('
+    # Generic words found in festival names.
+    r'festival|fest|oktoberfest|block\s*party|bluegrass|jamboree|carnival|rendezvous|'
+    # Big-name festivals that don't carry "festival" in the brand.
+    r'lollapalooza|coachella|bonnaroo|sxsw|south\s+by\s+southwest|'
+    r'austin\s+city\s+limits|outside\s+lands|stagecoach|firefly|glastonbury|hangout|'
+    r'governors\s+ball|warped\s+tour|wakarusa|electric\s+forest'
+    r')\b',
+    re.I,
+)
+
+def _looks_like_festival(s):
+    """True if the headliner string reads like a festival name. We
+    require an actual festival keyword — a trailing 4-digit year alone
+    isn't enough (it false-positives on band names like Death from
+    Above 1979)."""
+    return bool(s and FESTIVAL_RE.search(s))
+
+
+def _join_acts_oxford(parts):
+    """Render a list of bands with proper Oxford-comma punctuation.
+    De-duplicates (case-insensitive) while preserving first-seen order
+    — Songkick sometimes lists the same support twice."""
+    parts = [p for p in (p.strip() for p in parts) if p]
+    seen, deduped = set(), []
+    for p in parts:
+        k = p.lower()
+        if k not in seen:
+            seen.add(k)
+            deduped.append(p)
+    parts = deduped
+    if not parts: return ''
+    if len(parts) == 1: return parts[0]
+    if len(parts) == 2: return f"{parts[0]} and {parts[1]}"
+    return ", ".join(parts[:-1]) + f", and {parts[-1]}"
+
+
+def _normalize_lineup(artists_text):
+    """Take a flat string of acts (potentially mixing commas and 'and')
+    and re-emit it with disambiguators stripped + Oxford commas.
+
+    Splits on the longest separator first ("X, and Y" is ONE split
+    point, not two) to avoid the empty-band-named-"and" trap. """
+    parts = re.split(r'\s*,\s*and\s+|\s*,\s*|\s+and\s+', artists_text)
+    parts = [_strip_disambig(p) for p in parts if p and p.strip()]
+    return _join_acts_oxford(parts)
 
 
 def parse_songkick_event(chunk):
@@ -168,13 +246,25 @@ def parse_songkick_event(chunk):
 
     # Artists: contents of <p class="artists summary">.
     # Songkick wraps the HEADLINER in <strong> and dumps supporting acts
-    # as plain trailing text — insert a comma at the </strong> boundary
-    # so they read cleanly as a comma-separated bill.
+    # as plain trailing text. We branch:
+    #   - If the headliner looks festival-y, surface ONLY the festival
+    #     name (skip listing every band on the bill).
+    #   - Otherwise merge headliner + supports, strip disambiguators,
+    #     and rejoin with Oxford-comma punctuation.
     m = re.search(r'<p[^>]*class="artists\s+summary"[^>]*>(.*?)</p>', chunk, re.S)
     artists_html = m.group(1) if m else ''
-    artists_html = re.sub(r'</strong>(\s*)(?=\S)', r'</strong>, ', artists_html)
-    artist = _strip_tags(artists_html)
-    artist = re.sub(r'\s*,\s*$', '', artist)
+    m_strong = re.search(r'<strong[^>]*>(.*?)</strong>', artists_html, re.S)
+    headliner = _strip_tags(m_strong.group(1)) if m_strong else ''
+
+    if _looks_like_festival(headliner):
+        artist = _strip_disambig(headliner)
+    else:
+        # Insert ", " at the </strong> boundary so headliner + supports
+        # become one comma-separated list, then normalise to Oxford.
+        merged_html = re.sub(r'</strong>(\s*)(?=\S)', r'</strong>, ', artists_html)
+        merged = _strip_tags(merged_html)
+        merged = re.sub(r'\s*,\s*$', '', merged)
+        artist = _normalize_lineup(merged)
 
     # Venue.
     m = re.search(r'<span[^>]*class="venue-name"[^>]*>(.*?)</span>', chunk, re.S)

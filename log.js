@@ -27,7 +27,9 @@
     'git-fork':          'M224,64a32,32,0,1,0-40,31v17a8,8,0,0,1-8,8H80a8,8,0,0,1-8-8V95a32,32,0,1,0-16,0v17a24,24,0,0,0,24,24h40v25a32,32,0,1,0,16,0V136h40a24,24,0,0,0,24-24V95A32.06,32.06,0,0,0,224,64ZM48,64A16,16,0,1,1,64,80,16,16,0,0,1,48,64Zm96,128a16,16,0,1,1-16-16A16,16,0,0,1,144,192ZM192,80a16,16,0,1,1,16-16A16,16,0,0,1,192,80Z',
   };
 
-  // Source → [tag, phosphor-icon-name]
+  // Source → [tag, phosphor-icon-name]. Tag is no longer rendered
+  // (the icon carries the identity) but kept for any future logging
+  // or accessibility hooks.
   const SRC = {
     letterboxd: ['[lb]', 'film-reel'],
     discogs:    ['[dc]', 'vinyl-record'],
@@ -35,6 +37,7 @@
     untappd:    ['[ut]', 'beer-stein'],
     aoty:       ['[ao]', 'music-notes'],
     books:      ['[bk]', 'book-bookmark'],
+    github:     ['[gh]', 'git-branch'],
   };
 
   /* Build an inline SVG element for a Phosphor icon. The svg inherits
@@ -152,6 +155,18 @@
     root.className = ''; // drop .empty
     root.innerHTML = '';
     if (count) count.textContent = String(entries.length);
+
+    // Mark legend buttons whose source has zero entries — they
+    // render dimmer + show as "(soon)" on hover so visitors know
+    // the source is planned but not live yet.
+    const sourceCounts = entries.reduce((m, e) => {
+      m[e.source] = (m[e.source] || 0) + 1;
+      return m;
+    }, {});
+    document.querySelectorAll('.meta__filter').forEach((b) => {
+      const src = b.dataset.source;
+      b.classList.toggle('meta__filter--empty', !sourceCounts[src]);
+    });
 
     // One unbroken stream — year pills are inserted inline at the
     // moment each year changes. The feed reads as a single flowing

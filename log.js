@@ -116,6 +116,16 @@
       span.append(sep, v);
     }
 
+    // Brewery (untappd).
+    if (e.source === 'untappd' && e.brewery) {
+      const sep = document.createElement('span');
+      sep.className = 'sep'; sep.textContent = ' · ';
+      const v = document.createElement('span');
+      v.className = 'entry__venue';
+      v.textContent = e.brewery;
+      span.append(sep, v);
+    }
+
     // (Letterboxd star rating intentionally not rendered — the date
     // alone tells the story; ratings stay in the JSON in case we
     // want them back.)

@@ -87,8 +87,7 @@
 
     if (e.source === 'discogs') {
       // "Artist — Title"
-      const parts = [e.artist, e.title].filter(Boolean).join(' — ');
-      a.textContent = parts;
+      a.textContent = [e.artist, e.title].filter(Boolean).join(' — ');
     } else {
       a.textContent = e.title || '';
     }
@@ -100,6 +99,17 @@
       y.className = 'entry__year';
       y.textContent = ` (${e.year})`;
       span.appendChild(y);
+    }
+
+    // Venue + city (songkick).
+    if (e.source === 'songkick' && (e.venue || e.city)) {
+      const parts = [e.venue, e.city].filter(Boolean).join(' · ');
+      const sep = document.createElement('span');
+      sep.className = 'sep'; sep.textContent = ' · ';
+      const v = document.createElement('span');
+      v.className = 'entry__venue';
+      v.textContent = parts;
+      span.append(sep, v);
     }
 
     // Rating (letterboxd) — preceded by middle dot.

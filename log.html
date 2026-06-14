@@ -41,7 +41,10 @@
     }
 
     .meta {
-      color: var(--text-faint);
+      /* Four-level hierarchy across this row:
+         drewroper.com (white) > entry count (muted) >
+         filter verb (faint) > source paren (faintest).        */
+      color: var(--text-muted);
       /* Stick to viewport top while scrolling. Negative side+top
          margins, then matching padding, let the bar extend past the
          .log container's padding into a full-width strip — without
@@ -54,9 +57,9 @@
       background: var(--bg);
     }
     .meta a {
-      color: var(--text-faint);
+      color: var(--text);
       text-decoration: none;
-      border-bottom: 1px solid var(--text-faint);
+      border-bottom: 1px solid var(--text);
     }
     .meta a:hover { color: var(--accent); border-bottom-color: var(--accent); }
     .meta__icon {
@@ -81,8 +84,9 @@
       transition: color .15s ease, opacity .15s ease;
     }
     .meta__filter:hover { color: var(--text-muted); }
-    /* Source name in the parens reads quieter than the verb. */
-    .meta__filter-src { color: var(--text-faint); opacity: .7; }
+    /* Source name in the parens reads quietest — one tier below the
+       verb, so the four-step hierarchy stays clean. */
+    .meta__filter-src { color: var(--text-faint); opacity: .55; }
     /* When ANY filter is active, dim the un-active legend buttons. */
     .log.is-filtered .meta__filter             { opacity: .35; }
     .log.is-filtered .meta__filter.is-active   { opacity: 1; color: var(--text); }

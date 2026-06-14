@@ -113,14 +113,9 @@
       span.append(sep, v);
     }
 
-    // Rating (letterboxd) — preceded by middle dot.
-    if (e.rating) {
-      const sep = document.createElement('span');
-      sep.className = 'sep'; sep.textContent = ' · ';
-      const r = document.createElement('span');
-      r.className = 'entry__rating'; r.textContent = e.rating;
-      span.append(sep, r);
-    }
+    // (Letterboxd star rating intentionally not rendered — the date
+    // alone tells the story; ratings stay in the JSON in case we
+    // want them back.)
 
     // Rewatch indicator.
     if (e.source === 'letterboxd' && e.rewatch) {

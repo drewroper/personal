@@ -40,10 +40,23 @@ jobs:
         run: |
           git config user.name  "drewroper-life-log[bot]"
           git config user.email "actions@drewroper.com"
-          if ! git diff --quiet -- data/life-log.json; then
-            git add data/life-log.json
-            git commit -m "life-log: refresh $(date -u +'%Y-%m-%dT%H:%MZ')"
-            git push
-          else
+          if git diff --quiet -- data/life-log.json; then
             echo "no changes"
+            exit 0
           fi
+          git add data/life-log.json
+          git commit -m "life-log: refresh $(date -u +'%Y-%m-%dT%H:%MZ')"
+          # The branch may have moved on between checkout and push
+          # (concurrent workflow runs, pushes from elsewhere). Retry
+          # with a rebase a few times before giving up.
+          for attempt in 1 2 3 4 5; do
+            if git push; then
+              exit 0
+            fi
+            echo "push rejected (attempt $attempt), rebasing on origin/$GITHUB_REF_NAME and retrying…"
+            git fetch origin "$GITHUB_REF_NAME"
+            git rebase "origin/$GITHUB_REF_NAME" || git rebase --abort
+            sleep $((attempt * 2))
+          done
+          echo "Failed to push after 5 attempts"
+          exit 1

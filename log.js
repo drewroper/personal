@@ -138,6 +138,19 @@
       span.append(sep, v);
     }
 
+    // Author + publisher (books). Dedupe when they're the same string
+    // (e.g. self-published titles list author == publisher).
+    if (e.source === 'books' && (e.author || e.publisher)) {
+      const parts = [e.author, e.publisher].filter(Boolean);
+      if (parts.length === 2 && parts[0] === parts[1]) parts.pop();
+      const sep = document.createElement('span');
+      sep.className = 'sep'; sep.textContent = ' · ';
+      const v = document.createElement('span');
+      v.className = 'entry__venue';
+      v.textContent = parts.join(' · ');
+      span.append(sep, v);
+    }
+
     // (Letterboxd star rating intentionally not rendered — the date
     // alone tells the story; ratings stay in the JSON in case we
     // want them back.)

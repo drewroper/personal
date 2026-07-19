@@ -69,6 +69,19 @@
     return `${d} ${m}`;
   }
 
+  // Format a start→end span. Same month collapses the month
+  // ("19–20 jun"); crossing a month keeps both ("30 jun – 02 jul").
+  // A missing/equal end falls back to a single date.
+  function fmtDateRange(start, end) {
+    if (!end || end === start) return fmtDate(start);
+    const m1 = start.slice(5, 7), m2 = end.slice(5, 7);
+    const d1 = String(parseInt(start.slice(8, 10), 10) || '').padStart(2, '0');
+    const d2 = String(parseInt(end.slice(8, 10), 10) || '').padStart(2, '0');
+    const mon1 = MONTHS[parseInt(m1, 10) - 1] || '';
+    const mon2 = MONTHS[parseInt(m2, 10) - 1] || '';
+    return m1 === m2 ? `${d1}–${d2} ${mon1}` : `${d1} ${mon1} – ${d2} ${mon2}`;
+  }
+
   function yearOf(iso) { return (iso || '').slice(0, 4); }
 
   // Build one entry as a DOM fragment.
@@ -161,12 +174,14 @@
       span.append(sep, r);
     }
 
-    // Date — for discogs prefix with "added", for letterboxd just the date.
+    // Date — for discogs prefix with "added", for letterboxd just the
+    // date. Multi-day events (festivals) carry `dateEnd` and render as
+    // a span ("19–20 jun").
     const sep = document.createElement('span');
     sep.className = 'sep'; sep.textContent = ' · ';
     const d = document.createElement('span');
     d.className = 'entry__date';
-    d.textContent = (e.source === 'discogs' ? 'added ' : '') + fmtDate(e.date);
+    d.textContent = (e.source === 'discogs' ? 'added ' : '') + fmtDateRange(e.date, e.dateEnd);
     span.append(sep, d);
 
     return span;

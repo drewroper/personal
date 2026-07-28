@@ -593,6 +593,9 @@ section {
   letter-spacing: .12em;
   font-size: var(--mono-size);
 }
+/* "Current" on the Anthropic row pops in electric lime so the
+   present role reads at a glance. */
+.history__now { color: var(--accent); }
 
 /* WORK ---------------------------------------------------------- */
 .work__title,

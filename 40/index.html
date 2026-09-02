@@ -14,20 +14,12 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Geist:wght@300..600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <style>
     /* Same type system as the homepage: Geist for reading, Geist Mono at
        11px for labels and metadata. No rotating display face here — the
-       H1 is Silkscreen, self-hosted from assets/fonts. */
-    @font-face {
-      font-family: 'Silkscreen'; font-weight: 700; font-display: swap;
-      src: url('../assets/fonts/Silkscreen-Bold.ttf') format('truetype');
-    }
-    @font-face {
-      font-family: 'Silkscreen'; font-weight: 400; font-display: swap;
-      src: url('../assets/fonts/Silkscreen-Regular.ttf') format('truetype');
-    }
+       About H1 is Bricolage Grotesque. */
     :root {
       --bg:         #0c0c0d;
       --bg-raised:  #131315;
@@ -36,7 +28,7 @@
       --text-muted: #8c8a86;
       --text-faint: #56544f;
       --accent:     #d6ff38;
-      --font-pixel:   'Silkscreen', 'Geist Mono', monospace;
+      --font-display: 'Bricolage Grotesque', 'Geist', -apple-system, Helvetica, Arial, sans-serif;
       --font-sans:    'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
       --font-mono:    'Geist Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
       --mono-size: 11px;
@@ -100,8 +92,9 @@
     .about { padding: 28px 0 32px; border-bottom: 1px solid var(--rule); }
     .about__title {
       margin: 0; color: var(--text);
-      font-family: var(--font-pixel); font-weight: 700;
-      font-size: clamp(22px, 6.4vw, 40px); line-height: 1.15; letter-spacing: .01em;
+      font-family: var(--font-display); font-weight: 800;
+      font-variation-settings: 'opsz' 96, 'wdth' 100;
+      font-size: clamp(40px, 11vw, 64px); line-height: 1; letter-spacing: -.02em;
     }
     .about__title span, .about__title em { display: block; }
     .about__title em { color: var(--accent); font-style: normal; }
@@ -191,7 +184,7 @@
         Counting down forty albums that shaped me, one a day, before I turn forty.
         In no particular order.
       </p>
-      <p class="about__dates mono">Sep 23 → Nov 1, 2026 <span id="js-next"></span></p>
+      <p class="about__dates mono">Sep 23 → Nov 1, 2026</p>
     </section>
 
     <section id="js-feed" class="empty">Loading…</section>
@@ -290,11 +283,6 @@
       .then(({ meta, albums }) => {
         const slotted = albums.filter(a => a.no && a.date).sort((x, y) => x.no - y.no);
         const live    = slotted.filter(a => preview || a.date <= today);
-        const upNext  = slotted.find(a => a.date > today);
-
-        document.getElementById('js-next').textContent = upNext
-          ? `· next ${fmtDate(upNext.date)}`
-          : (live.length >= meta.total ? '· done.' : '');
 
         // About panel: collapsed by default, since most visits are repeat
         // visits from a story. Opens itself only when there's nothing else

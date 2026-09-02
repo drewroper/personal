@@ -146,11 +146,11 @@
     .listen { margin: 22px 0 0; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
     .listen__any {
       display: inline-flex; align-items: center; gap: 8px;
-      padding: 10px 14px; border-radius: 999px;
-      color: var(--bg); background: var(--accent); border: 1px solid var(--accent);
-      transition: filter .15s ease;
+      padding: 9px 14px; border-radius: 999px;
+      color: var(--accent); background: none; border: 1px solid var(--accent);
+      transition: color .15s ease, background .15s ease;
     }
-    .listen__any:hover { color: var(--bg); filter: brightness(1.08); }
+    .listen__any:hover { color: var(--bg); background: var(--accent); }
     .listen__svc {
       display: inline-flex; align-items: center;
       padding: 9px 12px; border-radius: 999px;
@@ -276,12 +276,8 @@
       const q = encodeURIComponent(`${a.artist} ${a.title}`);
       const L = a.links || {};
       const svcs = [
-        a.apple_url && ['Apple Music', a.apple_url],
-        ['Spotify',       L.spotify       || `https://open.spotify.com/search/${q}/albums`],
-        ['YouTube Music', L.youtubeMusic  || `https://music.youtube.com/search?q=${q}`],
-        ['Tidal',         L.tidal         || `https://tidal.com/search?q=${q}`],
-        L.bandcamp && ['Bandcamp', L.bandcamp],
-      ].filter(Boolean);
+        ['Spotify', L.spotify || `https://open.spotify.com/search/${q}/albums`],
+      ];
       const any = a.apple_id
         ? `<a class="listen__any mono" href="https://album.link/i/${a.apple_id}" target="_blank" rel="noopener">Open in your music app ↗</a>`
         : '';

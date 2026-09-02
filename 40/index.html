@@ -61,11 +61,12 @@
     .page { max-width: 640px; margin: 0 auto; padding: 0 20px 0; }
 
     /* ── Top bar, same recipe as the homepage: brand mark left, title
-       centered, one control right; mono, translucent, hairline. ─────── */
-    .bar {
-      position: sticky; top: 0; z-index: 50;
+       centered, one control right; mono, translucent, hairline. The About
+       panel hangs off it as a dropdown, so it opens wherever you are. ── */
+    .bar { position: sticky; top: 0; z-index: 50; margin: 0 -20px; }
+    .bar__row {
       display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: .75rem;
-      min-height: 44px; margin: 0 -20px; padding: .65rem 20px;
+      min-height: 44px; padding: .65rem 20px;
       letter-spacing: .04em;
       background: rgba(12,12,13,.78);
       backdrop-filter: saturate(140%) blur(10px);
@@ -87,9 +88,17 @@
     }
     .bar__about:hover, .bar__about[aria-expanded="true"] { color: var(--text); border-color: var(--text-faint); }
 
-    /* ── Intro panel, collapsed by default. Opens automatically only when
-       there's nothing posted yet (nothing else to show). ─────────────── */
-    .about { padding: 28px 0 32px; border-bottom: 1px solid var(--rule); }
+    /* ── About: a dropdown under the bar. Before launch, when there's
+       nothing else on the page, it sits in the flow instead. ─────────── */
+    .about {
+      position: absolute; left: 0; right: 0; top: 100%;
+      padding: 26px 20px 30px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--rule);
+      box-shadow: 0 24px 48px rgba(0,0,0,.55);
+      font-family: var(--font-sans); font-size: 15px; letter-spacing: 0; text-transform: none;
+    }
+    .page.is-empty .about { position: static; box-shadow: none; }
     .about__title {
       margin: 0; color: var(--text);
       font-family: var(--font-display); font-weight: 800;
@@ -169,6 +178,7 @@
 <body>
   <main class="page">
     <header class="bar mono" aria-label="Site meta">
+      <div class="bar__row">
       <a class="bar__brand" href="/" aria-label="Drew Roper — home">
         <svg class="brand-mark" viewBox="0 0 71 58" aria-hidden="true" focusable="false">
           <path fill="currentColor" fill-rule="evenodd" d="M40.508 0H0v8.395h40.508c12.207 0 21.77 9.05 21.77 20.603 0 10.936-8.564 19.63-19.877 20.53l-6.288-7.554h4.116l.114.001c7.132 0 12.935-5.821 12.935-12.976 0-7.154-5.803-12.972-12.935-12.972H0v8.395h9.284v25.184H0V58h25.53v-8.395h-7.736v-7.631h7.307l12.064 14.492L38.496 58h2.012c16.979 0 30.28-12.739 30.28-29.002C70.788 12.737 57.487 0 40.508 0Zm-22.714 24.421h22.55c2.397 0 4.424 2.096 4.424 4.577 0 2.483-2.027 4.581-4.424 4.581h-.115H17.794v-9.158Z"/>
@@ -176,16 +186,16 @@
       </a>
       <span class="bar__name">40 albums • 40 days • 40 years</span>
       <button class="bar__about" id="js-about-btn" type="button" aria-expanded="false" aria-controls="js-about">About</button>
-    </header>
-
-    <section class="about" id="js-about" hidden>
+      </div>
+      <section class="about" id="js-about" hidden>
       <h1 class="about__title"><span>40 albums,</span> <em>40 days,</em> <span>40 years.</span></h1>
       <p class="about__lede">
         Counting down forty albums that shaped me, one a day, before I turn forty.
         In no particular order.
       </p>
       <p class="about__dates mono">Sep 23 → Nov 1, 2026</p>
-    </section>
+      </section>
+    </header>
 
     <section id="js-feed" class="empty">Loading…</section>
 
@@ -294,8 +304,12 @@
           btn.setAttribute('aria-expanded', String(open));
           btn.textContent = open ? 'Close' : 'About';
         };
-        btn.addEventListener('click', () => setOpen(about.hidden));
-        if (!live.length) setOpen(true);
+        btn.addEventListener('click', e => { e.stopPropagation(); setOpen(about.hidden); });
+        about.addEventListener('click', e => e.stopPropagation());
+        document.addEventListener('click', () => { if (!about.hidden && !isEmpty) setOpen(false); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape' && !about.hidden) setOpen(false); });
+        const isEmpty = !live.length;
+        if (isEmpty) { document.querySelector('.page').classList.add('is-empty'); setOpen(true); }
 
         const feed = document.getElementById('js-feed');
         if (!live.length) {

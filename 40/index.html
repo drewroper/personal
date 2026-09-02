@@ -143,21 +143,22 @@
 
     /* Listen elsewhere: one button that resolves the album on any service
        (album.link), then direct pills. On a phone each pill opens the app. */
-    .listen { margin: 22px 0 0; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-    .listen__any {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 9px 14px; border-radius: 999px;
-      color: var(--accent); background: none; border: 1px solid var(--accent);
-      transition: color .15s ease, background .15s ease;
+    .listen { margin: 22px 0 0; display: flex; gap: 8px; }
+    .listen__any, .listen__svc {
+      flex: 1 1 auto; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 10px 14px; border-radius: 999px; white-space: nowrap;
+      transition: color .15s ease, background .15s ease, border-color .15s ease;
     }
-    .listen__any:hover { color: var(--bg); background: var(--accent); }
-    .listen__svc {
-      display: inline-flex; align-items: center;
-      padding: 9px 12px; border-radius: 999px;
-      color: var(--text-muted); border: 1px solid var(--rule);
-      transition: color .15s ease, border-color .15s ease;
+    .listen__any { color: var(--accent); background: none; border: 1px solid var(--accent); }
+    .listen__svc { color: var(--text-muted); background: none; border: 1px solid var(--rule); }
+    /* Fill on hover only where hover exists — a phone would otherwise keep
+       the filled state stuck after a tap. Touch gets a brief press flash. */
+    @media (hover: hover) {
+      .listen__any:hover { color: var(--bg); background: var(--accent); }
+      .listen__svc:hover { color: var(--text); border-color: var(--text-faint); }
     }
-    .listen__svc:hover { color: var(--text); border-color: var(--text-faint); }
+    .listen__any:active { color: var(--bg); background: var(--accent); }
+    .listen__svc:active { color: var(--text); border-color: var(--text-faint); }
 
     details { margin: 18px 0 0; }
     summary { cursor: pointer; color: var(--text-faint); list-style: none; user-select: none; }
@@ -188,6 +189,7 @@
       .entry__cover { margin-top: 0; }
       .entry__artist { margin-top: 0; }
       .entry__grid { margin-top: 20px; }
+      .listen__any, .listen__svc { flex: 0 1 auto; }
       .tracks { columns: 2; column-gap: 32px; }
       .tracks li { break-inside: avoid; }
     }
@@ -282,7 +284,7 @@
         ? `<a class="listen__any mono" href="https://album.link/i/${a.apple_id}" target="_blank" rel="noopener">Open in your music app ↗</a>`
         : '';
       return `<div class="listen">${any}${svcs.map(([n, u]) =>
-        `<a class="listen__svc mono" href="${esc(u)}" target="_blank" rel="noopener">${n}</a>`).join('')}</div>`;
+        `<a class="listen__svc mono" href="${esc(u)}" target="_blank" rel="noopener">${n} ↗</a>`).join('')}</div>`;
     }
 
     function tracks(a) {

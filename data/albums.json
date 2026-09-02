@@ -76,7 +76,10 @@
       ],
       "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/fc/ef/19/fcef196c-3f81-e9da-f02a-b55d900e7d69/16UMGIM53162.rgb.jpg/1800x1800bb.jpg",
       "label": "Geffen Records",
-      "art": "assets/40/weezer-green-album.jpg"
+      "art": "assets/40/weezer-green-album.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/2hDiTEsKePTnDcvKEuLizk"
+      }
     }
   ]
 }

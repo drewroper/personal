@@ -115,6 +115,25 @@ def fetch(album):
     album["art"] = f'assets/40/{album["slug"]}.jpg'
 
 
+def check_spotify(album):
+    """Spotify's oEmbed needs no key and returns the linked album's title —
+    enough to catch a pasted link that points at the wrong record."""
+    url = (album.get("links") or {}).get("spotify")
+    if not url:
+        return
+    try:
+        title = get_json("https://open.spotify.com/oembed?url=" + urllib.parse.quote(url, safe=""))["title"]
+    except Exception as e:  # noqa: BLE001
+        print(f"  ! spotify link unreachable: {e}")
+        return
+    want = re.sub(r"[^a-z0-9]", "", album["title"].lower())
+    got  = re.sub(r"[^a-z0-9]", "", title.lower())
+    if want[:12] not in got and got[:12] not in want:
+        print(f'  ! spotify link says "{title}", album is "{album["title"]}" — check it')
+    else:
+        print(f"  spotify ✓ {title}")
+
+
 def main():
     data  = json.loads(DATA.read_text())
     start = date.fromisoformat(data["meta"]["start"])
@@ -143,6 +162,7 @@ def main():
             fetch(album)
         else:
             print(f"· {tag}: ok")
+        check_spotify(album)
 
     DATA.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
 

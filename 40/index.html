@@ -146,7 +146,7 @@
     details[open] summary::before { content: '▾ '; }
     summary:hover { color: var(--text); }
     .tracks { margin: 12px 0 0; padding: 0; list-style: none; font-size: 14px; }
-    .tracks li { display: flex; gap: 12px; padding: 3px 0; }
+    .tracks li { display: flex; align-items: baseline; gap: 12px; padding: 3px 0; }
     .tracks__n { color: var(--text-faint); flex: none; width: 2.2em; text-align: right; }
     .tracks__t { color: var(--text-muted); flex: 1; }
     .tracks__d { color: var(--text-faint); flex: none; }
@@ -267,7 +267,7 @@
         : `<p class="entry__blurb--empty">Blurb still cooking.</p>`;
       return `<article class="entry" id="${pad(a.no)}">
         <div class="entry__head mono">
-          <span class="entry__no"><a href="#${pad(a.no)}">No. ${pad(a.no)}</a></span>
+          <span class="entry__no"><a href="#${pad(a.no)}">Day ${pad(a.no)}</a></span>
           <span>${fmtDate(a.date)}</span>
         </div>
         <div class="entry__grid">
@@ -312,7 +312,7 @@
         const feed = document.getElementById('js-feed');
         if (!live.length) {
           const n = daysBetween(today, meta.start);
-          feed.innerHTML = `<b>No. 01 drops ${fmtDate(meta.start)}.</b>` +
+          feed.innerHTML = `<b>Day 01 drops ${fmtDate(meta.start)}.</b>` +
             (n > 0 ? ` ${n} day${n === 1 ? '' : 's'} out.` : '');
           return;
         }

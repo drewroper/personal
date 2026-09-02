@@ -15,8 +15,9 @@ Hand-written fields are never touched: no, slug, artist, title, blurb,
 discovered, and any `label` you set yourself. Post dates are derived from
 `no` and meta.start so nothing has to be typed twice.
 
-Run: python3 scripts/fetch-albums.py           # fill missing fields only
-     python3 scripts/fetch-albums.py --refresh  # re-pull everything
+Run: python3 scripts/fetch-albums.py                        # fill missing fields
+     python3 scripts/fetch-albums.py --refresh               # re-pull everything
+     python3 scripts/fetch-albums.py data/albums.test.json   # another file
 """
 
 import json
@@ -28,7 +29,8 @@ from datetime import date, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-DATA = ROOT / "data" / "albums.json"
+ARGS = [a for a in sys.argv[1:] if not a.startswith("--")]
+DATA = Path(ARGS[0]).resolve() if ARGS else ROOT / "data" / "albums.json"
 ART  = ROOT / "assets" / "40"
 
 LOOKUP = "https://itunes.apple.com/lookup?id={id}&entity=song&country=us"

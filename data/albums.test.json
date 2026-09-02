@@ -84,77 +84,88 @@
     },
     {
       "no": 2,
-      "slug": "weezer-green-album-2",
-      "artist": "Weezer",
-      "title": "Weezer (The Green Album)",
-      "apple_id": 1440868131,
-      "discovered": "",
+      "slug": "dave-matthews-band-crash",
+      "artist": "Dave Matthews Band",
+      "title": "Crash",
+      "apple_id": 388136111,
+      "label": "RCA",
+      "discovered": "Placeholder — swap for the real line.",
       "blurb": [
-        "Same record repeated as No. 02, purely so you can see how two entries stack. Newest sits on top."
+        "Second entry so you can see two records stack. Newest sits on top, so Day 02 is above Day 01.",
+        "_Crash_ is here as sample data; it isn't on the real list unless you put it there."
       ],
-      "apple_url": "https://music.apple.com/us/album/weezer-green-album/1440868131",
-      "released": "2001-05-15",
-      "year": "2001",
-      "copyright": "℗ 2016 Geffen Records",
+      "date": "2026-09-24",
+      "apple_url": "https://music.apple.com/us/album/crash/388136111",
+      "released": "1996-04-30",
+      "year": "1996",
+      "copyright": "℗ 1996 Sony Music Entertainment",
       "genre": "Rock",
-      "track_count": 10,
-      "runtime_ms": 1714293,
+      "track_count": 12,
+      "runtime_ms": 4130708,
       "tracks": [
         {
           "n": 1,
-          "title": "Don't Let Go",
-          "ms": 179533
+          "title": "So Much to Say",
+          "ms": 246600
         },
         {
           "n": 2,
-          "title": "Photograph",
-          "ms": 139093
+          "title": "Two Step",
+          "ms": 387267
         },
         {
           "n": 3,
-          "title": "Hash Pipe",
-          "ms": 186533
+          "title": "Crash Into Me",
+          "ms": 316467
         },
         {
           "n": 4,
-          "title": "Island In the Sun",
-          "ms": 200307
+          "title": "Too Much",
+          "ms": 261627
         },
         {
           "n": 5,
-          "title": "Crab",
-          "ms": 154560
+          "title": "#41",
+          "ms": 399800
         },
         {
           "n": 6,
-          "title": "Knockdown Dragout",
-          "ms": 128333
+          "title": "Say Goodbye",
+          "ms": 371040
         },
         {
           "n": 7,
-          "title": "Smile",
-          "ms": 158667
+          "title": "Drive In Drive Out",
+          "ms": 354600
         },
         {
           "n": 8,
-          "title": "Simple Pages",
-          "ms": 176707
+          "title": "Let You Down",
+          "ms": 247400
         },
         {
           "n": 9,
-          "title": "Glorious Day",
-          "ms": 160827
+          "title": "Lie In Our Graves",
+          "ms": 342040
         },
         {
           "n": 10,
-          "title": "O Girlfriend",
-          "ms": 229733
+          "title": "Cry Freedom",
+          "ms": 352667
+        },
+        {
+          "n": 11,
+          "title": "Tripping Billies",
+          "ms": 300440
+        },
+        {
+          "n": 12,
+          "title": "Proudest Monkey",
+          "ms": 550760
         }
       ],
-      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/fc/ef/19/fcef196c-3f81-e9da-f02a-b55d900e7d69/16UMGIM53162.rgb.jpg/1800x1800bb.jpg",
-      "label": "Geffen Records",
-      "art": "assets/40/weezer-green-album.jpg",
-      "date": "2026-09-24"
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/1d/4f/38/1d4f38dd-e5ee-a14e-13a2-df60d4e3b431/884977724707.jpg/1800x1800bb.jpg",
+      "art": "assets/40/dave-matthews-band-crash.jpg"
     }
   ]
 }

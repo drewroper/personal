@@ -55,118 +55,143 @@
       letter-spacing: .08em; text-transform: uppercase;
     }
 
-    .page { max-width: 880px; margin: 0 auto; padding: 20px 20px 96px; }
+    /* Mobile-first. One column, phone width; the desktop gets a little
+       more room but the same structure. */
+    .page { max-width: 640px; margin: 0 auto; padding: 0 20px 0; }
 
-    /* Sticky top strip: site link, then the running tally. */
-    .meta {
+    /* ── Sticky bar: name, tally, About toggle, then the 40-cell progress
+       strip riding underneath it. That's the whole header on a return
+       visit; the intro lives behind the button. ────────────────────── */
+    .bar {
       position: sticky; top: 0; z-index: 10;
-      margin: -20px -20px 0; padding: 20px 20px 12px;
+      margin: 0 -20px; padding: 14px 20px 0;
       background: var(--bg);
-      color: var(--text-faint);
-      display: flex; flex-wrap: wrap; gap: 0 10px;
     }
-    .meta a { border-bottom-color: var(--text-faint); }
-    .meta__tally { color: var(--text-muted); }
-    .meta__next  { color: var(--text-faint); }
-
-    /* Title block */
-    .head { padding: 64px 0 44px; border-bottom: 1px solid var(--rule); }
-    .head__eyebrow { margin: 0; color: var(--text-faint); }
-    .head__title {
-      margin: 14px 0 0; color: var(--text);
-      font-family: var(--font-display); font-weight: 400;
-      font-size: clamp(44px, 8vw, 80px); line-height: .98; letter-spacing: -.01em;
+    .bar__row { display: flex; align-items: center; gap: 12px; }
+    .bar__name { margin: 0; color: var(--text); font-weight: 400; font-size: var(--mono-size); }
+    .bar__tally { color: var(--text-faint); }
+    .bar__about {
+      margin-left: auto;
+      font: inherit; color: var(--text-muted);
+      background: none; border: 1px solid var(--rule); border-radius: 999px;
+      padding: 5px 12px; cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: color .15s ease, border-color .15s ease;
     }
-    .head__title em { color: var(--accent); font-style: italic; }
-    .head__lede { max-width: var(--measure); margin: 24px 0 0; color: var(--text-muted); font-size: 17px; line-height: 1.5; font-weight: 300; }
-
-    /* Progress: 40 cells, filled as records post. */
-    .track { display: grid; grid-template-columns: repeat(40, 1fr); gap: 3px; margin: 32px 0 0; }
-    .track__cell { height: 6px; background: var(--rule); border-radius: 1px; }
-    .track__cell.is-done { background: var(--accent); }
+    .bar__about:hover, .bar__about[aria-expanded="true"] { color: var(--text); border-color: var(--text-faint); }
+    .track { display: grid; grid-template-columns: repeat(40, 1fr); gap: 2px; margin: 12px 0 0; }
+    .track__cell { height: 3px; background: var(--rule); }
+    .track__cell.is-done  { background: var(--accent); }
     .track__cell.is-today { background: var(--text); }
 
-    /* Entries */
-    .entry { padding: 52px 0; border-bottom: 1px solid var(--rule); scroll-margin-top: 64px; }
+    /* ── Intro panel, collapsed by default. Opens automatically only when
+       there's nothing posted yet (nothing else to show). ─────────────── */
+    .about { padding: 28px 0 32px; border-bottom: 1px solid var(--rule); }
+    .about__title {
+      margin: 0; color: var(--text);
+      font-family: var(--font-display); font-weight: 400;
+      font-size: clamp(38px, 10vw, 56px); line-height: .98; letter-spacing: -.01em;
+    }
+    .about__title em { color: var(--accent); font-style: italic; }
+    .about__lede { max-width: var(--measure); margin: 18px 0 0; color: var(--text-muted); font-size: 16px; line-height: 1.5; font-weight: 300; }
+    .about__dates { margin: 18px 0 0; color: var(--text-faint); }
+
+    /* ── Entries: newest first, cover is the hero at phone width. ────── */
+    .entry { padding: 28px 0 40px; border-bottom: 1px solid var(--rule); scroll-margin-top: 56px; }
     .entry__head { display: flex; justify-content: space-between; align-items: baseline; color: var(--text-faint); }
     .entry__no { color: var(--accent); }
     .entry__no a { color: inherit; border: 0; }
     .entry__no a:hover { color: var(--text); }
 
-    .entry__grid { display: grid; grid-template-columns: 220px 1fr; gap: 28px; align-items: start; margin-top: 24px; }
     .entry__cover {
-      display: block; width: 100%; aspect-ratio: 1; object-fit: cover;
+      display: block; width: 100%; aspect-ratio: 1; object-fit: cover; margin-top: 16px;
       background: var(--bg-raised); border: 1px solid var(--rule);
     }
-    .entry__artist { margin: 0; color: var(--text-muted); font-size: 15px; }
+    .entry__artist { margin: 20px 0 0; color: var(--text-muted); font-size: 15px; }
     .entry__title  {
       margin: 2px 0 0; color: var(--text);
       font-family: var(--font-display); font-weight: 400;
-      font-size: 38px; line-height: 1.05; letter-spacing: -.005em;
+      font-size: 34px; line-height: 1.05;
     }
-    .entry__facts  { margin: 14px 0 0; color: var(--text-faint); }
+    .entry__facts  { margin: 12px 0 0; color: var(--text-faint); }
     .entry__facts span + span::before { content: ' · '; }
-    .entry__found  { margin: 16px 0 0; color: var(--text-muted); font-size: 14px; }
+    .entry__found  { margin: 14px 0 0; color: var(--text-muted); font-size: 14px; }
     .entry__found b { font-weight: 400; color: var(--text-faint); margin-right: .4em; }
 
-    .entry__blurb { max-width: var(--measure); margin: 28px 0 0; color: var(--text); font-size: 17px; line-height: 1.6; font-weight: 300; }
+    .entry__blurb { max-width: var(--measure); margin: 24px 0 0; color: var(--text); font-size: 17px; line-height: 1.6; font-weight: 300; }
     .entry__blurb p { margin: 0 0 1.1em; }
     .entry__blurb p:last-child { margin-bottom: 0; }
     .entry__blurb em { font-style: italic; }
     .entry__blurb--empty { color: var(--text-faint); }
 
-    .entry__player { margin: 28px 0 0; max-width: 660px; }
+    .entry__player { margin: 26px 0 0; }
     .entry__player iframe { width: 100%; height: 450px; border: 0; overflow: hidden; background: transparent; border-radius: 10px; }
     .entry__noplayer { color: var(--text-faint); font-size: 14px; }
 
-    details { margin: 20px 0 0; }
+    details { margin: 18px 0 0; }
     summary { cursor: pointer; color: var(--text-faint); list-style: none; user-select: none; }
     summary::-webkit-details-marker { display: none; }
     summary::before { content: '▸ '; }
     details[open] summary::before { content: '▾ '; }
     summary:hover { color: var(--text); }
-    .tracks { margin: 12px 0 0; padding: 0; list-style: none; columns: 2; column-gap: 32px; max-width: 660px; font-size: 14px; }
-    .tracks li { display: flex; gap: 12px; break-inside: avoid; padding: 3px 0; }
+    .tracks { margin: 12px 0 0; padding: 0; list-style: none; font-size: 14px; }
+    .tracks li { display: flex; gap: 12px; padding: 3px 0; }
     .tracks__n { color: var(--text-faint); flex: none; width: 2.2em; text-align: right; }
     .tracks__t { color: var(--text-muted); flex: 1; }
     .tracks__d { color: var(--text-faint); flex: none; }
 
-    .empty { padding: 72px 0; color: var(--text-faint); font-size: 17px; font-weight: 300; }
+    .empty { padding: 48px 0; color: var(--text-faint); font-size: 17px; font-weight: 300; border-bottom: 1px solid var(--rule); }
     .empty b { color: var(--text); font-weight: 400; }
 
-    .foot { padding: 40px 0 0; color: var(--text-faint); }
+    /* ── Footer: a real one, with room to grow. ─────────────────────── */
+    .foot { padding: 36px 0 calc(48px + env(safe-area-inset-bottom)); color: var(--text-faint); }
+    .foot__links { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 0; padding: 0; list-style: none; }
+    .foot__links a { color: var(--text-muted); border-bottom-color: transparent; }
+    .foot__links a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+    .foot__colophon { margin: 22px 0 0; }
 
-    @media (max-width: 640px) {
-      .entry__grid { grid-template-columns: 1fr; gap: 20px; }
-      .entry__cover { max-width: 280px; }
-      .entry__title { font-size: 32px; }
-      .tracks { columns: 1; }
+    /* Desktop gets the cover beside the title; everything else stays. */
+    @media (min-width: 720px) {
+      .page { max-width: 760px; }
+      .entry__grid { display: grid; grid-template-columns: 220px 1fr; gap: 28px; align-items: start; }
+      .entry__cover { margin-top: 0; }
+      .entry__artist { margin-top: 0; }
+      .entry__grid { margin-top: 20px; }
+      .tracks { columns: 2; column-gap: 32px; }
+      .tracks li { break-inside: avoid; }
     }
   </style>
 </head>
 <body>
   <main class="page">
-    <div class="meta mono">
-      <a href="/">← drewroper.com</a>
-      <span>·</span>
-      <span class="meta__tally" id="js-tally">…</span>
-      <span class="meta__next" id="js-next"></span>
+    <div class="bar mono">
+      <div class="bar__row">
+        <h1 class="bar__name">40 albums · 40 days</h1>
+        <span class="bar__tally" id="js-tally">…</span>
+        <button class="bar__about" id="js-about-btn" type="button" aria-expanded="false" aria-controls="js-about">About</button>
+      </div>
+      <div class="track" id="js-track" aria-hidden="true"></div>
     </div>
 
-    <header class="head">
-      <p class="head__eyebrow mono">Sep 23 → Nov 1, 2026</p>
-      <h1 class="head__title">40 albums, <em>40 days</em>, 40 years.</h1>
-      <p class="head__lede">
+    <section class="about" id="js-about" hidden>
+      <p class="about__title">40 albums, <em>40 days</em>, 40 years.</p>
+      <p class="about__lede">
         I turn forty on November 1st. Counting up to it one record a day — not a ranking,
         just the albums that did something to me, and when, and why. Posted to Instagram
         each morning; archived here with the full story and a player.
       </p>
-      <div class="track" id="js-track" aria-hidden="true"></div>
-    </header>
+      <p class="about__dates mono">Sep 23 → Nov 1, 2026 <span id="js-next"></span></p>
+    </section>
 
     <section id="js-feed" class="empty">Loading…</section>
 
-    <p class="foot mono">Written by hand. Metadata via Apple Music. Covers belong to their labels.</p>
+    <footer class="foot mono">
+      <ul class="foot__links">
+        <li><a href="/">← drewroper.com</a></li>
+        <li><a href="/log.html">Life log</a></li>
+      </ul>
+      <p class="foot__colophon">Written by hand. Metadata via Apple Music. Covers belong to their labels.</p>
+    </footer>
   </main>
 
   <script>
@@ -232,7 +257,7 @@
         </div>
         <div class="entry__grid">
           <img class="entry__cover" src="../${esc(a.art || '')}" alt="${esc(a.title)} cover" loading="lazy" />
-          <div>
+          <div class="entry__text">
             <p class="entry__artist">${esc(a.artist)}</p>
             <h2 class="entry__title">${esc(a.title)}</h2>
             <p class="entry__facts mono">${facts}</p>
@@ -255,8 +280,21 @@
         document.getElementById('js-tally').textContent =
           `${pad(live.length)} of ${meta.total} posted`;
         document.getElementById('js-next').textContent = upNext
-          ? `· next: ${fmtDate(upNext.date)}`
+          ? `· next ${fmtDate(upNext.date)}`
           : (live.length >= meta.total ? '· done.' : '');
+
+        // About panel: collapsed by default, since most visits are repeat
+        // visits from a story. Opens itself only when there's nothing else
+        // on the page yet.
+        const about = document.getElementById('js-about');
+        const btn   = document.getElementById('js-about-btn');
+        const setOpen = open => {
+          about.hidden = !open;
+          btn.setAttribute('aria-expanded', String(open));
+          btn.textContent = open ? 'Close' : 'About';
+        };
+        btn.addEventListener('click', () => setOpen(about.hidden));
+        if (!live.length) setOpen(true);
 
         document.getElementById('js-track').innerHTML = Array.from({ length: meta.total }, (_, i) => {
           const a = slotted[i];
@@ -267,8 +305,8 @@
         const feed = document.getElementById('js-feed');
         if (!live.length) {
           const n = daysBetween(today, meta.start);
-          feed.innerHTML = `<b>Nothing yet.</b> First record drops ${fmtDate(meta.start)}` +
-            (n > 0 ? ` — ${n} day${n === 1 ? '' : 's'} out.` : '.');
+          feed.innerHTML = `<b>No. 01 drops ${fmtDate(meta.start)}.</b>` +
+            (n > 0 ? ` ${n} day${n === 1 ? '' : 's'} out.` : '');
           return;
         }
         feed.className = '';

@@ -216,8 +216,12 @@
     }).format(new Date());
 
     // ?preview shows every slotted record regardless of date, so a blurb
-    // can be proofed before it goes live.
-    const preview = new URLSearchParams(location.search).has('preview');
+    // can be proofed before it goes live. ?test (also /40/test/) swaps in
+    // data/albums.test.json — sample entries for looking at the design.
+    const params  = new URLSearchParams(location.search);
+    const test    = params.has('test');
+    const preview = test || params.has('preview');
+    const DATA    = test ? '../data/albums.test.json' : '../data/albums.json';
 
     const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
     // Blurbs are plain paragraphs; _underscores_ become italics for titles.
@@ -281,7 +285,7 @@
       </article>`;
     }
 
-    fetch('../data/albums.json?v=' + Date.now())
+    fetch(DATA + '?v=' + Date.now())
       .then(r => r.json())
       .then(({ meta, albums }) => {
         const slotted = albums.filter(a => a.no && a.date).sort((x, y) => x.no - y.no);

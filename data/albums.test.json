@@ -1,0 +1,160 @@
+{
+  "meta": {
+    "title": "40 albums · 40 days",
+    "start": "2026-09-23",
+    "end": "2026-11-01",
+    "total": 40,
+    "url": "https://drewroper.com/40"
+  },
+  "albums": [
+    {
+      "no": 1,
+      "slug": "weezer-green-album",
+      "artist": "Weezer",
+      "title": "Weezer (The Green Album)",
+      "apple_id": 1440868131,
+      "discovered": "Summer 2001. Placeholder — swap for the real line.",
+      "blurb": [
+        "Placeholder blurb so the layout has real paragraphs to hold. This is where the story goes: when you found it, where you were, why it stuck. _Island in the Sun_ was everywhere that summer.",
+        "Second paragraph, to check spacing and the reading measure at this size. Album titles set in _italics_ with underscores."
+      ],
+      "apple_url": "https://music.apple.com/us/album/weezer-green-album/1440868131",
+      "released": "2001-05-15",
+      "year": "2001",
+      "copyright": "℗ 2016 Geffen Records",
+      "genre": "Rock",
+      "track_count": 10,
+      "runtime_ms": 1714293,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Don't Let Go",
+          "ms": 179533
+        },
+        {
+          "n": 2,
+          "title": "Photograph",
+          "ms": 139093
+        },
+        {
+          "n": 3,
+          "title": "Hash Pipe",
+          "ms": 186533
+        },
+        {
+          "n": 4,
+          "title": "Island In the Sun",
+          "ms": 200307
+        },
+        {
+          "n": 5,
+          "title": "Crab",
+          "ms": 154560
+        },
+        {
+          "n": 6,
+          "title": "Knockdown Dragout",
+          "ms": 128333
+        },
+        {
+          "n": 7,
+          "title": "Smile",
+          "ms": 158667
+        },
+        {
+          "n": 8,
+          "title": "Simple Pages",
+          "ms": 176707
+        },
+        {
+          "n": 9,
+          "title": "Glorious Day",
+          "ms": 160827
+        },
+        {
+          "n": 10,
+          "title": "O Girlfriend",
+          "ms": 229733
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/fc/ef/19/fcef196c-3f81-e9da-f02a-b55d900e7d69/16UMGIM53162.rgb.jpg/1800x1800bb.jpg",
+      "label": "Geffen Records",
+      "art": "assets/40/weezer-green-album.jpg",
+      "date": "2026-09-23"
+    },
+    {
+      "no": 2,
+      "slug": "weezer-green-album-2",
+      "artist": "Weezer",
+      "title": "Weezer (The Green Album)",
+      "apple_id": 1440868131,
+      "discovered": "",
+      "blurb": [
+        "Same record repeated as No. 02, purely so you can see how two entries stack. Newest sits on top."
+      ],
+      "apple_url": "https://music.apple.com/us/album/weezer-green-album/1440868131",
+      "released": "2001-05-15",
+      "year": "2001",
+      "copyright": "℗ 2016 Geffen Records",
+      "genre": "Rock",
+      "track_count": 10,
+      "runtime_ms": 1714293,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Don't Let Go",
+          "ms": 179533
+        },
+        {
+          "n": 2,
+          "title": "Photograph",
+          "ms": 139093
+        },
+        {
+          "n": 3,
+          "title": "Hash Pipe",
+          "ms": 186533
+        },
+        {
+          "n": 4,
+          "title": "Island In the Sun",
+          "ms": 200307
+        },
+        {
+          "n": 5,
+          "title": "Crab",
+          "ms": 154560
+        },
+        {
+          "n": 6,
+          "title": "Knockdown Dragout",
+          "ms": 128333
+        },
+        {
+          "n": 7,
+          "title": "Smile",
+          "ms": 158667
+        },
+        {
+          "n": 8,
+          "title": "Simple Pages",
+          "ms": 176707
+        },
+        {
+          "n": 9,
+          "title": "Glorious Day",
+          "ms": 160827
+        },
+        {
+          "n": 10,
+          "title": "O Girlfriend",
+          "ms": 229733
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/fc/ef/19/fcef196c-3f81-e9da-f02a-b55d900e7d69/16UMGIM53162.rgb.jpg/1800x1800bb.jpg",
+      "label": "Geffen Records",
+      "art": "assets/40/weezer-green-album.jpg",
+      "date": "2026-09-24"
+    }
+  ]
+}

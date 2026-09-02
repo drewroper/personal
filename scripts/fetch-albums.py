@@ -12,7 +12,10 @@ printed as candidates and left alone, because the first search hit is
 often wrong (a live album, a deluxe reissue, a different band).
 
 Hand-written fields are never touched: no, slug, artist, title, blurb,
-discovered, and any `label` you set yourself. Post dates are derived from
+discovered, any `label` you set yourself, and `links` — an optional
+{spotify, youtubeMusic, tidal, bandcamp} of direct album URLs. Without
+them the page falls back to per-service search links, and album.link
+resolves the record across every service from the Apple ID alone. Post dates are derived from
 `no` and meta.start so nothing has to be typed twice.
 
 Run: python3 scripts/fetch-albums.py                        # fill missing fields

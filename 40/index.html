@@ -141,6 +141,24 @@
     .entry__player iframe { width: 100%; height: 450px; border: 0; overflow: hidden; background: transparent; border-radius: 10px; }
     .entry__noplayer { color: var(--text-faint); font-size: 14px; }
 
+    /* Listen elsewhere: one button that resolves the album on any service
+       (album.link), then direct pills. On a phone each pill opens the app. */
+    .listen { margin: 22px 0 0; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .listen__any {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 14px; border-radius: 999px;
+      color: var(--bg); background: var(--accent); border: 1px solid var(--accent);
+      transition: filter .15s ease;
+    }
+    .listen__any:hover { color: var(--bg); filter: brightness(1.08); }
+    .listen__svc {
+      display: inline-flex; align-items: center;
+      padding: 9px 12px; border-radius: 999px;
+      color: var(--text-muted); border: 1px solid var(--rule);
+      transition: color .15s ease, border-color .15s ease;
+    }
+    .listen__svc:hover { color: var(--text); border-color: var(--text-faint); }
+
     details { margin: 18px 0 0; }
     summary { cursor: pointer; color: var(--text-faint); list-style: none; user-select: none; }
     summary::-webkit-details-marker { display: none; }
@@ -252,6 +270,25 @@
         src="https://embed.music.apple.com/us/album/${esc(slug)}/${a.apple_id}?theme=dark"></iframe>`;
     }
 
+    // Direct links when the data has them (links.spotify etc.); otherwise a
+    // search deep link, which still lands inside the app on a phone.
+    function listen(a) {
+      const q = encodeURIComponent(`${a.artist} ${a.title}`);
+      const L = a.links || {};
+      const svcs = [
+        a.apple_url && ['Apple Music', a.apple_url],
+        ['Spotify',       L.spotify       || `https://open.spotify.com/search/${q}/albums`],
+        ['YouTube Music', L.youtubeMusic  || `https://music.youtube.com/search?q=${q}`],
+        ['Tidal',         L.tidal         || `https://tidal.com/search?q=${q}`],
+        L.bandcamp && ['Bandcamp', L.bandcamp],
+      ].filter(Boolean);
+      const any = a.apple_id
+        ? `<a class="listen__any mono" href="https://album.link/i/${a.apple_id}" target="_blank" rel="noopener">Open in your music app ↗</a>`
+        : '';
+      return `<div class="listen">${any}${svcs.map(([n, u]) =>
+        `<a class="listen__svc mono" href="${esc(u)}" target="_blank" rel="noopener">${n}</a>`).join('')}</div>`;
+    }
+
     function tracks(a) {
       if (!a.tracks || !a.tracks.length) return '';
       return `<details>
@@ -284,7 +321,8 @@
         </div>
         <div class="entry__blurb">${blurb}</div>
         <div class="entry__player">${player(a)}</div>
-        ${tracks(a)}
+        ${listen(a)}
+        ${a.apple_id ? '' : tracks(a)}
       </article>`;
     }
 

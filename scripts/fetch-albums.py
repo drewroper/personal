@@ -23,6 +23,7 @@ Run: python3 scripts/fetch-albums.py                        # fill missing field
      python3 scripts/fetch-albums.py data/albums.test.json   # another file
 """
 
+import difflib
 import json
 import re
 import sys
@@ -126,9 +127,10 @@ def check_spotify(album):
     except Exception as e:  # noqa: BLE001
         print(f"  ! spotify link unreachable: {e}")
         return
-    want = re.sub(r"[^a-z0-9]", "", album["title"].lower())
-    got  = re.sub(r"[^a-z0-9]", "", title.lower())
-    if want[:12] not in got and got[:12] not in want:
+    norm = lambda t: re.sub(r"\b(the|a|an|album|deluxe|edition|remaster(ed)?)\b|[^a-z0-9 ]", "", t.lower()).split()
+    want, got = norm(album["title"]), norm(title)
+    ratio = difflib.SequenceMatcher(None, " ".join(want), " ".join(got)).ratio()
+    if ratio < 0.6:
         print(f'  ! spotify link says "{title}", album is "{album["title"]}" — check it')
     else:
         print(f"  spotify ✓ {title}")

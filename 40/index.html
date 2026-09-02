@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>40 albums · 40 days — drewroper</title>
+  <meta name="description" content="Forty records that mattered, one a day, counting up to forty." />
+  <meta name="theme-color" content="#0c0c0d" />
+  <link rel="icon" type="image/svg+xml" href="../assets/dr-logo.svg" />
+  <meta property="og:title" content="40 albums · 40 days" />
+  <meta property="og:description" content="Forty records that mattered, one a day, counting up to forty." />
+  <meta property="og:url" content="https://drewroper.com/40" />
+  <meta property="og:image" content="https://drewroper.com/assets/og-image.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg:         #0c0c0d;
+      --bg-raised:  #131315;
+      --rule:       #262628;
+      --text:       #f4f1ec;
+      --text-muted: #8c8a86;
+      --text-faint: #56544f;
+      --accent:     #d6ff38;
+      --mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+      --measure: 62ch;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    html { background: var(--bg); scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text-muted);
+      font-family: var(--mono);
+      font-size: 13px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    ::selection { background: var(--accent); color: var(--bg); }
+    a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--text-faint); }
+    a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+    .page { max-width: 880px; margin: 0 auto; padding: 20px 20px 96px; }
+
+    /* Sticky top strip, same idea as log.html: the site link, then the
+       running tally. Negative margins push the background full-bleed. */
+    .meta {
+      position: sticky; top: 0; z-index: 10;
+      margin: -20px -20px 0; padding: 20px 20px 12px;
+      background: var(--bg);
+      color: var(--text-faint);
+      display: flex; flex-wrap: wrap; gap: 0 10px;
+    }
+    .meta__tally { color: var(--text-muted); }
+    .meta__next  { color: var(--text-faint); }
+
+    /* Title block */
+    .head { padding: 56px 0 40px; border-bottom: 1px solid var(--rule); }
+    .head__eyebrow { color: var(--text-faint); letter-spacing: .12em; text-transform: uppercase; font-size: 11px; }
+    .head__title {
+      margin: 10px 0 0; color: var(--text);
+      font-size: clamp(28px, 6vw, 52px); font-weight: 500; line-height: 1.05; letter-spacing: -.02em;
+    }
+    .head__title em { color: var(--accent); font-style: normal; }
+    .head__lede { max-width: var(--measure); margin: 20px 0 0; color: var(--text-muted); font-size: 14px; }
+
+    /* Progress: 40 cells, filled as records post. */
+    .track { display: grid; grid-template-columns: repeat(40, 1fr); gap: 3px; margin: 28px 0 0; }
+    .track__cell { height: 6px; background: var(--rule); border-radius: 1px; }
+    .track__cell.is-done { background: var(--accent); }
+    .track__cell.is-today { background: var(--text); }
+
+    /* Entries */
+    .entry { padding: 48px 0; border-bottom: 1px solid var(--rule); scroll-margin-top: 64px; }
+    .entry__head {
+      display: flex; justify-content: space-between; align-items: baseline;
+      color: var(--text-faint); font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+    }
+    .entry__no { color: var(--accent); }
+    .entry__no a { color: inherit; border: 0; }
+    .entry__no a:hover { color: var(--text); }
+
+    .entry__grid {
+      display: grid; grid-template-columns: 220px 1fr; gap: 28px; align-items: start; margin-top: 22px;
+    }
+    .entry__cover {
+      display: block; width: 100%; aspect-ratio: 1; object-fit: cover;
+      background: var(--bg-raised); border: 1px solid var(--rule);
+    }
+    .entry__artist { margin: 0; color: var(--text-muted); font-size: 14px; }
+    .entry__title  { margin: 2px 0 0; color: var(--text); font-size: 22px; font-weight: 500; line-height: 1.2; letter-spacing: -.01em; }
+    .entry__facts  { margin: 12px 0 0; color: var(--text-faint); }
+    .entry__facts span + span::before { content: ' · '; }
+    .entry__found  { margin: 14px 0 0; color: var(--text-muted); }
+    .entry__found b { color: var(--text-faint); font-weight: 400; }
+
+    .entry__blurb { max-width: var(--measure); margin: 24px 0 0; color: var(--text); font-size: 15px; line-height: 1.7; }
+    .entry__blurb p { margin: 0 0 1.1em; }
+    .entry__blurb p:last-child { margin-bottom: 0; }
+    .entry__blurb em { font-style: italic; color: var(--text); }
+    .entry__blurb--empty { color: var(--text-faint); font-style: italic; }
+
+    .entry__player { margin: 26px 0 0; max-width: 660px; }
+    .entry__player iframe { width: 100%; height: 450px; border: 0; overflow: hidden; background: transparent; border-radius: 10px; }
+    .entry__noplayer { color: var(--text-faint); }
+
+    details { margin: 18px 0 0; }
+    summary { cursor: pointer; color: var(--text-faint); list-style: none; user-select: none; }
+    summary::-webkit-details-marker { display: none; }
+    summary::before { content: '▸ '; }
+    details[open] summary::before { content: '▾ '; }
+    summary:hover { color: var(--text); }
+    .tracks { margin: 10px 0 0; padding: 0; list-style: none; columns: 2; column-gap: 32px; max-width: 660px; }
+    .tracks li { display: flex; gap: 12px; break-inside: avoid; padding: 2px 0; }
+    .tracks__n { color: var(--text-faint); flex: none; width: 2ch; text-align: right; }
+    .tracks__t { color: var(--text-muted); flex: 1; }
+    .tracks__d { color: var(--text-faint); flex: none; }
+
+    .empty { padding: 72px 0; color: var(--text-faint); }
+    .empty b { color: var(--text); font-weight: 400; }
+
+    .foot { padding: 40px 0 0; color: var(--text-faint); }
+
+    @media (max-width: 640px) {
+      .entry__grid { grid-template-columns: 1fr; gap: 20px; }
+      .entry__cover { max-width: 280px; }
+      .tracks { columns: 1; }
+      .entry__player iframe { height: 450px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="meta">
+      <a href="/">← drewroper.com</a>
+      <span>·</span>
+      <span class="meta__tally" id="js-tally">…</span>
+      <span class="meta__next" id="js-next"></span>
+    </div>
+
+    <header class="head">
+      <p class="head__eyebrow">Sep 23 → Nov 1, 2026</p>
+      <h1 class="head__title">40 albums, <em>40 days</em>, 40 years.</h1>
+      <p class="head__lede">
+        I turn forty on November 1st. Counting up to it one record a day — not a ranking,
+        just the albums that did something to me, and when, and why. Posted to Instagram
+        each morning; archived here with the full story and a player.
+      </p>
+      <div class="track" id="js-track" aria-hidden="true"></div>
+    </header>
+
+    <section id="js-feed" class="empty">Loading…</section>
+
+    <p class="foot">Written by hand. Metadata via Apple Music. Covers belong to their labels.</p>
+  </main>
+
+  <script>
+  (() => {
+    const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+    // "Today" in Denver — the countdown runs on the day the story posts,
+    // not on wherever the reader's browser happens to be.
+    const today = new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'America/Denver', year: 'numeric', month: '2-digit', day: '2-digit',
+    }).format(new Date());
+
+    // ?preview shows every slotted record regardless of date, so a blurb
+    // can be proofed before it goes live.
+    const preview = new URLSearchParams(location.search).has('preview');
+
+    const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+    // Blurbs are plain paragraphs; _underscores_ become italics for titles.
+    const inline = s => esc(s).replace(/_([^_]+)_/g, '<em>$1</em>');
+    const pad = n => String(n).padStart(2, '0');
+    const fmtDate = iso => {
+      const [y, m, d] = iso.split('-').map(Number);
+      return `${MONTHS[m - 1]} ${d}, ${y}`;
+    };
+    const fmtMs = ms => {
+      const s = Math.round(ms / 1000);
+      const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), r = s % 60;
+      return h ? `${h}:${pad(m)}:${pad(r)}` : `${m}:${pad(r)}`;
+    };
+    const daysBetween = (a, b) => Math.round((new Date(b) - new Date(a)) / 864e5);
+
+    function player(a) {
+      if (!a.apple_id) {
+        return `<p class="entry__noplayer">Not on Apple Music.${a.link ? ` <a href="${esc(a.link)}" target="_blank" rel="noopener">Listen here</a>.` : ''}</p>`;
+      }
+      const slug = (a.apple_url || '').split('/').slice(-2, -1)[0] || a.slug;
+      return `<iframe loading="lazy" title="${esc(a.artist)} — ${esc(a.title)} on Apple Music"
+        allow="autoplay *; encrypted-media *; clipboard-write"
+        sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+        src="https://embed.music.apple.com/us/album/${esc(slug)}/${a.apple_id}?theme=dark"></iframe>`;
+    }
+
+    function tracks(a) {
+      if (!a.tracks || !a.tracks.length) return '';
+      return `<details>
+        <summary>Tracklist</summary>
+        <ol class="tracks">${a.tracks.map(t => `
+          <li><span class="tracks__n">${pad(t.n)}</span><span class="tracks__t">${esc(t.title)}</span><span class="tracks__d">${fmtMs(t.ms)}</span></li>`).join('')}
+        </ol>
+      </details>`;
+    }
+
+    function entry(a) {
+      const facts = [a.year, a.label, a.track_count && `${a.track_count} tracks`, a.runtime_ms && fmtMs(a.runtime_ms)]
+        .filter(Boolean).map(f => `<span>${esc(f)}</span>`).join('');
+      const blurb = a.blurb && a.blurb.length
+        ? a.blurb.map(p => `<p>${inline(p)}</p>`).join('')
+        : `<p class="entry__blurb--empty">Blurb still cooking.</p>`;
+      return `<article class="entry" id="${pad(a.no)}">
+        <div class="entry__head">
+          <span class="entry__no"><a href="#${pad(a.no)}">No. ${pad(a.no)}</a></span>
+          <span>${fmtDate(a.date)}</span>
+        </div>
+        <div class="entry__grid">
+          <img class="entry__cover" src="../${esc(a.art || '')}" alt="${esc(a.title)} cover" loading="lazy" />
+          <div>
+            <p class="entry__artist">${esc(a.artist)}</p>
+            <h2 class="entry__title">${esc(a.title)}</h2>
+            <p class="entry__facts">${facts}</p>
+            ${a.discovered ? `<p class="entry__found"><b>Found it:</b> ${inline(a.discovered)}</p>` : ''}
+          </div>
+        </div>
+        <div class="entry__blurb">${blurb}</div>
+        <div class="entry__player">${player(a)}</div>
+        ${tracks(a)}
+      </article>`;
+    }
+
+    fetch('../data/albums.json?v=' + Date.now())
+      .then(r => r.json())
+      .then(({ meta, albums }) => {
+        const slotted = albums.filter(a => a.no && a.date).sort((x, y) => x.no - y.no);
+        const live    = slotted.filter(a => preview || a.date <= today);
+        const upNext  = slotted.find(a => a.date > today);
+
+        document.getElementById('js-tally').textContent =
+          `${pad(live.length)} of ${meta.total} posted`;
+        document.getElementById('js-next').textContent = upNext
+          ? `· next: ${fmtDate(upNext.date)}`
+          : (live.length >= meta.total ? '· done.' : '');
+
+        document.getElementById('js-track').innerHTML = Array.from({ length: meta.total }, (_, i) => {
+          const a = slotted[i];
+          const cls = a && a.date < today ? ' is-done' : a && a.date === today ? ' is-today' : '';
+          return `<span class="track__cell${cls}"></span>`;
+        }).join('');
+
+        const feed = document.getElementById('js-feed');
+        if (!live.length) {
+          const n = daysBetween(today, meta.start);
+          feed.innerHTML = `<b>Nothing yet.</b> First record drops ${fmtDate(meta.start)}` +
+            (n > 0 ? ` — ${n} day${n === 1 ? '' : 's'} out.` : '.');
+          return;
+        }
+        feed.className = '';
+        // Newest on top, like a blog.
+        feed.innerHTML = live.slice().reverse().map(entry).join('');
+        if (location.hash) {
+          const el = document.getElementById(location.hash.slice(1));
+          if (el) el.scrollIntoView();
+        }
+      })
+      .catch(err => {
+        document.getElementById('js-feed').textContent = 'Could not load albums.json — ' + err.message;
+      });
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Broncos tickets 2026 — drewroper</title>
+  <meta name="description" content="Who's got the Broncos home game tickets this season." />
+  <meta name="theme-color" content="#0c0c0d" />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/svg+xml" href="../assets/dr-logo.svg" />
+  <meta property="og:title" content="Broncos tickets 2026" />
+  <meta property="og:description" content="Who's got the Broncos home game tickets this season." />
+  <meta property="og:url" content="https://drewroper.com/broncos" />
+  <meta property="og:image" content="https://drewroper.com/assets/og-image.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Geist:wght@300..600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* Same type system as the homepage and /40: Geist for reading, Geist
+       Mono at 11px for labels. Accent is Broncos orange instead of the
+       site's lime, because it's a Broncos page. */
+    :root {
+      --bg:         #0c0c0d;
+      --bg-raised:  #131315;
+      --bg-hover:   #19191c;
+      --rule:       #262628;
+      --rule-soft:  #1c1c1f;
+      --text:       #f4f1ec;
+      --text-muted: #8c8a86;
+      --text-faint: #56544f;
+      --accent:     #fb4f14;
+      --accent-ink: #0c0c0d;
+      --ok:         #7ee787;
+      --warn:       #ffb000;
+      --font-display: 'Bricolage Grotesque', 'Geist', -apple-system, Helvetica, Arial, sans-serif;
+      --font-sans:    'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      --font-mono:    'Geist Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+      --mono-size: 11px;
+      --pad: 16px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    html { background: var(--bg); }
+    body {
+      background: var(--bg);
+      color: var(--text-muted);
+      font-family: var(--font-sans);
+      font-size: 15px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+    ::selection { background: var(--accent); color: var(--accent-ink); }
+    a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--text-faint); }
+    a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+    button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+    select, input {
+      font: inherit; color: var(--text); background: var(--bg-raised);
+      border: 1px solid var(--rule); border-radius: 6px; padding: 8px 10px;
+    }
+    select:focus, input:focus, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+    [hidden] { display: none !important; }
+
+    .mono {
+      font-family: var(--font-mono); font-size: var(--mono-size);
+      letter-spacing: .08em; text-transform: uppercase;
+    }
+
+    /* ---------- top bar (matches /40) ---------- */
+    .topbar {
+      position: sticky; top: 0; z-index: 10;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 12px var(--pad);
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--rule-soft);
+    }
+    .topbar__brand { border: 0; color: var(--text-muted); }
+    .topbar__brand:hover { color: var(--accent); }
+    .topbar__status { display: inline-flex; align-items: center; gap: 6px; color: var(--text-faint); }
+    .topbar__status .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--text-faint); }
+    .topbar__status.is-live .dot { background: var(--ok); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ok) 20%, transparent); }
+    .topbar__status.is-local .dot { background: var(--warn); }
+    .topbar__status.is-error .dot { background: var(--accent); }
+
+    .wrap { max-width: 720px; margin: 0 auto; padding: 0 var(--pad) 80px; }
+
+    /* ---------- header ---------- */
+    .hero { padding: 36px 0 20px; }
+    .hero h1 {
+      font-family: var(--font-display); font-weight: 700; font-size: clamp(34px, 8vw, 56px);
+      line-height: .95; letter-spacing: -.02em; color: var(--text); margin: 6px 0 12px;
+      font-variation-settings: 'wdth' 90;
+    }
+    .hero p { margin: 0; max-width: 46ch; }
+    .hero .eyebrow { color: var(--accent); }
+
+    /* ---------- banners ---------- */
+    .banner {
+      display: flex; gap: 10px; align-items: flex-start;
+      padding: 12px 14px; border-radius: 8px; margin: 0 0 20px;
+      background: var(--bg-raised); border: 1px solid var(--rule); color: var(--text-muted);
+      font-size: 14px;
+    }
+    .banner.is-warn { border-color: color-mix(in srgb, var(--warn) 45%, var(--rule)); }
+    .banner.is-error { border-color: color-mix(in srgb, var(--accent) 60%, var(--rule)); }
+    .banner strong { color: var(--text); font-weight: 500; }
+
+    /* ---------- "who are you" ---------- */
+    .me {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px;
+      padding: 14px 0; border-top: 1px solid var(--rule-soft); border-bottom: 1px solid var(--rule-soft);
+      margin-bottom: 22px;
+    }
+    .me label { color: var(--text-faint); }
+    .me select { min-width: 160px; }
+    .me__hint { color: var(--text-faint); font-size: 13px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 7px 12px 7px 9px; border-radius: 999px;
+      border: 1px solid var(--rule); background: var(--bg-raised); color: var(--text);
+      font-size: 14px; line-height: 1; cursor: pointer; transition: border-color .12s, background .12s;
+    }
+    .chip:hover { border-color: var(--text-faint); background: var(--bg-hover); }
+    .chip.is-me { border-color: var(--accent); }
+    .chip .swatch { width: 9px; height: 9px; border-radius: 50%; background: var(--c, var(--text-faint)); flex: none; }
+    .chip .count { color: var(--text-faint); font-family: var(--font-mono); font-size: 11px; }
+
+    /* ---------- section headings ---------- */
+    .section { margin: 26px 0 0; }
+    .section__head {
+      display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+      padding-bottom: 10px; border-bottom: 1px solid var(--rule); margin-bottom: 14px;
+    }
+    .section__head h2 { margin: 0; font-size: 12px; font-weight: 500; color: var(--text-faint); }
+    .section__head .sub { color: var(--text-faint); font-size: 13px; }
+
+    /* ---------- filters ---------- */
+    .filters { display: flex; gap: 4px; padding: 2px; background: var(--bg-raised); border: 1px solid var(--rule); border-radius: 8px; }
+    .filters button { flex: 1; padding: 7px 10px; border-radius: 6px; color: var(--text-muted); }
+    .filters button.is-on { background: var(--bg-hover); color: var(--text); box-shadow: inset 0 0 0 1px var(--rule); }
+    .filters button .n { color: var(--text-faint); margin-left: 4px; }
+
+    /* ---------- game cards ---------- */
+    .games { display: flex; flex-direction: column; gap: 12px; margin-top: 14px; }
+    .game {
+      position: relative;
+      background: var(--bg-raised); border: 1px solid var(--rule); border-radius: 12px;
+      padding: 16px 16px 14px; overflow: hidden;
+    }
+    .game.is-past { opacity: .55; }
+    .game.is-next { border-color: color-mix(in srgb, var(--accent) 60%, var(--rule)); }
+    .game.is-open { border-color: color-mix(in srgb, var(--warn) 55%, var(--rule)); }
+    .game.is-mine::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--accent);
+    }
+    .game__meta { display: flex; flex-wrap: wrap; gap: 4px 10px; color: var(--text-faint); margin-bottom: 8px; }
+    .game__meta .week { color: var(--text-muted); }
+    .game__meta .tag { color: var(--accent); }
+    .game__meta .tag.is-next { color: var(--ok); }
+    .game__title {
+      display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+      margin: 0 0 4px;
+    }
+    .game__title h3 {
+      margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 26px; line-height: 1.05;
+      letter-spacing: -.015em; color: var(--text);
+    }
+    .game__title h3 .vs { color: var(--text-faint); font-weight: 400; font-size: .7em; margin-right: 4px; }
+    .game__when { color: var(--text-muted); font-size: 14px; }
+    .game__when .time { color: var(--text); }
+
+    .holder {
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+      margin: 12px 0 0; padding: 10px 12px; border-radius: 8px; background: var(--bg); border: 1px solid var(--rule-soft);
+      font-size: 14px;
+    }
+    .holder .k { color: var(--text-faint); }
+    .holder .who { color: var(--text); font-weight: 500; display: inline-flex; align-items: center; gap: 6px; }
+    .holder .who .swatch { width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
+    .holder .note { color: var(--text-faint); font-size: 12px; }
+    .holder.is-open { border-color: color-mix(in srgb, var(--warn) 50%, var(--rule)); }
+    .holder.is-open .who { color: var(--warn); }
+    .holder .assign { margin-left: auto; }
+    .holder select { padding: 5px 8px; font-size: 13px; border-radius: 6px; color: var(--text-muted); max-width: 150px; }
+
+    .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 9px 14px; border-radius: 8px; font-size: 14px; line-height: 1;
+      border: 1px solid var(--rule); color: var(--text); background: var(--bg);
+      transition: background .12s, border-color .12s, color .12s;
+    }
+    .btn:hover { background: var(--bg-hover); border-color: var(--text-faint); }
+    .btn.is-primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 500; }
+    .btn.is-primary:hover { background: #ff6a36; border-color: #ff6a36; }
+    .btn.is-quiet { color: var(--text-muted); }
+    .btn.is-out { border-color: color-mix(in srgb, var(--warn) 50%, var(--rule)); color: var(--warn); }
+    .btn:disabled { opacity: .45; cursor: default; }
+    .btn.is-link { border: 0; padding: 9px 4px; color: var(--text-faint); }
+    .btn.is-link:hover { color: var(--accent); background: none; }
+
+    .avail { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--rule-soft); }
+    .avail .lbl { width: 100%; color: var(--text-faint); margin-bottom: 2px; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 6px; padding: 5px 9px 5px 7px;
+      border-radius: 999px; border: 1px solid var(--rule-soft); font-size: 13px; color: var(--text-muted);
+      cursor: pointer; background: transparent;
+    }
+    .pill:hover { border-color: var(--text-faint); }
+    .pill .swatch { width: 7px; height: 7px; border-radius: 50%; background: var(--c); }
+    .pill.is-holder { color: var(--text); border-color: var(--rule); }
+    .pill.is-holder::after { content: '🎟'; font-size: 11px; }
+    .pill.is-out { text-decoration: line-through; color: var(--text-faint); }
+    .pill.is-out .swatch { opacity: .35; }
+    .pill.is-out::after { content: 'out'; font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; color: var(--warn); }
+
+    /* ---------- calendars ---------- */
+    .cal { display: grid; gap: 10px; }
+    .cal__row {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px;
+      padding: 12px 14px; background: var(--bg-raised); border: 1px solid var(--rule); border-radius: 10px;
+    }
+    .cal__row .t { color: var(--text); flex: 1 1 200px; }
+    .cal__row .d { color: var(--text-faint); font-size: 13px; width: 100%; }
+    .cal__row code { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); word-break: break-all; }
+
+    /* ---------- people ---------- */
+    details.people { margin-top: 26px; }
+    details.people summary {
+      cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: baseline;
+      padding-bottom: 10px; border-bottom: 1px solid var(--rule); color: var(--text-faint); font-size: 12px; font-weight: 500;
+    }
+    details.people summary::-webkit-details-marker { display: none; }
+    details.people summary .sub { font-size: 13px; }
+    details.people[open] summary .sub { display: none; }
+    .people__list { display: flex; flex-direction: column; margin-top: 10px; }
+    .person {
+      display: grid; grid-template-columns: 14px 1fr auto; gap: 10px 12px; align-items: center;
+      padding: 10px 0; border-bottom: 1px solid var(--rule-soft);
+    }
+    .person .swatch { width: 12px; height: 12px; border-radius: 50%; background: var(--c); border: 0; cursor: pointer; padding: 0; }
+    .person .name { color: var(--text); font-weight: 500; background: none; border: 0; padding: 0; text-align: left; }
+    .person .name:hover { color: var(--accent); }
+    .person .default { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-muted); cursor: pointer; }
+    .person .default input { accent-color: var(--accent); margin: 0; }
+    .person .tools { display: flex; gap: 6px; }
+    .person__add { display: flex; gap: 8px; margin-top: 12px; }
+    .person__add input { flex: 1; }
+    .people__help { margin: 12px 0 0; font-size: 13px; color: var(--text-faint); max-width: 56ch; }
+
+    .foot { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--rule-soft); color: var(--text-faint); font-size: 13px; }
+    .foot a { color: var(--text-muted); }
+
+    .toast {
+      position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px);
+      background: var(--text); color: var(--bg); padding: 10px 14px; border-radius: 8px; font-size: 14px;
+      opacity: 0; pointer-events: none; transition: opacity .18s, transform .18s; z-index: 20; max-width: calc(100vw - 32px);
+    }
+    .toast.is-on { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    @media (min-width: 640px) {
+      :root { --pad: 24px; }
+      .game { padding: 20px 20px 16px; }
+      .game__title h3 { font-size: 30px; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="topbar__brand mono" href="../">← drewroper</a>
+    <span id="status" class="topbar__status mono"><span class="dot"></span><span class="txt">Loading</span></span>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="eyebrow mono">2026 season · Empower Field at Mile High</div>
+      <h1>Broncos tickets</h1>
+      <p>Eight home games. Pick the ones you want, mark the ones you can't make, and the rest default to Drew &amp; Megan. Updates show up for everyone instantly.</p>
+    </section>
+
+    <div id="banner" hidden></div>
+
+    <section class="me">
+      <label class="mono" for="me">You are</label>
+      <select id="me"><option value="">Pick your name…</option></select>
+      <span class="me__hint" id="me-hint">Remembered on this device.</span>
+    </section>
+
+    <section class="section" id="summary">
+      <div class="section__head"><h2 class="mono">Who's got what</h2><span class="sub" id="summary-sub"></span></div>
+      <div class="chips" id="chips"></div>
+    </section>
+
+    <section class="section">
+      <div class="section__head"><h2 class="mono">Home games</h2><span class="sub">All times Mountain</span></div>
+      <div class="filters" id="filters">
+        <button data-filter="all" class="is-on">All</button>
+        <button data-filter="mine">Mine</button>
+        <button data-filter="open">Needs a taker</button>
+      </div>
+      <div class="games" id="games"></div>
+    </section>
+
+    <section class="section">
+      <div class="section__head"><h2 class="mono">Calendars</h2></div>
+      <div class="cal" id="cal"></div>
+    </section>
+
+    <details class="people" id="people">
+      <summary><span class="mono">Manage people</span><span class="sub">Add, rename, remove, set who gets unclaimed games</span></summary>
+      <div class="people__list" id="people-list"></div>
+      <form class="person__add" id="person-add">
+        <input type="text" name="name" placeholder="Add someone (e.g. Uncle Rob)" maxlength="32" autocomplete="off" required />
+        <button class="btn" type="submit">Add</button>
+      </form>
+      <p class="people__help">Everyone can see and edit everything — it's a family page, not a bank. “Gets unclaimed games” means a game nobody has taken defaults to that person. Tap a name to rename, tap the dot to recolor.</p>
+    </details>
+
+    <p class="foot">Schedule verified Sep 2, 2026. Kickoff times can flex; the Week 18 time is announced late in the season. <a href="https://www.denverbroncos.com/schedule/">Official schedule</a></p>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

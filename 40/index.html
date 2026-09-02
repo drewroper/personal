@@ -14,9 +14,11 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
 
   <style>
+    /* Same type system as the homepage: Geist for reading, Geist Mono at
+       11px for labels and metadata, Instrument Serif for headlines. */
     :root {
       --bg:         #0c0c0d;
       --bg-raised:  #131315;
@@ -25,8 +27,11 @@
       --text-muted: #8c8a86;
       --text-faint: #56544f;
       --accent:     #d6ff38;
-      --mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
-      --measure: 62ch;
+      --font-display: 'Instrument Serif', 'Times New Roman', Times, serif;
+      --font-sans:    'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      --font-mono:    'Geist Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+      --mono-size: 11px;
+      --measure: 60ch;
     }
     *, *::before, *::after { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
@@ -34,9 +39,9 @@
     body {
       background: var(--bg);
       color: var(--text-muted);
-      font-family: var(--mono);
-      font-size: 13px;
-      line-height: 1.6;
+      font-family: var(--font-sans);
+      font-size: 15px;
+      line-height: 1.55;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
@@ -44,10 +49,15 @@
     a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--text-faint); }
     a:hover { color: var(--accent); border-bottom-color: var(--accent); }
 
+    /* Label voice — every small-caps mono string on the page. */
+    .mono {
+      font-family: var(--font-mono); font-size: var(--mono-size);
+      letter-spacing: .08em; text-transform: uppercase;
+    }
+
     .page { max-width: 880px; margin: 0 auto; padding: 20px 20px 96px; }
 
-    /* Sticky top strip, same idea as log.html: the site link, then the
-       running tally. Negative margins push the background full-bleed. */
+    /* Sticky top strip: site link, then the running tally. */
     .meta {
       position: sticky; top: 0; z-index: 10;
       margin: -20px -20px 0; padding: 20px 20px 12px;
@@ -55,72 +65,73 @@
       color: var(--text-faint);
       display: flex; flex-wrap: wrap; gap: 0 10px;
     }
+    .meta a { border-bottom-color: var(--text-faint); }
     .meta__tally { color: var(--text-muted); }
     .meta__next  { color: var(--text-faint); }
 
     /* Title block */
-    .head { padding: 56px 0 40px; border-bottom: 1px solid var(--rule); }
-    .head__eyebrow { color: var(--text-faint); letter-spacing: .12em; text-transform: uppercase; font-size: 11px; }
+    .head { padding: 64px 0 44px; border-bottom: 1px solid var(--rule); }
+    .head__eyebrow { margin: 0; color: var(--text-faint); }
     .head__title {
-      margin: 10px 0 0; color: var(--text);
-      font-size: clamp(28px, 6vw, 52px); font-weight: 500; line-height: 1.05; letter-spacing: -.02em;
+      margin: 14px 0 0; color: var(--text);
+      font-family: var(--font-display); font-weight: 400;
+      font-size: clamp(44px, 8vw, 80px); line-height: .98; letter-spacing: -.01em;
     }
-    .head__title em { color: var(--accent); font-style: normal; }
-    .head__lede { max-width: var(--measure); margin: 20px 0 0; color: var(--text-muted); font-size: 14px; }
+    .head__title em { color: var(--accent); font-style: italic; }
+    .head__lede { max-width: var(--measure); margin: 24px 0 0; color: var(--text-muted); font-size: 17px; line-height: 1.5; font-weight: 300; }
 
     /* Progress: 40 cells, filled as records post. */
-    .track { display: grid; grid-template-columns: repeat(40, 1fr); gap: 3px; margin: 28px 0 0; }
+    .track { display: grid; grid-template-columns: repeat(40, 1fr); gap: 3px; margin: 32px 0 0; }
     .track__cell { height: 6px; background: var(--rule); border-radius: 1px; }
     .track__cell.is-done { background: var(--accent); }
     .track__cell.is-today { background: var(--text); }
 
     /* Entries */
-    .entry { padding: 48px 0; border-bottom: 1px solid var(--rule); scroll-margin-top: 64px; }
-    .entry__head {
-      display: flex; justify-content: space-between; align-items: baseline;
-      color: var(--text-faint); font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
-    }
+    .entry { padding: 52px 0; border-bottom: 1px solid var(--rule); scroll-margin-top: 64px; }
+    .entry__head { display: flex; justify-content: space-between; align-items: baseline; color: var(--text-faint); }
     .entry__no { color: var(--accent); }
     .entry__no a { color: inherit; border: 0; }
     .entry__no a:hover { color: var(--text); }
 
-    .entry__grid {
-      display: grid; grid-template-columns: 220px 1fr; gap: 28px; align-items: start; margin-top: 22px;
-    }
+    .entry__grid { display: grid; grid-template-columns: 220px 1fr; gap: 28px; align-items: start; margin-top: 24px; }
     .entry__cover {
       display: block; width: 100%; aspect-ratio: 1; object-fit: cover;
       background: var(--bg-raised); border: 1px solid var(--rule);
     }
-    .entry__artist { margin: 0; color: var(--text-muted); font-size: 14px; }
-    .entry__title  { margin: 2px 0 0; color: var(--text); font-size: 22px; font-weight: 500; line-height: 1.2; letter-spacing: -.01em; }
-    .entry__facts  { margin: 12px 0 0; color: var(--text-faint); }
+    .entry__artist { margin: 0; color: var(--text-muted); font-size: 15px; }
+    .entry__title  {
+      margin: 2px 0 0; color: var(--text);
+      font-family: var(--font-display); font-weight: 400;
+      font-size: 38px; line-height: 1.05; letter-spacing: -.005em;
+    }
+    .entry__facts  { margin: 14px 0 0; color: var(--text-faint); }
     .entry__facts span + span::before { content: ' · '; }
-    .entry__found  { margin: 14px 0 0; color: var(--text-muted); }
-    .entry__found b { color: var(--text-faint); font-weight: 400; }
+    .entry__found  { margin: 16px 0 0; color: var(--text-muted); font-size: 14px; }
+    .entry__found b { font-weight: 400; color: var(--text-faint); margin-right: .4em; }
 
-    .entry__blurb { max-width: var(--measure); margin: 24px 0 0; color: var(--text); font-size: 15px; line-height: 1.7; }
+    .entry__blurb { max-width: var(--measure); margin: 28px 0 0; color: var(--text); font-size: 17px; line-height: 1.6; font-weight: 300; }
     .entry__blurb p { margin: 0 0 1.1em; }
     .entry__blurb p:last-child { margin-bottom: 0; }
-    .entry__blurb em { font-style: italic; color: var(--text); }
-    .entry__blurb--empty { color: var(--text-faint); font-style: italic; }
+    .entry__blurb em { font-style: italic; }
+    .entry__blurb--empty { color: var(--text-faint); }
 
-    .entry__player { margin: 26px 0 0; max-width: 660px; }
+    .entry__player { margin: 28px 0 0; max-width: 660px; }
     .entry__player iframe { width: 100%; height: 450px; border: 0; overflow: hidden; background: transparent; border-radius: 10px; }
-    .entry__noplayer { color: var(--text-faint); }
+    .entry__noplayer { color: var(--text-faint); font-size: 14px; }
 
-    details { margin: 18px 0 0; }
+    details { margin: 20px 0 0; }
     summary { cursor: pointer; color: var(--text-faint); list-style: none; user-select: none; }
     summary::-webkit-details-marker { display: none; }
     summary::before { content: '▸ '; }
     details[open] summary::before { content: '▾ '; }
     summary:hover { color: var(--text); }
-    .tracks { margin: 10px 0 0; padding: 0; list-style: none; columns: 2; column-gap: 32px; max-width: 660px; }
-    .tracks li { display: flex; gap: 12px; break-inside: avoid; padding: 2px 0; }
-    .tracks__n { color: var(--text-faint); flex: none; width: 2ch; text-align: right; }
+    .tracks { margin: 12px 0 0; padding: 0; list-style: none; columns: 2; column-gap: 32px; max-width: 660px; font-size: 14px; }
+    .tracks li { display: flex; gap: 12px; break-inside: avoid; padding: 3px 0; }
+    .tracks__n { color: var(--text-faint); flex: none; width: 2.2em; text-align: right; }
     .tracks__t { color: var(--text-muted); flex: 1; }
     .tracks__d { color: var(--text-faint); flex: none; }
 
-    .empty { padding: 72px 0; color: var(--text-faint); }
+    .empty { padding: 72px 0; color: var(--text-faint); font-size: 17px; font-weight: 300; }
     .empty b { color: var(--text); font-weight: 400; }
 
     .foot { padding: 40px 0 0; color: var(--text-faint); }
@@ -128,14 +139,14 @@
     @media (max-width: 640px) {
       .entry__grid { grid-template-columns: 1fr; gap: 20px; }
       .entry__cover { max-width: 280px; }
+      .entry__title { font-size: 32px; }
       .tracks { columns: 1; }
-      .entry__player iframe { height: 450px; }
     }
   </style>
 </head>
 <body>
   <main class="page">
-    <div class="meta">
+    <div class="meta mono">
       <a href="/">← drewroper.com</a>
       <span>·</span>
       <span class="meta__tally" id="js-tally">…</span>
@@ -143,7 +154,7 @@
     </div>
 
     <header class="head">
-      <p class="head__eyebrow">Sep 23 → Nov 1, 2026</p>
+      <p class="head__eyebrow mono">Sep 23 → Nov 1, 2026</p>
       <h1 class="head__title">40 albums, <em>40 days</em>, 40 years.</h1>
       <p class="head__lede">
         I turn forty on November 1st. Counting up to it one record a day — not a ranking,
@@ -155,7 +166,7 @@
 
     <section id="js-feed" class="empty">Loading…</section>
 
-    <p class="foot">Written by hand. Metadata via Apple Music. Covers belong to their labels.</p>
+    <p class="foot mono">Written by hand. Metadata via Apple Music. Covers belong to their labels.</p>
   </main>
 
   <script>
@@ -201,9 +212,9 @@
     function tracks(a) {
       if (!a.tracks || !a.tracks.length) return '';
       return `<details>
-        <summary>Tracklist</summary>
+        <summary class="mono">Tracklist</summary>
         <ol class="tracks">${a.tracks.map(t => `
-          <li><span class="tracks__n">${pad(t.n)}</span><span class="tracks__t">${esc(t.title)}</span><span class="tracks__d">${fmtMs(t.ms)}</span></li>`).join('')}
+          <li><span class="tracks__n mono">${pad(t.n)}</span><span class="tracks__t">${esc(t.title)}</span><span class="tracks__d mono">${fmtMs(t.ms)}</span></li>`).join('')}
         </ol>
       </details>`;
     }
@@ -215,7 +226,7 @@
         ? a.blurb.map(p => `<p>${inline(p)}</p>`).join('')
         : `<p class="entry__blurb--empty">Blurb still cooking.</p>`;
       return `<article class="entry" id="${pad(a.no)}">
-        <div class="entry__head">
+        <div class="entry__head mono">
           <span class="entry__no"><a href="#${pad(a.no)}">No. ${pad(a.no)}</a></span>
           <span>${fmtDate(a.date)}</span>
         </div>
@@ -224,7 +235,7 @@
           <div>
             <p class="entry__artist">${esc(a.artist)}</p>
             <h2 class="entry__title">${esc(a.title)}</h2>
-            <p class="entry__facts">${facts}</p>
+            <p class="entry__facts mono">${facts}</p>
             ${a.discovered ? `<p class="entry__found"><b>Found it:</b> ${inline(a.discovered)}</p>` : ''}
           </div>
         </div>

@@ -25,22 +25,3 @@ export const GAMES = [
   // Week 18 date is set; the league announces the kickoff time late in the season.
   { id: 'wk18', week: 18, opponent: 'Los Angeles Chargers', short: 'Chargers', kickoff: null, date: '2027-01-10',   tv: 'TBA',         tag: 'Kickoff TBA' },
 ];
-
-// First-run data. Only used the very first time the shared database is
-// created (or on a fresh device in local mode). After that, edit people in
-// the app itself.
-export const SEED = {
-  people: {
-    drew:  { name: 'Drew',  color: '#FFB000', order: 1, defaultHolder: true  },
-    megan: { name: 'Megan', color: '#FF6FA5', order: 2, defaultHolder: true  },
-    mikey: { name: 'Mikey', color: '#5AB4FF', order: 3, defaultHolder: false },
-    mason: { name: 'Mason', color: '#7EE787', order: 4, defaultHolder: false },
-    jenny: { name: 'Jenny', color: '#C792EA', order: 5, defaultHolder: false },
-  },
-  // gameId -> personId. Mason already has the Raiders game.
-  claims: { wk11: 'mason' },
-  // gameId -> { personId: true }
-  unavailable: {},
-  // gameId -> free text
-  notes: {},
-};

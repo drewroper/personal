@@ -1,35 +1,20 @@
-import { GAMES, SEED, SEASON, VENUE, VENUE_ADDRESS, TEAM } from './schedule.js';
-import { config } from './config.js';
-import { TZ, gameDate, gameEnd, icsUtc, icsDate, nextDay, buildIcs, gameDescription } from './ics.js';
+import { GAMES, SEASON, VENUE, VENUE_ADDRESS } from './schedule.js';
+import { TZ, gameDate, gameEnd, icsUtc, icsDate, nextDay, gameDescription } from './ics.js';
 
-const FIREBASE_CDN = 'https://www.gstatic.com/firebasejs/12.2.1';
-const LS_STATE = `broncos-${SEASON}-state`;
+const POLL_MS = 4000;
 const LS_ME = `broncos-${SEASON}-me`;
 const PALETTE = ['#FFB000', '#FF6FA5', '#5AB4FF', '#7EE787', '#C792EA', '#FF8A5B', '#4DD0E1', '#F4E04D', '#A8E6CF', '#F28B82'];
 
 // ----------------------------------------------------------------------------
-// Store. One shared document: { people, claims, unavailable, notes }.
-// Every mutation is a "patch": a map of dotted paths to values (or DELETE).
-// The Firestore adapter forwards patches as field-path updates, so two people
-// editing different games at the same moment never clobber each other. The
-// local adapter applies the same patches to a copy in localStorage.
+// Store. The server (functions/api/state.js) keeps one shared document:
+// { people, claims, unavailable, notes }. Every change is a "patch": a map of
+// dotted paths to values, with DELETE (sent as null) meaning remove. The
+// server applies patches atomically, so two people editing different games
+// at the same moment never clobber each other. We poll for other people's
+// changes every few seconds while the tab is visible.
 // ----------------------------------------------------------------------------
 const DELETE = Symbol('delete');
-
-function applyPatch(obj, patch) {
-  for (const [path, value] of Object.entries(patch)) {
-    const keys = path.split('.');
-    let cur = obj;
-    for (let i = 0; i < keys.length - 1; i++) {
-      if (typeof cur[keys[i]] !== 'object' || cur[keys[i]] === null) cur[keys[i]] = {};
-      cur = cur[keys[i]];
-    }
-    const last = keys[keys.length - 1];
-    if (value === DELETE) delete cur[last];
-    else cur[last] = value;
-  }
-  return obj;
-}
+const API = '/api/state';
 
 function normalize(data) {
   const s = data && typeof data === 'object' ? data : {};
@@ -41,50 +26,48 @@ function normalize(data) {
   };
 }
 
-function createLocalStore(onChange) {
-  let data;
-  try { data = JSON.parse(localStorage.getItem(LS_STATE)); } catch { data = null; }
-  if (!data) data = structuredClone(SEED);
-  const save = () => { try { localStorage.setItem(LS_STATE, JSON.stringify(data)); } catch {} };
-  save();
-  queueMicrotask(() => onChange(normalize(data)));
-  return {
-    mode: 'local',
-    async patch(p) { applyPatch(data, p); save(); onChange(normalize(structuredClone(data))); },
-  };
+async function apiFetch(url, init) {
+  const res = await fetch(url, { cache: 'no-store', ...init });
+  if (res.status === 401) { location.reload(); throw new Error('Logged out'); }
+  let body = null;
+  try { body = await res.json(); } catch {}
+  if (!res.ok) throw new Error((body && body.error) || `${res.status} ${res.statusText}`);
+  return body;
 }
 
-async function createFirestoreStore(onChange) {
-  const [{ initializeApp }, fs] = await Promise.all([
-    import(`${FIREBASE_CDN}/firebase-app.js`),
-    import(`${FIREBASE_CDN}/firebase-firestore.js`),
-  ]);
-  const app = initializeApp(config.firebase);
-  const db = fs.getFirestore(app);
-  const ref = fs.doc(db, 'broncos', config.seasonDocId || `season-${SEASON}`);
+async function createApiStore(onChange) {
+  let version = 0;
+  let calKey = '';
+  let inflight = null;
 
-  // First visitor ever creates the document from SEED. A transaction keeps two
-  // simultaneous first visitors from both writing it.
-  await fs.runTransaction(db, async (tx) => {
-    const snap = await tx.get(ref);
-    if (!snap.exists()) tx.set(ref, { ...structuredClone(SEED), createdAt: fs.serverTimestamp() });
-  });
+  const load = (since) => {
+    if (inflight) return inflight;
+    inflight = apiFetch(since ? `${API}?since=${since}` : API)
+      .then((j) => {
+        if (j.unchanged) return;
+        version = j.version;
+        if (j.calKey) calKey = j.calKey;
+        onChange(normalize(j.state));
+        setStatus('live', 'Live');
+      })
+      .finally(() => { inflight = null; });
+    return inflight;
+  };
 
-  await new Promise((resolve, reject) => {
-    let first = true;
-    fs.onSnapshot(ref, (snap) => {
-      onChange(normalize(snap.data()));
-      if (first) { first = false; resolve(); }
-    }, (err) => { if (first) { first = false; reject(err); } else setStatus('error', 'Sync error'); });
-  });
+  await load(0);
+  const tick = () => { if (document.visibilityState === 'visible') load(version).catch(() => setStatus('error', 'Reconnecting')); };
+  setInterval(tick, POLL_MS);
+  addEventListener('focus', tick);
+  document.addEventListener('visibilitychange', tick);
 
   return {
-    mode: 'live',
+    get calKey() { return calKey; },
     async patch(p) {
-      const out = {};
-      for (const [k, v] of Object.entries(p)) out[k] = v === DELETE ? fs.deleteField() : v;
-      out.updatedAt = fs.serverTimestamp();
-      await fs.updateDoc(ref, out);
+      const encoded = {};
+      for (const [k, v] of Object.entries(p)) encoded[k] = v === DELETE ? null : v;
+      const j = await apiFetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ patch: encoded }) });
+      version = j.version;
+      onChange(normalize(j.state));
     },
   };
 }
@@ -92,7 +75,7 @@ async function createFirestoreStore(onChange) {
 // ----------------------------------------------------------------------------
 // Derived data
 // ----------------------------------------------------------------------------
-let state = normalize(SEED);
+let state = normalize({});
 let store = null;
 let me = localStorage.getItem(LS_ME) || '';
 let filter = 'all';
@@ -267,21 +250,27 @@ function renderGames() {
 }
 
 function renderCal() {
-  const base = `${location.origin}${location.pathname.replace(/[^/]*$/, '')}`;
-  const icsUrl = `${base}broncos-home-${SEASON}.ics`;
-  const webcal = icsUrl.replace(/^https?:/, 'webcal:');
   const mine = me ? person(me) : null;
-  $('#cal').innerHTML = `
+  const key = store && store.calKey;
+  if (!key) { $('#cal').innerHTML = ''; return; }
+  const feed = (who) => `${location.origin}/cal/${key}/${who}.ics`;
+  const row = (title, who, desc) => {
+    const https = feed(who);
+    const webcal = https.replace(/^https?:/, 'webcal:');
+    return `
     <div class="cal__row">
-      <span class="t">${mine ? `${esc(mine.name)}’s games` : 'My games'} (.ics)</span>
-      <button class="btn" data-ics="mine"${mine ? '' : ' disabled'}>Download</button>
-      <span class="d">Only the games ${mine ? esc(mine.name) : 'you'} currently hold${mine ? '' : ' — pick your name first'}. Re-download if things change.</span>
-    </div>
-    <div class="cal__row">
-      <span class="t">All eight home games (.ics)</span>
-      <button class="btn" data-ics="all">Download</button>
-      <span class="d">Every home game, no names. Or subscribe so it stays updated: <code>${esc(webcal)}</code></span>
+      <span class="t">${title}</span>
+      <a class="btn is-primary" href="${esc(webcal)}">Subscribe</a>
+      <a class="btn" href="${esc(https)}" download>Download</a>
+      <button class="btn is-quiet" data-copy="${esc(https)}">Copy link</button>
+      <span class="d">${desc}</span>
     </div>`;
+  };
+  $('#cal').innerHTML =
+    (mine
+      ? row(`${esc(mine.name)}’s games`, mine.id, `Subscribe once and it updates itself as games change hands. On iPhone, tap Subscribe and it goes straight into Calendar. For Google Calendar, copy the link and add it under “From URL”.`)
+      : `<div class="cal__row"><span class="t">Your games</span><span class="d">Pick your name above to get a calendar of just your games.</span></div>`) +
+    row('All eight home games', 'all', 'Every home game, with who has the tickets in the notes.');
 }
 
 function renderPeople() {
@@ -309,14 +298,6 @@ function render() {
 // ----------------------------------------------------------------------------
 // Calendar export
 // ----------------------------------------------------------------------------
-function download(name, text) {
-  const blob = new Blob([text], { type: 'text/calendar;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
-  const a = Object.assign(document.createElement('a'), { href: url, download: name });
-  document.body.appendChild(a); a.click(); a.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
-}
-
 function gcalLink(g, h) {
   const holders = h.kind === 'open' ? 'Needs a taker' : h.people.map((p) => p.name).join(' & ');
   const p = new URLSearchParams({
@@ -363,7 +344,7 @@ function setMe(id) {
 }
 
 document.addEventListener('click', async (e) => {
-  const t = e.target.closest('[data-me],[data-claim],[data-release],[data-out],[data-avail],[data-toggle-out],[data-note],[data-ics],[data-remove],[data-rename],[data-recolor]');
+  const t = e.target.closest('[data-me],[data-claim],[data-release],[data-out],[data-avail],[data-toggle-out],[data-note],[data-copy],[data-remove],[data-rename],[data-recolor]');
   if (!t) return;
   const d = t.dataset;
   const g = (id) => GAMES.find((x) => x.id === id);
@@ -389,18 +370,10 @@ document.addEventListener('click', async (e) => {
     if (v === null) return;
     return commit({ [`notes.${d.note}`]: v.trim() ? v.trim().slice(0, 200) : DELETE });
   }
-  if (d.ics === 'all') {
-    return download(`broncos-home-${SEASON}.ics`, buildIcs(GAMES, (gm) => ({ summary: `Broncos vs ${gm.short}`, description: gameDescription(gm) })));
-  }
-  if (d.ics === 'mine') {
-    if (!needMe()) return;
-    const p = person(me);
-    const games = GAMES.filter((gm) => holdersFor(gm).people.some((x) => x.id === me));
-    if (!games.length) return toast('You don’t hold any games yet');
-    return download(`broncos-${p.name.toLowerCase()}-${SEASON}.ics`, buildIcs(games, (gm) => {
-      const h = holdersFor(gm);
-      return { summary: `Broncos vs ${gm.short} 🎟`, description: `${gameDescription(gm)}\nTickets: ${h.people.map((x) => x.name).join(' & ')}\n${location.href}` };
-    }));
+  if (d.copy) {
+    try { await navigator.clipboard.writeText(d.copy); toast('Link copied'); }
+    catch { prompt('Copy this link:', d.copy); }
+    return;
   }
   if (d.remove) {
     const p = person(d.remove);
@@ -464,19 +437,12 @@ function onChange(next) { state = next; render(); }
 
 (async () => {
   setStatus('local', 'Connecting');
-  if (config.firebase && config.firebase.projectId) {
-    try {
-      store = await createFirestoreStore(onChange);
-      setStatus('live', 'Live');
-    } catch (err) {
-      console.error(err);
-      showBanner('error', `<span>⚠️</span><div><strong>Couldn’t reach the shared database</strong> (${esc(err.code || err.message || err)}). Running on this device only — check the Firestore rules and the config in <code>config.js</code>.</div>`);
-      store = createLocalStore(onChange);
-      setStatus('error', 'Offline');
-    }
-  } else {
-    store = createLocalStore(onChange);
-    setStatus('local', 'This device only');
-    showBanner('warn', `<span>⚠️</span><div><strong>Not connected to a shared database yet.</strong> Everything works, but changes stay on this device. See <a href="https://github.com/drewroper/personal/blob/HEAD/broncos/README.md" target="_blank" rel="noopener">README</a> for the 5-minute Firebase setup.</div>`);
+  try {
+    store = await createApiStore(onChange);
+    render();
+  } catch (err) {
+    console.error(err);
+    setStatus('error', 'Offline');
+    showBanner('error', `<span>⚠️</span><div><strong>Couldn’t load the shared list</strong> (${esc(err.message || err)}). Make sure you opened the real link, then pull to refresh.</div>`);
   }
 })();

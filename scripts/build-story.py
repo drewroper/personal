@@ -3,7 +3,7 @@ Render Instagram story graphics (1080x1920) for the /40 countdown.
 
     python3 scripts/build-story.py [data.json] [--variant a|b|c|d] [--slug x ...]
                                    [--extras] [--out DIR]
-                                   [--video [--riff detail-resolve|field|resolve|detail|accent ...] [--seconds 10]]
+                                   [--video [--riff detail-resolve|field|resolve|detail|accent ...] [--seconds 60]]
 
 Reads data/albums.json (or the file given), renders every slotted album —
 or just the slugs given — into out/stories/. --extras also renders the
@@ -125,12 +125,25 @@ def breathe(theta):
     return ox, oy, ts
 
 
+_GRAY = {}
+
+def _gray(im, grid, contrast):
+    """Shrunk, contrast-stretched luminance for a dither pass. Cached by
+    image identity so animated renders don't re-shrink every frame."""
+    k = (id(im), grid, contrast)
+    if k not in _GRAY:
+        g = np.array(im.convert("L").resize((grid, int(grid * im.height / im.width)), Image.LANCZOS),
+                     dtype=np.float32)
+        _GRAY[k] = ((g - 128.0) * contrast + 128.0).clip(0, 255)
+        if len(_GRAY) > 64:
+            _GRAY.pop(next(iter(_GRAY)))
+    return _GRAY[k].copy()
+
+
 def dither(im, grid, on=LIGHT, off=BG, contrast=1.2, theta=None):
     """Two-tone ordered dither at `grid` cells across, scaled back up with
     hard pixels — the site's portrait treatment. theta animates it."""
-    g = np.array(im.convert("L").resize((grid, int(grid * im.height / im.width)), Image.LANCZOS),
-                 dtype=np.float32)
-    g = ((g - 128.0) * contrast + 128.0).clip(0, 255)
+    g = _gray(im, grid, contrast)
     h, w = g.shape
     th = np.tile(BAYER, (h // 8 + 2, w // 8 + 2))
     if theta is not None:
@@ -213,16 +226,25 @@ GROUND = (34, 34, 36)          # dim bone — the ground dither's "on" tone
 GROUND_ACCENT = (56, 66, 20)   # the same, pulled toward the accent
 
 
+_CACHE = {}
+
+def _prep(art, key, fn):
+    k = (id(art), key)
+    if k not in _CACHE:
+        _CACHE[k] = fn()
+    return _CACHE[k]
+
+
 def _ground(art, theta, riff):
     """Full-frame dithered ground for the B family."""
     if "detail" in riff:
         # A 3x detail of the cover, drifting on a small circle so it loops.
-        big = square(art, W * 3)
+        # Pre-shrunk to the dither grid's scale so the crop + dither is cheap.
+        big = _prep(art, "big3", lambda: square(art, W * 3))
         cx = W + int(math.cos(theta) * 90); cy = (W * 3 - H) // 2 + int(math.sin(theta) * 90)
         src = big.crop((cx, cy, cx + W, cy + H))
     else:
-        big = square(art, W)
-        src = Image.new("RGB", (W, H), BG); src.paste(big, (0, (H - W) // 2))
+        src = _prep(art, "field", lambda: (lambda b: (lambda s_: (s_.paste(b, (0, (H - W) // 2)), s_)[1])(Image.new("RGB", (W, H), BG)))(square(art, W)))
     tone = GROUND_ACCENT if "accent" in riff else GROUND
     return dither(src, 135, on=tone, off=BG, contrast=1.4, theta=theta)
 
@@ -263,7 +285,7 @@ def variant_b(a, art, theta=None, riff="field"):
     microcopy(d, a, TOP + 4)
     y = header(d, a, TOP + 60)
     cy = max(y + 36, 580)
-    cover = square(art, COVER)
+    cover = _prep(art, "cover", lambda: square(art, COVER))
     if "resolve" in riff and theta is not None:
         cover = _reveal(cover, theta)
     c.paste(cover, (CX, cy))
@@ -407,7 +429,7 @@ def main():
             continue
         art = Image.open(ROOT / a["art"]).convert("RGB")
         if "--video" in args:
-            secs = int(args[args.index("--seconds") + 1]) if "--seconds" in args else 10
+            secs = int(args[args.index("--seconds") + 1]) if "--seconds" in args else 60
             for riff in riffs:
                 p = out / f'day-{a["no"]:02d}-{a["slug"]}-b-{riff}.mp4'
                 render_video(lambda th: variant_b(a, art, th, riff), p, secs); print(p)

@@ -6,7 +6,7 @@ Render Instagram story graphics (1080x1920) for the /40 countdown.
 
 Reads data/albums.json (or the file given), renders every slotted album —
 or just the slugs given — into out/stories/. --extras also renders the
-highlight cover and the two intro slides. --variant picks the layout; the
+highlight cover, the two intro slides, and the closing grid. --variant picks the layout; the
 default is set in VARIANT below once one is chosen.
 
 Layout rules shared by every variant:
@@ -254,11 +254,14 @@ def intro_1():
     return c
 
 
-def intro_2():
-    """The 40-cell grid, empty. It's the thing that fills in over 40 days."""
+def grid_card(albums, through=0, headline="", eyebrow="ONE A DAY · IN NO PARTICULAR ORDER"):
+    """The 40-cell grid. Cells through `through` show that day's cover;
+    the rest stay empty. through=0 is the intro card, 40 is the closer."""
     c = Image.new("RGB", (W, H), BG); d = ImageDraw.Draw(c)
-    tracked(d, (PAD, TOP + 4), "ONE A DAY · IN NO PARTICULAR ORDER", mono(24), FAINT)
-    d.text((PAD - 3, TOP + 48), "Day 01 drops Sep 23.", font=display(64), fill=LIGHT)
+    tracked(d, (PAD, TOP + 4), eyebrow, mono(24), FAINT)
+    if headline:
+        d.text((PAD - 3, TOP + 48), headline, font=display(64), fill=LIGHT)
+    by_no = {a["no"]: a for a in albums if a.get("no") and a.get("art")}
     cols, rows = 5, 8
     cell, gap = 124, 22
     gw = cols * cell + (cols - 1) * gap
@@ -266,10 +269,23 @@ def intro_2():
     for i in range(40):
         r, k = divmod(i, cols)
         x = x0 + k * (cell + gap); y = y0 + r * (cell + gap)
-        d.rectangle([x, y, x + cell - 1, y + cell - 1], outline=RULE, width=2)
-        d.text((x + 12, y + 8), f"{i + 1:02d}", font=mono(20), fill=FAINT)
+        a = by_no.get(i + 1)
+        if a and i + 1 <= through:
+            art = Image.open(ROOT / a["art"]).convert("RGB")
+            c.paste(square(art, cell), (x, y))
+        else:
+            d.rectangle([x, y, x + cell - 1, y + cell - 1], outline=RULE, width=2)
+            d.text((x + 12, y + 8), f"{i + 1:02d}", font=mono(20), fill=FAINT)
     url(d, BOT - 30)
     return c
+
+
+def intro_2(albums):
+    return grid_card(albums, 0, "40 albums, 40 days.")
+
+
+def closing(albums):
+    return grid_card(albums, 40, "That's forty.", "SEP 23 → NOV 1 · ALL FORTY")
 
 
 # ── main ─────────────────────────────────────────────────────────────────
@@ -293,8 +309,10 @@ def main():
         VARIANTS[var](a, art).save(p); print(p)
 
     if "--extras" in args:
-        for name, fn in (("highlight-cover", highlight_cover), ("intro-1", intro_1), ("intro-2", intro_2)):
-            p = out / f"{name}.png"; fn().save(p); print(p)
+        albums = data["albums"]
+        for name, im in (("highlight-cover", highlight_cover()), ("intro-1", intro_1()),
+                         ("intro-2", intro_2(albums)), ("closing", closing(albums))):
+            p = out / f"{name}.png"; im.save(p); print(p)
 
 
 if __name__ == "__main__":

@@ -3,6 +3,7 @@ Render Instagram story graphics (1080x1920) for the /40 countdown.
 
     python3 scripts/build-story.py [data.json] [--variant a|b|c|d] [--slug x ...]
                                    [--extras] [--out DIR]
+                                   [--video [--riff field|resolve|detail|accent ...] [--seconds 10]]
 
 Reads data/albums.json (or the file given), renders every slotted album —
 or just the slugs given — into out/stories/. --extras also renders the
@@ -18,6 +19,8 @@ Layout rules shared by every variant:
 """
 
 import json
+import math
+import subprocess
 import sys
 from pathlib import Path
 
@@ -102,14 +105,29 @@ def square(im, size):
     return im.resize((size, size), Image.LANCZOS)
 
 
-def dither(im, grid, on=LIGHT, off=BG, contrast=1.2, threshold_shift=0):
+def breathe(theta):
+    """Drift + threshold wobble for one loop of the breathing dither, as
+    on the site's OG image. theta runs 0..2π over the loop, so frame N
+    and frame 0 meet cleanly."""
+    ox = int(round(math.sin(theta) * 6))
+    oy = int(round(math.cos(theta) * 6))
+    ts = math.sin(theta * 2) * 12
+    return ox, oy, ts
+
+
+def dither(im, grid, on=LIGHT, off=BG, contrast=1.2, theta=None):
     """Two-tone ordered dither at `grid` cells across, scaled back up with
-    hard pixels — the site's portrait treatment."""
+    hard pixels — the site's portrait treatment. theta animates it."""
     g = np.array(im.convert("L").resize((grid, int(grid * im.height / im.width)), Image.LANCZOS),
                  dtype=np.float32)
-    g = ((g - 128.0) * contrast + 128.0 + threshold_shift).clip(0, 255)
+    g = ((g - 128.0) * contrast + 128.0).clip(0, 255)
     h, w = g.shape
-    th = np.tile(BAYER, (h // 8 + 1, w // 8 + 1))[:h, :w]
+    th = np.tile(BAYER, (h // 8 + 2, w // 8 + 2))
+    if theta is not None:
+        ox, oy, ts = breathe(theta)
+        th = np.roll(th, (oy, ox), axis=(0, 1))
+        g = g - ts
+    th = th[:h, :w]
     out = np.empty((h, w, 3), dtype=np.uint8)
     b = g > th
     out[b], out[~b] = on, off
@@ -179,18 +197,51 @@ def variant_a(a, art):
     return c
 
 
-def variant_b(a, art):
-    """Field: the cover itself, blown up and dithered dim, is the texture
-    behind everything. Microcopy for the day."""
-    big = square(art, W).resize((W, W), Image.LANCZOS)
-    tall = Image.new("RGB", (W, H), BG)
-    tall.paste(big, (0, (H - W) // 2))
-    tall = dither(tall, 135, on=(34, 34, 36), off=BG, contrast=1.4)
-    c = tall; d = ImageDraw.Draw(c)
+GROUND = (34, 34, 36)          # dim bone — the ground dither's "on" tone
+GROUND_ACCENT = (56, 66, 20)   # the same, pulled toward the accent
+
+
+def _ground(art, theta, riff):
+    """Full-frame dithered ground for the B family."""
+    if riff == "detail":
+        # A 3x detail of the cover, drifting on a small circle so it loops.
+        big = square(art, W * 3)
+        cx = W + int(math.cos(theta) * 90); cy = (W * 3 - H) // 2 + int(math.sin(theta) * 90)
+        src = big.crop((cx, cy, cx + W, cy + H))
+    else:
+        big = square(art, W)
+        src = Image.new("RGB", (W, H), BG); src.paste(big, (0, (H - W) // 2))
+    tone = GROUND_ACCENT if riff == "accent" else GROUND
+    return dither(src, 135, on=tone, off=BG, contrast=1.4, theta=theta)
+
+
+def _resolve_alpha(theta):
+    """Cover resolves out of the dither at the top of the loop and sinks
+    back at the end: 0 → 1 over the first 15%, 1 → 0 over the last 10%."""
+    u = theta / (2 * math.pi)
+    if u < 0.15:
+        x = u / 0.15
+    elif u > 0.90:
+        x = (1 - u) / 0.10
+    else:
+        return 1.0
+    return x * x * (3 - 2 * x)
+
+
+def variant_b(a, art, theta=None, riff="field"):
+    """Field: the cover itself, blown up and dithered dim, is the ground
+    behind everything, breathing. Riffs: field (base), resolve (cover
+    emerges from its own dither), detail (zoomed drifting ground),
+    accent (ground dither tinted toward the accent)."""
+    c = _ground(art, theta, riff); d = ImageDraw.Draw(c)
     microcopy(d, a, TOP + 4)
     y = header(d, a, TOP + 60)
     cy = max(y + 36, 580)
-    c.paste(square(art, COVER), (CX, cy))
+    cover = square(art, COVER)
+    if riff == "resolve" and theta is not None:
+        ghost = dither(cover, 110, on=LIGHT, off=BG, contrast=1.2, theta=theta)
+        cover = Image.blend(ghost, cover, _resolve_alpha(theta))
+    c.paste(cover, (CX, cy))
     d.rectangle([CX, cy, CX + COVER - 1, cy + COVER - 1], outline=(60, 60, 62), width=2)
     url(d, BOT - 30)
     return c
@@ -288,6 +339,30 @@ def closing(albums):
     return grid_card(albums, 40, "That's forty.", "SEP 23 → NOV 1 · ALL FORTY")
 
 
+# ── video ────────────────────────────────────────────────────────────────
+def ffmpeg_bin():
+    try:
+        import imageio_ffmpeg
+        return imageio_ffmpeg.get_ffmpeg_exe()
+    except ImportError:
+        return "ffmpeg"
+
+
+def render_video(frame_fn, out_path, seconds=10, fps=30):
+    """Pipe frames straight into ffmpeg. frame_fn(theta) -> PIL image."""
+    n = seconds * fps
+    cmd = [ffmpeg_bin(), "-y", "-loglevel", "error",
+           "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(fps), "-i", "-",
+           "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "20", "-preset", "medium",
+           "-movflags", "+faststart", str(out_path)]
+    proc = subprocess.Popen(cmd, stdin=subprocess.PIPE)
+    for i in range(n):
+        proc.stdin.write(frame_fn(2 * math.pi * i / n).tobytes())
+    proc.stdin.close(); proc.wait()
+    if proc.returncode:
+        raise SystemExit(f"ffmpeg failed on {out_path}")
+
+
 # ── main ─────────────────────────────────────────────────────────────────
 def main():
     args   = sys.argv[1:]
@@ -296,6 +371,7 @@ def main():
     var    = args[args.index("--variant") + 1] if "--variant" in args else VARIANT
     out    = Path(args[args.index("--out") + 1]) if "--out" in args else ROOT / "out" / "stories"
     slugs  = [args[i + 1] for i, a in enumerate(args) if a == "--slug"]
+    riffs  = [args[i + 1] for i, a in enumerate(args) if a == "--riff"] or ["field"]
     out.mkdir(parents=True, exist_ok=True)
 
     data = json.loads(data_p.read_text())
@@ -305,8 +381,14 @@ def main():
         if slugs and a["slug"] not in slugs:
             continue
         art = Image.open(ROOT / a["art"]).convert("RGB")
-        p = out / f'day-{a["no"]:02d}-{a["slug"]}-{var}.png'
-        VARIANTS[var](a, art).save(p); print(p)
+        if "--video" in args:
+            secs = int(args[args.index("--seconds") + 1]) if "--seconds" in args else 10
+            for riff in riffs:
+                p = out / f'day-{a["no"]:02d}-{a["slug"]}-b-{riff}.mp4'
+                render_video(lambda th: variant_b(a, art, th, riff), p, secs); print(p)
+        else:
+            p = out / f'day-{a["no"]:02d}-{a["slug"]}-{var}.png'
+            VARIANTS[var](a, art).save(p); print(p)
 
     if "--extras" in args:
         albums = data["albums"]

@@ -184,9 +184,9 @@ def microcopy(d, a, y, right=False):
     text = f'DAY {a["no"]:02d} / 40'
     f = mono(24)
     if right:
-        tracked(d, (W - PAD - tracked_w(text, f), y), text, f, FAINT)
+        tracked(d, (W - PAD - tracked_w(text, f), y), text, f, ACCENT)
     else:
-        edge_tracked(d, y, text, f, FAINT)
+        edge_tracked(d, y, text, f, ACCENT)
 
 
 def url(d, y):

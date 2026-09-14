@@ -3,7 +3,7 @@ Render Instagram story graphics (1080x1920) for the /40 countdown.
 
     python3 scripts/build-story.py [data.json] [--variant a|b|c|d] [--slug x ...]
                                    [--extras] [--out DIR]
-                                   [--video [--riff detail-resolve|field|resolve|detail|accent ...] [--seconds 60]]
+                                   [--video [--riff detail-resolve|field|resolve|detail|accent ...] [--seconds 20]]
 
 Reads data/albums.json (or the file given), renders every slotted album —
 or just the slugs given — into out/stories/. --extras also renders the
@@ -429,7 +429,7 @@ def main():
             continue
         art = Image.open(ROOT / a["art"]).convert("RGB")
         if "--video" in args:
-            secs = int(args[args.index("--seconds") + 1]) if "--seconds" in args else 60
+            secs = int(args[args.index("--seconds") + 1]) if "--seconds" in args else 20
             for riff in riffs:
                 p = out / f'day-{a["no"]:02d}-{a["slug"]}-b-{riff}.mp4'
                 render_video(lambda th: variant_b(a, art, th, riff), p, secs); print(p)

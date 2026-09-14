@@ -80,6 +80,2583 @@
       "links": {
         "spotify": "https://open.spotify.com/album/2hDiTEsKePTnDcvKEuLizk"
       }
+    },
+    {
+      "no": null,
+      "slug": "finch-what-it-is-to-burn",
+      "artist": "Finch",
+      "title": "What It Is to Burn",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 1440743253,
+      "apple_url": "https://music.apple.com/us/album/what-it-is-to-burn/1440743253",
+      "released": "2002-01-01",
+      "year": "2002",
+      "copyright": "℗ 2002 Geffen Records",
+      "genre": "Alternative",
+      "track_count": 13,
+      "runtime_ms": 3670427,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "New Beginnings",
+          "ms": 241667
+        },
+        {
+          "n": 2,
+          "title": "Letters to You",
+          "ms": 199600
+        },
+        {
+          "n": 3,
+          "title": "Post Script",
+          "ms": 169760
+        },
+        {
+          "n": 4,
+          "title": "Grey Matter",
+          "ms": 159907
+        },
+        {
+          "n": 5,
+          "title": "Perfection Through Silence",
+          "ms": 189093
+        },
+        {
+          "n": 6,
+          "title": "Awake",
+          "ms": 288507
+        },
+        {
+          "n": 7,
+          "title": "Without You Here",
+          "ms": 250533
+        },
+        {
+          "n": 8,
+          "title": "Stay With Me",
+          "ms": 242933
+        },
+        {
+          "n": 9,
+          "title": "Project Mayhem",
+          "ms": 319147
+        },
+        {
+          "n": 10,
+          "title": "Untitled",
+          "ms": 253480
+        },
+        {
+          "n": 11,
+          "title": "Three Simple Words",
+          "ms": 278733
+        },
+        {
+          "n": 12,
+          "title": "Ender",
+          "ms": 808040
+        },
+        {
+          "n": 13,
+          "title": "What It Is to Burn (New Version)",
+          "ms": 269027
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/42/14/a1/4214a191-3dce-85ab-ae8e-6ad7596c4df3/00042286099125.rgb.jpg/1800x1800bb.jpg",
+      "label": "Geffen Records",
+      "art": "assets/40/finch-what-it-is-to-burn.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/28DROCResQvsdO6Hjmb32x"
+      }
+    },
+    {
+      "no": null,
+      "slug": "turnstile-glow-on",
+      "artist": "Turnstile",
+      "title": "Glow On",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 1576430192,
+      "apple_url": "https://music.apple.com/us/album/glow-on/1576430192",
+      "released": "2021-08-27",
+      "year": "2021",
+      "copyright": "℗ 2021 Roadrunner Records Inc.",
+      "genre": "Hard Rock",
+      "track_count": 15,
+      "runtime_ms": 2097444,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "MYSTERY",
+          "ms": 155200
+        },
+        {
+          "n": 2,
+          "title": "BLACKOUT",
+          "ms": 173280
+        },
+        {
+          "n": 3,
+          "title": "DON'T PLAY",
+          "ms": 133353
+        },
+        {
+          "n": 4,
+          "title": "UNDERWATER BOI",
+          "ms": 184944
+        },
+        {
+          "n": 5,
+          "title": "HOLIDAY",
+          "ms": 172021
+        },
+        {
+          "n": 6,
+          "title": "HUMANOID / SHAKE IT UP",
+          "ms": 69143
+        },
+        {
+          "n": 7,
+          "title": "ENDLESS",
+          "ms": 118542
+        },
+        {
+          "n": 8,
+          "title": "FLY AGAIN",
+          "ms": 151866
+        },
+        {
+          "n": 9,
+          "title": "ALIEN LOVE CALL",
+          "ms": 176003
+        },
+        {
+          "n": 10,
+          "title": "WILD WRLD",
+          "ms": 174765
+        },
+        {
+          "n": 11,
+          "title": "DANCE-OFF",
+          "ms": 129124
+        },
+        {
+          "n": 12,
+          "title": "NEW HEART DESIGN",
+          "ms": 147750
+        },
+        {
+          "n": 13,
+          "title": "T.L.C. (TURNSTILE LOVE CONNECTION)",
+          "ms": 102804
+        },
+        {
+          "n": 14,
+          "title": "NO SURPRISE",
+          "ms": 45463
+        },
+        {
+          "n": 15,
+          "title": "LONELY DEZIRES",
+          "ms": 163186
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/bd/ed/05/bded05c9-3355-c885-3840-b9a4b427b118/075679792839.jpg/1800x1800bb.jpg",
+      "label": "Roadrunner Records Inc",
+      "art": "assets/40/turnstile-glow-on.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/2NrYPcMmQBlbBxopc2XlzS"
+      }
+    },
+    {
+      "no": null,
+      "slug": "nelly-country-grammar",
+      "artist": "Nelly",
+      "title": "Country Grammar",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 1440782396,
+      "apple_url": "https://music.apple.com/us/album/country-grammar/1440782396",
+      "released": "2000-06-27",
+      "year": "2000",
+      "copyright": "℗ 2000 Universal Records, a Division of UMG Recordings, Inc.",
+      "genre": "Hip-Hop/Rap",
+      "track_count": 17,
+      "runtime_ms": 4000959,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Intro (feat. Cedric the Entertainer)",
+          "ms": 81293
+        },
+        {
+          "n": 2,
+          "title": "St. Louie",
+          "ms": 267573
+        },
+        {
+          "n": 3,
+          "title": "Greed, Hate, Envy",
+          "ms": 255093
+        },
+        {
+          "n": 4,
+          "title": "Country Grammar (Hot...)",
+          "ms": 286933
+        },
+        {
+          "n": 5,
+          "title": "Steal The Show (feat. St. Lunatics)",
+          "ms": 328000
+        },
+        {
+          "n": 6,
+          "title": "Interlude (feat. Cedric the Entertainer)",
+          "ms": 34373
+        },
+        {
+          "n": 7,
+          "title": "Ride Wit Me (feat. City Spud)",
+          "ms": 290133
+        },
+        {
+          "n": 8,
+          "title": "E.I.",
+          "ms": 284493
+        },
+        {
+          "n": 9,
+          "title": "Thicky Thick Girl",
+          "ms": 274267
+        },
+        {
+          "n": 10,
+          "title": "For My (feat. Lil Wayne)",
+          "ms": 248600
+        },
+        {
+          "n": 11,
+          "title": "Utha Side",
+          "ms": 273307
+        },
+        {
+          "n": 12,
+          "title": "Tho Dem Wrappas",
+          "ms": 248400
+        },
+        {
+          "n": 13,
+          "title": "Wrap Sumden",
+          "ms": 255627
+        },
+        {
+          "n": 14,
+          "title": "Batter Up (feat. Murphy Lee & Ali)",
+          "ms": 327800
+        },
+        {
+          "n": 15,
+          "title": "Never Let 'Em C U Sweat",
+          "ms": 254107
+        },
+        {
+          "n": 16,
+          "title": "Luven Me",
+          "ms": 247000
+        },
+        {
+          "n": 17,
+          "title": "Outro (feat. Cedric the Entertainer)",
+          "ms": 43960
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/86/ea/41/86ea41d4-5d1f-b342-da08-dd43294d8fad/06UMGIM14203.rgb.jpg/1800x1800bb.jpg",
+      "label": "Universal Records, a Division of UMG Recordings, Inc",
+      "art": "assets/40/nelly-country-grammar.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/3Ej2Ae8nxp06thEoPhyaLJ"
+      }
+    },
+    {
+      "no": null,
+      "slug": "outkast-aquemini",
+      "artist": "OutKast",
+      "title": "Aquemini",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 1536669507,
+      "apple_url": "https://music.apple.com/us/album/aquemini/1536669507",
+      "released": "1998-09-29",
+      "year": "1998",
+      "copyright": "℗ 1998 Arista Records LLC",
+      "genre": "Hip-Hop/Rap",
+      "track_count": 15,
+      "runtime_ms": 3753134,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Hold On, Be Strong",
+          "ms": 72187
+        },
+        {
+          "n": 2,
+          "title": "Return Of The \"G\"",
+          "ms": 219573
+        },
+        {
+          "n": 3,
+          "title": "Rosa Parks (Radio Version)",
+          "ms": 247267
+        },
+        {
+          "n": 4,
+          "title": "Skew It on the Bar-B (feat. Raekwon)",
+          "ms": 199373
+        },
+        {
+          "n": 5,
+          "title": "Aquemini",
+          "ms": 293533
+        },
+        {
+          "n": 6,
+          "title": "Synthesizer (feat. George Clinton)",
+          "ms": 268893
+        },
+        {
+          "n": 7,
+          "title": "Slump",
+          "ms": 287000
+        },
+        {
+          "n": 8,
+          "title": "West Savannah",
+          "ms": 209800
+        },
+        {
+          "n": 9,
+          "title": "Da Art of Storytellin' (Pt. 1)",
+          "ms": 203640
+        },
+        {
+          "n": 10,
+          "title": "Da Art of Storytellin' (Pt. 2)",
+          "ms": 172267
+        },
+        {
+          "n": 11,
+          "title": "Mamacita",
+          "ms": 336867
+        },
+        {
+          "n": 12,
+          "title": "SpottieOttieDopaliscious",
+          "ms": 358960
+        },
+        {
+          "n": 13,
+          "title": "Y'All Scared (feat. T-Mo, Big Gipp & Khujo)",
+          "ms": 260640
+        },
+        {
+          "n": 14,
+          "title": "Liberation (with Cee-Lo)",
+          "ms": 302227
+        },
+        {
+          "n": 15,
+          "title": "Chonkyfire",
+          "ms": 320907
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/0e/48/dd/0e48dd9a-07c9-46de-a838-b4ddb4e508a7/886448814191.jpg/1800x1800bb.jpg",
+      "label": "Arista Records LLC",
+      "art": "assets/40/outkast-aquemini.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/5ceB3rxgXqIRpsOvVzTG28"
+      }
+    },
+    {
+      "no": null,
+      "slug": "portugal-the-man-the-satanic-satanist",
+      "artist": "Portugal. The Man",
+      "title": "The Satanic Satanist",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 1537511193,
+      "apple_url": "https://music.apple.com/us/album/the-satanic-satanist/1537511193",
+      "released": "2009-07-21",
+      "year": "2009",
+      "copyright": "℗ 2009 Approaching AIRballoons",
+      "genre": "Alternative",
+      "track_count": 11,
+      "runtime_ms": 2084428,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "People Say",
+          "ms": 179360
+        },
+        {
+          "n": 2,
+          "title": "Work All Day",
+          "ms": 178947
+        },
+        {
+          "n": 3,
+          "title": "Lovers In Love",
+          "ms": 193960
+        },
+        {
+          "n": 4,
+          "title": "The Sun",
+          "ms": 181667
+        },
+        {
+          "n": 5,
+          "title": "The Home",
+          "ms": 176840
+        },
+        {
+          "n": 6,
+          "title": "The Woods",
+          "ms": 191947
+        },
+        {
+          "n": 7,
+          "title": "Guns and Dogs",
+          "ms": 164520
+        },
+        {
+          "n": 8,
+          "title": "Do You",
+          "ms": 174933
+        },
+        {
+          "n": 9,
+          "title": "Everyone Is Golden",
+          "ms": 225867
+        },
+        {
+          "n": 10,
+          "title": "Let You Down",
+          "ms": 137307
+        },
+        {
+          "n": 11,
+          "title": "Mornings",
+          "ms": 279080
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/8e/38/27/8e3827fb-ef98-d3fb-54e5-4269f7c27066/cover.jpg/1800x1800bb.jpg",
+      "label": "Approaching AIRballoons",
+      "art": "assets/40/portugal-the-man-the-satanic-satanist.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/04V5tTHMYIGBzcYxGMgRFn"
+      }
+    },
+    {
+      "no": null,
+      "slug": "death-cab-for-cutie-plans",
+      "artist": "Death Cab for Cutie",
+      "title": "Plans",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 966379289,
+      "apple_url": "https://music.apple.com/us/album/plans/966379289",
+      "released": "2005-08-29",
+      "year": "2005",
+      "copyright": "℗ 2005 Atlantic Recording Corporation for the United States and WEA International Inc. for the world outside of the United States. A Warner Music Group Company",
+      "genre": "Alternative",
+      "track_count": 11,
+      "runtime_ms": 2664063,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Marching Bands of Manhattan",
+          "ms": 252073
+        },
+        {
+          "n": 2,
+          "title": "Soul Meets Body",
+          "ms": 230905
+        },
+        {
+          "n": 3,
+          "title": "Summer Skin",
+          "ms": 194228
+        },
+        {
+          "n": 4,
+          "title": "Different Names for the Same Thing",
+          "ms": 308507
+        },
+        {
+          "n": 5,
+          "title": "I Will Follow You Into the Dark",
+          "ms": 189395
+        },
+        {
+          "n": 6,
+          "title": "Your Heart Is an Empty Room",
+          "ms": 219364
+        },
+        {
+          "n": 7,
+          "title": "Someday You Will Be Loved",
+          "ms": 191427
+        },
+        {
+          "n": 8,
+          "title": "Crooked Teeth",
+          "ms": 203661
+        },
+        {
+          "n": 9,
+          "title": "What Sarah Said",
+          "ms": 380920
+        },
+        {
+          "n": 10,
+          "title": "Brothers On a Hotel Bed",
+          "ms": 271100
+        },
+        {
+          "n": 11,
+          "title": "Stable Song",
+          "ms": 222483
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/03/0d/0c/030d0c02-4186-a22a-ada6-a13348069d8d/075679930491.jpg/1800x1800bb.jpg",
+      "label": "Atlantic Recording Corporation for the United States and WEA International Inc. for the world outside of the United States. A Warner Music Group Company",
+      "art": "assets/40/death-cab-for-cutie-plans.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/1NFGnxmeIEBakre4DvLaJq"
+      }
+    },
+    {
+      "no": null,
+      "slug": "oasis-what-s-the-story-morning-glory",
+      "artist": "Oasis",
+      "title": "(What's the Story) Morning Glory?",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 1517447039,
+      "apple_url": "https://music.apple.com/us/album/whats-the-story-morning-glory/1517447039",
+      "released": "1995-10-02",
+      "year": "1995",
+      "copyright": "℗ 1995 Big Brother Recordings Ltd",
+      "genre": "Indie Rock",
+      "track_count": 12,
+      "runtime_ms": 3013335,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Hello",
+          "ms": 203187
+        },
+        {
+          "n": 2,
+          "title": "Roll with It",
+          "ms": 239827
+        },
+        {
+          "n": 3,
+          "title": "Wonderwall",
+          "ms": 258907
+        },
+        {
+          "n": 4,
+          "title": "Don't Look Back in Anger",
+          "ms": 287827
+        },
+        {
+          "n": 5,
+          "title": "Hey Now!",
+          "ms": 341907
+        },
+        {
+          "n": 6,
+          "title": "The Swamp Song (Version 1)",
+          "ms": 44627
+        },
+        {
+          "n": 7,
+          "title": "Some Might Say",
+          "ms": 327920
+        },
+        {
+          "n": 8,
+          "title": "Cast No Shadow",
+          "ms": 294813
+        },
+        {
+          "n": 9,
+          "title": "She's Electric",
+          "ms": 220920
+        },
+        {
+          "n": 10,
+          "title": "Morning Glory",
+          "ms": 303533
+        },
+        {
+          "n": 11,
+          "title": "The Swamp Song (Version 2)",
+          "ms": 39360
+        },
+        {
+          "n": 12,
+          "title": "Champagne Supernova",
+          "ms": 450507
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/04/92/e0/0492e08b-cbcc-9969-9ad6-8f5a0888068c/5051961007107.jpg/1800x1800bb.jpg",
+      "label": "Big Brother Recordings Ltd",
+      "art": "assets/40/oasis-what-s-the-story-morning-glory.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/7EW77iyGMou046Z44pOrIk"
+      }
+    },
+    {
+      "no": null,
+      "slug": "radiohead-hail-to-the-thief",
+      "artist": "Radiohead",
+      "title": "Hail to the Thief",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 1097863576,
+      "links": {
+        "spotify": "https://open.spotify.com/album/5mzoI3VH0ZWk1pLFR6RoYy"
+      },
+      "apple_url": "https://music.apple.com/us/album/hail-to-the-thief/1097863576",
+      "released": "2003-06-09",
+      "year": "2003",
+      "copyright": "℗ 2003 XL Recordings Ltd",
+      "genre": "Alternative",
+      "track_count": 14,
+      "runtime_ms": 3395800,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "2 + 2 = 5",
+          "ms": 199360
+        },
+        {
+          "n": 2,
+          "title": "Sit Down. Stand Up",
+          "ms": 259973
+        },
+        {
+          "n": 3,
+          "title": "Sail to the Moon",
+          "ms": 258360
+        },
+        {
+          "n": 4,
+          "title": "Backdrifts",
+          "ms": 322600
+        },
+        {
+          "n": 5,
+          "title": "Go to Sleep",
+          "ms": 201507
+        },
+        {
+          "n": 6,
+          "title": "Where I End and You Begin",
+          "ms": 269293
+        },
+        {
+          "n": 7,
+          "title": "We Suck Young Blood",
+          "ms": 296707
+        },
+        {
+          "n": 8,
+          "title": "The Gloaming",
+          "ms": 212027
+        },
+        {
+          "n": 9,
+          "title": "There, There",
+          "ms": 323600
+        },
+        {
+          "n": 10,
+          "title": "I Will",
+          "ms": 119467
+        },
+        {
+          "n": 11,
+          "title": "A Punch Up at a Wedding",
+          "ms": 297333
+        },
+        {
+          "n": 12,
+          "title": "Myxomatosis",
+          "ms": 232533
+        },
+        {
+          "n": 13,
+          "title": "Scatterbrain",
+          "ms": 201707
+        },
+        {
+          "n": 14,
+          "title": "A Wolf at the Door",
+          "ms": 201333
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/3c/95/1d/3c951d73-f6c6-12dd-34b4-cc95f63e210c/634904078560.png/1800x1800bb.jpg",
+      "label": "XL Recordings Ltd",
+      "art": "assets/40/radiohead-hail-to-the-thief.jpg"
+    },
+    {
+      "no": null,
+      "slug": "animal-collective-merriweather-post-pavilion",
+      "artist": "Animal Collective",
+      "title": "Merriweather Post Pavilion",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 300683110,
+      "apple_url": "https://music.apple.com/us/album/merriweather-post-pavilion/300683110",
+      "released": "2009-01-06",
+      "year": "2009",
+      "copyright": "℗ 2009 Domino Recording Co Ltd",
+      "genre": "Alternative",
+      "track_count": 12,
+      "runtime_ms": 3612201,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "In the Flowers",
+          "ms": 322027
+        },
+        {
+          "n": 2,
+          "title": "My Girls",
+          "ms": 340787
+        },
+        {
+          "n": 3,
+          "title": "Also Frightened",
+          "ms": 314067
+        },
+        {
+          "n": 4,
+          "title": "Summertime Clothes",
+          "ms": 270120
+        },
+        {
+          "n": 5,
+          "title": "Daily Routine",
+          "ms": 346040
+        },
+        {
+          "n": 6,
+          "title": "Bluish",
+          "ms": 313560
+        },
+        {
+          "n": 7,
+          "title": "Guys Eyes",
+          "ms": 270653
+        },
+        {
+          "n": 8,
+          "title": "Taste",
+          "ms": 233453
+        },
+        {
+          "n": 9,
+          "title": "Lion in a Coma",
+          "ms": 252227
+        },
+        {
+          "n": 10,
+          "title": "No More Runnin",
+          "ms": 263333
+        },
+        {
+          "n": 11,
+          "title": "Brother Sport",
+          "ms": 359027
+        },
+        {
+          "n": 12,
+          "title": "Summertime Clothes (Live)",
+          "ms": 326907
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/64/79/67/64796709-9482-2221-b1b7-64cdbe1b99f2/dj.fuppzyzi.jpg/1800x1800bb.jpg",
+      "label": "Domino Recording Co Ltd",
+      "art": "assets/40/animal-collective-merriweather-post-pavilion.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/5O9OXl9zAWMJTzawofxuan"
+      }
+    },
+    {
+      "no": null,
+      "slug": "paul-simon-graceland",
+      "artist": "Paul Simon",
+      "title": "Graceland",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 529574560,
+      "apple_url": "https://music.apple.com/us/album/graceland/529574560",
+      "released": "1986-08-25",
+      "year": "1986",
+      "copyright": "℗ 2012 Paul Simon under exclusive license of Sony Music Entertainment",
+      "genre": "Singer/Songwriter",
+      "track_count": 11,
+      "runtime_ms": 2596189,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "The Boy In the Bubble",
+          "ms": 239133
+        },
+        {
+          "n": 2,
+          "title": "Graceland",
+          "ms": 291200
+        },
+        {
+          "n": 3,
+          "title": "I Know What I Know (with General M.D. Shirinda & the Gaza Sisters)",
+          "ms": 193373
+        },
+        {
+          "n": 4,
+          "title": "Gumboots (with the Boyoyo Boys)",
+          "ms": 164827
+        },
+        {
+          "n": 5,
+          "title": "Diamonds On the Soles of Her Shoes",
+          "ms": 350723
+        },
+        {
+          "n": 6,
+          "title": "You Can Call Me Al",
+          "ms": 280587
+        },
+        {
+          "n": 7,
+          "title": "Under African Skies",
+          "ms": 217160
+        },
+        {
+          "n": 8,
+          "title": "Homeless (with Ladysmith Black Mambazo)",
+          "ms": 228413
+        },
+        {
+          "n": 9,
+          "title": "Crazy Love, Vol. II",
+          "ms": 259360
+        },
+        {
+          "n": 10,
+          "title": "That Was Your Mother (with Good Rockin' Dopsie and the Twisters)",
+          "ms": 172813
+        },
+        {
+          "n": 11,
+          "title": "All Around the World or the Myth of Fingerprints (with Los Lobos)",
+          "ms": 198600
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/a7/73/c1/a773c1f0-281c-324c-204f-540444080ea8/886443445697.jpg/1800x1800bb.jpg",
+      "label": "Paul Simon",
+      "art": "assets/40/paul-simon-graceland.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/4WoQ94qzwQj28n3nlSOVLB"
+      }
+    },
+    {
+      "no": null,
+      "slug": "taking-back-sunday-where-you-want-to-be",
+      "artist": "Taking Back Sunday",
+      "title": "Where You Want to Be",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 1440945815,
+      "apple_url": "https://music.apple.com/us/album/where-you-want-to-be/1440945815",
+      "released": "2004-07-27",
+      "year": "2004",
+      "copyright": "℗ 2004 Concord Bicycle Assets, LLC",
+      "genre": "Alternative",
+      "track_count": 11,
+      "runtime_ms": 2454760,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Set Phasers To Stun",
+          "ms": 183333
+        },
+        {
+          "n": 2,
+          "title": "Bonus Mosh Pt. II",
+          "ms": 186467
+        },
+        {
+          "n": 3,
+          "title": "A Decade Under the Influence",
+          "ms": 247760
+        },
+        {
+          "n": 4,
+          "title": "This Photograph Is Proof (I Know You Know)",
+          "ms": 251373
+        },
+        {
+          "n": 5,
+          "title": "The Union",
+          "ms": 170027
+        },
+        {
+          "n": 6,
+          "title": "New American Classic",
+          "ms": 275240
+        },
+        {
+          "n": 7,
+          "title": "I Am Fred Astaire",
+          "ms": 223400
+        },
+        {
+          "n": 8,
+          "title": "One-Eighty By Summer",
+          "ms": 233867
+        },
+        {
+          "n": 9,
+          "title": "Number Five With a Bullet",
+          "ms": 229533
+        },
+        {
+          "n": 10,
+          "title": "Little Devotional",
+          "ms": 187440
+        },
+        {
+          "n": 11,
+          "title": "...Slowdance On the Inside",
+          "ms": 266320
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/c7/2b/46/c72b4649-ecde-c2cd-58a8-7f70a7d360a4/00886443197039.rgb.jpg/1800x1800bb.jpg",
+      "label": "Concord Bicycle Assets, LLC",
+      "art": "assets/40/taking-back-sunday-where-you-want-to-be.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/6D1rTYBev0y8ZKE5tD7OP9"
+      }
+    },
+    {
+      "no": null,
+      "slug": "girl-talk-feed-the-animals",
+      "artist": "Girl Talk",
+      "title": "Feed the Animals",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 0,
+      "links": {
+        "spotify": "https://open.spotify.com/album/1B5Lwt0D1ZetRreaCBYobP"
+      },
+      "year": "2008",
+      "released": "2008-06-19",
+      "label": "Illegal Art",
+      "genre": "Mashup",
+      "art": "assets/40/girl-talk-feed-the-animals.jpg",
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Play Your Part (Pt. 1)",
+          "ms": 284000
+        },
+        {
+          "n": 2,
+          "title": "Shut The Club Down",
+          "ms": 186000
+        },
+        {
+          "n": 3,
+          "title": "Still Here",
+          "ms": 237000
+        },
+        {
+          "n": 4,
+          "title": "What It's All About",
+          "ms": 254000
+        },
+        {
+          "n": 5,
+          "title": "Set It Off",
+          "ms": 221000
+        },
+        {
+          "n": 6,
+          "title": "No Pause",
+          "ms": 192000
+        },
+        {
+          "n": 7,
+          "title": "Like This",
+          "ms": 201000
+        },
+        {
+          "n": 8,
+          "title": "Give Me A Beat",
+          "ms": 252000
+        },
+        {
+          "n": 9,
+          "title": "Hands In The Air",
+          "ms": 260000
+        },
+        {
+          "n": 10,
+          "title": "In Step",
+          "ms": 203000
+        },
+        {
+          "n": 11,
+          "title": "Let Me See You",
+          "ms": 243000
+        },
+        {
+          "n": 12,
+          "title": "Here's The Thing",
+          "ms": 285000
+        },
+        {
+          "n": 13,
+          "title": "Don't Stop",
+          "ms": 178000
+        },
+        {
+          "n": 14,
+          "title": "Play Your Part (Pt. 2)",
+          "ms": 205000
+        }
+      ],
+      "track_count": 14,
+      "runtime_ms": 3201000
+    },
+    {
+      "no": null,
+      "slug": "my-chemical-romance-three-cheers-for-sweet-revenge",
+      "artist": "My Chemical Romance",
+      "title": "Three Cheers for Sweet Revenge",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 1156311431,
+      "links": {
+        "spotify": "https://open.spotify.com/album/7mFjRD4eVWopKTRExy4n5t"
+      },
+      "apple_url": "https://music.apple.com/us/album/three-cheers-for-sweet-revenge/1156311431",
+      "released": "2004-06-08",
+      "year": "2004",
+      "copyright": "℗ 2004 Reprise Records",
+      "genre": "Rock",
+      "track_count": 13,
+      "runtime_ms": 2380617,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Helena",
+          "ms": 202339
+        },
+        {
+          "n": 2,
+          "title": "Give 'Em Hell, Kid",
+          "ms": 138476
+        },
+        {
+          "n": 3,
+          "title": "To the End",
+          "ms": 181029
+        },
+        {
+          "n": 4,
+          "title": "You Know What They Do to Guys Like Us in Prison",
+          "ms": 173734
+        },
+        {
+          "n": 5,
+          "title": "I'm Not Okay (I Promise)",
+          "ms": 187983
+        },
+        {
+          "n": 6,
+          "title": "The Ghost of You",
+          "ms": 202771
+        },
+        {
+          "n": 7,
+          "title": "The Jetset Life Is Gonna Kill You",
+          "ms": 217735
+        },
+        {
+          "n": 8,
+          "title": "Interlude",
+          "ms": 57174
+        },
+        {
+          "n": 9,
+          "title": "Thank You for the Venom",
+          "ms": 221094
+        },
+        {
+          "n": 10,
+          "title": "Hang 'Em High",
+          "ms": 167567
+        },
+        {
+          "n": 11,
+          "title": "It's Not a Fashion Statement It's a Deathwish",
+          "ms": 210868
+        },
+        {
+          "n": 12,
+          "title": "Cemetery Drive",
+          "ms": 188068
+        },
+        {
+          "n": 13,
+          "title": "I Never Told You What I Do for a Living",
+          "ms": 231779
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/42/58/f7/4258f7bb-eb5b-62b8-573d-6200df0fe3e1/093624917731.jpg/1800x1800bb.jpg",
+      "label": "Reprise Records",
+      "art": "assets/40/my-chemical-romance-three-cheers-for-sweet-revenge.jpg"
+    },
+    {
+      "no": null,
+      "slug": "brand-new-deja-entendu",
+      "artist": "Brand New",
+      "title": "Deja Entendu",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 1440928946,
+      "apple_url": "https://music.apple.com/us/album/deja-entendu/1440928946",
+      "released": "2003-06-17",
+      "year": "2003",
+      "copyright": "℗ 2003 Triple Crown Records\\Razor & Tie., Marketed by Razor & Tie Recordings. Distributed by Concord Music Group, Inc.",
+      "genre": "Alternative",
+      "track_count": 11,
+      "runtime_ms": 2927385,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Tautou",
+          "ms": 102453
+        },
+        {
+          "n": 2,
+          "title": "Sic Transit Gloria ... Glory Fades",
+          "ms": 186493
+        },
+        {
+          "n": 3,
+          "title": "I Will Play My Game Beneath The Spin Light",
+          "ms": 237200
+        },
+        {
+          "n": 4,
+          "title": "Okay I Believe You, But My Tommy Gun Don't",
+          "ms": 335373
+        },
+        {
+          "n": 5,
+          "title": "The Quiet Things That No One Ever Knows",
+          "ms": 241640
+        },
+        {
+          "n": 6,
+          "title": "The Boy Who Blocked His Own Shot",
+          "ms": 279200
+        },
+        {
+          "n": 7,
+          "title": "Jaws Theme Swimming",
+          "ms": 274453
+        },
+        {
+          "n": 8,
+          "title": "Me vs. Maradona vs. Elvis",
+          "ms": 319000
+        },
+        {
+          "n": 9,
+          "title": "Guernica",
+          "ms": 203173
+        },
+        {
+          "n": 10,
+          "title": "Good to Know That If I Ever Need Attention All I Have to Do Is Die",
+          "ms": 420520
+        },
+        {
+          "n": 11,
+          "title": "Play Crack The Sky",
+          "ms": 327880
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/55/66/86/5566866b-0c84-3f85-136f-16d2f402f5be/16CRGIM00067.rgb.jpg/1800x1800bb.jpg",
+      "label": "Triple Crown Records\\Razor & Tie",
+      "art": "assets/40/brand-new-deja-entendu.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/6vDiMhyfSnTn18OY99BSQX"
+      }
+    },
+    {
+      "no": null,
+      "slug": "dave-matthews-band-crash",
+      "artist": "Dave Matthews Band",
+      "title": "Crash",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 388136111,
+      "label": "RCA",
+      "links": {
+        "spotify": "https://open.spotify.com/album/3Z72KfamjH9Wc5m9mgVqI7"
+      },
+      "apple_url": "https://music.apple.com/us/album/crash/388136111",
+      "released": "1996-04-30",
+      "year": "1996",
+      "copyright": "℗ 1996 Sony Music Entertainment",
+      "genre": "Rock",
+      "track_count": 12,
+      "runtime_ms": 4130708,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "So Much to Say",
+          "ms": 246600
+        },
+        {
+          "n": 2,
+          "title": "Two Step",
+          "ms": 387267
+        },
+        {
+          "n": 3,
+          "title": "Crash Into Me",
+          "ms": 316467
+        },
+        {
+          "n": 4,
+          "title": "Too Much",
+          "ms": 261627
+        },
+        {
+          "n": 5,
+          "title": "#41",
+          "ms": 399800
+        },
+        {
+          "n": 6,
+          "title": "Say Goodbye",
+          "ms": 371040
+        },
+        {
+          "n": 7,
+          "title": "Drive In Drive Out",
+          "ms": 354600
+        },
+        {
+          "n": 8,
+          "title": "Let You Down",
+          "ms": 247400
+        },
+        {
+          "n": 9,
+          "title": "Lie In Our Graves",
+          "ms": 342040
+        },
+        {
+          "n": 10,
+          "title": "Cry Freedom",
+          "ms": 352667
+        },
+        {
+          "n": 11,
+          "title": "Tripping Billies",
+          "ms": 300440
+        },
+        {
+          "n": 12,
+          "title": "Proudest Monkey",
+          "ms": 550760
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/1d/4f/38/1d4f38dd-e5ee-a14e-13a2-df60d4e3b431/884977724707.jpg/1800x1800bb.jpg",
+      "art": "assets/40/dave-matthews-band-crash.jpg"
+    },
+    {
+      "no": null,
+      "slug": "dave-matthews-band-under-the-table-and-dreaming",
+      "artist": "Dave Matthews Band",
+      "title": "Under the Table and Dreaming",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 308261232,
+      "apple_url": "https://music.apple.com/us/album/under-the-table-and-dreaming/308261232",
+      "released": "1994-09-27",
+      "year": "1994",
+      "copyright": "℗ 1994 Bama Rags Recordings, LLC",
+      "genre": "Rock",
+      "track_count": 12,
+      "runtime_ms": 3796156,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "The Best of What's Around",
+          "ms": 256986
+        },
+        {
+          "n": 2,
+          "title": "What Would You Say",
+          "ms": 222340
+        },
+        {
+          "n": 3,
+          "title": "Satellite",
+          "ms": 291630
+        },
+        {
+          "n": 4,
+          "title": "Rhyme & Reason",
+          "ms": 315827
+        },
+        {
+          "n": 5,
+          "title": "Typical Situation",
+          "ms": 359133
+        },
+        {
+          "n": 6,
+          "title": "Dancing Nancies",
+          "ms": 365293
+        },
+        {
+          "n": 7,
+          "title": "Ants Marching",
+          "ms": 271187
+        },
+        {
+          "n": 8,
+          "title": "Lover Lay Down",
+          "ms": 337893
+        },
+        {
+          "n": 9,
+          "title": "Jimi Thing",
+          "ms": 357173
+        },
+        {
+          "n": 10,
+          "title": "Warehouse",
+          "ms": 426240
+        },
+        {
+          "n": 11,
+          "title": "Pay for What You Get",
+          "ms": 292239
+        },
+        {
+          "n": 12,
+          "title": "#34",
+          "ms": 300215
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/a5/15/0a/a5150ad3-729a-2ba4-d803-1fc5fec7758d/888880620392.jpg/1800x1800bb.jpg",
+      "label": "Bama Rags Recordings, LLC",
+      "art": "assets/40/dave-matthews-band-under-the-table-and-dreaming.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/3eAA4fvTVttgUlE43vRVMq"
+      }
+    },
+    {
+      "no": null,
+      "slug": "alt-j-an-awesome-wave",
+      "artist": "alt-J",
+      "title": "An Awesome Wave",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 558262493,
+      "apple_url": "https://music.apple.com/us/album/an-awesome-wave/558262493",
+      "released": "2012-05-28",
+      "year": "2012",
+      "copyright": "℗ 2012 Infectious Music Ltd., under exclusive license to Atlantic Recording Corporation for North America.",
+      "genre": "Alternative",
+      "track_count": 14,
+      "runtime_ms": 2636297,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Intro",
+          "ms": 157488
+        },
+        {
+          "n": 2,
+          "title": "Interlude 1",
+          "ms": 72083
+        },
+        {
+          "n": 3,
+          "title": "Tessellate",
+          "ms": 182671
+        },
+        {
+          "n": 4,
+          "title": "Breezeblocks",
+          "ms": 227084
+        },
+        {
+          "n": 5,
+          "title": "Interlude 2",
+          "ms": 77404
+        },
+        {
+          "n": 6,
+          "title": "Something Good",
+          "ms": 218244
+        },
+        {
+          "n": 7,
+          "title": "Dissolve Me",
+          "ms": 239018
+        },
+        {
+          "n": 8,
+          "title": "Matilda",
+          "ms": 228711
+        },
+        {
+          "n": 9,
+          "title": "Ms",
+          "ms": 238977
+        },
+        {
+          "n": 10,
+          "title": "Fitzpleasure",
+          "ms": 219404
+        },
+        {
+          "n": 11,
+          "title": "Interlude 3",
+          "ms": 53604
+        },
+        {
+          "n": 12,
+          "title": "Bloodflood",
+          "ms": 249431
+        },
+        {
+          "n": 13,
+          "title": "Taro",
+          "ms": 314927
+        },
+        {
+          "n": 14,
+          "title": "Hand-Made",
+          "ms": 157251
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/14/ce/32/14ce329f-ce30-569a-725b-1b2feefdcdfc/075679959959.jpg/1800x1800bb.jpg",
+      "label": "Infectious Music Ltd",
+      "art": "assets/40/alt-j-an-awesome-wave.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/6k3vC8nep1BfqAIJ81L6OL"
+      }
+    },
+    {
+      "no": null,
+      "slug": "coldplay-parachutes",
+      "artist": "Coldplay",
+      "title": "Parachutes",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 1122782080,
+      "apple_url": "https://music.apple.com/us/album/parachutes/1122782080",
+      "released": "2000-07-10",
+      "year": "2000",
+      "copyright": "℗ 2000 Parlophone Records Ltd, a Warner Music Group Company",
+      "genre": "Alternative",
+      "track_count": 10,
+      "runtime_ms": 2506643,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Don't Panic",
+          "ms": 137225
+        },
+        {
+          "n": 2,
+          "title": "Shiver",
+          "ms": 299265
+        },
+        {
+          "n": 3,
+          "title": "Spies",
+          "ms": 318268
+        },
+        {
+          "n": 4,
+          "title": "Sparks",
+          "ms": 227094
+        },
+        {
+          "n": 5,
+          "title": "Yellow",
+          "ms": 269208
+        },
+        {
+          "n": 6,
+          "title": "Trouble",
+          "ms": 270731
+        },
+        {
+          "n": 7,
+          "title": "Parachutes",
+          "ms": 46228
+        },
+        {
+          "n": 8,
+          "title": "High Speed",
+          "ms": 254049
+        },
+        {
+          "n": 9,
+          "title": "We Never Change",
+          "ms": 249327
+        },
+        {
+          "n": 10,
+          "title": "Everything's Not Lost",
+          "ms": 435248
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/f5/93/8c/f5938c49-964c-31d1-4b33-78b634f71fb7/190295978075.jpg/1800x1800bb.jpg",
+      "label": "Parlophone Records Ltd, a Warner Music Group Company",
+      "art": "assets/40/coldplay-parachutes.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/6ZG5lRT77aJ3btmArcykra"
+      }
+    },
+    {
+      "no": null,
+      "slug": "lord-huron-lonesome-dreams",
+      "artist": "Lord Huron",
+      "title": "Lonesome Dreams",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 1758066410,
+      "links": {
+        "spotify": "https://open.spotify.com/album/2ZDjruwuzzzT8JMJRXvLtl"
+      },
+      "apple_url": "https://music.apple.com/us/album/lonesome-dreams-bonus-track-version/1758066410",
+      "released": "2012-10-09",
+      "year": "2012",
+      "copyright": "℗ 2012 Whispering Pines, distributed by Mercury Records, a division of UMG Recordings, Inc.",
+      "genre": "Rock",
+      "track_count": 11,
+      "runtime_ms": 3053573,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Ends of the Earth",
+          "ms": 284147
+        },
+        {
+          "n": 2,
+          "title": "Time to Run",
+          "ms": 323973
+        },
+        {
+          "n": 3,
+          "title": "Lonesome Dreams",
+          "ms": 255573
+        },
+        {
+          "n": 4,
+          "title": "The Ghost on the Shore",
+          "ms": 277240
+        },
+        {
+          "n": 5,
+          "title": "She Lit a Fire",
+          "ms": 270667
+        },
+        {
+          "n": 6,
+          "title": "I Will Be Back One Day",
+          "ms": 205907
+        },
+        {
+          "n": 7,
+          "title": "The Man Who Lives Forever",
+          "ms": 318813
+        },
+        {
+          "n": 8,
+          "title": "Lullaby",
+          "ms": 240080
+        },
+        {
+          "n": 9,
+          "title": "Brother",
+          "ms": 240000
+        },
+        {
+          "n": 10,
+          "title": "In The Wind",
+          "ms": 299360
+        },
+        {
+          "n": 11,
+          "title": "The Stranger (Bonus Track)",
+          "ms": 337813
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/f3/b6/00/f3b600c3-e128-6fe6-8f0a-162145c2d4be/886443581227_Cover.jpg/1800x1800bb.jpg",
+      "label": "Whispering Pines",
+      "art": "assets/40/lord-huron-lonesome-dreams.jpg"
+    },
+    {
+      "no": null,
+      "slug": "ratatat-classics",
+      "artist": "Ratatat",
+      "title": "Classics",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 354003618,
+      "links": {
+        "spotify": "https://open.spotify.com/album/2n5wpk7KaHpp3mgUYqpF4f"
+      },
+      "apple_url": "https://music.apple.com/us/album/classics/354003618",
+      "released": "2006-08-21",
+      "year": "2006",
+      "copyright": "℗ 2006 XL Recordings Ltd",
+      "genre": "Electronic",
+      "track_count": 11,
+      "runtime_ms": 2767080,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Montanita",
+          "ms": 300280
+        },
+        {
+          "n": 2,
+          "title": "Lex",
+          "ms": 269747
+        },
+        {
+          "n": 3,
+          "title": "Gettysburg",
+          "ms": 327787
+        },
+        {
+          "n": 4,
+          "title": "Wildcat",
+          "ms": 260173
+        },
+        {
+          "n": 5,
+          "title": "Tropicana",
+          "ms": 276800
+        },
+        {
+          "n": 6,
+          "title": "Loud Pipes",
+          "ms": 226533
+        },
+        {
+          "n": 7,
+          "title": "Kennedy",
+          "ms": 214680
+        },
+        {
+          "n": 8,
+          "title": "Swisha",
+          "ms": 229773
+        },
+        {
+          "n": 9,
+          "title": "Nostrand",
+          "ms": 184040
+        },
+        {
+          "n": 10,
+          "title": "Tacobel Canon",
+          "ms": 266760
+        },
+        {
+          "n": 11,
+          "title": "Truman (Bonus Track)",
+          "ms": 210507
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/b8/49/69/b84969fc-a475-ebc2-6496-274eb0771360/634904219888.png/1800x1800bb.jpg",
+      "label": "XL Recordings Ltd",
+      "art": "assets/40/ratatat-classics.jpg"
+    },
+    {
+      "no": null,
+      "slug": "andy-shauf-the-bearer-of-bad-news",
+      "artist": "Andy Shauf",
+      "title": "The Bearer of Bad News",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 948443235,
+      "apple_url": "https://music.apple.com/us/album/the-bearer-of-bad-news/948443235",
+      "released": "2015-01-30",
+      "year": "2015",
+      "copyright": "℗ 2015 Tender Loving Empire / Party Damage Records",
+      "genre": "Alternative",
+      "track_count": 11,
+      "runtime_ms": 2649067,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Hometown Hero",
+          "ms": 223827
+        },
+        {
+          "n": 2,
+          "title": "Drink My Rivers",
+          "ms": 262373
+        },
+        {
+          "n": 3,
+          "title": "I'm Not Falling Asleep",
+          "ms": 174387
+        },
+        {
+          "n": 4,
+          "title": "Covered in Dust",
+          "ms": 169627
+        },
+        {
+          "n": 5,
+          "title": "Wendell Walker",
+          "ms": 503347
+        },
+        {
+          "n": 6,
+          "title": "You're Out Wasting",
+          "ms": 226720
+        },
+        {
+          "n": 7,
+          "title": "The Man On Stage",
+          "ms": 129053
+        },
+        {
+          "n": 8,
+          "title": "Jesus, She's a Good Girl",
+          "ms": 199173
+        },
+        {
+          "n": 9,
+          "title": "Lick Your Wounds",
+          "ms": 190093
+        },
+        {
+          "n": 10,
+          "title": "Jerry Was a Clerk",
+          "ms": 240320
+        },
+        {
+          "n": 11,
+          "title": "My Dear Helen",
+          "ms": 330147
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music1/v4/63/29/74/632974af-0e52-6190-0809-4dea63ca22ac/751937431961.jpg/1800x1800bb.jpg",
+      "label": "Tender Loving Empire / Party Damage Records",
+      "art": "assets/40/andy-shauf-the-bearer-of-bad-news.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/1bKpcuXtsV2l6ybVUJMRAl"
+      }
+    },
+    {
+      "no": null,
+      "slug": "incubus-morning-view",
+      "artist": "Incubus",
+      "title": "Morning View",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 271792608,
+      "apple_url": "https://music.apple.com/us/album/morning-view/271792608",
+      "released": "2001-10-22",
+      "year": "2001",
+      "copyright": "℗ 2001 Epic Records, a division of Sony Music Entertainment",
+      "genre": "Alternative",
+      "track_count": 13,
+      "runtime_ms": 3486359,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Nice to Know You",
+          "ms": 283160
+        },
+        {
+          "n": 2,
+          "title": "Circles",
+          "ms": 249373
+        },
+        {
+          "n": 3,
+          "title": "Wish You Were Here",
+          "ms": 212733
+        },
+        {
+          "n": 4,
+          "title": "Just a Phase",
+          "ms": 329267
+        },
+        {
+          "n": 5,
+          "title": "11 Am",
+          "ms": 253427
+        },
+        {
+          "n": 6,
+          "title": "Blood On the Ground",
+          "ms": 273333
+        },
+        {
+          "n": 7,
+          "title": "Mexico",
+          "ms": 258307
+        },
+        {
+          "n": 8,
+          "title": "Warning",
+          "ms": 278733
+        },
+        {
+          "n": 9,
+          "title": "Echo",
+          "ms": 214333
+        },
+        {
+          "n": 10,
+          "title": "Have You Ever",
+          "ms": 194640
+        },
+        {
+          "n": 11,
+          "title": "Are You In?",
+          "ms": 264200
+        },
+        {
+          "n": 12,
+          "title": "Under My Umbrella",
+          "ms": 208293
+        },
+        {
+          "n": 13,
+          "title": "Aqueous Transmission",
+          "ms": 466560
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/2c/95/ec/2c95ecf2-8303-50b6-2e19-ea6b28424af9/mzi.yficmzdc.jpg/1800x1800bb.jpg",
+      "label": "Epic Records, a division of Sony Music Entertainment",
+      "art": "assets/40/incubus-morning-view.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/1rQZbncicoXyB64DqoH7OY"
+      }
+    },
+    {
+      "no": null,
+      "slug": "third-eye-blind-third-eye-blind",
+      "artist": "Third Eye Blind",
+      "title": "Third Eye Blind",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 271978738,
+      "apple_url": "https://music.apple.com/us/album/third-eye-blind/271978738",
+      "released": "1997-04-08",
+      "year": "1997",
+      "copyright": "℗ 1997 Elektra Entertainment, manufactured and marketed by Rhino Entertainment Company, a Warner Music Group Company",
+      "genre": "Alternative",
+      "track_count": 14,
+      "runtime_ms": 3453439,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Losing a Whole Year",
+          "ms": 200640
+        },
+        {
+          "n": 2,
+          "title": "Narcolepsy",
+          "ms": 228453
+        },
+        {
+          "n": 3,
+          "title": "Semi-Charmed Life",
+          "ms": 268360
+        },
+        {
+          "n": 4,
+          "title": "Jumper",
+          "ms": 272973
+        },
+        {
+          "n": 5,
+          "title": "Graduate",
+          "ms": 187667
+        },
+        {
+          "n": 6,
+          "title": "How's It Going to Be",
+          "ms": 253413
+        },
+        {
+          "n": 7,
+          "title": "Thanks a Lot",
+          "ms": 297627
+        },
+        {
+          "n": 8,
+          "title": "Burning Man",
+          "ms": 179733
+        },
+        {
+          "n": 9,
+          "title": "Good for You",
+          "ms": 232000
+        },
+        {
+          "n": 10,
+          "title": "London",
+          "ms": 187000
+        },
+        {
+          "n": 11,
+          "title": "I Want You",
+          "ms": 269013
+        },
+        {
+          "n": 12,
+          "title": "The Background",
+          "ms": 296733
+        },
+        {
+          "n": 13,
+          "title": "Motorcycle Drive By",
+          "ms": 262627
+        },
+        {
+          "n": 14,
+          "title": "God of Wine",
+          "ms": 317200
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/89/8f/21/898f2118-a3e1-2b4a-7481-d986d09ffc29/mzi.jbqxjhwg.jpg/1800x1800bb.jpg",
+      "label": "Elektra Entertainment, manufactured and",
+      "art": "assets/40/third-eye-blind-third-eye-blind.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/2gToC0XAblE9h3UZD6aAaQ"
+      }
+    },
+    {
+      "no": null,
+      "slug": "fall-out-boy-from-under-the-cork-tree",
+      "artist": "Fall Out Boy",
+      "title": "From Under the Cork Tree",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 1440748840,
+      "apple_url": "https://music.apple.com/us/album/from-under-the-cork-tree/1440748840",
+      "released": "2005-05-03",
+      "year": "2005",
+      "copyright": "℗ 2005 The Island Def Jam Music Group",
+      "genre": "Alternative",
+      "track_count": 13,
+      "runtime_ms": 2579440,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Our Lawyer Made Us Change the Name of This Song So We Wouldn't Get Sued",
+          "ms": 188547
+        },
+        {
+          "n": 2,
+          "title": "Of All the Gin Joints In All the World",
+          "ms": 191160
+        },
+        {
+          "n": 3,
+          "title": "Dance, Dance",
+          "ms": 180267
+        },
+        {
+          "n": 4,
+          "title": "Sugar, We're Goin Down",
+          "ms": 229093
+        },
+        {
+          "n": 5,
+          "title": "Nobody Puts Baby In the Corner",
+          "ms": 200747
+        },
+        {
+          "n": 6,
+          "title": "I've Got a Dark Alley and a Bad Idea That Says You Should Shut Your Mouth (Summer Song)",
+          "ms": 190520
+        },
+        {
+          "n": 7,
+          "title": "7 Minutes In Heaven (Atavan Halen)",
+          "ms": 182707
+        },
+        {
+          "n": 8,
+          "title": "Sophomore Slump or Comeback of the Year",
+          "ms": 203760
+        },
+        {
+          "n": 9,
+          "title": "Champagne for My Real Friends, Real Pain for My Sham Friends",
+          "ms": 203813
+        },
+        {
+          "n": 10,
+          "title": "I Slept With Someone In Fall Out Boy and All I Got Was This Stupid Song Written About Me",
+          "ms": 211493
+        },
+        {
+          "n": 11,
+          "title": "A Little Less Sixteen Candles, a Little More \"Touch Me\"",
+          "ms": 169027
+        },
+        {
+          "n": 12,
+          "title": "Get Busy Living or Get Busy Dying (Do Your Part to Save the Scene and Stop Going to Shows)",
+          "ms": 207653
+        },
+        {
+          "n": 13,
+          "title": "Xo",
+          "ms": 220653
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/ea/ff/60/eaff603f-d108-2815-3dce-db39b990635f/06UMGIM11830.rgb.jpg/1800x1800bb.jpg",
+      "label": "The Island Def Jam Music Group",
+      "art": "assets/40/fall-out-boy-from-under-the-cork-tree.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/5nkUSlIhtoJZMOUlB0sNCp"
+      }
+    },
+    {
+      "no": null,
+      "slug": "run-the-jewels-run-the-jewels-2",
+      "artist": "Run the Jewels",
+      "title": "Run the Jewels 2",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 1862913140,
+      "links": {
+        "spotify": "https://open.spotify.com/album/2lPYlP4eumsjz6LBG8GCbG"
+      },
+      "apple_url": "https://music.apple.com/us/album/run-the-jewels-2/1862913140",
+      "released": "2014-10-27",
+      "year": "2014",
+      "copyright": "℗ 2014 Seeker Music",
+      "genre": "Hip-Hop",
+      "track_count": 12,
+      "runtime_ms": 2501471,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Jeopardy",
+          "ms": 201987
+        },
+        {
+          "n": 2,
+          "title": "Oh My Darling Don't Cry",
+          "ms": 204840
+        },
+        {
+          "n": 3,
+          "title": "Blockbuster Night Pt. 1",
+          "ms": 152253
+        },
+        {
+          "n": 4,
+          "title": "Close Your Eyes (And Count to F**k) [feat. Zack de la Rocha]",
+          "ms": 234160
+        },
+        {
+          "n": 5,
+          "title": "All My Life",
+          "ms": 187973
+        },
+        {
+          "n": 6,
+          "title": "Lie, Cheat, Steal",
+          "ms": 208467
+        },
+        {
+          "n": 7,
+          "title": "Early (feat. Boots)",
+          "ms": 224067
+        },
+        {
+          "n": 8,
+          "title": "All Due Respect (feat. Travis Barker)",
+          "ms": 167840
+        },
+        {
+          "n": 9,
+          "title": "Love Again (Akinyele Back) [feat. Gangsta Boo]",
+          "ms": 225093
+        },
+        {
+          "n": 10,
+          "title": "Crown (feat. Diane Coffee)",
+          "ms": 225720
+        },
+        {
+          "n": 11,
+          "title": "Angel Duster",
+          "ms": 309840
+        },
+        {
+          "n": 12,
+          "title": "Blockbuster Night Pt. 2 (feat. Despot & Wiki)",
+          "ms": 159231
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/d7/32/29/d73229cf-9692-0a67-9821-1f84ed7f3b1b/198704917011_Cover.jpg/1800x1800bb.jpg",
+      "label": "Seeker Music",
+      "art": "assets/40/run-the-jewels-run-the-jewels-2.jpg"
+    },
+    {
+      "no": null,
+      "slug": "the-hotelier-home-like-noplace-is-there",
+      "artist": "The Hotelier",
+      "title": "Home, Like Noplace Is There",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 1559320070,
+      "links": {
+        "spotify": "https://open.spotify.com/album/37ohOvaKOQIEkFjTWfg9Q4"
+      },
+      "apple_url": "https://music.apple.com/us/album/home-like-noplace-is-there/1559320070",
+      "released": "2014-02-25",
+      "year": "2014",
+      "copyright": "℗ 2014 Dreams of Field",
+      "genre": "Rock",
+      "track_count": 9,
+      "runtime_ms": 2174987,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "An Introduction to the Album",
+          "ms": 272547
+        },
+        {
+          "n": 2,
+          "title": "The Scope of All of This Rebuilding",
+          "ms": 146480
+        },
+        {
+          "n": 3,
+          "title": "In Framing",
+          "ms": 179627
+        },
+        {
+          "n": 4,
+          "title": "Your Deep Rest",
+          "ms": 227213
+        },
+        {
+          "n": 5,
+          "title": "Among the Wildflowers",
+          "ms": 348893
+        },
+        {
+          "n": 6,
+          "title": "Life in Drag",
+          "ms": 141880
+        },
+        {
+          "n": 7,
+          "title": "Housebroken",
+          "ms": 290867
+        },
+        {
+          "n": 8,
+          "title": "Discomfort Revisited",
+          "ms": 239573
+        },
+        {
+          "n": 9,
+          "title": "Dendron",
+          "ms": 327907
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/b4/02/f4/b402f4ba-dcbe-bc76-cf35-ff0cfdba1124/634457054646.jpg/1800x1800bb.jpg",
+      "label": "Dreams of Field",
+      "art": "assets/40/the-hotelier-home-like-noplace-is-there.jpg"
+    },
+    {
+      "no": null,
+      "slug": "tokyo-police-club-champ",
+      "artist": "Tokyo Police Club",
+      "title": "Champ",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 1881439477,
+      "apple_url": "https://music.apple.com/us/album/champ/1881439477",
+      "released": "2010-01-01",
+      "year": "2010",
+      "copyright": "℗ 2010 Mom+Pop",
+      "genre": "Alternative",
+      "track_count": 11,
+      "runtime_ms": 2140308,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Favourite Food",
+          "ms": 236227
+        },
+        {
+          "n": 2,
+          "title": "Favourite Colour",
+          "ms": 157987
+        },
+        {
+          "n": 3,
+          "title": "Breakneck Speed",
+          "ms": 223653
+        },
+        {
+          "n": 4,
+          "title": "Wait Up (Boots of Danger)",
+          "ms": 189267
+        },
+        {
+          "n": 5,
+          "title": "Bambi",
+          "ms": 166120
+        },
+        {
+          "n": 6,
+          "title": "End of a Spark",
+          "ms": 216987
+        },
+        {
+          "n": 7,
+          "title": "Hands Reversed",
+          "ms": 199760
+        },
+        {
+          "n": 8,
+          "title": "Gone",
+          "ms": 184533
+        },
+        {
+          "n": 9,
+          "title": "Big Difference",
+          "ms": 178027
+        },
+        {
+          "n": 10,
+          "title": "Not Sick",
+          "ms": 178360
+        },
+        {
+          "n": 11,
+          "title": "Frankenstein",
+          "ms": 209387
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/54/b7/ec/54b7ec82-0101-6bef-d2d8-82ac9f159b51/112425.jpg/1800x1800bb.jpg",
+      "label": "Mom+Pop",
+      "art": "assets/40/tokyo-police-club-champ.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/7HLzs8Qao2pl7qFEbY7SJo"
+      }
+    },
+    {
+      "no": null,
+      "slug": "blink-182-take-off-your-pants-and-jacket",
+      "artist": "blink-182",
+      "title": "Take Off Your Pants and Jacket",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 1443271610,
+      "apple_url": "https://music.apple.com/us/album/take-off-your-pants-and-jacket/1443271610",
+      "released": "2001-06-12",
+      "year": "2001",
+      "copyright": "℗ 2016 Geffen Records",
+      "genre": "Rock",
+      "track_count": 13,
+      "runtime_ms": 2339231,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Anthem, Pt. 2",
+          "ms": 227595
+        },
+        {
+          "n": 2,
+          "title": "Online Songs",
+          "ms": 144799
+        },
+        {
+          "n": 3,
+          "title": "First Date",
+          "ms": 169804
+        },
+        {
+          "n": 4,
+          "title": "Happy Holidays",
+          "ms": 41964
+        },
+        {
+          "n": 5,
+          "title": "Story of a Lonely Guy",
+          "ms": 219869
+        },
+        {
+          "n": 6,
+          "title": "The Rock Show",
+          "ms": 171205
+        },
+        {
+          "n": 7,
+          "title": "Stay Together for the Kids",
+          "ms": 239376
+        },
+        {
+          "n": 8,
+          "title": "Roller Coaster",
+          "ms": 167926
+        },
+        {
+          "n": 9,
+          "title": "Reckless Abandon",
+          "ms": 186122
+        },
+        {
+          "n": 10,
+          "title": "Every Time I Look for You",
+          "ms": 185032
+        },
+        {
+          "n": 11,
+          "title": "Give Me One Good Reason",
+          "ms": 198837
+        },
+        {
+          "n": 12,
+          "title": "Shut Up",
+          "ms": 200262
+        },
+        {
+          "n": 13,
+          "title": "Please Take Me Home",
+          "ms": 186440
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/ed/b7/8b/edb78b6a-db5a-2eb3-ea51-61bfefb9c031/16UMGIM35661.rgb.jpg/1800x1800bb.jpg",
+      "label": "Geffen Records",
+      "art": "assets/40/blink-182-take-off-your-pants-and-jacket.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/3nHpBmW5wJXGeC3ojBkpey"
+      }
+    },
+    {
+      "no": null,
+      "slug": "youth-lagoon-the-year-of-hibernation",
+      "artist": "Youth Lagoon",
+      "title": "The Year of Hibernation",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 1185722235,
+      "apple_url": "https://music.apple.com/us/album/the-year-of-hibernation/1185722235",
+      "released": "2011-01-01",
+      "year": "2011",
+      "copyright": "℗ 2011 Fat Possum Records",
+      "genre": "Alternative",
+      "track_count": 10,
+      "runtime_ms": 2535027,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Posters",
+          "ms": 231560
+        },
+        {
+          "n": 2,
+          "title": "Cannons",
+          "ms": 224773
+        },
+        {
+          "n": 3,
+          "title": "Afternoon",
+          "ms": 250067
+        },
+        {
+          "n": 4,
+          "title": "17",
+          "ms": 236000
+        },
+        {
+          "n": 5,
+          "title": "July",
+          "ms": 286267
+        },
+        {
+          "n": 6,
+          "title": "Daydream",
+          "ms": 319627
+        },
+        {
+          "n": 7,
+          "title": "Montana",
+          "ms": 274773
+        },
+        {
+          "n": 8,
+          "title": "The Hunt",
+          "ms": 265800
+        },
+        {
+          "n": 9,
+          "title": "Bobby (Bonus Track)",
+          "ms": 202267
+        },
+        {
+          "n": 10,
+          "title": "Ghost to Me (Bonus Track)",
+          "ms": 243893
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/84/22/2d/84222db0-c68a-ce99-0fd8-e8c7674bc9f7/886446283388.jpg/1800x1800bb.jpg",
+      "label": "Fat Possum Records",
+      "art": "assets/40/youth-lagoon-the-year-of-hibernation.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/0mcvDycoex7ANLZOmVVRoD"
+      }
+    },
+    {
+      "no": null,
+      "slug": "arcade-fire-the-suburbs",
+      "artist": "Arcade Fire",
+      "title": "The Suburbs",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 1252757950,
+      "apple_url": "https://music.apple.com/us/album/the-suburbs/1252757950",
+      "released": "2010-08-02",
+      "year": "2010",
+      "copyright": "℗ 2010 Arcade Fire Music Under Exclusive License to Sony Music Entertainment",
+      "genre": "Alternative",
+      "track_count": 16,
+      "runtime_ms": 3845066,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "The Suburbs",
+          "ms": 315200
+        },
+        {
+          "n": 2,
+          "title": "Ready to Start",
+          "ms": 255893
+        },
+        {
+          "n": 3,
+          "title": "Modern Man",
+          "ms": 279760
+        },
+        {
+          "n": 4,
+          "title": "Rococo",
+          "ms": 236773
+        },
+        {
+          "n": 5,
+          "title": "Empty Room",
+          "ms": 171533
+        },
+        {
+          "n": 6,
+          "title": "City With No Children",
+          "ms": 191600
+        },
+        {
+          "n": 7,
+          "title": "Half Light I",
+          "ms": 253667
+        },
+        {
+          "n": 8,
+          "title": "Half Light II (No Celebration)",
+          "ms": 267133
+        },
+        {
+          "n": 9,
+          "title": "Suburban War",
+          "ms": 285133
+        },
+        {
+          "n": 10,
+          "title": "Month of May",
+          "ms": 230720
+        },
+        {
+          "n": 11,
+          "title": "Wasted Hours",
+          "ms": 200720
+        },
+        {
+          "n": 12,
+          "title": "Deep Blue",
+          "ms": 268133
+        },
+        {
+          "n": 13,
+          "title": "We Used to Wait",
+          "ms": 301400
+        },
+        {
+          "n": 14,
+          "title": "Sprawl I (Flatland)",
+          "ms": 174227
+        },
+        {
+          "n": 15,
+          "title": "Sprawl II (Mountains Beyond Mountains)",
+          "ms": 325547
+        },
+        {
+          "n": 16,
+          "title": "The Suburbs (Continued)",
+          "ms": 87627
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/ea/9f/1a/ea9f1ab0-4cac-c925-590d-14461f676912/886446576510.jpg/1800x1800bb.jpg",
+      "label": "Arcade Fire Music",
+      "art": "assets/40/arcade-fire-the-suburbs.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/3DrgM5X3yX1JP1liNLAOHI"
+      }
     }
   ]
 }

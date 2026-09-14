@@ -116,6 +116,26 @@ def fetch(album):
     album["art"] = f'assets/40/{album["slug"]}.jpg'
 
 
+def fetch_from_spotify(album):
+    """No Apple record: take the cover from Spotify's oEmbed thumbnail
+    (640px — softer than Apple's 1800px; drop a better scan into
+    assets/40/<slug>.jpg by hand and it's used instead)."""
+    url = (album.get("links") or {}).get("spotify")
+    if not url:
+        return
+    ART.mkdir(parents=True, exist_ok=True)
+    out = ART / f'{album["slug"]}.jpg'
+    if REFRESH or not out.exists():
+        try:
+            o = get_json("https://open.spotify.com/oembed?url=" + urllib.parse.quote(url, safe=""))
+            urllib.request.urlretrieve(o["thumbnail_url"], out)
+            print(f"  cover from spotify ({o.get('thumbnail_width')}px)")
+        except Exception as e:  # noqa: BLE001
+            print(f"  ! could not fetch spotify cover: {e}")
+            return
+    album["art"] = f'assets/40/{album["slug"]}.jpg'
+
+
 def check_spotify(album):
     """Spotify's oEmbed needs no key and returns the linked album's title —
     enough to catch a pasted link that points at the wrong record."""
@@ -156,7 +176,9 @@ def main():
                 continue
 
         if album["apple_id"] == 0:
-            print(f"· {tag}: not on Apple Music, skipping fetch")
+            print(f"· {tag}: not on Apple Music")
+            fetch_from_spotify(album)
+            check_spotify(album)
             continue
 
         if REFRESH or not all(album.get(k) for k in FETCHED):

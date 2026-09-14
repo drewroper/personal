@@ -131,13 +131,13 @@ def _gray(im, grid, contrast):
     """Shrunk, contrast-stretched luminance for a dither pass. Cached by
     image identity so animated renders don't re-shrink every frame."""
     k = (id(im), grid, contrast)
-    if k not in _GRAY:
+    if k not in _GRAY or _GRAY[k][0] is not im:
         g = np.array(im.convert("L").resize((grid, int(grid * im.height / im.width)), Image.LANCZOS),
                      dtype=np.float32)
-        _GRAY[k] = ((g - 128.0) * contrast + 128.0).clip(0, 255)
+        _GRAY[k] = (im, ((g - 128.0) * contrast + 128.0).clip(0, 255))
         if len(_GRAY) > 64:
             _GRAY.pop(next(iter(_GRAY)))
-    return _GRAY[k].copy()
+    return _GRAY[k][1].copy()
 
 
 def dither(im, grid, on=LIGHT, off=BG, contrast=1.2, theta=None):
@@ -229,10 +229,16 @@ GROUND_ACCENT = (56, 66, 20)   # the same, pulled toward the accent
 _CACHE = {}
 
 def _prep(art, key, fn):
+    """Per-album prep cache. The image object is stored alongside so its
+    id() can't be recycled by a later album and hand back stale work."""
     k = (id(art), key)
-    if k not in _CACHE:
-        _CACHE[k] = fn()
-    return _CACHE[k]
+    if k not in _CACHE or _CACHE[k][0] is not art:
+        _CACHE[k] = (art, fn())
+    return _CACHE[k][1]
+
+
+def reset_caches():
+    _CACHE.clear(); _GRAY.clear()
 
 
 def _ground(art, theta, riff):
@@ -428,6 +434,7 @@ def main():
         if slugs and a["slug"] not in slugs:
             continue
         art = Image.open(ROOT / a["art"]).convert("RGB")
+        reset_caches()
         if "--video" in args:
             secs = int(args[args.index("--seconds") + 1]) if "--seconds" in args else 20
             for riff in riffs:

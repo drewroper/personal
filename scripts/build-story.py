@@ -3,7 +3,7 @@ Render Instagram story graphics (1080x1920) for the /40 countdown.
 
     python3 scripts/build-story.py [data.json] [--variant a|b|c|d] [--slug x ...]
                                    [--extras] [--out DIR]
-                                   [--video [--riff field|resolve|detail|accent ...] [--seconds 10]]
+                                   [--video [--riff detail-resolve|field|resolve|detail|accent ...] [--seconds 10]]
 
 Reads data/albums.json (or the file given), renders every slotted album —
 or just the slugs given — into out/stories/. --extras also renders the
@@ -62,6 +62,16 @@ display   = lambda s: font("Bricolage-800", s)
 
 
 # ── text helpers ─────────────────────────────────────────────────────────
+def edge_text(d, y, text, f, fill):
+    """Draw so the glyph's ink starts exactly at PAD, whatever the face's
+    side bearing is — one hard left edge across mono, sans and display."""
+    d.text((PAD - f.getbbox(text)[0], y), text, font=f, fill=fill)
+
+
+def edge_tracked(d, y, text, f, fill, em=0.10):
+    tracked(d, (PAD - f.getbbox(text[0])[0], y), text, f, fill, em)
+
+
 def tracked(d, xy, text, f, fill, em=0.10):
     x, y = xy
     for ch in text:
@@ -148,11 +158,11 @@ def grain(size, density=0.06, tone=(26, 26, 28)):
 # ── shared pieces ────────────────────────────────────────────────────────
 def header(d, a, y):
     """Artist (H2) then album title (H1). Returns the y below the block."""
-    d.text((PAD, y), a["artist"], font=sans(40), fill=MUTED)
+    edge_text(d, y, a["artist"], sans(40), MUTED)
     y += 62
     f, lines = fit(a["title"], display, 92, COL, 2, 56)
     for ln in lines:
-        d.text((PAD - 4, y), ln, font=f, fill=LIGHT)
+        edge_text(d, y, ln, f, LIGHT)
         y += int(f.size * 1.02)
     return y + 8
 
@@ -160,12 +170,14 @@ def header(d, a, y):
 def microcopy(d, a, y, right=False):
     text = f'DAY {a["no"]:02d} / 40'
     f = mono(24)
-    x = W - PAD - tracked_w(text, f) if right else PAD
-    tracked(d, (x, y), text, f, FAINT)
+    if right:
+        tracked(d, (W - PAD - tracked_w(text, f), y), text, f, FAINT)
+    else:
+        edge_tracked(d, y, text, f, FAINT)
 
 
 def url(d, y):
-    tracked(d, (PAD, y), "DREWROPER.COM/40", mono(24), ACCENT)
+    edge_tracked(d, y, "DREWROPER.COM/40", mono(24), ACCENT)
 
 
 def dot_rail(d, a, side="left"):
@@ -181,8 +193,8 @@ def dot_rail(d, a, side="left"):
 
 
 # ── variants ─────────────────────────────────────────────────────────────
-COVER = 880
-CX    = (W - COVER) // 2
+COVER = W - PAD * 2   # 912 — cover shares the type's left edge
+CX    = PAD
 
 def variant_a(a, art):
     """Offset dither: a 1-bit copy of the cover sits behind the real one,
@@ -203,7 +215,7 @@ GROUND_ACCENT = (56, 66, 20)   # the same, pulled toward the accent
 
 def _ground(art, theta, riff):
     """Full-frame dithered ground for the B family."""
-    if riff == "detail":
+    if "detail" in riff:
         # A 3x detail of the cover, drifting on a small circle so it loops.
         big = square(art, W * 3)
         cx = W + int(math.cos(theta) * 90); cy = (W * 3 - H) // 2 + int(math.sin(theta) * 90)
@@ -211,21 +223,35 @@ def _ground(art, theta, riff):
     else:
         big = square(art, W)
         src = Image.new("RGB", (W, H), BG); src.paste(big, (0, (H - W) // 2))
-    tone = GROUND_ACCENT if riff == "accent" else GROUND
+    tone = GROUND_ACCENT if "accent" in riff else GROUND
     return dither(src, 135, on=tone, off=BG, contrast=1.4, theta=theta)
 
 
-def _resolve_alpha(theta):
-    """Cover resolves out of the dither at the top of the loop and sinks
-    back at the end: 0 → 1 over the first 15%, 1 → 0 over the last 10%."""
+REVEAL_STEPS = (16, 32, 64, 128, 256)   # dither cells across the cover, coarse → fine
+STEP_HOLD    = 0.022                     # fraction of the loop per step
+SNAP         = 0.020                     # fraction of the loop for the final fade to color
+SINK_AT      = 0.90                      # where the reverse begins
+
+
+def _reveal(cover, theta):
+    """The cover resolves out of its own dither in hard steps — each step
+    halves the cell size, so it's one-bit the whole way and never mushy.
+    Only the last step fades, briefly, to color. Reverses at loop end."""
     u = theta / (2 * math.pi)
-    if u < 0.15:
-        x = u / 0.15
-    elif u > 0.90:
-        x = (1 - u) / 0.10
+    n = len(REVEAL_STEPS)
+    rise = n * STEP_HOLD + SNAP
+    if u < rise:
+        k = u / STEP_HOLD
+    elif u > SINK_AT:
+        k = (1 - u) / (1 - SINK_AT) * rise / STEP_HOLD
     else:
-        return 1.0
-    return x * x * (3 - 2 * x)
+        return cover
+    if k < n:
+        grid = REVEAL_STEPS[int(k)]
+        return dither(cover, grid, on=LIGHT, off=BG, contrast=1.2, theta=theta)
+    fine = dither(cover, REVEAL_STEPS[-1], on=LIGHT, off=BG, contrast=1.2, theta=theta)
+    x = min(1.0, (k - n) * STEP_HOLD / SNAP)
+    return Image.blend(fine, cover, x * x * (3 - 2 * x))
 
 
 def variant_b(a, art, theta=None, riff="field"):
@@ -238,9 +264,8 @@ def variant_b(a, art, theta=None, riff="field"):
     y = header(d, a, TOP + 60)
     cy = max(y + 36, 580)
     cover = square(art, COVER)
-    if riff == "resolve" and theta is not None:
-        ghost = dither(cover, 110, on=LIGHT, off=BG, contrast=1.2, theta=theta)
-        cover = Image.blend(ghost, cover, _resolve_alpha(theta))
+    if "resolve" in riff and theta is not None:
+        cover = _reveal(cover, theta)
     c.paste(cover, (CX, cy))
     d.rectangle([CX, cy, CX + COVER - 1, cy + COVER - 1], outline=(60, 60, 62), width=2)
     url(d, BOT - 30)
@@ -371,7 +396,7 @@ def main():
     var    = args[args.index("--variant") + 1] if "--variant" in args else VARIANT
     out    = Path(args[args.index("--out") + 1]) if "--out" in args else ROOT / "out" / "stories"
     slugs  = [args[i + 1] for i, a in enumerate(args) if a == "--slug"]
-    riffs  = [args[i + 1] for i, a in enumerate(args) if a == "--riff"] or ["field"]
+    riffs  = [args[i + 1] for i, a in enumerate(args) if a == "--riff"] or ["detail-resolve"]
     out.mkdir(parents=True, exist_ok=True)
 
     data = json.loads(data_p.read_text())

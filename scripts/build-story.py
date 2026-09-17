@@ -247,7 +247,8 @@ def _ground(art, theta, riff):
         # A 3x detail of the cover, drifting on a small circle so it loops.
         # Pre-shrunk to the dither grid's scale so the crop + dither is cheap.
         big = _prep(art, "big3", lambda: square(art, W * 3))
-        cx = W + int(math.cos(theta) * 90); cy = (W * 3 - H) // 2 + int(math.sin(theta) * 90)
+        t = theta or 0.0
+        cx = W + int(math.cos(t) * 90); cy = (W * 3 - H) // 2 + int(math.sin(t) * 90)
         src = big.crop((cx, cy, cx + W, cy + H))
     else:
         src = _prep(art, "field", lambda: (lambda b: (lambda s_: (s_.paste(b, (0, (H - W) // 2)), s_)[1])(Image.new("RGB", (W, H), BG)))(square(art, W)))

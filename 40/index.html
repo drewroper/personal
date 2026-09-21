@@ -81,7 +81,11 @@
     .bar__brand:hover { color: var(--accent); }
     .brand-mark { height: 1em; width: auto; display: inline-block; vertical-align: -0.12em; font-size: 14px; }
     .bar__name { justify-self: center; margin: 0; white-space: nowrap;
-                 font-family: var(--font-display); font-size: 22px; line-height: 1; letter-spacing: -.06em; color: var(--text); }
+                 font-family: var(--font-display); font-size: 22px; line-height: 1; letter-spacing: -.06em; color: var(--text);
+                 opacity: 0; transform: translateY(14px); pointer-events: none;
+                 transition: opacity .35s ease, transform .45s cubic-bezier(.2,.7,.2,1); }
+    .bar.is-scrolled .bar__name { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .bar__name { transition: none; } }
     /* The wordmark: 404040 edge to edge, top of the page and bottom. */
     .wordmark {
       font-family: var(--font-display); font-size: min(38.5vw, 300px); line-height: .82;
@@ -105,7 +109,8 @@
        Every line is the H1 size; lines are hand-broken so none wraps. ── */
     .about {
       position: fixed; inset: 0; z-index: 0; overflow-y: auto; -webkit-overflow-scrolling: touch;
-      background: var(--bg); padding: 76px 20px 64px;
+      background: rgba(12,12,13,.82); backdrop-filter: blur(22px) saturate(140%); -webkit-backdrop-filter: blur(22px) saturate(140%);
+      padding: 76px 20px 64px;
       font-family: var(--font-sans); text-transform: none; letter-spacing: 0;
     }
     .about__title {
@@ -373,6 +378,17 @@
           document.body.style.overflow = open ? 'hidden' : '';
         };
         btn.addEventListener('click', e => { e.stopPropagation(); setOpen(about.hidden); });
+
+        // The small 404040 in the bar appears only once the big one is gone.
+        const bar = document.querySelector('.bar');
+        const big = document.querySelector('.wordmark--top');
+        if (big && 'IntersectionObserver' in window) {
+          new IntersectionObserver(([e]) => {
+            bar.classList.toggle('is-scrolled', !e.isIntersecting && e.boundingClientRect.top < 0);
+          }, { threshold: 0, rootMargin: '-48px 0px 0px 0px' }).observe(big);
+        } else if (bar) {
+          bar.classList.add('is-scrolled');
+        }
         about.addEventListener('click', e => e.stopPropagation());
         document.addEventListener('click', () => { if (!about.hidden) setOpen(false); });
         document.addEventListener('keydown', e => { if (e.key === 'Escape' && !about.hidden) setOpen(false); });

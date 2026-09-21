@@ -396,14 +396,43 @@ VARIANTS = {"a": variant_a, "b": variant_b, "c": variant_c, "d": variant_d}
 
 
 # ── extras: highlight cover + intro slides ───────────────────────────────
-def highlight_cover():
-    """Profile highlight circles crop to the centre — keep it dead centre."""
+HL_SIZE  = 400     # Porca size of each 40
+HL_PITCH = 330     # vertical distance between the stacked 40s
+HL_SLIDE_AT, HL_SLIDE = 0.5, 0.7    # seconds: when the outer 40s start moving, and how long
+HL_TEXT_AT = 1.5
+
+
+def _ease_out(x):
+    x = max(0.0, min(1.0, x)); return 1 - (1 - x) ** 3
+
+
+def highlight_cover(theta=None):
+    """Profile highlight: a yellow 40 dead centre (that's all the circle
+    crop shows). Animated, two bone 40s slide out from behind it, up and
+    down, to make the stacked 404040. One line about the project sits at
+    the very bottom, outside the circle."""
     c = Image.new("RGB", (W, H), BG); d = ImageDraw.Draw(c)
-    f = display(520)
-    w = f.getlength("40")
-    d.text(((W - w) / 2 - 8, H / 2 - 330), "40", font=f, fill=ACCENT)
-    t = "ALBUMS"; m = mono(34)
-    tracked(d, ((W - tracked_w(t, m, .3)) / 2, H / 2 + 200), t, m, MUTED, .3)
+    f = display(HL_SIZE)
+    x = (W - f.getlength("40")) / 2 - 8
+    cy = H / 2 - HL_SIZE * 0.62          # visual centre of the glyphs
+    if theta is None:
+        k = 1.0; p_text = 1.0
+    else:
+        t = _t(theta)
+        k = _ease_out((t - HL_SLIDE_AT) / HL_SLIDE)
+        if t > DURATION - HL_SLIDE - 0.6:  # slide back in before the loop closes
+            k = min(k, _ease_out((DURATION - 0.6 - t) / HL_SLIDE))
+        p_text = _text_progress(theta, 0) if False else max(0.0, min(1.0, (t - HL_TEXT_AT) / TEXT_IN, (DURATION - 1.2 - t) / TEXT_OUT))
+    off = HL_PITCH * k
+    d.text((x, cy - off), "40", font=f, fill=LIGHT)
+    d.text((x, cy + off), "40", font=f, fill=LIGHT)
+    d.text((x, cy), "40", font=f, fill=ACCENT)
+    line = "Forty albums that shaped me, one a day, before I turn forty."
+    lf = sans(34)
+    layer = _text_layer(lambda dd: dd.text(((W - lf.getlength(line)) / 2, BOT - 40), line, font=lf, fill=MUTED))
+    layer = dissolve(layer, p_text)
+    if layer is not None:
+        c.paste(layer, (0, 0), layer)
     return c
 
 
@@ -516,6 +545,10 @@ def main():
         for name, im in (("highlight-cover", highlight_cover()), ("intro-1", intro_1()),
                          ("intro-2", intro_2(albums)), ("closing", closing(albums))):
             p = out / f"{name}.png"; im.save(p); print(p)
+        if "--video" in args:
+            secs = int(args[args.index("--seconds") + 1]) if "--seconds" in args else 20
+            p = out / "highlight-cover.mp4"
+            render_video(lambda th: highlight_cover(th), p, secs); print(p)
 
 
 if __name__ == "__main__":

@@ -271,6 +271,7 @@ REVEAL_STEPS = (16, 32, 64, 128, 256)   # dither cells across the cover, coarse 
 STEP_HOLD    = 0.22                      # seconds per step
 SNAP         = 0.20                      # seconds for the final fade to color
 RISE         = len(REVEAL_STEPS) * STEP_HOLD + SNAP   # cover fully resolved at this time
+TEXT_DELAY   = 0.4                       # beat between the cover landing and the first text
 TEXT_IN      = 0.35                      # seconds each text element takes to dissolve in
 TEXT_STAGGER = 0.15
 TEXT_OUT     = 0.4                       # seconds to dissolve out, before the cover sinks
@@ -306,9 +307,9 @@ def _text_progress(theta, order):
     if theta is None:
         return 1.0
     t = _t(theta)
-    start = RISE + order * TEXT_STAGGER
+    start = RISE + TEXT_DELAY + order * TEXT_STAGGER
     p_in = (t - start) / TEXT_IN
-    end = DURATION - RISE - TEXT_OUT - (2 - order) * TEXT_STAGGER
+    end = DURATION - RISE - TEXT_DELAY - TEXT_OUT - (2 - order) * TEXT_STAGGER
     p_out = (end + TEXT_OUT - t) / TEXT_OUT
     return max(0.0, min(1.0, p_in, p_out))
 

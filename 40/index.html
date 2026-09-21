@@ -105,7 +105,7 @@
     .about__title {
       margin: 0 0 0 -3px; color: var(--text);
       font-family: var(--font-display); font-weight: 400;
-      font-size: clamp(64px, 22vw, 140px); line-height: 1.02; letter-spacing: 0;
+      font-size: clamp(64px, 22vw, 140px); line-height: .9; letter-spacing: 0;
     }
     .about__title span, .about__title em { display: block; }
     .about__title em { color: var(--accent); font-style: normal; }
@@ -186,6 +186,20 @@
     .foot__colophon { margin: 22px 0 0; }
 
     /* Desktop gets the cover beside the title; everything else stays. */
+    /* ── Minimal: no rules, no microcopy. ?minimal turns it on. ─────── */
+    .is-minimal .bar__row { border-bottom: 0; }
+    .is-minimal .entry { border-bottom: 0; padding: 40px 0 56px; }
+    .is-minimal .entry__head,
+    .is-minimal .entry__facts,
+    .is-minimal .entry__found,
+    .is-minimal details,
+    .is-minimal .about__dates,
+    .is-minimal .foot__colophon { display: none; }
+    .is-minimal .entry__cover { margin-top: 0; border: 0; }
+    .is-minimal .about { border-bottom: 0; }
+    .is-minimal .empty { border-bottom: 0; }
+    .is-minimal .foot { padding-top: 8px; }
+
     @media (min-width: 720px) {
       .page { max-width: 760px; }
       .entry__grid { display: grid; grid-template-columns: 220px 1fr; gap: 28px; align-items: start; }
@@ -246,6 +260,7 @@
     // data/albums.test.json — sample entries for looking at the design.
     const params  = new URLSearchParams(location.search);
     const test    = params.has('test');
+    if (params.has('minimal')) document.body.classList.add('is-minimal');
     const preview = test || params.has('preview');
     const DATA    = test ? '../data/albums.test.json' : '../data/albums.json';
 

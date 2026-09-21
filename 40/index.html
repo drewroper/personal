@@ -36,6 +36,9 @@
       --font-mono:    'Geist Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
       --mono-size: 11px;
       --display-size: clamp(56px, 17vw, 140px);   /* About lines and album names share this */
+      --gutter: 20px;                             /* page edge, scales up on desktop */
+      --page-max: 640px;
+      --vw: 100vw;                                /* set by JS to the real client width (no scrollbar) */
       --measure: 60ch;
     }
     *, *::before, *::after { box-sizing: border-box; }
@@ -63,16 +66,16 @@
 
     /* Mobile-first. One column, phone width; the desktop gets a little
        more room but the same structure. */
-    .page { max-width: 640px; margin: 0 auto; padding: 0 20px 0; }
+    .page { max-width: var(--page-max); margin: 0 auto; padding: 0 var(--gutter) 0; }
 
     /* ── Top bar, same recipe as the homepage: brand mark left, title
        centered, one control right; mono, translucent, hairline. The About
        panel hangs off it as a dropdown, so it opens wherever you are. ── */
-    .bar { position: sticky; top: 0; z-index: 50; margin: 0 -20px; }
+    .bar { position: sticky; top: 0; z-index: 50; margin: 0 calc(-1 * var(--gutter)); }
     .bar__row {
       position: relative; z-index: 1;
       display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: .75rem;
-      min-height: 48px; padding: .6rem 20px .55rem;
+      min-height: 48px; padding: .6rem var(--gutter) .55rem;
       letter-spacing: .04em;
       background: rgba(12,12,13,.78);
       backdrop-filter: saturate(140%) blur(10px);
@@ -93,7 +96,7 @@
        so the box is clipped to the ink height and the glyphs shifted up —
        then gutters are measured from the ink, not the box. */
     .wordmark {
-      font-family: var(--font-display); font-size: min(37.9vw, 300px); line-height: 1;
+      font-family: var(--font-display); font-size: calc((min(var(--vw), var(--page-max)) - 2 * var(--gutter)) / 2.368); line-height: 1;
       letter-spacing: -.06em; color: var(--text); white-space: nowrap;
       height: calc(1em - .214em - .237em); overflow: hidden;
       margin: 0 0 0 -.02em; user-select: none;
@@ -117,7 +120,7 @@
     .about {
       position: fixed; inset: 0; z-index: 0; overflow-y: auto; -webkit-overflow-scrolling: touch;
       background: rgba(12,12,13,.82); backdrop-filter: blur(22px) saturate(140%); -webkit-backdrop-filter: blur(22px) saturate(140%);
-      padding: 64px 20px calc(20px + var(--sab));
+      padding: 64px var(--gutter) calc(20px + var(--sab));
       display: flex; flex-direction: column; box-sizing: border-box;
       font-family: var(--font-sans); text-transform: none; letter-spacing: 0;
     }
@@ -126,7 +129,7 @@
     .about__title {
       margin: 0; padding: 0; max-width: 760px;
       font-family: var(--font-display); font-weight: 400; color: var(--text);
-      font-size: min(var(--display-size), 10vh, 10dvh); line-height: .9; letter-spacing: 0;
+      font-size: min(var(--display-size), 10vh, 10dvh); line-height: .8; letter-spacing: 0;
     }
     .about__title > * { display: block; white-space: nowrap; margin-left: -.03em; }
     /* Same stack as an entry: Porca title, mono facts line, Geist blurb. */
@@ -261,7 +264,7 @@
     .tail__stage { position: sticky; top: 0; height: 100vh; height: 100dvh; overflow: hidden; }
     .tail__cv { position: absolute; inset: 0; display: block; width: 100%; height: 100%; image-rendering: pixelated; image-rendering: crisp-edges; }
     .tail__col { position: relative; height: 100%; }
-    .tail__cap { position: absolute; top: 0; left: 20px; will-change: transform; visibility: hidden; }
+    .tail__cap { position: absolute; top: 0; left: var(--gutter); will-change: transform; visibility: hidden; }
     @media (prefers-reduced-motion: reduce) { .tail { height: 100vh; height: 100dvh; } }
     .grid40 > * { display: block; aspect-ratio: 1; border-radius: 4px; overflow: hidden; }
     .grid40 span { border: 1px solid var(--rule); display: grid; place-items: center; font: 400 9px/1 var(--font-mono); letter-spacing: .06em; color: var(--text-faint); opacity: .8; user-select: none; }
@@ -272,7 +275,7 @@
 
     /* Desktop gets the cover beside the title; everything else stays. */
     @media (min-width: 720px) {
-      .page { max-width: 760px; }
+      :root { --page-max: 760px; }
       .entry__grid { display: grid; grid-template-columns: 220px 1fr; gap: 28px; align-items: start; }
       .entry__cover { margin-top: 0; }
       .entry__artist { margin-top: 0; }
@@ -281,6 +284,41 @@
       .tracks { columns: 2; column-gap: 32px; }
       .tracks li { break-inside: avoid; }
     }
+
+    /* ── Desktop: the wordmark goes wall to wall, entries become two columns with the
+       cover as a large sticky object, About becomes a spread with the grid on the right. ── */
+    @media (min-width: 1024px) {
+      :root { --gutter: 40px; --page-max: 1440px; --display-size: clamp(64px, 6.4vw, 112px); }
+      .wordmark--top { margin: 40px 0 24px; }
+      .entry {
+        display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: 72px;
+        grid-template-areas: "cover head" "cover text" "cover blurb" "cover player" "cover listen" "cover tracks";
+        padding: 56px 0 88px; scroll-margin-top: 48px;
+      }
+      .entry__head { grid-area: head; align-self: start; }
+      .entry__grid { display: contents; }
+      .entry .entry__cover-wrap { grid-area: cover; position: sticky; top: 72px; align-self: start; margin: 0; }
+      .entry__text { grid-area: text; }
+      .entry__artist { margin-top: 32px; font-size: 17px; }
+      .entry__title { margin-top: 8px; }
+      .entry__blurb { grid-area: blurb; max-width: 62ch; font-size: 18px; }
+      .entry__player { grid-area: player; max-width: 660px; }
+      .entry .listen { grid-area: listen; max-width: 660px; }
+      .entry details { grid-area: tracks; }
+      .about {
+        display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: 72px;
+        align-content: center; align-items: start; padding-top: 48px;
+        max-width: var(--page-max); box-sizing: border-box; margin: 0 auto;
+      }
+      .about[hidden] { display: none; }
+      .about__title { grid-column: 1; font-size: min(var(--display-size), 11vh); }
+      .about__body { grid-column: 1; font-size: 18px; max-width: 52ch; }
+      .about__meta { grid-column: 1; max-width: 52ch; }
+      .about .grid40 { grid-column: 2; grid-row: 1 / span 3; align-self: center; margin: 0; max-width: 560px; justify-self: end; width: 100%; }
+      .grid40 span { font-size: 11px; }
+      .foot { padding-top: 48px; }
+    }
+
   </style>
 </head>
 <body>
@@ -445,6 +483,9 @@
     const BAYER = [0,32,8,40,2,34,10,42,48,16,56,24,50,18,58,26,12,44,4,36,14,46,6,38,60,28,52,20,62,30,54,22,
                    3,35,11,43,1,33,9,41,51,19,59,27,49,17,57,25,15,47,7,39,13,45,5,37,63,31,55,23,61,29,53,21].map(v => v * 4);
     const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // The wordmark is sized from the real client width, so a desktop scrollbar never pushes it past the gutter.
+    const setVW = () => document.documentElement.style.setProperty('--vw', document.documentElement.clientWidth + 'px');
+    setVW(); addEventListener('resize', setVW);
 
     // ── The tail. Scroll is the engine. 404040 stays pinned at the top; as it rises
     //    into view an extrusion dithers in beneath it, fully there by the time the
@@ -464,7 +505,7 @@
 
       function build() {
         const fs = parseFloat(getComputedStyle(ref).fontSize);
-        cell = Math.max(3, Math.round(fs / 48));
+        cell = Math.min(8, Math.max(3, Math.round(fs / 48)));
         W = Math.ceil(innerWidth / cell); H = Math.ceil(innerHeight / cell);
         cv.width = W; cv.height = H; img = ctx.createImageData(W, H); buf = img.data;
         const span = ref.querySelector('span'), pxW = span.getBoundingClientRect().width + .02 * fs;

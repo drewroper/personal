@@ -17,8 +17,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <style>
-    /* Geist for reading. Porca — a rounded pixel face, self-hosted — for
-       the title, album names and every label. No rotating faces here. */
+    /* Same type system as the homepage: Geist for reading, Geist Mono at
+       11px for labels and metadata. The About H1 is Porca, self-hosted. */
     @font-face {
       font-family: 'Porca'; font-weight: 400; font-display: swap;
       src: url('../assets/fonts/Porca.otf') format('opentype');
@@ -55,29 +55,8 @@
 
     /* Label voice — every small-caps mono string on the page. */
     .mono {
-      font-family: var(--font-display); font-size: 13px;
-      letter-spacing: .05em; text-transform: uppercase;
-    }
-    /* Stepped pixel corners — three steps of --s. The font is rounded;
-       the boxes are stairs. .px-line draws a 1px outline that follows
-       the stairs: the box is the line colour, ::before is the fill. */
-    .px, .px-line::before {
-      --s: 3px;
-      clip-path: polygon(
-        calc(3*var(--s)) 0, calc(100% - 3*var(--s)) 0,
-        calc(100% - 3*var(--s)) var(--s), calc(100% - 2*var(--s)) var(--s),
-        calc(100% - 2*var(--s)) calc(2*var(--s)), calc(100% - var(--s)) calc(2*var(--s)),
-        calc(100% - var(--s)) calc(3*var(--s)), 100% calc(3*var(--s)),
-        100% calc(100% - 3*var(--s)), calc(100% - var(--s)) calc(100% - 3*var(--s)),
-        calc(100% - var(--s)) calc(100% - 2*var(--s)), calc(100% - 2*var(--s)) calc(100% - 2*var(--s)),
-        calc(100% - 2*var(--s)) calc(100% - var(--s)), calc(100% - 3*var(--s)) calc(100% - var(--s)),
-        calc(100% - 3*var(--s)) 100%, calc(3*var(--s)) 100%,
-        calc(3*var(--s)) calc(100% - var(--s)), calc(2*var(--s)) calc(100% - var(--s)),
-        calc(2*var(--s)) calc(100% - 2*var(--s)), var(--s) calc(100% - 2*var(--s)),
-        var(--s) calc(100% - 3*var(--s)), 0 calc(100% - 3*var(--s)),
-        0 calc(3*var(--s)), var(--s) calc(3*var(--s)),
-        var(--s) calc(2*var(--s)), calc(2*var(--s)) calc(2*var(--s)),
-        calc(2*var(--s)) var(--s), calc(3*var(--s)) var(--s));
+      font-family: var(--font-mono); font-size: var(--mono-size);
+      letter-spacing: .08em; text-transform: uppercase;
     }
 
     /* Mobile-first. One column, phone width; the desktop gets a little
@@ -105,14 +84,12 @@
       justify-self: end;
       font: inherit; letter-spacing: inherit; text-transform: inherit;
       color: var(--text-muted);
-      background: var(--line); border: 0;
-      padding: 6px 12px 5px; cursor: pointer;
-      position: relative; z-index: 0; --line: var(--rule); --fill: var(--bg);
+      background: none; border: 1px solid var(--rule); border-radius: 999px;
+      padding: 4px 11px; cursor: pointer;
       -webkit-tap-highlight-color: transparent;
       transition: color .15s ease, border-color .15s ease;
     }
-    .bar__about:hover, .bar__about[aria-expanded="true"] { color: var(--text); --line: var(--text-faint); }
-    .px-line::before { content: ''; position: absolute; inset: 1px; background: var(--fill); z-index: -1; --s: inherit; }
+    .bar__about:hover, .bar__about[aria-expanded="true"] { color: var(--text); border-color: var(--text-faint); }
 
     /* ── About: a dropdown under the bar. Before launch, when there's
        nothing else on the page, it sits in the flow instead. ─────────── */
@@ -126,9 +103,9 @@
     }
     .page.is-empty .about { position: static; box-shadow: none; }
     .about__title {
-      margin: 0; color: var(--text);
+      margin: 0 0 0 -3px; color: var(--text);
       font-family: var(--font-display); font-weight: 400;
-      font-size: clamp(34px, 9vw, 56px); line-height: 1.12; letter-spacing: .01em;
+      font-size: clamp(64px, 22vw, 140px); line-height: 1.02; letter-spacing: 0;
     }
     .about__title span, .about__title em { display: block; }
     .about__title em { color: var(--accent); font-style: normal; }
@@ -144,13 +121,12 @@
 
     .entry__cover {
       display: block; width: 100%; aspect-ratio: 1; object-fit: cover; margin-top: 16px;
-      background: var(--bg-raised); --s: 8px;
+      background: var(--bg-raised); border: 1px solid var(--rule);
     }
     .entry__artist { margin: 20px 0 0; color: var(--text-muted); font-size: 15px; }
     .entry__title  {
-      margin: 6px 0 0; color: var(--text);
-      font-family: var(--font-display); font-weight: 400;
-      font-size: 28px; line-height: 1.15; letter-spacing: .01em;
+      margin: 4px 0 0; color: var(--text);
+      font-weight: 500; font-size: 26px; line-height: 1.15; letter-spacing: -.015em;
     }
     .entry__facts  { margin: 12px 0 0; color: var(--text-faint); }
     .entry__facts span + span::before { content: ' · '; }
@@ -164,7 +140,7 @@
     .entry__blurb--empty { color: var(--text-faint); }
 
     .entry__player { margin: 26px 0 0; }
-    .entry__player iframe { width: 100%; height: 450px; border: 0; overflow: hidden; background: transparent; --s: 5px; }
+    .entry__player iframe { width: 100%; height: 450px; border: 0; overflow: hidden; background: transparent; border-radius: 10px; }
     .entry__noplayer { color: var(--text-faint); font-size: 14px; }
 
     /* Listen elsewhere: one button that resolves the album on any service
@@ -174,19 +150,18 @@
     .listen { margin: 22px 0 0; display: flex; gap: 8px; }
     .listen a {
       flex: 1 1 auto; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 12px 16px 11px; white-space: nowrap;
+      padding: 10px 14px; border-radius: 999px; white-space: nowrap;
       -webkit-tap-highlight-color: transparent;
       transition: color .15s ease, background .15s ease, border-color .15s ease;
     }
-    .listen a { position: relative; z-index: 0; border: 0; background: var(--line); --fill: var(--bg); }
-    .listen a.listen__any, .listen a.listen__any:hover { color: var(--accent); --line: var(--accent); }
-    .listen a.listen__svc, .listen a.listen__svc:hover { color: var(--text-muted); --line: var(--rule); }
+    .listen a.listen__any, .listen a.listen__any:hover { color: var(--accent); background: none; border: 1px solid var(--accent); }
+    .listen a.listen__svc, .listen a.listen__svc:hover { color: var(--text-muted); background: none; border: 1px solid var(--rule); }
     @media (hover: hover) {
-      .listen a.listen__any:hover { color: var(--bg); --fill: var(--accent); }
-      .listen a.listen__svc:hover { color: var(--text); --line: var(--text-faint); }
+      .listen a.listen__any:hover { color: var(--bg); background: var(--accent); }
+      .listen a.listen__svc:hover { color: var(--text); border-color: var(--text-faint); }
     }
-    .listen a.listen__any:active { color: var(--bg); --fill: var(--accent); }
-    .listen a.listen__svc:active { color: var(--text); --line: var(--text-faint); }
+    .listen a.listen__any:active { color: var(--bg); background: var(--accent); }
+    .listen a.listen__svc:active { color: var(--text); border-color: var(--text-faint); }
 
     details { margin: 18px 0 0; }
     summary { cursor: pointer; color: var(--text-faint); list-style: none; user-select: none; }
@@ -233,7 +208,7 @@
         </svg>
       </a>
       <span class="bar__name">40 albums • 40 days • 40 years</span>
-      <button class="bar__about px px-line" id="js-about-btn" type="button" aria-expanded="false" aria-controls="js-about">About</button>
+      <button class="bar__about" id="js-about-btn" type="button" aria-expanded="false" aria-controls="js-about">About</button>
       </div>
       <section class="about" id="js-about" hidden>
       <h1 class="about__title"><span>40 albums,</span> <em>40 days,</em> <span>40 years.</span></h1>
@@ -294,7 +269,7 @@
         return `<p class="entry__noplayer">Not on Apple Music.${a.link ? ` <a href="${esc(a.link)}" target="_blank" rel="noopener">Listen here</a>.` : ''}</p>`;
       }
       const slug = (a.apple_url || '').split('/').slice(-2, -1)[0] || a.slug;
-      return `<iframe class="px" loading="lazy" title="${esc(a.artist)} — ${esc(a.title)} on Apple Music"
+      return `<iframe loading="lazy" title="${esc(a.artist)} — ${esc(a.title)} on Apple Music"
         allow="autoplay *; encrypted-media *; clipboard-write"
         sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
         src="https://embed.music.apple.com/us/album/${esc(slug)}/${a.apple_id}?theme=dark"></iframe>`;
@@ -309,10 +284,10 @@
         ['Spotify', L.spotify || `https://open.spotify.com/search/${q}/albums`],
       ];
       const any = a.apple_id
-        ? `<a class="listen__any mono px px-line" href="https://album.link/i/${a.apple_id}" target="_blank" rel="noopener">Open in your music app ↗</a>`
+        ? `<a class="listen__any mono" href="https://album.link/i/${a.apple_id}" target="_blank" rel="noopener">Open in your music app ↗</a>`
         : '';
       return `<div class="listen">${any}${svcs.map(([n, u]) =>
-        `<a class="listen__svc mono px px-line" href="${esc(u)}" target="_blank" rel="noopener">${n} ↗</a>`).join('')}</div>`;
+        `<a class="listen__svc mono" href="${esc(u)}" target="_blank" rel="noopener">${n} ↗</a>`).join('')}</div>`;
     }
 
     function tracks(a) {
@@ -337,7 +312,7 @@
           <span>${fmtDate(a.date)}</span>
         </div>
         <div class="entry__grid">
-          <img class="entry__cover px" src="../${esc(a.art || '')}" alt="${esc(a.title)} cover" loading="lazy" />
+          <img class="entry__cover" src="../${esc(a.art || '')}" alt="${esc(a.title)} cover" loading="lazy" />
           <div class="entry__text">
             <p class="entry__artist">${esc(a.artist)}</p>
             <h2 class="entry__title">${esc(a.title)}</h2>

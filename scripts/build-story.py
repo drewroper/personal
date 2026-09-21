@@ -268,46 +268,99 @@ def _ground(art, theta, riff):
 
 
 REVEAL_STEPS = (16, 32, 64, 128, 256)   # dither cells across the cover, coarse → fine
-STEP_HOLD    = 0.022                     # fraction of the loop per step
-SNAP         = 0.020                     # fraction of the loop for the final fade to color
-SINK_AT      = 0.90                      # where the reverse begins
+STEP_HOLD    = 0.22                      # seconds per step
+SNAP         = 0.20                      # seconds for the final fade to color
+RISE         = len(REVEAL_STEPS) * STEP_HOLD + SNAP   # cover fully resolved at this time
+TEXT_IN      = 0.35                      # seconds each text element takes to dissolve in
+TEXT_STAGGER = 0.15
+TEXT_OUT     = 0.4                       # seconds to dissolve out, before the cover sinks
+DURATION     = 20.0                      # set by render_video
+
+
+def _t(theta):
+    """Loop phase → seconds into the loop."""
+    return theta / (2 * math.pi) * DURATION
 
 
 def _reveal(cover, theta):
     """The cover resolves out of its own dither in hard steps — each step
     halves the cell size, so it's one-bit the whole way and never mushy.
-    Only the last step fades, briefly, to color. Reverses at loop end."""
-    u = theta / (2 * math.pi)
-    n = len(REVEAL_STEPS)
-    rise = n * STEP_HOLD + SNAP
-    if u < rise:
-        k = u / STEP_HOLD
-    elif u > SINK_AT:
-        k = (1 - u) / (1 - SINK_AT) * rise / STEP_HOLD
+    Only the last step fades, briefly, to color. Sinks back at loop end."""
+    t = _t(theta); n = len(REVEAL_STEPS)
+    if t < RISE:
+        k = t / STEP_HOLD
+    elif t > DURATION - RISE:
+        k = (DURATION - t) / STEP_HOLD
     else:
         return cover
     if k < n:
-        grid = REVEAL_STEPS[int(k)]
-        return dither(cover, grid, on=LIGHT, off=BG, contrast=1.2, theta=theta)
+        return dither(cover, REVEAL_STEPS[int(max(k, 0))], on=LIGHT, off=BG, contrast=1.2, theta=theta)
     fine = dither(cover, REVEAL_STEPS[-1], on=LIGHT, off=BG, contrast=1.2, theta=theta)
     x = min(1.0, (k - n) * STEP_HOLD / SNAP)
     return Image.blend(fine, cover, x * x * (3 - 2 * x))
 
 
+def _text_progress(theta, order):
+    """0..1 visibility of the `order`-th text element: dissolves in after
+    the cover has resolved, staggered; dissolves out before it sinks."""
+    if theta is None:
+        return 1.0
+    t = _t(theta)
+    start = RISE + order * TEXT_STAGGER
+    p_in = (t - start) / TEXT_IN
+    end = DURATION - RISE - TEXT_OUT - (2 - order) * TEXT_STAGGER
+    p_out = (end + TEXT_OUT - t) / TEXT_OUT
+    return max(0.0, min(1.0, p_in, p_out))
+
+
+def dissolve(layer, p, cell=6):
+    """Ordered-dither dissolve of an RGBA layer: pixels appear in Bayer
+    order as p goes 0 → 1, so text comes in as pixels, not as a fade."""
+    if p >= 1:
+        return layer
+    if p <= 0:
+        return None
+    a = np.array(layer)
+    h, w = a.shape[:2]
+    gh, gw = -(-h // cell), -(-w // cell)
+    th = np.tile(BAYER, (gh // 8 + 1, gw // 8 + 1))[:gh, :gw]
+    keep = np.kron(th < p * 255, np.ones((cell, cell), bool))[:h, :w]
+    a[..., 3] = np.where(keep, a[..., 3], 0)
+    return Image.fromarray(a, "RGBA")
+
+
+def _text_layer(fn):
+    """Draw with fn(draw) onto a fresh transparent layer."""
+    layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    fn(ImageDraw.Draw(layer))
+    return layer
+
+
 def variant_b(a, art, theta=None, riff="field"):
     """Field: the cover itself, blown up and dithered dim, is the ground
-    behind everything, breathing. Riffs: field (base), resolve (cover
-    emerges from its own dither), detail (zoomed drifting ground),
-    accent (ground dither tinted toward the accent)."""
-    c = _ground(art, theta, riff); d = ImageDraw.Draw(c)
-    microcopy(d, a, TOP + 4)
-    y = header(d, a, TOP + 60)
-    cy = max(y + 36, 580)
+    behind everything, breathing. With "resolve": the cover steps out of
+    its own dither first, then the type dissolves in, line by line."""
+    c = _ground(art, theta, riff)
     cover = _prep(art, "cover", lambda: square(art, COVER))
     if "resolve" in riff and theta is not None:
         cover = _reveal(cover, theta)
+    # Header height decides where the cover sits; measure it on a scratch draw.
+    scratch = ImageDraw.Draw(Image.new("RGB", (1, 1)))
+    y_after = header(scratch, a, TOP + 60)
+    cy = max(y_after + 36, 580)
     c.paste(cover, (CX, cy), rounded(cover, 24))
-    url(d, BOT - 30)
+
+    animate = "resolve" in riff
+    pieces = [
+        (0, lambda d: microcopy(d, a, TOP + 4)),
+        (1, lambda d: header(d, a, TOP + 60)),
+        (2, lambda d: url(d, BOT - 30)),
+    ]
+    for order, fn in pieces:
+        p = _text_progress(theta, order) if animate else 1.0
+        layer = dissolve(_text_layer(fn), p)
+        if layer is not None:
+            c.alpha_composite(layer) if c.mode == "RGBA" else c.paste(layer, (0, 0), layer)
     return c
 
 
@@ -414,6 +467,8 @@ def ffmpeg_bin():
 
 def render_video(frame_fn, out_path, seconds=10, fps=30):
     """Pipe frames straight into ffmpeg. frame_fn(theta) -> PIL image."""
+    global DURATION
+    DURATION = float(seconds)
     n = seconds * fps
     cmd = [ffmpeg_bin(), "-y", "-loglevel", "error",
            "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(fps), "-i", "-",

@@ -495,7 +495,8 @@
       "links": {
         "spotify": "https://open.spotify.com/album/5ceB3rxgXqIRpsOvVzTG28"
       },
-      "date": "2026-09-27"
+      "date": "2026-09-27",
+      "art_back": "assets/40/outkast-aquemini-back.jpg"
     },
     {
       "no": 6,
@@ -577,7 +578,8 @@
       "links": {
         "spotify": "https://open.spotify.com/album/04V5tTHMYIGBzcYxGMgRFn"
       },
-      "date": "2026-09-28"
+      "date": "2026-09-28",
+      "art_back": "assets/40/portugal-the-man-the-satanic-satanist-back.jpg"
     },
     {
       "no": 7,
@@ -659,7 +661,8 @@
       "links": {
         "spotify": "https://open.spotify.com/album/1NFGnxmeIEBakre4DvLaJq"
       },
-      "date": "2026-09-29"
+      "date": "2026-09-29",
+      "art_back": "assets/40/death-cab-for-cutie-plans-back.jpg"
     },
     {
       "no": 8,
@@ -746,7 +749,8 @@
       "links": {
         "spotify": "https://open.spotify.com/album/7EW77iyGMou046Z44pOrIk"
       },
-      "date": "2026-09-30"
+      "date": "2026-09-30",
+      "art_back": "assets/40/oasis-what-s-the-story-morning-glory-back.jpg"
     },
     {
       "no": 9,
@@ -843,7 +847,8 @@
       "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/3c/95/1d/3c951d73-f6c6-12dd-34b4-cc95f63e210c/634904078560.png/1800x1800bb.jpg",
       "label": "XL Recordings Ltd",
       "art": "assets/40/radiohead-hail-to-the-thief.jpg",
-      "date": "2026-10-01"
+      "date": "2026-10-01",
+      "art_back": "assets/40/radiohead-hail-to-the-thief-back.jpg"
     },
     {
       "no": 10,

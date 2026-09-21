@@ -2522,7 +2522,9 @@
       "art": "assets/40/blink-182-take-off-your-pants-and-jacket.jpg",
       "links": {
         "spotify": "https://open.spotify.com/album/3nHpBmW5wJXGeC3ojBkpey"
-      }
+      },
+      "art_back": "assets/40/blink-182-take-off-your-pants-and-jacket-back.jpg",
+      "art_back_src": "https://coverartarchive.org/release/dce5628d-fc2f-4703-9e58-7b266df478c3/36600754811.jpg"
     },
     {
       "no": null,
@@ -2596,7 +2598,9 @@
       "art": "assets/40/youth-lagoon-the-year-of-hibernation.jpg",
       "links": {
         "spotify": "https://open.spotify.com/album/0mcvDycoex7ANLZOmVVRoD"
-      }
+      },
+      "art_back": "assets/40/youth-lagoon-the-year-of-hibernation-back.jpg",
+      "art_back_src": "https://coverartarchive.org/release/2f6ee3f5-6e5f-46e5-8dfc-4099f2713645/41279033936.jpg"
     },
     {
       "no": null,
@@ -2700,7 +2704,9 @@
       "art": "assets/40/arcade-fire-the-suburbs.jpg",
       "links": {
         "spotify": "https://open.spotify.com/album/3DrgM5X3yX1JP1liNLAOHI"
-      }
+      },
+      "art_back": "assets/40/arcade-fire-the-suburbs-back.jpg",
+      "art_back_src": "http://coverartarchive.org/release/9f8374c0-8598-3799-8986-a573b9de2d31/5763179290.jpg"
     }
   ]
 }

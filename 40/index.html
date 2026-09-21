@@ -89,12 +89,12 @@
     @media (prefers-reduced-motion: reduce) { .bar__name { transition: none; } }
     /* The wordmark: 404040 edge to edge, top of the page and bottom. */
     .wordmark {
-      font-family: var(--font-display); font-size: min(38.5vw, 300px); line-height: .82;
+      font-family: var(--font-display); font-size: min(37.2vw, 300px); line-height: .82;
       letter-spacing: -.06em; color: var(--text); white-space: nowrap;
       margin: 0 0 0 -.02em; user-select: none;
     }
     .wordmark--top { padding: 24px 0 20px; }
-    .wordmark--foot { padding: 36px 0 0; }
+    .wordmark--foot { padding: 36px 0 0; line-height: .74; margin-bottom: -.19em; }
     .bar__about {
       justify-self: end;
       font: inherit; letter-spacing: inherit; text-transform: inherit;
@@ -201,7 +201,7 @@
     .empty b { color: var(--text); font-weight: 400; }
 
     /* ── Footer: a real one, with room to grow. ─────────────────────── */
-    .foot { padding: 36px 0 calc(48px + env(safe-area-inset-bottom)); color: var(--text-faint); }
+    .foot { padding: 36px 0 env(safe-area-inset-bottom); color: var(--text-faint); }
     .foot__links { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 0; padding: 0; list-style: none; }
     .foot__links a { color: var(--text-muted); border-bottom-color: transparent; }
     .foot__links a:hover { color: var(--accent); border-bottom-color: var(--accent); }

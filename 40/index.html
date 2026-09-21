@@ -262,11 +262,20 @@
     .tail__cv { position: absolute; inset: 0; display: block; width: 100%; height: 100%; image-rendering: pixelated; image-rendering: crisp-edges; }
     .tail__col { position: relative; height: 100%; }
     .tail__cap { position: absolute; top: 0; left: 20px; will-change: transform; visibility: hidden; }
-    .tail__cap--end { color: var(--accent); cursor: pointer; }
-    @media (prefers-reduced-motion: reduce) { .tail { height: 100vh; height: 100dvh; } }
+    .tail__top {
+      position: absolute; left: 50%; bottom: calc(20px + var(--sab));
+      transform: translate(-50%, calc(100% + 24px + var(--sab)));
+      font: 400 var(--mono-size) var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--accent);
+      background: rgba(12,12,13,.8); border: 1px solid var(--accent); border-radius: 999px; padding: 12px 20px;
+      cursor: pointer; -webkit-tap-highlight-color: transparent; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      transition: transform .5s cubic-bezier(.2,.8,.2,1);
+    }
+    .tail.is-deep .tail__top { transform: translate(-50%, 0); }
+    @media (hover: hover) { .tail__top:hover { background: var(--accent); color: var(--bg); } }
+    @media (prefers-reduced-motion: reduce) { .tail { height: 100vh; height: 100dvh; } .tail .tail__top { transform: translate(-50%, 0); } }
     .grid40 > * { display: block; aspect-ratio: 1; border-radius: 4px; overflow: hidden; }
-    .grid40 span { border: 1px solid var(--rule); }
-    .grid40 span.is-today { border-color: var(--accent); }
+    .grid40 span { border: 1px solid var(--rule); display: grid; place-items: center; font: 400 9px/1 var(--font-mono); letter-spacing: .06em; color: var(--text-faint); opacity: .8; user-select: none; }
+    .grid40 span.is-today { border-color: var(--accent); color: var(--accent); }
     .grid40 a { border: 0; }
     .grid40 a img { display: block; width: 100%; height: 100%; object-fit: cover; }
     .grid40 a:hover img { opacity: .8; }
@@ -327,8 +336,8 @@
       <canvas class="tail__cv" id="js-tail-cv"></canvas>
       <div class="page tail__col">
         <div class="wordmark tail__cap" id="js-tail-start"><span>404040</span></div>
-        <div class="wordmark tail__cap tail__cap--end" id="js-tail-end" role="button" tabindex="-1" aria-label="Back to top"><span>404040</span></div>
       </div>
+      <button class="tail__top mono" id="js-tail-top" type="button">Back to top ↑</button>
     </div>
   </section>
 
@@ -448,18 +457,20 @@
                    3,35,11,43,1,33,9,41,51,19,59,27,49,17,57,25,15,47,7,39,13,45,5,37,63,31,55,23,61,29,53,21].map(v => v * 4);
     const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // ── The tail. Scroll is the engine: it pulls an extrusion out of 404040, snakes
-    //    it down a tunnel toward a vanishing point, fogs the far end with dither, and
-    //    finally surfaces the other cap in accent green. Tap that to go home. ──
+    // ── The tail. Scroll is the engine. The moment 404040 rises in from the bottom,
+    //    an extrusion starts pulling out beneath it; the cap keeps scrolling away while
+    //    the ribbon sticks, and the tunnel goes on for as long as you scroll, getting
+    //    stranger the deeper you go. A Back-to-top pill surfaces once the cap is gone. ──
     (function tail() {
       const region = document.getElementById('js-tail'), cv = document.getElementById('js-tail-cv'), ref = document.querySelector('.wordmark--top');
-      const capEl = document.getElementById('js-tail-start'), endEl = document.getElementById('js-tail-end');
-      if (!region || !cv || !ref || !capEl || !endEl) return;
+      const capEl = document.getElementById('js-tail-start'), topBtn = document.getElementById('js-tail-top');
+      if (!region || !cv || !ref || !capEl || !topBtn) return;
       const ctx = cv.getContext('2d');
       const TXT = [244, 241, 236], ACC = [214, 255, 56], BG = [12, 12, 13];
       const clamp = v => v < 0 ? 0 : v > 1 ? 1 : v, ease = v => v * v * (3 - 2 * v);
-      let cell = 3, W = 0, H = 0, img, buf, fill = [], edge = [], inkW = 0, inkH = 0, capX = 0, p = 0, t0 = performance.now(), raf = 0, visible = false;
-      // Safe-area inset in px, measured off a probe element rather than parsed from env().
+      const hash = (a, b) => { let h = (a * 374761393 + b * 668265263) | 0; h = (h ^ (h >>> 13)) * 1274126177; return ((h ^ (h >>> 16)) >>> 0) / 4294967296; };
+      let cell = 3, W = 0, H = 0, img, buf, edge = [], inkW = 0, inkH = 0, inkPx = 0, capX = 0, t0 = performance.now(), raf = 0, visible = false;
+      let rise = 0, stuck = 0;   // px the region top has risen from the viewport bottom; px scrolled since the stage stuck
       const probe = document.createElement('div'); probe.style.cssText = 'position:fixed;bottom:0;height:env(safe-area-inset-bottom,0px);visibility:hidden;pointer-events:none'; document.body.appendChild(probe);
       const SAB = () => probe.offsetHeight || 0;
 
@@ -468,30 +479,29 @@
         cell = Math.max(3, Math.round(fs / 48));
         W = Math.ceil(innerWidth / cell); H = Math.ceil(innerHeight / cell);
         cv.width = W; cv.height = H; img = ctx.createImageData(W, H); buf = img.data;
-        // The 404040 mask at cell resolution, sized to the DOM wordmark.
-        const span = ref.querySelector('span'), pxW = span.getBoundingClientRect().width + .02 * fs, pxH = fs * (1 - .214 - .237);
+        const span = ref.querySelector('span'), pxW = span.getBoundingClientRect().width + .02 * fs;
+        inkPx = ref.getBoundingClientRect().height || fs * (1 - .214 - .237);
         const f = fs / cell, off = document.createElement('canvas'), o = off.getContext('2d', { willReadFrequently: true });
         o.font = `400 ${f}px Porca`;
         const track = -.06 * f, adv = [...'404040'].map(c => o.measureText(c).width + track), measured = adv.reduce((a, b) => a + b, 0) - track;
-        inkW = Math.round(pxW / cell); inkH = Math.ceil(pxH / cell);
+        inkW = Math.round(pxW / cell); inkH = Math.ceil(inkPx / cell);
         off.width = inkW; off.height = inkH;
         o.scale((pxW / cell) / measured, 1); o.font = `400 ${f}px Porca`; o.textBaseline = 'top'; o.fillStyle = '#fff';
         let x = -.02 * f; [...'404040'].forEach((c, i) => { o.fillText(c, x, -.214 * f); x += adv[i]; });
         const d = o.getImageData(0, 0, inkW, inkH).data, on = (x, y) => x >= 0 && y >= 0 && x < inkW && y < inkH && d[(y * inkW + x) * 4 + 3] > 128;
-        fill = []; edge = [];
-        for (let y = 0; y < inkH; y++) for (let x = 0; x < inkW; x++) if (on(x, y)) {
-          fill.push(x, y);
-          if (!on(x - 1, y) || !on(x + 1, y) || !on(x, y - 1) || !on(x, y + 1)) edge.push(x, y);
-        }
-        capX = Math.round((span.getBoundingClientRect().left + .02 * fs) / cell);  // ink starts at the gutter
+        edge = [];
+        for (let y = 0; y < inkH; y++) for (let x = 0; x < inkW; x++) if (on(x, y) && (!on(x - 1, y) || !on(x + 1, y) || !on(x, y - 1) || !on(x, y + 1))) edge.push(x - inkW / 2, y - inkH / 2);
+        capX = Math.round((span.getBoundingClientRect().left + .02 * fs) / cell);
         if (capX + inkW > W) capX = Math.max(0, Math.round((W - inkW) / 2));
       }
 
-      // Plot a slice: the mask scaled about its centre by s, shifted by (dx, dy), coloured by col*b, thinned by dither keep.
-      function plot(pts, dx, dy, s, col, b, keep) {
-        const cx = inkW / 2, cy = inkH / 2, r = col[0] * b + BG[0] * (1 - b), g = col[1] * b + BG[1] * (1 - b), bl = col[2] * b + BG[2] * (1 - b);
-        for (let i = 0; i < pts.length; i += 2) {
-          const x = Math.round(cx + (pts[i] - cx) * s + dx), y = Math.round(cy + (pts[i + 1] - cy) * s + dy);
+      // One slice of the extrusion: the outline, scaled (sx, sy) and rotated (rot) about its centre, at (cx, cy).
+      function slice(cx, cy, sx, sy, rot, col, b, keep) {
+        const r = col[0] * b + BG[0] * (1 - b), g = col[1] * b + BG[1] * (1 - b), bl = col[2] * b + BG[2] * (1 - b);
+        const cr = Math.cos(rot), sr = Math.sin(rot);
+        for (let i = 0; i < edge.length; i += 2) {
+          const px = edge[i] * sx, py = edge[i + 1] * sy;
+          const x = Math.round(cx + px * cr - py * sr), y = Math.round(cy + px * sr + py * cr);
           if (x < 0 || y < 0 || x >= W || y >= H) continue;
           if (keep < 1 && keep * 256 <= BAYER[(y & 7) * 8 + (x & 7)]) continue;
           const k = (y * W + x) * 4; buf[k] = r; buf[k + 1] = g; buf[k + 2] = bl; buf[k + 3] = 255;
@@ -501,52 +511,61 @@
       function draw(now) {
         const t = (now - t0) / 1000;
         for (let i = 0, n = W * H * 4; i < n; i += 4) { buf[i] = BG[0]; buf[i + 1] = BG[1]; buf[i + 2] = BG[2]; buf[i + 3] = 255; }
-        const gutter = Math.round(20 / cell), safe = Math.round(SAB() / cell);
-        const grow   = ease(clamp(p / .18));            // extrusion pulled out of the cap
-        const leave  = ease(clamp((p - .22) / .28));    // start cap recedes off the top
-        const arrive = ease(clamp((p - .68) / .32));    // end cap rises from below
-        const inkPx = ref.getBoundingClientRect().height || inkH * cell, safePx = SAB();
-        const capPx = 28 - leave * (28 + inkPx + 18);                                   // start cap, in CSS px
-        const endPx = innerHeight + 18 - arrive * (innerHeight + 18 - (innerHeight - 20 - safePx - inkPx));
-        const capY = Math.round(capPx / cell), endY = Math.round(endPx / cell);
-        capEl.style.transform = `translateY(${capPx.toFixed(1)}px)`; capEl.style.visibility = capPx + inkPx > 0 ? 'visible' : 'hidden';
-        endEl.style.transform = `translateY(${endPx.toFixed(1)}px)`; endEl.style.visibility = arrive > 0 ? 'visible' : 'hidden';
-        endEl.style.opacity = arrive < .35 ? (arrive / .35).toFixed(2) : 1;
-        const step  = Math.max(2, Math.round(9 / cell));
-        const depthMax = Math.round((H + inkH + 20) * 1.4 / step);
-        const K = Math.round(grow * depthMax);
-        const amp = (1.5 + 7 * ease(clamp((p - .1) / .5))) * (inkW / 120);
+        // The cap: 28px under the footer links, then it simply keeps scrolling once the stage sticks.
+        const capPx = 28 - stuck, capY = capPx / cell;
+        capEl.style.transform = `translateY(${capPx.toFixed(1)}px)`;
+        capEl.style.visibility = capPx + inkPx > 0 ? 'visible' : 'hidden';
+        const gone = capPx + inkPx < 0;
+        region.classList.toggle('is-deep', gone);
+        // Depth is where a slice sits on screen, below the cap (or the top edge once the cap is gone).
+        const top0 = Math.max(capY, 0), span = H * 1.15;
+        const step = Math.max(2, Math.round(9 / cell));
+        // The screen's bottom in canvas coordinates: before the stage sticks the canvas hangs below the viewport.
+        const bottom = Math.min(H, Math.ceil(rise / cell));
+        const s = stuck / innerHeight;                                   // screens travelled: the weirdness dial
+        const amp   = Math.min(W * .3, (1.5 + 7 * ease(clamp(s / 1.5)) + s * .5) * (inkW / 120));
+        const twist = ease(clamp((s - 2) / 4));                          // ribbons rotate and squash
+        const tint  = ease(clamp((s - 5) / 4));                          // accent bleeds in, in waves
+        const split = ease(clamp((s - 9) / 5));                          // a second ribbon braids in
+        const jit   = ease(clamp((s - 14) / 6));                         // slices start to glitch
+        const ring  = Math.max(2, 6 - Math.floor(s / 5));
         const vanish = W / 2 - (capX + inkW / 2);
-        // Far slices first so near ones paint over them.
-        for (let k = K; k >= 1; k--) {
-          const y = capY + k * step;
-          if (y + inkH < 0 || y > endY - 1) continue;
-          const d = k / depthMax;
-          const s = 1 - .55 * d;                                          // perspective: shrink with depth
-          const wob = amp * Math.sin(k * .21 - p * 22 + t * .5) + amp * .5 * Math.sin(k * .06 + p * 9 - t * .2);
-          const dx = capX + wob + vanish * d * .9;
-          const b = (1 - .78 * d) * (k % 6 === 0 ? 1 : .72);              // dim with depth; every 6th slice is a bright contour ring
-          // Fog: dither thins the far end, except the end lights up as the far cap arrives.
-          const fog = clamp(1.25 - d * 1.25), lit = arrive * clamp(1 - Math.abs(endY - y) / (H * .45));
-          const keep = Math.max(fog, lit);
-          plot(edge, dx, y, s, TXT, b, keep);
+        const kStart = Math.max(1, Math.floor((-inkH - capY) / step)), kEnd = Math.ceil((bottom - capY) / step);
+        for (let k = kEnd; k >= kStart; k--) {
+          const y = capY + k * step;                                     // slice top, in cells
+          if (y + inkH < 0 || y > bottom) continue;
+          const d = clamp((y - top0) / span);
+          const sc = 1 - .55 * d;
+          const wob = amp * Math.sin(k * .21 + t * .5) + amp * .5 * Math.sin(k * .06 - t * .2);
+          const rot = twist * .55 * Math.sin(k * .05 + t * .3);
+          const sx = sc * (1 + twist * .4 * Math.sin(k * .09 + t * .7)), sy = sc;
+          let dx = capX + inkW / 2 + wob + vanish * d * .9;
+          if (jit > 0) { const h = hash(k, Math.floor(t * 9)); if (h < jit * .5) dx += (hash(k + 7, Math.floor(t * 9)) - .5) * 16 * jit; }
+          let b = (1 - .78 * d) * (k % ring === 0 ? 1 : .72);
+          const mix = tint * (.5 + .5 * Math.sin(k * .15 - t * 1.2));
+          const col = [TXT[0] + (ACC[0] - TXT[0]) * mix, TXT[1] + (ACC[1] - TXT[1]) * mix, TXT[2] + (ACC[2] - TXT[2]) * mix];
+          let keep = clamp(1.25 - d * 1.25);
+          if (jit > 0 && hash(k + 3, Math.floor(t * 6)) < jit * .25) keep *= .35;
+          slice(dx, y + inkH / 2, sx, sy, rot, col, b, keep);
+          if (split > 0) slice(W - dx + (dx - W / 2) * (1 - split), y + inkH / 2 + step / 2, -sx, sy, -rot, col, b * .8 * split, keep);
         }
         ctx.putImageData(img, 0, 0);
-        region.classList.toggle('is-end', arrive > .5);
       }
 
       function progress() {
-        const r = region.getBoundingClientRect(), total = r.height - innerHeight;
-        p = total > 0 ? clamp(-r.top / total) : 1;
-        visible = r.bottom > 0 && r.top < innerHeight;
+        const r = region.getBoundingClientRect();
+        rise = innerHeight - r.top; stuck = Math.max(0, -r.top);
+        visible = r.bottom > 0 && rise > 0;
+        // Infinity: keep adding runway as the end approaches.
+        if (!REDUCED && r.bottom < innerHeight * 3) region.style.height = (region.offsetHeight + innerHeight * 6) + 'px';
       }
       let last = 0;
       function tick(now) { raf = 0; if (!visible) return; if (now - last > 40) { draw(now); last = now; } if (!REDUCED) raf = requestAnimationFrame(tick); }
       function kick() { progress(); if (visible && !raf) raf = requestAnimationFrame(tick); }
       addEventListener('scroll', kick, { passive: true });
       let rw = 0; addEventListener('resize', () => { clearTimeout(rw); rw = setTimeout(() => { build(); kick(); if (REDUCED) draw(performance.now()); }, 150); });
-      endEl.addEventListener('click', () => { if (!BIRTHDAY) scrollTo({ top: 0, behavior: REDUCED ? 'auto' : 'smooth' }); });
-      const start = () => { build(); if (REDUCED) { p = .6; draw(performance.now()); } else kick(); };
+      topBtn.addEventListener('click', () => scrollTo({ top: 0, behavior: REDUCED ? 'auto' : 'smooth' }));
+      const start = () => { build(); if (REDUCED) { rise = innerHeight; stuck = 0; draw(performance.now()); } else kick(); };
       (document.fonts && document.fonts.load ? document.fonts.load('400 100px Porca') : Promise.resolve()).then(start, start);
     })();
     document.addEventListener('click', e => {
@@ -686,7 +705,7 @@
         document.getElementById('js-grid').innerHTML = Array.from({ length: meta.total }, (_, i) => {
           const a = byNo.get(i + 1);
           if (a && (preview || a.date <= today)) return `<a href="#${pad(a.no)}" title="Day ${pad(a.no)} · ${esc(a.artist)} — ${esc(a.title)}"><img src="../${esc(a.art || '')}" alt="" loading="lazy"></a>`;
-          return `<span class="${a && a.date === today ? 'is-today' : ''}" aria-hidden="true"></span>`;
+          return `<span class="${a && a.date === today ? 'is-today' : ''}" aria-hidden="true">${pad(i + 1)}</span>`;
         }).join('');
         const last = document.querySelector('#js-grid a:nth-child(40)');
         if (BIRTHDAY && last && !REDUCED && 'IntersectionObserver' in window) {

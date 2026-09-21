@@ -257,22 +257,12 @@
     .grid40 { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; margin: 0; max-width: 560px; }
     /* Past the footer wordmark the 404040 repeats, each copy more eroded by dither, until nothing is left. */
     /* ── The tail: scroll pulls a pixel extrusion out of 404040 and you travel down it. ── */
-    .tail { position: relative; height: 700vh; height: 700dvh; }
+    .tail { position: relative; height: 600vh; height: 600dvh; }
     .tail__stage { position: sticky; top: 0; height: 100vh; height: 100dvh; overflow: hidden; }
     .tail__cv { position: absolute; inset: 0; display: block; width: 100%; height: 100%; image-rendering: pixelated; image-rendering: crisp-edges; }
     .tail__col { position: relative; height: 100%; }
     .tail__cap { position: absolute; top: 0; left: 20px; will-change: transform; visibility: hidden; }
-    .tail__top {
-      position: absolute; left: 50%; bottom: calc(20px + var(--sab));
-      transform: translate(-50%, calc(100% + 24px + var(--sab)));
-      font: 400 var(--mono-size) var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--accent);
-      background: rgba(12,12,13,.8); border: 1px solid var(--accent); border-radius: 999px; padding: 12px 20px;
-      cursor: pointer; -webkit-tap-highlight-color: transparent; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-      transition: transform .5s cubic-bezier(.2,.8,.2,1);
-    }
-    .tail.is-deep .tail__top { transform: translate(-50%, 0); }
-    @media (hover: hover) { .tail__top:hover { background: var(--accent); color: var(--bg); } }
-    @media (prefers-reduced-motion: reduce) { .tail { height: 100vh; height: 100dvh; } .tail .tail__top { transform: translate(-50%, 0); } }
+    @media (prefers-reduced-motion: reduce) { .tail { height: 100vh; height: 100dvh; } }
     .grid40 > * { display: block; aspect-ratio: 1; border-radius: 4px; overflow: hidden; }
     .grid40 span { border: 1px solid var(--rule); display: grid; place-items: center; font: 400 9px/1 var(--font-mono); letter-spacing: .06em; color: var(--text-faint); opacity: .8; user-select: none; }
     .grid40 span.is-today { border-color: var(--accent); color: var(--accent); }
@@ -337,7 +327,6 @@
       <div class="page tail__col">
         <div class="wordmark tail__cap" id="js-tail-start"><span>404040</span></div>
       </div>
-      <button class="tail__top mono" id="js-tail-top" type="button">Back to top ↑</button>
     </div>
   </section>
 
@@ -457,22 +446,21 @@
                    3,35,11,43,1,33,9,41,51,19,59,27,49,17,57,25,15,47,7,39,13,45,5,37,63,31,55,23,61,29,53,21].map(v => v * 4);
     const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // ── The tail. Scroll is the engine. The moment 404040 rises in from the bottom,
-    //    an extrusion starts pulling out beneath it; the cap keeps scrolling away while
-    //    the ribbon sticks, and the tunnel goes on for as long as you scroll, getting
-    //    stranger the deeper you go. A Back-to-top pill surfaces once the cap is gone. ──
+    // ── The tail. Scroll is the engine. 404040 stays pinned at the top; as it rises
+    //    into view an extrusion dithers in beneath it, fully there by the time the
+    //    wordmark reaches the top. Six screens of runway turn the weirdness dial: the
+    //    ribbon widens, twists, goes green, braids, and finally swallows the screen.
+    //    Time keeps it moving once you're at the end. ──
     (function tail() {
       const region = document.getElementById('js-tail'), cv = document.getElementById('js-tail-cv'), ref = document.querySelector('.wordmark--top');
-      const capEl = document.getElementById('js-tail-start'), topBtn = document.getElementById('js-tail-top');
-      if (!region || !cv || !ref || !capEl || !topBtn) return;
+      const capEl = document.getElementById('js-tail-start');
+      if (!region || !cv || !ref || !capEl) return;
       const ctx = cv.getContext('2d');
       const TXT = [244, 241, 236], ACC = [214, 255, 56], BG = [12, 12, 13];
       const clamp = v => v < 0 ? 0 : v > 1 ? 1 : v, ease = v => v * v * (3 - 2 * v);
       const hash = (a, b) => { let h = (a * 374761393 + b * 668265263) | 0; h = (h ^ (h >>> 13)) * 1274126177; return ((h ^ (h >>> 16)) >>> 0) / 4294967296; };
       let cell = 3, W = 0, H = 0, img, buf, edge = [], inkW = 0, inkH = 0, inkPx = 0, capX = 0, t0 = performance.now(), raf = 0, visible = false;
-      let rise = 0, stuck = 0;   // px the region top has risen from the viewport bottom; px scrolled since the stage stuck
-      const probe = document.createElement('div'); probe.style.cssText = 'position:fixed;bottom:0;height:env(safe-area-inset-bottom,0px);visibility:hidden;pointer-events:none'; document.body.appendChild(probe);
-      const SAB = () => probe.offsetHeight || 0;
+      let rise = 0, stuck = 0, runway = 1;
 
       function build() {
         const fs = parseFloat(getComputedStyle(ref).fontSize);
@@ -493,10 +481,12 @@
         for (let y = 0; y < inkH; y++) for (let x = 0; x < inkW; x++) if (on(x, y) && (!on(x - 1, y) || !on(x + 1, y) || !on(x, y - 1) || !on(x, y + 1))) edge.push(x - inkW / 2, y - inkH / 2);
         capX = Math.round((span.getBoundingClientRect().left + .02 * fs) / cell);
         if (capX + inkW > W) capX = Math.max(0, Math.round((W - inkW) / 2));
+        capEl.style.transform = 'translateY(28px)'; capEl.style.visibility = 'visible';
       }
 
-      // One slice of the extrusion: the outline, scaled (sx, sy) and rotated (rot) about its centre, at (cx, cy).
+      // One slice of the extrusion: the outline, scaled (sx, sy) and rotated about its centre at (cx, cy).
       function slice(cx, cy, sx, sy, rot, col, b, keep) {
+        if (keep <= 0 || b <= 0) return;
         const r = col[0] * b + BG[0] * (1 - b), g = col[1] * b + BG[1] * (1 - b), bl = col[2] * b + BG[2] * (1 - b);
         const cr = Math.cos(rot), sr = Math.sin(rot);
         for (let i = 0; i < edge.length; i += 2) {
@@ -510,62 +500,72 @@
 
       function draw(now) {
         const t = (now - t0) / 1000;
-        for (let i = 0, n = W * H * 4; i < n; i += 4) { buf[i] = BG[0]; buf[i + 1] = BG[1]; buf[i + 2] = BG[2]; buf[i + 3] = 255; }
-        // The cap: 28px under the footer links, then it simply keeps scrolling once the stage sticks.
-        const capPx = 28 - stuck, capY = capPx / cell;
-        capEl.style.transform = `translateY(${capPx.toFixed(1)}px)`;
-        capEl.style.visibility = capPx + inkPx > 0 ? 'visible' : 'hidden';
-        const gone = capPx + inkPx < 0;
-        region.classList.toggle('is-deep', gone);
-        // Depth is where a slice sits on screen, below the cap (or the top edge once the cap is gone).
-        const top0 = Math.max(capY, 0), span = H * 1.15;
+        const capY = 28 / cell;
+        // Appear: nothing while the wordmark is still low on screen, everything once it reaches the top.
+        const appear = ease(clamp((rise - inkPx - 28) / (innerHeight - inkPx - 28)));
+        const s = stuck / innerHeight;                                        // screens of runway travelled
+        if (stuck >= runway - 1) { if (!draw.tEnd) draw.tEnd = now; } else draw.tEnd = 0;
+        const late = draw.tEnd ? (now - draw.tEnd) / 1000 : 0;
+        const dial = s + late * .12;                                          // keeps climbing with time at the end
+        const amp   = Math.min(W * .3, (1.5 + 7 * ease(clamp(dial / 1.2)) + dial * .4) * (inkW / 120));
+        const twist = ease(clamp((dial - .8) / 1.5));
+        const tint  = ease(clamp((dial - 1.6) / 1.5));
+        const split = ease(clamp((dial - 2.2) / 1.5));
+        const take  = ease(clamp((dial - 3) / 2.5));                          // the takeover: fills the screen
+        const jit   = ease(clamp((dial - 4) / 2));
+        const ring  = Math.max(2, 6 - Math.floor(dial / 1.5));
+        // Background: a breathing dither field that surfaces during the takeover.
+        const field = take * .55;
+        for (let y = 0, i = 0; y < H; y++) for (let x = 0; x < W; x++, i += 4) {
+          let on = false;
+          if (field > 0) {
+            const v = .5 + .5 * Math.sin(x * .09 + t * .9) * Math.sin(y * .07 - t * .7) + .25 * Math.sin((x + y) * .05 + t * .5);
+            on = field * v * 256 > BAYER[(y & 7) * 8 + (x & 7)];
+          }
+          const g = on ? .18 + .1 * take : 0;
+          buf[i] = BG[0] + (TXT[0] - BG[0]) * g; buf[i + 1] = BG[1] + (TXT[1] - BG[1]) * g; buf[i + 2] = BG[2] + (TXT[2] - BG[2]) * g; buf[i + 3] = 255;
+        }
         const step = Math.max(2, Math.round(9 / cell));
-        // The screen's bottom in canvas coordinates: before the stage sticks the canvas hangs below the viewport.
-        const bottom = Math.min(H, Math.ceil(rise / cell));
-        const s = stuck / innerHeight;                                   // screens travelled: the weirdness dial
-        const amp   = Math.min(W * .3, (1.5 + 7 * ease(clamp(s / 1.5)) + s * .5) * (inkW / 120));
-        const twist = ease(clamp((s - 2) / 4));                          // ribbons rotate and squash
-        const tint  = ease(clamp((s - 5) / 4));                          // accent bleeds in, in waves
-        const split = ease(clamp((s - 9) / 5));                          // a second ribbon braids in
-        const jit   = ease(clamp((s - 14) / 6));                         // slices start to glitch
-        const ring  = Math.max(2, 6 - Math.floor(s / 5));
-        const vanish = W / 2 - (capX + inkW / 2);
-        const kStart = Math.max(1, Math.floor((-inkH - capY) / step)), kEnd = Math.ceil((bottom - capY) / step);
-        for (let k = kEnd; k >= kStart; k--) {
-          const y = capY + k * step;                                     // slice top, in cells
-          if (y + inkH < 0 || y > bottom) continue;
-          const d = clamp((y - top0) / span);
-          const sc = 1 - .55 * d;
+        const bottom = Math.min(H, Math.ceil(rise / cell));                    // the screen's bottom in canvas cells
+        const span = H * 1.15, vanish = W / 2 - (capX + inkW / 2);
+        const kEnd = Math.ceil((bottom - capY) / step) + 2;
+        // Extrusion length grows with the appear phase, so it is pulled out as the wordmark climbs.
+        const kMax = Math.max(0, Math.round(kEnd * appear));
+        const lanes = take > 0 ? 3 : 1;
+        for (let k = kMax; k >= 1; k--) {
+          const y = capY + k * step;
+          if (y > bottom) continue;
+          const d = clamp((y - capY) / span);
+          const sc0 = 1 - .55 * d, big = 1.1 + 1.4 * (.5 + .5 * Math.sin(k * .035 + t * .45));
+          const sc = sc0 * (1 - take) + big * take;
           const wob = amp * Math.sin(k * .21 + t * .5) + amp * .5 * Math.sin(k * .06 - t * .2);
-          const rot = twist * .55 * Math.sin(k * .05 + t * .3);
+          const rot = twist * .55 * Math.sin(k * .05 + t * .3) + take * .9 * Math.sin(k * .02 + t * .25);
           const sx = sc * (1 + twist * .4 * Math.sin(k * .09 + t * .7)), sy = sc;
-          let dx = capX + inkW / 2 + wob + vanish * d * .9;
-          if (jit > 0) { const h = hash(k, Math.floor(t * 9)); if (h < jit * .5) dx += (hash(k + 7, Math.floor(t * 9)) - .5) * 16 * jit; }
-          let b = (1 - .78 * d) * (k % ring === 0 ? 1 : .72);
+          let b = (1 - .78 * d * (1 - take * .7)) * (k % ring === 0 ? 1 : .72);
           const mix = tint * (.5 + .5 * Math.sin(k * .15 - t * 1.2));
           const col = [TXT[0] + (ACC[0] - TXT[0]) * mix, TXT[1] + (ACC[1] - TXT[1]) * mix, TXT[2] + (ACC[2] - TXT[2]) * mix];
-          let keep = clamp(1.25 - d * 1.25);
+          let keep = (clamp(1.25 - d * 1.25) * (1 - take) + take) * appear;
           if (jit > 0 && hash(k + 3, Math.floor(t * 6)) < jit * .25) keep *= .35;
+          let dx = capX + inkW / 2 + wob + vanish * d * .9 * (1 - take);
+          if (jit > 0 && hash(k, Math.floor(t * 9)) < jit * .5) dx += (hash(k + 7, Math.floor(t * 9)) - .5) * 16 * jit;
           slice(dx, y + inkH / 2, sx, sy, rot, col, b, keep);
           if (split > 0) slice(W - dx + (dx - W / 2) * (1 - split), y + inkH / 2 + step / 2, -sx, sy, -rot, col, b * .8 * split, keep);
+          if (lanes > 1) for (let l = -1; l <= 1; l += 2) slice(dx + l * W * .55 * take, y + inkH / 2 + l * step, sx * .8, sy * .8, rot * -1, col, b * .7 * take, keep);
         }
         ctx.putImageData(img, 0, 0);
       }
 
       function progress() {
         const r = region.getBoundingClientRect();
-        rise = innerHeight - r.top; stuck = Math.max(0, -r.top);
+        rise = innerHeight - r.top; stuck = Math.max(0, -r.top); runway = Math.max(1, r.height - innerHeight);
         visible = r.bottom > 0 && rise > 0;
-        // Infinity: keep adding runway as the end approaches.
-        if (!REDUCED && r.bottom < innerHeight * 3) region.style.height = (region.offsetHeight + innerHeight * 6) + 'px';
       }
       let last = 0;
       function tick(now) { raf = 0; if (!visible) return; if (now - last > 40) { draw(now); last = now; } if (!REDUCED) raf = requestAnimationFrame(tick); }
       function kick() { progress(); if (visible && !raf) raf = requestAnimationFrame(tick); }
       addEventListener('scroll', kick, { passive: true });
       let rw = 0; addEventListener('resize', () => { clearTimeout(rw); rw = setTimeout(() => { build(); kick(); if (REDUCED) draw(performance.now()); }, 150); });
-      topBtn.addEventListener('click', () => scrollTo({ top: 0, behavior: REDUCED ? 'auto' : 'smooth' }));
-      const start = () => { build(); if (REDUCED) { rise = innerHeight; stuck = 0; draw(performance.now()); } else kick(); };
+      const start = () => { build(); if (REDUCED) { rise = innerHeight; stuck = innerHeight * .8; runway = innerHeight; draw(performance.now()); } else kick(); };
       (document.fonts && document.fonts.load ? document.fonts.load('400 100px Porca') : Promise.resolve()).then(start, start);
     })();
     document.addEventListener('click', e => {

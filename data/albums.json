@@ -992,7 +992,9 @@
       "art": "assets/40/paul-simon-graceland.jpg",
       "links": {
         "spotify": "https://open.spotify.com/album/4WoQ94qzwQj28n3nlSOVLB"
-      }
+      },
+      "art_back": "assets/40/paul-simon-graceland-back.jpg",
+      "art_back_src": "http://coverartarchive.org/release/b1b2f602-f72b-4ccf-88a1-e8e22ee328ae/26212201091.jpg"
     },
     {
       "no": null,
@@ -1071,7 +1073,9 @@
       "art": "assets/40/taking-back-sunday-where-you-want-to-be.jpg",
       "links": {
         "spotify": "https://open.spotify.com/album/6D1rTYBev0y8ZKE5tD7OP9"
-      }
+      },
+      "art_back": "assets/40/taking-back-sunday-where-you-want-to-be-back.jpg",
+      "art_back_src": "https://coverartarchive.org/release/17f88c72-99db-495c-8fbd-37610350c785/44879516313.jpg"
     },
     {
       "no": null,

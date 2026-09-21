@@ -109,7 +109,8 @@
       -webkit-tap-highlight-color: transparent;
       transition: color .15s ease, border-color .15s ease;
     }
-    .bar__about:hover, .bar__about[aria-expanded="true"] { color: var(--text); border-color: var(--text-faint); }
+    @media (hover: hover) { .bar__about:hover { color: var(--text); border-color: var(--text-faint); } }
+    .bar__about[aria-expanded="true"], .bar__about[aria-expanded="true"]:hover { color: var(--accent); border-color: var(--accent); }
 
     /* ── About: a full-screen type poster under the bar. Closed on load.
        Every line is the H1 size; lines are hand-broken so none wraps. ── */
@@ -149,9 +150,27 @@
       display: block; width: 100%; aspect-ratio: 1; object-fit: cover; margin-top: 16px;
       background: var(--bg-raised); border: 1px solid var(--rule); border-radius: 10px;
     }
-    .entry__cover-wrap { position: relative; margin-top: 16px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+    .entry__cover-wrap { position: relative; margin-top: 16px; cursor: pointer; -webkit-tap-highlight-color: transparent; perspective: 1400px; }
     .entry__cover-wrap .entry__cover { margin-top: 0; }
-    .entry__cover-wrap canvas { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 10px; pointer-events: none; image-rendering: pixelated; }
+    /* Tap the cover and it flips over to the back of the record. */
+    .flip { position: relative; aspect-ratio: 1; transform-style: preserve-3d; transition: transform .75s cubic-bezier(.2, .75, .15, 1); }
+    .is-flipped .flip { transform: rotateY(180deg); }
+    .flip__front, .flip__back { -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+    .flip__back {
+      position: absolute; inset: 0; transform: rotateY(180deg);
+      background: var(--bg-raised); border: 1px solid var(--rule); border-radius: 10px; overflow: hidden;
+      display: grid; place-items: center;
+    }
+    .flip__back img { display: block; width: 100%; height: 100%; object-fit: contain; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+    .flip__back img.is-square { object-fit: cover; }
+    .flip__list { margin: 0; padding: 18px 20px; width: 100%; height: 100%; box-sizing: border-box; list-style: none; display: flex; flex-direction: column; justify-content: center; font-size: 11px; line-height: 1.5; letter-spacing: .04em; text-transform: uppercase; color: var(--text-muted); }
+    .flip__list li { display: flex; gap: 10px; }
+    .flip__list li span:first-child { color: var(--text-faint); flex: none; width: 2em; }
+    .flip__list li span:last-child { color: var(--text-faint); margin-left: auto; padding-left: 8px; }
+    .flip__list.is-long { font-size: 9.5px; padding: 14px 16px; }
+    .flip__list.is-xlong { font-size: 8px; line-height: 1.4; }
+    .flip__list-foot { margin-top: 10px; color: var(--text-faint); font-size: 8.5px; }
+    @media (prefers-reduced-motion: reduce) { .flip { transition: none; } }
     .entry__artist { margin: 20px 0 0; color: var(--text-muted); font-size: 15px; }
     .entry__title  {
       margin: 8px 0 0 -3px; color: var(--text);
@@ -350,6 +369,16 @@
       </details>`;
     }
 
+    // The back of the record: the real back cover when we found one, else the tracklist set in mono.
+    function back(a) {
+      if (a.art_back) return `<img src="../${esc(a.art_back)}" alt="" loading="lazy" onload="if (Math.max(this.naturalWidth, this.naturalHeight) / Math.min(this.naturalWidth, this.naturalHeight) < 1.08) this.classList.add('is-square')" />`;
+      if (!a.tracks || !a.tracks.length) return '';
+      const n = a.tracks.length, size = n > 22 ? ' is-xlong' : n > 14 ? ' is-long' : '';
+      return `<ol class="flip__list mono${size}">${a.tracks.map(t =>
+        `<li><span>${pad(t.n)}</span>${esc(t.title)}<span>${fmtMs(t.ms)}</span></li>`).join('')}
+        <li class="flip__list-foot">${esc([a.year, a.label].filter(Boolean).join(' · '))}</li></ol>`;
+    }
+
     function entry(a) {
       const facts = [a.year, a.label, a.track_count && `${a.track_count} tracks`, a.runtime_ms && fmtMs(a.runtime_ms)]
         .filter(Boolean).map(f => `<span>${esc(f)}</span>`).join('');
@@ -362,8 +391,11 @@
           <span>${fmtDate(a.date)}</span>
         </div>
         <div class="entry__grid">
-          <button class="entry__cover-wrap" type="button" aria-label="Dither ${esc(a.title)}" style="display:block;width:100%;padding:0;border:0;background:none;text-align:left;">
-            <img class="entry__cover" src="../${esc(a.art || '')}" alt="${esc(a.title)} cover" loading="lazy" crossorigin="anonymous" />
+          <button class="entry__cover-wrap" type="button" aria-label="Flip ${esc(a.title)} over" aria-pressed="false" style="display:block;width:100%;padding:0;border:0;background:none;text-align:left;">
+            <div class="flip">
+              <img class="entry__cover flip__front" src="../${esc(a.art || '')}" alt="${esc(a.title)} cover" loading="lazy" />
+              <div class="flip__back" aria-hidden="true">${back(a)}</div>
+            </div>
           </button>
           <div class="entry__text">
             <p class="entry__artist">${esc(a.artist)}</p>
@@ -383,42 +415,11 @@
     const BAYER = [0,32,8,40,2,34,10,42,48,16,56,24,50,18,58,26,12,44,4,36,14,46,6,38,60,28,52,20,62,30,54,22,
                    3,35,11,43,1,33,9,41,51,19,59,27,49,17,57,25,15,47,7,39,13,45,5,37,63,31,55,23,61,29,53,21].map(v => v * 4);
     const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    function ditherPulse(wrap, img) {
-      if (wrap.dataset.busy || !img.complete || !img.naturalWidth) return;
-      wrap.dataset.busy = '1';
-      const steps = [256, 128, 64, 32, 16, 16, 32, 64, 128, 256];
-      const hold = REDUCED ? 0 : 90;
-      const cv = document.createElement('canvas');
-      const rect = img.getBoundingClientRect();
-      cv.width = Math.round(rect.width * devicePixelRatio); cv.height = Math.round(rect.height * devicePixelRatio);
-      const ctx = cv.getContext('2d'); ctx.imageSmoothingEnabled = false;
-      const small = document.createElement('canvas'), sctx = small.getContext('2d', { willReadFrequently: true });
-      wrap.appendChild(cv);
-      let i = 0;
-      const frame = () => {
-        const g = steps[i]; small.width = small.height = g;
-        sctx.drawImage(img, 0, 0, g, g);
-        let px;
-        try { px = sctx.getImageData(0, 0, g, g).data; } catch (e) { cv.remove(); delete wrap.dataset.busy; return; }
-        const out = sctx.createImageData(g, g);
-        for (let y = 0; y < g; y++) for (let x = 0; x < g; x++) {
-          const k = (y * g + x) * 4;
-          const l = ((0.299 * px[k] + 0.587 * px[k + 1] + 0.114 * px[k + 2]) - 128) * 1.2 + 128;
-          const on = l > BAYER[(y & 7) * 8 + (x & 7)];
-          out.data[k] = on ? 244 : 12; out.data[k + 1] = on ? 241 : 12; out.data[k + 2] = on ? 236 : 13; out.data[k + 3] = 255;
-        }
-        sctx.putImageData(out, 0, 0);
-        ctx.clearRect(0, 0, cv.width, cv.height);
-        ctx.drawImage(small, 0, 0, cv.width, cv.height);
-        i++;
-        if (i < steps.length) setTimeout(frame, hold);
-        else setTimeout(() => { cv.remove(); delete wrap.dataset.busy; }, hold);
-      };
-      frame();
-    }
     document.addEventListener('click', e => {
       const wrap = e.target.closest('.entry__cover-wrap');
-      if (wrap) ditherPulse(wrap, wrap.querySelector('img'));
+      if (!wrap) return;
+      const on = wrap.classList.toggle('is-flipped');
+      wrap.setAttribute('aria-pressed', on);
     });
 
     // ── Birthday mode ────────────────────────────────────────────────────

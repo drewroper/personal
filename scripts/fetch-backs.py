@@ -29,8 +29,7 @@ def get(url, retries=3):
             with urllib.request.urlopen(req, timeout=30) as r: return r.read()
         except urllib.error.HTTPError as e:
             if e.code == 404: return None
-            if e.code == 503: time.sleep(2 + i); continue
-            raise
+            time.sleep(2 + i); continue
         except Exception:
             time.sleep(1 + i)
     return None

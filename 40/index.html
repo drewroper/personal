@@ -213,6 +213,14 @@
     .foot__links { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 0; padding: 0; list-style: none; }
     .foot__links a { color: var(--text-muted); border-bottom-color: transparent; }
     .foot__links a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+    /* ── Birthday mode: Nov 1, or ?birthday to preview. ───────────────── */
+    .confetti { position: fixed; inset: 0; z-index: 30; pointer-events: none; image-rendering: pixelated; }
+    .is-birthday .wordmark { cursor: pointer; user-select: none; }
+    .is-birthday .wordmark.is-playing > span { animation: hop .28s steps(2, jump-none) infinite; }
+    @keyframes hop { 50% { transform: translateY(-.04em); } }
+    .grid40 a.is-arriving { position: relative; }
+    .grid40 a.is-arriving canvas { position: absolute; inset: 0; width: 100%; height: 100%; image-rendering: pixelated; }
+
     /* The 40 cells from the closing card, filling in as records post. */
     .grid40 { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; margin: 20px 0 0; }
     .grid40 > * { display: block; aspect-ratio: 1; border-radius: 4px; overflow: hidden; }
@@ -413,6 +421,98 @@
       if (wrap) ditherPulse(wrap, wrap.querySelector('img'));
     });
 
+    // ── Birthday mode ────────────────────────────────────────────────────
+    const BIRTHDAY = today === '2026-11-01' || params.has('birthday');
+    if (BIRTHDAY) document.body.classList.add('is-birthday');
+
+    // Pixel confetti: rounded squares in the accent, a few tiny 40s, raining
+    // the whole time. Tap anywhere for a burst.
+    function startConfetti() {
+      if (REDUCED) return;
+      const cv = document.createElement('canvas'); cv.className = 'confetti'; document.body.appendChild(cv);
+      const ctx = cv.getContext('2d');
+      const P = [], G = 3;                      // pixel unit
+      const size = () => { cv.width = Math.ceil(innerWidth / G); cv.height = Math.ceil(innerHeight / G); cv.style.width = innerWidth + 'px'; cv.style.height = innerHeight + 'px'; };
+      size(); addEventListener('resize', size);
+      const spawn = (x, y, vx, vy) => P.push({ x, y, vx, vy, s: 2 + Math.random() * 3, t: Math.random() * 6.28,
+        forty: Math.random() < .08, c: Math.random() < .85 ? '#d6ff38' : '#f4f1ec' });
+      for (let i = 0; i < 90; i++) spawn(Math.random() * cv.width, Math.random() * cv.height, 0, .4 + Math.random() * .5);
+      addEventListener('pointerdown', e => {
+        if (e.target.closest('a, button, iframe')) return;
+        for (let i = 0; i < 40; i++) { const a = Math.random() * 6.28, v = 2 + Math.random() * 4; spawn(e.clientX / G, e.clientY / G, Math.cos(a) * v, Math.sin(a) * v - 2); }
+      });
+      ctx.font = '7px Porca, monospace';
+      const tick = () => {
+        ctx.clearRect(0, 0, cv.width, cv.height);
+        for (let i = P.length - 1; i >= 0; i--) {
+          const p = P[i]; p.t += .05; p.vy = Math.min(p.vy + .02, 1.6); p.vx *= .98;
+          p.x += p.vx + Math.sin(p.t) * .3; p.y += p.vy;
+          if (p.y > cv.height + 4) { if (P.length > 90) { P.splice(i, 1); continue; } p.y = -4; p.x = Math.random() * cv.width; p.vy = .4 + Math.random() * .5; p.vx = 0; }
+          ctx.fillStyle = p.c;
+          if (p.forty) ctx.fillText('40', Math.round(p.x), Math.round(p.y));
+          else { const x = Math.round(p.x), y = Math.round(p.y), s = Math.round(p.s); ctx.fillRect(x + 1, y, s - 2, s); ctx.fillRect(x, y + 1, s, s - 2); }
+        }
+        requestAnimationFrame(tick);
+      };
+      tick();
+    }
+
+    // Happy Birthday in square waves, on a tap of the big wordmark.
+    function chiptune(el) {
+      const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return;
+      const ac = chiptune.ac || (chiptune.ac = new AC()); ac.resume();
+      const N = { G4: 392, A4: 440, B4: 493.88, C5: 523.25, D5: 587.33, E5: 659.25, F5: 698.46, G5: 783.99 };
+      const tune = [['G4',.75],['G4',.25],['A4',1],['G4',1],['C5',1],['B4',2],
+                    ['G4',.75],['G4',.25],['A4',1],['G4',1],['D5',1],['C5',2],
+                    ['G4',.75],['G4',.25],['G5',1],['E5',1],['C5',1],['B4',1],['A4',2],
+                    ['F5',.75],['F5',.25],['E5',1],['C5',1],['D5',1],['C5',2]];
+      const beat = .42; let t = ac.currentTime + .05;
+      el.classList.add('is-playing');
+      for (const [n, d] of tune) {
+        const o = ac.createOscillator(), g = ac.createGain();
+        o.type = 'square'; o.frequency.value = N[n];
+        g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.08, t + .01); g.gain.setValueAtTime(.08, t + d * beat - .06); g.gain.linearRampToValueAtTime(0, t + d * beat - .01);
+        o.connect(g).connect(ac.destination); o.start(t); o.stop(t + d * beat); t += d * beat;
+      }
+      setTimeout(() => el.classList.remove('is-playing'), (t - ac.currentTime) * 1000);
+    }
+
+    if (BIRTHDAY) {
+      startConfetti();
+      document.querySelectorAll('.wordmark').forEach(w => { w.setAttribute('role', 'button'); w.removeAttribute('aria-hidden'); w.setAttribute('aria-label', 'Play Happy Birthday'); w.tabIndex = 0;
+        w.addEventListener('click', () => chiptune(w)); w.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') chiptune(w); }); });
+    }
+
+    // The 40th cell arrives with a dither pulse on the day, instead of just being there.
+    function arrive(cell) {
+      const img = cell.querySelector('img');
+      const go = () => {
+        cell.classList.add('is-arriving');
+        const cv = document.createElement('canvas'); cell.appendChild(cv);
+        const r = cell.getBoundingClientRect(); cv.width = cv.height = Math.round(r.width * devicePixelRatio);
+        const ctx = cv.getContext('2d'); ctx.imageSmoothingEnabled = false;
+        const small = document.createElement('canvas'), sctx = small.getContext('2d', { willReadFrequently: true });
+        const steps = [0, 8, 16, 32, 64]; let i = 0;
+        const frame = () => {
+          const g = steps[i];
+          ctx.clearRect(0, 0, cv.width, cv.height);
+          if (g === 0) { ctx.fillStyle = '#0c0c0d'; ctx.fillRect(0, 0, cv.width, cv.height); }
+          else {
+            small.width = small.height = g; sctx.drawImage(img, 0, 0, g, g);
+            let px; try { px = sctx.getImageData(0, 0, g, g).data; } catch (e) { cv.remove(); return; }
+            const out = sctx.createImageData(g, g);
+            for (let y = 0; y < g; y++) for (let x = 0; x < g; x++) { const k = (y * g + x) * 4;
+              const l = ((0.299 * px[k] + 0.587 * px[k + 1] + 0.114 * px[k + 2]) - 128) * 1.2 + 128, on = l > BAYER[(y & 7) * 8 + (x & 7)];
+              out.data[k] = on ? 244 : 12; out.data[k + 1] = on ? 241 : 12; out.data[k + 2] = on ? 236 : 13; out.data[k + 3] = 255; }
+            sctx.putImageData(out, 0, 0); ctx.drawImage(small, 0, 0, cv.width, cv.height);
+          }
+          i++; if (i < steps.length) setTimeout(frame, 160); else setTimeout(() => { cv.remove(); cell.classList.remove('is-arriving'); }, 160);
+        };
+        frame();
+      };
+      if (img.complete && img.naturalWidth) go(); else img.addEventListener('load', go, { once: true });
+    }
+
     fetch(DATA + '?v=' + Date.now())
       .then(r => r.json())
       .then(({ meta, albums }) => {
@@ -447,11 +547,16 @@
         document.addEventListener('keydown', e => { if (e.key === 'Escape' && !about.hidden) setOpen(false); });
 
 
+        const byNo = new Map(slotted.map(a => [a.no, a]));
         document.getElementById('js-grid').innerHTML = Array.from({ length: meta.total }, (_, i) => {
-          const a = slotted[i];
+          const a = byNo.get(i + 1);
           if (a && (preview || a.date <= today)) return `<a href="#${pad(a.no)}" title="Day ${pad(a.no)} · ${esc(a.artist)} — ${esc(a.title)}"><img src="../${esc(a.art || '')}" alt="" loading="lazy"></a>`;
           return `<span class="${a && a.date === today ? 'is-today' : ''}" aria-hidden="true"></span>`;
         }).join('');
+        const last = document.querySelector('#js-grid a:nth-child(40)');
+        if (BIRTHDAY && last && !REDUCED && 'IntersectionObserver' in window) {
+          new IntersectionObserver((es, io) => { if (es[0].isIntersecting) { io.disconnect(); setTimeout(() => arrive(last), 500); } }, { threshold: .6 }).observe(last);
+        }
 
         const feed = document.getElementById('js-feed');
         if (!live.length) {

@@ -1255,7 +1255,9 @@
       ],
       "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/42/58/f7/4258f7bb-eb5b-62b8-573d-6200df0fe3e1/093624917731.jpg/1800x1800bb.jpg",
       "label": "Reprise Records",
-      "art": "assets/40/my-chemical-romance-three-cheers-for-sweet-revenge.jpg"
+      "art": "assets/40/my-chemical-romance-three-cheers-for-sweet-revenge.jpg",
+      "art_back": "assets/40/my-chemical-romance-three-cheers-for-sweet-revenge-back.jpg",
+      "art_back_src": "https://coverartarchive.org/release/9108adbb-b065-408b-9f59-c1af1f4a241a/11144526053.jpg"
     },
     {
       "no": null,
@@ -1334,7 +1336,9 @@
       "art": "assets/40/brand-new-deja-entendu.jpg",
       "links": {
         "spotify": "https://open.spotify.com/album/6vDiMhyfSnTn18OY99BSQX"
-      }
+      },
+      "art_back": "assets/40/brand-new-deja-entendu-back.jpg",
+      "art_back_src": "http://coverartarchive.org/release/b315e122-1921-44b5-ada0-27817ad6d0bc/32846867469.jpg"
     },
     {
       "no": null,
@@ -1418,7 +1422,9 @@
         }
       ],
       "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/1d/4f/38/1d4f38dd-e5ee-a14e-13a2-df60d4e3b431/884977724707.jpg/1800x1800bb.jpg",
-      "art": "assets/40/dave-matthews-band-crash.jpg"
+      "art": "assets/40/dave-matthews-band-crash.jpg",
+      "art_back": "assets/40/dave-matthews-band-crash-back.jpg",
+      "art_back_src": "http://coverartarchive.org/release/c4335abe-ac67-44c6-87f5-b452d62b07d9/20335839949.jpg"
     },
     {
       "no": null,
@@ -1502,7 +1508,9 @@
       "art": "assets/40/dave-matthews-band-under-the-table-and-dreaming.jpg",
       "links": {
         "spotify": "https://open.spotify.com/album/3eAA4fvTVttgUlE43vRVMq"
-      }
+      },
+      "art_back": "assets/40/dave-matthews-band-under-the-table-and-dreaming-back.jpg",
+      "art_back_src": "http://coverartarchive.org/release/c46205bc-adb2-48d8-8e8e-b05e54109c86/14063280413.jpg"
     },
     {
       "no": null,
@@ -1596,7 +1604,9 @@
       "art": "assets/40/alt-j-an-awesome-wave.jpg",
       "links": {
         "spotify": "https://open.spotify.com/album/6k3vC8nep1BfqAIJ81L6OL"
-      }
+      },
+      "art_back": "assets/40/alt-j-an-awesome-wave-back.jpg",
+      "art_back_src": "https://coverartarchive.org/release/beb58056-1b5a-4b4f-8b86-ac28b4092470/8777336088.jpg"
     },
     {
       "no": null,
@@ -1670,7 +1680,9 @@
       "art": "assets/40/coldplay-parachutes.jpg",
       "links": {
         "spotify": "https://open.spotify.com/album/6ZG5lRT77aJ3btmArcykra"
-      }
+      },
+      "art_back": "assets/40/coldplay-parachutes-back.jpg",
+      "art_back_src": "http://coverartarchive.org/release/16a32e03-6d97-43a4-a19e-80e79567854a/19420035366.jpg"
     },
     {
       "no": null,

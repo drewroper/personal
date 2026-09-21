@@ -13,10 +13,10 @@
       "artist": "Weezer",
       "title": "Weezer (The Green Album)",
       "apple_id": 1440868131,
-      "discovered": "Summer 2001. Placeholder — swap for the real line.",
+      "discovered": "Placeholder — swap for the real line.",
       "blurb": [
-        "Placeholder blurb so the layout has real paragraphs to hold. This is where the story goes: when you found it, where you were, why it stuck. _Island in the Sun_ was everywhere that summer.",
-        "Second paragraph, to check spacing and the reading measure at this size. Album titles set in _italics_ with underscores."
+        "Summer 2001. Placeholder — this is where the story goes: when you found it, where you were, why it stuck.",
+        "Second paragraph to check the reading measure."
       ],
       "apple_url": "https://music.apple.com/us/album/weezer-green-album/1440868131",
       "released": "2001-05-15",
@@ -80,98 +80,853 @@
       "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/fc/ef/19/fcef196c-3f81-e9da-f02a-b55d900e7d69/16UMGIM53162.rgb.jpg/1800x1800bb.jpg",
       "label": "Geffen Records",
       "art": "assets/40/weezer-green-album.jpg",
-      "date": "2026-09-23",
       "links": {
         "spotify": "https://open.spotify.com/album/2hDiTEsKePTnDcvKEuLizk"
-      }
+      },
+      "date": "2026-09-23"
     },
     {
       "no": 2,
-      "slug": "dave-matthews-band-crash",
-      "artist": "Dave Matthews Band",
-      "title": "Crash",
-      "apple_id": 388136111,
-      "label": "RCA",
+      "slug": "finch-what-it-is-to-burn",
+      "artist": "Finch",
+      "title": "What It Is to Burn",
       "discovered": "Placeholder — swap for the real line.",
       "blurb": [
-        "Second entry so you can see two records stack. Newest sits on top, so Day 02 is above Day 01.",
-        "_Crash_ is here as sample data; it isn't on the real list unless you put it there."
+        "Placeholder blurb for What It Is to Burn. When you found it, where you were, why it stuck."
       ],
-      "date": "2026-09-24",
-      "apple_url": "https://music.apple.com/us/album/crash/388136111",
-      "released": "1996-04-30",
-      "year": "1996",
-      "copyright": "℗ 1996 Sony Music Entertainment",
-      "genre": "Rock",
-      "track_count": 12,
-      "runtime_ms": 4130708,
+      "apple_id": 1440743253,
+      "apple_url": "https://music.apple.com/us/album/what-it-is-to-burn/1440743253",
+      "released": "2002-01-01",
+      "year": "2002",
+      "copyright": "℗ 2002 Geffen Records",
+      "genre": "Alternative",
+      "track_count": 13,
+      "runtime_ms": 3670427,
       "tracks": [
         {
           "n": 1,
-          "title": "So Much to Say",
-          "ms": 246600
+          "title": "New Beginnings",
+          "ms": 241667
         },
         {
           "n": 2,
-          "title": "Two Step",
-          "ms": 387267
+          "title": "Letters to You",
+          "ms": 199600
         },
         {
           "n": 3,
-          "title": "Crash Into Me",
-          "ms": 316467
+          "title": "Post Script",
+          "ms": 169760
         },
         {
           "n": 4,
-          "title": "Too Much",
-          "ms": 261627
+          "title": "Grey Matter",
+          "ms": 159907
         },
         {
           "n": 5,
-          "title": "#41",
-          "ms": 399800
+          "title": "Perfection Through Silence",
+          "ms": 189093
         },
         {
           "n": 6,
-          "title": "Say Goodbye",
-          "ms": 371040
+          "title": "Awake",
+          "ms": 288507
         },
         {
           "n": 7,
-          "title": "Drive In Drive Out",
-          "ms": 354600
+          "title": "Without You Here",
+          "ms": 250533
         },
         {
           "n": 8,
-          "title": "Let You Down",
-          "ms": 247400
+          "title": "Stay With Me",
+          "ms": 242933
         },
         {
           "n": 9,
-          "title": "Lie In Our Graves",
-          "ms": 342040
+          "title": "Project Mayhem",
+          "ms": 319147
         },
         {
           "n": 10,
-          "title": "Cry Freedom",
-          "ms": 352667
+          "title": "Untitled",
+          "ms": 253480
         },
         {
           "n": 11,
-          "title": "Tripping Billies",
-          "ms": 300440
+          "title": "Three Simple Words",
+          "ms": 278733
         },
         {
           "n": 12,
-          "title": "Proudest Monkey",
-          "ms": 550760
+          "title": "Ender",
+          "ms": 808040
+        },
+        {
+          "n": 13,
+          "title": "What It Is to Burn (New Version)",
+          "ms": 269027
         }
       ],
-      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/1d/4f/38/1d4f38dd-e5ee-a14e-13a2-df60d4e3b431/884977724707.jpg/1800x1800bb.jpg",
-      "art": "assets/40/dave-matthews-band-crash.jpg",
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/42/14/a1/4214a191-3dce-85ab-ae8e-6ad7596c4df3/00042286099125.rgb.jpg/1800x1800bb.jpg",
+      "label": "Geffen Records",
+      "art": "assets/40/finch-what-it-is-to-burn.jpg",
       "links": {
-        "spotify": "https://open.spotify.com/album/3Z72KfamjH9Wc5m9mgVqI7"
-      }
+        "spotify": "https://open.spotify.com/album/28DROCResQvsdO6Hjmb32x"
+      },
+      "date": "2026-09-24"
+    },
+    {
+      "no": 3,
+      "slug": "turnstile-glow-on",
+      "artist": "Turnstile",
+      "title": "Glow On",
+      "discovered": "Placeholder — swap for the real line.",
+      "blurb": [
+        "Placeholder blurb for Glow On. When you found it, where you were, why it stuck."
+      ],
+      "apple_id": 1576430192,
+      "apple_url": "https://music.apple.com/us/album/glow-on/1576430192",
+      "released": "2021-08-27",
+      "year": "2021",
+      "copyright": "℗ 2021 Roadrunner Records Inc.",
+      "genre": "Hard Rock",
+      "track_count": 15,
+      "runtime_ms": 2097444,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "MYSTERY",
+          "ms": 155200
+        },
+        {
+          "n": 2,
+          "title": "BLACKOUT",
+          "ms": 173280
+        },
+        {
+          "n": 3,
+          "title": "DON'T PLAY",
+          "ms": 133353
+        },
+        {
+          "n": 4,
+          "title": "UNDERWATER BOI",
+          "ms": 184944
+        },
+        {
+          "n": 5,
+          "title": "HOLIDAY",
+          "ms": 172021
+        },
+        {
+          "n": 6,
+          "title": "HUMANOID / SHAKE IT UP",
+          "ms": 69143
+        },
+        {
+          "n": 7,
+          "title": "ENDLESS",
+          "ms": 118542
+        },
+        {
+          "n": 8,
+          "title": "FLY AGAIN",
+          "ms": 151866
+        },
+        {
+          "n": 9,
+          "title": "ALIEN LOVE CALL",
+          "ms": 176003
+        },
+        {
+          "n": 10,
+          "title": "WILD WRLD",
+          "ms": 174765
+        },
+        {
+          "n": 11,
+          "title": "DANCE-OFF",
+          "ms": 129124
+        },
+        {
+          "n": 12,
+          "title": "NEW HEART DESIGN",
+          "ms": 147750
+        },
+        {
+          "n": 13,
+          "title": "T.L.C. (TURNSTILE LOVE CONNECTION)",
+          "ms": 102804
+        },
+        {
+          "n": 14,
+          "title": "NO SURPRISE",
+          "ms": 45463
+        },
+        {
+          "n": 15,
+          "title": "LONELY DEZIRES",
+          "ms": 163186
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/bd/ed/05/bded05c9-3355-c885-3840-b9a4b427b118/075679792839.jpg/1800x1800bb.jpg",
+      "label": "Roadrunner Records Inc",
+      "art": "assets/40/turnstile-glow-on.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/2NrYPcMmQBlbBxopc2XlzS"
+      },
+      "date": "2026-09-25"
+    },
+    {
+      "no": 4,
+      "slug": "nelly-country-grammar",
+      "artist": "Nelly",
+      "title": "Country Grammar",
+      "discovered": "Placeholder — swap for the real line.",
+      "blurb": [
+        "Placeholder blurb for Country Grammar. When you found it, where you were, why it stuck."
+      ],
+      "apple_id": 1440782396,
+      "apple_url": "https://music.apple.com/us/album/country-grammar/1440782396",
+      "released": "2000-06-27",
+      "year": "2000",
+      "copyright": "℗ 2000 Universal Records, a Division of UMG Recordings, Inc.",
+      "genre": "Hip-Hop/Rap",
+      "track_count": 17,
+      "runtime_ms": 4000959,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Intro (feat. Cedric the Entertainer)",
+          "ms": 81293
+        },
+        {
+          "n": 2,
+          "title": "St. Louie",
+          "ms": 267573
+        },
+        {
+          "n": 3,
+          "title": "Greed, Hate, Envy",
+          "ms": 255093
+        },
+        {
+          "n": 4,
+          "title": "Country Grammar (Hot...)",
+          "ms": 286933
+        },
+        {
+          "n": 5,
+          "title": "Steal The Show (feat. St. Lunatics)",
+          "ms": 328000
+        },
+        {
+          "n": 6,
+          "title": "Interlude (feat. Cedric the Entertainer)",
+          "ms": 34373
+        },
+        {
+          "n": 7,
+          "title": "Ride Wit Me (feat. City Spud)",
+          "ms": 290133
+        },
+        {
+          "n": 8,
+          "title": "E.I.",
+          "ms": 284493
+        },
+        {
+          "n": 9,
+          "title": "Thicky Thick Girl",
+          "ms": 274267
+        },
+        {
+          "n": 10,
+          "title": "For My (feat. Lil Wayne)",
+          "ms": 248600
+        },
+        {
+          "n": 11,
+          "title": "Utha Side",
+          "ms": 273307
+        },
+        {
+          "n": 12,
+          "title": "Tho Dem Wrappas",
+          "ms": 248400
+        },
+        {
+          "n": 13,
+          "title": "Wrap Sumden",
+          "ms": 255627
+        },
+        {
+          "n": 14,
+          "title": "Batter Up (feat. Murphy Lee & Ali)",
+          "ms": 327800
+        },
+        {
+          "n": 15,
+          "title": "Never Let 'Em C U Sweat",
+          "ms": 254107
+        },
+        {
+          "n": 16,
+          "title": "Luven Me",
+          "ms": 247000
+        },
+        {
+          "n": 17,
+          "title": "Outro (feat. Cedric the Entertainer)",
+          "ms": 43960
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/86/ea/41/86ea41d4-5d1f-b342-da08-dd43294d8fad/06UMGIM14203.rgb.jpg/1800x1800bb.jpg",
+      "label": "Universal Records, a Division of UMG Recordings, Inc",
+      "art": "assets/40/nelly-country-grammar.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/3Ej2Ae8nxp06thEoPhyaLJ"
+      },
+      "date": "2026-09-26"
+    },
+    {
+      "no": 5,
+      "slug": "outkast-aquemini",
+      "artist": "OutKast",
+      "title": "Aquemini",
+      "discovered": "Placeholder — swap for the real line.",
+      "blurb": [
+        "Placeholder blurb for Aquemini. When you found it, where you were, why it stuck."
+      ],
+      "apple_id": 1536669507,
+      "apple_url": "https://music.apple.com/us/album/aquemini/1536669507",
+      "released": "1998-09-29",
+      "year": "1998",
+      "copyright": "℗ 1998 Arista Records LLC",
+      "genre": "Hip-Hop/Rap",
+      "track_count": 15,
+      "runtime_ms": 3753134,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Hold On, Be Strong",
+          "ms": 72187
+        },
+        {
+          "n": 2,
+          "title": "Return Of The \"G\"",
+          "ms": 219573
+        },
+        {
+          "n": 3,
+          "title": "Rosa Parks (Radio Version)",
+          "ms": 247267
+        },
+        {
+          "n": 4,
+          "title": "Skew It on the Bar-B (feat. Raekwon)",
+          "ms": 199373
+        },
+        {
+          "n": 5,
+          "title": "Aquemini",
+          "ms": 293533
+        },
+        {
+          "n": 6,
+          "title": "Synthesizer (feat. George Clinton)",
+          "ms": 268893
+        },
+        {
+          "n": 7,
+          "title": "Slump",
+          "ms": 287000
+        },
+        {
+          "n": 8,
+          "title": "West Savannah",
+          "ms": 209800
+        },
+        {
+          "n": 9,
+          "title": "Da Art of Storytellin' (Pt. 1)",
+          "ms": 203640
+        },
+        {
+          "n": 10,
+          "title": "Da Art of Storytellin' (Pt. 2)",
+          "ms": 172267
+        },
+        {
+          "n": 11,
+          "title": "Mamacita",
+          "ms": 336867
+        },
+        {
+          "n": 12,
+          "title": "SpottieOttieDopaliscious",
+          "ms": 358960
+        },
+        {
+          "n": 13,
+          "title": "Y'All Scared (feat. T-Mo, Big Gipp & Khujo)",
+          "ms": 260640
+        },
+        {
+          "n": 14,
+          "title": "Liberation (with Cee-Lo)",
+          "ms": 302227
+        },
+        {
+          "n": 15,
+          "title": "Chonkyfire",
+          "ms": 320907
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/0e/48/dd/0e48dd9a-07c9-46de-a838-b4ddb4e508a7/886448814191.jpg/1800x1800bb.jpg",
+      "label": "Arista Records LLC",
+      "art": "assets/40/outkast-aquemini.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/5ceB3rxgXqIRpsOvVzTG28"
+      },
+      "date": "2026-09-27"
+    },
+    {
+      "no": 6,
+      "slug": "portugal-the-man-the-satanic-satanist",
+      "artist": "Portugal. The Man",
+      "title": "The Satanic Satanist",
+      "discovered": "Placeholder — swap for the real line.",
+      "blurb": [
+        "Placeholder blurb for The Satanic Satanist. When you found it, where you were, why it stuck."
+      ],
+      "apple_id": 1537511193,
+      "apple_url": "https://music.apple.com/us/album/the-satanic-satanist/1537511193",
+      "released": "2009-07-21",
+      "year": "2009",
+      "copyright": "℗ 2009 Approaching AIRballoons",
+      "genre": "Alternative",
+      "track_count": 11,
+      "runtime_ms": 2084428,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "People Say",
+          "ms": 179360
+        },
+        {
+          "n": 2,
+          "title": "Work All Day",
+          "ms": 178947
+        },
+        {
+          "n": 3,
+          "title": "Lovers In Love",
+          "ms": 193960
+        },
+        {
+          "n": 4,
+          "title": "The Sun",
+          "ms": 181667
+        },
+        {
+          "n": 5,
+          "title": "The Home",
+          "ms": 176840
+        },
+        {
+          "n": 6,
+          "title": "The Woods",
+          "ms": 191947
+        },
+        {
+          "n": 7,
+          "title": "Guns and Dogs",
+          "ms": 164520
+        },
+        {
+          "n": 8,
+          "title": "Do You",
+          "ms": 174933
+        },
+        {
+          "n": 9,
+          "title": "Everyone Is Golden",
+          "ms": 225867
+        },
+        {
+          "n": 10,
+          "title": "Let You Down",
+          "ms": 137307
+        },
+        {
+          "n": 11,
+          "title": "Mornings",
+          "ms": 279080
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/8e/38/27/8e3827fb-ef98-d3fb-54e5-4269f7c27066/cover.jpg/1800x1800bb.jpg",
+      "label": "Approaching AIRballoons",
+      "art": "assets/40/portugal-the-man-the-satanic-satanist.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/04V5tTHMYIGBzcYxGMgRFn"
+      },
+      "date": "2026-09-28"
+    },
+    {
+      "no": 7,
+      "slug": "death-cab-for-cutie-plans",
+      "artist": "Death Cab for Cutie",
+      "title": "Plans",
+      "discovered": "Placeholder — swap for the real line.",
+      "blurb": [
+        "Placeholder blurb for Plans. When you found it, where you were, why it stuck."
+      ],
+      "apple_id": 966379289,
+      "apple_url": "https://music.apple.com/us/album/plans/966379289",
+      "released": "2005-08-29",
+      "year": "2005",
+      "copyright": "℗ 2005 Atlantic Recording Corporation for the United States and WEA International Inc. for the world outside of the United States. A Warner Music Group Company",
+      "genre": "Alternative",
+      "track_count": 11,
+      "runtime_ms": 2664063,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Marching Bands of Manhattan",
+          "ms": 252073
+        },
+        {
+          "n": 2,
+          "title": "Soul Meets Body",
+          "ms": 230905
+        },
+        {
+          "n": 3,
+          "title": "Summer Skin",
+          "ms": 194228
+        },
+        {
+          "n": 4,
+          "title": "Different Names for the Same Thing",
+          "ms": 308507
+        },
+        {
+          "n": 5,
+          "title": "I Will Follow You Into the Dark",
+          "ms": 189395
+        },
+        {
+          "n": 6,
+          "title": "Your Heart Is an Empty Room",
+          "ms": 219364
+        },
+        {
+          "n": 7,
+          "title": "Someday You Will Be Loved",
+          "ms": 191427
+        },
+        {
+          "n": 8,
+          "title": "Crooked Teeth",
+          "ms": 203661
+        },
+        {
+          "n": 9,
+          "title": "What Sarah Said",
+          "ms": 380920
+        },
+        {
+          "n": 10,
+          "title": "Brothers On a Hotel Bed",
+          "ms": 271100
+        },
+        {
+          "n": 11,
+          "title": "Stable Song",
+          "ms": 222483
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/03/0d/0c/030d0c02-4186-a22a-ada6-a13348069d8d/075679930491.jpg/1800x1800bb.jpg",
+      "label": "Atlantic Recording Corporation for the United States and WEA International Inc. for the world outside of the United States. A Warner Music Group Company",
+      "art": "assets/40/death-cab-for-cutie-plans.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/1NFGnxmeIEBakre4DvLaJq"
+      },
+      "date": "2026-09-29"
+    },
+    {
+      "no": 8,
+      "slug": "oasis-what-s-the-story-morning-glory",
+      "artist": "Oasis",
+      "title": "(What's the Story) Morning Glory?",
+      "discovered": "Placeholder — swap for the real line.",
+      "blurb": [
+        "Placeholder blurb for (What's the Story) Morning Glory?. When you found it, where you were, why it stuck."
+      ],
+      "apple_id": 1517447039,
+      "apple_url": "https://music.apple.com/us/album/whats-the-story-morning-glory/1517447039",
+      "released": "1995-10-02",
+      "year": "1995",
+      "copyright": "℗ 1995 Big Brother Recordings Ltd",
+      "genre": "Indie Rock",
+      "track_count": 12,
+      "runtime_ms": 3013335,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Hello",
+          "ms": 203187
+        },
+        {
+          "n": 2,
+          "title": "Roll with It",
+          "ms": 239827
+        },
+        {
+          "n": 3,
+          "title": "Wonderwall",
+          "ms": 258907
+        },
+        {
+          "n": 4,
+          "title": "Don't Look Back in Anger",
+          "ms": 287827
+        },
+        {
+          "n": 5,
+          "title": "Hey Now!",
+          "ms": 341907
+        },
+        {
+          "n": 6,
+          "title": "The Swamp Song (Version 1)",
+          "ms": 44627
+        },
+        {
+          "n": 7,
+          "title": "Some Might Say",
+          "ms": 327920
+        },
+        {
+          "n": 8,
+          "title": "Cast No Shadow",
+          "ms": 294813
+        },
+        {
+          "n": 9,
+          "title": "She's Electric",
+          "ms": 220920
+        },
+        {
+          "n": 10,
+          "title": "Morning Glory",
+          "ms": 303533
+        },
+        {
+          "n": 11,
+          "title": "The Swamp Song (Version 2)",
+          "ms": 39360
+        },
+        {
+          "n": 12,
+          "title": "Champagne Supernova",
+          "ms": 450507
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/04/92/e0/0492e08b-cbcc-9969-9ad6-8f5a0888068c/5051961007107.jpg/1800x1800bb.jpg",
+      "label": "Big Brother Recordings Ltd",
+      "art": "assets/40/oasis-what-s-the-story-morning-glory.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/7EW77iyGMou046Z44pOrIk"
+      },
+      "date": "2026-09-30"
+    },
+    {
+      "no": 9,
+      "slug": "radiohead-hail-to-the-thief",
+      "artist": "Radiohead",
+      "title": "Hail to the Thief",
+      "discovered": "Placeholder — swap for the real line.",
+      "blurb": [
+        "Placeholder blurb for Hail to the Thief. When you found it, where you were, why it stuck."
+      ],
+      "apple_id": 1097863576,
+      "links": {
+        "spotify": "https://open.spotify.com/album/5mzoI3VH0ZWk1pLFR6RoYy"
+      },
+      "apple_url": "https://music.apple.com/us/album/hail-to-the-thief/1097863576",
+      "released": "2003-06-09",
+      "year": "2003",
+      "copyright": "℗ 2003 XL Recordings Ltd",
+      "genre": "Alternative",
+      "track_count": 14,
+      "runtime_ms": 3395800,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "2 + 2 = 5",
+          "ms": 199360
+        },
+        {
+          "n": 2,
+          "title": "Sit Down. Stand Up",
+          "ms": 259973
+        },
+        {
+          "n": 3,
+          "title": "Sail to the Moon",
+          "ms": 258360
+        },
+        {
+          "n": 4,
+          "title": "Backdrifts",
+          "ms": 322600
+        },
+        {
+          "n": 5,
+          "title": "Go to Sleep",
+          "ms": 201507
+        },
+        {
+          "n": 6,
+          "title": "Where I End and You Begin",
+          "ms": 269293
+        },
+        {
+          "n": 7,
+          "title": "We Suck Young Blood",
+          "ms": 296707
+        },
+        {
+          "n": 8,
+          "title": "The Gloaming",
+          "ms": 212027
+        },
+        {
+          "n": 9,
+          "title": "There, There",
+          "ms": 323600
+        },
+        {
+          "n": 10,
+          "title": "I Will",
+          "ms": 119467
+        },
+        {
+          "n": 11,
+          "title": "A Punch Up at a Wedding",
+          "ms": 297333
+        },
+        {
+          "n": 12,
+          "title": "Myxomatosis",
+          "ms": 232533
+        },
+        {
+          "n": 13,
+          "title": "Scatterbrain",
+          "ms": 201707
+        },
+        {
+          "n": 14,
+          "title": "A Wolf at the Door",
+          "ms": 201333
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/3c/95/1d/3c951d73-f6c6-12dd-34b4-cc95f63e210c/634904078560.png/1800x1800bb.jpg",
+      "label": "XL Recordings Ltd",
+      "art": "assets/40/radiohead-hail-to-the-thief.jpg",
+      "date": "2026-10-01"
+    },
+    {
+      "no": 10,
+      "slug": "animal-collective-merriweather-post-pavilion",
+      "artist": "Animal Collective",
+      "title": "Merriweather Post Pavilion",
+      "discovered": "Placeholder — swap for the real line.",
+      "blurb": [
+        "Placeholder blurb for Merriweather Post Pavilion. When you found it, where you were, why it stuck."
+      ],
+      "apple_id": 300683110,
+      "apple_url": "https://music.apple.com/us/album/merriweather-post-pavilion/300683110",
+      "released": "2009-01-06",
+      "year": "2009",
+      "copyright": "℗ 2009 Domino Recording Co Ltd",
+      "genre": "Alternative",
+      "track_count": 12,
+      "runtime_ms": 3612201,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "In the Flowers",
+          "ms": 322027
+        },
+        {
+          "n": 2,
+          "title": "My Girls",
+          "ms": 340787
+        },
+        {
+          "n": 3,
+          "title": "Also Frightened",
+          "ms": 314067
+        },
+        {
+          "n": 4,
+          "title": "Summertime Clothes",
+          "ms": 270120
+        },
+        {
+          "n": 5,
+          "title": "Daily Routine",
+          "ms": 346040
+        },
+        {
+          "n": 6,
+          "title": "Bluish",
+          "ms": 313560
+        },
+        {
+          "n": 7,
+          "title": "Guys Eyes",
+          "ms": 270653
+        },
+        {
+          "n": 8,
+          "title": "Taste",
+          "ms": 233453
+        },
+        {
+          "n": 9,
+          "title": "Lion in a Coma",
+          "ms": 252227
+        },
+        {
+          "n": 10,
+          "title": "No More Runnin",
+          "ms": 263333
+        },
+        {
+          "n": 11,
+          "title": "Brother Sport",
+          "ms": 359027
+        },
+        {
+          "n": 12,
+          "title": "Summertime Clothes (Live)",
+          "ms": 326907
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/64/79/67/64796709-9482-2221-b1b7-64cdbe1b99f2/dj.fuppzyzi.jpg/1800x1800bb.jpg",
+      "label": "Domino Recording Co Ltd",
+      "art": "assets/40/animal-collective-merriweather-post-pavilion.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/5O9OXl9zAWMJTzawofxuan"
+      },
+      "date": "2026-10-02"
     }
   ]
 }

@@ -120,20 +120,16 @@
       font-size: var(--display-size); line-height: .9; letter-spacing: 0;
     }
     .about__title > * { display: block; white-space: nowrap; margin-left: -.03em; }
-    /* Below the title the voice changes to the mono: hierarchy, not more Porca. */
-    .about__body {
-      max-width: 34ch; margin: 1.4em 0 0; padding: 0;
-      font-family: var(--font-mono); font-size: clamp(17px, 4.6vw, 24px); line-height: 1.45; color: var(--text);
-    }
-    .about__body--quiet { margin-top: .9em; color: var(--text-faint); }
-    .about__body--date { margin-top: 1.6em; font-size: clamp(12px, 3.2vw, 14px); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
-    .about__title + .about__body { margin-top: 1.1em; }
+    /* Same stack as an entry: Porca title, mono facts line, Geist blurb. */
+    .about__facts { margin: 14px 0 0; color: var(--text-faint); letter-spacing: .08em; text-transform: uppercase; font-family: var(--font-mono); font-size: var(--mono-size); }
+    .about__facts span + span::before { content: ' · '; }
+    .about__body { max-width: var(--measure); margin: 24px 0 0; color: var(--text); font-size: 17px; line-height: 1.6; font-weight: 300; }
     .about__title em { font-style: normal; color: var(--accent); }
     .about__title .is-quiet { color: var(--text-faint); }
     .about__title .is-date { color: var(--accent); }
     .about__title .is-gap { height: .5em; }
     @media (prefers-reduced-motion: no-preference) {
-      .about:not([hidden]) .about__title > *, .about:not([hidden]) .about__body { animation: rise .42s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i) * 60ms); }
+      .about:not([hidden]) .about__title > *, .about:not([hidden]) .about__facts, .about:not([hidden]) .about__body { animation: rise .42s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i) * 60ms); }
       @keyframes rise { from { opacity: 0; transform: translateY(.35em); } to { opacity: 1; transform: none; } }
     }
 
@@ -241,9 +237,8 @@
           <em style="--i:1">40 days,</em>
           <span style="--i:2">40 years.</span>
         </h1>
-        <p class="about__body" style="--i:3">Counting down forty albums that shaped me, one a day, before I turn forty.</p>
-        <p class="about__body about__body--quiet" style="--i:4">In no particular order.</p>
-        <p class="about__body about__body--date" style="--i:5">Sep 23 → Nov 1, 2026</p>
+        <p class="about__facts mono" style="--i:3"><span>Sep 23 → Nov 1, 2026</span><span>One a day</span><span>No particular order</span></p>
+        <p class="about__body" style="--i:4">Counting down forty albums that shaped me, one a day, before I turn forty.</p>
       </section>
     </header>
 

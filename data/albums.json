@@ -1840,7 +1840,9 @@
       ],
       "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/b8/49/69/b84969fc-a475-ebc2-6496-274eb0771360/634904219888.png/1800x1800bb.jpg",
       "label": "XL Recordings Ltd",
-      "art": "assets/40/ratatat-classics.jpg"
+      "art": "assets/40/ratatat-classics.jpg",
+      "art_back": "assets/40/ratatat-classics-back.jpg",
+      "art_back_src": "http://coverartarchive.org/release/82a6769a-6527-4559-8d19-dbfbf93c92f1/26763472220.png"
     },
     {
       "no": null,

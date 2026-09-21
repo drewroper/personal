@@ -53,12 +53,16 @@ BAYER = np.array([
 
 
 def font(name, size):
-    return ImageFont.truetype(str(FONTS / f"{name}.ttf"), size)
+    for ext in (".otf", ".ttf"):
+        f = FONTS / f"{name}{ext}"
+        if f.exists():
+            return ImageFont.truetype(str(f), size)
+    raise FileNotFoundError(name)
 
 mono      = lambda s: font("GeistMono-Regular", s)
 sans      = lambda s: font("Geist-300", s)
 sans_md   = lambda s: font("Geist-500", s)
-display   = lambda s: font("Bricolage-800", s)
+display   = lambda s: font("Porca", s)
 
 
 # ── text helpers ─────────────────────────────────────────────────────────
@@ -108,6 +112,13 @@ def fit(text, mk, size, width, max_lines, min_size):
 
 
 # ── image helpers ────────────────────────────────────────────────────────
+def rounded(im, radius):
+    """Alpha mask with rounded corners, for pasting covers."""
+    m = Image.new("L", im.size, 0)
+    ImageDraw.Draw(m).rounded_rectangle([0, 0, im.width - 1, im.height - 1], radius=radius, fill=255)
+    return m
+
+
 def square(im, size):
     s = min(im.size)
     im = im.crop(((im.width - s) // 2, (im.height - s) // 2,
@@ -173,7 +184,7 @@ def header(d, a, y):
     """Artist (H2) then album title (H1). Returns the y below the block."""
     edge_text(d, y, a["artist"], sans(40), MUTED)
     y += 62
-    f, lines = fit(a["title"], display, 92, COL, 2, 56)
+    f, lines = fit(a["title"], display, 112, COL, 2, 60)
     for ln in lines:
         edge_text(d, y, ln, f, LIGHT)
         y += int(f.size * 1.02)
@@ -295,8 +306,7 @@ def variant_b(a, art, theta=None, riff="field"):
     cover = _prep(art, "cover", lambda: square(art, COVER))
     if "resolve" in riff and theta is not None:
         cover = _reveal(cover, theta)
-    c.paste(cover, (CX, cy))
-    d.rectangle([CX, cy, CX + COVER - 1, cy + COVER - 1], outline=(60, 60, 62), width=2)
+    c.paste(cover, (CX, cy), rounded(cover, 24))
     url(d, BOT - 30)
     return c
 
@@ -377,7 +387,7 @@ def grid_card(albums, through=0, headline="", eyebrow="ONE A DAY · IN NO PARTIC
         a = by_no.get(i + 1)
         if a and i + 1 <= through:
             art = Image.open(ROOT / a["art"]).convert("RGB")
-            c.paste(square(art, cell), (x, y))
+            t = square(art, cell); c.paste(t, (x, y), rounded(t, 4))
         else:
             d.rectangle([x, y, x + cell - 1, y + cell - 1], outline=RULE, width=2)
             d.text((x + 12, y + 8), f"{i + 1:02d}", font=mono(20), fill=FAINT)

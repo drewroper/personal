@@ -93,6 +93,12 @@
       letter-spacing: -.06em; color: var(--text); white-space: nowrap;
       margin: 0 0 0 -.02em; user-select: none;
     }
+    /* Middle 40: a 50% checker dither, cut into the letterforms. */
+    .wordmark b {
+      --cell: clamp(4px, 1.7vw, 10px); font-weight: 400; color: transparent;
+      background: repeating-conic-gradient(var(--text) 0 25%, transparent 0 50%) 0 0 / var(--cell) var(--cell);
+      -webkit-background-clip: text; background-clip: text;
+    }
     .wordmark--top { padding: 24px 0 20px; }
     .wordmark--foot { padding: 36px 0 0; }
     .bar__about {
@@ -263,7 +269,7 @@
       </section>
     </header>
 
-    <div class="wordmark wordmark--top" aria-hidden="true">404040</div>
+    <div class="wordmark wordmark--top" aria-hidden="true">40<b>40</b>40</div>
 
     <section id="js-feed" class="empty">Loading…</section>
 
@@ -272,7 +278,7 @@
         <li><a href="/">← drewroper.com</a></li>
         <li><a href="https://claude.com/claude-code" target="_blank" rel="noopener">Made with Claude Code ↗</a></li>
       </ul>
-      <div class="wordmark wordmark--foot" aria-hidden="true">404040</div>
+      <div class="wordmark wordmark--foot" aria-hidden="true">40<b>40</b>40</div>
     </footer>
   </main>
 

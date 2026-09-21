@@ -68,6 +68,7 @@
        panel hangs off it as a dropdown, so it opens wherever you are. ── */
     .bar { position: sticky; top: 0; z-index: 50; margin: 0 -20px; }
     .bar__row {
+      position: relative; z-index: 1;
       display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: .75rem;
       min-height: 48px; padding: .6rem 20px .55rem;
       letter-spacing: .04em;
@@ -100,26 +101,27 @@
     }
     .bar__about:hover, .bar__about[aria-expanded="true"] { color: var(--text); border-color: var(--text-faint); }
 
-    /* ── About: a dropdown under the bar. Before launch, when there's
-       nothing else on the page, it sits in the flow instead. ─────────── */
+    /* ── About: a full-screen type poster under the bar. Closed on load.
+       Every line is the H1 size; lines are hand-broken so none wraps. ── */
     .about {
-      position: absolute; left: 0; right: 0; top: 100%;
-      padding: 26px 20px 30px;
-      background: var(--bg);
-      border-bottom: 1px solid var(--rule);
-      box-shadow: 0 24px 48px rgba(0,0,0,.55);
-      font-family: var(--font-sans); font-size: 15px; letter-spacing: 0; text-transform: none;
+      position: fixed; inset: 0; z-index: 0; overflow-y: auto; -webkit-overflow-scrolling: touch;
+      background: var(--bg); padding: 76px 20px 64px;
+      font-family: var(--font-sans); text-transform: none; letter-spacing: 0;
     }
-    .page.is-empty .about { position: static; box-shadow: none; }
     .about__title {
-      margin: 0 0 0 -3px; color: var(--text);
-      font-family: var(--font-display); font-weight: 400;
-      font-size: clamp(72px, 22vw, 180px); line-height: .9; letter-spacing: 0;
+      margin: 0 auto; padding: 0; max-width: 760px;
+      font-family: var(--font-display); font-weight: 400; color: var(--text);
+      font-size: clamp(68px, 21vw, 170px); line-height: .9; letter-spacing: 0;
     }
-    .about__title span, .about__title em { display: block; white-space: nowrap; }
-    .about__title em { color: var(--accent); font-style: normal; }
-    .about__lede { max-width: var(--measure); margin: 18px 0 0; color: var(--text-muted); font-size: 16px; line-height: 1.5; font-weight: 300; }
-    .about__dates { margin: 18px 0 0; color: var(--text-faint); }
+    .about__title > * { display: block; white-space: nowrap; margin-left: -.03em; }
+    .about__title em { font-style: normal; color: var(--accent); }
+    .about__title .is-quiet { color: var(--text-faint); }
+    .about__title .is-date { color: var(--accent); }
+    .about__title .is-gap { height: .5em; }
+    @media (prefers-reduced-motion: no-preference) {
+      .about:not([hidden]) .about__title > * { animation: rise .42s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i) * 45ms); }
+      @keyframes rise { from { opacity: 0; transform: translateY(.35em); } to { opacity: 1; transform: none; } }
+    }
 
     /* ── Entries: newest first, cover is the hero at phone width. ────── */
     .entry { padding: 24px 0 40px; border-bottom: 1px solid var(--rule); scroll-margin-top: 56px; }
@@ -220,12 +222,27 @@
       <button class="bar__about" id="js-about-btn" type="button" aria-expanded="false" aria-controls="js-about">About</button>
       </div>
       <section class="about" id="js-about" hidden>
-      <h1 class="about__title"><span>40 albums,</span> <em>40 days,</em> <span>40 years.</span></h1>
-      <p class="about__lede">
-        Counting down forty albums that shaped me, one a day, before I turn forty.
-        In no particular order.
-      </p>
-      <p class="about__dates mono">Sep 23 → Nov 1, 2026</p>
+        <h1 class="about__title">
+          <span style="--i:0">40 albums,</span>
+          <em style="--i:1">40 days,</em>
+          <span style="--i:2">40 years.</span>
+          <span class="is-gap" style="--i:3"></span>
+          <span style="--i:4">Counting</span>
+          <span style="--i:5">down forty</span>
+          <span style="--i:6">albums</span>
+          <span style="--i:7">that shaped</span>
+          <span style="--i:8">me, one</span>
+          <span style="--i:9">a day,</span>
+          <span style="--i:10">before I</span>
+          <span style="--i:11">turn forty.</span>
+          <span class="is-gap" style="--i:12"></span>
+          <span class="is-quiet" style="--i:13">In no</span>
+          <span class="is-quiet" style="--i:14">particular</span>
+          <span class="is-quiet" style="--i:15">order.</span>
+          <span class="is-gap" style="--i:16"></span>
+          <span class="is-date" style="--i:17">Sep 23 →</span>
+          <span class="is-date" style="--i:18">Nov 1</span>
+        </h1>
       </section>
     </header>
 
@@ -353,13 +370,13 @@
           about.hidden = !open;
           btn.setAttribute('aria-expanded', String(open));
           btn.textContent = open ? 'Close' : 'About';
+          document.body.style.overflow = open ? 'hidden' : '';
         };
         btn.addEventListener('click', e => { e.stopPropagation(); setOpen(about.hidden); });
         about.addEventListener('click', e => e.stopPropagation());
-        document.addEventListener('click', () => { if (!about.hidden && !isEmpty) setOpen(false); });
+        document.addEventListener('click', () => { if (!about.hidden) setOpen(false); });
         document.addEventListener('keydown', e => { if (e.key === 'Escape' && !about.hidden) setOpen(false); });
-        const isEmpty = !live.length;
-        if (isEmpty) { document.querySelector('.page').classList.add('is-empty'); setOpen(true); }
+
 
         const feed = document.getElementById('js-feed');
         if (!live.length) {

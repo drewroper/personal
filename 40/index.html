@@ -125,8 +125,9 @@
     }
     .entry__artist { margin: 20px 0 0; color: var(--text-muted); font-size: 15px; }
     .entry__title  {
-      margin: 4px 0 0; color: var(--text);
-      font-weight: 500; font-size: 26px; line-height: 1.15; letter-spacing: -.015em;
+      margin: 6px 0 0 -2px; color: var(--text);
+      font-family: var(--font-display); font-weight: 400;
+      font-size: 34px; line-height: 1; letter-spacing: 0;
     }
     .entry__facts  { margin: 12px 0 0; color: var(--text-faint); }
     .entry__facts span + span::before { content: ' · '; }
@@ -186,20 +187,6 @@
     .foot__colophon { margin: 22px 0 0; }
 
     /* Desktop gets the cover beside the title; everything else stays. */
-    /* ── Minimal: no rules, no microcopy. ?minimal turns it on. ─────── */
-    .is-minimal .bar__row { border-bottom: 0; }
-    .is-minimal .entry { border-bottom: 0; padding: 40px 0 56px; }
-    .is-minimal .entry__head,
-    .is-minimal .entry__facts,
-    .is-minimal .entry__found,
-    .is-minimal details,
-    .is-minimal .about__dates,
-    .is-minimal .foot__colophon { display: none; }
-    .is-minimal .entry__cover { margin-top: 0; border: 0; }
-    .is-minimal .about { border-bottom: 0; }
-    .is-minimal .empty { border-bottom: 0; }
-    .is-minimal .foot { padding-top: 8px; }
-
     @media (min-width: 720px) {
       .page { max-width: 760px; }
       .entry__grid { display: grid; grid-template-columns: 220px 1fr; gap: 28px; align-items: start; }
@@ -260,7 +247,6 @@
     // data/albums.test.json — sample entries for looking at the design.
     const params  = new URLSearchParams(location.search);
     const test    = params.has('test');
-    if (params.has('minimal')) document.body.classList.add('is-minimal');
     const preview = test || params.has('preview');
     const DATA    = test ? '../data/albums.test.json' : '../data/albums.json';
 

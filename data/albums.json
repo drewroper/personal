@@ -827,7 +827,9 @@
       ],
       "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/3c/95/1d/3c951d73-f6c6-12dd-34b4-cc95f63e210c/634904078560.png/1800x1800bb.jpg",
       "label": "XL Recordings Ltd",
-      "art": "assets/40/radiohead-hail-to-the-thief.jpg"
+      "art": "assets/40/radiohead-hail-to-the-thief.jpg",
+      "art_back": "assets/40/radiohead-hail-to-the-thief-back.jpg",
+      "art_back_src": "http://coverartarchive.org/release/f847d298-e2d8-43ed-97ed-7c7b01ff03bc/24770542667.jpg"
     },
     {
       "no": null,

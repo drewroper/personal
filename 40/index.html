@@ -117,25 +117,38 @@
     .about {
       position: fixed; inset: 0; z-index: 0; overflow-y: auto; -webkit-overflow-scrolling: touch;
       background: rgba(12,12,13,.82); backdrop-filter: blur(22px) saturate(140%); -webkit-backdrop-filter: blur(22px) saturate(140%);
-      padding: 76px 20px 64px;
+      padding: 64px 20px calc(20px + var(--sab));
+      display: flex; flex-direction: column; box-sizing: border-box;
       font-family: var(--font-sans); text-transform: none; letter-spacing: 0;
     }
+    .about[hidden] { display: none; }
+    .about > * { flex: none; }
     .about__title {
       margin: 0; padding: 0; max-width: 760px;
       font-family: var(--font-display); font-weight: 400; color: var(--text);
-      font-size: var(--display-size); line-height: .9; letter-spacing: 0;
+      font-size: min(var(--display-size), 10vh, 10dvh); line-height: .9; letter-spacing: 0;
     }
     .about__title > * { display: block; white-space: nowrap; margin-left: -.03em; }
     /* Same stack as an entry: Porca title, mono facts line, Geist blurb. */
-    .about__body  { max-width: var(--measure); margin: 26px 0 0; color: var(--text); font-size: 17px; line-height: 1.6; font-weight: 300; }
-    .about__quiet { max-width: var(--measure); margin: 10px 0 0; color: var(--text-faint); font-size: 15px; line-height: 1.5; font-weight: 300; }
-    .about__facts { margin: 22px 0 0; color: var(--accent); letter-spacing: .08em; text-transform: uppercase; font-family: var(--font-mono); font-size: var(--mono-size); }
+    .about__body  { max-width: var(--measure); margin: 20px 0 0; color: var(--text); font-size: 16px; line-height: 1.55; font-weight: 300; }
+    /* One line: the disclaimer on the left, the dates on the right. */
+    .about__meta  { display: flex; justify-content: space-between; align-items: baseline; gap: 8px 16px; flex-wrap: wrap; max-width: 560px; margin: 12px 0 0; }
+    .about__quiet { margin: 0; color: var(--text-faint); font-size: 14px; line-height: 1.5; font-weight: 300; }
+    .about__facts { margin: 0; color: var(--accent); letter-spacing: .08em; text-transform: uppercase; font-family: var(--font-mono); font-size: var(--mono-size); white-space: nowrap; }
+    .about .grid40 { margin-top: 24px; }
+    @media (max-height: 620px) {
+      .about { padding-top: 58px; }
+      .about__title { font-size: min(var(--display-size), 8.6vh); }
+      .about__body { font-size: 15px; margin-top: 14px; }
+      .about__meta { margin-top: 8px; }
+      .about .grid40 { margin-top: 16px; }
+    }
     .about__title em { font-style: normal; color: var(--accent); }
     .about__title .is-quiet { color: var(--text-faint); }
     .about__title .is-date { color: var(--accent); }
     .about__title .is-gap { height: .5em; }
     @media (prefers-reduced-motion: no-preference) {
-      .about:not([hidden]) .about__title > *, .about:not([hidden]) .about__facts, .about:not([hidden]) .about__quiet, .about:not([hidden]) .about__body, .about:not([hidden]) .grid40 { animation: rise .42s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i) * 60ms); }
+      .about:not([hidden]) .about__title > *, .about:not([hidden]) .about__meta, .about:not([hidden]) .about__body, .about:not([hidden]) .grid40 { animation: rise .42s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i) * 60ms); }
       @keyframes rise { from { opacity: 0; transform: translateY(.35em); } to { opacity: 1; transform: none; } }
     }
 
@@ -241,12 +254,15 @@
     .grid40 a.is-arriving canvas { position: absolute; inset: 0; width: 100%; height: 100%; image-rendering: pixelated; }
 
     /* The 40 cells from the closing card, filling in as records post. */
-    .grid40 { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; margin: 28px 0 0; max-width: 560px; }
+    .grid40 { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; margin: 0; max-width: 560px; }
     /* Past the footer wordmark the 404040 repeats, each copy more eroded by dither, until nothing is left. */
     /* ── The tail: scroll pulls a pixel extrusion out of 404040 and you travel down it. ── */
     .tail { position: relative; height: 700vh; height: 700dvh; }
-    .tail__cv { position: sticky; top: 0; display: block; width: 100vw; height: 100vh; height: 100dvh; image-rendering: pixelated; image-rendering: crisp-edges; cursor: default; }
-    .tail.is-end .tail__cv { cursor: pointer; }
+    .tail__stage { position: sticky; top: 0; height: 100vh; height: 100dvh; overflow: hidden; }
+    .tail__cv { position: absolute; inset: 0; display: block; width: 100%; height: 100%; image-rendering: pixelated; image-rendering: crisp-edges; }
+    .tail__col { position: relative; height: 100%; }
+    .tail__cap { position: absolute; top: 0; left: 20px; will-change: transform; visibility: hidden; }
+    .tail__cap--end { color: var(--accent); cursor: pointer; }
     @media (prefers-reduced-motion: reduce) { .tail { height: 100vh; height: 100dvh; } }
     .grid40 > * { display: block; aspect-ratio: 1; border-radius: 4px; overflow: hidden; }
     .grid40 span { border: 1px solid var(--rule); }
@@ -287,9 +303,11 @@
           <span style="--i:2">40 years.</span>
         </h1>
         <p class="about__body" style="--i:3">Counting down forty albums that shaped me, one a day, before I turn forty.</p>
-        <p class="about__quiet" style="--i:4">In no particular order.</p>
-        <p class="about__facts mono" style="--i:5">Sep 23 → Nov 1, 2026</p>
-        <nav class="grid40" id="js-grid" aria-label="Every day of the countdown" style="--i:6"></nav>
+        <div class="about__meta" style="--i:4">
+          <p class="about__quiet">In no particular order.</p>
+          <p class="about__facts mono">Sep 23 → Nov 1, 2026</p>
+        </div>
+        <nav class="grid40" id="js-grid" aria-label="Every day of the countdown" style="--i:5"></nav>
       </section>
     </header>
 
@@ -304,7 +322,15 @@
       </ul>
     </footer>
   </main>
-  <section class="tail" id="js-tail" aria-hidden="true"><canvas class="tail__cv" id="js-tail-cv"></canvas></section>
+  <section class="tail" id="js-tail" aria-hidden="true">
+    <div class="tail__stage">
+      <canvas class="tail__cv" id="js-tail-cv"></canvas>
+      <div class="page tail__col">
+        <div class="wordmark tail__cap" id="js-tail-start"><span>404040</span></div>
+        <div class="wordmark tail__cap tail__cap--end" id="js-tail-end" role="button" tabindex="-1" aria-label="Back to top"><span>404040</span></div>
+      </div>
+    </div>
+  </section>
 
   <script>
   (() => {
@@ -427,11 +453,15 @@
     //    finally surfaces the other cap in accent green. Tap that to go home. ──
     (function tail() {
       const region = document.getElementById('js-tail'), cv = document.getElementById('js-tail-cv'), ref = document.querySelector('.wordmark--top');
-      if (!region || !cv || !ref) return;
+      const capEl = document.getElementById('js-tail-start'), endEl = document.getElementById('js-tail-end');
+      if (!region || !cv || !ref || !capEl || !endEl) return;
       const ctx = cv.getContext('2d');
       const TXT = [244, 241, 236], ACC = [214, 255, 56], BG = [12, 12, 13];
       const clamp = v => v < 0 ? 0 : v > 1 ? 1 : v, ease = v => v * v * (3 - 2 * v);
       let cell = 3, W = 0, H = 0, img, buf, fill = [], edge = [], inkW = 0, inkH = 0, capX = 0, p = 0, t0 = performance.now(), raf = 0, visible = false;
+      // Safe-area inset in px, measured off a probe element rather than parsed from env().
+      const probe = document.createElement('div'); probe.style.cssText = 'position:fixed;bottom:0;height:env(safe-area-inset-bottom,0px);visibility:hidden;pointer-events:none'; document.body.appendChild(probe);
+      const SAB = () => probe.offsetHeight || 0;
 
       function build() {
         const fs = parseFloat(getComputedStyle(ref).fontSize);
@@ -471,13 +501,17 @@
       function draw(now) {
         const t = (now - t0) / 1000;
         for (let i = 0, n = W * H * 4; i < n; i += 4) { buf[i] = BG[0]; buf[i + 1] = BG[1]; buf[i + 2] = BG[2]; buf[i + 3] = 255; }
-        const gutter = Math.round(20 / cell), safe = Math.round((parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--sab')) || 0) / cell);
+        const gutter = Math.round(20 / cell), safe = Math.round(SAB() / cell);
         const grow   = ease(clamp(p / .18));            // extrusion pulled out of the cap
         const leave  = ease(clamp((p - .22) / .28));    // start cap recedes off the top
         const arrive = ease(clamp((p - .68) / .32));    // end cap rises from below
-        const capY0 = gutter + Math.round(8 / cell);
-        const capY  = Math.round(capY0 - leave * (capY0 + inkH + 6));
-        const endY  = Math.round(H + 6 - arrive * (H + 6 - (H - gutter - safe - inkH + 1)));
+        const inkPx = ref.getBoundingClientRect().height || inkH * cell, safePx = SAB();
+        const capPx = 28 - leave * (28 + inkPx + 18);                                   // start cap, in CSS px
+        const endPx = innerHeight + 18 - arrive * (innerHeight + 18 - (innerHeight - 20 - safePx - inkPx));
+        const capY = Math.round(capPx / cell), endY = Math.round(endPx / cell);
+        capEl.style.transform = `translateY(${capPx.toFixed(1)}px)`; capEl.style.visibility = capPx + inkPx > 0 ? 'visible' : 'hidden';
+        endEl.style.transform = `translateY(${endPx.toFixed(1)}px)`; endEl.style.visibility = arrive > 0 ? 'visible' : 'hidden';
+        endEl.style.opacity = arrive < .35 ? (arrive / .35).toFixed(2) : 1;
         const step  = Math.max(2, Math.round(9 / cell));
         const depthMax = Math.round((H + inkH + 20) * 1.4 / step);
         const K = Math.round(grow * depthMax);
@@ -497,8 +531,6 @@
           const keep = Math.max(fog, lit);
           plot(edge, dx, y, s, TXT, b, keep);
         }
-        if (capY + inkH > 0) plot(fill, capX, capY, 1, TXT, 1, 1);
-        if (arrive > 0) plot(fill, capX, endY, 1, ACC, 1, arrive < .35 ? arrive / .35 : 1);
         ctx.putImageData(img, 0, 0);
         region.classList.toggle('is-end', arrive > .5);
       }
@@ -513,7 +545,7 @@
       function kick() { progress(); if (visible && !raf) raf = requestAnimationFrame(tick); }
       addEventListener('scroll', kick, { passive: true });
       let rw = 0; addEventListener('resize', () => { clearTimeout(rw); rw = setTimeout(() => { build(); kick(); if (REDUCED) draw(performance.now()); }, 150); });
-      cv.addEventListener('click', () => { if (region.classList.contains('is-end')) { if (BIRTHDAY) chiptune(cv); else scrollTo({ top: 0, behavior: REDUCED ? 'auto' : 'smooth' }); } });
+      endEl.addEventListener('click', () => { if (!BIRTHDAY) scrollTo({ top: 0, behavior: REDUCED ? 'auto' : 'smooth' }); });
       const start = () => { build(); if (REDUCED) { p = .6; draw(performance.now()); } else kick(); };
       (document.fonts && document.fonts.load ? document.fonts.load('400 100px Porca') : Promise.resolve()).then(start, start);
     })();

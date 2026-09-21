@@ -149,6 +149,9 @@
       display: block; width: 100%; aspect-ratio: 1; object-fit: cover; margin-top: 16px;
       background: var(--bg-raised); border: 1px solid var(--rule); border-radius: 10px;
     }
+    .entry__cover-wrap { position: relative; margin-top: 16px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+    .entry__cover-wrap .entry__cover { margin-top: 0; }
+    .entry__cover-wrap canvas { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 10px; pointer-events: none; image-rendering: pixelated; }
     .entry__artist { margin: 20px 0 0; color: var(--text-muted); font-size: 15px; }
     .entry__title  {
       margin: 8px 0 0 -3px; color: var(--text);
@@ -342,7 +345,9 @@
           <span>${fmtDate(a.date)}</span>
         </div>
         <div class="entry__grid">
-          <img class="entry__cover" src="../${esc(a.art || '')}" alt="${esc(a.title)} cover" loading="lazy" />
+          <button class="entry__cover-wrap" type="button" aria-label="Dither ${esc(a.title)}" style="display:block;width:100%;padding:0;border:0;background:none;text-align:left;">
+            <img class="entry__cover" src="../${esc(a.art || '')}" alt="${esc(a.title)} cover" loading="lazy" crossorigin="anonymous" />
+          </button>
           <div class="entry__text">
             <p class="entry__artist">${esc(a.artist)}</p>
             <h2 class="entry__title">${esc(a.title)}</h2>
@@ -356,6 +361,48 @@
         ${a.apple_id ? '' : tracks(a)}
       </article>`;
     }
+
+    // ── Easter egg: press a cover and it dithers out and resolves back. ──
+    const BAYER = [0,32,8,40,2,34,10,42,48,16,56,24,50,18,58,26,12,44,4,36,14,46,6,38,60,28,52,20,62,30,54,22,
+                   3,35,11,43,1,33,9,41,51,19,59,27,49,17,57,25,15,47,7,39,13,45,5,37,63,31,55,23,61,29,53,21].map(v => v * 4);
+    const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function ditherPulse(wrap, img) {
+      if (wrap.dataset.busy || !img.complete || !img.naturalWidth) return;
+      wrap.dataset.busy = '1';
+      const steps = [256, 128, 64, 32, 16, 16, 32, 64, 128, 256];
+      const hold = REDUCED ? 0 : 90;
+      const cv = document.createElement('canvas');
+      const rect = img.getBoundingClientRect();
+      cv.width = Math.round(rect.width * devicePixelRatio); cv.height = Math.round(rect.height * devicePixelRatio);
+      const ctx = cv.getContext('2d'); ctx.imageSmoothingEnabled = false;
+      const small = document.createElement('canvas'), sctx = small.getContext('2d', { willReadFrequently: true });
+      wrap.appendChild(cv);
+      let i = 0;
+      const frame = () => {
+        const g = steps[i]; small.width = small.height = g;
+        sctx.drawImage(img, 0, 0, g, g);
+        let px;
+        try { px = sctx.getImageData(0, 0, g, g).data; } catch (e) { cv.remove(); delete wrap.dataset.busy; return; }
+        const out = sctx.createImageData(g, g);
+        for (let y = 0; y < g; y++) for (let x = 0; x < g; x++) {
+          const k = (y * g + x) * 4;
+          const l = ((0.299 * px[k] + 0.587 * px[k + 1] + 0.114 * px[k + 2]) - 128) * 1.2 + 128;
+          const on = l > BAYER[(y & 7) * 8 + (x & 7)];
+          out.data[k] = on ? 244 : 12; out.data[k + 1] = on ? 241 : 12; out.data[k + 2] = on ? 236 : 13; out.data[k + 3] = 255;
+        }
+        sctx.putImageData(out, 0, 0);
+        ctx.clearRect(0, 0, cv.width, cv.height);
+        ctx.drawImage(small, 0, 0, cv.width, cv.height);
+        i++;
+        if (i < steps.length) setTimeout(frame, hold);
+        else setTimeout(() => { cv.remove(); delete wrap.dataset.busy; }, hold);
+      };
+      frame();
+    }
+    document.addEventListener('click', e => {
+      const wrap = e.target.closest('.entry__cover-wrap');
+      if (wrap) ditherPulse(wrap, wrap.querySelector('img'));
+    });
 
     fetch(DATA + '?v=' + Date.now())
       .then(r => r.json())

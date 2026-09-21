@@ -114,18 +114,33 @@
       padding: 76px 20px 64px;
       font-family: var(--font-sans); text-transform: none; letter-spacing: 0;
     }
-    .about__title {
-      margin: 0 auto; padding: 0; max-width: 760px;
-      font-family: var(--font-display); font-weight: 400; color: var(--text);
-      font-size: var(--display-size); line-height: .9; letter-spacing: 0;
+    .about__poster { max-width: 760px; margin: 0 auto; font-family: var(--font-display); color: var(--text); text-transform: uppercase; }
+    .about__poster > * { margin: 0; }
+    .p-row { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+    .p-big { font-size: var(--display-size); line-height: .9; letter-spacing: 0; white-space: nowrap; margin-left: -.03em; }
+    .p-big--acc { color: var(--accent); }
+    .p-sm { font-size: clamp(13px, 3.6vw, 22px); line-height: 1.2; letter-spacing: .04em; color: var(--text-muted); white-space: nowrap; }
+    .p-sm--acc { color: var(--accent); }
+    .p-sm--r { text-align: right; }
+    .p-gap { height: .45em; font-size: var(--display-size); }
+    .p-row--badge { align-items: center; }
+    .p-row--badge .p-badge { margin: -.6em 8px -.5em 0; }
+    /* The badge: accent sticker, stepped corners, slightly off-square. */
+    .p-badge {
+      --s: 4px; display: inline-block; padding: 12px 16px 11px; transform: rotate(-6deg); transform-origin: center;
+      background: var(--accent); color: var(--bg); text-align: center;
+      font-size: clamp(12px, 3.2vw, 19px); line-height: 1.05; letter-spacing: .04em;
+      clip-path: polygon(
+        calc(3*var(--s)) 0, calc(100% - 3*var(--s)) 0, calc(100% - 3*var(--s)) var(--s), calc(100% - 2*var(--s)) var(--s),
+        calc(100% - 2*var(--s)) calc(2*var(--s)), calc(100% - var(--s)) calc(2*var(--s)), calc(100% - var(--s)) calc(3*var(--s)), 100% calc(3*var(--s)),
+        100% calc(100% - 3*var(--s)), calc(100% - var(--s)) calc(100% - 3*var(--s)), calc(100% - var(--s)) calc(100% - 2*var(--s)), calc(100% - 2*var(--s)) calc(100% - 2*var(--s)),
+        calc(100% - 2*var(--s)) calc(100% - var(--s)), calc(100% - 3*var(--s)) calc(100% - var(--s)), calc(100% - 3*var(--s)) 100%, calc(3*var(--s)) 100%,
+        calc(3*var(--s)) calc(100% - var(--s)), calc(2*var(--s)) calc(100% - var(--s)), calc(2*var(--s)) calc(100% - 2*var(--s)), var(--s) calc(100% - 2*var(--s)),
+        var(--s) calc(100% - 3*var(--s)), 0 calc(100% - 3*var(--s)), 0 calc(3*var(--s)), var(--s) calc(3*var(--s)),
+        var(--s) calc(2*var(--s)), calc(2*var(--s)) calc(2*var(--s)), calc(2*var(--s)) var(--s), calc(3*var(--s)) var(--s));
     }
-    .about__title > * { display: block; white-space: nowrap; margin-left: -.03em; }
-    .about__title em { font-style: normal; color: var(--accent); }
-    .about__title .is-quiet { color: var(--text-faint); }
-    .about__title .is-date { color: var(--accent); }
-    .about__title .is-gap { height: .5em; }
     @media (prefers-reduced-motion: no-preference) {
-      .about:not([hidden]) .about__title > * { animation: rise .42s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i) * 45ms); }
+      .about:not([hidden]) .about__poster > * { animation: rise .42s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i) * 45ms); }
       @keyframes rise { from { opacity: 0; transform: translateY(.35em); } to { opacity: 1; transform: none; } }
     }
 
@@ -228,27 +243,23 @@
       <button class="bar__about" id="js-about-btn" type="button" aria-expanded="false" aria-controls="js-about">About</button>
       </div>
       <section class="about" id="js-about" hidden>
-        <h1 class="about__title">
-          <span style="--i:0">40 albums,</span>
-          <em style="--i:1">40 days,</em>
-          <span style="--i:2">40 years.</span>
-          <span class="is-gap" style="--i:3"></span>
-          <span style="--i:4">Counting</span>
-          <span style="--i:5">down forty</span>
-          <span style="--i:6">albums</span>
-          <span style="--i:7">that shaped</span>
-          <span style="--i:8">me, one</span>
-          <span style="--i:9">a day,</span>
-          <span style="--i:10">before I</span>
-          <span style="--i:11">turn forty.</span>
-          <span class="is-gap" style="--i:12"></span>
-          <span class="is-quiet" style="--i:13">In no</span>
-          <span class="is-quiet" style="--i:14">particular</span>
-          <span class="is-quiet" style="--i:15">order.</span>
-          <span class="is-gap" style="--i:16"></span>
-          <span class="is-date" style="--i:17">Sep 23 →</span>
-          <span class="is-date" style="--i:18">Nov 1</span>
-        </h1>
+        <div class="about__poster">
+          <div class="p-row" style="--i:0"><span class="p-sm">One a day</span><span class="p-sm p-sm--acc p-sm--r">Sep 23 -&gt; Nov 1</span></div>
+          <h1 class="p-big" style="--i:1">/40 albums,</h1>
+          <p class="p-big p-big--acc" style="--i:2">/40 days,</p>
+          <p class="p-big" style="--i:3">/40 years.</p>
+          <div class="p-gap" style="--i:4"></div>
+          <p class="p-big" style="--i:5">Counting</p>
+          <div class="p-row p-row--badge" style="--i:6"><span class="p-big">down 40</span><span class="p-badge">In no<br>particular<br>order</span></div>
+          <p class="p-big" style="--i:7">albums</p>
+          <p class="p-big" style="--i:8">that</p>
+          <p class="p-big" style="--i:9">shaped me</p>
+          <p class="p-big" style="--i:10">one a day,</p>
+          <p class="p-big" style="--i:11">before I</p>
+          <p class="p-big" style="--i:12">turn 40 <span class="p-big--acc">*</span></p>
+          <div class="p-gap" style="--i:13"></div>
+          <div class="p-row" style="--i:14"><span class="p-sm">@ drewroper.com/40</span><span class="p-sm p-sm--r">Denver / CO</span></div>
+        </div>
       </section>
     </header>
 

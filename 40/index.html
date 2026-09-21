@@ -40,6 +40,7 @@
     }
     *, *::before, *::after { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
+    :root { --sab: env(safe-area-inset-bottom, 0px); }
     html { background: var(--bg); scroll-behavior: smooth; }
     body {
       background: var(--bg);
@@ -99,7 +100,6 @@
     }
     .wordmark > span { display: block; margin-top: -.214em; }
     .wordmark--top  { margin-top: 24px; margin-bottom: 20px; }
-    .wordmark--foot { margin-top: 36px; }
     .bar__about {
       justify-self: end;
       font: inherit; letter-spacing: inherit; text-transform: inherit;
@@ -228,7 +228,7 @@
     .empty b { color: var(--text); font-weight: 400; }
 
     /* ── Footer: a real one, with room to grow. ─────────────────────── */
-    .foot { padding: 36px 0 calc(8px + env(safe-area-inset-bottom)); color: var(--text-faint); }
+    .foot { padding: 36px 0 0; color: var(--text-faint); }
     .foot__links { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 0; padding: 0; list-style: none; }
     .foot__links a { color: var(--text-muted); border-bottom-color: transparent; }
     .foot__links a:hover { color: var(--accent); border-bottom-color: var(--accent); }
@@ -243,8 +243,11 @@
     /* The 40 cells from the closing card, filling in as records post. */
     .grid40 { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; margin: 28px 0 0; max-width: 560px; }
     /* Past the footer wordmark the 404040 repeats, each copy more eroded by dither, until nothing is left. */
-    .dissolve { display: grid; gap: 20px; margin-top: 20px; }
-    .dissolve canvas { display: block; image-rendering: pixelated; image-rendering: crisp-edges; }
+    /* ── The tail: scroll pulls a pixel extrusion out of 404040 and you travel down it. ── */
+    .tail { position: relative; height: 700vh; height: 700dvh; }
+    .tail__cv { position: sticky; top: 0; display: block; width: 100vw; height: 100vh; height: 100dvh; image-rendering: pixelated; image-rendering: crisp-edges; cursor: default; }
+    .tail.is-end .tail__cv { cursor: pointer; }
+    @media (prefers-reduced-motion: reduce) { .tail { height: 100vh; height: 100dvh; } }
     .grid40 > * { display: block; aspect-ratio: 1; border-radius: 4px; overflow: hidden; }
     .grid40 span { border: 1px solid var(--rule); }
     .grid40 span.is-today { border-color: var(--accent); }
@@ -299,10 +302,9 @@
         <li><a href="/">← drewroper.com</a></li>
         <li><a href="https://claude.com/claude-code" target="_blank" rel="noopener">Made with Claude Code ↗</a></li>
       </ul>
-      <div class="wordmark wordmark--foot" aria-hidden="true"><span>404040</span></div>
-      <div class="dissolve" id="js-dissolve" aria-hidden="true"></div>
     </footer>
   </main>
+  <section class="tail" id="js-tail" aria-hidden="true"><canvas class="tail__cv" id="js-tail-cv"></canvas></section>
 
   <script>
   (() => {
@@ -420,58 +422,100 @@
                    3,35,11,43,1,33,9,41,51,19,59,27,49,17,57,25,15,47,7,39,13,45,5,37,63,31,55,23,61,29,53,21].map(v => v * 4);
     const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // ── The end of the page: 404040 dissolving into dither, copy by copy. ──
-    (function dissolve() {
-      const box = document.getElementById('js-dissolve'), ref = document.querySelector('.wordmark--foot');
-      if (!box || !ref) return;
-      const COPIES = 7, TEXT = '404040';
-      let layers = [], W = 0;
+    // ── The tail. Scroll is the engine: it pulls an extrusion out of 404040, snakes
+    //    it down a tunnel toward a vanishing point, fogs the far end with dither, and
+    //    finally surfaces the other cap in accent green. Tap that to go home. ──
+    (function tail() {
+      const region = document.getElementById('js-tail'), cv = document.getElementById('js-tail-cv'), ref = document.querySelector('.wordmark--top');
+      if (!region || !cv || !ref) return;
+      const ctx = cv.getContext('2d');
+      const TXT = [244, 241, 236], ACC = [214, 255, 56], BG = [12, 12, 13];
+      const clamp = v => v < 0 ? 0 : v > 1 ? 1 : v, ease = v => v * v * (3 - 2 * v);
+      let cell = 3, W = 0, H = 0, img, buf, fill = [], edge = [], inkW = 0, inkH = 0, capX = 0, p = 0, t0 = performance.now(), raf = 0, visible = false;
+
       function build() {
-        box.innerHTML = ''; layers = [];
         const fs = parseFloat(getComputedStyle(ref).fontSize);
-        const cell = Math.max(3, Math.round(fs / 48));                 // one dither pixel, in CSS px
-        const inkH = Math.round(fs * (1 - .214 - .237));
-        const span = ref.querySelector('span'), inkW = span.getBoundingClientRect().width + .02 * fs;
-        const off = document.createElement('canvas'), o = off.getContext('2d', { willReadFrequently: true });
-        const f = fs / cell;                                            // font size at cell resolution
+        cell = Math.max(3, Math.round(fs / 48));
+        W = Math.ceil(innerWidth / cell); H = Math.ceil(innerHeight / cell);
+        cv.width = W; cv.height = H; img = ctx.createImageData(W, H); buf = img.data;
+        // The 404040 mask at cell resolution, sized to the DOM wordmark.
+        const span = ref.querySelector('span'), pxW = span.getBoundingClientRect().width + .02 * fs, pxH = fs * (1 - .214 - .237);
+        const f = fs / cell, off = document.createElement('canvas'), o = off.getContext('2d', { willReadFrequently: true });
         o.font = `400 ${f}px Porca`;
-        const track = -.06 * f;
-        const adv = [...TEXT].map(ch => o.measureText(ch).width + track);
-        const measured = adv.reduce((a, b) => a + b, 0) - track;
-        const cw = Math.round(inkW / cell), ch = Math.ceil(inkH / cell);
-        off.width = cw; off.height = ch;
-        // Match the DOM wordmark's width exactly, whatever canvas text metrics say.
-        o.scale((inkW / cell) / measured, 1);
-        o.font = `400 ${f}px Porca`; o.textBaseline = 'top'; o.fillStyle = '#fff';
-        let x = -.02 * f; [...TEXT].forEach((c, i) => { o.fillText(c, x, -.214 * f); x += adv[i]; });
-        const ink = o.getImageData(0, 0, cw, ch).data;
-        W = cw;
-        for (let i = 0; i < COPIES; i++) {
-          const cv = document.createElement('canvas'); cv.width = cw; cv.height = ch;
-          cv.style.width = cw * cell + 'px'; cv.style.height = ch * cell + 'px';
-          box.appendChild(cv);
-          // Erosion eases in: the first copies lose a few pixels, the last loses everything.
-          layers.push({ cv, ctx: cv.getContext('2d'), img: cv.getContext('2d').createImageData(cw, ch), ink, e: Math.pow((i + 1) / COPIES, 1.5) });
+        const track = -.06 * f, adv = [...'404040'].map(c => o.measureText(c).width + track), measured = adv.reduce((a, b) => a + b, 0) - track;
+        inkW = Math.round(pxW / cell); inkH = Math.ceil(pxH / cell);
+        off.width = inkW; off.height = inkH;
+        o.scale((pxW / cell) / measured, 1); o.font = `400 ${f}px Porca`; o.textBaseline = 'top'; o.fillStyle = '#fff';
+        let x = -.02 * f; [...'404040'].forEach((c, i) => { o.fillText(c, x, -.214 * f); x += adv[i]; });
+        const d = o.getImageData(0, 0, inkW, inkH).data, on = (x, y) => x >= 0 && y >= 0 && x < inkW && y < inkH && d[(y * inkW + x) * 4 + 3] > 128;
+        fill = []; edge = [];
+        for (let y = 0; y < inkH; y++) for (let x = 0; x < inkW; x++) if (on(x, y)) {
+          fill.push(x, y);
+          if (!on(x - 1, y) || !on(x + 1, y) || !on(x, y - 1) || !on(x, y + 1)) edge.push(x, y);
+        }
+        capX = Math.round((span.getBoundingClientRect().left + .02 * fs) / cell);  // ink starts at the gutter
+        if (capX + inkW > W) capX = Math.max(0, Math.round((W - inkW) / 2));
+      }
+
+      // Plot a slice: the mask scaled about its centre by s, shifted by (dx, dy), coloured by col*b, thinned by dither keep.
+      function plot(pts, dx, dy, s, col, b, keep) {
+        const cx = inkW / 2, cy = inkH / 2, r = col[0] * b + BG[0] * (1 - b), g = col[1] * b + BG[1] * (1 - b), bl = col[2] * b + BG[2] * (1 - b);
+        for (let i = 0; i < pts.length; i += 2) {
+          const x = Math.round(cx + (pts[i] - cx) * s + dx), y = Math.round(cy + (pts[i + 1] - cy) * s + dy);
+          if (x < 0 || y < 0 || x >= W || y >= H) continue;
+          if (keep < 1 && keep * 256 <= BAYER[(y & 7) * 8 + (x & 7)]) continue;
+          const k = (y * W + x) * 4; buf[k] = r; buf[k + 1] = g; buf[k + 2] = bl; buf[k + 3] = 255;
         }
       }
-      // Same idea as the site's dither: an ordered threshold, breathing a little. e = how much is gone.
-      function paint(t) {
-        layers.forEach((L, i) => {
-          const keep = 1 - L.e + (REDUCED ? 0 : .07 * Math.sin(t / 900 + i * 1.3));
-          const d = L.img.data, ink = L.ink, w = L.cv.width;
-          for (let p = 0, n = w * L.cv.height; p < n; p++) {
-            const k = p * 4, on = ink[k + 3] > 128 && keep * 256 > BAYER[((p / w | 0) & 7) * 8 + (p % w & 7)];
-            d[k] = 244; d[k + 1] = 241; d[k + 2] = 236; d[k + 3] = on ? 255 : 0;
-          }
-          L.ctx.putImageData(L.img, 0, 0);
-        });
+
+      function draw(now) {
+        const t = (now - t0) / 1000;
+        for (let i = 0, n = W * H * 4; i < n; i += 4) { buf[i] = BG[0]; buf[i + 1] = BG[1]; buf[i + 2] = BG[2]; buf[i + 3] = 255; }
+        const gutter = Math.round(20 / cell), safe = Math.round((parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--sab')) || 0) / cell);
+        const grow   = ease(clamp(p / .18));            // extrusion pulled out of the cap
+        const leave  = ease(clamp((p - .22) / .28));    // start cap recedes off the top
+        const arrive = ease(clamp((p - .68) / .32));    // end cap rises from below
+        const capY0 = gutter + Math.round(8 / cell);
+        const capY  = Math.round(capY0 - leave * (capY0 + inkH + 6));
+        const endY  = Math.round(H + 6 - arrive * (H + 6 - (H - gutter - safe - inkH + 1)));
+        const step  = Math.max(2, Math.round(9 / cell));
+        const depthMax = Math.round((H + inkH + 20) * 1.4 / step);
+        const K = Math.round(grow * depthMax);
+        const amp = (1.5 + 7 * ease(clamp((p - .1) / .5))) * (inkW / 120);
+        const vanish = W / 2 - (capX + inkW / 2);
+        // Far slices first so near ones paint over them.
+        for (let k = K; k >= 1; k--) {
+          const y = capY + k * step;
+          if (y + inkH < 0 || y > endY - 1) continue;
+          const d = k / depthMax;
+          const s = 1 - .55 * d;                                          // perspective: shrink with depth
+          const wob = amp * Math.sin(k * .21 - p * 22 + t * .5) + amp * .5 * Math.sin(k * .06 + p * 9 - t * .2);
+          const dx = capX + wob + vanish * d * .9;
+          const b = (1 - .78 * d) * (k % 6 === 0 ? 1 : .72);              // dim with depth; every 6th slice is a bright contour ring
+          // Fog: dither thins the far end, except the end lights up as the far cap arrives.
+          const fog = clamp(1.25 - d * 1.25), lit = arrive * clamp(1 - Math.abs(endY - y) / (H * .45));
+          const keep = Math.max(fog, lit);
+          plot(edge, dx, y, s, TXT, b, keep);
+        }
+        if (capY + inkH > 0) plot(fill, capX, capY, 1, TXT, 1, 1);
+        if (arrive > 0) plot(fill, capX, endY, 1, ACC, 1, arrive < .35 ? arrive / .35 : 1);
+        ctx.putImageData(img, 0, 0);
+        region.classList.toggle('is-end', arrive > .5);
       }
-      let visible = false, raf = 0, last = 0;
-      function tick(t) { raf = 0; if (!visible) return; if (t - last > 90) { paint(t); last = t; } raf = requestAnimationFrame(tick); }
-      new IntersectionObserver(es => { visible = es[0].isIntersecting; if (visible && !raf && !REDUCED) raf = requestAnimationFrame(tick); }).observe(box);
-      const start = () => { build(); paint(0); };
+
+      function progress() {
+        const r = region.getBoundingClientRect(), total = r.height - innerHeight;
+        p = total > 0 ? clamp(-r.top / total) : 1;
+        visible = r.bottom > 0 && r.top < innerHeight;
+      }
+      let last = 0;
+      function tick(now) { raf = 0; if (!visible) return; if (now - last > 40) { draw(now); last = now; } if (!REDUCED) raf = requestAnimationFrame(tick); }
+      function kick() { progress(); if (visible && !raf) raf = requestAnimationFrame(tick); }
+      addEventListener('scroll', kick, { passive: true });
+      let rw = 0; addEventListener('resize', () => { clearTimeout(rw); rw = setTimeout(() => { build(); kick(); if (REDUCED) draw(performance.now()); }, 150); });
+      cv.addEventListener('click', () => { if (region.classList.contains('is-end')) { if (BIRTHDAY) chiptune(cv); else scrollTo({ top: 0, behavior: REDUCED ? 'auto' : 'smooth' }); } });
+      const start = () => { build(); if (REDUCED) { p = .6; draw(performance.now()); } else kick(); };
       (document.fonts && document.fonts.load ? document.fonts.load('400 100px Porca') : Promise.resolve()).then(start, start);
-      let rw = 0; addEventListener('resize', () => { clearTimeout(rw); rw = setTimeout(start, 150); });
     })();
     document.addEventListener('click', e => {
       const wrap = e.target.closest('.entry__cover-wrap');

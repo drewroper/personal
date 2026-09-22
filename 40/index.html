@@ -562,8 +562,10 @@
         for (let y = 0, i = 0; y < H; y++) for (let x = 0; x < W; x++, i += 4) {
           let on = false;
           if (field > 0) {
+            // The field spreads out from the wordmark: nothing at its edge, full strength further down.
+            const fy = clamp((y - capY - inkH) / (H * .7));
             const v = .5 + .5 * Math.sin(x * .09 + t * .9) * Math.sin(y * .07 - t * .7) + .25 * Math.sin((x + y) * .05 + t * .5);
-            on = field * v * 256 > BAYER[(y & 7) * 8 + (x & 7)];
+            on = field * fy * v * 256 > BAYER[(y & 7) * 8 + (x & 7)];
           }
           const g = on ? .18 + .1 * take : 0;
           buf[i] = BG[0] + (TXT[0] - BG[0]) * g; buf[i + 1] = BG[1] + (TXT[1] - BG[1]) * g; buf[i + 2] = BG[2] + (TXT[2] - BG[2]) * g; buf[i + 3] = 255;
@@ -579,21 +581,23 @@
           const y = capY + k * step;
           if (y > bottom) continue;
           const d = clamp((y - capY) / span);
+          // Everything grows out of the wordmark: at the root the slice is the letters' own silhouette.
+          const g = ease(clamp(d / .35));
           const sc0 = 1 - .55 * d, big = 1.1 + 1.4 * (.5 + .5 * Math.sin(k * .035 + t * .45));
-          const sc = sc0 * (1 - take) + big * take;
-          const wob = amp * Math.sin(k * .21 + t * .5) + amp * .5 * Math.sin(k * .06 - t * .2);
-          const rot = twist * .55 * Math.sin(k * .05 + t * .3) + take * .9 * Math.sin(k * .02 + t * .25);
-          const sx = sc * (1 + twist * .4 * Math.sin(k * .09 + t * .7)), sy = sc;
+          const sc = sc0 + (big - sc0) * take * g;
+          const wob = (amp * Math.sin(k * .21 + t * .5) + amp * .5 * Math.sin(k * .06 - t * .2)) * g;
+          const rot = (twist * .55 * Math.sin(k * .05 + t * .3) + take * .9 * Math.sin(k * .02 + t * .25)) * g;
+          const sx = sc * (1 + twist * .4 * Math.sin(k * .09 + t * .7) * g), sy = sc;
           let b = (1 - .78 * d * (1 - take * .7)) * (k % ring === 0 ? 1 : .72);
-          const mix = tint * (.5 + .5 * Math.sin(k * .15 - t * 1.2));
+          const mix = tint * (.5 + .5 * Math.sin(k * .15 - t * 1.2)) * g;
           const col = [TXT[0] + (ACC[0] - TXT[0]) * mix, TXT[1] + (ACC[1] - TXT[1]) * mix, TXT[2] + (ACC[2] - TXT[2]) * mix];
           let keep = (clamp(1.25 - d * 1.25) * (1 - take) + take) * appear;
-          if (jit > 0 && hash(k + 3, Math.floor(t * 6)) < jit * .25) keep *= .35;
+          if (jit > 0 && hash(k + 3, Math.floor(t * 6)) < jit * .25 * g) keep *= .35;
           let dx = capX + inkW / 2 + wob + vanish * d * .9 * (1 - take);
-          if (jit > 0 && hash(k, Math.floor(t * 9)) < jit * .5) dx += (hash(k + 7, Math.floor(t * 9)) - .5) * 16 * jit;
+          if (jit > 0 && hash(k, Math.floor(t * 9)) < jit * .5 * g) dx += (hash(k + 7, Math.floor(t * 9)) - .5) * 16 * jit;
           slice(dx, y + inkH / 2, sx, sy, rot, col, b, keep);
-          if (split > 0) slice(W - dx + (dx - W / 2) * (1 - split), y + inkH / 2 + step / 2, -sx, sy, -rot, col, b * .8 * split, keep);
-          if (lanes > 1) for (let l = -1; l <= 1; l += 2) slice(dx + l * W * .55 * take, y + inkH / 2 + l * step, sx * .8, sy * .8, rot * -1, col, b * .7 * take, keep);
+          if (split > 0) { const mx = W - dx + (dx - W / 2) * (1 - split); slice(dx + (mx - dx) * g, y + inkH / 2 + step / 2 * g, -sx, sy, -rot, col, b * .8 * split * g, keep); }
+          if (lanes > 1) for (let l = -1; l <= 1; l += 2) slice(dx + l * W * .55 * take * g, y + inkH / 2 + l * step * g, sx * (1 - .2 * g), sy * (1 - .2 * g), rot * -1, col, b * .7 * take * g, keep);
         }
         ctx.putImageData(img, 0, 0);
       }

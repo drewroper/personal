@@ -9,14 +9,460 @@
   "albums": [
     {
       "no": 1,
+      "slug": "dave-matthews-band-crash",
+      "artist": "Dave Matthews Band",
+      "title": "Crash",
+      "discovered": "Placeholder — swap for the real line.",
+      "blurb": [
+        "Placeholder — this is where the story goes: when you found it, where you were, why it stuck.",
+        "Second paragraph to check the reading measure."
+      ],
+      "apple_id": 388136111,
+      "label": "RCA",
+      "links": {
+        "spotify": "https://open.spotify.com/album/3Z72KfamjH9Wc5m9mgVqI7"
+      },
+      "apple_url": "https://music.apple.com/us/album/crash/388136111",
+      "released": "1996-04-30",
+      "year": "1996",
+      "copyright": "℗ 1996 Sony Music Entertainment",
+      "genre": "Rock",
+      "track_count": 12,
+      "runtime_ms": 4130708,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "So Much to Say",
+          "ms": 246600
+        },
+        {
+          "n": 2,
+          "title": "Two Step",
+          "ms": 387267
+        },
+        {
+          "n": 3,
+          "title": "Crash Into Me",
+          "ms": 316467
+        },
+        {
+          "n": 4,
+          "title": "Too Much",
+          "ms": 261627
+        },
+        {
+          "n": 5,
+          "title": "#41",
+          "ms": 399800
+        },
+        {
+          "n": 6,
+          "title": "Say Goodbye",
+          "ms": 371040
+        },
+        {
+          "n": 7,
+          "title": "Drive In Drive Out",
+          "ms": 354600
+        },
+        {
+          "n": 8,
+          "title": "Let You Down",
+          "ms": 247400
+        },
+        {
+          "n": 9,
+          "title": "Lie In Our Graves",
+          "ms": 342040
+        },
+        {
+          "n": 10,
+          "title": "Cry Freedom",
+          "ms": 352667
+        },
+        {
+          "n": 11,
+          "title": "Tripping Billies",
+          "ms": 300440
+        },
+        {
+          "n": 12,
+          "title": "Proudest Monkey",
+          "ms": 550760
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/1d/4f/38/1d4f38dd-e5ee-a14e-13a2-df60d4e3b431/884977724707.jpg/1800x1800bb.jpg",
+      "art": "assets/40/dave-matthews-band-crash.jpg",
+      "art_back": "assets/40/dave-matthews-band-crash-back.jpg",
+      "art_back_src": "http://coverartarchive.org/release/c4335abe-ac67-44c6-87f5-b452d62b07d9/20335839949.jpg",
+      "date": "2026-09-23",
+      "wear": {
+        "level": "med"
+      },
+      "art_worn": "assets/40/worn/dave-matthews-band-crash.jpg",
+      "art_back_worn": "assets/40/worn/dave-matthews-band-crash-back.jpg"
+    },
+    {
+      "no": 2,
+      "slug": "third-eye-blind-third-eye-blind",
+      "artist": "Third Eye Blind",
+      "title": "Third Eye Blind",
+      "discovered": "Placeholder — swap for the real line.",
+      "blurb": [
+        "Placeholder blurb for Third Eye Blind. When you found it, where you were, why it stuck."
+      ],
+      "apple_id": 271978738,
+      "apple_url": "https://music.apple.com/us/album/third-eye-blind/271978738",
+      "released": "1997-04-08",
+      "year": "1997",
+      "copyright": "℗ 1997 Elektra Entertainment, manufactured and marketed by Rhino Entertainment Company, a Warner Music Group Company",
+      "genre": "Alternative",
+      "track_count": 14,
+      "runtime_ms": 3453439,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Losing a Whole Year",
+          "ms": 200640
+        },
+        {
+          "n": 2,
+          "title": "Narcolepsy",
+          "ms": 228453
+        },
+        {
+          "n": 3,
+          "title": "Semi-Charmed Life",
+          "ms": 268360
+        },
+        {
+          "n": 4,
+          "title": "Jumper",
+          "ms": 272973
+        },
+        {
+          "n": 5,
+          "title": "Graduate",
+          "ms": 187667
+        },
+        {
+          "n": 6,
+          "title": "How's It Going to Be",
+          "ms": 253413
+        },
+        {
+          "n": 7,
+          "title": "Thanks a Lot",
+          "ms": 297627
+        },
+        {
+          "n": 8,
+          "title": "Burning Man",
+          "ms": 179733
+        },
+        {
+          "n": 9,
+          "title": "Good for You",
+          "ms": 232000
+        },
+        {
+          "n": 10,
+          "title": "London",
+          "ms": 187000
+        },
+        {
+          "n": 11,
+          "title": "I Want You",
+          "ms": 269013
+        },
+        {
+          "n": 12,
+          "title": "The Background",
+          "ms": 296733
+        },
+        {
+          "n": 13,
+          "title": "Motorcycle Drive By",
+          "ms": 262627
+        },
+        {
+          "n": 14,
+          "title": "God of Wine",
+          "ms": 317200
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/89/8f/21/898f2118-a3e1-2b4a-7481-d986d09ffc29/mzi.jbqxjhwg.jpg/1800x1800bb.jpg",
+      "label": "Elektra Entertainment, manufactured and",
+      "art": "assets/40/third-eye-blind-third-eye-blind.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/2gToC0XAblE9h3UZD6aAaQ"
+      },
+      "art_back": "assets/40/third-eye-blind-third-eye-blind-back.jpg",
+      "art_back_src": "http://coverartarchive.org/release/bf333fb1-a5c4-413a-a663-43b0c603eab5/26861645942.jpg",
+      "date": "2026-09-24",
+      "wear": {
+        "level": "med"
+      },
+      "art_worn": "assets/40/worn/third-eye-blind-third-eye-blind.jpg",
+      "art_back_worn": "assets/40/worn/third-eye-blind-third-eye-blind-back.jpg"
+    },
+    {
+      "no": 3,
+      "slug": "oasis-what-s-the-story-morning-glory",
+      "artist": "Oasis",
+      "title": "(What's the Story) Morning Glory?",
+      "discovered": "Placeholder — swap for the real line.",
+      "blurb": [
+        "Placeholder blurb for (What's the Story) Morning Glory?. When you found it, where you were, why it stuck."
+      ],
+      "apple_id": 1517447039,
+      "apple_url": "https://music.apple.com/us/album/whats-the-story-morning-glory/1517447039",
+      "released": "1995-10-02",
+      "year": "1995",
+      "copyright": "℗ 1995 Big Brother Recordings Ltd",
+      "genre": "Indie Rock",
+      "track_count": 12,
+      "runtime_ms": 3013335,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Hello",
+          "ms": 203187
+        },
+        {
+          "n": 2,
+          "title": "Roll with It",
+          "ms": 239827
+        },
+        {
+          "n": 3,
+          "title": "Wonderwall",
+          "ms": 258907
+        },
+        {
+          "n": 4,
+          "title": "Don't Look Back in Anger",
+          "ms": 287827
+        },
+        {
+          "n": 5,
+          "title": "Hey Now!",
+          "ms": 341907
+        },
+        {
+          "n": 6,
+          "title": "The Swamp Song (Version 1)",
+          "ms": 44627
+        },
+        {
+          "n": 7,
+          "title": "Some Might Say",
+          "ms": 327920
+        },
+        {
+          "n": 8,
+          "title": "Cast No Shadow",
+          "ms": 294813
+        },
+        {
+          "n": 9,
+          "title": "She's Electric",
+          "ms": 220920
+        },
+        {
+          "n": 10,
+          "title": "Morning Glory",
+          "ms": 303533
+        },
+        {
+          "n": 11,
+          "title": "The Swamp Song (Version 2)",
+          "ms": 39360
+        },
+        {
+          "n": 12,
+          "title": "Champagne Supernova",
+          "ms": 450507
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/04/92/e0/0492e08b-cbcc-9969-9ad6-8f5a0888068c/5051961007107.jpg/1800x1800bb.jpg",
+      "label": "Big Brother Recordings Ltd",
+      "art": "assets/40/oasis-what-s-the-story-morning-glory.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/7EW77iyGMou046Z44pOrIk"
+      },
+      "art_back": "assets/40/oasis-what-s-the-story-morning-glory-back.jpg",
+      "art_back_src": "http://coverartarchive.org/release/f29584cc-8f94-4035-8a63-d4369f201e2a/38266290259.jpg",
+      "date": "2026-09-25",
+      "wear": {
+        "level": "med"
+      },
+      "art_worn": "assets/40/worn/oasis-what-s-the-story-morning-glory.jpg",
+      "art_back_worn": "assets/40/worn/oasis-what-s-the-story-morning-glory-back.jpg"
+    },
+    {
+      "no": 4,
+      "slug": "outkast-stankonia",
+      "artist": "OutKast",
+      "title": "Stankonia",
+      "discovered": "Placeholder — swap for the real line.",
+      "blurb": [
+        "Placeholder blurb for Stankonia. When you found it, where you were, why it stuck."
+      ],
+      "links": {
+        "spotify": "https://open.spotify.com/album/2tm3Ht61kqqRZtIYsBjxEj"
+      },
+      "apple_id": 255836651,
+      "apple_url": "https://music.apple.com/us/album/stankonia/255836651",
+      "released": "2000-10-31",
+      "year": "2000",
+      "copyright": "℗ 2000 Arista Records LLC",
+      "genre": "Hip-Hop/Rap",
+      "track_count": 24,
+      "runtime_ms": 4397923,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Intro",
+          "ms": 69720
+        },
+        {
+          "n": 2,
+          "title": "Gasoline Dreams (with Khujo Goodie)",
+          "ms": 214707
+        },
+        {
+          "n": 3,
+          "title": "I'm Cool (Interlude)",
+          "ms": 42040
+        },
+        {
+          "n": 4,
+          "title": "So Fresh, So Clean",
+          "ms": 240027
+        },
+        {
+          "n": 5,
+          "title": "Ms. Jackson",
+          "ms": 270507
+        },
+        {
+          "n": 6,
+          "title": "Snappin' & Trappin' (with Killer Mike & J-Sweet)",
+          "ms": 259693
+        },
+        {
+          "n": 7,
+          "title": "D.F. (Interlude)",
+          "ms": 27240
+        },
+        {
+          "n": 8,
+          "title": "Spaghetti Junction",
+          "ms": 237160
+        },
+        {
+          "n": 9,
+          "title": "Kim & Cookie (Interlude)",
+          "ms": 72533
+        },
+        {
+          "n": 10,
+          "title": "I'll Call B4 I Cum (with Gangsta Boo & Eco)",
+          "ms": 258440
+        },
+        {
+          "n": 11,
+          "title": "B.O.B. (Bombs Over Baghdad)",
+          "ms": 304227
+        },
+        {
+          "n": 12,
+          "title": "Xplosion (with B-Real)",
+          "ms": 248840
+        },
+        {
+          "n": 13,
+          "title": "Good Hair (Interlude)",
+          "ms": 14960
+        },
+        {
+          "n": 14,
+          "title": "We Luv Deez Hoez (feat. Backbone & Big Gipp)",
+          "ms": 250467
+        },
+        {
+          "n": 15,
+          "title": "Humble Mumble (with Erykah Badu)",
+          "ms": 290667
+        },
+        {
+          "n": 16,
+          "title": "Drinkin' Again (Interlude)",
+          "ms": 24507
+        },
+        {
+          "n": 17,
+          "title": "?",
+          "ms": 88627
+        },
+        {
+          "n": 18,
+          "title": "Red Velvet",
+          "ms": 232640
+        },
+        {
+          "n": 19,
+          "title": "Cruisin' In the ATL (Interlude)",
+          "ms": 19293
+        },
+        {
+          "n": 20,
+          "title": "Gangsta Sh*t (feat. Slimm Calhoun, C-BONE & T-Mo)",
+          "ms": 281267
+        },
+        {
+          "n": 21,
+          "title": "Toilet Tisha",
+          "ms": 264707
+        },
+        {
+          "n": 22,
+          "title": "Slum Beautiful (feat. Cee-Lo)",
+          "ms": 247560
+        },
+        {
+          "n": 23,
+          "title": "Pre-Nump (Interlude)",
+          "ms": 27067
+        },
+        {
+          "n": 24,
+          "title": "Stankonia (Stanklove) [feat. Big Rube & Sleepy Brown]",
+          "ms": 411027
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/e0/4c/f4/e04cf460-46a5-992a-87c7-2c1aef7e3a46/730082607223.jpg/1800x1800bb.jpg",
+      "label": "Arista",
+      "art": "assets/40/outkast-stankonia.jpg",
+      "art_back": "assets/40/outkast-stankonia-back.jpg",
+      "art_back_src": "http://coverartarchive.org/release/951d7ae5-965b-3277-923d-f2da57fcd969/8976394266.jpg",
+      "date": "2026-09-26",
+      "wear": {
+        "level": "med"
+      },
+      "art_worn": "assets/40/worn/outkast-stankonia.jpg",
+      "art_back_worn": "assets/40/worn/outkast-stankonia-back.jpg"
+    },
+    {
+      "no": 5,
       "slug": "weezer-green-album",
       "artist": "Weezer",
       "title": "Weezer (The Green Album)",
       "apple_id": 1440868131,
       "discovered": "Placeholder — swap for the real line.",
       "blurb": [
-        "Summer 2001. Placeholder — this is where the story goes: when you found it, where you were, why it stuck.",
-        "Second paragraph to check the reading measure."
+        "Placeholder blurb for Weezer (The Green Album). When you found it, where you were, why it stuck."
       ],
       "apple_url": "https://music.apple.com/us/album/weezer-green-album/1440868131",
       "released": "2001-05-15",
@@ -83,8 +529,9 @@
       "links": {
         "spotify": "https://open.spotify.com/album/2hDiTEsKePTnDcvKEuLizk"
       },
-      "date": "2026-09-23",
       "art_back": "assets/40/weezer-green-album-back.jpg",
+      "art_back_src": "http://coverartarchive.org/release/7a9a2617-28a7-4afd-9993-1b6a40cf6f25/32712601799.jpg",
+      "date": "2026-09-27",
       "wear": {
         "level": "med"
       },
@@ -92,105 +539,389 @@
       "art_back_worn": "assets/40/worn/weezer-green-album-back.jpg"
     },
     {
-      "no": 2,
-      "slug": "finch-what-it-is-to-burn",
-      "artist": "Finch",
-      "title": "What It Is to Burn",
+      "no": 6,
+      "slug": "blink-182-take-off-your-pants-and-jacket",
+      "artist": "blink-182",
+      "title": "Take Off Your Pants and Jacket",
       "discovered": "Placeholder — swap for the real line.",
       "blurb": [
-        "Placeholder blurb for What It Is to Burn. When you found it, where you were, why it stuck."
+        "Placeholder blurb for Take Off Your Pants and Jacket. When you found it, where you were, why it stuck."
       ],
-      "apple_id": 1440743253,
-      "apple_url": "https://music.apple.com/us/album/what-it-is-to-burn/1440743253",
-      "released": "2002-01-01",
-      "year": "2002",
-      "copyright": "℗ 2002 Geffen Records",
-      "genre": "Alternative",
+      "apple_id": 1443271610,
+      "apple_url": "https://music.apple.com/us/album/take-off-your-pants-and-jacket/1443271610",
+      "released": "2001-06-12",
+      "year": "2001",
+      "copyright": "℗ 2016 Geffen Records",
+      "genre": "Rock",
       "track_count": 13,
-      "runtime_ms": 3670427,
+      "runtime_ms": 2339231,
       "tracks": [
         {
           "n": 1,
-          "title": "New Beginnings",
-          "ms": 241667
+          "title": "Anthem, Pt. 2",
+          "ms": 227595
         },
         {
           "n": 2,
-          "title": "Letters to You",
-          "ms": 199600
+          "title": "Online Songs",
+          "ms": 144799
         },
         {
           "n": 3,
-          "title": "Post Script",
-          "ms": 169760
+          "title": "First Date",
+          "ms": 169804
         },
         {
           "n": 4,
-          "title": "Grey Matter",
-          "ms": 159907
+          "title": "Happy Holidays",
+          "ms": 41964
         },
         {
           "n": 5,
-          "title": "Perfection Through Silence",
-          "ms": 189093
+          "title": "Story of a Lonely Guy",
+          "ms": 219869
         },
         {
           "n": 6,
-          "title": "Awake",
-          "ms": 288507
+          "title": "The Rock Show",
+          "ms": 171205
         },
         {
           "n": 7,
-          "title": "Without You Here",
-          "ms": 250533
+          "title": "Stay Together for the Kids",
+          "ms": 239376
         },
         {
           "n": 8,
-          "title": "Stay With Me",
-          "ms": 242933
+          "title": "Roller Coaster",
+          "ms": 167926
         },
         {
           "n": 9,
-          "title": "Project Mayhem",
-          "ms": 319147
+          "title": "Reckless Abandon",
+          "ms": 186122
         },
         {
           "n": 10,
-          "title": "Untitled",
-          "ms": 253480
+          "title": "Every Time I Look for You",
+          "ms": 185032
         },
         {
           "n": 11,
-          "title": "Three Simple Words",
-          "ms": 278733
+          "title": "Give Me One Good Reason",
+          "ms": 198837
         },
         {
           "n": 12,
-          "title": "Ender",
-          "ms": 808040
+          "title": "Shut Up",
+          "ms": 200262
         },
         {
           "n": 13,
-          "title": "What It Is to Burn (New Version)",
-          "ms": 269027
+          "title": "Please Take Me Home",
+          "ms": 186440
         }
       ],
-      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/42/14/a1/4214a191-3dce-85ab-ae8e-6ad7596c4df3/00042286099125.rgb.jpg/1800x1800bb.jpg",
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/ed/b7/8b/edb78b6a-db5a-2eb3-ea51-61bfefb9c031/16UMGIM35661.rgb.jpg/1800x1800bb.jpg",
       "label": "Geffen Records",
-      "art": "assets/40/finch-what-it-is-to-burn.jpg",
+      "art": "assets/40/blink-182-take-off-your-pants-and-jacket.jpg",
       "links": {
-        "spotify": "https://open.spotify.com/album/28DROCResQvsdO6Hjmb32x"
+        "spotify": "https://open.spotify.com/album/3nHpBmW5wJXGeC3ojBkpey"
       },
-      "date": "2026-09-24",
-      "art_back": "assets/40/finch-what-it-is-to-burn-back.jpg",
+      "art_back": "assets/40/blink-182-take-off-your-pants-and-jacket-back.jpg",
+      "art_back_src": "https://coverartarchive.org/release/dce5628d-fc2f-4703-9e58-7b266df478c3/36600754811.jpg",
+      "date": "2026-09-28",
       "wear": {
         "level": "med"
       },
-      "art_worn": "assets/40/worn/finch-what-it-is-to-burn.jpg",
-      "art_back_worn": "assets/40/worn/finch-what-it-is-to-burn-back.jpg"
+      "art_worn": "assets/40/worn/blink-182-take-off-your-pants-and-jacket.jpg",
+      "art_back_worn": "assets/40/worn/blink-182-take-off-your-pants-and-jacket-back.jpg"
     },
     {
-      "no": 3,
+      "no": 7,
+      "slug": "girl-talk-feed-the-animals",
+      "artist": "Girl Talk",
+      "title": "Feed the Animals",
+      "discovered": "Placeholder — swap for the real line.",
+      "blurb": [
+        "Placeholder blurb for Feed the Animals. When you found it, where you were, why it stuck."
+      ],
+      "apple_id": 0,
+      "links": {
+        "spotify": "https://open.spotify.com/album/1B5Lwt0D1ZetRreaCBYobP"
+      },
+      "year": "2008",
+      "released": "2008-06-19",
+      "label": "Illegal Art",
+      "genre": "Mashup",
+      "art": "assets/40/girl-talk-feed-the-animals.jpg",
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Play Your Part (Pt. 1)",
+          "ms": 284000
+        },
+        {
+          "n": 2,
+          "title": "Shut The Club Down",
+          "ms": 186000
+        },
+        {
+          "n": 3,
+          "title": "Still Here",
+          "ms": 237000
+        },
+        {
+          "n": 4,
+          "title": "What It's All About",
+          "ms": 254000
+        },
+        {
+          "n": 5,
+          "title": "Set It Off",
+          "ms": 221000
+        },
+        {
+          "n": 6,
+          "title": "No Pause",
+          "ms": 192000
+        },
+        {
+          "n": 7,
+          "title": "Like This",
+          "ms": 201000
+        },
+        {
+          "n": 8,
+          "title": "Give Me A Beat",
+          "ms": 252000
+        },
+        {
+          "n": 9,
+          "title": "Hands In The Air",
+          "ms": 260000
+        },
+        {
+          "n": 10,
+          "title": "In Step",
+          "ms": 203000
+        },
+        {
+          "n": 11,
+          "title": "Let Me See You",
+          "ms": 243000
+        },
+        {
+          "n": 12,
+          "title": "Here's The Thing",
+          "ms": 285000
+        },
+        {
+          "n": 13,
+          "title": "Don't Stop",
+          "ms": 178000
+        },
+        {
+          "n": 14,
+          "title": "Play Your Part (Pt. 2)",
+          "ms": 205000
+        }
+      ],
+      "track_count": 14,
+      "runtime_ms": 3201000,
+      "date": "2026-09-29",
+      "wear": {
+        "level": "med"
+      },
+      "art_worn": "assets/40/worn/girl-talk-feed-the-animals.jpg"
+    },
+    {
+      "no": 8,
+      "slug": "animal-collective-merriweather-post-pavilion",
+      "artist": "Animal Collective",
+      "title": "Merriweather Post Pavilion",
+      "discovered": "Placeholder — swap for the real line.",
+      "blurb": [
+        "Placeholder blurb for Merriweather Post Pavilion. When you found it, where you were, why it stuck."
+      ],
+      "apple_id": 300683110,
+      "apple_url": "https://music.apple.com/us/album/merriweather-post-pavilion/300683110",
+      "released": "2009-01-06",
+      "year": "2009",
+      "copyright": "℗ 2009 Domino Recording Co Ltd",
+      "genre": "Alternative",
+      "track_count": 12,
+      "runtime_ms": 3612201,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "In the Flowers",
+          "ms": 322027
+        },
+        {
+          "n": 2,
+          "title": "My Girls",
+          "ms": 340787
+        },
+        {
+          "n": 3,
+          "title": "Also Frightened",
+          "ms": 314067
+        },
+        {
+          "n": 4,
+          "title": "Summertime Clothes",
+          "ms": 270120
+        },
+        {
+          "n": 5,
+          "title": "Daily Routine",
+          "ms": 346040
+        },
+        {
+          "n": 6,
+          "title": "Bluish",
+          "ms": 313560
+        },
+        {
+          "n": 7,
+          "title": "Guys Eyes",
+          "ms": 270653
+        },
+        {
+          "n": 8,
+          "title": "Taste",
+          "ms": 233453
+        },
+        {
+          "n": 9,
+          "title": "Lion in a Coma",
+          "ms": 252227
+        },
+        {
+          "n": 10,
+          "title": "No More Runnin",
+          "ms": 263333
+        },
+        {
+          "n": 11,
+          "title": "Brother Sport",
+          "ms": 359027
+        },
+        {
+          "n": 12,
+          "title": "Summertime Clothes (Live)",
+          "ms": 326907
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/64/79/67/64796709-9482-2221-b1b7-64cdbe1b99f2/dj.fuppzyzi.jpg/1800x1800bb.jpg",
+      "label": "Domino Recording Co Ltd",
+      "art": "assets/40/animal-collective-merriweather-post-pavilion.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/5O9OXl9zAWMJTzawofxuan"
+      },
+      "date": "2026-09-30",
+      "wear": {
+        "level": "med"
+      },
+      "art_worn": "assets/40/worn/animal-collective-merriweather-post-pavilion.jpg"
+    },
+    {
+      "no": 9,
+      "slug": "run-the-jewels-run-the-jewels-2",
+      "artist": "Run the Jewels",
+      "title": "Run the Jewels 2",
+      "discovered": "Placeholder — swap for the real line.",
+      "blurb": [
+        "Placeholder blurb for Run the Jewels 2. When you found it, where you were, why it stuck."
+      ],
+      "apple_id": 1862913140,
+      "links": {
+        "spotify": "https://open.spotify.com/album/2lPYlP4eumsjz6LBG8GCbG"
+      },
+      "apple_url": "https://music.apple.com/us/album/run-the-jewels-2/1862913140",
+      "released": "2014-10-27",
+      "year": "2014",
+      "copyright": "℗ 2014 Seeker Music",
+      "genre": "Hip-Hop",
+      "track_count": 12,
+      "runtime_ms": 2501471,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Jeopardy",
+          "ms": 201987
+        },
+        {
+          "n": 2,
+          "title": "Oh My Darling Don't Cry",
+          "ms": 204840
+        },
+        {
+          "n": 3,
+          "title": "Blockbuster Night Pt. 1",
+          "ms": 152253
+        },
+        {
+          "n": 4,
+          "title": "Close Your Eyes (And Count to F**k) [feat. Zack de la Rocha]",
+          "ms": 234160
+        },
+        {
+          "n": 5,
+          "title": "All My Life",
+          "ms": 187973
+        },
+        {
+          "n": 6,
+          "title": "Lie, Cheat, Steal",
+          "ms": 208467
+        },
+        {
+          "n": 7,
+          "title": "Early (feat. Boots)",
+          "ms": 224067
+        },
+        {
+          "n": 8,
+          "title": "All Due Respect (feat. Travis Barker)",
+          "ms": 167840
+        },
+        {
+          "n": 9,
+          "title": "Love Again (Akinyele Back) [feat. Gangsta Boo]",
+          "ms": 225093
+        },
+        {
+          "n": 10,
+          "title": "Crown (feat. Diane Coffee)",
+          "ms": 225720
+        },
+        {
+          "n": 11,
+          "title": "Angel Duster",
+          "ms": 309840
+        },
+        {
+          "n": 12,
+          "title": "Blockbuster Night Pt. 2 (feat. Despot & Wiki)",
+          "ms": 159231
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/d7/32/29/d73229cf-9692-0a67-9821-1f84ed7f3b1b/198704917011_Cover.jpg/1800x1800bb.jpg",
+      "label": "Seeker Music",
+      "art": "assets/40/run-the-jewels-run-the-jewels-2.jpg",
+      "art_back": "assets/40/run-the-jewels-run-the-jewels-2-back.jpg",
+      "art_back_src": "http://coverartarchive.org/release/063f311e-9c81-4616-a007-b76e3df910c9/26628543683.jpg",
+      "date": "2026-10-01",
+      "wear": {
+        "level": "med"
+      },
+      "art_worn": "assets/40/worn/run-the-jewels-run-the-jewels-2.jpg",
+      "art_back_worn": "assets/40/worn/run-the-jewels-run-the-jewels-2-back.jpg"
+    },
+    {
+      "no": 10,
       "slug": "turnstile-glow-on",
       "artist": "Turnstile",
       "title": "Glow On",
@@ -289,8 +1020,9 @@
       "links": {
         "spotify": "https://open.spotify.com/album/2NrYPcMmQBlbBxopc2XlzS"
       },
-      "date": "2026-09-25",
       "art_back": "assets/40/turnstile-glow-on-back.jpg",
+      "art_back_src": "http://coverartarchive.org/release/c86758fc-5447-461d-942d-a9300e4bc51f/37155210486.jpg",
+      "date": "2026-10-02",
       "wear": {
         "level": "med"
       },
@@ -298,502 +1030,91 @@
       "art_back_worn": "assets/40/worn/turnstile-glow-on-back.jpg"
     },
     {
-      "no": 4,
-      "slug": "nelly-country-grammar",
-      "artist": "Nelly",
-      "title": "Country Grammar",
+      "no": 11,
+      "slug": "youth-lagoon-the-year-of-hibernation",
+      "artist": "Youth Lagoon",
+      "title": "The Year of Hibernation",
       "discovered": "Placeholder — swap for the real line.",
       "blurb": [
-        "Placeholder blurb for Country Grammar. When you found it, where you were, why it stuck."
+        "Placeholder blurb for The Year of Hibernation. When you found it, where you were, why it stuck."
       ],
-      "apple_id": 1440782396,
-      "apple_url": "https://music.apple.com/us/album/country-grammar/1440782396",
-      "released": "2000-06-27",
-      "year": "2000",
-      "copyright": "℗ 2000 Universal Records, a Division of UMG Recordings, Inc.",
-      "genre": "Hip-Hop/Rap",
-      "track_count": 17,
-      "runtime_ms": 4000959,
-      "tracks": [
-        {
-          "n": 1,
-          "title": "Intro (feat. Cedric the Entertainer)",
-          "ms": 81293
-        },
-        {
-          "n": 2,
-          "title": "St. Louie",
-          "ms": 267573
-        },
-        {
-          "n": 3,
-          "title": "Greed, Hate, Envy",
-          "ms": 255093
-        },
-        {
-          "n": 4,
-          "title": "Country Grammar (Hot...)",
-          "ms": 286933
-        },
-        {
-          "n": 5,
-          "title": "Steal The Show (feat. St. Lunatics)",
-          "ms": 328000
-        },
-        {
-          "n": 6,
-          "title": "Interlude (feat. Cedric the Entertainer)",
-          "ms": 34373
-        },
-        {
-          "n": 7,
-          "title": "Ride Wit Me (feat. City Spud)",
-          "ms": 290133
-        },
-        {
-          "n": 8,
-          "title": "E.I.",
-          "ms": 284493
-        },
-        {
-          "n": 9,
-          "title": "Thicky Thick Girl",
-          "ms": 274267
-        },
-        {
-          "n": 10,
-          "title": "For My (feat. Lil Wayne)",
-          "ms": 248600
-        },
-        {
-          "n": 11,
-          "title": "Utha Side",
-          "ms": 273307
-        },
-        {
-          "n": 12,
-          "title": "Tho Dem Wrappas",
-          "ms": 248400
-        },
-        {
-          "n": 13,
-          "title": "Wrap Sumden",
-          "ms": 255627
-        },
-        {
-          "n": 14,
-          "title": "Batter Up (feat. Murphy Lee & Ali)",
-          "ms": 327800
-        },
-        {
-          "n": 15,
-          "title": "Never Let 'Em C U Sweat",
-          "ms": 254107
-        },
-        {
-          "n": 16,
-          "title": "Luven Me",
-          "ms": 247000
-        },
-        {
-          "n": 17,
-          "title": "Outro (feat. Cedric the Entertainer)",
-          "ms": 43960
-        }
-      ],
-      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/86/ea/41/86ea41d4-5d1f-b342-da08-dd43294d8fad/06UMGIM14203.rgb.jpg/1800x1800bb.jpg",
-      "label": "Universal Records, a Division of UMG Recordings, Inc",
-      "art": "assets/40/nelly-country-grammar.jpg",
-      "links": {
-        "spotify": "https://open.spotify.com/album/3Ej2Ae8nxp06thEoPhyaLJ"
-      },
-      "date": "2026-09-26",
-      "art_back": "assets/40/nelly-country-grammar-back.jpg",
-      "wear": {
-        "level": "med"
-      },
-      "art_worn": "assets/40/worn/nelly-country-grammar.jpg",
-      "art_back_worn": "assets/40/worn/nelly-country-grammar-back.jpg"
-    },
-    {
-      "no": 5,
-      "slug": "outkast-aquemini",
-      "artist": "OutKast",
-      "title": "Aquemini",
-      "discovered": "Placeholder — swap for the real line.",
-      "blurb": [
-        "Placeholder blurb for Aquemini. When you found it, where you were, why it stuck."
-      ],
-      "apple_id": 1536669507,
-      "apple_url": "https://music.apple.com/us/album/aquemini/1536669507",
-      "released": "1998-09-29",
-      "year": "1998",
-      "copyright": "℗ 1998 Arista Records LLC",
-      "genre": "Hip-Hop/Rap",
-      "track_count": 15,
-      "runtime_ms": 3753134,
-      "tracks": [
-        {
-          "n": 1,
-          "title": "Hold On, Be Strong",
-          "ms": 72187
-        },
-        {
-          "n": 2,
-          "title": "Return Of The \"G\"",
-          "ms": 219573
-        },
-        {
-          "n": 3,
-          "title": "Rosa Parks (Radio Version)",
-          "ms": 247267
-        },
-        {
-          "n": 4,
-          "title": "Skew It on the Bar-B (feat. Raekwon)",
-          "ms": 199373
-        },
-        {
-          "n": 5,
-          "title": "Aquemini",
-          "ms": 293533
-        },
-        {
-          "n": 6,
-          "title": "Synthesizer (feat. George Clinton)",
-          "ms": 268893
-        },
-        {
-          "n": 7,
-          "title": "Slump",
-          "ms": 287000
-        },
-        {
-          "n": 8,
-          "title": "West Savannah",
-          "ms": 209800
-        },
-        {
-          "n": 9,
-          "title": "Da Art of Storytellin' (Pt. 1)",
-          "ms": 203640
-        },
-        {
-          "n": 10,
-          "title": "Da Art of Storytellin' (Pt. 2)",
-          "ms": 172267
-        },
-        {
-          "n": 11,
-          "title": "Mamacita",
-          "ms": 336867
-        },
-        {
-          "n": 12,
-          "title": "SpottieOttieDopaliscious",
-          "ms": 358960
-        },
-        {
-          "n": 13,
-          "title": "Y'All Scared (feat. T-Mo, Big Gipp & Khujo)",
-          "ms": 260640
-        },
-        {
-          "n": 14,
-          "title": "Liberation (with Cee-Lo)",
-          "ms": 302227
-        },
-        {
-          "n": 15,
-          "title": "Chonkyfire",
-          "ms": 320907
-        }
-      ],
-      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/0e/48/dd/0e48dd9a-07c9-46de-a838-b4ddb4e508a7/886448814191.jpg/1800x1800bb.jpg",
-      "label": "Arista Records LLC",
-      "art": "assets/40/outkast-aquemini.jpg",
-      "links": {
-        "spotify": "https://open.spotify.com/album/5ceB3rxgXqIRpsOvVzTG28"
-      },
-      "date": "2026-09-27",
-      "art_back": "assets/40/outkast-aquemini-back.jpg",
-      "wear": {
-        "level": "med"
-      },
-      "art_worn": "assets/40/worn/outkast-aquemini.jpg",
-      "art_back_worn": "assets/40/worn/outkast-aquemini-back.jpg"
-    },
-    {
-      "no": 6,
-      "slug": "portugal-the-man-the-satanic-satanist",
-      "artist": "Portugal. The Man",
-      "title": "The Satanic Satanist",
-      "discovered": "Placeholder — swap for the real line.",
-      "blurb": [
-        "Placeholder blurb for The Satanic Satanist. When you found it, where you were, why it stuck."
-      ],
-      "apple_id": 1537511193,
-      "apple_url": "https://music.apple.com/us/album/the-satanic-satanist/1537511193",
-      "released": "2009-07-21",
-      "year": "2009",
-      "copyright": "℗ 2009 Approaching AIRballoons",
+      "apple_id": 1185722235,
+      "apple_url": "https://music.apple.com/us/album/the-year-of-hibernation/1185722235",
+      "released": "2011-01-01",
+      "year": "2011",
+      "copyright": "℗ 2011 Fat Possum Records",
       "genre": "Alternative",
-      "track_count": 11,
-      "runtime_ms": 2084428,
+      "track_count": 10,
+      "runtime_ms": 2535027,
       "tracks": [
         {
           "n": 1,
-          "title": "People Say",
-          "ms": 179360
+          "title": "Posters",
+          "ms": 231560
         },
         {
           "n": 2,
-          "title": "Work All Day",
-          "ms": 178947
+          "title": "Cannons",
+          "ms": 224773
         },
         {
           "n": 3,
-          "title": "Lovers In Love",
-          "ms": 193960
+          "title": "Afternoon",
+          "ms": 250067
         },
         {
           "n": 4,
-          "title": "The Sun",
-          "ms": 181667
+          "title": "17",
+          "ms": 236000
         },
         {
           "n": 5,
-          "title": "The Home",
-          "ms": 176840
+          "title": "July",
+          "ms": 286267
         },
         {
           "n": 6,
-          "title": "The Woods",
-          "ms": 191947
+          "title": "Daydream",
+          "ms": 319627
         },
         {
           "n": 7,
-          "title": "Guns and Dogs",
-          "ms": 164520
+          "title": "Montana",
+          "ms": 274773
         },
         {
           "n": 8,
-          "title": "Do You",
-          "ms": 174933
+          "title": "The Hunt",
+          "ms": 265800
         },
         {
           "n": 9,
-          "title": "Everyone Is Golden",
-          "ms": 225867
+          "title": "Bobby (Bonus Track)",
+          "ms": 202267
         },
         {
           "n": 10,
-          "title": "Let You Down",
-          "ms": 137307
-        },
-        {
-          "n": 11,
-          "title": "Mornings",
-          "ms": 279080
+          "title": "Ghost to Me (Bonus Track)",
+          "ms": 243893
         }
       ],
-      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/8e/38/27/8e3827fb-ef98-d3fb-54e5-4269f7c27066/cover.jpg/1800x1800bb.jpg",
-      "label": "Approaching AIRballoons",
-      "art": "assets/40/portugal-the-man-the-satanic-satanist.jpg",
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/84/22/2d/84222db0-c68a-ce99-0fd8-e8c7674bc9f7/886446283388.jpg/1800x1800bb.jpg",
+      "label": "Fat Possum Records",
+      "art": "assets/40/youth-lagoon-the-year-of-hibernation.jpg",
       "links": {
-        "spotify": "https://open.spotify.com/album/04V5tTHMYIGBzcYxGMgRFn"
+        "spotify": "https://open.spotify.com/album/0mcvDycoex7ANLZOmVVRoD"
       },
-      "date": "2026-09-28",
-      "art_back": "assets/40/portugal-the-man-the-satanic-satanist-back.jpg",
+      "art_back": "assets/40/youth-lagoon-the-year-of-hibernation-back.jpg",
+      "art_back_src": "https://coverartarchive.org/release/2f6ee3f5-6e5f-46e5-8dfc-4099f2713645/41279033936.jpg",
+      "date": "2026-10-03",
       "wear": {
         "level": "med"
       },
-      "art_worn": "assets/40/worn/portugal-the-man-the-satanic-satanist.jpg",
-      "art_back_worn": "assets/40/worn/portugal-the-man-the-satanic-satanist-back.jpg"
+      "art_worn": "assets/40/worn/youth-lagoon-the-year-of-hibernation.jpg",
+      "art_back_worn": "assets/40/worn/youth-lagoon-the-year-of-hibernation-back.jpg"
     },
     {
-      "no": 7,
-      "slug": "death-cab-for-cutie-plans",
-      "artist": "Death Cab for Cutie",
-      "title": "Plans",
-      "discovered": "Placeholder — swap for the real line.",
-      "blurb": [
-        "Placeholder blurb for Plans. When you found it, where you were, why it stuck."
-      ],
-      "apple_id": 966379289,
-      "apple_url": "https://music.apple.com/us/album/plans/966379289",
-      "released": "2005-08-29",
-      "year": "2005",
-      "copyright": "℗ 2005 Atlantic Recording Corporation for the United States and WEA International Inc. for the world outside of the United States. A Warner Music Group Company",
-      "genre": "Alternative",
-      "track_count": 11,
-      "runtime_ms": 2664063,
-      "tracks": [
-        {
-          "n": 1,
-          "title": "Marching Bands of Manhattan",
-          "ms": 252073
-        },
-        {
-          "n": 2,
-          "title": "Soul Meets Body",
-          "ms": 230905
-        },
-        {
-          "n": 3,
-          "title": "Summer Skin",
-          "ms": 194228
-        },
-        {
-          "n": 4,
-          "title": "Different Names for the Same Thing",
-          "ms": 308507
-        },
-        {
-          "n": 5,
-          "title": "I Will Follow You Into the Dark",
-          "ms": 189395
-        },
-        {
-          "n": 6,
-          "title": "Your Heart Is an Empty Room",
-          "ms": 219364
-        },
-        {
-          "n": 7,
-          "title": "Someday You Will Be Loved",
-          "ms": 191427
-        },
-        {
-          "n": 8,
-          "title": "Crooked Teeth",
-          "ms": 203661
-        },
-        {
-          "n": 9,
-          "title": "What Sarah Said",
-          "ms": 380920
-        },
-        {
-          "n": 10,
-          "title": "Brothers On a Hotel Bed",
-          "ms": 271100
-        },
-        {
-          "n": 11,
-          "title": "Stable Song",
-          "ms": 222483
-        }
-      ],
-      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/03/0d/0c/030d0c02-4186-a22a-ada6-a13348069d8d/075679930491.jpg/1800x1800bb.jpg",
-      "label": "Atlantic Recording Corporation for the United States and WEA International Inc. for the world outside of the United States. A Warner Music Group Company",
-      "art": "assets/40/death-cab-for-cutie-plans.jpg",
-      "links": {
-        "spotify": "https://open.spotify.com/album/1NFGnxmeIEBakre4DvLaJq"
-      },
-      "date": "2026-09-29",
-      "art_back": "assets/40/death-cab-for-cutie-plans-back.jpg",
-      "wear": {
-        "level": "med"
-      },
-      "art_worn": "assets/40/worn/death-cab-for-cutie-plans.jpg",
-      "art_back_worn": "assets/40/worn/death-cab-for-cutie-plans-back.jpg"
-    },
-    {
-      "no": 8,
-      "slug": "oasis-what-s-the-story-morning-glory",
-      "artist": "Oasis",
-      "title": "(What's the Story) Morning Glory?",
-      "discovered": "Placeholder — swap for the real line.",
-      "blurb": [
-        "Placeholder blurb for (What's the Story) Morning Glory?. When you found it, where you were, why it stuck."
-      ],
-      "apple_id": 1517447039,
-      "apple_url": "https://music.apple.com/us/album/whats-the-story-morning-glory/1517447039",
-      "released": "1995-10-02",
-      "year": "1995",
-      "copyright": "℗ 1995 Big Brother Recordings Ltd",
-      "genre": "Indie Rock",
-      "track_count": 12,
-      "runtime_ms": 3013335,
-      "tracks": [
-        {
-          "n": 1,
-          "title": "Hello",
-          "ms": 203187
-        },
-        {
-          "n": 2,
-          "title": "Roll with It",
-          "ms": 239827
-        },
-        {
-          "n": 3,
-          "title": "Wonderwall",
-          "ms": 258907
-        },
-        {
-          "n": 4,
-          "title": "Don't Look Back in Anger",
-          "ms": 287827
-        },
-        {
-          "n": 5,
-          "title": "Hey Now!",
-          "ms": 341907
-        },
-        {
-          "n": 6,
-          "title": "The Swamp Song (Version 1)",
-          "ms": 44627
-        },
-        {
-          "n": 7,
-          "title": "Some Might Say",
-          "ms": 327920
-        },
-        {
-          "n": 8,
-          "title": "Cast No Shadow",
-          "ms": 294813
-        },
-        {
-          "n": 9,
-          "title": "She's Electric",
-          "ms": 220920
-        },
-        {
-          "n": 10,
-          "title": "Morning Glory",
-          "ms": 303533
-        },
-        {
-          "n": 11,
-          "title": "The Swamp Song (Version 2)",
-          "ms": 39360
-        },
-        {
-          "n": 12,
-          "title": "Champagne Supernova",
-          "ms": 450507
-        }
-      ],
-      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/04/92/e0/0492e08b-cbcc-9969-9ad6-8f5a0888068c/5051961007107.jpg/1800x1800bb.jpg",
-      "label": "Big Brother Recordings Ltd",
-      "art": "assets/40/oasis-what-s-the-story-morning-glory.jpg",
-      "links": {
-        "spotify": "https://open.spotify.com/album/7EW77iyGMou046Z44pOrIk"
-      },
-      "date": "2026-09-30",
-      "art_back": "assets/40/oasis-what-s-the-story-morning-glory-back.jpg",
-      "wear": {
-        "level": "med"
-      },
-      "art_worn": "assets/40/worn/oasis-what-s-the-story-morning-glory.jpg",
-      "art_back_worn": "assets/40/worn/oasis-what-s-the-story-morning-glory-back.jpg"
-    },
-    {
-      "no": 9,
+      "no": 12,
       "slug": "radiohead-hail-to-the-thief",
       "artist": "Radiohead",
       "title": "Hail to the Thief",
@@ -887,8 +1208,9 @@
       "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/3c/95/1d/3c951d73-f6c6-12dd-34b4-cc95f63e210c/634904078560.png/1800x1800bb.jpg",
       "label": "XL Recordings Ltd",
       "art": "assets/40/radiohead-hail-to-the-thief.jpg",
-      "date": "2026-10-01",
       "art_back": "assets/40/radiohead-hail-to-the-thief-back.jpg",
+      "art_back_src": "http://coverartarchive.org/release/f847d298-e2d8-43ed-97ed-7c7b01ff03bc/24770542667.jpg",
+      "date": "2026-10-04",
       "wear": {
         "level": "med"
       },
@@ -896,95 +1218,753 @@
       "art_back_worn": "assets/40/worn/radiohead-hail-to-the-thief-back.jpg"
     },
     {
-      "no": 10,
-      "slug": "animal-collective-merriweather-post-pavilion",
-      "artist": "Animal Collective",
-      "title": "Merriweather Post Pavilion",
+      "no": 13,
+      "slug": "alt-j-an-awesome-wave",
+      "artist": "alt-J",
+      "title": "An Awesome Wave",
       "discovered": "Placeholder — swap for the real line.",
       "blurb": [
-        "Placeholder blurb for Merriweather Post Pavilion. When you found it, where you were, why it stuck."
+        "Placeholder blurb for An Awesome Wave. When you found it, where you were, why it stuck."
       ],
-      "apple_id": 300683110,
-      "apple_url": "https://music.apple.com/us/album/merriweather-post-pavilion/300683110",
-      "released": "2009-01-06",
-      "year": "2009",
-      "copyright": "℗ 2009 Domino Recording Co Ltd",
+      "apple_id": 558262493,
+      "apple_url": "https://music.apple.com/us/album/an-awesome-wave/558262493",
+      "released": "2012-05-28",
+      "year": "2012",
+      "copyright": "℗ 2012 Infectious Music Ltd., under exclusive license to Atlantic Recording Corporation for North America.",
       "genre": "Alternative",
-      "track_count": 12,
-      "runtime_ms": 3612201,
+      "track_count": 14,
+      "runtime_ms": 2636297,
       "tracks": [
         {
           "n": 1,
-          "title": "In the Flowers",
-          "ms": 322027
+          "title": "Intro",
+          "ms": 157488
         },
         {
           "n": 2,
-          "title": "My Girls",
-          "ms": 340787
+          "title": "Interlude 1",
+          "ms": 72083
         },
         {
           "n": 3,
-          "title": "Also Frightened",
-          "ms": 314067
+          "title": "Tessellate",
+          "ms": 182671
         },
         {
           "n": 4,
-          "title": "Summertime Clothes",
-          "ms": 270120
+          "title": "Breezeblocks",
+          "ms": 227084
         },
         {
           "n": 5,
-          "title": "Daily Routine",
-          "ms": 346040
+          "title": "Interlude 2",
+          "ms": 77404
         },
         {
           "n": 6,
-          "title": "Bluish",
-          "ms": 313560
+          "title": "Something Good",
+          "ms": 218244
         },
         {
           "n": 7,
-          "title": "Guys Eyes",
-          "ms": 270653
+          "title": "Dissolve Me",
+          "ms": 239018
         },
         {
           "n": 8,
-          "title": "Taste",
-          "ms": 233453
+          "title": "Matilda",
+          "ms": 228711
         },
         {
           "n": 9,
-          "title": "Lion in a Coma",
-          "ms": 252227
+          "title": "Ms",
+          "ms": 238977
         },
         {
           "n": 10,
-          "title": "No More Runnin",
-          "ms": 263333
+          "title": "Fitzpleasure",
+          "ms": 219404
         },
         {
           "n": 11,
-          "title": "Brother Sport",
-          "ms": 359027
+          "title": "Interlude 3",
+          "ms": 53604
         },
         {
           "n": 12,
-          "title": "Summertime Clothes (Live)",
-          "ms": 326907
+          "title": "Bloodflood",
+          "ms": 249431
+        },
+        {
+          "n": 13,
+          "title": "Taro",
+          "ms": 314927
+        },
+        {
+          "n": 14,
+          "title": "Hand-Made",
+          "ms": 157251
         }
       ],
-      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/64/79/67/64796709-9482-2221-b1b7-64cdbe1b99f2/dj.fuppzyzi.jpg/1800x1800bb.jpg",
-      "label": "Domino Recording Co Ltd",
-      "art": "assets/40/animal-collective-merriweather-post-pavilion.jpg",
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/14/ce/32/14ce329f-ce30-569a-725b-1b2feefdcdfc/075679959959.jpg/1800x1800bb.jpg",
+      "label": "Infectious Music Ltd",
+      "art": "assets/40/alt-j-an-awesome-wave.jpg",
       "links": {
-        "spotify": "https://open.spotify.com/album/5O9OXl9zAWMJTzawofxuan"
+        "spotify": "https://open.spotify.com/album/6k3vC8nep1BfqAIJ81L6OL"
       },
-      "date": "2026-10-02",
+      "art_back": "assets/40/alt-j-an-awesome-wave-back.jpg",
+      "art_back_src": "https://coverartarchive.org/release/beb58056-1b5a-4b4f-8b86-ac28b4092470/8777336088.jpg",
+      "date": "2026-10-05",
       "wear": {
         "level": "med"
       },
-      "art_worn": "assets/40/worn/animal-collective-merriweather-post-pavilion.jpg"
+      "art_worn": "assets/40/worn/alt-j-an-awesome-wave.jpg",
+      "art_back_worn": "assets/40/worn/alt-j-an-awesome-wave-back.jpg"
+    },
+    {
+      "no": 14,
+      "slug": "jose-gonzalez-in-our-nature",
+      "artist": "José González",
+      "title": "In Our Nature",
+      "discovered": "Placeholder — swap for the real line.",
+      "blurb": [
+        "Placeholder blurb for In Our Nature. When you found it, where you were, why it stuck."
+      ],
+      "links": {
+        "spotify": "https://open.spotify.com/album/4zhb7QX3fvyamvbcYGnKMv"
+      },
+      "apple_id": 828050112,
+      "apple_url": "https://music.apple.com/us/album/in-our-nature/828050112",
+      "released": "2007-09-24",
+      "year": "2007",
+      "copyright": "℗ 2007 Imperial Recordings under exclusive llcense to Mute for North America",
+      "genre": "Singer/Songwriter",
+      "track_count": 11,
+      "runtime_ms": 2240465,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "How Low",
+          "ms": 160013
+        },
+        {
+          "n": 2,
+          "title": "Down the Line",
+          "ms": 192907
+        },
+        {
+          "n": 3,
+          "title": "Killing For Love",
+          "ms": 182893
+        },
+        {
+          "n": 4,
+          "title": "In Our Nature",
+          "ms": 162680
+        },
+        {
+          "n": 5,
+          "title": "Teardrop",
+          "ms": 200853
+        },
+        {
+          "n": 6,
+          "title": "Abram",
+          "ms": 108493
+        },
+        {
+          "n": 7,
+          "title": "Time To Send Someone Away",
+          "ms": 167840
+        },
+        {
+          "n": 8,
+          "title": "The Nest",
+          "ms": 143880
+        },
+        {
+          "n": 9,
+          "title": "Fold",
+          "ms": 174773
+        },
+        {
+          "n": 10,
+          "title": "Cycling Trivialities",
+          "ms": 489213
+        },
+        {
+          "n": 11,
+          "title": "You're an Animal",
+          "ms": 256920
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music/v4/37/5e/30/375e3049-0c0f-4549-7f5c-ef7340b034aa/724596936764.jpg/1800x1800bb.jpg",
+      "label": "Imperial Recordings / Mute",
+      "art": "assets/40/jose-gonzalez-in-our-nature.jpg",
+      "art_back": "assets/40/jose-gonzalez-in-our-nature-back.jpg",
+      "art_back_src": "http://coverartarchive.org/release/ba3d1339-f4d8-495c-b422-34c40de6d1d9/17097045330.jpg",
+      "date": "2026-10-06",
+      "wear": {
+        "level": "med"
+      },
+      "art_worn": "assets/40/worn/jose-gonzalez-in-our-nature.jpg",
+      "art_back_worn": "assets/40/worn/jose-gonzalez-in-our-nature-back.jpg"
+    },
+    {
+      "no": 15,
+      "slug": "ratatat-classics",
+      "artist": "Ratatat",
+      "title": "Classics",
+      "discovered": "Placeholder — swap for the real line.",
+      "blurb": [
+        "Placeholder blurb for Classics. When you found it, where you were, why it stuck."
+      ],
+      "apple_id": 354003618,
+      "links": {
+        "spotify": "https://open.spotify.com/album/2n5wpk7KaHpp3mgUYqpF4f"
+      },
+      "apple_url": "https://music.apple.com/us/album/classics/354003618",
+      "released": "2006-08-21",
+      "year": "2006",
+      "copyright": "℗ 2006 XL Recordings Ltd",
+      "genre": "Electronic",
+      "track_count": 11,
+      "runtime_ms": 2767080,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Montanita",
+          "ms": 300280
+        },
+        {
+          "n": 2,
+          "title": "Lex",
+          "ms": 269747
+        },
+        {
+          "n": 3,
+          "title": "Gettysburg",
+          "ms": 327787
+        },
+        {
+          "n": 4,
+          "title": "Wildcat",
+          "ms": 260173
+        },
+        {
+          "n": 5,
+          "title": "Tropicana",
+          "ms": 276800
+        },
+        {
+          "n": 6,
+          "title": "Loud Pipes",
+          "ms": 226533
+        },
+        {
+          "n": 7,
+          "title": "Kennedy",
+          "ms": 214680
+        },
+        {
+          "n": 8,
+          "title": "Swisha",
+          "ms": 229773
+        },
+        {
+          "n": 9,
+          "title": "Nostrand",
+          "ms": 184040
+        },
+        {
+          "n": 10,
+          "title": "Tacobel Canon",
+          "ms": 266760
+        },
+        {
+          "n": 11,
+          "title": "Truman (Bonus Track)",
+          "ms": 210507
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/b8/49/69/b84969fc-a475-ebc2-6496-274eb0771360/634904219888.png/1800x1800bb.jpg",
+      "label": "XL Recordings Ltd",
+      "art": "assets/40/ratatat-classics.jpg",
+      "art_back": "assets/40/ratatat-classics-back.jpg",
+      "art_back_src": "http://coverartarchive.org/release/82a6769a-6527-4559-8d19-dbfbf93c92f1/26763472220.png",
+      "date": "2026-10-07",
+      "wear": {
+        "level": "med"
+      },
+      "art_worn": "assets/40/worn/ratatat-classics.jpg",
+      "art_back_worn": "assets/40/worn/ratatat-classics-back.jpg"
+    },
+    {
+      "no": 16,
+      "slug": "tokyo-police-club-champ",
+      "artist": "Tokyo Police Club",
+      "title": "Champ",
+      "discovered": "Placeholder — swap for the real line.",
+      "blurb": [
+        "Placeholder blurb for Champ. When you found it, where you were, why it stuck."
+      ],
+      "apple_id": 1881439477,
+      "apple_url": "https://music.apple.com/us/album/champ/1881439477",
+      "released": "2010-01-01",
+      "year": "2010",
+      "copyright": "℗ 2010 Mom+Pop",
+      "genre": "Alternative",
+      "track_count": 11,
+      "runtime_ms": 2140308,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Favourite Food",
+          "ms": 236227
+        },
+        {
+          "n": 2,
+          "title": "Favourite Colour",
+          "ms": 157987
+        },
+        {
+          "n": 3,
+          "title": "Breakneck Speed",
+          "ms": 223653
+        },
+        {
+          "n": 4,
+          "title": "Wait Up (Boots of Danger)",
+          "ms": 189267
+        },
+        {
+          "n": 5,
+          "title": "Bambi",
+          "ms": 166120
+        },
+        {
+          "n": 6,
+          "title": "End of a Spark",
+          "ms": 216987
+        },
+        {
+          "n": 7,
+          "title": "Hands Reversed",
+          "ms": 199760
+        },
+        {
+          "n": 8,
+          "title": "Gone",
+          "ms": 184533
+        },
+        {
+          "n": 9,
+          "title": "Big Difference",
+          "ms": 178027
+        },
+        {
+          "n": 10,
+          "title": "Not Sick",
+          "ms": 178360
+        },
+        {
+          "n": 11,
+          "title": "Frankenstein",
+          "ms": 209387
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/54/b7/ec/54b7ec82-0101-6bef-d2d8-82ac9f159b51/112425.jpg/1800x1800bb.jpg",
+      "label": "Mom+Pop",
+      "art": "assets/40/tokyo-police-club-champ.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/7HLzs8Qao2pl7qFEbY7SJo"
+      },
+      "date": "2026-10-08",
+      "wear": {
+        "level": "med"
+      },
+      "art_worn": "assets/40/worn/tokyo-police-club-champ.jpg"
+    },
+    {
+      "no": 17,
+      "slug": "incubus-morning-view",
+      "artist": "Incubus",
+      "title": "Morning View",
+      "discovered": "Placeholder — swap for the real line.",
+      "blurb": [
+        "Placeholder blurb for Morning View. When you found it, where you were, why it stuck."
+      ],
+      "apple_id": 271792608,
+      "apple_url": "https://music.apple.com/us/album/morning-view/271792608",
+      "released": "2001-10-22",
+      "year": "2001",
+      "copyright": "℗ 2001 Epic Records, a division of Sony Music Entertainment",
+      "genre": "Alternative",
+      "track_count": 13,
+      "runtime_ms": 3486359,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Nice to Know You",
+          "ms": 283160
+        },
+        {
+          "n": 2,
+          "title": "Circles",
+          "ms": 249373
+        },
+        {
+          "n": 3,
+          "title": "Wish You Were Here",
+          "ms": 212733
+        },
+        {
+          "n": 4,
+          "title": "Just a Phase",
+          "ms": 329267
+        },
+        {
+          "n": 5,
+          "title": "11 Am",
+          "ms": 253427
+        },
+        {
+          "n": 6,
+          "title": "Blood On the Ground",
+          "ms": 273333
+        },
+        {
+          "n": 7,
+          "title": "Mexico",
+          "ms": 258307
+        },
+        {
+          "n": 8,
+          "title": "Warning",
+          "ms": 278733
+        },
+        {
+          "n": 9,
+          "title": "Echo",
+          "ms": 214333
+        },
+        {
+          "n": 10,
+          "title": "Have You Ever",
+          "ms": 194640
+        },
+        {
+          "n": 11,
+          "title": "Are You In?",
+          "ms": 264200
+        },
+        {
+          "n": 12,
+          "title": "Under My Umbrella",
+          "ms": 208293
+        },
+        {
+          "n": 13,
+          "title": "Aqueous Transmission",
+          "ms": 466560
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/2c/95/ec/2c95ecf2-8303-50b6-2e19-ea6b28424af9/mzi.yficmzdc.jpg/1800x1800bb.jpg",
+      "label": "Epic Records, a division of Sony Music Entertainment",
+      "art": "assets/40/incubus-morning-view.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/1rQZbncicoXyB64DqoH7OY"
+      },
+      "art_back": "assets/40/incubus-morning-view-back.jpg",
+      "art_back_src": "https://coverartarchive.org/release/ee6b9446-1d2b-427d-8172-7ee6dab0fd5f/8289386498.jpg",
+      "date": "2026-10-09",
+      "wear": {
+        "level": "med"
+      },
+      "art_worn": "assets/40/worn/incubus-morning-view.jpg",
+      "art_back_worn": "assets/40/worn/incubus-morning-view-back.jpg"
+    },
+    {
+      "no": 18,
+      "slug": "finch-what-it-is-to-burn",
+      "artist": "Finch",
+      "title": "What It Is to Burn",
+      "discovered": "Placeholder — swap for the real line.",
+      "blurb": [
+        "Placeholder blurb for What It Is to Burn. When you found it, where you were, why it stuck."
+      ],
+      "apple_id": 1440743253,
+      "apple_url": "https://music.apple.com/us/album/what-it-is-to-burn/1440743253",
+      "released": "2002-01-01",
+      "year": "2002",
+      "copyright": "℗ 2002 Geffen Records",
+      "genre": "Alternative",
+      "track_count": 13,
+      "runtime_ms": 3670427,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "New Beginnings",
+          "ms": 241667
+        },
+        {
+          "n": 2,
+          "title": "Letters to You",
+          "ms": 199600
+        },
+        {
+          "n": 3,
+          "title": "Post Script",
+          "ms": 169760
+        },
+        {
+          "n": 4,
+          "title": "Grey Matter",
+          "ms": 159907
+        },
+        {
+          "n": 5,
+          "title": "Perfection Through Silence",
+          "ms": 189093
+        },
+        {
+          "n": 6,
+          "title": "Awake",
+          "ms": 288507
+        },
+        {
+          "n": 7,
+          "title": "Without You Here",
+          "ms": 250533
+        },
+        {
+          "n": 8,
+          "title": "Stay With Me",
+          "ms": 242933
+        },
+        {
+          "n": 9,
+          "title": "Project Mayhem",
+          "ms": 319147
+        },
+        {
+          "n": 10,
+          "title": "Untitled",
+          "ms": 253480
+        },
+        {
+          "n": 11,
+          "title": "Three Simple Words",
+          "ms": 278733
+        },
+        {
+          "n": 12,
+          "title": "Ender",
+          "ms": 808040
+        },
+        {
+          "n": 13,
+          "title": "What It Is to Burn (New Version)",
+          "ms": 269027
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/42/14/a1/4214a191-3dce-85ab-ae8e-6ad7596c4df3/00042286099125.rgb.jpg/1800x1800bb.jpg",
+      "label": "Geffen Records",
+      "art": "assets/40/finch-what-it-is-to-burn.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/28DROCResQvsdO6Hjmb32x"
+      },
+      "art_back": "assets/40/finch-what-it-is-to-burn-back.jpg",
+      "art_back_src": "http://coverartarchive.org/release/21024c74-097c-4415-8848-b8a6f65e9072/4691646485.jpg",
+      "date": "2026-10-10",
+      "wear": {
+        "level": "med"
+      },
+      "art_worn": "assets/40/worn/finch-what-it-is-to-burn.jpg",
+      "art_back_worn": "assets/40/worn/finch-what-it-is-to-burn-back.jpg"
+    },
+    {
+      "no": 19,
+      "slug": "brand-new-deja-entendu",
+      "artist": "Brand New",
+      "title": "Deja Entendu",
+      "discovered": "Placeholder — swap for the real line.",
+      "blurb": [
+        "Placeholder blurb for Deja Entendu. When you found it, where you were, why it stuck."
+      ],
+      "apple_id": 1440928946,
+      "apple_url": "https://music.apple.com/us/album/deja-entendu/1440928946",
+      "released": "2003-06-17",
+      "year": "2003",
+      "copyright": "℗ 2003 Triple Crown Records\\Razor & Tie., Marketed by Razor & Tie Recordings. Distributed by Concord Music Group, Inc.",
+      "genre": "Alternative",
+      "track_count": 11,
+      "runtime_ms": 2927385,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Tautou",
+          "ms": 102453
+        },
+        {
+          "n": 2,
+          "title": "Sic Transit Gloria ... Glory Fades",
+          "ms": 186493
+        },
+        {
+          "n": 3,
+          "title": "I Will Play My Game Beneath The Spin Light",
+          "ms": 237200
+        },
+        {
+          "n": 4,
+          "title": "Okay I Believe You, But My Tommy Gun Don't",
+          "ms": 335373
+        },
+        {
+          "n": 5,
+          "title": "The Quiet Things That No One Ever Knows",
+          "ms": 241640
+        },
+        {
+          "n": 6,
+          "title": "The Boy Who Blocked His Own Shot",
+          "ms": 279200
+        },
+        {
+          "n": 7,
+          "title": "Jaws Theme Swimming",
+          "ms": 274453
+        },
+        {
+          "n": 8,
+          "title": "Me vs. Maradona vs. Elvis",
+          "ms": 319000
+        },
+        {
+          "n": 9,
+          "title": "Guernica",
+          "ms": 203173
+        },
+        {
+          "n": 10,
+          "title": "Good to Know That If I Ever Need Attention All I Have to Do Is Die",
+          "ms": 420520
+        },
+        {
+          "n": 11,
+          "title": "Play Crack The Sky",
+          "ms": 327880
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/55/66/86/5566866b-0c84-3f85-136f-16d2f402f5be/16CRGIM00067.rgb.jpg/1800x1800bb.jpg",
+      "label": "Triple Crown Records\\Razor & Tie",
+      "art": "assets/40/brand-new-deja-entendu.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/6vDiMhyfSnTn18OY99BSQX"
+      },
+      "art_back": "assets/40/brand-new-deja-entendu-back.jpg",
+      "art_back_src": "http://coverartarchive.org/release/b315e122-1921-44b5-ada0-27817ad6d0bc/32846867469.jpg",
+      "date": "2026-10-11",
+      "wear": {
+        "level": "med"
+      },
+      "art_worn": "assets/40/worn/brand-new-deja-entendu.jpg",
+      "art_back_worn": "assets/40/worn/brand-new-deja-entendu-back.jpg"
+    },
+    {
+      "no": 20,
+      "slug": "phish-a-live-one",
+      "artist": "Phish",
+      "title": "A Live One",
+      "discovered": "Placeholder — swap for the real line.",
+      "blurb": [
+        "Placeholder blurb for A Live One. When you found it, where you were, why it stuck."
+      ],
+      "links": {
+        "spotify": "https://open.spotify.com/album/4UTjy2dLYT8i8ItyboijlW"
+      },
+      "apple_id": 396486533,
+      "apple_url": "https://music.apple.com/us/album/a-live-one/396486533",
+      "released": "1995-06-27",
+      "year": "1995",
+      "copyright": "℗ 1995 Elektra Entertainment Group Inc.",
+      "genre": "Rock",
+      "track_count": 12,
+      "runtime_ms": 7869906,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Bouncing Around the Room (Live)",
+          "ms": 248440
+        },
+        {
+          "n": 2,
+          "title": "Stash (Live)",
+          "ms": 751600
+        },
+        {
+          "n": 3,
+          "title": "Gumbo (Live)",
+          "ms": 314933
+        },
+        {
+          "n": 4,
+          "title": "Montana (Live)",
+          "ms": 124267
+        },
+        {
+          "n": 5,
+          "title": "You Enjoy Myself (Live)",
+          "ms": 1257333
+        },
+        {
+          "n": 6,
+          "title": "Chalkdust Torture (Live)",
+          "ms": 408533
+        },
+        {
+          "n": 7,
+          "title": "Slave to the Traffic Light (Live)",
+          "ms": 646400
+        },
+        {
+          "n": 8,
+          "title": "Wilson (Live)",
+          "ms": 307133
+        },
+        {
+          "n": 9,
+          "title": "Tweezer (Live)",
+          "ms": 1855600
+        },
+        {
+          "n": 10,
+          "title": "Simple (Live)",
+          "ms": 293933
+        },
+        {
+          "n": 11,
+          "title": "Harry Hood (Live)",
+          "ms": 911507
+        },
+        {
+          "n": 12,
+          "title": "The Squirming Coil (Live)",
+          "ms": 750227
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/18/51/c8/1851c8d9-4468-a985-8a33-585a69ab685f/mzi.kvuanymf.jpg/1800x1800bb.jpg",
+      "label": "Elektra",
+      "art": "assets/40/phish-a-live-one.jpg",
+      "art_back": "assets/40/phish-a-live-one-back.jpg",
+      "art_back_src": "http://coverartarchive.org/release/b36f57fa-9fdf-4326-9dcc-49105ae7031c/17690753919.jpg",
+      "date": "2026-10-12",
+      "wear": {
+        "level": "med"
+      },
+      "art_worn": "assets/40/worn/phish-a-live-one.jpg",
+      "art_back_worn": "assets/40/worn/phish-a-live-one-back.jpg"
     },
     {
       "no": 40,
@@ -1061,8 +2041,9 @@
       "links": {
         "spotify": "https://open.spotify.com/album/2hDiTEsKePTnDcvKEuLizk"
       },
-      "date": "2026-11-01",
       "art_back": "assets/40/weezer-green-album-back.jpg",
+      "art_back_src": "http://coverartarchive.org/release/7a9a2617-28a7-4afd-9993-1b6a40cf6f25/32712601799.jpg",
+      "date": "2026-11-01",
       "wear": {
         "level": "med"
       },

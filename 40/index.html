@@ -69,8 +69,8 @@
     .page { max-width: var(--page-max); margin: 0 auto; padding: 0 var(--gutter) 0; }
 
     /* ── Top bar, same recipe as the homepage: brand mark left, title
-       centered, one control right; mono, translucent, hairline. The About
-       panel hangs off it as a dropdown, so it opens wherever you are. ── */
+       centered, Index and About right; mono, translucent, hairline. Both
+       panels hang off it as dropdowns, so they open wherever you are. ── */
     .bar { position: sticky; top: 0; z-index: 50; margin: 0 calc(-1 * var(--gutter)); }
     .bar__row {
       position: relative; z-index: 1;
@@ -103,8 +103,19 @@
     }
     .wordmark > span { display: block; margin-top: -.214em; }
     .wordmark--top  { margin-top: 24px; margin-bottom: 20px; }
+    .bar__nav { justify-self: end; display: flex; align-items: center; gap: 6px; }
+    /* Index: a small grid glyph beside About; opens every day of the countdown as a dropdown. */
+    .bar__index {
+      width: 27px; height: 27px; padding: 0; display: grid; place-items: center; flex: none;
+      color: var(--text-muted); background: none; border: 1px solid var(--rule); border-radius: 50%; cursor: pointer;
+      -webkit-tap-highlight-color: transparent; transition: color .15s ease, border-color .15s ease;
+    }
+    .bar__index svg { display: block; }
+    .bar__index .i-close, .bar__index[aria-expanded="true"] .i-grid { display: none; }
+    .bar__index[aria-expanded="true"] .i-close { display: block; }
+    @media (hover: hover) { .bar__index:hover { color: var(--text); border-color: var(--text-faint); } }
+    .bar__index[aria-expanded="true"], .bar__index[aria-expanded="true"]:hover { color: var(--accent); border-color: var(--accent); }
     .bar__about {
-      justify-self: end;
       font: inherit; letter-spacing: inherit; text-transform: inherit;
       color: var(--text-muted);
       background: none; border: 1px solid var(--rule); border-radius: 999px;
@@ -117,15 +128,15 @@
 
     /* ── About: a full-screen type poster under the bar. Closed on load.
        Every line is the H1 size; lines are hand-broken so none wraps. ── */
-    .about {
+    .about, .index {
       position: fixed; inset: 0; z-index: 0; overflow-y: auto; -webkit-overflow-scrolling: touch;
       background: rgba(12,12,13,.82); backdrop-filter: blur(22px) saturate(140%); -webkit-backdrop-filter: blur(22px) saturate(140%);
       padding: 64px var(--gutter) calc(20px + var(--sab));
       display: flex; flex-direction: column; box-sizing: border-box;
       font-family: var(--font-sans); text-transform: none; letter-spacing: 0;
     }
-    .about[hidden] { display: none; }
-    .about > * { flex: none; }
+    .about[hidden], .index[hidden] { display: none; }
+    .about > *, .index > * { flex: none; }
     .about__title {
       margin: 0; padding: 0; max-width: 760px;
       font-family: var(--font-display); font-weight: 400; color: var(--text);
@@ -138,20 +149,25 @@
     .about__meta  { display: flex; justify-content: space-between; align-items: baseline; gap: 8px 16px; flex-wrap: wrap; max-width: 560px; margin: 12px 0 0; }
     .about__quiet { margin: 0; color: var(--text-faint); font-size: 14px; line-height: 1.5; font-weight: 300; }
     .about__facts { margin: 0; color: var(--accent); letter-spacing: .08em; text-transform: uppercase; font-family: var(--font-mono); font-size: var(--mono-size); white-space: nowrap; }
-    .about .grid40 { margin-top: 24px; }
+    /* Index: the forty days, as big as the screen allows — 5 across on a phone (8 rows), 8 across from 720px. */
+    .index__meta { display: flex; justify-content: space-between; gap: 16px; margin: 0 0 14px; color: var(--text-faint); }
+    .index__meta b { font-weight: 400; color: var(--accent); }
+    .index .grid40 { grid-template-columns: repeat(5, 1fr); gap: 6px; width: 100%; max-width: min(100%, calc((100vh - 150px - var(--sab)) * .625)); max-width: min(100%, calc((100dvh - 150px - var(--sab)) * .625)); }
+    .index .grid40 span { font-size: 11px; }
     @media (max-height: 620px) {
       .about { padding-top: 58px; }
       .about__title { font-size: min(var(--display-size), 8.6vh); }
       .about__body { font-size: 15px; margin-top: 14px; }
       .about__meta { margin-top: 8px; }
-      .about .grid40 { margin-top: 16px; }
+      .index { padding-top: 58px; }
     }
     .about__title em { font-style: normal; color: var(--accent); }
     .about__title .is-quiet { color: var(--text-faint); }
     .about__title .is-date { color: var(--accent); }
     .about__title .is-gap { height: .5em; }
     @media (prefers-reduced-motion: no-preference) {
-      .about:not([hidden]) .about__title > *, .about:not([hidden]) .about__meta, .about:not([hidden]) .about__body, .about:not([hidden]) .grid40 { animation: rise .42s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i) * 60ms); }
+      .about:not([hidden]) .about__title > *, .about:not([hidden]) .about__meta, .about:not([hidden]) .about__body,
+      .index:not([hidden]) .index__meta, .index:not([hidden]) .grid40 { animation: rise .42s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i) * 60ms); }
       @keyframes rise { from { opacity: 0; transform: translateY(.35em); } to { opacity: 1; transform: none; } }
     }
 
@@ -293,6 +309,7 @@
 
     /* The 40 cells from the closing card, filling in as records post. */
     .grid40 { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; margin: 0; max-width: 560px; }
+    @media (min-width: 720px) { .index .grid40 { grid-template-columns: repeat(8, 1fr); max-width: min(100%, calc((100vh - 150px) * 1.6)); } .index__meta { max-width: min(100%, calc((100vh - 150px) * 1.6)); } }
     /* Past the footer wordmark the 404040 repeats, each copy more eroded by dither, until nothing is left. */
     /* ── The tail: scroll pulls a pixel extrusion out of 404040 and you travel down it. ── */
     .tail { position: relative; }
@@ -356,17 +373,14 @@
       .entry__player { grid-area: player; max-width: 660px; }
       .entry .listen { grid-area: listen; max-width: 660px; }
       .entry details { grid-area: tracks; }
-      .about {
-        display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: 72px;
-        align-content: center; align-items: start; padding-top: 48px;
-        max-width: var(--page-max); box-sizing: border-box; margin: 0 auto;
-      }
-      .about[hidden] { display: none; }
-      .about__title { grid-column: 1; font-size: min(var(--display-size), 11vh); }
-      .about__body { grid-column: 1; font-size: 18px; max-width: 52ch; }
-      .about__meta { grid-column: 1; max-width: 52ch; }
-      .about .grid40 { grid-column: 2; grid-row: 1 / span 3; align-self: center; margin: 0; max-width: 560px; justify-self: end; width: 100%; }
-      .grid40 span { font-size: 11px; }
+      .about, .index { justify-content: center; padding-top: 48px; max-width: var(--page-max); box-sizing: border-box; margin: 0 auto; }
+      .about[hidden], .index[hidden] { display: none; }
+      .about__title { font-size: min(var(--display-size), 11vh); }
+      .about__body { font-size: 18px; max-width: 52ch; }
+      .about__meta { max-width: 52ch; }
+      .index .grid40 { max-width: min(100%, 1200px, calc((100vh - 170px) * 1.6)); gap: 10px; margin: 0 auto; }
+      .index__meta { width: 100%; max-width: min(100%, 1200px, calc((100vh - 170px) * 1.6)); margin: 0 auto 18px; }
+      .grid40 span, .index .grid40 span { font-size: 12px; }
       .foot { padding-top: 48px; }
     }
 
@@ -382,7 +396,13 @@
         </svg>
       </a>
       <span class="bar__name" aria-label="40 albums, 40 days, 40 years">404040</span>
-      <button class="bar__about" id="js-about-btn" type="button" aria-expanded="false" aria-controls="js-about">About</button>
+      <div class="bar__nav">
+        <button class="bar__index" id="js-index-btn" type="button" aria-expanded="false" aria-controls="js-index" aria-label="Index: every day of the countdown">
+          <svg class="i-grid" width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><rect x=".5" y=".5" width="5" height="5" rx=".8"/><rect x="7.5" y=".5" width="5" height="5" rx=".8"/><rect x=".5" y="7.5" width="5" height="5" rx=".8"/><rect x="7.5" y="7.5" width="5" height="5" rx=".8"/></svg>
+          <svg class="i-close" width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" aria-hidden="true"><path d="M1 1l9 9M10 1l-9 9"/></svg>
+        </button>
+        <button class="bar__about" id="js-about-btn" type="button" aria-expanded="false" aria-controls="js-about">About</button>
+      </div>
       </div>
       <section class="about" id="js-about" hidden>
         <h1 class="about__title">
@@ -395,7 +415,10 @@
           <p class="about__quiet">In no particular order.</p>
           <p class="about__facts mono">Sep 23 → Nov 1, 2026</p>
         </div>
-        <nav class="grid40" id="js-grid" aria-label="Every day of the countdown" style="--i:5"></nav>
+      </section>
+      <section class="index" id="js-index" aria-label="Index" hidden>
+        <p class="index__meta mono" style="--i:0"><span>Day 01 → 40</span><span id="js-index-count"></span></p>
+        <nav class="grid40" id="js-grid" aria-label="Every day of the countdown" style="--i:1"></nav>
       </section>
     </header>
 
@@ -944,15 +967,19 @@
         // About panel: collapsed by default, since most visits are repeat
         // visits from a story. Opens itself only when there's nothing else
         // on the page yet.
-        const about = document.getElementById('js-about');
-        const btn   = document.getElementById('js-about-btn');
-        const setOpen = open => {
-          about.hidden = !open;
-          btn.setAttribute('aria-expanded', String(open));
-          btn.textContent = open ? 'Close' : 'About';
-          document.body.style.overflow = open ? 'hidden' : '';
+        // Two dropdowns hang off the bar, About and Index; one open at a time.
+        const about = document.getElementById('js-about'), btn = document.getElementById('js-about-btn');
+        const index = document.getElementById('js-index'), ibtn = document.getElementById('js-index-btn');
+        let open = null;
+        const setPanel = name => {
+          open = name;
+          about.hidden = name !== 'about'; btn.setAttribute('aria-expanded', String(name === 'about'));
+          index.hidden = name !== 'index'; ibtn.setAttribute('aria-expanded', String(name === 'index'));
+          btn.textContent = name === 'about' ? 'Close' : 'About';
+          document.body.style.overflow = name ? 'hidden' : '';
         };
-        btn.addEventListener('click', e => { e.stopPropagation(); setOpen(about.hidden); });
+        btn.addEventListener('click', e => { e.stopPropagation(); setPanel(open === 'about' ? null : 'about'); });
+        ibtn.addEventListener('click', e => { e.stopPropagation(); setPanel(open === 'index' ? null : 'index'); });
 
         // The small 404040 in the bar appears only once the big one is gone.
         const bar = document.querySelector('.bar');
@@ -964,9 +991,10 @@
         } else if (bar) {
           bar.classList.add('is-scrolled');
         }
-        about.addEventListener('click', e => { e.stopPropagation(); if (e.target.closest('.grid40 a')) setOpen(false); });
-        document.addEventListener('click', () => { if (!about.hidden) setOpen(false); });
-        document.addEventListener('keydown', e => { if (e.key === 'Escape' && !about.hidden) setOpen(false); });
+        about.addEventListener('click', e => e.stopPropagation());
+        index.addEventListener('click', e => { e.stopPropagation(); if (e.target.closest('.grid40 a')) setPanel(null); });
+        document.addEventListener('click', () => { if (open) setPanel(null); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape' && open) setPanel(null); });
 
 
         const byNo = new Map(slotted.map(a => [a.no, a]));
@@ -975,6 +1003,8 @@
           if (a && (preview || a.date <= today)) return `<a href="#${pad(a.no)}" title="Day ${pad(a.no)} · ${esc(a.artist)} — ${esc(a.title)}"><img src="../${esc((WORN && a.art_worn) || a.art || '')}" alt="" loading="lazy"></a>`;
           return `<span class="${a && a.date === today ? 'is-today' : ''}" aria-hidden="true">${pad(i + 1)}</span>`;
         }).join('');
+        const out = slotted.filter(a => preview || a.date <= today).length;
+        document.getElementById('js-index-count').innerHTML = `<b>${out}</b> of ${meta.total} so far`;
         const last = document.querySelector('#js-grid a:nth-child(40)');
         if (BIRTHDAY && last && !REDUCED && 'IntersectionObserver' in window) {
           new IntersectionObserver((es, io) => { if (es[0].isIntersecting) { io.disconnect(); setTimeout(() => arrive(last), 500); } }, { threshold: .6 }).observe(last);

@@ -220,6 +220,7 @@
     /* Selectors are deliberately heavier than the page's global a:hover,
        which would otherwise repaint these on hover / stuck iOS hover. */
     .listen { margin: 22px 0 0; display: flex; gap: 8px; }
+    .listen.listen--solo a, .listen.listen--solo a:only-child { flex: 1 1 100%; max-width: none; }
     .listen a {
       flex: 1 1 auto; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
       padding: 10px 14px; border-radius: 999px; white-space: nowrap;
@@ -443,6 +444,7 @@
       const any = a.apple_id
         ? `<a class="listen__any mono" href="https://album.link/i/${a.apple_id}" target="_blank" rel="noopener">Open in your music app ↗</a>`
         : '';
+      if (a.bonus) return any ? `<div class="listen listen--solo">${any}</div>` : '';
       return `<div class="listen">${any}${svcs.map(([n, u]) =>
         `<a class="listen__svc mono" href="${esc(u)}" target="_blank" rel="noopener">${n} ↗</a>`).join('')}</div>`;
     }
@@ -474,7 +476,7 @@
         ? a.blurb.map(p => `<p>${inline(p)}</p>`).join('')
         : `<p class="entry__blurb--empty">Blurb still cooking.</p>`;
       const head = a.bonus
-        ? `<span class="entry__no">Bonus album</span><span>Your reward for curiosity.</span>`
+        ? `<span class="entry__no">Bonus album</span><span>A reward for your curiosity.</span>`
         : `<span class="entry__no"><a href="#${pad(a.no)}">Day ${pad(a.no)}</a></span><span>${fmtDate(a.date)}</span>`;
       return `<article class="entry" id="${a.bonus ? 'bonus' : pad(a.no)}">
         <div class="entry__head mono">${head}</div>

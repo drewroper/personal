@@ -664,15 +664,34 @@
       addEventListener('wheel', e => {
         if (atEnd && e.deltaY > 0 && !REDUCED && !inAbout(e)) { e.preventDefault(); virtual += e.deltaY; kick(); }
       }, { passive: false });
-      let ty = null;
-      addEventListener('touchstart', e => { ty = e.touches[0].clientY; }, { passive: true });
+      // Touch: the drag feeds the dial directly, and a fling keeps going with the same
+      // deceleration as a native scroll (0.998 per ms, UIKit's normal rate), so a big swipe
+      // carries on after the finger lifts.
+      let ty = null, samples = [], mom = 0, momRaf = 0, momT = 0;
+      const stopMomentum = () => { mom = 0; if (momRaf) cancelAnimationFrame(momRaf); momRaf = 0; };
+      const momentum = now => {
+        momRaf = 0; const dt = Math.min(64, now - momT); momT = now;
+        if (!atEnd || mom < .02) { mom = 0; return; }
+        virtual += mom * dt * 1.5; mom *= Math.pow(.998, dt); kick();
+        momRaf = requestAnimationFrame(momentum);
+      };
+      addEventListener('touchstart', e => { stopMomentum(); ty = e.touches[0].clientY; samples = [[performance.now(), ty]]; }, { passive: true });
       addEventListener('touchmove', e => {
         if (ty === null) return;
         const y = e.touches[0].clientY, dy = ty - y; ty = y;
+        samples.push([performance.now(), y]); if (samples.length > 6) samples.shift();
         if (atEnd && dy > 0 && !REDUCED && !inAbout(e)) { if (e.cancelable) e.preventDefault(); virtual += dy * 1.5; kick(); }
       }, { passive: false });
-      addEventListener('touchend', () => { ty = null; }, { passive: true });
-      addEventListener('touchcancel', () => { ty = null; }, { passive: true });
+      const release = () => {
+        if (ty !== null && atEnd && !REDUCED && samples.length > 1) {
+          const [t0s, y0] = samples[0], [t1s, y1] = samples[samples.length - 1], dt = t1s - t0s;
+          const v = dt > 0 ? (y0 - y1) / dt : 0;                          // px per ms, upward drag positive
+          if (v > .3 && performance.now() - t1s < 80) { mom = Math.min(v, 6); momT = performance.now(); if (!momRaf) momRaf = requestAnimationFrame(momentum); }
+        }
+        ty = null; samples = [];
+      };
+      addEventListener('touchend', release, { passive: true });
+      addEventListener('touchcancel', () => { ty = null; samples = []; }, { passive: true });
       let rw = 0; addEventListener('resize', () => { clearTimeout(rw); rw = setTimeout(() => { build(); kick(); if (REDUCED) draw(performance.now()); }, 150); });
       const start = () => { build(); if (REDUCED) { rise = innerHeight; stuck = innerHeight * .8; runway = innerHeight; draw(performance.now()); } else kick(); };
       if (params.has('debug')) window.__tail = () => ({ rise, stuck, runway, virtual, atEnd, visible });
@@ -701,26 +720,26 @@
       if (REDUCED) return;
       const cv = document.createElement('canvas'); cv.className = 'confetti'; document.body.appendChild(cv);
       const ctx = cv.getContext('2d');
-      const P = [], G = 3;                      // pixel unit
+      const P = [], G = 2;                      // pixel unit
       const size = () => { cv.width = Math.ceil(innerWidth / G); cv.height = Math.ceil(innerHeight / G); cv.style.width = innerWidth + 'px'; cv.style.height = innerHeight + 'px'; };
       size(); addEventListener('resize', size);
-      const spawn = (x, y, vx, vy) => P.push({ x, y, vx, vy, s: 2 + Math.random() * 3, t: Math.random() * 6.28,
-        forty: Math.random() < .08, c: Math.random() < .85 ? '#d6ff38' : '#f4f1ec' });
-      for (let i = 0; i < 90; i++) spawn(Math.random() * cv.width, Math.random() * cv.height, 0, .4 + Math.random() * .5);
+      const spawn = (x, y, vx, vy) => P.push({ x, y, vx, vy, s: 1 + Math.random() * 1.6, t: Math.random() * 6.28,
+        forty: Math.random() < .03, c: Math.random() < .85 ? '#d6ff38' : '#f4f1ec' });
+      for (let i = 0; i < 110; i++) spawn(Math.random() * cv.width, Math.random() * cv.height, 0, .4 + Math.random() * .5);
       addEventListener('pointerdown', e => {
         if (e.target.closest('a, button, iframe')) return;
-        for (let i = 0; i < 40; i++) { const a = Math.random() * 6.28, v = 2 + Math.random() * 4; spawn(e.clientX / G, e.clientY / G, Math.cos(a) * v, Math.sin(a) * v - 2); }
+        for (let i = 0; i < 30; i++) { const a = Math.random() * 6.28, v = 2 + Math.random() * 4; spawn(e.clientX / G, e.clientY / G, Math.cos(a) * v, Math.sin(a) * v - 2); }
       });
-      ctx.font = '7px Porca, monospace';
+      ctx.font = '5px Porca, monospace';
       const tick = () => {
         ctx.clearRect(0, 0, cv.width, cv.height);
         for (let i = P.length - 1; i >= 0; i--) {
           const p = P[i]; p.t += .05; p.vy = Math.min(p.vy + .02, 1.6); p.vx *= .98;
           p.x += p.vx + Math.sin(p.t) * .3; p.y += p.vy;
-          if (p.y > cv.height + 4) { if (P.length > 90) { P.splice(i, 1); continue; } p.y = -4; p.x = Math.random() * cv.width; p.vy = .4 + Math.random() * .5; p.vx = 0; }
+          if (p.y > cv.height + 4) { if (P.length > 110) { P.splice(i, 1); continue; } p.y = -4; p.x = Math.random() * cv.width; p.vy = .4 + Math.random() * .5; p.vx = 0; }
           ctx.fillStyle = p.c;
           if (p.forty) ctx.fillText('40', Math.round(p.x), Math.round(p.y));
-          else { const x = Math.round(p.x), y = Math.round(p.y), s = Math.round(p.s); ctx.fillRect(x + 1, y, s - 2, s); ctx.fillRect(x, y + 1, s, s - 2); }
+          else { const x = Math.round(p.x), y = Math.round(p.y), s = Math.max(1, Math.round(p.s)); if (s > 2) { ctx.fillRect(x + 1, y, s - 2, s); ctx.fillRect(x, y + 1, s, s - 2); } else ctx.fillRect(x, y, s, s); }
         }
         requestAnimationFrame(tick);
       };

@@ -626,7 +626,7 @@
           // Full-frame inversions, more often the deeper you are. Greys flip; the accent stays green.
           if (melt > .6 && hash(Math.floor(t * 4), 13) < (melt - .6) * .5)
             for (let i = 0, n = W * H * 4; i < n; i += 4) {
-              if (buf[i + 1] > 150 && buf[i + 2] < 120) continue;
+              if (buf[i + 1] - buf[i + 2] > 24) continue;                  // any green-leaning pixel keeps its colour
               buf[i] = 255 - buf[i]; buf[i + 1] = 255 - buf[i + 1]; buf[i + 2] = 255 - buf[i + 2];
             }
         }

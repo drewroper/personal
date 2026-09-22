@@ -183,6 +183,9 @@
     .flip__wear { display: none; }
     .is-worn .flip__wear { display: block; position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 10px; pointer-events: none; opacity: var(--wear, .7); -webkit-backface-visibility: hidden; backface-visibility: hidden; }
     .is-worn .flip__back .flip__wear { transform: rotate(180deg); }
+    /* Paper stock: one shared tile at a fixed physical scale, so every sleeve reads as printed card. */
+    .flip__paper { display: none; }
+    .is-worn .flip__paper { display: block; position: absolute; inset: 0; border-radius: 10px; pointer-events: none; background: url(../assets/40/wear/paper.webp) 0 0 / 256px 256px repeat; opacity: var(--paper, .7); -webkit-backface-visibility: hidden; backface-visibility: hidden; }
     .flip__list { margin: 0; padding: 18px 20px; width: 100%; height: 100%; box-sizing: border-box; list-style: none; display: flex; flex-direction: column; justify-content: center; font-size: 11px; line-height: 1.5; letter-spacing: .04em; text-transform: uppercase; color: var(--text-muted); }
     .flip__list li { display: flex; gap: 10px; }
     .flip__list li span:first-child { color: var(--text-faint); flex: none; width: 2em; }
@@ -480,8 +483,8 @@
             <div class="flip">
               ${a.art ? `<img class="entry__cover flip__front" src="../${esc(a.art)}" alt="${esc(a.title)} cover" loading="lazy" />`
                       : `<div class="entry__cover entry__cover--empty flip__front" aria-label="${esc(a.title)} cover"><span>?</span></div>`}
-              ${WORN ? `<img class="flip__wear" src="../assets/40/wear/${esc(a.slug.replace(/-40$/, ''))}.webp" alt="" loading="lazy" aria-hidden="true" />` : ''}
-              <div class="flip__back" aria-hidden="true">${back(a)}${WORN ? `<img class="flip__wear" src="../assets/40/wear/${esc(a.slug.replace(/-40$/, ''))}.webp" alt="" loading="lazy" />` : ''}</div>
+              ${WORN ? `<img class="flip__wear" src="../assets/40/wear/${esc(a.slug.replace(/-40$/, ''))}.webp" alt="" loading="lazy" aria-hidden="true" /><div class="flip__paper" style="--paper:${(a.wear && a.wear.paper) || .7}"></div>` : ''}
+              <div class="flip__back" aria-hidden="true">${back(a)}${WORN ? `<img class="flip__wear" src="../assets/40/wear/${esc(a.slug.replace(/-40$/, ''))}.webp" alt="" loading="lazy" /><div class="flip__paper" style="--paper:${(a.wear && a.wear.paper) || .7}"></div>` : ''}</div>
             </div>
           </button>
           <div class="entry__text">

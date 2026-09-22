@@ -84,7 +84,10 @@
         "spotify": "https://open.spotify.com/album/2hDiTEsKePTnDcvKEuLizk"
       },
       "date": "2026-09-23",
-      "art_back": "assets/40/weezer-green-album-back.jpg"
+      "art_back": "assets/40/weezer-green-album-back.jpg",
+      "wear": {
+        "paper": 0.77
+      }
     },
     {
       "no": 2,
@@ -177,7 +180,10 @@
         "spotify": "https://open.spotify.com/album/28DROCResQvsdO6Hjmb32x"
       },
       "date": "2026-09-24",
-      "art_back": "assets/40/finch-what-it-is-to-burn-back.jpg"
+      "art_back": "assets/40/finch-what-it-is-to-burn-back.jpg",
+      "wear": {
+        "paper": 1.0
+      }
     },
     {
       "no": 3,
@@ -280,7 +286,10 @@
         "spotify": "https://open.spotify.com/album/2NrYPcMmQBlbBxopc2XlzS"
       },
       "date": "2026-09-25",
-      "art_back": "assets/40/turnstile-glow-on-back.jpg"
+      "art_back": "assets/40/turnstile-glow-on-back.jpg",
+      "wear": {
+        "paper": 1.0
+      }
     },
     {
       "no": 4,
@@ -393,7 +402,10 @@
         "spotify": "https://open.spotify.com/album/3Ej2Ae8nxp06thEoPhyaLJ"
       },
       "date": "2026-09-26",
-      "art_back": "assets/40/nelly-country-grammar-back.jpg"
+      "art_back": "assets/40/nelly-country-grammar-back.jpg",
+      "wear": {
+        "paper": 0.78
+      }
     },
     {
       "no": 5,
@@ -496,7 +508,10 @@
         "spotify": "https://open.spotify.com/album/5ceB3rxgXqIRpsOvVzTG28"
       },
       "date": "2026-09-27",
-      "art_back": "assets/40/outkast-aquemini-back.jpg"
+      "art_back": "assets/40/outkast-aquemini-back.jpg",
+      "wear": {
+        "paper": 0.69
+      }
     },
     {
       "no": 6,
@@ -579,7 +594,10 @@
         "spotify": "https://open.spotify.com/album/04V5tTHMYIGBzcYxGMgRFn"
       },
       "date": "2026-09-28",
-      "art_back": "assets/40/portugal-the-man-the-satanic-satanist-back.jpg"
+      "art_back": "assets/40/portugal-the-man-the-satanic-satanist-back.jpg",
+      "wear": {
+        "paper": 0.78
+      }
     },
     {
       "no": 7,
@@ -662,7 +680,10 @@
         "spotify": "https://open.spotify.com/album/1NFGnxmeIEBakre4DvLaJq"
       },
       "date": "2026-09-29",
-      "art_back": "assets/40/death-cab-for-cutie-plans-back.jpg"
+      "art_back": "assets/40/death-cab-for-cutie-plans-back.jpg",
+      "wear": {
+        "paper": 0.63
+      }
     },
     {
       "no": 8,
@@ -750,7 +771,10 @@
         "spotify": "https://open.spotify.com/album/7EW77iyGMou046Z44pOrIk"
       },
       "date": "2026-09-30",
-      "art_back": "assets/40/oasis-what-s-the-story-morning-glory-back.jpg"
+      "art_back": "assets/40/oasis-what-s-the-story-morning-glory-back.jpg",
+      "wear": {
+        "paper": 0.76
+      }
     },
     {
       "no": 9,
@@ -848,7 +872,10 @@
       "label": "XL Recordings Ltd",
       "art": "assets/40/radiohead-hail-to-the-thief.jpg",
       "date": "2026-10-01",
-      "art_back": "assets/40/radiohead-hail-to-the-thief-back.jpg"
+      "art_back": "assets/40/radiohead-hail-to-the-thief-back.jpg",
+      "wear": {
+        "paper": 0.74
+      }
     },
     {
       "no": 10,
@@ -935,7 +962,10 @@
       "links": {
         "spotify": "https://open.spotify.com/album/5O9OXl9zAWMJTzawofxuan"
       },
-      "date": "2026-10-02"
+      "date": "2026-10-02",
+      "wear": {
+        "paper": 0.73
+      }
     },
     {
       "no": 40,
@@ -1013,7 +1043,10 @@
         "spotify": "https://open.spotify.com/album/2hDiTEsKePTnDcvKEuLizk"
       },
       "date": "2026-11-01",
-      "art_back": "assets/40/weezer-green-album-back.jpg"
+      "art_back": "assets/40/weezer-green-album-back.jpg",
+      "wear": {
+        "paper": 0.77
+      }
     },
     {
       "no": null,
@@ -1105,7 +1138,10 @@
         }
       ],
       "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/28/af/39/28af39aa-6d9e-61d5-2364-095a7b0d3182/4050538365283.jpg/1800x1800bb.jpg",
-      "art": "assets/40/the-kinks-lola-versus-powerman.jpg"
+      "art": "assets/40/the-kinks-lola-versus-powerman.jpg",
+      "wear": {
+        "paper": 1.0
+      }
     }
   ]
 }

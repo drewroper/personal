@@ -22,6 +22,8 @@
   .cov { position:relative; aspect-ratio:1; border-radius:10px; overflow:hidden; background:#151516; }
   .cov img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
   .cov .wear { opacity: var(--wear, .75); pointer-events:none; }
+  .cov .paper { position:absolute; inset:0; background: url(../assets/40/wear/paper.webp) 0 0 / 256px 256px repeat; opacity: var(--paper, .7); pointer-events:none; }
+  body.off .cov .paper { opacity: 0; }
   body.off .cov .wear { opacity: 0; }
   figcaption { display:flex; justify-content:space-between; gap:12px; margin-top:8px; color: var(--muted); }
   figcaption span:last-child { color: var(--faint); }
@@ -48,6 +50,7 @@
         <div class="cov">
           <img src="../${esc(a.art)}" alt="" loading="lazy" />
           <img class="wear" src="../assets/40/wear/${esc(a.slug)}.webp" alt="" loading="lazy" />
+          <div class="paper" style="--paper:${(a.wear && a.wear.paper) || .7}"></div>
         </div>
         <figcaption><span>${esc(a.artist)} — ${esc(a.title)}</span><span>${esc(a.year || '')}</span></figcaption>
       </figure>`).join('');

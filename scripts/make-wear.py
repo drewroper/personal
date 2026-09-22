@@ -143,6 +143,13 @@ def make(job):
         abr = np.clip((fine * .55 + coarse * .45 - U(.36, .46)) * 3.2, 0, 1) * np.clip((coarse - .25) * 2.5, 0, 1)
         prof = band ** U(.6, 1.4)
         wear = np.maximum(wear, prof * lobe * cover * abr * U(.55, .9) * min(1, .45 + life))
+        # Some sleeves also get a broader rub around the ring: the print worn thin by years of
+        # the disc sliding in and out. Grain-edged, not blurred, and only on part of the circle.
+        if P(.4):
+            bw = S * U(.008, .02) * (.7 + .6 * (.5 + .5 * np.sin(2 * ang + ph[1])))
+            broad = np.clip(1 - np.abs(r - R * U(.99, 1.0)) / bw, 0, 1) ** U(1.2, 2)
+            rub = np.clip((fine * .6 + coarse * .4 - U(.4, .5)) * 2.6, 0, 1)
+            wear = np.maximum(wear, broad * lobe * cover * rub * U(.25, .45) * min(1, .45 + life))
 
     # Hairlines and rub marks, drawn at 2x and downsampled for crisp 1px anti-aliased lines.
     SS = 2; cv = Image.new('L', (S * SS, S * SS), 0); d = ImageDraw.Draw(cv)

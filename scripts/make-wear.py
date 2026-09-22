@@ -112,15 +112,14 @@ def make(slug, year=None):
         light += blur(np.asarray(im).astype(np.float32) / 255, 1.2) * 1.2
 
     # Price sticker ghost: a pale patch with darker residue at its edge.
-    if P(.35):
+    if P(.18) and age > 12:
         px, py = rng.choice(corners); px += (S * U(.08, .18)) * (1 if px == 0 else -1); py += (S * U(.08, .18)) * (1 if py == 0 else -1)
         w_, h_ = S * U(.07, .12), S * U(.05, .09)
         im = Image.new('L', (S, S), 0); d = ImageDraw.Draw(im)
-        if P(.5): d.rounded_rectangle([px - w_ / 2, py - h_ / 2, px + w_ / 2, py + h_ / 2], radius=S * .01, fill=255)
-        else: d.ellipse([px - w_ / 2, py - w_ / 2, px + w_ / 2, py + w_ / 2], fill=255)
+        d.rounded_rectangle([px - w_ / 2, py - h_ / 2, px + w_ / 2, py + h_ / 2], radius=S * .006, fill=255)
         st = np.asarray(im).astype(np.float32) / 255
-        light += blur(st, 1.5) * (.12 + noise(10) * .2)
-        dark += (blur(st, 2.5) - blur(st, .6)).clip(0, 1) * .8 * (.5 + noise(8) * .6)
+        light += blur(st, 1.5) * (.08 + noise(10) * .12)
+        dark += (blur(st, 2.5) - blur(st, .6)).clip(0, 1) * .5 * (.5 + noise(8) * .6)
 
     # Scuffs: directional streaks, and soft pale patches.
     for _ in range(int(U(2, 7))):
@@ -129,10 +128,10 @@ def make(slug, year=None):
         light += np.exp(-((ux / Lx) ** 2 + (uy / Ly) ** 2)) * noise(8) * U(.15, .45)
     # Hairlines
     im = Image.new('L', (S, S), 0); d = ImageDraw.Draw(im)
-    for _ in range(int(U(8, 90) * life)):
-        L = U(S * .03, S * .5); a = U(0, math.pi); x0, y0 = U(0, S), U(0, S)
-        d.line([(x0, y0), (x0 + math.cos(a) * L, y0 + math.sin(a) * L)], fill=int(U(70, 230)), width=int(rng.choice([1, 1, 1, 2])))
-    light += blur(np.asarray(im).astype(np.float32) / 255, .5) * .9
+    for _ in range(int(U(3, 34) * life)):
+        L = U(S * .03, S * .35); a = U(0, math.pi); x0, y0 = U(0, S), U(0, S)
+        d.line([(x0, y0), (x0 + math.cos(a) * L, y0 + math.sin(a) * L)], fill=int(U(50, 190)), width=1)
+    light += blur(np.asarray(im).astype(np.float32) / 255, .5) * .7
     # Speckle
     light += blur((rng.random((S, S)) > 1 - .002 * life).astype(np.float32), .5) * 2
 

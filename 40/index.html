@@ -264,21 +264,21 @@
     .grid40 { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; margin: 0; max-width: 560px; }
     /* Past the footer wordmark the 404040 repeats, each copy more eroded by dither, until nothing is left. */
     /* ── The tail: scroll pulls a pixel extrusion out of 404040 and you travel down it. ── */
-    .tail { position: relative; height: 160vh; height: 160dvh; }
+    .tail { position: relative; }
     .tail__stage { position: sticky; top: 0; height: 100vh; height: 100dvh; overflow: hidden; }
     .tail__cv { position: absolute; inset: 0; display: block; width: 100%; height: 100%; image-rendering: pixelated; image-rendering: crisp-edges; }
     .tail__col { position: relative; height: 100%; }
     .tail__cap { position: absolute; top: 0; left: var(--gutter); will-change: transform; visibility: hidden; }
-    /* The hidden 41st: revealed when the tunnel clears, about twenty swipes in. */
-    .tail__secret { position: absolute; left: var(--gutter); right: var(--gutter); top: 50%; transform: translateY(-46%); opacity: 0; pointer-events: none; }
-    .tail__secret[hidden] { display: none; }
-    .tail__secret-cover { width: min(58vw, 300px); aspect-ratio: 1; border: 1px solid var(--rule); border-radius: 10px; display: grid; place-items: center; background: var(--bg-raised); }
-    .tail__secret-cover span { font-family: var(--font-display); font-size: clamp(64px, 22vw, 120px); line-height: 1; color: var(--text-faint); letter-spacing: -.04em; }
-    .tail__secret-cover img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 10px; }
-    .tail__secret-label { display: flex; justify-content: space-between; margin: 22px 0 0; color: var(--text-faint); }
-    .tail__secret-artist { margin-top: 18px; }
-    .tail__secret-title { margin-top: 6px; }
-    @media (min-width: 1024px) { .tail__secret { max-width: 560px; } .tail__secret-cover { width: 320px; } }
+    /* The bonus album: surfaces inside the chaos about twenty swipes in, laid out like any entry,
+       on a translucent panel so the tunnel keeps moving around and through it. */
+    .tail { height: auto; min-height: 160vh; min-height: 160dvh; }
+    .tail__bonus { position: relative; z-index: 2; margin-top: 100vh; margin-top: 100dvh; padding-bottom: 40px; opacity: 0; transition: opacity .6s ease; }
+    .tail__bonus[hidden] { display: none; }
+    .tail__bonus.is-in { opacity: 1; }
+    .tail__bonus .entry { border: 1px solid var(--rule); border-radius: 14px; padding: 24px 20px 32px; background: rgba(12,12,13,.78); backdrop-filter: blur(10px) saturate(120%); -webkit-backdrop-filter: blur(10px) saturate(120%); }
+    .tail__bonus .entry__head { color: var(--text-faint); }
+    .entry__cover--empty { display: grid; place-items: center; font-family: var(--font-display); font-size: clamp(64px, 20vw, 120px); color: var(--text-faint); letter-spacing: -.04em; }
+    @media (min-width: 1024px) { .tail__bonus .entry { padding: 48px 40px 56px; } }
     @media (prefers-reduced-motion: reduce) { .tail { height: 100vh; height: 100dvh; } }
     .grid40 > * { display: block; aspect-ratio: 1; border-radius: 4px; overflow: hidden; }
     .grid40 span { border: 1px solid var(--rule); display: grid; place-items: center; font: 400 9px/1 var(--font-mono); letter-spacing: .06em; color: var(--text-faint); opacity: .8; user-select: none; }
@@ -378,14 +378,9 @@
       <canvas class="tail__cv" id="js-tail-cv"></canvas>
       <div class="page tail__col">
         <div class="wordmark tail__cap" id="js-tail-start"><span>404040</span></div>
-        <div class="tail__secret" id="js-tail-secret" hidden>
-          <div class="tail__secret-cover" id="js-secret-cover"><span>41</span></div>
-          <p class="mono tail__secret-label"><span class="entry__no">Day 41</span><span>You kept going.</span></p>
-          <p class="entry__artist tail__secret-artist" id="js-secret-artist">Artist to be named</p>
-          <h2 class="entry__title tail__secret-title" id="js-secret-title">One more.</h2>
-        </div>
       </div>
     </div>
+    <div class="page tail__bonus" id="js-tail-bonus" hidden></div>
   </section>
 
   <script>
@@ -474,15 +469,16 @@
       const blurb = a.blurb && a.blurb.length
         ? a.blurb.map(p => `<p>${inline(p)}</p>`).join('')
         : `<p class="entry__blurb--empty">Blurb still cooking.</p>`;
-      return `<article class="entry" id="${pad(a.no)}">
-        <div class="entry__head mono">
-          <span class="entry__no"><a href="#${pad(a.no)}">Day ${pad(a.no)}</a></span>
-          <span>${fmtDate(a.date)}</span>
-        </div>
+      const head = a.bonus
+        ? `<span class="entry__no">Bonus album</span><span>Always here.</span>`
+        : `<span class="entry__no"><a href="#${pad(a.no)}">Day ${pad(a.no)}</a></span><span>${fmtDate(a.date)}</span>`;
+      return `<article class="entry" id="${a.bonus ? 'bonus' : pad(a.no)}">
+        <div class="entry__head mono">${head}</div>
         <div class="entry__grid">
           <button class="entry__cover-wrap" type="button" aria-label="Flip ${esc(a.title)} over" aria-pressed="false" style="display:block;width:100%;padding:0;border:0;background:none;text-align:left;">
             <div class="flip">
-              <img class="entry__cover flip__front" src="../${esc(a.art || '')}" alt="${esc(a.title)} cover" loading="lazy" />
+              ${a.art ? `<img class="entry__cover flip__front" src="../${esc(a.art)}" alt="${esc(a.title)} cover" loading="lazy" />`
+                      : `<div class="entry__cover entry__cover--empty flip__front" aria-label="${esc(a.title)} cover"><span>?</span></div>`}
               ${WORN ? `<img class="flip__wear" src="../assets/40/wear/${esc(a.slug.replace(/-40$/, ''))}.webp" alt="" loading="lazy" aria-hidden="true" />` : ''}
               <div class="flip__back" aria-hidden="true">${back(a)}${WORN ? `<img class="flip__wear" src="../assets/40/wear/${esc(a.slug.replace(/-40$/, ''))}.webp" alt="" loading="lazy" />` : ''}</div>
             </div>
@@ -495,8 +491,8 @@
           </div>
         </div>
         <div class="entry__blurb">${blurb}</div>
-        <div class="entry__player">${player(a)}</div>
-        ${listen(a)}
+        ${a.bonus && !a.apple_id ? '' : `<div class="entry__player">${player(a)}</div>`}
+        ${a.bonus && !a.apple_id ? '' : listen(a)}
         ${a.apple_id ? '' : tracks(a)}
       </article>`;
     }
@@ -518,7 +514,7 @@
     //    out of sight and it all resets. ──
     (function tail() {
       const region = document.getElementById('js-tail'), cv = document.getElementById('js-tail-cv'), ref = document.querySelector('.wordmark--top');
-      const capEl = document.getElementById('js-tail-start'), secretEl = document.getElementById('js-tail-secret');
+      const capEl = document.getElementById('js-tail-start'), bonusEl = document.getElementById('js-tail-bonus');
       if (!region || !cv || !ref || !capEl) return;
       const ctx = cv.getContext('2d');
       const TXT = [244, 241, 236], ACC = [214, 255, 56], BG = [12, 12, 13];
@@ -571,8 +567,10 @@
         const capY = 28 / cell;
         // Appear: nothing while the wordmark is still low on screen, everything once it reaches the top.
         const appear = ease(clamp((rise - inkPx - 28) / (innerHeight - inkPx - 28)));
-        const dial = Math.min(21, (stuck + virtual) / innerHeight);           // screens travelled, real plus virtual
-        const clear = ease(clamp((dial - 19) / 1.3));                        // 19–20: the chaos clears for the hidden 41st
+        const dial = Math.min(22, (stuck + virtual) / innerHeight);           // screens travelled, real plus virtual
+        const clear = 0;
+        // About twenty swipes in, the bonus album surfaces inside the chaos and the page grows to hold it.
+        if (bonusEl) { const show = dial >= 19; if (show && bonusEl.hidden) { bonusEl.hidden = false; requestAnimationFrame(() => bonusEl.classList.add('is-in')); } else if (!show && !bonusEl.hidden) { bonusEl.hidden = true; bonusEl.classList.remove('is-in'); } }
         // One new thing per full screen. Each stage ramps in over the screen after its number.
         const st = n => ease(clamp(dial - n));
         const flow  = dial * 5;                                               // the ribbon visibly flows with every scroll
@@ -635,7 +633,6 @@
         // into the field below. Each pixel has its own release point; once released it drifts down,
         // scatters sideways, and dithers away.
         capEl.style.visibility = melt > 0 && clear < .5 ? 'hidden' : 'visible';
-        if (secretEl) { secretEl.hidden = clear <= 0; secretEl.style.opacity = clear; secretEl.style.pointerEvents = clear > .9 ? 'auto' : 'none'; }
         if (melt > 0 && clear < .5) {
           const frame = Math.floor(t * 5);
           for (let i = 0; i < fill.length; i += 2) {
@@ -668,7 +665,7 @@
         rise = innerHeight - r.top; stuck = Math.max(0, -r.top); runway = Math.max(1, r.height - innerHeight);
         visible = r.bottom > 0 && rise > 0;
         atEnd = stuck >= runway - 2;
-        if (r.top >= innerHeight) virtual = 0;                                // footer out of sight: reset
+        if (r.top >= innerHeight) { virtual = 0; if (bonusEl && !bonusEl.hidden) { bonusEl.hidden = true; bonusEl.classList.remove('is-in'); } }   // footer out of sight: reset
       }
       let last = 0;
       function tick(now) { raf = 0; if (!visible) return; if (now - last > 40) { draw(now); last = now; } if (!REDUCED) raf = requestAnimationFrame(tick); }
@@ -862,6 +859,9 @@
         if (BIRTHDAY && last && !REDUCED && 'IntersectionObserver' in window) {
           new IntersectionObserver((es, io) => { if (es[0].isIntersecting) { io.disconnect(); setTimeout(() => arrive(last), 500); } }, { threshold: .6 }).observe(last);
         }
+
+        const bonusEl = document.getElementById('js-tail-bonus');
+        if (bonusEl && meta.bonus) bonusEl.innerHTML = entry(Object.assign({ bonus: true, no: 0 }, meta.bonus));
 
         const feed = document.getElementById('js-feed');
         if (!live.length) {

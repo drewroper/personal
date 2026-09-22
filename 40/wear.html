@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="robots" content="noindex" />
+<title>Wear notes</title>
+
+<style>
+  @font-face { font-family: 'Porca'; src: url(../assets/fonts/Porca.otf) format('opentype'); font-display: swap; }
+  @font-face { font-family: 'Geist Mono'; src: url(../assets/fonts/GeistMono-Regular.ttf) format('truetype'); font-display: swap; }
+  :root { --bg:#0c0c0d; --text:#f4f1ec; --muted:#8c8a86; --faint:#56544f; --rule:#262628; --accent:#d6ff38; }
+  html, body { margin:0; background:var(--bg); color:var(--text); font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing:.06em; text-transform: uppercase; }
+  header { position: sticky; top:0; z-index:5; display:flex; justify-content:space-between; align-items:center; gap:12px; padding:12px 16px; background: rgba(12,12,13,.85); backdrop-filter: blur(10px); border-bottom:1px solid var(--rule); }
+  header b { font-family: Porca; font-weight: 400; font-size: 22px; letter-spacing: -.06em; text-transform: none; }
+  .ctl { display:flex; gap:6px; }
+  .ctl button { font: inherit; letter-spacing: inherit; text-transform: inherit; color: var(--muted); background:none; border:1px solid var(--rule); border-radius:999px; padding:6px 10px; cursor:pointer; }
+  .ctl button.is-on { color: var(--accent); border-color: var(--accent); }
+  main { display:grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr)); gap: 16px; padding: 16px; }
+  @media (max-width: 480px) { main { grid-template-columns: 1fr; gap: 24px; } }
+  figure { margin:0; }
+  .cov { position:relative; aspect-ratio:1; border-radius:10px; overflow:hidden; background:#151516; }
+  .cov img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
+  .cov .wear { opacity: var(--wear, .75); pointer-events:none; }
+  body.off .cov .wear { opacity: 0; }
+  figcaption { display:flex; justify-content:space-between; gap:12px; margin-top:8px; color: var(--muted); }
+  figcaption span:last-child { color: var(--faint); }
+</style>
+</head>
+<body>
+<header>
+  <b>404040</b>
+  <div class="ctl">
+    <button data-k="off">Off</button>
+    <button data-k=".55">Light</button>
+    <button data-k=".75" class="is-on">Med</button>
+    <button data-k="1">Heavy</button>
+  </div>
+</header>
+<main id="g"></main>
+<script>
+  const params = new URLSearchParams(location.search);
+  fetch('../data/albums.json?v=' + Date.now()).then(r => r.json()).then(({ albums }) => {
+    const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const list = albums.filter(a => a.art).sort((a, b) => String(a.year).localeCompare(String(b.year)));
+    document.getElementById('g').innerHTML = list.map(a => `
+      <figure>
+        <div class="cov">
+          <img src="../${esc(a.art)}" alt="" loading="lazy" />
+          <img class="wear" src="../assets/40/wear/${esc(a.slug)}.webp" alt="" loading="lazy" />
+        </div>
+        <figcaption><span>${esc(a.artist)} — ${esc(a.title)}</span><span>${esc(a.year || '')}</span></figcaption>
+      </figure>`).join('');
+  });
+  document.querySelectorAll('.ctl button').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('.ctl button').forEach(x => x.classList.toggle('is-on', x === b));
+    const k = b.dataset.k; document.body.classList.toggle('off', k === 'off');
+    if (k !== 'off') document.body.style.setProperty('--wear', k);
+  }));
+</script>
+</body>
+</html>

@@ -16,7 +16,7 @@
   },
   "albums": [
     {
-      "no": null,
+      "no": 5,
       "slug": "weezer-green-album",
       "artist": "Weezer",
       "title": "Weezer (The Green Album)",
@@ -89,10 +89,11 @@
         "spotify": "https://open.spotify.com/album/2hDiTEsKePTnDcvKEuLizk"
       },
       "art_back": "assets/40/weezer-green-album-back.jpg",
-      "art_back_src": "http://coverartarchive.org/release/7a9a2617-28a7-4afd-9993-1b6a40cf6f25/32712601799.jpg"
+      "art_back_src": "http://coverartarchive.org/release/7a9a2617-28a7-4afd-9993-1b6a40cf6f25/32712601799.jpg",
+      "date": "2026-09-27"
     },
     {
-      "no": null,
+      "no": 18,
       "slug": "finch-what-it-is-to-burn",
       "artist": "Finch",
       "title": "What It Is to Burn",
@@ -180,10 +181,11 @@
         "spotify": "https://open.spotify.com/album/28DROCResQvsdO6Hjmb32x"
       },
       "art_back": "assets/40/finch-what-it-is-to-burn-back.jpg",
-      "art_back_src": "http://coverartarchive.org/release/21024c74-097c-4415-8848-b8a6f65e9072/4691646485.jpg"
+      "art_back_src": "http://coverartarchive.org/release/21024c74-097c-4415-8848-b8a6f65e9072/4691646485.jpg",
+      "date": "2026-10-10"
     },
     {
-      "no": null,
+      "no": 10,
       "slug": "turnstile-glow-on",
       "artist": "Turnstile",
       "title": "Glow On",
@@ -281,7 +283,8 @@
         "spotify": "https://open.spotify.com/album/2NrYPcMmQBlbBxopc2XlzS"
       },
       "art_back": "assets/40/turnstile-glow-on-back.jpg",
-      "art_back_src": "http://coverartarchive.org/release/c86758fc-5447-461d-942d-a9300e4bc51f/37155210486.jpg"
+      "art_back_src": "http://coverartarchive.org/release/c86758fc-5447-461d-942d-a9300e4bc51f/37155210486.jpg",
+      "date": "2026-10-02"
     },
     {
       "no": null,
@@ -658,7 +661,7 @@
       "art_back_src": "http://coverartarchive.org/release/025eaf54-9ae7-497e-9b81-a2fed09b53ff/4136078628.jpg"
     },
     {
-      "no": null,
+      "no": 3,
       "slug": "oasis-what-s-the-story-morning-glory",
       "artist": "Oasis",
       "title": "(What's the Story) Morning Glory?",
@@ -741,10 +744,11 @@
         "spotify": "https://open.spotify.com/album/7EW77iyGMou046Z44pOrIk"
       },
       "art_back": "assets/40/oasis-what-s-the-story-morning-glory-back.jpg",
-      "art_back_src": "http://coverartarchive.org/release/f29584cc-8f94-4035-8a63-d4369f201e2a/38266290259.jpg"
+      "art_back_src": "http://coverartarchive.org/release/f29584cc-8f94-4035-8a63-d4369f201e2a/38266290259.jpg",
+      "date": "2026-09-25"
     },
     {
-      "no": null,
+      "no": 12,
       "slug": "radiohead-hail-to-the-thief",
       "artist": "Radiohead",
       "title": "Hail to the Thief",
@@ -837,10 +841,11 @@
       "label": "XL Recordings Ltd",
       "art": "assets/40/radiohead-hail-to-the-thief.jpg",
       "art_back": "assets/40/radiohead-hail-to-the-thief-back.jpg",
-      "art_back_src": "http://coverartarchive.org/release/f847d298-e2d8-43ed-97ed-7c7b01ff03bc/24770542667.jpg"
+      "art_back_src": "http://coverartarchive.org/release/f847d298-e2d8-43ed-97ed-7c7b01ff03bc/24770542667.jpg",
+      "date": "2026-10-04"
     },
     {
-      "no": null,
+      "no": 8,
       "slug": "animal-collective-merriweather-post-pavilion",
       "artist": "Animal Collective",
       "title": "Merriweather Post Pavilion",
@@ -921,7 +926,8 @@
       "art": "assets/40/animal-collective-merriweather-post-pavilion.jpg",
       "links": {
         "spotify": "https://open.spotify.com/album/5O9OXl9zAWMJTzawofxuan"
-      }
+      },
+      "date": "2026-09-30"
     },
     {
       "no": null,
@@ -1086,7 +1092,7 @@
       "art_back_src": "https://coverartarchive.org/release/17f88c72-99db-495c-8fbd-37610350c785/44879516313.jpg"
     },
     {
-      "no": null,
+      "no": 7,
       "slug": "girl-talk-feed-the-animals",
       "artist": "Girl Talk",
       "title": "Feed the Animals",
@@ -1174,7 +1180,8 @@
         }
       ],
       "track_count": 14,
-      "runtime_ms": 3201000
+      "runtime_ms": 3201000,
+      "date": "2026-09-29"
     },
     {
       "no": null,
@@ -1268,7 +1275,7 @@
       "art_back_src": "https://coverartarchive.org/release/9108adbb-b065-408b-9f59-c1af1f4a241a/11144526053.jpg"
     },
     {
-      "no": null,
+      "no": 19,
       "slug": "brand-new-deja-entendu",
       "artist": "Brand New",
       "title": "Deja Entendu",
@@ -1346,10 +1353,11 @@
         "spotify": "https://open.spotify.com/album/6vDiMhyfSnTn18OY99BSQX"
       },
       "art_back": "assets/40/brand-new-deja-entendu-back.jpg",
-      "art_back_src": "http://coverartarchive.org/release/b315e122-1921-44b5-ada0-27817ad6d0bc/32846867469.jpg"
+      "art_back_src": "http://coverartarchive.org/release/b315e122-1921-44b5-ada0-27817ad6d0bc/32846867469.jpg",
+      "date": "2026-10-11"
     },
     {
-      "no": null,
+      "no": 1,
       "slug": "dave-matthews-band-crash",
       "artist": "Dave Matthews Band",
       "title": "Crash",
@@ -1432,7 +1440,8 @@
       "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/1d/4f/38/1d4f38dd-e5ee-a14e-13a2-df60d4e3b431/884977724707.jpg/1800x1800bb.jpg",
       "art": "assets/40/dave-matthews-band-crash.jpg",
       "art_back": "assets/40/dave-matthews-band-crash-back.jpg",
-      "art_back_src": "http://coverartarchive.org/release/c4335abe-ac67-44c6-87f5-b452d62b07d9/20335839949.jpg"
+      "art_back_src": "http://coverartarchive.org/release/c4335abe-ac67-44c6-87f5-b452d62b07d9/20335839949.jpg",
+      "date": "2026-09-23"
     },
     {
       "no": null,
@@ -1521,7 +1530,7 @@
       "art_back_src": "http://coverartarchive.org/release/c46205bc-adb2-48d8-8e8e-b05e54109c86/14063280413.jpg"
     },
     {
-      "no": null,
+      "no": 13,
       "slug": "alt-j-an-awesome-wave",
       "artist": "alt-J",
       "title": "An Awesome Wave",
@@ -1614,7 +1623,8 @@
         "spotify": "https://open.spotify.com/album/6k3vC8nep1BfqAIJ81L6OL"
       },
       "art_back": "assets/40/alt-j-an-awesome-wave-back.jpg",
-      "art_back_src": "https://coverartarchive.org/release/beb58056-1b5a-4b4f-8b86-ac28b4092470/8777336088.jpg"
+      "art_back_src": "https://coverartarchive.org/release/beb58056-1b5a-4b4f-8b86-ac28b4092470/8777336088.jpg",
+      "date": "2026-10-05"
     },
     {
       "no": null,
@@ -1772,7 +1782,7 @@
       "art": "assets/40/lord-huron-lonesome-dreams.jpg"
     },
     {
-      "no": null,
+      "no": 15,
       "slug": "ratatat-classics",
       "artist": "Ratatat",
       "title": "Classics",
@@ -1850,7 +1860,8 @@
       "label": "XL Recordings Ltd",
       "art": "assets/40/ratatat-classics.jpg",
       "art_back": "assets/40/ratatat-classics-back.jpg",
-      "art_back_src": "http://coverartarchive.org/release/82a6769a-6527-4559-8d19-dbfbf93c92f1/26763472220.png"
+      "art_back_src": "http://coverartarchive.org/release/82a6769a-6527-4559-8d19-dbfbf93c92f1/26763472220.png",
+      "date": "2026-10-07"
     },
     {
       "no": null,
@@ -1932,7 +1943,7 @@
       }
     },
     {
-      "no": null,
+      "no": 17,
       "slug": "incubus-morning-view",
       "artist": "Incubus",
       "title": "Morning View",
@@ -2020,10 +2031,11 @@
         "spotify": "https://open.spotify.com/album/1rQZbncicoXyB64DqoH7OY"
       },
       "art_back": "assets/40/incubus-morning-view-back.jpg",
-      "art_back_src": "https://coverartarchive.org/release/ee6b9446-1d2b-427d-8172-7ee6dab0fd5f/8289386498.jpg"
+      "art_back_src": "https://coverartarchive.org/release/ee6b9446-1d2b-427d-8172-7ee6dab0fd5f/8289386498.jpg",
+      "date": "2026-10-09"
     },
     {
-      "no": null,
+      "no": 2,
       "slug": "third-eye-blind-third-eye-blind",
       "artist": "Third Eye Blind",
       "title": "Third Eye Blind",
@@ -2116,7 +2128,8 @@
         "spotify": "https://open.spotify.com/album/2gToC0XAblE9h3UZD6aAaQ"
       },
       "art_back": "assets/40/third-eye-blind-third-eye-blind-back.jpg",
-      "art_back_src": "http://coverartarchive.org/release/bf333fb1-a5c4-413a-a663-43b0c603eab5/26861645942.jpg"
+      "art_back_src": "http://coverartarchive.org/release/bf333fb1-a5c4-413a-a663-43b0c603eab5/26861645942.jpg",
+      "date": "2026-09-24"
     },
     {
       "no": null,
@@ -2210,7 +2223,7 @@
       "art_back_src": "http://coverartarchive.org/release/5aac11da-dad6-485c-b7f2-6fe330693095/32666815993.jpg"
     },
     {
-      "no": null,
+      "no": 9,
       "slug": "run-the-jewels-run-the-jewels-2",
       "artist": "Run the Jewels",
       "title": "Run the Jewels 2",
@@ -2293,7 +2306,8 @@
       "label": "Seeker Music",
       "art": "assets/40/run-the-jewels-run-the-jewels-2.jpg",
       "art_back": "assets/40/run-the-jewels-run-the-jewels-2-back.jpg",
-      "art_back_src": "http://coverartarchive.org/release/063f311e-9c81-4616-a007-b76e3df910c9/26628543683.jpg"
+      "art_back_src": "http://coverartarchive.org/release/063f311e-9c81-4616-a007-b76e3df910c9/26628543683.jpg",
+      "date": "2026-10-01"
     },
     {
       "no": null,
@@ -2365,7 +2379,7 @@
       "art": "assets/40/the-hotelier-home-like-noplace-is-there.jpg"
     },
     {
-      "no": null,
+      "no": 16,
       "slug": "tokyo-police-club-champ",
       "artist": "Tokyo Police Club",
       "title": "Champ",
@@ -2441,10 +2455,11 @@
       "art": "assets/40/tokyo-police-club-champ.jpg",
       "links": {
         "spotify": "https://open.spotify.com/album/7HLzs8Qao2pl7qFEbY7SJo"
-      }
+      },
+      "date": "2026-10-08"
     },
     {
-      "no": null,
+      "no": 6,
       "slug": "blink-182-take-off-your-pants-and-jacket",
       "artist": "blink-182",
       "title": "Take Off Your Pants and Jacket",
@@ -2532,10 +2547,11 @@
         "spotify": "https://open.spotify.com/album/3nHpBmW5wJXGeC3ojBkpey"
       },
       "art_back": "assets/40/blink-182-take-off-your-pants-and-jacket-back.jpg",
-      "art_back_src": "https://coverartarchive.org/release/dce5628d-fc2f-4703-9e58-7b266df478c3/36600754811.jpg"
+      "art_back_src": "https://coverartarchive.org/release/dce5628d-fc2f-4703-9e58-7b266df478c3/36600754811.jpg",
+      "date": "2026-09-28"
     },
     {
-      "no": null,
+      "no": 11,
       "slug": "youth-lagoon-the-year-of-hibernation",
       "artist": "Youth Lagoon",
       "title": "The Year of Hibernation",
@@ -2608,7 +2624,8 @@
         "spotify": "https://open.spotify.com/album/0mcvDycoex7ANLZOmVVRoD"
       },
       "art_back": "assets/40/youth-lagoon-the-year-of-hibernation-back.jpg",
-      "art_back_src": "https://coverartarchive.org/release/2f6ee3f5-6e5f-46e5-8dfc-4099f2713645/41279033936.jpg"
+      "art_back_src": "https://coverartarchive.org/release/2f6ee3f5-6e5f-46e5-8dfc-4099f2713645/41279033936.jpg",
+      "date": "2026-10-03"
     },
     {
       "no": null,
@@ -2717,7 +2734,7 @@
       "art_back_src": "http://coverartarchive.org/release/9f8374c0-8598-3799-8986-a573b9de2d31/5763179290.jpg"
     },
     {
-      "no": null,
+      "no": 20,
       "slug": "phish-a-live-one",
       "artist": "Phish",
       "title": "A Live One",
@@ -2800,10 +2817,11 @@
       "label": "Elektra",
       "art": "assets/40/phish-a-live-one.jpg",
       "art_back": "assets/40/phish-a-live-one-back.jpg",
-      "art_back_src": "http://coverartarchive.org/release/b36f57fa-9fdf-4326-9dcc-49105ae7031c/17690753919.jpg"
+      "art_back_src": "http://coverartarchive.org/release/b36f57fa-9fdf-4326-9dcc-49105ae7031c/17690753919.jpg",
+      "date": "2026-10-12"
     },
     {
-      "no": null,
+      "no": 4,
       "slug": "outkast-stankonia",
       "artist": "OutKast",
       "title": "Stankonia",
@@ -2946,10 +2964,11 @@
       "label": "Arista",
       "art": "assets/40/outkast-stankonia.jpg",
       "art_back": "assets/40/outkast-stankonia-back.jpg",
-      "art_back_src": "http://coverartarchive.org/release/951d7ae5-965b-3277-923d-f2da57fcd969/8976394266.jpg"
+      "art_back_src": "http://coverartarchive.org/release/951d7ae5-965b-3277-923d-f2da57fcd969/8976394266.jpg",
+      "date": "2026-09-26"
     },
     {
-      "no": null,
+      "no": 14,
       "slug": "jose-gonzalez-in-our-nature",
       "artist": "José González",
       "title": "In Our Nature",
@@ -3027,7 +3046,8 @@
       "label": "Imperial Recordings / Mute",
       "art": "assets/40/jose-gonzalez-in-our-nature.jpg",
       "art_back": "assets/40/jose-gonzalez-in-our-nature-back.jpg",
-      "art_back_src": "http://coverartarchive.org/release/ba3d1339-f4d8-495c-b422-34c40de6d1d9/17097045330.jpg"
+      "art_back_src": "http://coverartarchive.org/release/ba3d1339-f4d8-495c-b422-34c40de6d1d9/17097045330.jpg",
+      "date": "2026-10-06"
     }
   ]
 }

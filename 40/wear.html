@@ -21,7 +21,8 @@
   figure { margin:0; }
   .cov { position:relative; aspect-ratio:1; border-radius:10px; overflow:hidden; background:#151516; }
   .cov img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
-  .cov .wear { opacity: var(--wear, .75); pointer-events:none; }
+  .cov .worn { transition: opacity .2s ease; }
+  body.off .cov .worn { opacity: 0; }
   .cov .paper { position:absolute; inset:0; background: url(../assets/40/wear/paper.webp) 0 0 / 256px 256px repeat; opacity: var(--paper, .7); pointer-events:none; }
   body.off .cov .paper { opacity: 0; }
   body.off .cov .wear { opacity: 0; }
@@ -33,32 +34,27 @@
 <header>
   <b>404040</b>
   <div class="ctl">
-    <button data-k="off">Off</button>
-    <button data-k=".55">Light</button>
-    <button data-k=".75" class="is-on">Med</button>
-    <button data-k="1">Heavy</button>
+    <button data-k="off">Clean</button>
+    <button data-k="worn" class="is-on">Worn</button>
   </div>
 </header>
 <main id="g"></main>
 <script>
-  const params = new URLSearchParams(location.search);
   fetch('../data/albums.json?v=' + Date.now()).then(r => r.json()).then(({ albums }) => {
     const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-    const list = albums.filter(a => a.art).sort((a, b) => String(a.year).localeCompare(String(b.year)));
+    const list = albums.filter(a => a.art_worn).sort((a, b) => String(a.year).localeCompare(String(b.year)));
     document.getElementById('g').innerHTML = list.map(a => `
       <figure>
         <div class="cov">
-          <img src="../${esc(a.art)}" alt="" loading="lazy" />
-          <img class="wear" src="../assets/40/wear/${esc(a.slug)}.webp" alt="" loading="lazy" />
-          <div class="paper" style="--paper:${(a.wear && a.wear.paper) || .7}"></div>
+          <img class="clean" src="../${esc(a.art)}" alt="" loading="lazy" />
+          <img class="worn" src="../${esc(a.art_worn)}" alt="" loading="lazy" />
         </div>
         <figcaption><span>${esc(a.artist)} — ${esc(a.title)}</span><span>${esc(a.year || '')}</span></figcaption>
       </figure>`).join('');
   });
   document.querySelectorAll('.ctl button').forEach(b => b.addEventListener('click', () => {
     document.querySelectorAll('.ctl button').forEach(x => x.classList.toggle('is-on', x === b));
-    const k = b.dataset.k; document.body.classList.toggle('off', k === 'off');
-    if (k !== 'off') document.body.style.setProperty('--wear', k);
+    document.body.classList.toggle('off', b.dataset.k === 'off');
   }));
 </script>
 </body>

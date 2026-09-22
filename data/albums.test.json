@@ -86,11 +86,10 @@
       "date": "2026-09-23",
       "art_back": "assets/40/weezer-green-album-back.jpg",
       "wear": {
-        "paper": 0.9,
-        "level": "med",
-        "opacity": 0.75
+        "level": "med"
       },
-      "art_worn": "assets/40/worn/weezer-green-album.jpg"
+      "art_worn": "assets/40/worn/weezer-green-album.jpg",
+      "art_back_worn": "assets/40/worn/weezer-green-album-back.jpg"
     },
     {
       "no": 2,
@@ -185,11 +184,10 @@
       "date": "2026-09-24",
       "art_back": "assets/40/finch-what-it-is-to-burn-back.jpg",
       "wear": {
-        "paper": 1.0,
-        "level": "high",
-        "opacity": 1
+        "level": "med"
       },
-      "art_worn": "assets/40/worn/finch-what-it-is-to-burn.jpg"
+      "art_worn": "assets/40/worn/finch-what-it-is-to-burn.jpg",
+      "art_back_worn": "assets/40/worn/finch-what-it-is-to-burn-back.jpg"
     },
     {
       "no": 3,
@@ -294,11 +292,10 @@
       "date": "2026-09-25",
       "art_back": "assets/40/turnstile-glow-on-back.jpg",
       "wear": {
-        "paper": 1.0,
-        "level": "high",
-        "opacity": 1
+        "level": "med"
       },
-      "art_worn": "assets/40/worn/turnstile-glow-on.jpg"
+      "art_worn": "assets/40/worn/turnstile-glow-on.jpg",
+      "art_back_worn": "assets/40/worn/turnstile-glow-on-back.jpg"
     },
     {
       "no": 4,
@@ -413,9 +410,10 @@
       "date": "2026-09-26",
       "art_back": "assets/40/nelly-country-grammar-back.jpg",
       "wear": {
-        "paper": 0.9
+        "level": "med"
       },
-      "art_worn": "assets/40/worn/nelly-country-grammar.jpg"
+      "art_worn": "assets/40/worn/nelly-country-grammar.jpg",
+      "art_back_worn": "assets/40/worn/nelly-country-grammar-back.jpg"
     },
     {
       "no": 5,
@@ -520,9 +518,10 @@
       "date": "2026-09-27",
       "art_back": "assets/40/outkast-aquemini-back.jpg",
       "wear": {
-        "paper": 0.83
+        "level": "med"
       },
-      "art_worn": "assets/40/worn/outkast-aquemini.jpg"
+      "art_worn": "assets/40/worn/outkast-aquemini.jpg",
+      "art_back_worn": "assets/40/worn/outkast-aquemini-back.jpg"
     },
     {
       "no": 6,
@@ -607,9 +606,10 @@
       "date": "2026-09-28",
       "art_back": "assets/40/portugal-the-man-the-satanic-satanist-back.jpg",
       "wear": {
-        "paper": 0.9
+        "level": "med"
       },
-      "art_worn": "assets/40/worn/portugal-the-man-the-satanic-satanist.jpg"
+      "art_worn": "assets/40/worn/portugal-the-man-the-satanic-satanist.jpg",
+      "art_back_worn": "assets/40/worn/portugal-the-man-the-satanic-satanist-back.jpg"
     },
     {
       "no": 7,
@@ -694,9 +694,10 @@
       "date": "2026-09-29",
       "art_back": "assets/40/death-cab-for-cutie-plans-back.jpg",
       "wear": {
-        "paper": 0.77
+        "level": "med"
       },
-      "art_worn": "assets/40/worn/death-cab-for-cutie-plans.jpg"
+      "art_worn": "assets/40/worn/death-cab-for-cutie-plans.jpg",
+      "art_back_worn": "assets/40/worn/death-cab-for-cutie-plans-back.jpg"
     },
     {
       "no": 8,
@@ -786,11 +787,10 @@
       "date": "2026-09-30",
       "art_back": "assets/40/oasis-what-s-the-story-morning-glory-back.jpg",
       "wear": {
-        "paper": 0.89,
-        "level": "high",
-        "opacity": 1
+        "level": "med"
       },
-      "art_worn": "assets/40/worn/oasis-what-s-the-story-morning-glory.jpg"
+      "art_worn": "assets/40/worn/oasis-what-s-the-story-morning-glory.jpg",
+      "art_back_worn": "assets/40/worn/oasis-what-s-the-story-morning-glory-back.jpg"
     },
     {
       "no": 9,
@@ -890,11 +890,10 @@
       "date": "2026-10-01",
       "art_back": "assets/40/radiohead-hail-to-the-thief-back.jpg",
       "wear": {
-        "paper": 0.87,
-        "level": "high",
-        "opacity": 1
+        "level": "med"
       },
-      "art_worn": "assets/40/worn/radiohead-hail-to-the-thief.jpg"
+      "art_worn": "assets/40/worn/radiohead-hail-to-the-thief.jpg",
+      "art_back_worn": "assets/40/worn/radiohead-hail-to-the-thief-back.jpg"
     },
     {
       "no": 10,
@@ -983,9 +982,7 @@
       },
       "date": "2026-10-02",
       "wear": {
-        "paper": 0.86,
-        "level": "high",
-        "opacity": 1
+        "level": "med"
       },
       "art_worn": "assets/40/worn/animal-collective-merriweather-post-pavilion.jpg"
     },
@@ -1067,11 +1064,10 @@
       "date": "2026-11-01",
       "art_back": "assets/40/weezer-green-album-back.jpg",
       "wear": {
-        "paper": 0.9,
-        "level": "med",
-        "opacity": 0.75
+        "level": "med"
       },
-      "art_worn": "assets/40/worn/weezer-green-album.jpg"
+      "art_worn": "assets/40/worn/weezer-green-album.jpg",
+      "art_back_worn": "assets/40/worn/weezer-green-album-back.jpg"
     },
     {
       "no": null,
@@ -1165,11 +1161,10 @@
       "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/28/af/39/28af39aa-6d9e-61d5-2364-095a7b0d3182/4050538365283.jpg/1800x1800bb.jpg",
       "art": "assets/40/the-kinks-lola-versus-powerman.jpg",
       "wear": {
-        "paper": 1.0,
-        "level": "high",
-        "opacity": 1
+        "level": "med"
       },
-      "art_worn": "assets/40/worn/the-kinks-lola-versus-powerman.jpg"
+      "art_worn": "assets/40/worn/the-kinks-lola-versus-powerman.jpg",
+      "art_back_worn": "assets/40/worn/the-kinks-lola-versus-powerman-back.jpg"
     }
   ]
 }

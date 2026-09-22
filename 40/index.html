@@ -260,7 +260,7 @@
     .grid40 { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; margin: 0; max-width: 560px; }
     /* Past the footer wordmark the 404040 repeats, each copy more eroded by dither, until nothing is left. */
     /* ── The tail: scroll pulls a pixel extrusion out of 404040 and you travel down it. ── */
-    .tail { position: relative; height: 600vh; height: 600dvh; }
+    .tail { position: relative; height: 160vh; height: 160dvh; }
     .tail__stage { position: sticky; top: 0; height: 100vh; height: 100dvh; overflow: hidden; }
     .tail__cv { position: absolute; inset: 0; display: block; width: 100%; height: 100%; image-rendering: pixelated; image-rendering: crisp-edges; }
     .tail__col { position: relative; height: 100%; }
@@ -489,9 +489,11 @@
 
     // ── The tail. Scroll is the engine. 404040 stays pinned at the top; as it rises
     //    into view an extrusion dithers in beneath it, fully there by the time the
-    //    wordmark reaches the top. Six screens of runway turn the weirdness dial: the
-    //    ribbon widens, twists, goes green, braids, and finally swallows the screen.
-    //    Time keeps it moving once you're at the end. ──
+    //    wordmark reaches the top. One real screen of runway, then every wheel tick or
+    //    finger drag past the end of the page keeps turning the dial without adding
+    //    scroll height, so the way back up is always one screen. The ribbon widens,
+    //    twists, goes green, braids, and finally swallows the screen. Scroll the footer
+    //    out of sight and it all resets. ──
     (function tail() {
       const region = document.getElementById('js-tail'), cv = document.getElementById('js-tail-cv'), ref = document.querySelector('.wordmark--top');
       const capEl = document.getElementById('js-tail-start');
@@ -501,7 +503,7 @@
       const clamp = v => v < 0 ? 0 : v > 1 ? 1 : v, ease = v => v * v * (3 - 2 * v);
       const hash = (a, b) => { let h = (a * 374761393 + b * 668265263) | 0; h = (h ^ (h >>> 13)) * 1274126177; return ((h ^ (h >>> 16)) >>> 0) / 4294967296; };
       let cell = 3, W = 0, H = 0, img, buf, edge = [], inkW = 0, inkH = 0, inkPx = 0, capX = 0, t0 = performance.now(), raf = 0, visible = false;
-      let rise = 0, stuck = 0, runway = 1;
+      let rise = 0, stuck = 0, runway = 1, virtual = 0, atEnd = false;
 
       function build() {
         const fs = parseFloat(getComputedStyle(ref).fontSize);
@@ -544,10 +546,10 @@
         const capY = 28 / cell;
         // Appear: nothing while the wordmark is still low on screen, everything once it reaches the top.
         const appear = ease(clamp((rise - inkPx - 28) / (innerHeight - inkPx - 28)));
-        const s = stuck / innerHeight;                                        // screens of runway travelled
-        if (stuck >= runway - 1) { if (!draw.tEnd) draw.tEnd = now; } else draw.tEnd = 0;
+        const s = (stuck + virtual) / innerHeight;                            // screens travelled, real plus virtual
+        if (atEnd) { if (!draw.tEnd) draw.tEnd = now; } else draw.tEnd = 0;
         const late = draw.tEnd ? (now - draw.tEnd) / 1000 : 0;
-        const dial = s + late * .12;                                          // keeps climbing with time at the end
+        const dial = s + late * .06;                                          // still drifts with time when you stop
         const amp   = Math.min(W * .3, (1.5 + 7 * ease(clamp(dial / 1.2)) + dial * .4) * (inkW / 120));
         const twist = ease(clamp((dial - .8) / 1.5));
         const tint  = ease(clamp((dial - 1.6) / 1.5));
@@ -600,11 +602,19 @@
         const r = region.getBoundingClientRect();
         rise = innerHeight - r.top; stuck = Math.max(0, -r.top); runway = Math.max(1, r.height - innerHeight);
         visible = r.bottom > 0 && rise > 0;
+        atEnd = stuck >= runway - 2;
+        if (r.top >= innerHeight) { virtual = 0; draw.tEnd = 0; }             // footer out of sight: reset
       }
       let last = 0;
       function tick(now) { raf = 0; if (!visible) return; if (now - last > 40) { draw(now); last = now; } if (!REDUCED) raf = requestAnimationFrame(tick); }
       function kick() { progress(); if (visible && !raf) raf = requestAnimationFrame(tick); }
       addEventListener('scroll', kick, { passive: true });
+      // Past the end of the page there is nothing left to scroll, so read the intent directly.
+      addEventListener('wheel', e => { if (atEnd && e.deltaY > 0 && !REDUCED) { virtual += e.deltaY; kick(); } }, { passive: true });
+      let ty = null;
+      addEventListener('touchstart', e => { ty = e.touches[0].clientY; }, { passive: true });
+      addEventListener('touchmove', e => { if (ty === null) return; const y = e.touches[0].clientY, dy = ty - y; ty = y; if (atEnd && dy > 0 && !REDUCED) { virtual += dy * 1.5; kick(); } }, { passive: true });
+      addEventListener('touchend', () => { ty = null; }, { passive: true });
       let rw = 0; addEventListener('resize', () => { clearTimeout(rw); rw = setTimeout(() => { build(); kick(); if (REDUCED) draw(performance.now()); }, 150); });
       const start = () => { build(); if (REDUCED) { rise = innerHeight; stuck = innerHeight * .8; runway = innerHeight; draw(performance.now()); } else kick(); };
       (document.fonts && document.fonts.load ? document.fonts.load('400 100px Porca') : Promise.resolve()).then(start, start);

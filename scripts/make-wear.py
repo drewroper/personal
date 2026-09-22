@@ -4,11 +4,13 @@ well-played sleeve (calibrated against scans of worn black sleeves).
 
 For each album a wear mask (0..1, how far the print has worn through) is built from:
   - the cut edge: a thin, continuous pale line with chips, heavier toward the corners
-  - ring wear, where the disc pressed through the sleeve: a thin ridge line and/or a broad
-    band of crisp, sponge-like abrasion, strongest where the disc rested and broken
-    elsewhere; flattened rub streaks at the bottom (sometimes top); sometimes label rub
+  - ring wear, where the disc pressed through the sleeve: a thin granular ring and/or a
+    broad band of abrasion that streaks along the turn, strongest where the disc rested
+    and broken elsewhere, with a faint sheen; rub streaks at the bottom and top; on some,
+    a faint ring at the label's edge
   - creases: fine, wavy cracks at dog-eared corners and along the seam side
-  - a few hairline scratches and parallel scuffs; on the oldest sleeves, a small tear
+  - slide scratches in one prevailing direction, a few hairlines and rub marks; the worn
+    cut edge shows the card beneath; on the oldest sleeves, a small tear
 Older records carry more of all of it. The seed is the slug, so no two sleeves match.
 
 The mask is baked onto the cover per pixel: over dark ink the wear shows as exposed pale
@@ -43,6 +45,8 @@ LEVELS_DIR = Path(args[args.index('--levels') + 1]) if '--levels' in args else N
 PAPER_WHITE = np.array([243, 239, 229], np.float32) / 255    # exposed paper under dark ink
 GRIME = np.array([118, 112, 102], np.float32) / 255          # how the same wear reads on light ink
 WARM = np.array([1.0, .955, .86], np.float32)                # age tone on old light sleeves
+BOARD = np.array([214, 200, 176], np.float32) / 255           # the card under a worn edge
+BOARD_DIRTY = np.array([150, 138, 118], np.float32) / 255     # the same edge on a light sleeve
 
 
 def fbm(rng, n, cell, octaves=3, gain=.5):
@@ -70,6 +74,32 @@ def uniform(x):
     return out.reshape(x.shape)
 
 
+def polar_noise(rng, r, ang, R0, cell_r, cell_t, octaves=3):
+    """Value noise on a (radius, arc-length) lattice, periodic around the circle, so abrasion
+    near the ring streaks along the direction the disc turns rather than in random blobs."""
+    out = np.zeros(r.shape, np.float32); amp, tot = 1., 0.
+    for _ in range(octaves):
+        nv = max(4, int(round(2 * math.pi * R0 / cell_t))); nu = int(r.max() / cell_r) + 3
+        G = rng.random((nu, nv)).astype(np.float32)
+        u = r / cell_r; v = (ang + math.pi) / (2 * math.pi) * nv
+        u0 = np.floor(u).astype(np.int32); v0 = np.floor(v).astype(np.int32)
+        fu = u - u0; fv = v - v0; fu = fu * fu * (3 - 2 * fu); fv = fv * fv * (3 - 2 * fv)
+        u1 = np.minimum(u0 + 1, nu - 1); u0 = np.minimum(u0, nu - 1); v0 %= nv; v1 = (v0 + 1) % nv
+        out += (G[u0, v0] * (1 - fu) * (1 - fv) + G[u1, v0] * fu * (1 - fv) + G[u0, v1] * (1 - fu) * fv + G[u1, v1] * fu * fv) * amp
+        tot += amp; amp *= .5; cell_r = max(1., cell_r / 2); cell_t = max(2., cell_t / 2)
+    return out / tot
+
+
+def aniso(rng, cell_x, cell_y, octaves=2):
+    """Value noise stretched along one axis: streaks that run with the rubbing."""
+    out = np.zeros((S, S), np.float32); amp, tot = 1., 0.
+    for _ in range(octaves):
+        gx, gy = max(2, int(S / cell_x) + 1), max(2, int(S / cell_y) + 1)
+        out += np.asarray(Image.fromarray(rng.random((gy, gx)).astype(np.float32), 'F').resize((S, S), Image.BICUBIC)) * amp
+        tot += amp; amp *= .5; cell_x = max(1.5, cell_x / 2); cell_y = max(1.5, cell_y / 2)
+    return out / tot
+
+
 def smooth(e0, e1, x):
     t = np.clip((x - e0) / (e1 - e0), 0, 1); return t * t * (3 - 2 * t)
 
@@ -92,6 +122,32 @@ def crease(d, rng, x, y, heading, length, bright, width, branch=True):
         x, y = nx, ny
 
 
+# ── Shared paper stock (regenerate with --paper) ───────────────────────────
+def paper_tile(T=512, seed=40):
+    """A tileable card texture: soft tooth a few pixels across (not per-pixel noise) and short fibres."""
+    rng = np.random.default_rng(seed)
+    fy, fx = np.fft.fftfreq(T)[:, None], np.fft.fftfreq(T)[None, :]
+    def band(sig):   # periodic gaussian-filtered noise, so the tile wraps seamlessly
+        g = np.real(np.fft.ifft2(np.fft.fft2(rng.standard_normal((T, T))) * np.exp(-2 * (np.pi * sig) ** 2 * (fx ** 2 + fy ** 2))))
+        return (g / g.std()).astype(np.float32)
+    tooth = .55 * band(1.1) + .45 * band(3.0)
+    def fibres(count, lo, hi):
+        big = Image.new('L', (3 * T, 3 * T), 0); d = ImageDraw.Draw(big)
+        for _ in range(count):
+            x, y = T + rng.uniform(0, T), T + rng.uniform(0, T); a = rng.uniform(0, math.pi); L = rng.uniform(4, 18)
+            d.line([(x, y), (x + math.cos(a) * L, y + math.sin(a) * L)], fill=int(rng.uniform(lo, hi)), width=1)
+        arr = np.asarray(big).astype(np.float32) / 255
+        return np.clip(sum(arr[i * T:(i + 1) * T, j * T:(j + 1) * T] for i in range(3) for j in range(3)), 0, 1)
+    fl, fd = fibres(T * T // 220, 40, 140), fibres(T * T // 260, 40, 130)
+    white, dirt = np.array([246, 243, 236], np.float32), np.array([28, 26, 24], np.float32)
+    lift = np.clip(.02 + np.clip(tooth, 0, None) * .026 + fl * .04, 0, 1)[..., None]
+    dark = np.clip(np.clip(-tooth, 0, None) * .026 + fd * .04, 0, 1)[..., None]
+    rgb = white * lift; a = lift[..., 0]
+    rgb = rgb * (1 - dark) + dirt * dark; a = a * (1 - dark[..., 0]) + dark[..., 0]
+    rgb = rgb / np.maximum(a[..., None], 1e-4)
+    Image.fromarray(np.dstack([rgb.clip(0, 255).astype(np.uint8), (a * 255).astype(np.uint8)]), 'RGBA').save(PAPER_TILE, 'WEBP', quality=90, method=6)
+
+
 # ── One record's wear ──────────────────────────────────────────────────────
 def make_mask(slug, year, dens=1.0, edgek=1.0):
     """dens and edgek scale the amount of wear without moving any of it, so every level is the same sleeve."""
@@ -106,22 +162,24 @@ def make_mask(slug, year, dens=1.0, edgek=1.0):
     # Abrasion comes off in crisp, sponge-like flecks: a density field switches on a share of
     # a clumpy threshold texture, so denser wear means more (not blurrier) flecks.
     T = uniform(.45 * fbm(rng, S, 2.2, 2) + .35 * fbm(rng, S, 7, 2) + .2 * fbm(rng, S, 28, 2))
-    tone = .6 + .4 * fbm(rng, S, 5, 2)
+    tone = .75 + .25 * fbm(rng, S, 5, 2)
     grain = fbm(rng, S, 2, 2)
-    flecks = lambda D: smooth(-.03, .03, D - T) * tone
+    # sparse wear reads as faint grey specks, dense wear as near-white abrasion
+    fleck_on = lambda D, Tn: smooth(-.03, .03, D - Tn) * (.45 + .55 * np.clip(D / .6, 0, 1)) * tone
+    flecks = lambda D: fleck_on(D, T)
 
     # 1. The cut edge: a hard, chipped line, width varying along each side, worse at the corners.
     def profile():
         n = S; t = np.arange(n, dtype=np.float32)
         base = S * U(.0014, .0026) * (.45 + life) * edgek
         prof = base * (.2 + 1.3 * noise1(rng, n, S * .07) ** 2)
-        for _ in range(int(U(1, 7) * life)):
-            c, w = U(0, n), U(S * .003, S * .025)
-            prof += base * U(1.2, 3) * np.exp(-((t - c) / w) ** 2)
+        for _ in range(int(U(1, 4) * life)):
+            c, w = U(0, n), U(S * .003, S * .02)
+            prof += base * U(1, 2.2) * np.exp(-((t - c) / w) ** 2)
         if P(.22 * life):
             c, w = U(.2, .8) * n, U(.08, .25) * n
             prof += base * U(.5, 1.1) * np.exp(-((t - c) / w) ** 4)
-        k = U(.8, 2.4)
+        k = U(.4, 1.3)
         prof *= 1 + k * (np.exp(-t / (S * .03)) + np.exp(-(n - 1 - t) / (S * .03)))
         return prof
     shelf = U(1.1, 1.5) if P(.5) else 1.0
@@ -132,10 +190,11 @@ def make_mask(slug, year, dens=1.0, edgek=1.0):
         np.clip(lef[yi] - xx + .5, 0, 1), np.clip(rig[yi] - (S - 1 - xx) + .5, 0, 1)])
     chips = np.clip((fbm(rng, S, 3, 2) - U(.28, .4)) * 7, 0, 1)
     outer = np.clip(1.6 - np.minimum.reduce([xx, yy, S - 1 - xx, S - 1 - yy]), 0, 1) * U(.55, .9)
-    mask = np.maximum(mask, np.maximum(edge * chips, outer * min(1, .45 + life)))
+    edge_mask = np.maximum(edge * chips, outer * min(1, .45 + life))          # the worn cut edge shows the card beneath
 
-    # 2. Ring wear.
+    # 2. Ring wear. No drawn outline: the circle is made of the abrasion itself.
     density = np.zeros((S, S), np.float32)
+    ring_d = np.zeros((S, S), np.float32); haze = np.zeros((S, S), np.float32); Tr = T
     ring = P(.55 + .45 * old)
     if ring:
         cx, cy = S * U(.485, .515), S * U(.49, .52); R0 = S * U(.455, .478)
@@ -149,37 +208,50 @@ def make_mask(slug, year, dens=1.0, edgek=1.0):
         g = sum(w * (.5 + .5 * np.sin(k * ang + U(0, 6.28))) for k, w in waves) / sum(w for _, w in waves)
         cover = smooth(U(.2, .35), U(.5, .65), g)                                 # where it breaks up
         style = rng.random()                                                      # thin, broad, or both
-        a_ridge = U(.55, .95) * (.45 if style > .7 else 1)
+        wt = S * U(.003, .006); a_thin = U(.5, .85) * (.45 if style > .7 else 1)
+        thin = np.exp(-((r - R) / wt) ** 2)
         a_broad = U(.35, .7) * life * (.3 if style < .3 else 1)
-        w1 = S * U(.0018, .0035)
-        ridge = np.exp(-((r - R) / w1) ** 2)
-        mask = np.maximum(mask, ridge * lobe * cover * min(1.0, a_ridge * (.75 + .25 * dens)) * (.5 + .5 * grain))
         Rb = R - S * U(.003, .01); wb = S * U(.01, .03) * (.6 + .8 * (.5 + .5 * np.sin(2 * ang + U(0, 6.28))))
         dd = r - Rb
         broad = np.exp(-(dd / (wb * np.where(dd > 0, .7, 1.3))) ** 2)
-        density = np.maximum(density, broad * lobe * cover * a_broad)
-        if P(.35 + .35 * old):                                                    # rub streak at the bottom tangent
-            ax, ay = R0 * U(.22, .42), S * U(.01, .025)
+        ring_d = np.maximum(thin * a_thin, broad * a_broad) * lobe * cover
+        haze = np.maximum(thin, broad) * lobe * cover * U(.03, .065) * (.4 + .6 * grain)   # faint sheen: the circle reads from afar
+        if P(.45 + .3 * old):                                                     # rub streak at the bottom tangent
+            ax, ay = R0 * U(.22, .45), S * U(.01, .025)
             sx, sy = cx + R0 * U(-.08, .08), cy + R0 * U(.975, .995)
             e = ((xx - sx) / ax) ** 2 + ((yy - sy) / ay) ** 2
-            density = np.maximum(density, np.exp(-e ** 1.5) * U(.45, .85) * life)
-        if P(.25 * old):                                                          # and sometimes the top
-            ax, ay = R0 * U(.18, .35), S * U(.008, .02)
+            ring_d = np.maximum(ring_d, np.exp(-e ** 1.5) * U(.5, .9) * life)
+        if P(.3 + .35 * old):                                                     # and the top
+            ax, ay = R0 * U(.18, .38), S * U(.008, .02)
             sx, sy = cx + R0 * U(-.08, .08), cy - R0 * U(.975, .995)
             e = ((xx - sx) / ax) ** 2 + ((yy - sy) / ay) ** 2
-            density = np.maximum(density, np.exp(-e ** 1.5) * U(.35, .7) * life)
-        if P(.15 + .4 * old):                                                     # rub over the centre label
-            Rl = S * U(.11, .19)
-            density = np.maximum(density, np.clip(1 - (r / Rl) ** 6, 0, 1) * U(.08, .2) * life)
+            ring_d = np.maximum(ring_d, np.exp(-e ** 1.5) * U(.4, .8) * life)
+        if P(.12 + .25 * old):                                                    # a faint ring at the label's edge
+            Rl, wl = S * U(.14, .17), S * U(.006, .012)
+            lc = smooth(.4, .7, sum(.5 + .5 * np.sin(k * ang + U(0, 6.28)) for k in (1, 2, 3)) / 3)
+            ring_d = np.maximum(ring_d, np.exp(-((r - Rl) / wl) ** 2) * lc * U(.05, .12) * life)
+        # the threshold texture here streaks along the turn (about 4x longer than it is wide)
+        Tr = uniform(.5 * polar_noise(rng, r, ang, R0, 1.6, 7) + .3 * polar_noise(rng, r, ang, R0, 5, 24, 2) + .2 * fbm(rng, S, 28, 2))
+    # Shelf and hand wear: short streaks along the bottom edge where it slid on a shelf, and
+    # abrasion along the side it is gripped by, both running parallel to the edge. Every sleeve without a ring gets some; a few ringed ones too.
+    if not ring or P(.25):
+        if P(.8):
+            h = S * U(.018, .045); along = smooth(.4, .8, noise1(rng, S, S * .12))
+            band = np.exp(-((S - 1 - yy) / h) ** 1.5) * along[xi]
+            Tv = uniform(.6 * aniso(rng, 9, 1.8) + .4 * aniso(rng, 26, 5))     # streaks run along the edge, not up from it
+            mask = np.maximum(mask, fleck_on(np.clip(band * U(.3, .55) * life * dens, 0, 1), Tv))
+        if P(.55):
+            w = S * U(.018, .045); dist = xx if P(.5) else S - 1 - xx
+            along = smooth(.3, .7, noise1(rng, S, S * .12))
+            band = np.exp(-(dist / w) ** 1.5) * along[yi]
+            Th = uniform(.6 * aniso(rng, 1.8, 9) + .4 * aniso(rng, 5, 26))
+            mask = np.maximum(mask, fleck_on(np.clip(band * U(.25, .45) * life * dens, 0, 1), Th))
 
-    else:
-        # No ring: the wear is general handling, a few scuffed patches where hands and shelves rub.
+    scuffs = []
+    if not ring:
+        # No ring: the wear is general handling, a few patches of fine rub strokes where hands and shelves rub.
         for _ in range(int(rng.integers(1, 4))):
-            a0 = U(0, math.pi); cx2, cy2 = S * U(.15, .85), S * U(.15, .85)
-            ax, ay = S * U(.08, .22), S * U(.02, .06)
-            ux = ((xx - cx2) * math.cos(a0) + (yy - cy2) * math.sin(a0)) / ax
-            uy = (-(xx - cx2) * math.sin(a0) + (yy - cy2) * math.cos(a0)) / ay
-            density = np.maximum(density, np.exp(-(ux * ux + uy * uy) ** 1.4) * U(.18, .4) * life)
+            scuffs.append((S * U(.15, .85), S * U(.15, .85), U(0, math.pi), S * U(.06, .16), S * U(.02, .05), int(U(60, 140) * life)))
 
     # 3. Creases, scratches and scuffs, drawn at 2x for crisp anti-aliased lines.
     cv = Image.new('L', (S * 2, S * 2), 0); d = ImageDraw.Draw(cv)
@@ -199,7 +271,18 @@ def make_mask(slug, year, dens=1.0, edgek=1.0):
     for _ in range(int(U(0, 2.4) * old * life) + (1 if P(.2 * old) else 0)):    # seam-side creases
         x0 = S * U(.008, .05); x0 = x0 if P(.5) else S - x0
         crease(d, rng, x0, S * U(.05, .6), math.pi / 2 + U(-.08, .08), S * U(.15, .55), U(.45, .8), 2)
-    for _ in range(int(U(2, 10) * life)):                                         # hairline scratches
+    a0 = U(0, math.pi)                                                            # slide scratches: one prevailing direction
+    for _ in range(int(U(0, 1) ** 1.6 * 26 * life)):
+        L = S * math.exp(U(math.log(.015), math.log(.09))); a = a0 + rng.normal(0, .14)
+        x0, y0 = U(.03, .97) * S, U(.03, .97) * S; x1, y1 = x0 + math.cos(a) * L, y0 + math.sin(a) * L
+        bend = U(-.08, .08) * L; mx, my = (x0 + x1) / 2 - math.sin(a) * bend, (y0 + y1) / 2 + math.cos(a) * bend
+        peak = U(70, 160) if P(.8) else U(160, 235)
+        for i in range(14):
+            t0, t1 = i / 14, (i + 1) / 14
+            q = lambda t: ((1 - t) ** 2 * x0 + 2 * (1 - t) * t * mx + t * t * x1, (1 - t) ** 2 * y0 + 2 * (1 - t) * t * my + t * t * y1)
+            p0, p1 = q(t0), q(t1)
+            d.line([(p0[0] * 2, p0[1] * 2), (p1[0] * 2, p1[1] * 2)], fill=int(peak * math.sin(math.pi * (t0 + t1) / 2) ** .7), width=2)
+    for _ in range(int(U(1, 6) * life)):                                          # hairline scratches
         L = S * math.exp(U(math.log(.03), math.log(.4))); a = U(0, math.pi)
         x0, y0 = U(0, S), U(0, S); x1, y1 = x0 + math.cos(a) * L, y0 + math.sin(a) * L
         bend = U(-.06, .06) * L; mx, my = (x0 + x1) / 2 - math.sin(a) * bend, (y0 + y1) / 2 + math.cos(a) * bend
@@ -211,17 +294,19 @@ def make_mask(slug, year, dens=1.0, edgek=1.0):
             q = lambda t: ((1 - t) ** 2 * x0 + 2 * (1 - t) * t * mx + t * t * x1, (1 - t) ** 2 * y0 + 2 * (1 - t) * t * my + t * t * y1)
             p0, p1 = q(t0), q(t1)
             d.line([(p0[0] * 2, p0[1] * 2), (p1[0] * 2, p1[1] * 2)], fill=int(peak * math.sin(math.pi * (t0 + t1) / 2) ** .5), width=2)
-    for _ in range(int(U(0, 2.2) * life)):                                        # scuffs: parallel strokes in a patch
-        cx2, cy2 = U(.1, .9) * S, U(.1, .9) * S; a = U(0, math.pi); rx, ry = S * U(.03, .09), S * U(.015, .04)
-        for _k in range(int(U(15, 55))):
+    scuffs += [(U(.1, .9) * S, U(.1, .9) * S, U(0, math.pi), S * U(.03, .09), S * U(.015, .04), int(U(15, 55))) for _ in range(int(U(0, 2.2) * life))]
+    for cx2, cy2, a, rx, ry, n_strokes in scuffs:                                 # scuffs: parallel strokes in a patch
+        for _k in range(n_strokes):
             t = U(0, 2 * math.pi); rr = math.sqrt(U(0, 1))
             px2 = cx2 + rr * rx * math.cos(t) * math.cos(a) - rr * ry * math.sin(t) * math.sin(a)
             py2 = cy2 + rr * rx * math.cos(t) * math.sin(a) + rr * ry * math.sin(t) * math.cos(a)
             L = U(4, 22); aa = a + U(-.05, .05)
-            d.line([(px2 * 2, py2 * 2), ((px2 + math.cos(aa) * L) * 2, (py2 + math.sin(aa) * L) * 2)], fill=int(U(40, 110)), width=1)
+            d.line([(px2 * 2, py2 * 2), ((px2 + math.cos(aa) * L) * 2, (py2 + math.sin(aa) * L) * 2)], fill=int(U(50, 140)), width=1)
     lines = np.asarray(cv.resize((S, S), Image.BOX)).astype(np.float32) / 255
 
     mask = np.maximum(mask, flecks(np.clip(density * dens, 0, 1)))
+    mask = np.maximum(mask, fleck_on(np.clip(ring_d * dens, 0, 1), Tr))
+    mask = np.maximum(mask, haze * min(1.3, dens))
     mask = np.maximum(mask, lines)
 
     # 4. On the oldest sleeves, a small tear at one edge, exposing the paper underneath.
@@ -231,9 +316,9 @@ def make_mask(slug, year, dens=1.0, edgek=1.0):
         u, v = [(xx, yy), (xx, S - 1 - yy), (yy, xx), (yy, S - 1 - xx)][side]
         shape = np.exp(-((u - pos) / wa) ** 4 - (v / dp) ** 2)
         tear = smooth(.29, .33, shape - .45 * fbm(rng, S, 5, 3))
-        mask = np.maximum(mask, tear * U(.8, .95))
+        edge_mask = np.maximum(edge_mask, tear * U(.8, .95))
 
-    return np.clip(mask, 0, 1), life, age, ring
+    return np.stack([np.clip(mask, 0, 1), np.clip(edge_mask, 0, 1)], -1), life, age, ring
 
 
 # ── Baking ─────────────────────────────────────────────────────────────────
@@ -258,8 +343,10 @@ def bake(cov, mask, k, slug, age):
     Lum = cov @ np.array([.2126, .7152, .0722], np.float32)
     s = smooth(.55, .82, Lum)[..., None]                     # 0 over dark ink, 1 over light ink
     col = PAPER_WHITE * (1 - s) + GRIME * s
-    a = np.clip(mask * k, 0, 1)[..., None] * (.82 + .18 * s) * (1 - .3 * s)   # a touch softer on black, grime a touch lighter
+    a = np.clip(mask[..., 0] * k, 0, 1)[..., None] * (.82 + .18 * s) * (1 - .3 * s)   # a touch softer on black, grime a touch lighter
     out = cov * (1 - a) + col * a
+    ae = np.clip(mask[..., 1] * k, 0, 1)[..., None] * .95
+    out = out * (1 - ae) + (BOARD * (1 - s) + BOARD_DIRTY * s) * ae
     mean = float(Lum.mean())
     if mean > .62 and age > 30:                               # old light stock ages warm, more at the edges
         yy, xx = np.mgrid[0:S, 0:S].astype(np.float32)
@@ -272,7 +359,7 @@ def bake(cov, mask, k, slug, age):
     out = out + (1 - out) * np.clip(-u, 0, 1) ** 1.6 * rng.uniform(.02, .04)
     out = out * (1 - np.clip(u, 0, 1) ** 1.6 * rng.uniform(.035, .06))
     t = paper(); n = t.shape[0]; t = np.tile(t, (S // n + 1, S // n + 1, 1))[:S, :S]
-    pa = t[:, :, 3:4] * (1.0 if mean > .62 else .75 + .25 * mean)
+    pa = t[:, :, 3:4] * (.9 if mean > .62 else .75 + .25 * mean)
     out = out * (1 - pa) + t[:, :, :3] * pa
     return Image.fromarray((np.clip(out, 0, 1) * 255 + .5).astype(np.uint8))
 
@@ -287,12 +374,12 @@ def job(a):
         masks[lv] = make_mask(slug, a.get('year'), dens, ek)
     mask, life, age, ring = masks[level]; k = LEVELS[level][2]
     MASKS.mkdir(parents=True, exist_ok=True)
-    Image.fromarray((mask * 255 + .5).astype(np.uint8), 'L').save(MASKS / f'{slug}.png')
+    Image.fromarray(np.dstack([(mask * 255 + .5).astype(np.uint8), np.zeros((S, S), np.uint8)]), 'RGB').save(MASKS / f'{slug}.png')
     cov = load_square(ROOT / a['art'])
     bake(cov, mask, k, slug, age).save(WORN / f'{slug}.jpg', 'JPEG', quality=88, optimize=True, progressive=True)
     back = None
     if a.get('art_back') and (ROOT / a['art_back']).exists():
-        bake(load_square(ROOT / a['art_back'], pad=True), np.fliplr(mask), k, slug + ':back', age) \
+        bake(load_square(ROOT / a['art_back'], pad=True), mask[:, ::-1], k, slug + ':back', age) \
             .save(WORN / f'{slug}-back.jpg', 'JPEG', quality=86, optimize=True, progressive=True)
         back = f'assets/40/worn/{slug}-back.jpg'
     if LEVELS_DIR:
@@ -305,6 +392,8 @@ def job(a):
 
 if __name__ == '__main__':
     WORN.mkdir(parents=True, exist_ok=True)
+    if '--paper' in args or not PAPER_TILE.exists():
+        paper_tile(); print('paper tile', PAPER_TILE.stat().st_size // 1024, 'KB')
     data_path = ROOT / 'data/albums.json'
     albums = [a for a in json.loads(data_path.read_text())['albums'] if a.get('art') and (not ONLY or a['slug'] in ONLY)]
     with Pool(JOBS) as pool:

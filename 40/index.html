@@ -216,6 +216,30 @@
     .entry__player { margin: 26px 0 0; }
     .entry__player iframe { width: 100%; height: 450px; border: 0; overflow: hidden; background: transparent; border-radius: 10px; }
     .entry__noplayer { color: var(--text-faint); font-size: 14px; }
+    /* ?player=previews (trial): no Apple chrome, no second cover. The tracklist is the player:
+       tap a track for Apple's 30-second preview, or play to run through the record. */
+    .pv { border-top: 1px solid var(--rule); }
+    .pv__head { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--rule); color: var(--text-muted); }
+    .pv__play { flex: none; width: 36px; height: 36px; display: grid; place-items: center; padding: 0; border-radius: 50%;
+      color: var(--text); background: none; border: 1px solid var(--rule); cursor: pointer; -webkit-tap-highlight-color: transparent; }
+    .pv__play .pv__pause, .pv.is-playing .pv__play .pv__go { display: none; }
+    .pv.is-playing .pv__play .pv__pause { display: block; }
+    .pv.is-playing .pv__play { border-color: var(--accent); color: var(--accent); }
+    .pv__now { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .pv.is-live .pv__now { color: var(--text); }
+    .pv__time { flex: none; color: var(--text-faint); font-variant-numeric: tabular-nums; }
+    .pv__list { margin: 0; padding: 0; list-style: none; }
+    .pv__list li { position: relative; border-bottom: 1px solid var(--rule); }
+    .pv__row { display: flex; align-items: baseline; gap: 12px; width: 100%; padding: 9px 0; margin: 0; border: 0; background: none; color: var(--text-muted);
+      font: inherit; font-size: 15px; text-align: left; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+    .pv__row:disabled { cursor: default; opacity: .5; }
+    .pv__n { flex: none; width: 2.2em; text-align: right; color: var(--text-faint); }
+    .pv__t { flex: 1; min-width: 0; }
+    .pv__d { flex: none; color: var(--text-faint); }
+    @media (hover: hover) { .pv__row:not(:disabled):hover { color: var(--text); } }
+    .pv__list li.is-on .pv__row { color: var(--text); }
+    .pv__list li.is-on .pv__n { color: var(--accent); }
+    .pv__bar { position: absolute; left: 0; bottom: -1px; height: 1px; width: calc(var(--p, 0) * 100%); background: var(--accent); pointer-events: none; }
 
     /* Listen elsewhere: one button that resolves the album on any service
        (album.link), then direct pills. On a phone each pill opens the app. */
@@ -411,6 +435,8 @@
     const test    = params.has('test');
     const preview = test || params.has('preview');
     const WORN    = !params.has('clean');   // worn sleeves are the default; ?clean shows the original art
+    const PREVIEWS = params.get('player') === 'previews';                     // trial: our own preview player
+    const PV_ICON = '<svg class="pv__go" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="round"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="pv__pause" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"><path d="M5.5 3v10M10.5 3v10"/></svg>';
     const FLIP_ICON = '<svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 8a5.5 5.5 0 1 1-1.8-4.1"/><path d="M13.5 2.5v3h-3"/></svg>';
     const DATA    = test ? '../data/albums.test.json' : '../data/albums.json';
 
@@ -429,7 +455,16 @@
     };
     const daysBetween = (a, b) => Math.round((new Date(b) - new Date(a)) / 864e5);
 
+    const hasPreviews = a => PREVIEWS && (a.tracks || []).some(t => t.preview);
+    function previewPlayer(a) {
+      return `<div class="pv">
+        <div class="pv__head mono"><button class="pv__play" type="button" aria-label="Play previews of ${esc(a.title)}">${PV_ICON}</button><span class="pv__now">Play previews</span><span class="pv__time">0:30 clips</span></div>
+        <ol class="pv__list">${a.tracks.map((t, i) => `<li><button class="pv__row" type="button" data-i="${i}"${t.preview ? ` data-src="${esc(t.preview)}"` : ' disabled'}><span class="pv__n mono">${pad(t.n)}</span><span class="pv__t">${esc(t.title)}</span><span class="pv__d mono">${fmtMs(t.ms)}</span></button><i class="pv__bar"></i></li>`).join('')}</ol>
+      </div>`;
+    }
+
     function player(a) {
+      if (hasPreviews(a)) return previewPlayer(a);
       if (!a.apple_id) {
         return `<p class="entry__noplayer">Not on Apple Music.${a.link ? ` <a href="${esc(a.link)}" target="_blank" rel="noopener">Listen here</a>.` : ''}</p>`;
       }
@@ -457,7 +492,7 @@
     }
 
     function tracks(a) {
-      if (!a.tracks || !a.tracks.length) return '';
+      if (!a.tracks || !a.tracks.length || hasPreviews(a)) return '';        // the preview player already lists them
       return `<details>
         <summary class="mono">Tracklist</summary>
         <ol class="tracks">${a.tracks.map(t => `
@@ -743,6 +778,44 @@
       if (params.has('debug')) window.__tail = () => ({ rise, stuck, runway, virtual, atEnd, visible, docked });
       (document.fonts && document.fonts.load ? document.fonts.load('400 100px Porca') : Promise.resolve()).then(start, start);
     })();
+    // Preview player: one shared <audio>. Play runs through the record from the top (or resumes);
+    // a row plays that track; each clip rolls into the next; starting one record stops another.
+    if (PREVIEWS) {
+      const au = new Audio(); au.preload = 'none';
+      let cur = null, idx = -1;
+      const rows = pv => [...pv.querySelectorAll('.pv__list li')];
+      const paint = () => {
+        document.querySelectorAll('.pv').forEach(pv => {
+          const mine = pv === cur, live = mine && idx >= 0;
+          pv.classList.toggle('is-playing', mine && !au.paused); pv.classList.toggle('is-live', live);
+          rows(pv).forEach((li, i) => { const on = live && i === idx; li.classList.toggle('is-on', on); if (!on) li.style.removeProperty('--p'); });
+          if (live) { const r = rows(pv)[idx]; pv.querySelector('.pv__now').textContent = r.querySelector('.pv__t').textContent; }
+          else pv.querySelector('.pv__now').textContent = 'Play previews';
+          if (!live) pv.querySelector('.pv__time').textContent = '0:30 clips';
+        });
+      };
+      const playAt = (pv, i) => {
+        const btns = [...pv.querySelectorAll('.pv__row')];
+        while (i < btns.length && !btns[i].dataset.src) i++;
+        if (i >= btns.length) { au.pause(); cur = null; idx = -1; paint(); return; }
+        cur = pv; idx = i; au.src = btns[i].dataset.src; au.currentTime = 0; au.play().catch(() => {}); paint();
+      };
+      document.addEventListener('click', e => {
+        const row = e.target.closest('.pv__row'), btn = e.target.closest('.pv__play');
+        if (!row && !btn) return;
+        const pv = e.target.closest('.pv');
+        if (row) { const i = +row.dataset.i; if (pv === cur && i === idx) { au.paused ? au.play() : au.pause(); } else playAt(pv, i); return; }
+        if (pv === cur && idx >= 0) { au.paused ? au.play() : au.pause(); } else playAt(pv, 0);
+      });
+      au.addEventListener('play', paint); au.addEventListener('pause', paint);
+      au.addEventListener('ended', () => cur && playAt(cur, idx + 1));
+      au.addEventListener('timeupdate', () => {
+        if (!cur || idx < 0 || !au.duration) return;
+        const li = rows(cur)[idx]; if (li) li.style.setProperty('--p', (au.currentTime / au.duration).toFixed(4));
+        const r = Math.max(0, Math.ceil(au.duration - au.currentTime)); cur.querySelector('.pv__time').textContent = `-0:${pad(r)}`;
+      });
+    }
+
     // A flipped sleeve turns back to its front once its whole entry has scrolled out of view,
     // instantly (it's off screen), so every record reads front-first when you come back to it.
     const unflip = wrap => {

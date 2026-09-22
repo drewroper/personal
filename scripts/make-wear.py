@@ -47,7 +47,7 @@ def make(slug, year=None, art=None):
     if art and (ROOT / art).exists():
         lum = float(np.asarray(Image.open(ROOT / art).convert('L').resize((64, 64))).mean() / 255)
     tone = .85 + .6 * lum
-    fibre = (0.35 + 0.65 * noise(2, 2, .6)) * (0.7 + 0.6 * (noise(2, 1) > .45))   # paper fibre: high frequency, partly binary
+    fibre = 0.55 + 0.45 * noise(3, 3, .55)                               # paper fibre: soft, continuous, like a photo of matte stock
     light = np.zeros((S, S), np.float32); dark = np.zeros((S, S), np.float32)
 
     # Ring wear: the disc's edge abrading the print. Never a compass circle: the radius wobbles
@@ -71,14 +71,14 @@ def make(slug, year=None, art=None):
         rest = U(math.pi * .15, math.pi * .85) if P(.7) else U(0, 2 * math.pi)   # low on the sleeve, mostly
         lobe = .3 + .7 * (.5 + .5 * np.cos(ang - rest)) ** U(1, 2.5)
         cover = arc_cover(ang, int(U(1, 4)), rest) * (.3 + .7 * noise(50))
-        grain = (rng.random((S, S)) > U(.45, .62)).astype(np.float32) * (.5 + noise(6, 2))   # dots, not a line
-        ring = band * lobe * cover * grain * (noise(3, 2) > U(.2, .4))
-        light += ring * U(1.2, 1.8)
+        mottle = np.clip((noise(4, 3, .6) - U(.3, .42)) * 3.2, 0, 1)         # soft, uneven abrasion along the band
+        ring = band * lobe * cover * mottle
+        light += blur(ring, .6) * U(1.1, 1.6)
         dark += np.exp(-((r - R * 1.02) / (w * 2)) ** 2) * lobe * cover * (.3 + noise(40) * .6) * U(.1, .3)
         if P(.3):                                                        # a second, offset arc from an inner sleeve
             R2 = R0 * U(.92, .99); cx2, cy2 = cx + S * U(-.04, .04), cy + S * U(-.04, .04)
             r2 = np.hypot(xx - cx2, yy - cy2); ang2 = np.arctan2(yy - cy2, xx - cx2)
-            light += np.exp(-((r2 - R2) / (w * .8)) ** 2) * arc_cover(ang2, int(U(1, 3)), U(0, 6.28)) * (rng.random((S, S)) > .55) * (.3 + noise(26) * .7) * (noise(3, 2) > .35) * U(.5, 1.0)
+            light += blur(np.exp(-((r2 - R2) / (w * .8)) ** 2) * arc_cover(ang2, int(U(1, 3)), U(0, 6.28)) * np.clip((noise(4, 3, .6) - .38) * 3, 0, 1), .6) * U(.5, .9)
         if P(.35):                                                       # faint spindle/label arc
             light += np.exp(-((r - S * U(.15, .19)) / (S * .01)) ** 2) * arc_cover(ang, 1, U(0, 6.28)) * noise(24) * U(.15, .35)
 
@@ -88,16 +88,16 @@ def make(slug, year=None, art=None):
     edge = np.zeros_like(light)
     for d, wt in zip([dl, dr_, dt, db], wts):
         edge += np.exp(-d / (S * U(.006, .02))) * wt
-    edge = edge * (.4 + noise(12) * 1.1) * (noise(2, 2) > U(.3, .5)) * (.5 + .5 * (rng.random((S, S)) > .4))
-    light += edge * U(1.0, 1.5)
+    edge = edge * (.4 + noise(12) * 1.1) * np.clip((noise(3, 3, .6) - U(.3, .42)) * 3, 0, 1)
+    light += blur(edge, .5) * U(1.0, 1.5)
 
     # Corners: blunted, with creases fanning out of the worst ones.
     corners = [(0, 0), (S, 0), (0, S), (S, S)]
     for (px, py) in corners:
         if P(.7):
             rad = S * U(.03, .09); k = U(.4, 1.2)
-            c = np.exp(-np.hypot(xx - px, yy - py) / rad) * (.5 + noise(16) * .9) * k
-            light += blur(c, 1.0)
+            c = np.exp(-np.hypot(xx - px, yy - py) / rad) * (.5 + noise(16) * .9) * np.clip((noise(3, 3, .6) - .3) * 2.5, 0, 1) * k
+            light += blur(c, .8)
             dark += np.exp(-np.hypot(xx - px, yy - py) / (rad * 1.6)) * (.4 + noise(22) * .6) * k * .35
             if P(.45):
                 im = Image.new('L', (S, S), 0); d = ImageDraw.Draw(im)
@@ -123,9 +123,9 @@ def make(slug, year=None, art=None):
         light += np.exp(-((ux / Lx) ** 2 + (uy / Ly) ** 2)) * noise(8) * U(.15, .45)
     # Hairlines
     im = Image.new('L', (S, S), 0); d = ImageDraw.Draw(im)
-    for _ in range(int(U(1.5, 17) * life)):
-        L = S * math.exp(U(math.log(.02), math.log(.3)))                     # log-spread: most short, a few long
-        a = U(0, math.pi); x, y = U(0, S), U(0, S); pts = [(x, y)]; v = int(U(28, 110))
+    for _ in range(int(U(4, 30) * life)):
+        L = S * math.exp(U(math.log(.02), math.log(.35)))                    # log-spread: most short, a few long
+        a = U(0, math.pi); x, y = U(0, S), U(0, S); pts = [(x, y)]; v = int(U(40, 150)) if P(.85) else int(U(150, 220))
         for _k in range(int(U(3, 9))):                                       # wander: a slight change of heading per segment
             a += U(-.25, .25); seg = L / 6; x += math.cos(a) * seg; y += math.sin(a) * seg; pts.append((x, y))
             if P(.18): pts.append(None)                                      # a break in the line
@@ -136,8 +136,6 @@ def make(slug, year=None, art=None):
                 run = []
             else: run.append(q)
     light += blur(np.asarray(im).astype(np.float32) / 255, .4) * .5
-    # Speckle
-    light += blur((rng.random((S, S)) > 1 - .002 * life).astype(np.float32), .5) * 2
 
     # Grime: soft clouds only. No spots.
     for _ in range(int(U(2, 6))):

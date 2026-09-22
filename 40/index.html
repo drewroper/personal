@@ -274,13 +274,17 @@
     .tail__stage { position: sticky; top: 0; height: 100vh; height: 100dvh; overflow: hidden; }
     .tail__cv { position: absolute; inset: 0; display: block; width: 100%; height: 100%; image-rendering: pixelated; image-rendering: crisp-edges; }
     .tail__col { position: relative; height: 100%; }
-    .tail__cap { position: absolute; top: 0; left: var(--gutter); will-change: transform; visibility: hidden; }
+    .tail__cap { position: absolute; top: 0; left: var(--gutter); right: var(--gutter); will-change: transform; visibility: hidden; }   /* gutter to gutter, like the top one, so the last 0 isn't clipped */
     /* The bonus album: surfaces inside the chaos about twenty swipes in, laid out like any entry,
        on a translucent panel so the tunnel keeps moving around and through it. */
     .tail { height: auto; min-height: 160vh; min-height: 160dvh; }
     .tail__bonus { position: relative; z-index: 2; margin-top: 100vh; margin-top: 100dvh; padding-bottom: 40px; opacity: 0; transition: opacity .6s ease; }
     .tail__bonus[hidden] { display: none; }
     .tail__bonus.is-in { opacity: 1; }
+    /* Docked: once you head back up from the bonus, the screen of chaos above it goes and the record
+       rides on top of the footer, so the two leave together and the page is right there above them. */
+    .tail.is-docked { min-height: 0; }
+    .tail.is-docked .tail__bonus { margin-top: -100vh; margin-top: -100dvh; }
     .tail__bonus .entry { border: 1px solid var(--rule); border-radius: 14px; padding: 24px 20px 32px; background: rgba(12,12,13,.78); backdrop-filter: blur(10px) saturate(120%); -webkit-backdrop-filter: blur(10px) saturate(120%); }
     .tail__bonus .entry__head { color: var(--text-faint); }
     .tail__bonus .entry__title { font-size: min(var(--display-size), 11vw); overflow-wrap: anywhere; }
@@ -310,7 +314,7 @@
        cover as a large sticky object, About becomes a spread with the grid on the right. ── */
     @media (min-width: 1024px) {
       :root { --gutter: 40px; --page-max: 1440px; --display-size: clamp(64px, 6.4vw, 112px); }
-      .wordmark--top { margin: 40px 0 24px; }
+      .wordmark--top { margin-top: 40px; margin-bottom: 24px; }   /* longhands: the shorthand would reset the -.02em ink offset */
       .entry {
         display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: 72px;
         grid-template-areas: "cover head" "cover text" "cover blurb" "cover player" "cover listen" "cover tracks";
@@ -532,6 +536,7 @@
       const hash = (a, b) => { let h = (a * 374761393 + b * 668265263) | 0; h = (h ^ (h >>> 13)) * 1274126177; return ((h ^ (h >>> 16)) >>> 0) / 4294967296; };
       let cell = 3, W = 0, H = 0, img, buf, edge = [], fill = [], inkW = 0, inkH = 0, inkPx = 0, capX = 0, t0 = performance.now(), raf = 0, visible = false;
       let rise = 0, stuck = 0, runway = 1, virtual = 0, atEnd = false;
+      let docked = false, covered = false, lastY = scrollY;
 
       function build() {
         const fs = parseFloat(getComputedStyle(ref).fontSize);
@@ -580,7 +585,7 @@
         const dial = Math.min(22, (stuck + virtual) / innerHeight);           // screens travelled, real plus virtual
         const clear = 0;
         // About twenty swipes in, the bonus album surfaces inside the chaos and the page grows to hold it.
-        if (bonusEl) { const show = dial >= 19; if (show && bonusEl.hidden) { bonusEl.hidden = false; requestAnimationFrame(() => bonusEl.classList.add('is-in')); } else if (!show && !bonusEl.hidden) { bonusEl.hidden = true; bonusEl.classList.remove('is-in'); } }
+        if (bonusEl) { const show = dial >= 19 || docked; if (show && bonusEl.hidden) { bonusEl.hidden = false; requestAnimationFrame(() => bonusEl.classList.add('is-in')); } else if (!show && !bonusEl.hidden) { bonusEl.hidden = true; bonusEl.classList.remove('is-in'); } }
         // One new thing per full screen. Each stage ramps in over the screen after its number.
         const st = n => ease(clamp(dial - n));
         const flow  = dial * 5;                                               // the ribbon visibly flows with every scroll
@@ -670,12 +675,29 @@
         ctx.putImageData(img, 0, 0);
       }
 
+      // Heading back up from the bonus: once it has fully arrived and then starts back down the
+      // screen, dock it (drop the screen of chaos above it) and hold it exactly where it is.
+      function dock() {
+        const before = bonusEl.getBoundingClientRect().top;
+        docked = true; region.classList.add('is-docked');
+        window.scrollTo({ top: scrollY + bonusEl.getBoundingClientRect().top - before, behavior: 'instant' });
+      }
       function progress() {
+        if (bonusEl && !bonusEl.hidden && !docked) {
+          const bt = bonusEl.getBoundingClientRect().top, home = Math.max(0, innerHeight - bonusEl.offsetHeight) + 2;
+          if (covered && bt > home && scrollY < lastY) dock();              // fully arrived, now heading back up
+          covered = bt <= home;
+        }
+        lastY = scrollY;
         const r = region.getBoundingClientRect();
         rise = innerHeight - r.top; stuck = Math.max(0, -r.top); runway = Math.max(1, r.height - innerHeight);
         visible = r.bottom > 0 && rise > 0;
         atEnd = stuck >= runway - 2;
-        if (r.top >= innerHeight) { virtual = 0; if (bonusEl && !bonusEl.hidden) { bonusEl.hidden = true; bonusEl.classList.remove('is-in'); } }   // footer out of sight: reset
+        if (r.top >= innerHeight) {                                         // footer out of sight: reset
+          virtual = 0; covered = false;
+          if (docked) { docked = false; region.classList.remove('is-docked'); }
+          if (bonusEl && !bonusEl.hidden) { bonusEl.hidden = true; bonusEl.classList.remove('is-in'); }
+        }
       }
       let last = 0;
       function tick(now) { raf = 0; if (!visible) return; if (now - last > 40) { draw(now); last = now; } if (!REDUCED) raf = requestAnimationFrame(tick); }
@@ -718,14 +740,30 @@
       addEventListener('touchcancel', () => { ty = null; samples = []; }, { passive: true });
       let rw = 0; addEventListener('resize', () => { clearTimeout(rw); rw = setTimeout(() => { build(); kick(); if (REDUCED) draw(performance.now()); }, 150); });
       const start = () => { build(); if (REDUCED) { rise = innerHeight; stuck = innerHeight * .8; runway = innerHeight; draw(performance.now()); } else kick(); };
-      if (params.has('debug')) window.__tail = () => ({ rise, stuck, runway, virtual, atEnd, visible });
+      if (params.has('debug')) window.__tail = () => ({ rise, stuck, runway, virtual, atEnd, visible, docked });
       (document.fonts && document.fonts.load ? document.fonts.load('400 100px Porca') : Promise.resolve()).then(start, start);
     })();
+    // A flipped sleeve turns back to its front once its whole entry has scrolled out of view,
+    // instantly (it's off screen), so every record reads front-first when you come back to it.
+    const unflip = wrap => {
+      const parts = [wrap.querySelector('.flip'), wrap.querySelector('.flip-hint svg')].filter(Boolean);
+      parts.forEach(el => el.style.transition = 'none');
+      wrap.classList.remove('is-flipped'); wrap.setAttribute('aria-pressed', 'false');
+      void wrap.offsetWidth; parts.forEach(el => el.style.transition = '');
+    };
+    const offscreen = 'IntersectionObserver' in window ? new IntersectionObserver(list => list.forEach(e => {
+      if (e.isIntersecting) return;
+      const wrap = e.target.querySelector('.entry__cover-wrap.is-flipped');
+      if (wrap) unflip(wrap);
+      offscreen.unobserve(e.target);
+    })) : null;
     document.addEventListener('click', e => {
       const wrap = e.target.closest('.entry__cover-wrap');
       if (!wrap) return;
       const on = wrap.classList.toggle('is-flipped');
       wrap.setAttribute('aria-pressed', on);
+      const entry = wrap.closest('.entry');
+      if (on && offscreen && entry) offscreen.observe(entry);
     });
 
     // ── Birthday mode ────────────────────────────────────────────────────

@@ -179,12 +179,10 @@
     }
     .flip__back img { display: block; width: 100%; height: 100%; object-fit: contain; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
     .flip__back img.is-square { object-fit: cover; }
-    /* ?worn — record-sleeve wear over every cover: fibres screened in, grime multiplied, turned per album. */
-    .is-worn .flip__wear { position: absolute; inset: 0; border-radius: 10px; pointer-events: none; overflow: hidden; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
-    .is-worn .flip__wear::before, .is-worn .flip__wear::after { content: ""; position: absolute; inset: 0; background-size: 100% 100%; transform: rotate(var(--wear-turn, 0deg)) scaleX(var(--wear-flip, 1)); }
-    .is-worn .flip__wear::before { background-image: url(../assets/40/wear/wear-light.webp); mix-blend-mode: screen; opacity: var(--wear-light, .8); }
-    .is-worn .flip__wear::after  { background-image: url(../assets/40/wear/wear-dark.webp);  mix-blend-mode: multiply; opacity: var(--wear-dark, .55); }
-    .is-worn .flip__wear--back { transform: rotateY(180deg); }
+    /* ?worn — each record's own sleeve wear laid over its cover (and, turned, its back). */
+    .flip__wear { display: none; }
+    .is-worn .flip__wear { display: block; position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 10px; pointer-events: none; opacity: var(--wear, .7); -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+    .is-worn .flip__back .flip__wear { transform: rotate(180deg); }
     .flip__list { margin: 0; padding: 18px 20px; width: 100%; height: 100%; box-sizing: border-box; list-style: none; display: flex; flex-direction: column; justify-content: center; font-size: 11px; line-height: 1.5; letter-spacing: .04em; text-transform: uppercase; color: var(--text-muted); }
     .flip__list li { display: flex; gap: 10px; }
     .flip__list li span:first-child { color: var(--text-faint); flex: none; width: 2em; }
@@ -390,6 +388,7 @@
     const params  = new URLSearchParams(location.search);
     const test    = params.has('test');
     const preview = test || params.has('preview');
+    const WORN    = params.has('worn');
     const DATA    = test ? '../data/albums.test.json' : '../data/albums.json';
 
     const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -466,10 +465,10 @@
         </div>
         <div class="entry__grid">
           <button class="entry__cover-wrap" type="button" aria-label="Flip ${esc(a.title)} over" aria-pressed="false" style="display:block;width:100%;padding:0;border:0;background:none;text-align:left;">
-            <div class="flip" style="--wear-turn:${(a.no * 90) % 360}deg;--wear-flip:${a.no % 2 ? 1 : -1}">
+            <div class="flip">
               <img class="entry__cover flip__front" src="../${esc(a.art || '')}" alt="${esc(a.title)} cover" loading="lazy" />
-              <div class="flip__wear" aria-hidden="true"></div>
-              <div class="flip__back" aria-hidden="true">${back(a)}<div class="flip__wear" style="--wear-turn:${(a.no * 90 + 180) % 360}deg"></div></div>
+              ${WORN ? `<img class="flip__wear" src="../assets/40/wear/${esc(a.slug.replace(/-40$/, ''))}.webp" alt="" loading="lazy" aria-hidden="true" />` : ''}
+              <div class="flip__back" aria-hidden="true">${back(a)}${WORN ? `<img class="flip__wear" src="../assets/40/wear/${esc(a.slug.replace(/-40$/, ''))}.webp" alt="" loading="lazy" />` : ''}</div>
             </div>
           </button>
           <div class="entry__text">
@@ -706,11 +705,10 @@
 
     // ── Birthday mode ────────────────────────────────────────────────────
     const BIRTHDAY = today === '2026-11-01' || params.has('birthday');
-    // ?worn, ?worn=light, ?worn=heavy — sleeve wear over the covers (a test for now).
-    if (params.has('worn')) {
-      const k = { light: .6, heavy: 1.25 }[params.get('worn')] || .85;
+    // ?worn, ?worn=light, ?worn=heavy — each record's own sleeve wear over its cover (a test for now).
+    if (WORN) {
       document.body.classList.add('is-worn');
-      document.body.style.setProperty('--wear-light', Math.min(1, .8 * k)); document.body.style.setProperty('--wear-dark', Math.min(1, .55 * k));
+      document.body.style.setProperty('--wear', { light: .55, heavy: 1 }[params.get('worn')] || .75);
     }
     if (BIRTHDAY) document.body.classList.add('is-birthday');
 

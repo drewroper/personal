@@ -381,11 +381,14 @@
       .entry details { grid-area: tracks; }
       .about, .index { justify-content: center; padding-top: 48px; max-width: var(--page-max); box-sizing: border-box; margin: 0 auto; }
       .about[hidden], .index[hidden] { display: none; }
-      .about { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: 72px; align-content: center; align-items: start; }
-      .about__title { font-size: min(var(--display-size), 11vh); }
-      .about__body { font-size: 18px; max-width: 52ch; }
-      .about__meta { max-width: 52ch; }
-      .about__project { align-self: start; margin: 0; padding: .35em 0 .35em 32px; border: 0; border-left: 1px solid var(--rule); font-size: 17px; max-width: 46ch; }
+      /* Two equal halves with the divider on the centre line of the screen. The title is sized from
+         the half it sits in (its widest line, "40 albums,", runs 3.97em), capped by the screen height. */
+      .about { container-type: inline-size; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 0; align-content: center; align-items: start; }
+      .about__lead { padding-right: 56px; }
+      .about__title { font-size: min(170px, 18vh, calc((50cqw - 56px) / 4.02)); font-size: min(170px, 18dvh, calc((50cqw - 56px) / 4.02)); }
+      .about__body { font-size: 18px; max-width: none; margin-top: 30px; }
+      .about__meta { max-width: none; }
+      .about__project { align-self: start; margin: 0; padding: .35em 0 .35em 56px; border: 0; border-left: 1px solid var(--rule); font-size: 17px; max-width: calc(50ch + 56px); }
       .index .grid40 { max-width: min(100%, 1200px, calc((100vh - 170px) * 1.6)); gap: 10px; margin: 0 auto; }
       .index__meta { width: 100%; max-width: min(100%, 1200px, calc((100vh - 170px) * 1.6)); margin: 0 auto 18px; }
       .grid40 span, .index .grid40 span { font-size: 12px; }

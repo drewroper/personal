@@ -470,7 +470,7 @@
         ? a.blurb.map(p => `<p>${inline(p)}</p>`).join('')
         : `<p class="entry__blurb--empty">Blurb still cooking.</p>`;
       const head = a.bonus
-        ? `<span class="entry__no">Bonus album</span><span>Your reward for scrolling.</span>`
+        ? `<span class="entry__no">Bonus album</span><span>Your reward for curiosity.</span>`
         : `<span class="entry__no"><a href="#${pad(a.no)}">Day ${pad(a.no)}</a></span><span>${fmtDate(a.date)}</span>`;
       return `<article class="entry" id="${a.bonus ? 'bonus' : pad(a.no)}">
         <div class="entry__head mono">${head}</div>
@@ -491,8 +491,8 @@
           </div>
         </div>
         <div class="entry__blurb">${blurb}</div>
-        ${a.bonus && !a.apple_id ? '' : `<div class="entry__player">${player(a)}</div>`}
-        ${a.bonus && !a.apple_id ? '' : listen(a)}
+        ${a.bonus ? '' : `<div class="entry__player">${player(a)}</div>`}
+        ${!a.bonus || a.apple_id || (a.links && a.links.spotify) ? listen(a) : ''}
         ${a.apple_id ? '' : tracks(a)}
       </article>`;
     }

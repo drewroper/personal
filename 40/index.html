@@ -613,12 +613,22 @@
       function tick(now) { raf = 0; if (!visible) return; if (now - last > 40) { draw(now); last = now; } if (!REDUCED) raf = requestAnimationFrame(tick); }
       function kick() { progress(); if (visible && !raf) raf = requestAnimationFrame(tick); }
       addEventListener('scroll', kick, { passive: true });
-      // Past the end of the page there is nothing left to scroll, so read the intent directly.
-      addEventListener('wheel', e => { if (atEnd && e.deltaY > 0 && !REDUCED) { virtual += e.deltaY; kick(); } }, { passive: true });
+      // Past the end of the page there is nothing left to scroll, so read the intent directly
+      // and swallow the browser's own overscroll bounce: the gesture feeds the animation, the
+      // page holds still. A new gesture the other way scrolls normally, one screen back to content.
+      const inAbout = e => e.target && e.target.closest && e.target.closest('.about');
+      addEventListener('wheel', e => {
+        if (atEnd && e.deltaY > 0 && !REDUCED && !inAbout(e)) { e.preventDefault(); virtual += e.deltaY; kick(); }
+      }, { passive: false });
       let ty = null;
       addEventListener('touchstart', e => { ty = e.touches[0].clientY; }, { passive: true });
-      addEventListener('touchmove', e => { if (ty === null) return; const y = e.touches[0].clientY, dy = ty - y; ty = y; if (atEnd && dy > 0 && !REDUCED) { virtual += dy * 1.5; kick(); } }, { passive: true });
+      addEventListener('touchmove', e => {
+        if (ty === null) return;
+        const y = e.touches[0].clientY, dy = ty - y; ty = y;
+        if (atEnd && dy > 0 && !REDUCED && !inAbout(e)) { if (e.cancelable) e.preventDefault(); virtual += dy * 1.5; kick(); }
+      }, { passive: false });
       addEventListener('touchend', () => { ty = null; }, { passive: true });
+      addEventListener('touchcancel', () => { ty = null; }, { passive: true });
       let rw = 0; addEventListener('resize', () => { clearTimeout(rw); rw = setTimeout(() => { build(); kick(); if (REDUCED) draw(performance.now()); }, 150); });
       const start = () => { build(); if (REDUCED) { rise = innerHeight; stuck = innerHeight * .8; runway = innerHeight; draw(performance.now()); } else kick(); };
       (document.fonts && document.fonts.load ? document.fonts.load('400 100px Porca') : Promise.resolve()).then(start, start);

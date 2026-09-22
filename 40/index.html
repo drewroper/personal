@@ -166,7 +166,18 @@
       display: block; width: 100%; aspect-ratio: 1; object-fit: cover; margin-top: 16px;
       background: var(--bg-raised); border: 1px solid var(--rule); border-radius: 2px;
     }
-    .entry__cover-wrap { position: relative; margin-top: 16px; cursor: pointer; -webkit-tap-highlight-color: transparent; perspective: 1400px; }
+    .entry__cover-wrap { position: relative; margin-top: 16px; cursor: pointer; -webkit-tap-highlight-color: transparent; perspective: 1400px; overflow: visible; }
+    /* Flip hint, two styles on trial: ?flip=b sits on the art, ?flip=f sits just under it.
+       Both are the icon alone; the arrow turns with the sleeve. */
+    .flip-hint { position: absolute; z-index: 3; display: grid; place-items: center; }   /* taps land on the button it sits in */
+    .flip-hint svg { display: block; transition: transform .75s cubic-bezier(.2, .75, .15, 1); }
+    .is-flipped .flip-hint svg { transform: rotate(180deg); }
+    .flip-hint--b { right: 10px; bottom: 10px; width: 36px; height: 36px; border-radius: 50%; color: var(--text);
+      background: rgba(12, 12, 13, .55); border: 1px solid rgba(244, 241, 236, .16);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+    .flip-hint--f { right: -6px; top: calc(100% + 17px); width: 30px; height: 30px; color: var(--text-muted); }
+    @media (hover: hover) { .entry__cover-wrap:hover .flip-hint--f { color: var(--text); } }
+    @media (prefers-reduced-motion: reduce) { .flip-hint svg { transition: none; } }
     .entry__cover-wrap .entry__cover { margin-top: 0; }
     /* Tap the cover and it flips over to the back of the record. */
     .flip { position: relative; aspect-ratio: 1; transform-style: preserve-3d; transition: transform .75s cubic-bezier(.2, .75, .15, 1); }
@@ -317,6 +328,7 @@
       .entry__head { grid-area: head; align-self: start; }
       .entry__grid { display: contents; }
       .entry .entry__cover-wrap { grid-area: cover; position: sticky; top: 72px; align-self: start; margin: 0; }
+      .flip-hint--f { top: calc(100% + 8px); }
       .entry__text { grid-area: text; }
       .entry__artist { margin-top: 32px; font-size: 17px; }
       .entry__title { margin-top: 8px; }
@@ -405,6 +417,8 @@
     const test    = params.has('test');
     const preview = test || params.has('preview');
     const WORN    = !params.has('clean');   // worn sleeves are the default; ?clean shows the original art
+    const FLIP    = ['b', 'f'].includes(params.get('flip')) ? params.get('flip') : '';   // flip-hint trial
+    const FLIP_ICON = '<svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 8a5.5 5.5 0 1 1-1.8-4.1"/><path d="M13.5 2.5v3h-3"/></svg>';
     const DATA    = test ? '../data/albums.test.json' : '../data/albums.json';
 
     const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -487,6 +501,7 @@
                       : `<div class="entry__cover entry__cover--empty flip__front" aria-label="${esc(a.title)} cover"><span>?</span></div>`}
               <div class="flip__back" aria-hidden="true">${back(a)}${WORN ? `<img class="flip__wear" src="../assets/40/wear/${esc(a.slug.replace(/-40$/, ''))}.webp" alt="" loading="lazy" /><div class="flip__paper" style="--paper:${(a.wear && a.wear.paper) || .7}"></div>` : ''}</div>
             </div>
+            ${FLIP ? `<span class="flip-hint flip-hint--${FLIP}" aria-hidden="true">${FLIP_ICON}</span>` : ''}
           </button>
           <div class="entry__text">
             <p class="entry__artist">${esc(a.artist)}</p>

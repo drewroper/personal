@@ -502,7 +502,7 @@
       const TXT = [244, 241, 236], ACC = [214, 255, 56], BG = [12, 12, 13];
       const clamp = v => v < 0 ? 0 : v > 1 ? 1 : v, ease = v => v * v * (3 - 2 * v);
       const hash = (a, b) => { let h = (a * 374761393 + b * 668265263) | 0; h = (h ^ (h >>> 13)) * 1274126177; return ((h ^ (h >>> 16)) >>> 0) / 4294967296; };
-      let cell = 3, W = 0, H = 0, img, buf, edge = [], inkW = 0, inkH = 0, inkPx = 0, capX = 0, t0 = performance.now(), raf = 0, visible = false;
+      let cell = 3, W = 0, H = 0, img, buf, edge = [], fill = [], inkW = 0, inkH = 0, inkPx = 0, capX = 0, t0 = performance.now(), raf = 0, visible = false;
       let rise = 0, stuck = 0, runway = 1, virtual = 0, atEnd = false;
 
       function build() {
@@ -520,8 +520,11 @@
         o.scale((pxW / cell) / measured, 1); o.font = `400 ${f}px Porca`; o.textBaseline = 'top'; o.fillStyle = '#fff';
         let x = -.02 * f; [...'404040'].forEach((c, i) => { o.fillText(c, x, -.214 * f); x += adv[i]; });
         const d = o.getImageData(0, 0, inkW, inkH).data, on = (x, y) => x >= 0 && y >= 0 && x < inkW && y < inkH && d[(y * inkW + x) * 4 + 3] > 128;
-        edge = [];
-        for (let y = 0; y < inkH; y++) for (let x = 0; x < inkW; x++) if (on(x, y) && (!on(x - 1, y) || !on(x + 1, y) || !on(x, y - 1) || !on(x, y + 1))) edge.push(x - inkW / 2, y - inkH / 2);
+        edge = []; fill = [];
+        for (let y = 0; y < inkH; y++) for (let x = 0; x < inkW; x++) if (on(x, y)) {
+          fill.push(x, y);
+          if (!on(x - 1, y) || !on(x + 1, y) || !on(x, y - 1) || !on(x, y + 1)) edge.push(x - inkW / 2, y - inkH / 2);
+        }
         capX = Math.round((span.getBoundingClientRect().left + .02 * fs) / cell);
         if (capX + inkW > W) capX = Math.max(0, Math.round((W - inkW) / 2));
         capEl.style.transform = 'translateY(28px)'; capEl.style.visibility = 'visible';
@@ -556,18 +559,20 @@
         const split = ease(clamp((dial - 2.2) / 1.5));
         const take  = ease(clamp((dial - 3) / 2.5));                          // the takeover: fills the screen
         const jit   = ease(clamp((dial - 4) / 2));
+        const melt  = ease(clamp((dial - 9) / 4));                           // the end: pure contrast, the wordmark comes apart
         const ring  = Math.max(2, 6 - Math.floor(dial / 1.5));
-        // Background: a breathing dither field that surfaces during the takeover.
-        const field = take * .55;
+        // Background: a breathing dither field that surfaces during the takeover, then goes to hard black and white.
+        const field = take * .55 + melt * .45;
         for (let y = 0, i = 0; y < H; y++) for (let x = 0; x < W; x++, i += 4) {
           let on = false;
           if (field > 0) {
             // The field spreads out from the wordmark: nothing at its edge, full strength further down.
-            const fy = clamp((y - capY - inkH) / (H * .7));
-            const v = .5 + .5 * Math.sin(x * .09 + t * .9) * Math.sin(y * .07 - t * .7) + .25 * Math.sin((x + y) * .05 + t * .5);
+            const fy = Math.max(clamp((y - capY - inkH) / (H * .7)), melt);
+            const v = .5 + .5 * Math.sin(x * .09 + t * .9) * Math.sin(y * .07 - t * .7) + .25 * Math.sin((x + y) * .05 + t * .5)
+                    + melt * .35 * Math.sin(x * .31 + y * .23 + t * 6) * Math.sin(y * .19 - t * 4);
             on = field * fy * v * 256 > BAYER[(y & 7) * 8 + (x & 7)];
           }
-          const g = on ? .18 + .1 * take : 0;
+          const g = on ? .18 + .1 * take + .72 * melt : 0;
           buf[i] = BG[0] + (TXT[0] - BG[0]) * g; buf[i + 1] = BG[1] + (TXT[1] - BG[1]) * g; buf[i + 2] = BG[2] + (TXT[2] - BG[2]) * g; buf[i + 3] = 255;
         }
         const step = Math.max(2, Math.round(9 / cell));
@@ -588,7 +593,7 @@
           const wob = (amp * Math.sin(k * .21 + t * .5) + amp * .5 * Math.sin(k * .06 - t * .2)) * g;
           const rot = (twist * .55 * Math.sin(k * .05 + t * .3) + take * .9 * Math.sin(k * .02 + t * .25)) * g;
           const sx = sc * (1 + twist * .4 * Math.sin(k * .09 + t * .7) * g), sy = sc;
-          let b = (1 - .78 * d * (1 - take * .7)) * (k % ring === 0 ? 1 : .72);
+          let b = Math.min(1, (1 - .78 * d * (1 - take * .7)) * (k % ring === 0 ? 1 : .72) + melt);
           const mix = tint * (.5 + .5 * Math.sin(k * .15 - t * 1.2)) * g;
           const col = [TXT[0] + (ACC[0] - TXT[0]) * mix, TXT[1] + (ACC[1] - TXT[1]) * mix, TXT[2] + (ACC[2] - TXT[2]) * mix];
           let keep = (clamp(1.25 - d * 1.25) * (1 - take) + take) * appear;
@@ -598,6 +603,32 @@
           slice(dx, y + inkH / 2, sx, sy, rot, col, b, keep);
           if (split > 0) { const mx = W - dx + (dx - W / 2) * (1 - split); slice(dx + (mx - dx) * g, y + inkH / 2 + step / 2 * g, -sx, sy, -rot, col, b * .8 * split * g, keep); }
           if (lanes > 1) for (let l = -1; l <= 1; l += 2) slice(dx + l * W * .55 * take * g, y + inkH / 2 + l * step * g, sx * (1 - .2 * g), sy * (1 - .2 * g), rot * -1, col, b * .7 * take * g, keep);
+        }
+        // Meltdown: the crisp wordmark hands off to the pixel grid and disintegrates, pixel by pixel,
+        // into the field below. Each pixel has its own release point; once released it drifts down,
+        // scatters sideways, and dithers away.
+        capEl.style.visibility = melt > 0 ? 'hidden' : 'visible';
+        if (melt > 0) {
+          const frame = Math.floor(t * 5);
+          for (let i = 0; i < fill.length; i += 2) {
+            const n = i >> 1, r = hash(n, 5);
+            let x = capX + fill[i], y = Math.round(capY) + fill[i + 1], keep = 1;
+            if (melt > r) {
+              const f = (melt - r) / Math.max(.05, 1 - r);                    // how far gone this pixel is
+              y += Math.round(f * f * H * .9 + hash(n, frame) * 4 * f);
+              x += Math.round((hash(n, 9) - .5) * 40 * f + Math.sin(t * 3 + n) * 3 * f);
+              keep = 1 - f;
+            }
+            if (x < 0 || y < 0 || x >= W || y >= H) continue;
+            if (keep < 1 && keep * 256 <= BAYER[(y & 7) * 8 + (x & 7)]) continue;
+            const k = (y * W + x) * 4; buf[k] = TXT[0]; buf[k + 1] = TXT[1]; buf[k + 2] = TXT[2];
+          }
+          // Full-frame inversions, more often the deeper you are. Greys flip; the accent stays green.
+          if (melt > .6 && hash(Math.floor(t * 4), 13) < (melt - .6) * .5)
+            for (let i = 0, n = W * H * 4; i < n; i += 4) {
+              if (buf[i + 1] > 150 && buf[i + 2] < 120) continue;
+              buf[i] = 255 - buf[i]; buf[i + 1] = 255 - buf[i + 1]; buf[i + 2] = 255 - buf[i + 2];
+            }
         }
         ctx.putImageData(img, 0, 0);
       }
@@ -631,6 +662,7 @@
       addEventListener('touchcancel', () => { ty = null; }, { passive: true });
       let rw = 0; addEventListener('resize', () => { clearTimeout(rw); rw = setTimeout(() => { build(); kick(); if (REDUCED) draw(performance.now()); }, 150); });
       const start = () => { build(); if (REDUCED) { rise = innerHeight; stuck = innerHeight * .8; runway = innerHeight; draw(performance.now()); } else kick(); };
+      if (params.has('debug')) window.__tail = () => ({ rise, stuck, runway, virtual, atEnd, visible });
       (document.fonts && document.fonts.load ? document.fonts.load('400 100px Porca') : Promise.resolve()).then(start, start);
     })();
     document.addEventListener('click', e => {

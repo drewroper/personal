@@ -483,7 +483,7 @@
             <div class="flip">
               ${a.art ? `<img class="entry__cover flip__front" src="../${esc(a.art)}" alt="${esc(a.title)} cover" loading="lazy" />`
                       : `<div class="entry__cover entry__cover--empty flip__front" aria-label="${esc(a.title)} cover"><span>?</span></div>`}
-              ${WORN ? `<img class="flip__wear" src="../assets/40/wear/${esc(a.slug.replace(/-40$/, ''))}.webp" alt="" loading="lazy" aria-hidden="true" /><div class="flip__paper" style="--paper:${(a.wear && a.wear.paper) || .7}"></div>` : ''}
+              ${WORN ? `<img class="flip__wear" src="../assets/40/wear/${esc(a.slug.replace(/-40$/, ''))}.webp" alt="" loading="lazy" aria-hidden="true" style="${a.wear && a.wear.opacity && !params.get('worn') ? `--wear:${a.wear.opacity}` : ''}" /><div class="flip__paper" style="--paper:${(a.wear && a.wear.paper) || .7}"></div>` : ''}
               <div class="flip__back" aria-hidden="true">${back(a)}${WORN ? `<img class="flip__wear" src="../assets/40/wear/${esc(a.slug.replace(/-40$/, ''))}.webp" alt="" loading="lazy" /><div class="flip__paper" style="--paper:${(a.wear && a.wear.paper) || .7}"></div>` : ''}</div>
             </div>
           </button>
@@ -727,7 +727,7 @@
     // ?worn, ?worn=light, ?worn=heavy — each record's own sleeve wear over its cover (a test for now).
     if (WORN) {
       document.body.classList.add('is-worn');
-      document.body.style.setProperty('--wear', { light: .55, heavy: 1 }[params.get('worn')] || .75);
+      if (params.get('worn')) document.body.style.setProperty('--wear', { light: .55, heavy: 1 }[params.get('worn')] || .75);   // an explicit strength overrides the per-record picks
     }
     if (BIRTHDAY) document.body.classList.add('is-birthday');
 

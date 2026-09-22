@@ -90,7 +90,7 @@ def make(job):
     rng = np.random.default_rng(int(hashlib.sha1(slug.encode()).hexdigest()[:8], 16))
     U = rng.uniform; P = lambda p: rng.random() < p
     age = (2026 - int(str(year)[:4])) if year else 20
-    life = float(np.clip(.2 + (age / 40) ** 1.6 * 1.2 + U(-.1, .1), .18, 1.45))
+    life = float(np.clip(.2 + (age / 40) ** 1.6 * 1.2 + U(-.1, .1), .5, 1.45))   # floor: even a new record has been handled
     lum = .35
     if art and (ROOT / art).exists():
         lum = float(np.asarray(Image.open(ROOT / art).convert('L').resize((64, 64))).mean() / 255)
@@ -180,7 +180,7 @@ def make(job):
         paper = 1.0
     else:
         over(rgb, A, WHITE, np.maximum(wear, marks) * .95)
-        paper = .6 + .3 * lum
+        paper = .75 + .25 * lum
     rgb = rgb / np.maximum(A[..., None], 1e-4)
     Image.fromarray(np.dstack([rgb.clip(0, 255).astype(np.uint8), (A * 255).astype(np.uint8)]), 'RGBA').save(OUT / f'{slug}.webp', 'WEBP', quality=84, method=6)
     return slug, year, round(life, 2), round(lum, 2), light, round(paper, 2)

@@ -86,7 +86,9 @@
       "date": "2026-09-23",
       "art_back": "assets/40/weezer-green-album-back.jpg",
       "wear": {
-        "paper": 0.77
+        "paper": 0.9,
+        "level": "med",
+        "opacity": 0.75
       }
     },
     {
@@ -182,7 +184,9 @@
       "date": "2026-09-24",
       "art_back": "assets/40/finch-what-it-is-to-burn-back.jpg",
       "wear": {
-        "paper": 1.0
+        "paper": 1.0,
+        "level": "high",
+        "opacity": 1
       }
     },
     {
@@ -288,7 +292,9 @@
       "date": "2026-09-25",
       "art_back": "assets/40/turnstile-glow-on-back.jpg",
       "wear": {
-        "paper": 1.0
+        "paper": 1.0,
+        "level": "high",
+        "opacity": 1
       }
     },
     {
@@ -404,7 +410,7 @@
       "date": "2026-09-26",
       "art_back": "assets/40/nelly-country-grammar-back.jpg",
       "wear": {
-        "paper": 0.78
+        "paper": 0.9
       }
     },
     {
@@ -510,7 +516,7 @@
       "date": "2026-09-27",
       "art_back": "assets/40/outkast-aquemini-back.jpg",
       "wear": {
-        "paper": 0.69
+        "paper": 0.83
       }
     },
     {
@@ -596,7 +602,7 @@
       "date": "2026-09-28",
       "art_back": "assets/40/portugal-the-man-the-satanic-satanist-back.jpg",
       "wear": {
-        "paper": 0.78
+        "paper": 0.9
       }
     },
     {
@@ -682,7 +688,7 @@
       "date": "2026-09-29",
       "art_back": "assets/40/death-cab-for-cutie-plans-back.jpg",
       "wear": {
-        "paper": 0.63
+        "paper": 0.77
       }
     },
     {
@@ -773,7 +779,9 @@
       "date": "2026-09-30",
       "art_back": "assets/40/oasis-what-s-the-story-morning-glory-back.jpg",
       "wear": {
-        "paper": 0.76
+        "paper": 0.89,
+        "level": "high",
+        "opacity": 1
       }
     },
     {
@@ -874,7 +882,9 @@
       "date": "2026-10-01",
       "art_back": "assets/40/radiohead-hail-to-the-thief-back.jpg",
       "wear": {
-        "paper": 0.74
+        "paper": 0.87,
+        "level": "high",
+        "opacity": 1
       }
     },
     {
@@ -964,7 +974,9 @@
       },
       "date": "2026-10-02",
       "wear": {
-        "paper": 0.73
+        "paper": 0.86,
+        "level": "high",
+        "opacity": 1
       }
     },
     {
@@ -1045,7 +1057,9 @@
       "date": "2026-11-01",
       "art_back": "assets/40/weezer-green-album-back.jpg",
       "wear": {
-        "paper": 0.77
+        "paper": 0.9,
+        "level": "med",
+        "opacity": 0.75
       }
     },
     {
@@ -1140,7 +1154,9 @@
       "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/28/af/39/28af39aa-6d9e-61d5-2364-095a7b0d3182/4050538365283.jpg/1800x1800bb.jpg",
       "art": "assets/40/the-kinks-lola-versus-powerman.jpg",
       "wear": {
-        "paper": 1.0
+        "paper": 1.0,
+        "level": "high",
+        "opacity": 1
       }
     }
   ]

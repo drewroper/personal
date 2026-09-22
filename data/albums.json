@@ -84,7 +84,9 @@
       "art_back_src": "http://coverartarchive.org/release/7a9a2617-28a7-4afd-9993-1b6a40cf6f25/32712601799.jpg",
       "date": "2026-09-27",
       "wear": {
-        "paper": 0.77
+        "paper": 0.9,
+        "level": "med",
+        "opacity": 0.75
       }
     },
     {
@@ -179,7 +181,9 @@
       "art_back_src": "http://coverartarchive.org/release/21024c74-097c-4415-8848-b8a6f65e9072/4691646485.jpg",
       "date": "2026-10-10",
       "wear": {
-        "paper": 1.0
+        "paper": 1.0,
+        "level": "high",
+        "opacity": 1
       }
     },
     {
@@ -284,7 +288,9 @@
       "art_back_src": "http://coverartarchive.org/release/c86758fc-5447-461d-942d-a9300e4bc51f/37155210486.jpg",
       "date": "2026-10-02",
       "wear": {
-        "paper": 1.0
+        "paper": 1.0,
+        "level": "high",
+        "opacity": 1
       }
     },
     {
@@ -398,7 +404,7 @@
       "art_back": "assets/40/nelly-country-grammar-back.jpg",
       "art_back_src": "http://coverartarchive.org/release/14a10238-fd83-485b-9aa2-72d54a8b0356/29350705744.jpg",
       "wear": {
-        "paper": 0.78
+        "paper": 0.9
       }
     },
     {
@@ -502,7 +508,7 @@
       "art_back": "assets/40/outkast-aquemini-back.jpg",
       "art_back_src": "https://coverartarchive.org/release/06438d71-3a7d-3f41-9338-3dc08351e19f/35213268731.jpg",
       "wear": {
-        "paper": 0.69
+        "paper": 0.83
       }
     },
     {
@@ -586,7 +592,7 @@
       "art_back": "assets/40/portugal-the-man-the-satanic-satanist-back.jpg",
       "art_back_src": "http://coverartarchive.org/release/e3f030dc-6e02-4a5f-a81d-aca200cb1413/16445057100.jpg",
       "wear": {
-        "paper": 0.78
+        "paper": 0.9
       }
     },
     {
@@ -670,7 +676,7 @@
       "art_back": "assets/40/death-cab-for-cutie-plans-back.jpg",
       "art_back_src": "http://coverartarchive.org/release/025eaf54-9ae7-497e-9b81-a2fed09b53ff/4136078628.jpg",
       "wear": {
-        "paper": 0.63
+        "paper": 0.77
       }
     },
     {
@@ -760,7 +766,9 @@
       "art_back_src": "http://coverartarchive.org/release/f29584cc-8f94-4035-8a63-d4369f201e2a/38266290259.jpg",
       "date": "2026-09-25",
       "wear": {
-        "paper": 0.76
+        "paper": 0.89,
+        "level": "high",
+        "opacity": 1
       }
     },
     {
@@ -860,7 +868,9 @@
       "art_back_src": "http://coverartarchive.org/release/f847d298-e2d8-43ed-97ed-7c7b01ff03bc/24770542667.jpg",
       "date": "2026-10-04",
       "wear": {
-        "paper": 0.74
+        "paper": 0.87,
+        "level": "high",
+        "opacity": 1
       }
     },
     {
@@ -948,7 +958,9 @@
       },
       "date": "2026-09-30",
       "wear": {
-        "paper": 0.73
+        "paper": 0.86,
+        "level": "high",
+        "opacity": 1
       }
     },
     {
@@ -1116,7 +1128,7 @@
       "art_back": "assets/40/taking-back-sunday-where-you-want-to-be-back.jpg",
       "art_back_src": "https://coverartarchive.org/release/17f88c72-99db-495c-8fbd-37610350c785/44879516313.jpg",
       "wear": {
-        "paper": 0.79
+        "paper": 0.9
       }
     },
     {
@@ -1211,7 +1223,9 @@
       "runtime_ms": 3201000,
       "date": "2026-09-29",
       "wear": {
-        "paper": 0.65
+        "paper": 0.8,
+        "level": "med",
+        "opacity": 0.75
       }
     },
     {
@@ -1305,7 +1319,7 @@
       "art_back": "assets/40/my-chemical-romance-three-cheers-for-sweet-revenge-back.jpg",
       "art_back_src": "https://coverartarchive.org/release/9108adbb-b065-408b-9f59-c1af1f4a241a/11144526053.jpg",
       "wear": {
-        "paper": 0.67
+        "paper": 0.8
       }
     },
     {
@@ -1390,7 +1404,9 @@
       "art_back_src": "http://coverartarchive.org/release/b315e122-1921-44b5-ada0-27817ad6d0bc/32846867469.jpg",
       "date": "2026-10-11",
       "wear": {
-        "paper": 0.69
+        "paper": 0.83,
+        "level": "med",
+        "opacity": 0.75
       }
     },
     {
@@ -1480,7 +1496,9 @@
       "art_back_src": "http://coverartarchive.org/release/c4335abe-ac67-44c6-87f5-b452d62b07d9/20335839949.jpg",
       "date": "2026-09-23",
       "wear": {
-        "paper": 0.7
+        "paper": 0.83,
+        "level": "low",
+        "opacity": 0.55
       }
     },
     {
@@ -1569,7 +1587,7 @@
       "art_back": "assets/40/dave-matthews-band-under-the-table-and-dreaming-back.jpg",
       "art_back_src": "http://coverartarchive.org/release/c46205bc-adb2-48d8-8e8e-b05e54109c86/14063280413.jpg",
       "wear": {
-        "paper": 0.71
+        "paper": 0.84
       }
     },
     {
@@ -1669,7 +1687,9 @@
       "art_back_src": "https://coverartarchive.org/release/beb58056-1b5a-4b4f-8b86-ac28b4092470/8777336088.jpg",
       "date": "2026-10-05",
       "wear": {
-        "paper": 0.72
+        "paper": 0.85,
+        "level": "high",
+        "opacity": 1
       }
     },
     {
@@ -1748,7 +1768,7 @@
       "art_back": "assets/40/coldplay-parachutes-back.jpg",
       "art_back_src": "http://coverartarchive.org/release/16a32e03-6d97-43a4-a19e-80e79567854a/19420035366.jpg",
       "wear": {
-        "paper": 0.63
+        "paper": 0.77
       }
     },
     {
@@ -1830,7 +1850,7 @@
       "label": "Whispering Pines",
       "art": "assets/40/lord-huron-lonesome-dreams.jpg",
       "wear": {
-        "paper": 0.72
+        "paper": 0.85
       }
     },
     {
@@ -1915,7 +1935,9 @@
       "art_back_src": "http://coverartarchive.org/release/82a6769a-6527-4559-8d19-dbfbf93c92f1/26763472220.png",
       "date": "2026-10-07",
       "wear": {
-        "paper": 0.65
+        "paper": 0.79,
+        "level": "med",
+        "opacity": 0.75
       }
     },
     {
@@ -1997,7 +2019,7 @@
         "spotify": "https://open.spotify.com/album/1bKpcuXtsV2l6ybVUJMRAl"
       },
       "wear": {
-        "paper": 0.78
+        "paper": 0.9
       }
     },
     {
@@ -2092,7 +2114,9 @@
       "art_back_src": "https://coverartarchive.org/release/ee6b9446-1d2b-427d-8172-7ee6dab0fd5f/8289386498.jpg",
       "date": "2026-10-09",
       "wear": {
-        "paper": 0.75
+        "paper": 0.87,
+        "level": "med",
+        "opacity": 0.75
       }
     },
     {
@@ -2192,7 +2216,9 @@
       "art_back_src": "http://coverartarchive.org/release/bf333fb1-a5c4-413a-a663-43b0c603eab5/26861645942.jpg",
       "date": "2026-09-24",
       "wear": {
-        "paper": 0.65
+        "paper": 0.79,
+        "level": "med",
+        "opacity": 0.75
       }
     },
     {
@@ -2286,7 +2312,7 @@
       "art_back": "assets/40/fall-out-boy-from-under-the-cork-tree-back.jpg",
       "art_back_src": "http://coverartarchive.org/release/5aac11da-dad6-485c-b7f2-6fe330693095/32666815993.jpg",
       "wear": {
-        "paper": 0.66
+        "paper": 0.8
       }
     },
     {
@@ -2376,7 +2402,9 @@
       "art_back_src": "http://coverartarchive.org/release/063f311e-9c81-4616-a007-b76e3df910c9/26628543683.jpg",
       "date": "2026-10-01",
       "wear": {
-        "paper": 0.72
+        "paper": 0.85,
+        "level": "high",
+        "opacity": 1
       }
     },
     {
@@ -2448,7 +2476,7 @@
       "label": "Dreams of Field",
       "art": "assets/40/the-hotelier-home-like-noplace-is-there.jpg",
       "wear": {
-        "paper": 0.75
+        "paper": 0.87
       }
     },
     {
@@ -2531,7 +2559,9 @@
       },
       "date": "2026-10-08",
       "wear": {
-        "paper": 1.0
+        "paper": 1.0,
+        "level": "high",
+        "opacity": 1
       }
     },
     {
@@ -2626,7 +2656,9 @@
       "art_back_src": "https://coverartarchive.org/release/dce5628d-fc2f-4703-9e58-7b266df478c3/36600754811.jpg",
       "date": "2026-09-28",
       "wear": {
-        "paper": 0.65
+        "paper": 0.79,
+        "level": "med",
+        "opacity": 0.75
       }
     },
     {
@@ -2706,7 +2738,9 @@
       "art_back_src": "https://coverartarchive.org/release/2f6ee3f5-6e5f-46e5-8dfc-4099f2713645/41279033936.jpg",
       "date": "2026-10-03",
       "wear": {
-        "paper": 0.73
+        "paper": 0.86,
+        "level": "med",
+        "opacity": 0.75
       }
     },
     {
@@ -2815,7 +2849,7 @@
       "art_back": "assets/40/arcade-fire-the-suburbs-back.jpg",
       "art_back_src": "http://coverartarchive.org/release/9f8374c0-8598-3799-8986-a573b9de2d31/5763179290.jpg",
       "wear": {
-        "paper": 0.74
+        "paper": 0.87
       }
     },
     {
@@ -2905,7 +2939,9 @@
       "art_back_src": "http://coverartarchive.org/release/b36f57fa-9fdf-4326-9dcc-49105ae7031c/17690753919.jpg",
       "date": "2026-10-12",
       "wear": {
-        "paper": 0.64
+        "paper": 0.79,
+        "level": "med",
+        "opacity": 0.75
       }
     },
     {
@@ -3055,7 +3091,9 @@
       "art_back_src": "http://coverartarchive.org/release/951d7ae5-965b-3277-923d-f2da57fcd969/8976394266.jpg",
       "date": "2026-09-26",
       "wear": {
-        "paper": 0.74
+        "paper": 0.87,
+        "level": "high",
+        "opacity": 1
       }
     },
     {
@@ -3140,7 +3178,9 @@
       "art_back_src": "http://coverartarchive.org/release/ba3d1339-f4d8-495c-b422-34c40de6d1d9/17097045330.jpg",
       "date": "2026-10-06",
       "wear": {
-        "paper": 1.0
+        "paper": 1.0,
+        "level": "high",
+        "opacity": 1
       }
     },
     {
@@ -3235,7 +3275,9 @@
       "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/28/af/39/28af39aa-6d9e-61d5-2364-095a7b0d3182/4050538365283.jpg/1800x1800bb.jpg",
       "art": "assets/40/the-kinks-lola-versus-powerman.jpg",
       "wear": {
-        "paper": 1.0
+        "paper": 1.0,
+        "level": "high",
+        "opacity": 1
       }
     }
   ]

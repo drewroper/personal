@@ -593,10 +593,11 @@
           const wob = (amp * Math.sin(k * .21 + t * .5) + amp * .5 * Math.sin(k * .06 - t * .2)) * g;
           const rot = (twist * .55 * Math.sin(k * .05 + t * .3) + take * .9 * Math.sin(k * .02 + t * .25)) * g;
           const sx = sc * (1 + twist * .4 * Math.sin(k * .09 + t * .7) * g), sy = sc;
-          let b = Math.min(1, (1 - .78 * d * (1 - take * .7)) * (k % ring === 0 ? 1 : .72) + melt);
+          // Hard contrast: slices stay white; depth and the ring cadence are carried by dither thinning, not grey.
+          let b = Math.min(1, 1 - .45 * clamp((d - .3) / .7) * (1 - take * .7) + melt);
           const mix = tint * (.5 + .5 * Math.sin(k * .15 - t * 1.2)) * g;
           const col = [TXT[0] + (ACC[0] - TXT[0]) * mix, TXT[1] + (ACC[1] - TXT[1]) * mix, TXT[2] + (ACC[2] - TXT[2]) * mix];
-          let keep = (clamp(1.25 - d * 1.25) * (1 - take) + take) * appear;
+          let keep = (clamp(1.25 - d * 1.25) * (1 - take) + take) * appear * (k % ring === 0 ? 1 : .7 + .3 * g * take);
           if (jit > 0 && hash(k + 3, Math.floor(t * 6)) < jit * .25 * g) keep *= .35;
           let dx = capX + inkW / 2 + wob + vanish * d * .9 * (1 - take);
           if (jit > 0 && hash(k, Math.floor(t * 9)) < jit * .5 * g) dx += (hash(k + 7, Math.floor(t * 9)) - .5) * 16 * jit;

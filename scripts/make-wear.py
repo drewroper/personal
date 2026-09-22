@@ -55,7 +55,7 @@ def make(slug, year=None):
             d = np.abs(((ang - c + math.pi) % (2 * math.pi)) - math.pi)
             cover += np.clip(1 - (d - span / 2) / (span * .3), 0, 1) * (1 if i == 0 else U(.4, .9))
         return np.clip(cover, 0, 1)
-    if P(.35 + .5 * min(1, age / 35)):
+    if P(.15 + .5 * min(1, age / 35)):                                   # a ring at all: ~65% at 35 years, ~20% at 5
         # A 12" disc in a 12¼" sleeve: the ring sits close to the edge. Thin, and made of grains.
         cx, cy = S * U(.485, .515), S * U(.49, .52); R0 = S * U(.455, .485)
         r = np.hypot(xx - cx, yy - cy); ang = np.arctan2(yy - cy, xx - cx)

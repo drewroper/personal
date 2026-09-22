@@ -2707,6 +2707,317 @@
       },
       "art_back": "assets/40/arcade-fire-the-suburbs-back.jpg",
       "art_back_src": "http://coverartarchive.org/release/9f8374c0-8598-3799-8986-a573b9de2d31/5763179290.jpg"
+    },
+    {
+      "no": null,
+      "slug": "phish-a-live-one",
+      "artist": "Phish",
+      "title": "A Live One",
+      "discovered": "",
+      "blurb": [],
+      "links": {
+        "spotify": "https://open.spotify.com/album/4UTjy2dLYT8i8ItyboijlW"
+      },
+      "apple_id": 396486533,
+      "apple_url": "https://music.apple.com/us/album/a-live-one/396486533",
+      "released": "1995-06-27",
+      "year": "1995",
+      "copyright": "℗ 1995 Elektra Entertainment Group Inc.",
+      "genre": "Rock",
+      "track_count": 12,
+      "runtime_ms": 7869906,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Bouncing Around the Room (Live)",
+          "ms": 248440
+        },
+        {
+          "n": 2,
+          "title": "Stash (Live)",
+          "ms": 751600
+        },
+        {
+          "n": 3,
+          "title": "Gumbo (Live)",
+          "ms": 314933
+        },
+        {
+          "n": 4,
+          "title": "Montana (Live)",
+          "ms": 124267
+        },
+        {
+          "n": 5,
+          "title": "You Enjoy Myself (Live)",
+          "ms": 1257333
+        },
+        {
+          "n": 6,
+          "title": "Chalkdust Torture (Live)",
+          "ms": 408533
+        },
+        {
+          "n": 7,
+          "title": "Slave to the Traffic Light (Live)",
+          "ms": 646400
+        },
+        {
+          "n": 8,
+          "title": "Wilson (Live)",
+          "ms": 307133
+        },
+        {
+          "n": 9,
+          "title": "Tweezer (Live)",
+          "ms": 1855600
+        },
+        {
+          "n": 10,
+          "title": "Simple (Live)",
+          "ms": 293933
+        },
+        {
+          "n": 11,
+          "title": "Harry Hood (Live)",
+          "ms": 911507
+        },
+        {
+          "n": 12,
+          "title": "The Squirming Coil (Live)",
+          "ms": 750227
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/18/51/c8/1851c8d9-4468-a985-8a33-585a69ab685f/mzi.kvuanymf.jpg/1800x1800bb.jpg",
+      "label": "Elektra",
+      "art": "assets/40/phish-a-live-one.jpg"
+    },
+    {
+      "no": null,
+      "slug": "outkast-stankonia",
+      "artist": "OutKast",
+      "title": "Stankonia",
+      "discovered": "",
+      "blurb": [],
+      "links": {
+        "spotify": "https://open.spotify.com/album/2tm3Ht61kqqRZtIYsBjxEj"
+      },
+      "apple_id": 255836651,
+      "apple_url": "https://music.apple.com/us/album/stankonia/255836651",
+      "released": "2000-10-31",
+      "year": "2000",
+      "copyright": "℗ 2000 Arista Records LLC",
+      "genre": "Hip-Hop/Rap",
+      "track_count": 24,
+      "runtime_ms": 4397923,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Intro",
+          "ms": 69720
+        },
+        {
+          "n": 2,
+          "title": "Gasoline Dreams (with Khujo Goodie)",
+          "ms": 214707
+        },
+        {
+          "n": 3,
+          "title": "I'm Cool (Interlude)",
+          "ms": 42040
+        },
+        {
+          "n": 4,
+          "title": "So Fresh, So Clean",
+          "ms": 240027
+        },
+        {
+          "n": 5,
+          "title": "Ms. Jackson",
+          "ms": 270507
+        },
+        {
+          "n": 6,
+          "title": "Snappin' & Trappin' (with Killer Mike & J-Sweet)",
+          "ms": 259693
+        },
+        {
+          "n": 7,
+          "title": "D.F. (Interlude)",
+          "ms": 27240
+        },
+        {
+          "n": 8,
+          "title": "Spaghetti Junction",
+          "ms": 237160
+        },
+        {
+          "n": 9,
+          "title": "Kim & Cookie (Interlude)",
+          "ms": 72533
+        },
+        {
+          "n": 10,
+          "title": "I'll Call B4 I Cum (with Gangsta Boo & Eco)",
+          "ms": 258440
+        },
+        {
+          "n": 11,
+          "title": "B.O.B. (Bombs Over Baghdad)",
+          "ms": 304227
+        },
+        {
+          "n": 12,
+          "title": "Xplosion (with B-Real)",
+          "ms": 248840
+        },
+        {
+          "n": 13,
+          "title": "Good Hair (Interlude)",
+          "ms": 14960
+        },
+        {
+          "n": 14,
+          "title": "We Luv Deez Hoez (feat. Backbone & Big Gipp)",
+          "ms": 250467
+        },
+        {
+          "n": 15,
+          "title": "Humble Mumble (with Erykah Badu)",
+          "ms": 290667
+        },
+        {
+          "n": 16,
+          "title": "Drinkin' Again (Interlude)",
+          "ms": 24507
+        },
+        {
+          "n": 17,
+          "title": "?",
+          "ms": 88627
+        },
+        {
+          "n": 18,
+          "title": "Red Velvet",
+          "ms": 232640
+        },
+        {
+          "n": 19,
+          "title": "Cruisin' In the ATL (Interlude)",
+          "ms": 19293
+        },
+        {
+          "n": 20,
+          "title": "Gangsta Sh*t (feat. Slimm Calhoun, C-BONE & T-Mo)",
+          "ms": 281267
+        },
+        {
+          "n": 21,
+          "title": "Toilet Tisha",
+          "ms": 264707
+        },
+        {
+          "n": 22,
+          "title": "Slum Beautiful (feat. Cee-Lo)",
+          "ms": 247560
+        },
+        {
+          "n": 23,
+          "title": "Pre-Nump (Interlude)",
+          "ms": 27067
+        },
+        {
+          "n": 24,
+          "title": "Stankonia (Stanklove) [feat. Big Rube & Sleepy Brown]",
+          "ms": 411027
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/e0/4c/f4/e04cf460-46a5-992a-87c7-2c1aef7e3a46/730082607223.jpg/1800x1800bb.jpg",
+      "label": "Arista",
+      "art": "assets/40/outkast-stankonia.jpg",
+      "art_back": "assets/40/outkast-stankonia-back.jpg",
+      "art_back_src": "http://coverartarchive.org/release/951d7ae5-965b-3277-923d-f2da57fcd969/8976394266.jpg"
+    },
+    {
+      "no": null,
+      "slug": "jose-gonzalez-in-our-nature",
+      "artist": "José González",
+      "title": "In Our Nature",
+      "discovered": "",
+      "blurb": [],
+      "links": {
+        "spotify": "https://open.spotify.com/album/4zhb7QX3fvyamvbcYGnKMv"
+      },
+      "apple_id": 828050112,
+      "apple_url": "https://music.apple.com/us/album/in-our-nature/828050112",
+      "released": "2007-09-24",
+      "year": "2007",
+      "copyright": "℗ 2007 Imperial Recordings under exclusive llcense to Mute for North America",
+      "genre": "Singer/Songwriter",
+      "track_count": 11,
+      "runtime_ms": 2240465,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "How Low",
+          "ms": 160013
+        },
+        {
+          "n": 2,
+          "title": "Down the Line",
+          "ms": 192907
+        },
+        {
+          "n": 3,
+          "title": "Killing For Love",
+          "ms": 182893
+        },
+        {
+          "n": 4,
+          "title": "In Our Nature",
+          "ms": 162680
+        },
+        {
+          "n": 5,
+          "title": "Teardrop",
+          "ms": 200853
+        },
+        {
+          "n": 6,
+          "title": "Abram",
+          "ms": 108493
+        },
+        {
+          "n": 7,
+          "title": "Time To Send Someone Away",
+          "ms": 167840
+        },
+        {
+          "n": 8,
+          "title": "The Nest",
+          "ms": 143880
+        },
+        {
+          "n": 9,
+          "title": "Fold",
+          "ms": 174773
+        },
+        {
+          "n": 10,
+          "title": "Cycling Trivialities",
+          "ms": 489213
+        },
+        {
+          "n": 11,
+          "title": "You're an Animal",
+          "ms": 256920
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music/v4/37/5e/30/375e3049-0c0f-4549-7f5c-ef7340b034aa/724596936764.jpg/1800x1800bb.jpg",
+      "label": "Imperial Recordings / Mute",
+      "art": "assets/40/jose-gonzalez-in-our-nature.jpg",
+      "art_back": "assets/40/jose-gonzalez-in-our-nature-back.jpg",
+      "art_back_src": "http://coverartarchive.org/release/ba3d1339-f4d8-495c-b422-34c40de6d1d9/17097045330.jpg"
     }
   ]
 }

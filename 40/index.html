@@ -624,8 +624,10 @@
             if (keep < 1 && keep * 256 <= BAYER[(y & 7) * 8 + (x & 7)]) continue;
             const k = (y * W + x) * 4; buf[k] = TXT[0]; buf[k + 1] = TXT[1]; buf[k + 2] = TXT[2];
           }
-          // Full-frame inversions, more often the deeper you are. Greys flip; the accent stays green.
-          if (melt > .6 && hash(Math.floor(t * 4), 13) < (melt - .6) * .5)
+          // Inversion: stutters foreshadow it, then past eleven screens the frame stays inverted,
+          // flickering back only for a frame now and then. Greys flip; the accent stays green.
+          const flicker = melt > .2 && hash(Math.floor(t * 4), 13) < .35 * (melt - .2);
+          if (dial >= 11 ? !flicker : flicker)
             for (let i = 0, n = W * H * 4; i < n; i += 4) {
               if (buf[i + 1] - buf[i + 2] > 24) continue;                  // any green-leaning pixel keeps its colour
               buf[i] = 255 - buf[i]; buf[i + 1] = 255 - buf[i + 1]; buf[i + 2] = 255 - buf[i + 2];

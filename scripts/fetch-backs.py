@@ -62,7 +62,7 @@ def _find_group(artist, title):
     best = None
     for g in res.get('release-groups', []):
         if g.get('primary-type') not in (None, 'Album', 'EP'): continue
-        if any(t in ('Compilation', 'Remix') for t in g.get('secondary-types', [])): continue
+        if 'Remix' in g.get('secondary-types', []): continue
         t = norm(g['title'])
         score = (t == want, t.startswith(want) or want.startswith(t), g.get('score', 0))
         if best is None or score > best[0]: best = (score, g)

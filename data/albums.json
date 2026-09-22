@@ -2790,7 +2790,9 @@
       ],
       "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/18/51/c8/1851c8d9-4468-a985-8a33-585a69ab685f/mzi.kvuanymf.jpg/1800x1800bb.jpg",
       "label": "Elektra",
-      "art": "assets/40/phish-a-live-one.jpg"
+      "art": "assets/40/phish-a-live-one.jpg",
+      "art_back": "assets/40/phish-a-live-one-back.jpg",
+      "art_back_src": "http://coverartarchive.org/release/b36f57fa-9fdf-4326-9dcc-49105ae7031c/17690753919.jpg"
     },
     {
       "no": null,

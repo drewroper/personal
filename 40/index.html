@@ -216,7 +216,7 @@
     .entry__player { margin: 26px 0 0; }
     .entry__player iframe { width: 100%; height: 450px; border: 0; overflow: hidden; background: transparent; border-radius: 10px; }
     .entry__noplayer { color: var(--text-faint); font-size: 14px; }
-    /* ?player=previews (trial): no Apple chrome, no second cover. The tracklist is the player:
+    /* The player: no Apple chrome, no second cover. The tracklist is the player:
        tap a track for Apple's 30-second preview, or play to run through the record. */
     .pv { border-top: 1px solid var(--rule); }
     .pv__head { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--rule); color: var(--text-muted); }
@@ -241,14 +241,15 @@
     .pv__list li.is-on .pv__n { color: var(--accent); }
     .pv__bar { position: absolute; left: 0; bottom: -1px; height: 1px; width: calc(var(--p, 0) * 100%); background: var(--accent); pointer-events: none; }
 
-    /* Listen elsewhere: one button that resolves the album on any service
-       (album.link), then direct pills. On a phone each pill opens the app. */
+    /* Listen: Apple Music, Spotify, Pick your app (album.link). On a phone the first runs full
+       width with the other two paired beneath it; from 720px up they share one row. */
     /* Selectors are deliberately heavier than the page's global a:hover,
        which would otherwise repaint these on hover / stuck iOS hover. */
-    .listen { margin: 22px 0 0; display: flex; gap: 8px; }
+    .listen { margin: 22px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+    .listen a:first-child:not(:only-child) { flex-basis: 100%; }
     .listen.listen--solo a, .listen.listen--solo a:only-child { flex: 1 1 100%; max-width: none; }
     .listen a {
-      flex: 1 1 auto; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      flex: 1 1 0; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
       padding: 10px 14px; border-radius: 999px; white-space: nowrap;
       -webkit-tap-highlight-color: transparent;
       transition: color .15s ease, background .15s ease, border-color .15s ease;
@@ -329,7 +330,8 @@
       .entry__cover { margin-top: 0; }
       .entry__artist { margin-top: 0; }
       .entry__grid { margin-top: 20px; }
-      .listen a { flex: 0 1 auto; }
+      .listen { flex-wrap: nowrap; }
+      .listen a, .listen a:first-child:not(:only-child) { flex: 0 1 auto; }
       .tracks { columns: 2; column-gap: 32px; }
       .tracks li { break-inside: avoid; }
     }
@@ -435,7 +437,7 @@
     const test    = params.has('test');
     const preview = test || params.has('preview');
     const WORN    = !params.has('clean');   // worn sleeves are the default; ?clean shows the original art
-    const PREVIEWS = params.get('player') === 'previews';                     // trial: our own preview player
+    const PREVIEWS = params.get('player') !== 'embed';                        // our own preview player; ?player=embed brings back Apple's
     const PV_ICON = '<svg class="pv__go" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="round"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="pv__pause" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"><path d="M5.5 3v10M10.5 3v10"/></svg>';
     const FLIP_ICON = '<svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 8a5.5 5.5 0 1 1-1.8-4.1"/><path d="M13.5 2.5v3h-3"/></svg>';
     const DATA    = test ? '../data/albums.test.json' : '../data/albums.json';
@@ -475,20 +477,20 @@
         src="https://embed.music.apple.com/us/album/${esc(slug)}/${a.apple_id}?theme=dark"></iframe>`;
     }
 
-    // Direct links when the data has them (links.spotify etc.); otherwise a
-    // search deep link, which still lands inside the app on a phone.
+    // Listen: Apple Music, Spotify, then album.link to pick any other app. Direct links when the
+    // data has them, a search otherwise; on a phone each one opens the app. The first is the accent.
     function listen(a) {
       const q = encodeURIComponent(`${a.artist} ${a.title}`);
-      const L = a.links || {};
-      const svcs = [
-        ['Spotify', L.spotify || `https://open.spotify.com/search/${q}/albums`],
-      ];
-      const any = a.apple_id
-        ? `<a class="listen__any mono" href="https://album.link/i/${a.apple_id}" target="_blank" rel="noopener">Open in your music app ↗</a>`
-        : '';
-      if (a.bonus) return any ? `<div class="listen listen--solo">${any}</div>` : '';
-      return `<div class="listen">${any}${svcs.map(([n, u]) =>
-        `<a class="listen__svc mono" href="${esc(u)}" target="_blank" rel="noopener">${n} ↗</a>`).join('')}</div>`;
+      const L = a.links || {}, sp = (L.spotify || '').match(/album\/([A-Za-z0-9]+)/);
+      const pick = a.apple_id ? `https://album.link/i/${a.apple_id}` : sp ? `https://album.link/s/${sp[1]}` : '';
+      if (a.bonus) return pick ? `<div class="listen listen--solo"><a class="listen__any mono" href="${esc(pick)}" target="_blank" rel="noopener">Open in your music app ↗</a></div>` : '';
+      const btns = [
+        a.apple_id && [a.apple_url || `https://music.apple.com/us/album/${a.apple_id}`, 'Apple Music'],
+        [L.spotify || `https://open.spotify.com/search/${q}/albums`, 'Spotify'],
+        pick && [pick, 'Pick your app'],
+      ].filter(Boolean);
+      return `<div class="listen">${btns.map(([u, n], i) =>
+        `<a class="${i ? 'listen__svc' : 'listen__any'} mono" href="${esc(u)}" target="_blank" rel="noopener">${n} ↗</a>`).join('')}</div>`;
     }
 
     function tracks(a) {

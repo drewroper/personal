@@ -25,7 +25,7 @@ def blur(a, r):
     if r <= 0: return a
     return np.asarray(Image.fromarray((np.clip(a, 0, 1) * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(r))).astype(np.float32) / 255
 
-def make(slug, year=None):
+def make(slug, year=None, art=None):
     seed = int(hashlib.sha1(slug.encode()).hexdigest()[:8], 16)
     rng = np.random.default_rng(seed)
     U = rng.uniform; P = lambda p: rng.random() < p
@@ -42,6 +42,11 @@ def make(slug, year=None):
     # How hard a life: older records have been played and shelved for decades, newer ones barely.
     age = (2026 - int(str(year)[:4])) if year else 20
     life = float(np.clip(.2 + (age / 40) ** 1.6 * 1.2 + U(-.1, .1), .18, 1.45))   # steep: 2005 ≈ half of 1995
+    # Tone: pale fibres barely register on a light cover, so light covers wear heavier; dark covers sit at medium.
+    lum = .35
+    if art and (ROOT / art).exists():
+        lum = float(np.asarray(Image.open(ROOT / art).convert('L').resize((64, 64))).mean() / 255)
+    tone = .85 + .6 * lum
     fibre = (0.35 + 0.65 * noise(2, 2, .6)) * (0.7 + 0.6 * (noise(2, 1) > .45))   # paper fibre: high frequency, partly binary
     light = np.zeros((S, S), np.float32); dark = np.zeros((S, S), np.float32)
 
@@ -111,16 +116,6 @@ def make(slug, year=None):
         d.line(pts, fill=230, width=int(U(2, 6)))
         light += blur(np.asarray(im).astype(np.float32) / 255, 1.2) * 1.2
 
-    # Price sticker ghost: a pale patch with darker residue at its edge.
-    if P(.18) and age > 12:
-        px, py = rng.choice(corners); px += (S * U(.08, .18)) * (1 if px == 0 else -1); py += (S * U(.08, .18)) * (1 if py == 0 else -1)
-        w_, h_ = S * U(.07, .12), S * U(.05, .09)
-        im = Image.new('L', (S, S), 0); d = ImageDraw.Draw(im)
-        d.rounded_rectangle([px - w_ / 2, py - h_ / 2, px + w_ / 2, py + h_ / 2], radius=S * .006, fill=255)
-        st = np.asarray(im).astype(np.float32) / 255
-        light += blur(st, 1.5) * (.08 + noise(10) * .12)
-        dark += (blur(st, 2.5) - blur(st, .6)).clip(0, 1) * .5 * (.5 + noise(8) * .6)
-
     # Scuffs: directional streaks, and soft pale patches.
     for _ in range(int(U(2, 7))):
         a = U(0, math.pi); px, py = U(0, S), U(0, S); Lx, Ly = S * U(.08, .3), S * U(.02, .07)
@@ -128,10 +123,19 @@ def make(slug, year=None):
         light += np.exp(-((ux / Lx) ** 2 + (uy / Ly) ** 2)) * noise(8) * U(.15, .45)
     # Hairlines
     im = Image.new('L', (S, S), 0); d = ImageDraw.Draw(im)
-    for _ in range(int(U(3, 34) * life)):
-        L = U(S * .03, S * .35); a = U(0, math.pi); x0, y0 = U(0, S), U(0, S)
-        d.line([(x0, y0), (x0 + math.cos(a) * L, y0 + math.sin(a) * L)], fill=int(U(50, 190)), width=1)
-    light += blur(np.asarray(im).astype(np.float32) / 255, .5) * .7
+    for _ in range(int(U(1.5, 17) * life)):
+        L = S * math.exp(U(math.log(.02), math.log(.3)))                     # log-spread: most short, a few long
+        a = U(0, math.pi); x, y = U(0, S), U(0, S); pts = [(x, y)]; v = int(U(28, 110))
+        for _k in range(int(U(3, 9))):                                       # wander: a slight change of heading per segment
+            a += U(-.25, .25); seg = L / 6; x += math.cos(a) * seg; y += math.sin(a) * seg; pts.append((x, y))
+            if P(.18): pts.append(None)                                      # a break in the line
+        run = []
+        for q in pts + [None]:
+            if q is None:
+                if len(run) > 1: d.line(run, fill=v, width=1)
+                run = []
+            else: run.append(q)
+    light += blur(np.asarray(im).astype(np.float32) / 255, .4) * .5
     # Speckle
     light += blur((rng.random((S, S)) > 1 - .002 * life).astype(np.float32), .5) * 2
 
@@ -145,14 +149,14 @@ def make(slug, year=None):
             dark += np.exp(-(np.hypot(xx - px, yy - py) / rad) ** 2) * U(.3, .7)
     dark += (rng.random((S, S)) > 1 - .0006 * life).astype(np.float32) * .9
 
-    light = np.clip((light * life * fibre) ** .8 * 1.25, 0, 1); dark = np.clip(blur(dark, .6) * life, 0, .85)
+    light = np.clip((light * life * tone * fibre) ** .8 * 1.25, 0, 1); dark = np.clip(blur(dark, .6) * life * tone, 0, .85)
     # Compose one RGBA overlay for normal blending: grime over fibres.
     a_l = light; a_d = dark
     rgb_l = np.array([238, 234, 226], np.float32); rgb_d = np.array([22, 20, 18], np.float32)
     A = a_d + a_l * (1 - a_d)
     rgb = (rgb_d[None, None] * a_d[..., None] + rgb_l[None, None] * (a_l * (1 - a_d))[..., None]) / np.maximum(A[..., None], 1e-4)
     out = np.dstack([rgb.clip(0, 255).astype(np.uint8), (A * 255).astype(np.uint8)])
-    return Image.fromarray(out, 'RGBA'), dict(life=float(life), age=age)
+    return Image.fromarray(out, 'RGBA'), dict(life=float(life), age=age, tone=tone)
 
 albums = json.loads((ROOT / 'data/albums.json').read_text())['albums']
 for a in albums:
@@ -160,6 +164,6 @@ for a in albums:
     if ONLY and slug not in ONLY: continue
     dst = OUT / f'{slug}.webp'
     if dst.exists() and not FORCE: continue
-    im, meta = make(slug, a.get('year'))
+    im, meta = make(slug, a.get('year'), a.get('art'))
     im.save(dst, 'WEBP', quality=68, method=6)
-    print(f'{slug:52} {a.get("year")} life={meta["life"]:.2f} {dst.stat().st_size // 1024}KB', flush=True)
+    print(f'{slug:52} {a.get("year")} life={meta["life"]:.2f} tone={meta["tone"]:.2f} {dst.stat().st_size // 1024}KB', flush=True)

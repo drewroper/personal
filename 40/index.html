@@ -549,30 +549,32 @@
         const capY = 28 / cell;
         // Appear: nothing while the wordmark is still low on screen, everything once it reaches the top.
         const appear = ease(clamp((rise - inkPx - 28) / (innerHeight - inkPx - 28)));
-        const s = (stuck + virtual) / innerHeight;                            // screens travelled, real plus virtual
-        if (atEnd) { if (!draw.tEnd) draw.tEnd = now; } else draw.tEnd = 0;
-        const late = draw.tEnd ? (now - draw.tEnd) / 1000 : 0;
-        const dial = s + late * .06;                                          // still drifts with time when you stop
-        const amp   = Math.min(W * .3, (1.5 + 7 * ease(clamp(dial / 1.2)) + dial * .4) * (inkW / 120));
-        const twist = ease(clamp((dial - .8) / 1.5));
-        const tint  = ease(clamp((dial - 1.6) / 1.5));
-        const split = ease(clamp((dial - 2.2) / 1.5));
-        const take  = ease(clamp((dial - 3) / 2.5));                          // the takeover: fills the screen
-        const jit   = ease(clamp((dial - 4) / 2));
-        const melt  = ease(clamp((dial - 9) / 4));                           // the end: pure contrast, the wordmark comes apart
+        const dial = (stuck + virtual) / innerHeight;                         // screens travelled, real plus virtual
+        // One new thing per full screen. Each stage ramps in over the screen after its number.
+        const st = n => ease(clamp(dial - n));
+        const flow  = dial * 5;                                               // the ribbon visibly flows with every scroll
+        const amp   = Math.min(W * .3, (1.5 + 7 * st(1) + Math.max(0, dial - 2) * .4) * (inkW / 120)); // 1: undulation
+        const twist = st(2);                                                  // 2: twists and turns
+        const tint  = st(3);                                                  // 3: green comes in
+        const split = st(4);                                                  // 4: a mirrored ribbon braids in
+        const take  = st(5);                                                  // 5: takes over the whole screen
+        const jit   = st(6);                                                  // 6: glitches
+        const melt  = ease(clamp((dial - 7) / 1.5));                          // 7: the logo dithers away
+        const hard  = st(8);                                                  // 8: full meltdown, hard black and white
+        const invHold = dial >= 10;                                           // 10: it inverts and stays: you're done
         const ring  = Math.max(2, 6 - Math.floor(dial / 1.5));
         // Background: a breathing dither field that surfaces during the takeover, then goes to hard black and white.
-        const field = take * .55 + melt * .45;
+        const field = take * .55 + hard * .45;
         for (let y = 0, i = 0; y < H; y++) for (let x = 0; x < W; x++, i += 4) {
           let on = false;
           if (field > 0) {
             // The field spreads out from the wordmark: nothing at its edge, full strength further down.
-            const fy = Math.max(clamp((y - capY - inkH) / (H * .7)), melt);
-            const v = .5 + .5 * Math.sin(x * .09 + t * .9) * Math.sin(y * .07 - t * .7) + .25 * Math.sin((x + y) * .05 + t * .5)
-                    + melt * .35 * Math.sin(x * .31 + y * .23 + t * 6) * Math.sin(y * .19 - t * 4);
+            const fy = Math.max(clamp((y - capY - inkH) / (H * .7)), hard);
+            const v = .5 + .5 * Math.sin(x * .09 + t * .9 - flow * .3) * Math.sin(y * .07 - t * .7 + flow * .2) + .25 * Math.sin((x + y) * .05 + t * .5)
+                    + hard * .35 * Math.sin(x * .31 + y * .23 + t * 6) * Math.sin(y * .19 - t * 4);
             on = field * fy * v * 256 > BAYER[(y & 7) * 8 + (x & 7)];
           }
-          const g = on ? .18 + .1 * take + .72 * melt : 0;
+          const g = on ? .18 + .1 * take + .72 * hard : 0;
           buf[i] = BG[0] + (TXT[0] - BG[0]) * g; buf[i + 1] = BG[1] + (TXT[1] - BG[1]) * g; buf[i + 2] = BG[2] + (TXT[2] - BG[2]) * g; buf[i + 3] = 255;
         }
         const step = Math.max(2, Math.round(9 / cell));
@@ -588,16 +590,17 @@
           const d = clamp((y - capY) / span);
           // Everything grows out of the wordmark: at the root the slice is the letters' own silhouette.
           const g = ease(clamp(d / .35));
-          const sc0 = 1 - .55 * d, big = 1.1 + 1.4 * (.5 + .5 * Math.sin(k * .035 + t * .45));
+          const sc0 = 1 - .55 * d, big = 1.1 + 1.4 * (.5 + .5 * Math.sin(k * .035 + t * .45 - flow * .2));
           const sc = sc0 + (big - sc0) * take * g;
-          const wob = (amp * Math.sin(k * .21 + t * .5) + amp * .5 * Math.sin(k * .06 - t * .2)) * g;
-          const rot = (twist * .55 * Math.sin(k * .05 + t * .3) + take * .9 * Math.sin(k * .02 + t * .25)) * g;
-          const sx = sc * (1 + twist * .4 * Math.sin(k * .09 + t * .7) * g), sy = sc;
+          const wob = (amp * Math.sin(k * .21 + t * .5 - flow) + amp * .5 * Math.sin(k * .06 - t * .2 + flow * .4)) * g;
+          const rot = (twist * .55 * Math.sin(k * .05 + t * .3 - flow * .3) + take * .9 * Math.sin(k * .02 + t * .25 - flow * .15)) * g;
+          const sx = sc * (1 + twist * .4 * Math.sin(k * .09 + t * .7 - flow * .5) * g), sy = sc;
           // Hard contrast: slices stay white; depth and the ring cadence are carried by dither thinning, not grey.
-          let b = Math.min(1, 1 - .45 * clamp((d - .3) / .7) * (1 - take * .7) + melt);
-          const mix = tint * (.5 + .5 * Math.sin(k * .15 - t * 1.2)) * g;
+          let b = Math.min(1, 1 - .45 * clamp((d - .3) / .7) * (1 - take * .7) + hard);
+          const mix = tint * (.5 + .5 * Math.sin(k * .15 - t * 1.2 + flow)) * g;
           const col = [TXT[0] + (ACC[0] - TXT[0]) * mix, TXT[1] + (ACC[1] - TXT[1]) * mix, TXT[2] + (ACC[2] - TXT[2]) * mix];
-          let keep = (clamp(1.25 - d * 1.25) * (1 - take) + take) * appear * (k % ring === 0 ? 1 : .7 + .3 * g * take);
+          const onRing = (k + Math.round(dial * 6)) % ring === 0;
+          let keep = (clamp(1.25 - d * 1.25) * (1 - take) + take) * appear * (onRing ? 1 : .7 + .3 * g * take);
           if (jit > 0 && hash(k + 3, Math.floor(t * 6)) < jit * .25 * g) keep *= .35;
           let dx = capX + inkW / 2 + wob + vanish * d * .9 * (1 - take);
           if (jit > 0 && hash(k, Math.floor(t * 9)) < jit * .5 * g) dx += (hash(k + 7, Math.floor(t * 9)) - .5) * 16 * jit;
@@ -624,10 +627,10 @@
             if (keep < 1 && keep * 256 <= BAYER[(y & 7) * 8 + (x & 7)]) continue;
             const k = (y * W + x) * 4; buf[k] = TXT[0]; buf[k + 1] = TXT[1]; buf[k + 2] = TXT[2];
           }
-          // Inversion: stutters foreshadow it, then past eleven screens the frame stays inverted,
-          // flickering back only for a frame now and then. Greys flip; the accent stays green.
-          const flicker = melt > .2 && hash(Math.floor(t * 4), 13) < .35 * (melt - .2);
-          if (dial >= 11 ? !flicker : flicker)
+          // Inversion: stutters from nine, then at ten the frame stays inverted, flickering back only
+          // for a frame now and then. That hold is the cue that the scroll has nothing more to give.
+          const flicker = dial > 9 && hash(Math.floor(t * 4), 13) < .35 * clamp(dial - 9);
+          if (invHold ? !flicker : flicker)
             for (let i = 0, n = W * H * 4; i < n; i += 4) {
               if (buf[i + 1] - buf[i + 2] > 24) continue;                  // any green-leaning pixel keeps its colour
               buf[i] = 255 - buf[i]; buf[i + 1] = 255 - buf[i + 1]; buf[i + 2] = 255 - buf[i + 2];
@@ -641,7 +644,7 @@
         rise = innerHeight - r.top; stuck = Math.max(0, -r.top); runway = Math.max(1, r.height - innerHeight);
         visible = r.bottom > 0 && rise > 0;
         atEnd = stuck >= runway - 2;
-        if (r.top >= innerHeight) { virtual = 0; draw.tEnd = 0; }             // footer out of sight: reset
+        if (r.top >= innerHeight) virtual = 0;                                // footer out of sight: reset
       }
       let last = 0;
       function tick(now) { raf = 0; if (!visible) return; if (now - last > 40) { draw(now); last = now; } if (!REDUCED) raf = requestAnimationFrame(tick); }

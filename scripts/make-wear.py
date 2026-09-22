@@ -2,7 +2,7 @@
 """Per-record sleeve wear. Every album gets its own history, seeded by slug: whether it
 has ring wear (and how the disc sat), a second ring from an inner sleeve, shelf wear on
 the top edge, blunted corners with creases, a seam split, a price-sticker ghost,
-directional scuffs, hairlines, foxing and grime — and how hard a life it has had.
+directional scuffs, hairlines and grime — and how hard a life it has had.
 
 Output: assets/40/wear/<slug>.webp, an RGBA overlay to lay over the cover with normal
 blending: exposed paper fibres (near-white) and grime (near-black) in one image.
@@ -139,15 +139,10 @@ def make(slug, year=None, art=None):
     # Speckle
     light += blur((rng.random((S, S)) > 1 - .002 * life).astype(np.float32), .5) * 2
 
-    # Grime: clouds, foxing spots, dirt specks.
+    # Grime: soft clouds only. No spots.
     for _ in range(int(U(2, 6))):
         px, py = U(0, S), U(0, S); rad = S * U(.08, .28)
         dark += np.exp(-np.hypot(xx - px, yy - py) / rad) * U(.05, .18) * noise(14)
-    if P(.5):
-        for _ in range(int(U(3, 20))):
-            px, py = U(0, S), U(0, S); rad = S * U(.003, .01)
-            dark += np.exp(-(np.hypot(xx - px, yy - py) / rad) ** 2) * U(.3, .7)
-    dark += (rng.random((S, S)) > 1 - .0006 * life).astype(np.float32) * .9
 
     light = np.clip((light * life * tone * fibre) ** .8 * 1.25, 0, 1); dark = np.clip(blur(dark, .6) * life * tone, 0, .85)
     # Compose one RGBA overlay for normal blending: grime over fibres.

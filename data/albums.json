@@ -3047,7 +3047,7 @@
       "slug": "the-kinks-lola-versus-powerman",
       "artist": "The Kinks",
       "title": "Lola Versus Powerman and the Moneygoround, Part One",
-      "apple_id": 1642496437,
+      "apple_id": 1439223872,
       "discovered": "",
       "blurb": [],
       "links": {
@@ -3055,7 +3055,83 @@
       },
       "art_back": "assets/40/the-kinks-lola-versus-powerman-back.jpg",
       "art_back_src": "http://coverartarchive.org/release/e69bf713-00cb-4042-b58b-5097d3458ce9/33540647551.jpg",
-      "label": null
+      "label": "Pye",
+      "apple_url": "https://music.apple.com/us/album/lola-versus-powerman-and-the-moneygoround-part-one/1439223872",
+      "released": "1970-11-27",
+      "year": "1970",
+      "copyright": "℗ 1970 Sanctuary Records Group Ltd., a BMG Company",
+      "genre": "Rock",
+      "track_count": 13,
+      "runtime_ms": 2412507,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "The Contenders",
+          "ms": 161920
+        },
+        {
+          "n": 2,
+          "title": "Strangers",
+          "ms": 199627
+        },
+        {
+          "n": 3,
+          "title": "Denmark Street",
+          "ms": 122680
+        },
+        {
+          "n": 4,
+          "title": "Get Back in Line",
+          "ms": 184613
+        },
+        {
+          "n": 5,
+          "title": "Lola",
+          "ms": 241347
+        },
+        {
+          "n": 6,
+          "title": "Top of the Pops",
+          "ms": 219853
+        },
+        {
+          "n": 7,
+          "title": "The Moneygoround",
+          "ms": 102760
+        },
+        {
+          "n": 8,
+          "title": "This Time Tomorrow",
+          "ms": 201773
+        },
+        {
+          "n": 9,
+          "title": "A Long Way from Home",
+          "ms": 146747
+        },
+        {
+          "n": 10,
+          "title": "Rats",
+          "ms": 159960
+        },
+        {
+          "n": 11,
+          "title": "Apeman",
+          "ms": 232333
+        },
+        {
+          "n": 12,
+          "title": "Powerman",
+          "ms": 259107
+        },
+        {
+          "n": 13,
+          "title": "Got to Be Free",
+          "ms": 179787
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/28/af/39/28af39aa-6d9e-61d5-2364-095a7b0d3182/4050538365283.jpg/1800x1800bb.jpg",
+      "art": "assets/40/the-kinks-lola-versus-powerman.jpg"
     }
   ]
 }

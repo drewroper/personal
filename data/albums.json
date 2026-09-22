@@ -87,7 +87,8 @@
         "paper": 0.9,
         "level": "med",
         "opacity": 0.75
-      }
+      },
+      "art_worn": "assets/40/worn/weezer-green-album.jpg"
     },
     {
       "no": 18,
@@ -184,7 +185,8 @@
         "paper": 1.0,
         "level": "high",
         "opacity": 1
-      }
+      },
+      "art_worn": "assets/40/worn/finch-what-it-is-to-burn.jpg"
     },
     {
       "no": 10,
@@ -291,7 +293,8 @@
         "paper": 1.0,
         "level": "high",
         "opacity": 1
-      }
+      },
+      "art_worn": "assets/40/worn/turnstile-glow-on.jpg"
     },
     {
       "no": null,
@@ -405,7 +408,8 @@
       "art_back_src": "http://coverartarchive.org/release/14a10238-fd83-485b-9aa2-72d54a8b0356/29350705744.jpg",
       "wear": {
         "paper": 0.9
-      }
+      },
+      "art_worn": "assets/40/worn/nelly-country-grammar.jpg"
     },
     {
       "no": null,
@@ -509,7 +513,8 @@
       "art_back_src": "https://coverartarchive.org/release/06438d71-3a7d-3f41-9338-3dc08351e19f/35213268731.jpg",
       "wear": {
         "paper": 0.83
-      }
+      },
+      "art_worn": "assets/40/worn/outkast-aquemini.jpg"
     },
     {
       "no": null,
@@ -593,7 +598,8 @@
       "art_back_src": "http://coverartarchive.org/release/e3f030dc-6e02-4a5f-a81d-aca200cb1413/16445057100.jpg",
       "wear": {
         "paper": 0.9
-      }
+      },
+      "art_worn": "assets/40/worn/portugal-the-man-the-satanic-satanist.jpg"
     },
     {
       "no": null,
@@ -677,7 +683,8 @@
       "art_back_src": "http://coverartarchive.org/release/025eaf54-9ae7-497e-9b81-a2fed09b53ff/4136078628.jpg",
       "wear": {
         "paper": 0.77
-      }
+      },
+      "art_worn": "assets/40/worn/death-cab-for-cutie-plans.jpg"
     },
     {
       "no": 3,
@@ -769,7 +776,8 @@
         "paper": 0.89,
         "level": "high",
         "opacity": 1
-      }
+      },
+      "art_worn": "assets/40/worn/oasis-what-s-the-story-morning-glory.jpg"
     },
     {
       "no": 12,
@@ -871,7 +879,8 @@
         "paper": 0.87,
         "level": "high",
         "opacity": 1
-      }
+      },
+      "art_worn": "assets/40/worn/radiohead-hail-to-the-thief.jpg"
     },
     {
       "no": 8,
@@ -961,7 +970,8 @@
         "paper": 0.86,
         "level": "high",
         "opacity": 1
-      }
+      },
+      "art_worn": "assets/40/worn/animal-collective-merriweather-post-pavilion.jpg"
     },
     {
       "no": null,
@@ -1045,7 +1055,8 @@
       "art_back_src": "http://coverartarchive.org/release/b1b2f602-f72b-4ccf-88a1-e8e22ee328ae/26212201091.jpg",
       "wear": {
         "paper": 1.0
-      }
+      },
+      "art_worn": "assets/40/worn/paul-simon-graceland.jpg"
     },
     {
       "no": null,
@@ -1129,7 +1140,8 @@
       "art_back_src": "https://coverartarchive.org/release/17f88c72-99db-495c-8fbd-37610350c785/44879516313.jpg",
       "wear": {
         "paper": 0.9
-      }
+      },
+      "art_worn": "assets/40/worn/taking-back-sunday-where-you-want-to-be.jpg"
     },
     {
       "no": 7,
@@ -1226,7 +1238,8 @@
         "paper": 0.8,
         "level": "med",
         "opacity": 0.75
-      }
+      },
+      "art_worn": "assets/40/worn/girl-talk-feed-the-animals.jpg"
     },
     {
       "no": null,
@@ -1320,7 +1333,8 @@
       "art_back_src": "https://coverartarchive.org/release/9108adbb-b065-408b-9f59-c1af1f4a241a/11144526053.jpg",
       "wear": {
         "paper": 0.8
-      }
+      },
+      "art_worn": "assets/40/worn/my-chemical-romance-three-cheers-for-sweet-revenge.jpg"
     },
     {
       "no": 19,
@@ -1407,7 +1421,8 @@
         "paper": 0.83,
         "level": "med",
         "opacity": 0.75
-      }
+      },
+      "art_worn": "assets/40/worn/brand-new-deja-entendu.jpg"
     },
     {
       "no": 1,
@@ -1499,7 +1514,8 @@
         "paper": 0.83,
         "level": "low",
         "opacity": 0.55
-      }
+      },
+      "art_worn": "assets/40/worn/dave-matthews-band-crash.jpg"
     },
     {
       "no": null,
@@ -1588,7 +1604,8 @@
       "art_back_src": "http://coverartarchive.org/release/c46205bc-adb2-48d8-8e8e-b05e54109c86/14063280413.jpg",
       "wear": {
         "paper": 0.84
-      }
+      },
+      "art_worn": "assets/40/worn/dave-matthews-band-under-the-table-and-dreaming.jpg"
     },
     {
       "no": 13,
@@ -1690,7 +1707,8 @@
         "paper": 0.85,
         "level": "high",
         "opacity": 1
-      }
+      },
+      "art_worn": "assets/40/worn/alt-j-an-awesome-wave.jpg"
     },
     {
       "no": null,
@@ -1769,7 +1787,8 @@
       "art_back_src": "http://coverartarchive.org/release/16a32e03-6d97-43a4-a19e-80e79567854a/19420035366.jpg",
       "wear": {
         "paper": 0.77
-      }
+      },
+      "art_worn": "assets/40/worn/coldplay-parachutes.jpg"
     },
     {
       "no": null,
@@ -1851,7 +1870,8 @@
       "art": "assets/40/lord-huron-lonesome-dreams.jpg",
       "wear": {
         "paper": 0.85
-      }
+      },
+      "art_worn": "assets/40/worn/lord-huron-lonesome-dreams.jpg"
     },
     {
       "no": 15,
@@ -1938,7 +1958,8 @@
         "paper": 0.79,
         "level": "med",
         "opacity": 0.75
-      }
+      },
+      "art_worn": "assets/40/worn/ratatat-classics.jpg"
     },
     {
       "no": null,
@@ -2020,7 +2041,8 @@
       },
       "wear": {
         "paper": 0.9
-      }
+      },
+      "art_worn": "assets/40/worn/andy-shauf-the-bearer-of-bad-news.jpg"
     },
     {
       "no": 17,
@@ -2117,7 +2139,8 @@
         "paper": 0.87,
         "level": "med",
         "opacity": 0.75
-      }
+      },
+      "art_worn": "assets/40/worn/incubus-morning-view.jpg"
     },
     {
       "no": 2,
@@ -2219,7 +2242,8 @@
         "paper": 0.79,
         "level": "med",
         "opacity": 0.75
-      }
+      },
+      "art_worn": "assets/40/worn/third-eye-blind-third-eye-blind.jpg"
     },
     {
       "no": null,
@@ -2313,7 +2337,8 @@
       "art_back_src": "http://coverartarchive.org/release/5aac11da-dad6-485c-b7f2-6fe330693095/32666815993.jpg",
       "wear": {
         "paper": 0.8
-      }
+      },
+      "art_worn": "assets/40/worn/fall-out-boy-from-under-the-cork-tree.jpg"
     },
     {
       "no": 9,
@@ -2405,7 +2430,8 @@
         "paper": 0.85,
         "level": "high",
         "opacity": 1
-      }
+      },
+      "art_worn": "assets/40/worn/run-the-jewels-run-the-jewels-2.jpg"
     },
     {
       "no": null,
@@ -2477,7 +2503,8 @@
       "art": "assets/40/the-hotelier-home-like-noplace-is-there.jpg",
       "wear": {
         "paper": 0.87
-      }
+      },
+      "art_worn": "assets/40/worn/the-hotelier-home-like-noplace-is-there.jpg"
     },
     {
       "no": 16,
@@ -2562,7 +2589,8 @@
         "paper": 1.0,
         "level": "high",
         "opacity": 1
-      }
+      },
+      "art_worn": "assets/40/worn/tokyo-police-club-champ.jpg"
     },
     {
       "no": 6,
@@ -2659,7 +2687,8 @@
         "paper": 0.79,
         "level": "med",
         "opacity": 0.75
-      }
+      },
+      "art_worn": "assets/40/worn/blink-182-take-off-your-pants-and-jacket.jpg"
     },
     {
       "no": 11,
@@ -2741,7 +2770,8 @@
         "paper": 0.86,
         "level": "med",
         "opacity": 0.75
-      }
+      },
+      "art_worn": "assets/40/worn/youth-lagoon-the-year-of-hibernation.jpg"
     },
     {
       "no": null,
@@ -2850,7 +2880,8 @@
       "art_back_src": "http://coverartarchive.org/release/9f8374c0-8598-3799-8986-a573b9de2d31/5763179290.jpg",
       "wear": {
         "paper": 0.87
-      }
+      },
+      "art_worn": "assets/40/worn/arcade-fire-the-suburbs.jpg"
     },
     {
       "no": 20,
@@ -2942,7 +2973,8 @@
         "paper": 0.79,
         "level": "med",
         "opacity": 0.75
-      }
+      },
+      "art_worn": "assets/40/worn/phish-a-live-one.jpg"
     },
     {
       "no": 4,
@@ -3094,7 +3126,8 @@
         "paper": 0.87,
         "level": "high",
         "opacity": 1
-      }
+      },
+      "art_worn": "assets/40/worn/outkast-stankonia.jpg"
     },
     {
       "no": 14,
@@ -3181,7 +3214,8 @@
         "paper": 1.0,
         "level": "high",
         "opacity": 1
-      }
+      },
+      "art_worn": "assets/40/worn/jose-gonzalez-in-our-nature.jpg"
     },
     {
       "no": null,
@@ -3278,7 +3312,8 @@
         "paper": 1.0,
         "level": "high",
         "opacity": 1
-      }
+      },
+      "art_worn": "assets/40/worn/the-kinks-lola-versus-powerman.jpg"
     }
   ]
 }

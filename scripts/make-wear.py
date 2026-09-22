@@ -15,6 +15,9 @@ texture and a faint age tone instead. No blur passes, no clouds, no speckle.
 
 It also writes each album's paper strength to data/albums.json as `wear.paper`.
 
+Then bakes each album's final sleeve (art + wear at its picked strength + paper) to
+assets/40/worn/<slug>.jpg and records it as `art_worn`: the one image every surface uses.
+
 Usage: scripts/make-wear.py [--size 1200] [--only slug,slug] [--force] [--jobs 4]
 """
 import sys, math, json, hashlib
@@ -188,9 +191,32 @@ def make(job):
     else:
         over(rgb, A, WHITE, np.maximum(wear, marks) * .95)
         paper = .75 + .25 * lum
+    # Falloff: the faint, even light of a scanner lamp — one side a touch brighter, the far side a
+    # touch deeper. A few percent at most, a different direction for every record.
+    th = U(0, 2 * math.pi)
+    u = ((xx - S / 2) * math.cos(th) + (yy - S / 2) * math.sin(th)) / (S * .72)
+    over(rgb, A, WHITE, np.clip(-u, 0, 1) ** 1.6 * U(.02, .04))
+    over(rgb, A, DIRT, np.clip(u, 0, 1) ** 1.6 * U(.035, .06))
     rgb = rgb / np.maximum(A[..., None], 1e-4)
     Image.fromarray(np.dstack([rgb.clip(0, 255).astype(np.uint8), (A * 255).astype(np.uint8)]), 'RGBA').save(OUT / f'{slug}.webp', 'WEBP', quality=84, method=6)
     return slug, year, round(life, 2), round(lum, 2), light, round(paper, 2)
+
+
+# ── Bake: the final sleeve every surface uses (site, grid, story clips) ────
+_PAPER = None
+def bake(job):
+    slug, art, opacity, paper = job
+    global _PAPER
+    if _PAPER is None: _PAPER = np.asarray(Image.open(OUT / 'paper.webp').convert('RGBA')).astype(np.float32) / 255
+    D = S
+    cov = np.asarray(Image.open(ROOT / art).convert('RGB').resize((D, D), Image.LANCZOS)).astype(np.float32) / 255
+    ov = np.asarray(Image.open(OUT / f'{slug}.webp').convert('RGBA')).astype(np.float32) / 255
+    al = ov[:, :, 3:4] * opacity; out = cov * (1 - al) + ov[:, :, :3] * al
+    T = _PAPER.shape[0]; t = np.tile(_PAPER, (D // T + 1, D // T + 1, 1))[:D, :D]
+    pa = t[:, :, 3:4] * paper; out = out * (1 - pa) + t[:, :, :3] * pa
+    dst = ROOT / 'assets/40/worn' / f'{slug}.jpg'
+    Image.fromarray((np.clip(out, 0, 1) * 255).astype(np.uint8)).save(dst, 'JPEG', quality=88, optimize=True, progressive=True)
+    return slug, dst.stat().st_size
 
 
 if __name__ == '__main__':
@@ -210,4 +236,12 @@ if __name__ == '__main__':
     doc = json.loads(data_path.read_text())                                  # re-read: don't clobber edits made meanwhile
     for a in doc['albums']:
         if a['slug'] in paper: a.setdefault('wear', {})['paper'] = paper[a['slug']]
+    # Bake every album with art and a wear overlay into its final sleeve.
+    (ROOT / 'assets/40/worn').mkdir(parents=True, exist_ok=True)
+    bj = [(a['slug'], a['art'], (a.get('wear') or {}).get('opacity', .75), (a.get('wear') or {}).get('paper', .7)) for a in doc['albums']
+          if a.get('art') and (OUT / f"{a['slug']}.webp").exists() and (not ONLY or a['slug'] in ONLY)]
+    with Pool(JOBS) as pool:
+        for slug, size in pool.map(bake, bj): print(f'baked {slug:46} {size // 1024}KB')
+    for a in doc['albums']:
+        if (ROOT / 'assets/40/worn' / f"{a['slug']}.jpg").exists(): a['art_worn'] = f"assets/40/worn/{a['slug']}.jpg"
     data_path.write_text(json.dumps(doc, indent=2, ensure_ascii=False) + '\n')

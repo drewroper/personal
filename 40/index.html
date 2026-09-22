@@ -164,7 +164,7 @@
 
     .entry__cover {
       display: block; width: 100%; aspect-ratio: 1; object-fit: cover; margin-top: 16px;
-      background: var(--bg-raised); border: 1px solid var(--rule); border-radius: 10px;
+      background: var(--bg-raised); border: 1px solid var(--rule); border-radius: 2px;
     }
     .entry__cover-wrap { position: relative; margin-top: 16px; cursor: pointer; -webkit-tap-highlight-color: transparent; perspective: 1400px; }
     .entry__cover-wrap .entry__cover { margin-top: 0; }
@@ -174,18 +174,18 @@
     .flip__front, .flip__back { -webkit-backface-visibility: hidden; backface-visibility: hidden; }
     .flip__back {
       position: absolute; inset: 0; transform: rotateY(180deg);
-      background: var(--bg-raised); border: 1px solid var(--rule); border-radius: 10px; overflow: hidden;
+      background: var(--bg-raised); border: 1px solid var(--rule); border-radius: 2px; overflow: hidden;
       display: grid; place-items: center;
     }
     .flip__back img { display: block; width: 100%; height: 100%; object-fit: contain; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
     .flip__back img.is-square { object-fit: cover; }
     /* ?worn — each record's own sleeve wear laid over its cover (and, turned, its back). */
     .flip__wear { display: none; }
-    .is-worn .flip__wear { display: block; position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 10px; pointer-events: none; opacity: var(--wear, .7); -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+    .is-worn .flip__wear { display: block; position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 2px; pointer-events: none; opacity: var(--wear, .7); -webkit-backface-visibility: hidden; backface-visibility: hidden; }
     .is-worn .flip__back .flip__wear { transform: rotate(180deg); }
     /* Paper stock: one shared tile at a fixed physical scale, so every sleeve reads as printed card. */
     .flip__paper { display: none; }
-    .is-worn .flip__paper { display: block; position: absolute; inset: 0; border-radius: 10px; pointer-events: none; background: url(../assets/40/wear/paper.webp) 0 0 / 256px 256px repeat; opacity: var(--paper, .7); -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+    .is-worn .flip__paper { display: block; position: absolute; inset: 0; border-radius: 2px; pointer-events: none; background: url(../assets/40/wear/paper.webp) 0 0 / 256px 256px repeat; opacity: var(--paper, .7); -webkit-backface-visibility: hidden; backface-visibility: hidden; }
     .flip__list { margin: 0; padding: 18px 20px; width: 100%; height: 100%; box-sizing: border-box; list-style: none; display: flex; flex-direction: column; justify-content: center; font-size: 11px; line-height: 1.5; letter-spacing: .04em; text-transform: uppercase; color: var(--text-muted); }
     .flip__list li { display: flex; gap: 10px; }
     .flip__list li span:first-child { color: var(--text-faint); flex: none; width: 2em; }
@@ -285,7 +285,7 @@
     .entry__cover--empty { display: grid; place-items: center; font-family: var(--font-display); font-size: clamp(64px, 20vw, 120px); color: var(--text-faint); letter-spacing: -.04em; }
     @media (min-width: 1024px) { .tail__bonus .entry { padding: 48px 40px 56px; } }
     @media (prefers-reduced-motion: reduce) { .tail { height: 100vh; height: 100dvh; } }
-    .grid40 > * { display: block; aspect-ratio: 1; border-radius: 4px; overflow: hidden; }
+    .grid40 > * { display: block; aspect-ratio: 1; border-radius: 2px; overflow: hidden; }
     .grid40 span { border: 1px solid var(--rule); display: grid; place-items: center; font: 400 9px/1 var(--font-mono); letter-spacing: .06em; color: var(--text-faint); opacity: .8; user-select: none; }
     .grid40 span.is-today { border-color: var(--accent); color: var(--accent); }
     .grid40 a { border: 0; }
@@ -404,7 +404,7 @@
     const params  = new URLSearchParams(location.search);
     const test    = params.has('test');
     const preview = test || params.has('preview');
-    const WORN    = params.has('worn');
+    const WORN    = !params.has('clean');   // worn sleeves are the default; ?clean shows the original art
     const DATA    = test ? '../data/albums.test.json' : '../data/albums.json';
 
     const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -483,9 +483,8 @@
         <div class="entry__grid">
           <button class="entry__cover-wrap" type="button" aria-label="Flip ${esc(a.title)} over" aria-pressed="false" style="display:block;width:100%;padding:0;border:0;background:none;text-align:left;">
             <div class="flip">
-              ${a.art ? `<img class="entry__cover flip__front" src="../${esc(a.art)}" alt="${esc(a.title)} cover" loading="lazy" />`
+              ${a.art ? `<img class="entry__cover flip__front" src="../${esc(WORN && a.art_worn ? a.art_worn : a.art)}" alt="${esc(a.title)} cover" loading="lazy" />`
                       : `<div class="entry__cover entry__cover--empty flip__front" aria-label="${esc(a.title)} cover"><span>?</span></div>`}
-              ${WORN ? `<img class="flip__wear" src="../assets/40/wear/${esc(a.slug.replace(/-40$/, ''))}.webp" alt="" loading="lazy" aria-hidden="true" style="${a.wear && a.wear.opacity && !params.get('worn') ? `--wear:${a.wear.opacity}` : ''}" /><div class="flip__paper" style="--paper:${(a.wear && a.wear.paper) || .7}"></div>` : ''}
               <div class="flip__back" aria-hidden="true">${back(a)}${WORN ? `<img class="flip__wear" src="../assets/40/wear/${esc(a.slug.replace(/-40$/, ''))}.webp" alt="" loading="lazy" /><div class="flip__paper" style="--paper:${(a.wear && a.wear.paper) || .7}"></div>` : ''}</div>
             </div>
           </button>
@@ -729,7 +728,7 @@
     // ?worn, ?worn=light, ?worn=heavy — each record's own sleeve wear over its cover (a test for now).
     if (WORN) {
       document.body.classList.add('is-worn');
-      if (params.get('worn')) document.body.style.setProperty('--wear', { light: .55, heavy: 1 }[params.get('worn')] || .75);   // an explicit strength overrides the per-record picks
+      document.body.style.setProperty('--wear', .75);
     }
     if (BIRTHDAY) document.body.classList.add('is-birthday');
 
@@ -858,7 +857,7 @@
         const byNo = new Map(slotted.map(a => [a.no, a]));
         document.getElementById('js-grid').innerHTML = Array.from({ length: meta.total }, (_, i) => {
           const a = byNo.get(i + 1);
-          if (a && (preview || a.date <= today)) return `<a href="#${pad(a.no)}" title="Day ${pad(a.no)} · ${esc(a.artist)} — ${esc(a.title)}"><img src="../${esc(a.art || '')}" alt="" loading="lazy"></a>`;
+          if (a && (preview || a.date <= today)) return `<a href="#${pad(a.no)}" title="Day ${pad(a.no)} · ${esc(a.artist)} — ${esc(a.title)}"><img src="../${esc((WORN && a.art_worn) || a.art || '')}" alt="" loading="lazy"></a>`;
           return `<span class="${a && a.date === today ? 'is-today' : ''}" aria-hidden="true">${pad(i + 1)}</span>`;
         }).join('');
         const last = document.querySelector('#js-grid a:nth-child(40)');

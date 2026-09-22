@@ -349,7 +349,7 @@ def variant_b(a, art, theta=None, riff="field"):
     scratch = ImageDraw.Draw(Image.new("RGB", (1, 1)))
     y_after = header(scratch, a, TOP + 60)
     cy = max(y_after + 36, 580)
-    c.paste(cover, (CX, cy), rounded(cover, 24))
+    c.paste(cover, (CX, cy), rounded(cover, 5))   # ≈2px at phone size, like the site
 
     animate = "resolve" in riff
     pieces = [
@@ -469,7 +469,7 @@ def grid_card(albums, through=0, headline="", eyebrow="ONE A DAY · IN NO PARTIC
         x = x0 + k * (cell + gap); y = y0 + r * (cell + gap)
         a = by_no.get(i + 1)
         if a and i + 1 <= through:
-            art = Image.open(ROOT / a["art"]).convert("RGB")
+            art = Image.open(ROOT / (a.get("art_worn") or a["art"])).convert("RGB")
             t = square(art, cell); c.paste(t, (x, y), rounded(t, 4))
         else:
             d.rectangle([x, y, x + cell - 1, y + cell - 1], outline=RULE, width=2)
@@ -529,7 +529,7 @@ def main():
             continue
         if slugs and a["slug"] not in slugs:
             continue
-        art = Image.open(ROOT / a["art"]).convert("RGB")
+        art = Image.open(ROOT / (a.get("art_worn") or a["art"])).convert("RGB")
         reset_caches()
         if "--video" in args:
             secs = int(args[args.index("--seconds") + 1]) if "--seconds" in args else 20

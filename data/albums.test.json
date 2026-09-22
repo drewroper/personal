@@ -89,7 +89,8 @@
         "paper": 0.9,
         "level": "med",
         "opacity": 0.75
-      }
+      },
+      "art_worn": "assets/40/worn/weezer-green-album.jpg"
     },
     {
       "no": 2,
@@ -187,7 +188,8 @@
         "paper": 1.0,
         "level": "high",
         "opacity": 1
-      }
+      },
+      "art_worn": "assets/40/worn/finch-what-it-is-to-burn.jpg"
     },
     {
       "no": 3,
@@ -295,7 +297,8 @@
         "paper": 1.0,
         "level": "high",
         "opacity": 1
-      }
+      },
+      "art_worn": "assets/40/worn/turnstile-glow-on.jpg"
     },
     {
       "no": 4,
@@ -411,7 +414,8 @@
       "art_back": "assets/40/nelly-country-grammar-back.jpg",
       "wear": {
         "paper": 0.9
-      }
+      },
+      "art_worn": "assets/40/worn/nelly-country-grammar.jpg"
     },
     {
       "no": 5,
@@ -517,7 +521,8 @@
       "art_back": "assets/40/outkast-aquemini-back.jpg",
       "wear": {
         "paper": 0.83
-      }
+      },
+      "art_worn": "assets/40/worn/outkast-aquemini.jpg"
     },
     {
       "no": 6,
@@ -603,7 +608,8 @@
       "art_back": "assets/40/portugal-the-man-the-satanic-satanist-back.jpg",
       "wear": {
         "paper": 0.9
-      }
+      },
+      "art_worn": "assets/40/worn/portugal-the-man-the-satanic-satanist.jpg"
     },
     {
       "no": 7,
@@ -689,7 +695,8 @@
       "art_back": "assets/40/death-cab-for-cutie-plans-back.jpg",
       "wear": {
         "paper": 0.77
-      }
+      },
+      "art_worn": "assets/40/worn/death-cab-for-cutie-plans.jpg"
     },
     {
       "no": 8,
@@ -782,7 +789,8 @@
         "paper": 0.89,
         "level": "high",
         "opacity": 1
-      }
+      },
+      "art_worn": "assets/40/worn/oasis-what-s-the-story-morning-glory.jpg"
     },
     {
       "no": 9,
@@ -885,7 +893,8 @@
         "paper": 0.87,
         "level": "high",
         "opacity": 1
-      }
+      },
+      "art_worn": "assets/40/worn/radiohead-hail-to-the-thief.jpg"
     },
     {
       "no": 10,
@@ -977,7 +986,8 @@
         "paper": 0.86,
         "level": "high",
         "opacity": 1
-      }
+      },
+      "art_worn": "assets/40/worn/animal-collective-merriweather-post-pavilion.jpg"
     },
     {
       "no": 40,
@@ -1060,7 +1070,8 @@
         "paper": 0.9,
         "level": "med",
         "opacity": 0.75
-      }
+      },
+      "art_worn": "assets/40/worn/weezer-green-album.jpg"
     },
     {
       "no": null,
@@ -1157,7 +1168,8 @@
         "paper": 1.0,
         "level": "high",
         "opacity": 1
-      }
+      },
+      "art_worn": "assets/40/worn/the-kinks-lola-versus-powerman.jpg"
     }
   ]
 }

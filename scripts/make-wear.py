@@ -56,23 +56,24 @@ def make(slug, year=None):
             cover += np.clip(1 - (d - span / 2) / (span * .3), 0, 1) * (1 if i == 0 else U(.4, .9))
         return np.clip(cover, 0, 1)
     if P(.35 + .5 * min(1, age / 35)):
-        cx, cy = S * U(.46, .54), S * U(.47, .55); R0 = S * U(.42, .47)
+        # A 12" disc in a 12¼" sleeve: the ring sits close to the edge. Thin, and made of grains.
+        cx, cy = S * U(.485, .515), S * U(.49, .52); R0 = S * U(.455, .485)
         r = np.hypot(xx - cx, yy - cy); ang = np.arctan2(yy - cy, xx - cx)
         ph1, ph2, ph3 = U(0, 6.28), U(0, 6.28), U(0, 6.28)
-        R = R0 * (1 + U(.01, .035) * np.sin(ang + ph1) + U(.005, .02) * np.sin(3 * ang + ph2))
-        w = S * U(.01, .03) * (.55 + .9 * (.5 + .5 * np.sin(2 * ang + ph3)))
-        band = np.exp(-((r - R) / w) ** 2) + .3 * np.exp(-((r - R) / (w * 2.8)) ** 2)
+        R = R0 * (1 + U(.006, .02) * np.sin(ang + ph1) + U(.003, .012) * np.sin(3 * ang + ph2))
+        w = S * U(.004, .011) * (.6 + .8 * (.5 + .5 * np.sin(2 * ang + ph3)))
+        band = np.exp(-((r - R) / w) ** 2) + .12 * np.exp(-((r - R) / (w * 3)) ** 2)
         rest = U(math.pi * .15, math.pi * .85) if P(.7) else U(0, 2 * math.pi)   # low on the sleeve, mostly
-        lobe = .25 + .75 * (.5 + .5 * np.cos(ang - rest)) ** U(1, 2.5)
-        cover = arc_cover(ang, int(U(1, 4)), rest) * (.35 + .65 * noise(60))
-        mottle = (.4 + noise(24) * 1.0) * (noise(3, 2) > U(.3, .5))
-        ring = band * lobe * cover * mottle
-        light += blur(ring, .5) * U(.9, 1.4)
-        dark += np.exp(-((r - R * 1.035) / (w * 1.5)) ** 2) * lobe * cover * (.3 + noise(40) * .6) * U(.15, .4)
+        lobe = .3 + .7 * (.5 + .5 * np.cos(ang - rest)) ** U(1, 2.5)
+        cover = arc_cover(ang, int(U(1, 4)), rest) * (.3 + .7 * noise(50))
+        grain = (rng.random((S, S)) > U(.45, .62)).astype(np.float32) * (.5 + noise(6, 2))   # dots, not a line
+        ring = band * lobe * cover * grain * (noise(3, 2) > U(.2, .4))
+        light += ring * U(1.2, 1.8)
+        dark += np.exp(-((r - R * 1.02) / (w * 2)) ** 2) * lobe * cover * (.3 + noise(40) * .6) * U(.1, .3)
         if P(.3):                                                        # a second, offset arc from an inner sleeve
             R2 = R0 * U(.92, .99); cx2, cy2 = cx + S * U(-.04, .04), cy + S * U(-.04, .04)
             r2 = np.hypot(xx - cx2, yy - cy2); ang2 = np.arctan2(yy - cy2, xx - cx2)
-            light += blur(np.exp(-((r2 - R2) / (w * .8)) ** 2) * arc_cover(ang2, int(U(1, 3)), U(0, 6.28)) * (.3 + noise(26) * .7) * (noise(3, 2) > .35), .6) * U(.3, .7)
+            light += np.exp(-((r2 - R2) / (w * .8)) ** 2) * arc_cover(ang2, int(U(1, 3)), U(0, 6.28)) * (rng.random((S, S)) > .55) * (.3 + noise(26) * .7) * (noise(3, 2) > .35) * U(.5, 1.0)
         if P(.35):                                                       # faint spindle/label arc
             light += np.exp(-((r - S * U(.15, .19)) / (S * .01)) ** 2) * arc_cover(ang, 1, U(0, 6.28)) * noise(24) * U(.15, .35)
 
@@ -82,8 +83,8 @@ def make(slug, year=None):
     edge = np.zeros_like(light)
     for d, wt in zip([dl, dr_, dt, db], wts):
         edge += np.exp(-d / (S * U(.006, .02))) * wt
-    edge = edge * (.4 + noise(12) * 1.1) * (noise(2, 2) > U(.3, .5))
-    light += blur(edge, .4) * U(.9, 1.4)
+    edge = edge * (.4 + noise(12) * 1.1) * (noise(2, 2) > U(.3, .5)) * (.5 + .5 * (rng.random((S, S)) > .4))
+    light += edge * U(1.0, 1.5)
 
     # Corners: blunted, with creases fanning out of the worst ones.
     corners = [(0, 0), (S, 0), (0, S), (S, S)]

@@ -818,7 +818,7 @@
     fetch(DATA + '?v=' + Date.now())
       .then(r => r.json())
       .then(({ meta, albums }) => {
-        const slotted = albums.filter(a => a.no && a.date).sort((x, y) => x.no - y.no);
+        const slotted = albums.filter(a => a.no && a.date && !a.bonus).sort((x, y) => x.no - y.no);
         const live    = slotted.filter(a => preview || a.date <= today);
 
         // About panel: collapsed by default, since most visits are repeat
@@ -860,8 +860,9 @@
           new IntersectionObserver((es, io) => { if (es[0].isIntersecting) { io.disconnect(); setTimeout(() => arrive(last), 500); } }, { threshold: .6 }).observe(last);
         }
 
-        const bonusEl = document.getElementById('js-tail-bonus');
-        if (bonusEl && meta.bonus) bonusEl.innerHTML = entry(Object.assign({ bonus: true, no: 0 }, meta.bonus));
+        // The bonus record lives in the albums list flagged `bonus`, outside the countdown and the grid.
+        const bonusEl = document.getElementById('js-tail-bonus'), bonusRec = albums.find(a => a.bonus);
+        if (bonusEl && bonusRec) bonusEl.innerHTML = entry(Object.assign({ no: 0 }, bonusRec));
 
         const feed = document.getElementById('js-feed');
         if (!live.length) {

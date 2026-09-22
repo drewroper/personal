@@ -4,15 +4,7 @@
     "start": "2026-09-23",
     "end": "2026-11-01",
     "total": 40,
-    "url": "https://drewroper.com/40",
-    "bonus": {
-      "slug": "bonus",
-      "artist": "Artist to be named",
-      "title": "One more.",
-      "discovered": "",
-      "blurb": [],
-      "links": {}
-    }
+    "url": "https://drewroper.com/40"
   },
   "albums": [
     {
@@ -1022,6 +1014,22 @@
       },
       "date": "2026-11-01",
       "art_back": "assets/40/weezer-green-album-back.jpg"
+    },
+    {
+      "no": null,
+      "bonus": true,
+      "slug": "the-kinks-lola-versus-powerman",
+      "artist": "The Kinks",
+      "title": "Lola Versus Powerman and the Moneygoround, Part One",
+      "apple_id": 1642496437,
+      "discovered": "",
+      "blurb": [],
+      "links": {
+        "spotify": "https://open.spotify.com/album/6cv47fKkAyi9Lm5wwud4It"
+      },
+      "art_back": "assets/40/the-kinks-lola-versus-powerman-back.jpg",
+      "art_back_src": "http://coverartarchive.org/release/e69bf713-00cb-4042-b58b-5097d3458ce9/33540647551.jpg",
+      "label": null
     }
   ]
 }

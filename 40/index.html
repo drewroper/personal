@@ -148,6 +148,12 @@
     /* One line: the disclaimer on the left, the dates on the right. */
     .about__meta  { display: flex; justify-content: space-between; align-items: baseline; gap: 8px 16px; flex-wrap: wrap; max-width: 560px; margin: 12px 0 0; }
     .about__quiet { margin: 0; color: var(--text-faint); font-size: 14px; line-height: 1.5; font-weight: 300; }
+    /* The project blurb: under the dates on a phone, its own column on desktop. From meta.about. */
+    .about__project { max-width: var(--measure); margin: 24px 0 0; padding-top: 20px; border-top: 1px solid var(--rule); color: var(--text-muted); font-size: 15px; line-height: 1.6; font-weight: 300; }
+    .about__project p { margin: 0 0 1em; }
+    .about__project p:last-child { margin-bottom: 0; }
+    .about__project em { font-style: italic; }
+    .about__project[hidden] { display: none; }
     .about__facts { margin: 0; color: var(--accent); letter-spacing: .08em; text-transform: uppercase; font-family: var(--font-mono); font-size: var(--mono-size); white-space: nowrap; }
     /* Index: the forty days, as big as the screen allows — 5 across on a phone (8 rows), 8 across from 720px. */
     .index__meta { display: flex; justify-content: space-between; gap: 16px; margin: 0 0 14px; color: var(--text-faint); }
@@ -166,7 +172,7 @@
     .about__title .is-date { color: var(--accent); }
     .about__title .is-gap { height: .5em; }
     @media (prefers-reduced-motion: no-preference) {
-      .about:not([hidden]) .about__title > *, .about:not([hidden]) .about__meta, .about:not([hidden]) .about__body,
+      .about:not([hidden]) .about__title > *, .about:not([hidden]) .about__meta, .about:not([hidden]) .about__body, .about:not([hidden]) .about__project,
       .index:not([hidden]) .index__meta, .index:not([hidden]) .grid40 { animation: rise .42s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i) * 60ms); }
       @keyframes rise { from { opacity: 0; transform: translateY(.35em); } to { opacity: 1; transform: none; } }
     }
@@ -375,9 +381,11 @@
       .entry details { grid-area: tracks; }
       .about, .index { justify-content: center; padding-top: 48px; max-width: var(--page-max); box-sizing: border-box; margin: 0 auto; }
       .about[hidden], .index[hidden] { display: none; }
+      .about { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: 72px; align-content: center; align-items: start; }
       .about__title { font-size: min(var(--display-size), 11vh); }
       .about__body { font-size: 18px; max-width: 52ch; }
       .about__meta { max-width: 52ch; }
+      .about__project { align-self: start; margin: 0; padding: .35em 0 .35em 32px; border: 0; border-left: 1px solid var(--rule); font-size: 17px; max-width: 46ch; }
       .index .grid40 { max-width: min(100%, 1200px, calc((100vh - 170px) * 1.6)); gap: 10px; margin: 0 auto; }
       .index__meta { width: 100%; max-width: min(100%, 1200px, calc((100vh - 170px) * 1.6)); margin: 0 auto 18px; }
       .grid40 span, .index .grid40 span { font-size: 12px; }
@@ -405,6 +413,7 @@
       </div>
       </div>
       <section class="about" id="js-about" hidden>
+        <div class="about__lead">
         <h1 class="about__title">
           <span style="--i:0">40 albums,</span>
           <em style="--i:1">40 days,</em>
@@ -415,6 +424,8 @@
           <p class="about__quiet">In no particular order.</p>
           <p class="about__facts mono">Sep 23 → Nov 1, 2026</p>
         </div>
+        </div>
+        <div class="about__project" id="js-about-project" style="--i:5" hidden></div>
       </section>
       <section class="index" id="js-index" aria-label="Index" hidden>
         <p class="index__meta mono" style="--i:0"><span>Day 01 → 40</span><span id="js-index-count"></span></p>
@@ -967,6 +978,9 @@
         // About panel: collapsed by default, since most visits are repeat
         // visits from a story. Opens itself only when there's nothing else
         // on the page yet.
+        const proj = document.getElementById('js-about-project'), projText = [].concat(meta.about || []);
+        if (proj && projText.length) { proj.innerHTML = projText.map(p => `<p>${inline(p)}</p>`).join(''); proj.hidden = false; }
+
         // Two dropdowns hang off the bar, About and Index; one open at a time.
         const about = document.getElementById('js-about'), btn = document.getElementById('js-about-btn');
         const index = document.getElementById('js-index'), ibtn = document.getElementById('js-index-btn');

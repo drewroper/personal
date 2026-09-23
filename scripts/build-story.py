@@ -14,7 +14,7 @@ Layout rules shared by every variant:
   * Instagram covers the top ~250px (progress bar, handle) and bottom
     ~250px (reply bar). Nothing important lives there.
   * Artist above title, title above cover, cover centred.
-  * The band under the cover is left open for the link sticker.
+  * No URL on any card: Drew adds Instagram's link sticker (drewroper.com/40/#NN).
   * Day indicator is quiet: microcopy or a 40-dot rail.
 """
 
@@ -42,7 +42,7 @@ FAINT  = (86, 84, 79)
 RULE   = (38, 38, 40)
 ACCENT = (214, 255, 56)
 
-TITLE_TRACK = .02   # album titles: a touch of open tracking (Drew: "a tad too tight")
+TITLE_TRACK = 1.5 / 92   # album titles: +1.5px at 92px, matching the design canvas (Drew: "a tad too tight")
 
 VARIANT = "b"   # full-bleed dither: the cover, blown up and dithered, is the ground
 
@@ -453,7 +453,6 @@ def intro_1():
     y += 30
     d.text((PAD, y), "Counting down 40 albums that shaped me,", font=sans(34), fill=MUTED)
     d.text((PAD, y + 46), "one a day, before I turn 40.", font=sans(34), fill=MUTED)
-    url(d, BOT - 30)
     return c
 
 
@@ -479,7 +478,6 @@ def grid_card(albums, through=0, headline="", eyebrow="ONE A DAY · IN NO PARTIC
         else:
             d.rectangle([x, y, x + cell - 1, y + cell - 1], outline=RULE, width=2)
             d.text((x + 12, y + 8), f"{i + 1:02d}", font=mono(20), fill=FAINT)
-    url(d, BOT - 30)
     return c
 
 
@@ -488,7 +486,7 @@ def intro_2(albums):
 
 
 def closing(albums):
-    return grid_card(albums, 40, "That's 40.", "SEP 23 → NOV 1 · ALL 40")
+    return grid_card(albums, 40, "All forty.", "SEP 23 → NOV 1")
 
 
 # ── video ────────────────────────────────────────────────────────────────

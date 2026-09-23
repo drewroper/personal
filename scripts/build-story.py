@@ -526,13 +526,14 @@ def story_404040(theta):
     return c
 
 
-WHY = [   # the canvas's "Intro 2 — Why (option B)", with Drew's numerals in the last line
-    ("rich", [("I turn 40 on November 1st", True), (", and I’m celebrating with the thing that’s been there for every chapter of my life so far. Music.", False)]),
-    ("lime", "Every day until my birthday, I’m sharing one album that shaped me."),
-    ("body", "I couldn’t pick my 40 favorite albums if my life depended on it. Plenty of these would make that list, and every one is in my top 100, but this list is about more than favorites."),
-    ("body", "I can still remember the first time I heard each of these, or what I was doing when I played them the most. Some of them introduced me to a new genre, or pulled me back into one I’d left behind. Some had me digging through a band’s entire catalog. And some of them just never left."),
+WHY = [   # the canvas's "Intro 2 — Why (option B)", as of Sep 23: lime Porca headline over four paragraphs
+    ("h1", "I turn 40 on November 1st."),
+    ("body", "Every day until my birthday, I’ll share one album that shaped me. You didn’t ask for this, so feel free to mute me, or better yet, yell at me about my album picks."),
+    ("body", "These aren’t my 40 favorite albums. I couldn’t pick those if my life depended on it. Plenty of these would make that list, and every one is in my top 100, but this list is about more than favorites."),
+    ("body", "These albums are special to me in other ways: I can still remember the first time I heard each of these, or what I was doing when I played them the most. Some of them introduced me to a new genre, some had me digging through the band’s back catalog, some just weirdly fit my life at that stage."),
     ("body", "40 albums, 40 days, for 40 years."),
 ]
+WHY_H1 = 112   # px; at 96 "1st." fell to its own line
 PORTRAIT_OPACITY = 0.15
 PORTRAIT_STEPS = (14, 27, 54, 108)   # the portrait resolves coarse → fine; 108 cells across is the canvas's grid
 
@@ -540,14 +541,26 @@ PORTRAIT_STEPS = (14, 27, 54, 108)   # the portrait resolves coarse → fine; 10
 def _why_paragraphs():
     """Lay out WHY like the canvas (912 wide at x 84, top 254, 40px gaps):
     a list of (draw_fn) per paragraph, plus the bottom y."""
-    body, bold, big = sans(40), sans_md(40), display(80)
+    body, bold, big = sans(40), sans_md(40), display(WHY_H1)
     out, y = [], 254
     for kind, content in WHY:
-        if kind == "lime":
-            lh = 80 * 1.04
-            lines = wrap(content, big, COL)
+        if kind == "h1":                                             # Porca, 1px tracking, lime
+            lh = WHY_H1 * 1.02
+            tw = lambda t: big.getlength(t) + len(t)
+            lines, cur = [], ""
+            for w in content.split():
+                if cur and tw(cur + " " + w) > COL:
+                    lines.append(cur); cur = w
+                else:
+                    cur = (cur + " " + w).strip()
+            lines.append(cur)
             ys = [_baseline(big, y + i * lh, lh) for i in range(len(lines))]
-            out.append(lambda d, lines=lines, ys=ys: [d.text((PAD, yy), ln, font=big, fill=ACCENT, anchor="ls") for ln, yy in zip(lines, ys)])
+            def draw(d, lines=lines, ys=ys):
+                for ln, yy in zip(lines, ys):
+                    xx = PAD
+                    for ch in ln:
+                        d.text((xx, yy), ch, font=big, fill=ACCENT, anchor="ls"); xx += big.getlength(ch) + 1
+            out.append(draw)
         else:
             lh = 40 * 1.34
             runs = content if kind == "rich" else [(content, False)]

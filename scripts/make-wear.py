@@ -416,10 +416,10 @@ def ring_layer(slug, year):
     return lay
 
 
-def surface_layer(slug, year, face='', mean=.5, edgew=1.0, surfw=0.0):
+def surface_layer(slug, year, face='', mean=.5, edgew=1.0, surfw=0.0, bendw=0.0):
     """What happened to one face: its cut edges and corners, shelf scuffs, the hand that held it,
     cracks, scratches and grit. The front and the back ('' / ':back') each have their own."""
-    key = (slug, year, face, round(mean, 3), edgew, surfw)
+    key = (slug, year, face, round(mean, 3), edgew, surfw, bendw)
     if key in _SURF:
         return _SURF[key]
     R = ring_layer(slug, year)
@@ -603,12 +603,12 @@ def surface_layer(slug, year, face='', mean=.5, edgew=1.0, surfw=0.0):
             L = S * math.exp(XU(math.log(.012), math.log(.08)))
             a = a0 + xr.normal(0, .5) if xr.random() < .45 else XU(0, math.pi)
             x0, y0 = XU(.03, .97) * S, XU(.03, .97) * S
-            bezier_line(dsx, x0, y0, x0 + math.cos(a) * L, y0 + math.sin(a) * L, XU(-.1, .1) * L,
+            bezier_line(dsx, x0, y0, x0 + math.cos(a) * L, y0 + math.sin(a) * L, XU(-.03, .03) * L,   # near straight: curls read as hair
                         XU(95, 190) if xr.random() < .75 else XU(190, 245), 14, .7)
         for _ in range(int(XU(2, 6) * k)):                       # longer hairlines, broken in places
             L = S * math.exp(XU(math.log(.05), math.log(.25))); a = XU(0, math.pi)
             x0, y0 = XU(0, S), XU(0, S)
-            bezier_line(dsx, x0, y0, x0 + math.cos(a) * L, y0 + math.sin(a) * L, XU(-.06, .06) * L,
+            bezier_line(dsx, x0, y0, x0 + math.cos(a) * L, y0 + math.sin(a) * L, XU(-.02, .02) * L,
                         XU(60, 140), 28, .5, gaps=[(g0, g0 + XU(.03, .12)) for g0 in xr.uniform(.1, .9, int(XU(1, 4)))])
         nrub = int(XU(1, 3.5) * k) if mean <= .62 or age > 40 else int(XU(0, 1.5) * k)
         for _ in range(nrub):                                    # rub patches: fine parallel strokes where something slid
@@ -636,6 +636,29 @@ def surface_layer(slug, year, face='', mean=.5, edgew=1.0, surfw=0.0):
             du = (xx - cx2) * math.cos(th) + (yy - cy2) * math.sin(th); dv = -(xx - cx2) * math.sin(th) + (yy - cy2) * math.cos(th)
             Pi = np.maximum(Pi, XU(.12, .3) * min(1.3, k) * np.exp(-(du / r1) ** 2 - (dv / r2) ** 2))
 
+    # 3c. wear.bends: the sleeve got bent — a crease across a corner or along an edge (the Incubus
+    #     top-right), its line cracked and the ink flaked in a band beside it where the ridge rubbed.
+    if bendw > 0:
+        br = seed(slug + (face or ':face') + ':bend'); BU = br.uniform
+        bd = Image.new('L', (N, N), 0); dbd = ImageDraw.Draw(bd)
+        spots = list(br.permutation(8))                            # each bend its own corner or side
+        for i in range(int(round(bendw))):
+            spot = int(spots[i % 8])
+            if spot < 4:                                           # a corner bent over, well into the face
+                px, py, sx_, sy_ = [(0, 0, 1, 1), (S - 1, 0, -1, 1), (0, S - 1, 1, -1), (S - 1, S - 1, -1, -1)][spot]
+                d1, d2 = S * BU(.14, .32), S * BU(.14, .32)
+                x0, y0, x1, y1 = px + sx_ * d1, py + sy_ * (inset(d1) + 1.5), px + sx_ * (inset(d2) + 1.5), py + sy_ * d2
+            else:                                                  # a bend running along an edge, a way in
+                side = spot - 4; off = S * BU(.06, .16); c = S * BU(.1, .55); L = S * BU(.25, .45)
+                x0, y0, x1, y1 = [(c, off, c + L, off + BU(-.04, .04) * L), (c, S - off, c + L, S - off + BU(-.04, .04) * L),
+                                  (off, c, off + BU(-.04, .04) * L, c + L), (S - off, c, S - off + BU(-.04, .04) * L, c + L)][side]
+            crack(dbd, br, x0, y0, math.atan2(y1 - y0, x1 - x0), math.hypot(x1 - x0, y1 - y0), BU(.85, 1.0), 3)
+        bimg = bd.resize((S, S), Image.BOX)
+        cracks = np.maximum(cracks, np.asarray(bimg).astype(np.float32) / 255)
+        ridge = np.asarray(bimg.filter(ImageFilter.GaussianBlur(BU(6, 10)))).astype(np.float32) / 255
+        bends_pi = np.clip(ridge * 8, 0, 1) * BU(.75, .95)          # the flaked band along the fold, strong
+        Pi = np.maximum(Pi, bends_pi)
+
     # 4. On the oldest sleeves, a small tear at one edge, showing the card.
     tear = np.zeros((S, S), np.float32)
     if age > 15 and P(.1 + .25 * old):
@@ -645,21 +668,21 @@ def surface_layer(slug, year, face='', mean=.5, edgew=1.0, surfw=0.0):
         shape = np.exp(-((u - pos) / wa) ** 4 - (v / dp) ** 2)
         tear = (shape - .35 * rng.random((S, S)) - .25 * noise1(rng, S, 6)[np.clip(u, 0, S - 1).astype(np.int32)] > .45).astype(np.float32)
 
-    lay = dict(stri=stri, ticks=ticks, grime=grime, Pi=Pi, Pb=Pb, esoil=esoil, Drr=Drr,
+    lay = dict(bends_pi=(bends_pi if bendw > 0 else None), stri=stri, ticks=ticks, grime=grime, Pi=Pi, Pb=Pb, esoil=esoil, Drr=Drr,
                profs=profs, gaps=gaps, dist=dist, alongidx=alongidx, jag=jag, corners=corners, crumbs=crumbs,
                cracks=cracks, scratches=scratches, tear=tear)
     _SURF.clear(); _SURF[key] = lay
     return lay
 
 
-def make_mask(slug, year, dens=1.0, edgek=1.0, face='', mean=.5, edgew=1.0, surfw=0.0):
+def make_mask(slug, year, dens=1.0, edgek=1.0, face='', mean=.5, edgew=1.0, surfw=0.0, bendw=0.0):
     """dens and edgek scale the amount of wear without moving any of it, so every level is the same sleeve.
     face '' is the front, ':back' the back (the ring mirrored, everything else its own). mean is the
     cover's mean luminance (pale stock is handled differently).
     Returns channels: 0 abrasion (exposed paper), 1 crushed edge (card), 2 dirt (shows on light ink),
     3 the rim's impression line, 4 the rim's stipple, 5 grey grain in rubbed white stock."""
     R = ring_layer(slug, year)
-    L = surface_layer(slug, year, face, mean, edgew, surfw)
+    L = surface_layer(slug, year, face, mean, edgew, surfw, bendw)
     edgek = edgek * (1 + .45 * (edgew - 1))         # and a wider crushed strip and corners
     fl = (lambda a: a[:, ::-1]) if face else (lambda a: a)      # the disc presses both faces, mirrored
     T, Trub, V, Vb, Tc = fl(R['T']), fl(R['Trub']), fl(R['V']), fl(R['Vb']), fl(R['Tc'])
@@ -670,6 +693,8 @@ def make_mask(slug, year, dens=1.0, edgek=1.0, face='', mean=.5, edgew=1.0, surf
     light_old = light and R['age'] > 40
     scuff = light and not light_old                  # young and mid-aged pale stock: a bar scuffs rather than soils
     ab_i = down(flakes(Pi * dens, T) * V)
+    if L.get('bends_pi') is not None:                # a bend is a bend at any level
+        ab_i = np.maximum(ab_i, down(flakes(L['bends_pi'], T) * V))
     ab_b = np.maximum(down(flakes(Pb * dens, Trub) * Vb) * R['rub_tone'],       # a bar's frost, grey or white per sleeve
                       down(flakes(Pbc * dens, Trub) * fl(R['Vbc'])))            # and its bright core
     ab = np.maximum(ab_i, ab_b)
@@ -790,13 +815,14 @@ def job(a):
     amount = float(w.get('amount', g['amount']))
     edgew = float(w.get('edge', g['edge']))                   # per-record: more edge wear where the art hides the rest
     surfw = float(w.get('surface', g['surface']))             # per-record: more scratches, rubs, folds on the face
+    bendw = float(w.get('bends', 0))                          # per-record: creases where the sleeve got bent
     cov = load_square(ROOT / a['art'])
     lum = float(lum_of(cov).mean())
     tone = 1 + .3 * float(smooth(.6, .85, lum))           # light covers carry heavier wear
     masks = {}
     for lv in (LEVELS if LEVELS_DIR else [level]):
         dens, ek, _ = LEVELS[lv]
-        masks[lv] = make_mask(slug, a.get('year'), dens * tone * amount, ek, '', lum, edgew, surfw)
+        masks[lv] = make_mask(slug, a.get('year'), dens * tone * amount, ek, '', lum, edgew, surfw, bendw)
     mask, life, age, ring = masks[level]; k = LEVELS[level][2]
     MASKS.mkdir(parents=True, exist_ok=True)
     Image.fromarray((mask[..., :3] * 255 + .5).astype(np.uint8), 'RGB').save(MASKS / f'{slug}.png')
@@ -806,7 +832,7 @@ def job(a):
         covb = load_square(ROOT / a['art_back'], pad=True)
         lumb = float(lum_of(covb).mean())
         dens, ek, _ = LEVELS[level]
-        mb = make_mask(slug, a.get('year'), dens * (1 + .3 * float(smooth(.6, .85, lumb))) * amount, ek, ':back', lumb, edgew, surfw)[0]
+        mb = make_mask(slug, a.get('year'), dens * (1 + .3 * float(smooth(.6, .85, lumb))) * amount, ek, ':back', lumb, edgew, surfw, bendw)[0]
         bake(covb, mb, k, slug + ':back', age).save(WORN / f'{slug}-back.jpg', 'JPEG', quality=86, optimize=True, progressive=True)
         back = f'assets/40/worn/{slug}-back.jpg'
     if LEVELS_DIR:

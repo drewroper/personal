@@ -724,7 +724,8 @@
       "date": "2026-09-28",
       "wear": {
         "level": "low",
-        "surface": 2.3
+        "surface": 0.5,
+        "bends": 3
       },
       "art_worn": "assets/40/worn/blink-182-take-off-your-pants-and-jacket.jpg",
       "art_back_worn": "assets/40/worn/blink-182-take-off-your-pants-and-jacket-back.jpg"

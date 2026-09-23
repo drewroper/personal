@@ -12,7 +12,7 @@
   },
   "albums": [
     {
-      "no": 1,
+      "no": 8,
       "slug": "dave-matthews-band-crash",
       "artist": "Dave Matthews Band",
       "title": "Crash",
@@ -110,7 +110,7 @@
       "art": "assets/40/dave-matthews-band-crash.jpg",
       "art_back": "assets/40/dave-matthews-band-crash-back.jpg",
       "art_back_src": "http://coverartarchive.org/release/c4335abe-ac67-44c6-87f5-b452d62b07d9/20335839949.jpg",
-      "date": "2026-09-23",
+      "date": "2026-09-30",
       "wear": {
         "level": "med"
       },
@@ -824,7 +824,7 @@
       "art_worn": "assets/40/worn/girl-talk-feed-the-animals.jpg"
     },
     {
-      "no": 8,
+      "no": 1,
       "slug": "animal-collective-merriweather-post-pavilion",
       "artist": "Animal Collective",
       "title": "Merriweather Post Pavilion",
@@ -920,7 +920,7 @@
       "links": {
         "spotify": "https://open.spotify.com/album/5O9OXl9zAWMJTzawofxuan"
       },
-      "date": "2026-09-30",
+      "date": "2026-09-23",
       "wear": {
         "level": "med"
       },

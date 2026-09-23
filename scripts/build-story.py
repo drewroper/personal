@@ -635,7 +635,13 @@ def render_video(frame_fn, out_path, seconds=10, fps=30, audio=False):
            "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(fps), "-i", "-"]
     if audio:
         cmd += ["-f", "lavfi", "-i", "anullsrc=r=44100:cl=stereo", "-c:a", "aac", "-b:a", "128k", "-shortest"]
-    cmd += ["-c:v", "libx264", "-profile:v", "high", "-pix_fmt", "yuv420p", "-crf", "18" if audio else "20", "-preset", "medium",
+    # BT.709 matrix, tagged: untagged HD video is read as 709 on phones, and a 601 encode
+    # shifts the lime to a dull (218, 238, 89). Near-lossless source so Instagram's own
+    # re-encode starts from clean edges; tune animation keeps flat colour and hard type crisp.
+    cmd += ["-vf", "scale=out_color_matrix=bt709:out_range=tv:flags=neighbor+accurate_rnd+full_chroma_int",
+            "-c:v", "libx264", "-profile:v", "high", "-pix_fmt", "yuv420p",
+            "-crf", "12" if audio else "20", "-preset", "slow", "-tune", "animation", "-g", "30",
+            "-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709", "-color_range", "tv",
             "-movflags", "+faststart", str(out_path)]
     proc = subprocess.Popen(cmd, stdin=subprocess.PIPE)
     for i in range(n):

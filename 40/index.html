@@ -302,7 +302,7 @@
     .empty b { color: var(--text); font-weight: 400; }
 
     /* ── Footer: a real one, with room to grow. ─────────────────────── */
-    .foot { padding: 36px 0 0; color: var(--text-faint); }
+    .foot { padding: 36px 0 32px; color: var(--text-faint); }   /* breathing room before the tail starts */
     .foot__links { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 0; padding: 0; list-style: none; }
     .foot__links a { color: var(--text-muted); border-bottom-color: transparent; }
     .foot__links a:hover { color: var(--accent); border-bottom-color: var(--accent); }
@@ -398,7 +398,7 @@
       .index .grid40 { max-width: min(100%, 1200px, calc((100vh - 170px) * 1.6)); gap: 10px; margin: 0 auto; }
       .index__meta { width: 100%; max-width: min(100%, 1200px, calc((100vh - 170px) * 1.6)); margin: 0 auto 18px; }
       .grid40 span, .index .grid40 span { font-size: 12px; }
-      .foot { padding-top: 48px; }
+      .foot { padding-top: 48px; padding-bottom: 44px; }
     }
 
   </style>

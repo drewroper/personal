@@ -115,7 +115,7 @@
     /* Tap a letter and it dithers to lime; tap again and it goes back. The type itself is never
        split up (separate letter boxes lose Porca's kerning and drift wider in Safari): a lime copy of
        the same text sits exactly on top, masked down to the tapped letters' shapes. */
-    .wordmark--top { position: relative; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+    .wordmark--top { position: relative; cursor: crosshair; -webkit-tap-highlight-color: transparent; }
     .wordmark__lime { position: absolute; left: 0; top: 0; width: 100%; color: var(--accent); pointer-events: none;
                       -webkit-mask-size: 100% 100%; mask-size: 100% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; }
     .wordmark__lime[hidden] { display: none; }

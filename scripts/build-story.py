@@ -664,7 +664,7 @@ def render_video(frame_fn, out_path, seconds=10, fps=30, audio=False):
     # BT.709 matrix, tagged: untagged HD video is read as 709 on phones, and a 601 encode
     # shifts the lime to a dull (218, 238, 89). Near-lossless source so Instagram's own
     # re-encode starts from clean edges; tune animation keeps flat colour and hard type crisp.
-    cmd += ["-vf", "scale=out_color_matrix=bt709:out_range=tv:flags=neighbor+accurate_rnd+full_chroma_int",
+    cmd += ["-vf", "scale=out_color_matrix=bt709:out_range=tv:flags=neighbor+accurate_rnd+full_chroma_int,setsar=1",   # square pixels, so every player reads 9:16
             "-c:v", "libx264", "-profile:v", "high", "-pix_fmt", "yuv420p",
             "-crf", "12" if audio else "20", "-preset", "slow", "-tune", "animation", "-g", "30",
             "-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709", "-color_range", "tv",

@@ -526,11 +526,11 @@ def story_404040(theta):
     return c
 
 
-WHY = [   # the canvas's "Intro 2 — Why (option B)", as of Sep 23: lime Porca headline over four paragraphs
+WHY = [   # the canvas's "Intro 2 — Why (option B)", locked Sep 23: lime Porca headline over four paragraphs (\n = the board's <br>)
     ("h1", "I turn 40 in 40 days."),
     ("body", "Every day until my birthday, I’ll share one album that shaped me. You didn’t ask for this, so feel free to mute me, or better yet, yell at me about my selections.", 883),
-    ("body", "These aren’t my 40 favorite albums. I couldn’t pick those if my life depended on it. Plenty of these would make that list, and every one is in my top 100, but this list is about more than favorites."),
-    ("body", "These albums are special to me in other ways: I can still remember the first time I heard each of these, or what I was doing when I played them the most. Some of them introduced me to a new genre, some had me digging through the band’s back catalog, some just weirdly fit my life at that stage."),
+    ("body", "These aren’t my 40 favorite albums. I couldn’t pick those if my life depended on it. Plenty of these would make that list (every one would be in my top 100) but this list is about more than favorites."),
+    ("body", "These albums are special to me in other ways:\nI can still remember the first time I heard each of these, or what I was doing when I played them into the ground. Some of them introduced me to a new genre, some had me digging through the band’s back catalog, some just weirdly fit my life at that moment in time."),
     ("body", "40 albums, 40 days, for 40 years."),
 ]
 WHY_H1 = 108   # px, with balanced wrapping (text-wrap: balance on the canvas)
@@ -572,6 +572,14 @@ def _why_paragraphs():
             toks = [(w, b) for txt, b in runs for w in txt.replace(" ", " \0").split("\0") if w]   # keep each word's trailing space
             lines, cur, cw = [], [], 0.0
             for w, b in toks:
+                brk = "\n" in w
+                if brk:                                                # forced break: finish the line on the word before it
+                    head, w = w.split("\n", 1)
+                    if head:
+                        cur.append((head, b))
+                    lines.append(cur); cur, cw = [], 0.0
+                    if not w:
+                        continue
                 fw = (bold if b else body).getlength(w)
                 if cur and cw + (bold if b else body).getlength(w.rstrip()) > colw:
                     lines.append(cur); cur, cw = [], 0.0

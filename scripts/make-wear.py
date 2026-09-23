@@ -72,6 +72,8 @@ S = 1200
 SS = 2                          # the flake field is rendered at 2x and averaged down
 N = S * SS
 RC = .028                       # the site's corner radius, as a share of the sleeve's width
+# Every sleeve, unless its wear has lock: a touch more wear overall, edges, and life on the face.
+GLOBAL = {'amount': 1.2, 'edge': 1.3, 'surface': 1.0}
 LEVELS = {'low': (.6, .8, .9), 'med': (1.0, 1.0, 1.0), 'high': (1.45, 1.25, 1.0)}   # (pressure, edge width, line strength)
 args = sys.argv[1:]
 ONLY = set(args[args.index('--only') + 1].split(',')) if '--only' in args else None
@@ -414,10 +416,10 @@ def ring_layer(slug, year):
     return lay
 
 
-def surface_layer(slug, year, face='', mean=.5, edgew=1.0):
+def surface_layer(slug, year, face='', mean=.5, edgew=1.0, surfw=0.0):
     """What happened to one face: its cut edges and corners, shelf scuffs, the hand that held it,
     cracks, scratches and grit. The front and the back ('' / ':back') each have their own."""
-    key = (slug, year, face, round(mean, 3), edgew)
+    key = (slug, year, face, round(mean, 3), edgew, surfw)
     if key in _SURF:
         return _SURF[key]
     R = ring_layer(slug, year)
@@ -475,13 +477,16 @@ def surface_layer(slug, year, face='', mean=.5, edgew=1.0):
             patch = smooth(.25, .7, noise1(er, S, S * .04, 3)) * (.55 + .45 * noise1(er, S, S * .012, 2))
             patch *= 1 + .8 * (np.exp(-t / (S * .06)) + np.exp(-(S - 1 - t) / (S * .06)))     # corners take more
             amp = er.uniform(.35, .6) * k * (1.25 if s == 1 else 1)
-            Pi = np.maximum(Pi, np.clip(amp * patch[alongidx[s]], 0, .95) * np.exp(-(np.maximum(dist[s], 0) / wide) ** 1.3))
+            bandw = np.clip(amp * patch[alongidx[s]], 0, .95) * np.exp(-(np.maximum(dist[s], 0) / wide) ** 1.3)
+            Pi = np.maximum(Pi, bandw)
+            if mean > .55:                           # on pale stock the rubbed edge shows as handling grime
+                esoil = np.maximum(esoil, bandw * (1.1 + .4 * k))
     if light_old:                                    # a faint soiled band along the opening, where hands go in
         along = smooth(.3, .7, noise1(rng, S, S * .06))
-        esoil = np.exp(-np.maximum(dist[opening], 0) / (S * U(.006, .012))) * along[alongidx[opening]] * U(.3, .45) * 1.3
+        esoil = np.maximum(esoil, np.exp(-np.maximum(dist[opening], 0) / (S * U(.006, .012))) * along[alongidx[opening]] * U(.3, .45) * 1.3)
     elif ringless_worn and mean > .55:               # an old pale sleeve with no ring was still handled there
         along = smooth(.3, .7, noise1(hr, S, S * .06))
-        esoil = np.exp(-np.maximum(dist[opening], 0) / (S * hr.uniform(.006, .012))) * along[alongidx[opening]] * hr.uniform(.3, .45)
+        esoil = np.maximum(esoil, np.exp(-np.maximum(dist[opening], 0) / (S * hr.uniform(.006, .012))) * along[alongidx[opening]] * hr.uniform(.3, .45))
     if not ring and P(.9):                           # no ring: the bottom edge took the shelf instead
         along = smooth(.35, .7, noise1(rng, S, S * .08))
         Pb = np.maximum(Pb, np.exp(-np.maximum(dist[1], 0) / (S * U(.008, .016))) * along[xi] * U(.45, .7) * max(life, .7))
@@ -588,6 +593,49 @@ def surface_layer(slug, year, face='', mean=.5, edgew=1.0):
     scratches = np.maximum(np.asarray(sc.resize((S, S), Image.BOX)).astype(np.float32) / 255, stri * .16)
     ticks = np.asarray(tk.resize((S, S), Image.BOX)).astype(np.float32) / 255
 
+    # 3b. wear.surface: more life on the face, from its own stream so everything above stays put —
+    #     scratches in every direction, broken hairlines, rub patches, a soft fold, flaked patches.
+    if surfw > 0:
+        xr = seed(slug + (face or ':face') + ':surface'); XU = xr.uniform
+        k = surfw * (.55 + .45 * min(1.2, life))
+        sx2 = Image.new('L', (N, N), 0); dsx = ImageDraw.Draw(sx2)
+        for _ in range(int(XU(10, 22) * k)):                     # scratches: some with the slide, many not
+            L = S * math.exp(XU(math.log(.012), math.log(.08)))
+            a = a0 + xr.normal(0, .5) if xr.random() < .45 else XU(0, math.pi)
+            x0, y0 = XU(.03, .97) * S, XU(.03, .97) * S
+            bezier_line(dsx, x0, y0, x0 + math.cos(a) * L, y0 + math.sin(a) * L, XU(-.1, .1) * L,
+                        XU(95, 190) if xr.random() < .75 else XU(190, 245), 14, .7)
+        for _ in range(int(XU(2, 6) * k)):                       # longer hairlines, broken in places
+            L = S * math.exp(XU(math.log(.05), math.log(.25))); a = XU(0, math.pi)
+            x0, y0 = XU(0, S), XU(0, S)
+            bezier_line(dsx, x0, y0, x0 + math.cos(a) * L, y0 + math.sin(a) * L, XU(-.06, .06) * L,
+                        XU(60, 140), 28, .5, gaps=[(g0, g0 + XU(.03, .12)) for g0 in xr.uniform(.1, .9, int(XU(1, 4)))])
+        nrub = int(XU(1, 3.5) * k) if mean <= .62 or age > 40 else int(XU(0, 1.5) * k)
+        for _ in range(nrub):                                    # rub patches: fine parallel strokes where something slid
+            pcx, pcy = S * XU(.12, .88), S * XU(.12, .88); pa = XU(0, math.pi)
+            Lp, Wp = S * XU(.04, .1), S * XU(.015, .035)
+            for _k in range(int(XU(30, 80))):
+                u, v = xr.normal(0, .45), xr.normal(0, .45)
+                px2 = pcx + u * Lp * math.cos(pa) - v * Wp * math.sin(pa); py2 = pcy + u * Lp * math.sin(pa) + v * Wp * math.cos(pa)
+                L = XU(5, 22); aa = pa + xr.normal(0, .05)
+                dsx.line([(px2 * 2, py2 * 2), ((px2 + math.cos(aa) * L) * 2, (py2 + math.sin(aa) * L) * 2)], fill=int(XU(110, 220)), width=1)
+        extra = np.asarray(sx2.resize((S, S), Image.BOX)).astype(np.float32) / 255
+        scratches = np.maximum(scratches, extra)
+        fd = Image.new('L', (N, N), 0); dfd = ImageDraw.Draw(fd)
+        for _ in range(int(XU(0, 1.4) * k * (.4 + .9 * old))):   # a soft fold across the sleeve
+            vert = xr.random() < .5
+            c0 = S * XU(.2, .8)
+            x0, y0, hd = (c0, 2, math.pi / 2) if vert else (2, c0, 0)
+            if xr.random() < .5: x0, y0, hd = (c0, S - 3, -math.pi / 2) if vert else (S - 3, c0, math.pi)
+            crack(dfd, xr, x0, y0, hd + XU(-.12, .12), S * XU(.25, .7), XU(.35, .6), 2)
+        fold = np.asarray(fd.resize((S, S), Image.BOX)).astype(np.float32) / 255
+        cracks = np.maximum(cracks, fold)
+        Pi = np.maximum(Pi, np.clip(np.asarray(fd.resize((S, S), Image.BOX).filter(ImageFilter.GaussianBlur(1.2))).astype(np.float32) / 255 * 2, 0, 1) * XU(.15, .3))
+        for _ in range(int(XU(1, 4) * k)):                       # flaked patches: small crisp rubs anywhere on the face
+            cx2, cy2 = S * XU(.08, .92), S * XU(.08, .92); r1, r2 = S * XU(.012, .045), S * XU(.008, .025); th = XU(0, math.pi)
+            du = (xx - cx2) * math.cos(th) + (yy - cy2) * math.sin(th); dv = -(xx - cx2) * math.sin(th) + (yy - cy2) * math.cos(th)
+            Pi = np.maximum(Pi, XU(.12, .3) * min(1.3, k) * np.exp(-(du / r1) ** 2 - (dv / r2) ** 2))
+
     # 4. On the oldest sleeves, a small tear at one edge, showing the card.
     tear = np.zeros((S, S), np.float32)
     if age > 15 and P(.1 + .25 * old):
@@ -604,15 +652,15 @@ def surface_layer(slug, year, face='', mean=.5, edgew=1.0):
     return lay
 
 
-def make_mask(slug, year, dens=1.0, edgek=1.0, face='', mean=.5, edgew=1.0):
+def make_mask(slug, year, dens=1.0, edgek=1.0, face='', mean=.5, edgew=1.0, surfw=0.0):
     """dens and edgek scale the amount of wear without moving any of it, so every level is the same sleeve.
     face '' is the front, ':back' the back (the ring mirrored, everything else its own). mean is the
     cover's mean luminance (pale stock is handled differently).
     Returns channels: 0 abrasion (exposed paper), 1 crushed edge (card), 2 dirt (shows on light ink),
     3 the rim's impression line, 4 the rim's stipple, 5 grey grain in rubbed white stock."""
     R = ring_layer(slug, year)
-    L = surface_layer(slug, year, face, mean, edgew)
-    edgek = edgek * (1 + .3 * (edgew - 1))          # and a somewhat wider crushed strip and corners
+    L = surface_layer(slug, year, face, mean, edgew, surfw)
+    edgek = edgek * (1 + .45 * (edgew - 1))         # and a wider crushed strip and corners
     fl = (lambda a: a[:, ::-1]) if face else (lambda a: a)      # the disc presses both faces, mirrored
     T, Trub, V, Vb, Tc = fl(R['T']), fl(R['Trub']), fl(R['V']), fl(R['Vb']), fl(R['Tc'])
     Pi = np.maximum(fl(R['Pi']), L['Pi'])
@@ -737,14 +785,18 @@ def job(a):
     slug = a['slug']
     level = (a.get('wear') or {}).get('level', 'med')
     level = level if level in LEVELS else 'med'
-    edgew = float((a.get('wear') or {}).get('edge', 1.0))   # per-record: more edge wear where the art hides the rest
+    w = a.get('wear') or {}
+    g = {'amount': 1.0, 'edge': 1.0, 'surface': 0.0} if w.get('lock') else GLOBAL     # lock: exactly as signed off
+    amount = float(w.get('amount', g['amount']))
+    edgew = float(w.get('edge', g['edge']))                   # per-record: more edge wear where the art hides the rest
+    surfw = float(w.get('surface', g['surface']))             # per-record: more scratches, rubs, folds on the face
     cov = load_square(ROOT / a['art'])
     lum = float(lum_of(cov).mean())
     tone = 1 + .3 * float(smooth(.6, .85, lum))           # light covers carry heavier wear
     masks = {}
     for lv in (LEVELS if LEVELS_DIR else [level]):
         dens, ek, _ = LEVELS[lv]
-        masks[lv] = make_mask(slug, a.get('year'), dens * tone, ek, '', lum, edgew)
+        masks[lv] = make_mask(slug, a.get('year'), dens * tone * amount, ek, '', lum, edgew, surfw)
     mask, life, age, ring = masks[level]; k = LEVELS[level][2]
     MASKS.mkdir(parents=True, exist_ok=True)
     Image.fromarray((mask[..., :3] * 255 + .5).astype(np.uint8), 'RGB').save(MASKS / f'{slug}.png')
@@ -754,7 +806,7 @@ def job(a):
         covb = load_square(ROOT / a['art_back'], pad=True)
         lumb = float(lum_of(covb).mean())
         dens, ek, _ = LEVELS[level]
-        mb = make_mask(slug, a.get('year'), dens * (1 + .3 * float(smooth(.6, .85, lumb))), ek, ':back', lumb, edgew)[0]
+        mb = make_mask(slug, a.get('year'), dens * (1 + .3 * float(smooth(.6, .85, lumb))) * amount, ek, ':back', lumb, edgew, surfw)[0]
         bake(covb, mb, k, slug + ':back', age).save(WORN / f'{slug}-back.jpg', 'JPEG', quality=86, optimize=True, progressive=True)
         back = f'assets/40/worn/{slug}-back.jpg'
     if LEVELS_DIR:

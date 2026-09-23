@@ -112,7 +112,8 @@
       "art_back_src": "http://coverartarchive.org/release/c4335abe-ac67-44c6-87f5-b452d62b07d9/20335839949.jpg",
       "date": "2026-09-30",
       "wear": {
-        "level": "med"
+        "level": "med",
+        "surface": 2.2
       },
       "art_worn": "assets/40/worn/dave-matthews-band-crash.jpg",
       "art_back_worn": "assets/40/worn/dave-matthews-band-crash-back.jpg"
@@ -230,7 +231,7 @@
       "art_back_src": "http://coverartarchive.org/release/bf333fb1-a5c4-413a-a663-43b0c603eab5/26861645942.jpg",
       "date": "2026-09-24",
       "wear": {
-        "level": "med"
+        "level": "high"
       },
       "art_worn": "assets/40/worn/third-eye-blind-third-eye-blind.jpg",
       "art_back_worn": "assets/40/worn/third-eye-blind-third-eye-blind-back.jpg"
@@ -336,7 +337,7 @@
       "art_back_src": "http://coverartarchive.org/release/f29584cc-8f94-4035-8a63-d4369f201e2a/38266290259.jpg",
       "date": "2026-09-25",
       "wear": {
-        "level": "med"
+        "level": "high"
       },
       "art_worn": "assets/40/worn/oasis-what-s-the-story-morning-glory.jpg",
       "art_back_worn": "assets/40/worn/oasis-what-s-the-story-morning-glory-back.jpg"
@@ -514,7 +515,8 @@
       "art_back_src": "http://coverartarchive.org/release/951d7ae5-965b-3277-923d-f2da57fcd969/8976394266.jpg",
       "date": "2026-09-26",
       "wear": {
-        "level": "med"
+        "level": "high",
+        "edge": 2.5
       },
       "art_worn": "assets/40/worn/outkast-stankonia.jpg",
       "art_back_worn": "assets/40/worn/outkast-stankonia-back.jpg"
@@ -608,7 +610,8 @@
       "art_back_src": "http://coverartarchive.org/release/7a9a2617-28a7-4afd-9993-1b6a40cf6f25/32712601799.jpg",
       "date": "2026-09-27",
       "wear": {
-        "level": "med"
+        "level": "med",
+        "edge": 2.5
       },
       "art_worn": "assets/40/worn/weezer-green-album.jpg",
       "art_back_worn": "assets/40/worn/weezer-green-album-back.jpg"
@@ -720,7 +723,8 @@
       "art_back_src": "https://coverartarchive.org/release/dce5628d-fc2f-4703-9e58-7b266df478c3/36600754811.jpg",
       "date": "2026-09-28",
       "wear": {
-        "level": "med"
+        "level": "low",
+        "surface": 2.3
       },
       "art_worn": "assets/40/worn/blink-182-take-off-your-pants-and-jacket.jpg",
       "art_back_worn": "assets/40/worn/blink-182-take-off-your-pants-and-jacket-back.jpg"
@@ -1028,7 +1032,7 @@
       "art_back_src": "http://coverartarchive.org/release/063f311e-9c81-4616-a007-b76e3df910c9/26628543683.jpg",
       "date": "2026-10-01",
       "wear": {
-        "level": "med"
+        "level": "high"
       },
       "art_worn": "assets/40/worn/run-the-jewels-run-the-jewels-2.jpg",
       "art_back_worn": "assets/40/worn/run-the-jewels-run-the-jewels-2-back.jpg"
@@ -1152,7 +1156,8 @@
       "art_back_src": "http://coverartarchive.org/release/c86758fc-5447-461d-942d-a9300e4bc51f/37155210486.jpg",
       "date": "2026-10-02",
       "wear": {
-        "level": "med"
+        "level": "high",
+        "edge": 2.5
       },
       "art_worn": "assets/40/worn/turnstile-glow-on.jpg",
       "art_back_worn": "assets/40/worn/turnstile-glow-on-back.jpg"
@@ -1246,7 +1251,8 @@
       "art_back_src": "https://coverartarchive.org/release/2f6ee3f5-6e5f-46e5-8dfc-4099f2713645/41279033936.jpg",
       "date": "2026-10-03",
       "wear": {
-        "level": "med"
+        "level": "high",
+        "surface": 2.3
       },
       "art_worn": "assets/40/worn/youth-lagoon-the-year-of-hibernation.jpg",
       "art_back_worn": "assets/40/worn/youth-lagoon-the-year-of-hibernation-back.jpg"
@@ -1364,7 +1370,8 @@
       "art_back_src": "http://coverartarchive.org/release/f847d298-e2d8-43ed-97ed-7c7b01ff03bc/24770542667.jpg",
       "date": "2026-10-04",
       "wear": {
-        "level": "med"
+        "level": "high",
+        "edge": 2.5
       },
       "art_worn": "assets/40/worn/radiohead-hail-to-the-thief.jpg",
       "art_back_worn": "assets/40/worn/radiohead-hail-to-the-thief-back.jpg"
@@ -1482,7 +1489,8 @@
       "art_back_src": "https://coverartarchive.org/release/beb58056-1b5a-4b4f-8b86-ac28b4092470/8777336088.jpg",
       "date": "2026-10-05",
       "wear": {
-        "level": "med"
+        "level": "high",
+        "edge": 2.5
       },
       "art_worn": "assets/40/worn/alt-j-an-awesome-wave.jpg",
       "art_back_worn": "assets/40/worn/alt-j-an-awesome-wave-back.jpg"
@@ -1582,7 +1590,9 @@
       "art_back_src": "http://coverartarchive.org/release/ba3d1339-f4d8-495c-b422-34c40de6d1d9/17097045330.jpg",
       "date": "2026-10-06",
       "wear": {
-        "level": "med"
+        "level": "low",
+        "edge": 4,
+        "surface": 2.3
       },
       "art_worn": "assets/40/worn/jose-gonzalez-in-our-nature.jpg",
       "art_back_worn": "assets/40/worn/jose-gonzalez-in-our-nature-back.jpg"
@@ -1682,7 +1692,8 @@
       "art_back_src": "http://coverartarchive.org/release/82a6769a-6527-4559-8d19-dbfbf93c92f1/26763472220.png",
       "date": "2026-10-07",
       "wear": {
-        "level": "med"
+        "level": "high",
+        "surface": 2.4
       },
       "art_worn": "assets/40/worn/ratatat-classics.jpg",
       "art_back_worn": "assets/40/worn/ratatat-classics-back.jpg"
@@ -1780,7 +1791,8 @@
       },
       "date": "2026-10-08",
       "wear": {
-        "level": "med"
+        "level": "high",
+        "edge": 4
       },
       "art_worn": "assets/40/worn/tokyo-police-club-champ.jpg"
     },
@@ -1891,7 +1903,8 @@
       "art_back_src": "https://coverartarchive.org/release/ee6b9446-1d2b-427d-8172-7ee6dab0fd5f/8289386498.jpg",
       "date": "2026-10-09",
       "wear": {
-        "level": "med"
+        "level": "high",
+        "lock": true
       },
       "art_worn": "assets/40/worn/incubus-morning-view.jpg",
       "art_back_worn": "assets/40/worn/incubus-morning-view-back.jpg"
@@ -2003,7 +2016,9 @@
       "art_back_src": "http://coverartarchive.org/release/21024c74-097c-4415-8848-b8a6f65e9072/4691646485.jpg",
       "date": "2026-10-10",
       "wear": {
-        "level": "med"
+        "level": "high",
+        "edge": 2.5,
+        "surface": 2.2
       },
       "art_worn": "assets/40/worn/finch-what-it-is-to-burn.jpg",
       "art_back_worn": "assets/40/worn/finch-what-it-is-to-burn-back.jpg"
@@ -2103,7 +2118,8 @@
       "art_back_src": "http://coverartarchive.org/release/b315e122-1921-44b5-ada0-27817ad6d0bc/32846867469.jpg",
       "date": "2026-10-11",
       "wear": {
-        "level": "med"
+        "level": "med",
+        "edge": 3
       },
       "art_worn": "assets/40/worn/brand-new-deja-entendu.jpg",
       "art_back_worn": "assets/40/worn/brand-new-deja-entendu-back.jpg"
@@ -2209,7 +2225,8 @@
       "art_back_src": "http://coverartarchive.org/release/b36f57fa-9fdf-4326-9dcc-49105ae7031c/17690753919.jpg",
       "date": "2026-10-12",
       "wear": {
-        "level": "med"
+        "level": "med",
+        "lock": true
       },
       "art_worn": "assets/40/worn/phish-a-live-one.jpg",
       "art_back_worn": "assets/40/worn/phish-a-live-one-back.jpg"
@@ -2303,7 +2320,8 @@
       "art_back_src": "http://coverartarchive.org/release/7a9a2617-28a7-4afd-9993-1b6a40cf6f25/32712601799.jpg",
       "date": "2026-11-01",
       "wear": {
-        "level": "med"
+        "level": "med",
+        "edge": 2.5
       },
       "art_worn": "assets/40/worn/weezer-green-album.jpg",
       "art_back_worn": "assets/40/worn/weezer-green-album-back.jpg"
@@ -2413,7 +2431,9 @@
       "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/28/af/39/28af39aa-6d9e-61d5-2364-095a7b0d3182/4050538365283.jpg/1800x1800bb.jpg",
       "art": "assets/40/the-kinks-lola-versus-powerman.jpg",
       "wear": {
-        "level": "med"
+        "level": "high",
+        "edge": 3.5,
+        "surface": 2.8
       },
       "art_worn": "assets/40/worn/the-kinks-lola-versus-powerman.jpg",
       "art_back_worn": "assets/40/worn/the-kinks-lola-versus-powerman-back.jpg"

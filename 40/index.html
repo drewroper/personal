@@ -174,6 +174,11 @@
     .index__meta { display: flex; justify-content: space-between; gap: 16px; margin: 0 0 14px; color: var(--text-faint); }
     .index .grid40 { grid-template-columns: repeat(5, 1fr); gap: 8px; width: 100%; max-width: none; }   /* phone: gutter to gutter; the panel scrolls if the screen is short */
     .index .grid40 span { font-size: 11px; }
+    /* iOS WebKit ignores a scrolling panel's bottom padding, so the last thing in it carries the room. */
+    @media (max-width: 1023px) {
+      .about, .index { padding-bottom: 0; }
+      .index .grid40, .about > :last-child { margin-bottom: calc(44px + var(--sab)); }
+    }
     @media (max-height: 620px) {
       .about { padding-top: 58px; }
       .about__title { font-size: min(var(--display-size), 8.6vh); }

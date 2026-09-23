@@ -158,7 +158,7 @@
     /* Index: the 40 days, as big as the screen allows — 5 across on a phone (8 rows), 8 across from 720px. */
     .index__meta { display: flex; justify-content: space-between; gap: 16px; margin: 0 0 14px; color: var(--text-faint); }
     .index__meta b { font-weight: 400; color: var(--accent); }
-    .index .grid40 { grid-template-columns: repeat(5, 1fr); gap: 6px; width: 100%; max-width: min(100%, calc((100vh - 150px - var(--sab)) * .625)); max-width: min(100%, calc((100dvh - 150px - var(--sab)) * .625)); }
+    .index .grid40 { grid-template-columns: repeat(5, 1fr); gap: 8px; width: 100%; max-width: none; }   /* phone: gutter to gutter; the panel scrolls if the screen is short */
     .index .grid40 span { font-size: 11px; }
     @media (max-height: 620px) {
       .about { padding-top: 58px; }

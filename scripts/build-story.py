@@ -42,6 +42,8 @@ FAINT  = (86, 84, 79)
 RULE   = (38, 38, 40)
 ACCENT = (214, 255, 56)
 
+TITLE_TRACK = .02   # album titles: a touch of open tracking (Drew: "a tad too tight")
+
 VARIANT = "b"   # full-bleed dither: the cover, blown up and dithered, is the ground
 
 BAYER = np.array([
@@ -184,11 +186,12 @@ def header(d, a, y):
     """Artist (H2) then album title (H1). Returns the y below the block."""
     edge_text(d, y, a["artist"], sans(40), MUTED)
     y += 62
-    f, lines = fit(a["title"], display, 112, COL, 1, 60)           # one line if it fits at 60px or more
-    if len(wrap(a["title"], f, COL)) > 1:
-        f, lines = fit(a["title"], display, 112, COL, 2, 60)       # otherwise two
+    col = COL / (1 + TITLE_TRACK * 1.4)                                # room for the open tracking
+    f, lines = fit(a["title"], display, 112, col, 1, 60)           # one line if it fits at 60px or more
+    if len(wrap(a["title"], f, col)) > 1:
+        f, lines = fit(a["title"], display, 112, col, 2, 60)       # otherwise two
     for ln in lines:
-        edge_text(d, y, ln, f, LIGHT)
+        edge_tracked(d, y, ln, f, LIGHT, em=TITLE_TRACK)
         y += int(f.size * 1.02)
     return y + 8
 

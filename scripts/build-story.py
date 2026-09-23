@@ -42,7 +42,7 @@ FAINT  = (86, 84, 79)
 RULE   = (38, 38, 40)
 ACCENT = (214, 255, 56)
 
-VARIANT = "a"
+VARIANT = "b"   # full-bleed dither: the cover, blown up and dithered, is the ground
 
 BAYER = np.array([
     [ 0,32, 8,40, 2,34,10,42],[48,16,56,24,50,18,58,26],
@@ -184,7 +184,9 @@ def header(d, a, y):
     """Artist (H2) then album title (H1). Returns the y below the block."""
     edge_text(d, y, a["artist"], sans(40), MUTED)
     y += 62
-    f, lines = fit(a["title"], display, 112, COL, 2, 60)
+    f, lines = fit(a["title"], display, 112, COL, 1, 60)           # one line if it fits at 60px or more
+    if len(wrap(a["title"], f, COL)) > 1:
+        f, lines = fit(a["title"], display, 112, COL, 2, 60)       # otherwise two
     for ln in lines:
         edge_text(d, y, ln, f, LIGHT)
         y += int(f.size * 1.02)
@@ -262,7 +264,8 @@ def _ground(art, theta, riff):
         cx = W + int(math.cos(t) * 90); cy = (W * 3 - H) // 2 + int(math.sin(t) * 90)
         src = big.crop((cx, cy, cx + W, cy + H))
     else:
-        src = _prep(art, "field", lambda: (lambda b: (lambda s_: (s_.paste(b, (0, (H - W) // 2)), s_)[1])(Image.new("RGB", (W, H), BG)))(square(art, W)))
+        # Full bleed: the cover scaled to the frame's height and centre-cropped to its width.
+        src = _prep(art, "field", lambda: square(art, H).crop(((H - W) // 2, 0, (H - W) // 2 + W, H)))
     tone = GROUND_ACCENT if "accent" in riff else GROUND
     return dither(src, 135, on=tone, off=BG, contrast=1.4, theta=theta)
 
@@ -348,7 +351,7 @@ def variant_b(a, art, theta=None, riff="field"):
     # Header height decides where the cover sits; measure it on a scratch draw.
     scratch = ImageDraw.Draw(Image.new("RGB", (1, 1)))
     y_after = header(scratch, a, TOP + 60)
-    cy = max(y_after + 36, 580)
+    cy = y_after + 36
     c.paste(cover, (CX, cy), rounded(cover, round(.028 * cover.width)))   # 2.8% of the width, like the site and the baked wear
 
     animate = "resolve" in riff

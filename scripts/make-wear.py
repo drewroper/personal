@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""Sleeve wear, modelled on how a real sleeve wears, so the result reads like a flatbed scan
+"""Drew's taste and the per-record knobs: docs/40-sleeve-wear.md — read it before tuning.
+
+Sleeve wear, modelled on how a real sleeve wears, so the result reads like a flatbed scan
 of a well-played record sleeve rather than a filter.
 
 The physical model

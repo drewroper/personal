@@ -112,12 +112,13 @@
     }
     .wordmark > span { display: block; margin-top: -.214em; }
     .wordmark--top  { margin-top: 24px; margin-bottom: 20px; }
-    /* Tap a letter and it dithers to lime; tap again and it goes back. */
-    .wordmark__l { font-style: normal; position: relative; display: inline-block; cursor: pointer; -webkit-tap-highlight-color: transparent; }
-    .wordmark__l.is-lime:not(.is-fading) { color: var(--accent); }
-    .wordmark__l::after { content: attr(data-c); position: absolute; inset: 0; color: var(--accent); pointer-events: none;
-                          -webkit-mask-image: var(--m, none); mask-image: var(--m, none); -webkit-mask-size: var(--ms); mask-size: var(--ms); visibility: hidden; }
-    .wordmark__l.is-fading::after { visibility: visible; }
+    /* Tap a letter and it dithers to lime; tap again and it goes back. The type itself is never
+       split up (separate letter boxes lose Porca's kerning and drift wider in Safari): a lime copy of
+       the same text sits exactly on top, masked down to the tapped letters' shapes. */
+    .wordmark--top { position: relative; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+    .wordmark__lime { position: absolute; left: 0; top: 0; width: 100%; color: var(--accent); pointer-events: none;
+                      -webkit-mask-size: 100% 100%; mask-size: 100% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; }
+    .wordmark__lime[hidden] { display: none; }
     .bar__nav { justify-self: end; display: flex; align-items: center; gap: 6px; }
     /* Index: a small grid glyph beside About; opens every day of the countdown as a dropdown. */
     .bar__index {
@@ -654,37 +655,74 @@
     })();
 
     // Tap the letters of the big 404040 and they turn lime, one at a time, until the whole
-    // thing is lime. Each one dithers over in the same 2px Bayer dots; tap again to undo.
+    // thing is lime; tap again to undo. The text stays one plain run. A lime copy sits on top,
+    // masked by a canvas that draws just the chosen letters' glyphs (a hair fat, so edges are
+    // the copy's own), and each one comes in through the same 2px Bayer dots.
     (function limeLetters() {
       const wm = document.querySelector('.wordmark--top'), word = wm && wm.querySelector('span');
-      if (!word || params.has('birthday')) return;                                  // birthday mode: the tap plays the tune
-      word.innerHTML = [...word.textContent].map(c => `<i class="wordmark__l" data-c="${c}">${c}</i>`).join('');
+      if (!word || params.has('birthday') || !word.firstChild) return;   // birthday mode: the tap plays the tune
+      const text = word.firstChild, N = text.length;
+      const lime = document.createElement('span'); lime.className = 'wordmark__lime'; lime.setAttribute('aria-hidden', 'true');
+      lime.textContent = text.data; lime.hidden = true; word.after(lime);
       const CELL = 2, STEPS = 8, DUR = 260;
-      const tile = document.createElement('canvas'); tile.width = tile.height = 8 * CELL;
-      const tc = tile.getContext('2d');
-      const frames = Array.from({ length: STEPS + 1 }, (_, k) => {
-        tc.clearRect(0, 0, 8 * CELL, 8 * CELL); tc.fillStyle = '#000';
-        for (let i = 0; i < 64; i++) if (BAYER8[i] < (k / STEPS) * 64) tc.fillRect((i & 7) * CELL, (i >> 3) * CELL, CELL, CELL);
-        return `url(${tile.toDataURL()})`;
+      const level = new Float32Array(N), target = new Uint8Array(N);   // 0..1 per letter
+      const tiles = Array.from({ length: STEPS + 1 }, (_, k) => {
+        const t = document.createElement('canvas'); t.width = t.height = 8 * CELL; const c = t.getContext('2d'); c.fillStyle = '#000';
+        for (let i = 0; i < 64; i++) if (BAYER8[i] < (k / STEPS) * 64) c.fillRect((i & 7) * CELL, (i >> 3) * CELL, CELL, CELL);
+        return t;
       });
-      wm.style.setProperty('--ms', `${8 * CELL}px ${8 * CELL}px`);
-      const show = (el, k) => el.style.setProperty('--m', k >= STEPS ? 'none' : frames[k]);
+      const cv = document.createElement('canvas'), ctx = cv.getContext('2d');
+      const layer = document.createElement('canvas'), lc = layer.getContext('2d');
+      let box, xs = [], dpr = 1;
+      const measure = () => {
+        box = word.getBoundingClientRect(); dpr = devicePixelRatio || 1;          // the copy shares this box (and may still be hidden)
+        const r = document.createRange();
+        xs = Array.from({ length: N }, (_, i) => { r.setStart(text, i); r.setEnd(text, i + 1); const b = r.getBoundingClientRect(); return { l: b.left, r: b.right, top: b.top }; });
+        cv.width = layer.width = Math.round(box.width * dpr); cv.height = layer.height = Math.round(box.height * dpr);
+      };
+      const draw = () => {
+        if (!level.some(v => v > 0)) { lime.hidden = true; return; }
+        lime.hidden = false;
+        const cs = getComputedStyle(word), font = `${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+        ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, cv.width, cv.height);
+        for (let i = 0; i < N; i++) {
+          if (level[i] <= 0) continue;
+          lc.setTransform(1, 0, 0, 1, 0, 0); lc.globalCompositeOperation = 'source-over'; lc.clearRect(0, 0, layer.width, layer.height);
+          lc.setTransform(dpr, 0, 0, dpr, 0, 0);
+          lc.font = font; lc.textBaseline = 'alphabetic'; lc.fillStyle = lc.strokeStyle = '#000'; lc.lineWidth = 2; lc.lineJoin = 'round';
+          const m = lc.measureText(text.data[i]), x = xs[i].l - box.left, y = xs[i].top - box.top + m.fontBoundingBoxAscent;
+          lc.fillText(text.data[i], x, y); lc.strokeText(text.data[i], x, y);
+          const k = Math.round(level[i] * STEPS);
+          if (k < STEPS) {                                                // mid-dither: keep only this step's dots
+            lc.setTransform(1, 0, 0, 1, 0, 0); lc.globalCompositeOperation = 'destination-in';
+            const pat = lc.createPattern(tiles[k], 'repeat'); pat.setTransform && pat.setTransform(new DOMMatrix().scale(dpr));
+            lc.fillStyle = pat; lc.fillRect(0, 0, layer.width, layer.height);
+          }
+          ctx.drawImage(layer, 0, 0);
+        }
+        const url = `url(${cv.toDataURL()})`;
+        lime.style.webkitMaskImage = url; lime.style.maskImage = url;
+      };
+      let raf = 0, last = 0;
+      const tick = now => {
+        const dt = last ? (now - last) / DUR : 0; last = now; let moving = false;
+        for (let i = 0; i < N; i++) {
+          const goal = target[i];
+          if (level[i] !== goal) { level[i] = goal ? Math.min(1, level[i] + dt) : Math.max(0, level[i] - dt); moving = true; }
+        }
+        draw();
+        raf = moving ? requestAnimationFrame(tick) : 0; if (!raf) last = 0;
+      };
       wm.addEventListener('click', e => {
-        const el = e.target.closest('.wordmark__l'); if (!el) return;
-        const on = !el.classList.contains('is-lime');
-        el.classList.toggle('is-lime', on);
-        if (REDUCED) { show(el, STEPS); return; }
-        el.classList.add('is-fading');
-        const t0 = performance.now(), run = el._run = (el._run || 0) + 1;
-        const step = now => {
-          if (el._run !== run) return;                                  // a quicker second tap takes over
-          const k = Math.min(STEPS, Math.floor((now - t0) / DUR * STEPS));
-          show(el, on ? k : STEPS - k);
-          if (k < STEPS) requestAnimationFrame(step);
-          else { el.classList.remove('is-fading'); if (!on) show(el, 0); }
-        };
-        requestAnimationFrame(step);
+        if (!box) measure();
+        const hit = xs.findIndex((b, i) => e.clientX < (i < N - 1 ? (b.r + xs[i + 1].l) / 2 : Infinity));   // letters overlap: split at the middle
+        if (hit < 0) return;
+        target[hit] ^= 1;
+        if (REDUCED) { level[hit] = target[hit]; draw(); return; }
+        if (!raf) raf = requestAnimationFrame(tick);
       });
+      addEventListener('resize', () => { if (!box) return; measure(); draw(); });
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { box = null; });
     })();
 
     // ── The tail. Scroll is the engine. 404040 stays pinned at the top; as it rises

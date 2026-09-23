@@ -1091,8 +1091,8 @@
       },
       "art_worn": "assets/40/worn/animal-collective-merriweather-post-pavilion.jpg",
       "live": true,
-      "art_back": "assets/40/animal-collective-merriweather-post-pavilion.jpg",
-      "art_back_src": "same as the front (Drew's vinyl)",
+      "art_back": "assets/40/animal-collective-merriweather-post-pavilion-back.jpg",
+      "art_back_src": "front design (Drew's copy) + shop sticker, scripts/make-mpp-back.py",
       "art_back_worn": "assets/40/worn/animal-collective-merriweather-post-pavilion-back.jpg"
     },
     {

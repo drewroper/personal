@@ -1089,7 +1089,8 @@
         "level": "med",
         "edge": 4
       },
-      "art_worn": "assets/40/worn/animal-collective-merriweather-post-pavilion.jpg"
+      "art_worn": "assets/40/worn/animal-collective-merriweather-post-pavilion.jpg",
+      "live": true
     },
     {
       "no": null,

@@ -978,7 +978,8 @@
       .then(r => r.json())
       .then(({ meta, albums }) => {
         const slotted = albums.filter(a => a.no && a.date && !a.bonus).sort((x, y) => x.no - y.no);
-        const live    = slotted.filter(a => preview || a.date <= today);
+        const isOut   = a => preview || a.live || a.date <= today;       // a.live: posted early, show it now
+        const live    = slotted.filter(isOut);
 
         // About panel: collapsed by default, since most visits are repeat
         // visits from a story. Opens itself only when there's nothing else
@@ -1019,10 +1020,10 @@
         const byNo = new Map(slotted.map(a => [a.no, a]));
         document.getElementById('js-grid').innerHTML = Array.from({ length: meta.total }, (_, i) => {
           const a = byNo.get(i + 1);
-          if (a && (preview || a.date <= today)) return `<a href="#${pad(a.no)}" title="Day ${pad(a.no)} · ${esc(a.artist)} — ${esc(a.title)}"><img src="../${esc((WORN && a.art_worn) || a.art || '')}" alt="" loading="lazy"></a>`;
+          if (a && isOut(a)) return `<a href="#${pad(a.no)}" title="Day ${pad(a.no)} · ${esc(a.artist)} — ${esc(a.title)}"><img src="../${esc((WORN && a.art_worn) || a.art || '')}" alt="" loading="lazy"></a>`;
           return `<span class="${a && a.date === today ? 'is-today' : ''}" aria-hidden="true">${pad(i + 1)}</span>`;
         }).join('');
-        const out = slotted.filter(a => preview || a.date <= today).length;
+        const out = slotted.filter(isOut).length;
         document.getElementById('js-index-count').innerHTML = `<b>${out}</b> of ${meta.total} so far`;
         const last = document.querySelector('#js-grid a:nth-child(40)');
         if (BIRTHDAY && last && !REDUCED && 'IntersectionObserver' in window) {

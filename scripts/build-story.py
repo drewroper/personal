@@ -509,8 +509,8 @@ def _p_at(t, start, dur=TEXT_IN):
 
 
 def story_404040(theta):
-    """Slide 1. The lime 40 dithers in, the two bone 40s slide out from behind
-    it into the stacked 404040, then the line dissolves in. Holds."""
+    """Slide 1. The lime 40 dithers in, then the two bone 40s slide out from
+    behind it into the stacked 404040. Holds. No line: the 404040 alone."""
     t = _t(theta)
     c = Image.new("RGB", (W, H), BG)
     f = display(HL_SIZE)
@@ -523,20 +523,15 @@ def story_404040(theta):
     lime = dissolve(_text_layer(lambda d: d.text((x, cy), "40", font=f, fill=ACCENT)), _p_at(t, 0.15, 0.45))
     if lime is not None:
         c.paste(lime, (0, 0), lime)
-    line = "40 albums that shaped me, one a day, before I turn 40."
-    lf = sans(34)
-    words = dissolve(_text_layer(lambda d: d.text(((W - lf.getlength(line)) / 2, BOT - 40), line, font=lf, fill=MUTED)), _p_at(t, 1.8))
-    if words is not None:
-        c.paste(words, (0, 0), words)
     return c
 
 
-WHY = [   # the canvas's "Intro 2 — Why (option B)", verbatim
+WHY = [   # the canvas's "Intro 2 — Why (option B)", with Drew's numerals in the last line
     ("rich", [("I turn 40 on November 1st", True), (", and I’m celebrating with the thing that’s been there for every chapter of my life so far. Music.", False)]),
     ("lime", "Every day until my birthday, I’m sharing one album that shaped me."),
     ("body", "I couldn’t pick my 40 favorite albums if my life depended on it. Plenty of these would make that list, and every one is in my top 100, but this list is about more than favorites."),
     ("body", "I can still remember the first time I heard each of these, or what I was doing when I played them the most. Some of them introduced me to a new genre, or pulled me back into one I’d left behind. Some had me digging through a band’s entire catalog. And some of them just never left."),
-    ("body", "Forty albums, forty days, for forty years."),
+    ("body", "40 albums, 40 days, for 40 years."),
 ]
 PORTRAIT_OPACITY = 0.15
 PORTRAIT_STEPS = (14, 27, 54, 108)   # the portrait resolves coarse → fine; 108 cells across is the canvas's grid
@@ -611,8 +606,8 @@ def story_set(data, day, out):
     a = next(x for x in data["albums"] if x.get("no") == day and not x.get("bonus"))
     art = Image.open(ROOT / (a.get("art_worn") or a["art"])).convert("RGB")
     jobs = [("1-404040", story_404040, 6),
-            ("2-why", story_why, 15),
-            (f'3-day-{day:02d}-{a["slug"]}', lambda th: variant_b(a, art, th, "detail-resolve"), 10)]
+            ("2-why", story_why, 20),
+            (f'3-day-{day:02d}-{a["slug"]}', lambda th: variant_b(a, art, th, "detail-resolve"), 20)]
     for name, fn, secs in jobs:
         reset_caches()
         p = out / f"story-{name}.mp4"

@@ -231,7 +231,7 @@ def variant_a(a, art):
     c.paste(dither(square(art, COVER), 110), (CX + 44, cy + 44))
     c.paste(square(art, COVER), (CX, cy))
     dot_rail(d, a, "left")
-    url(d, BOT - 30)
+    pass  # no URL on album cards: Drew adds Instagram's link sticker
     return c
 
 
@@ -358,7 +358,6 @@ def variant_b(a, art, theta=None, riff="field"):
     pieces = [
         (0, lambda d: microcopy(d, a, TOP + 4)),
         (1, lambda d: header(d, a, TOP + 60)),
-        (2, lambda d: url(d, BOT - 30)),
     ]
     for order, fn in pieces:
         p = _text_progress(theta, order) if animate else 1.0
@@ -378,7 +377,7 @@ def variant_c(a, art):
     cy = max(y + 36, 640)
     c.paste(square(art, 840), ((W - 840) // 2, cy))
     dot_rail(d, a, "right")
-    url(d, BOT - 30)
+    pass  # no URL on album cards: Drew adds Instagram's link sticker
     return c
 
 
@@ -391,7 +390,7 @@ def variant_d(a, art):
     cy = max(y + 40, 600)
     c.paste(square(art, COVER), (CX, cy))
     d.rectangle([CX - 12, cy - 12, CX + COVER + 11, cy + COVER + 11], outline=ACCENT, width=2)
-    url(d, BOT - 30)
+    pass  # no URL on album cards: Drew adds Instagram's link sticker
     return c
 
 

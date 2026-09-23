@@ -414,10 +414,10 @@ def ring_layer(slug, year):
     return lay
 
 
-def surface_layer(slug, year, face='', mean=.5):
+def surface_layer(slug, year, face='', mean=.5, edgew=1.0):
     """What happened to one face: its cut edges and corners, shelf scuffs, the hand that held it,
     cracks, scratches and grit. The front and the back ('' / ':back') each have their own."""
-    key = (slug, year, face, round(mean, 3))
+    key = (slug, year, face, round(mean, 3), edgew)
     if key in _SURF:
         return _SURF[key]
     R = ring_layer(slug, year)
@@ -464,7 +464,18 @@ def surface_layer(slug, year, face='', mean=.5):
         profs.append(prof)
         amp = U(.08, .3) * life * (shelf if s == 0 else 1) * (1.3 if s == 1 else 1) * (1.3 if light_old and s == opening else 1)
         e = S * U(.002, .0045)
+        amp, e = min(.95, amp * edgew), e * (1 + 1.1 * (edgew - 1))   # per-record edge wear (wear.edge): stronger, wider frost
         Pi = np.maximum(Pi, amp * np.exp(-np.maximum(dist[s], 0) / e) * (.25 + .75 * noise1(rng, S, S * .06))[alongidx[s]])
+    if edgew > 1:                                    # wear.edge: a broad, patchy rub along every edge, heaviest near the
+        er = seed(slug + (face or ':face') + ':edgewide')   # corners, for art that hides wear in the middle
+        k = min(1.0, (edgew - 1) / 3)
+        for s in range(4):
+            t = np.arange(S, dtype=np.float32)
+            wide = S * er.uniform(.012, .028) * (.6 + .4 * k)
+            patch = smooth(.25, .7, noise1(er, S, S * .04, 3)) * (.55 + .45 * noise1(er, S, S * .012, 2))
+            patch *= 1 + .8 * (np.exp(-t / (S * .06)) + np.exp(-(S - 1 - t) / (S * .06)))     # corners take more
+            amp = er.uniform(.35, .6) * k * (1.25 if s == 1 else 1)
+            Pi = np.maximum(Pi, np.clip(amp * patch[alongidx[s]], 0, .95) * np.exp(-(np.maximum(dist[s], 0) / wide) ** 1.3))
     if light_old:                                    # a faint soiled band along the opening, where hands go in
         along = smooth(.3, .7, noise1(rng, S, S * .06))
         esoil = np.exp(-np.maximum(dist[opening], 0) / (S * U(.006, .012))) * along[alongidx[opening]] * U(.3, .45) * 1.3
@@ -593,14 +604,15 @@ def surface_layer(slug, year, face='', mean=.5):
     return lay
 
 
-def make_mask(slug, year, dens=1.0, edgek=1.0, face='', mean=.5):
+def make_mask(slug, year, dens=1.0, edgek=1.0, face='', mean=.5, edgew=1.0):
     """dens and edgek scale the amount of wear without moving any of it, so every level is the same sleeve.
     face '' is the front, ':back' the back (the ring mirrored, everything else its own). mean is the
     cover's mean luminance (pale stock is handled differently).
     Returns channels: 0 abrasion (exposed paper), 1 crushed edge (card), 2 dirt (shows on light ink),
     3 the rim's impression line, 4 the rim's stipple, 5 grey grain in rubbed white stock."""
     R = ring_layer(slug, year)
-    L = surface_layer(slug, year, face, mean)
+    L = surface_layer(slug, year, face, mean, edgew)
+    edgek = edgek * (1 + .3 * (edgew - 1))          # and a somewhat wider crushed strip and corners
     fl = (lambda a: a[:, ::-1]) if face else (lambda a: a)      # the disc presses both faces, mirrored
     T, Trub, V, Vb, Tc = fl(R['T']), fl(R['Trub']), fl(R['V']), fl(R['Vb']), fl(R['Tc'])
     Pi = np.maximum(fl(R['Pi']), L['Pi'])
@@ -725,13 +737,14 @@ def job(a):
     slug = a['slug']
     level = (a.get('wear') or {}).get('level', 'med')
     level = level if level in LEVELS else 'med'
+    edgew = float((a.get('wear') or {}).get('edge', 1.0))   # per-record: more edge wear where the art hides the rest
     cov = load_square(ROOT / a['art'])
     lum = float(lum_of(cov).mean())
     tone = 1 + .3 * float(smooth(.6, .85, lum))           # light covers carry heavier wear
     masks = {}
     for lv in (LEVELS if LEVELS_DIR else [level]):
         dens, ek, _ = LEVELS[lv]
-        masks[lv] = make_mask(slug, a.get('year'), dens * tone, ek, '', lum)
+        masks[lv] = make_mask(slug, a.get('year'), dens * tone, ek, '', lum, edgew)
     mask, life, age, ring = masks[level]; k = LEVELS[level][2]
     MASKS.mkdir(parents=True, exist_ok=True)
     Image.fromarray((mask[..., :3] * 255 + .5).astype(np.uint8), 'RGB').save(MASKS / f'{slug}.png')
@@ -741,7 +754,7 @@ def job(a):
         covb = load_square(ROOT / a['art_back'], pad=True)
         lumb = float(lum_of(covb).mean())
         dens, ek, _ = LEVELS[level]
-        mb = make_mask(slug, a.get('year'), dens * (1 + .3 * float(smooth(.6, .85, lumb))), ek, ':back', lumb)[0]
+        mb = make_mask(slug, a.get('year'), dens * (1 + .3 * float(smooth(.6, .85, lumb))), ek, ':back', lumb, edgew)[0]
         bake(covb, mb, k, slug + ':back', age).save(WORN / f'{slug}-back.jpg', 'JPEG', quality=86, optimize=True, progressive=True)
         back = f'assets/40/worn/{slug}-back.jpg'
     if LEVELS_DIR:
@@ -773,5 +786,5 @@ if __name__ == '__main__':
         if a['slug'] in backs:
             a['art_worn'] = f"assets/40/worn/{a['slug']}.jpg"
             if backs[a['slug']]: a['art_back_worn'] = backs[a['slug']]
-            a['wear'] = {'level': (a.get('wear') or {}).get('level', 'med')}
+            a['wear'] = {**(a.get('wear') or {}), 'level': (a.get('wear') or {}).get('level', 'med')}
     data_path.write_text(json.dumps(doc, indent=2, ensure_ascii=False) + '\n')

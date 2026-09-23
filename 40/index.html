@@ -586,7 +586,7 @@
       const q = encodeURIComponent(`${a.artist} ${a.title}`);
       const L = a.links || {}, sp = (L.spotify || '').match(/album\/([A-Za-z0-9]+)/);
       const pick = a.apple_id ? `https://album.link/i/${a.apple_id}` : sp ? `https://album.link/s/${sp[1]}` : '';
-      if (a.bonus) return pick ? `<div class="listen listen--solo"><a class="listen__any mono" href="${esc(pick)}" target="_blank" rel="noopener">Open in your music app ↗</a></div>` : '';
+      if (a.bonus || a.secret) return pick ? `<div class="listen listen--solo"><a class="listen__any mono" href="${esc(pick)}" target="_blank" rel="noopener">Open in your music app ↗</a></div>` : '';
       const btns = [
         a.apple_id && [a.apple_url || `https://music.apple.com/us/album/${a.apple_id}`, 'Apple Music'],
         [L.spotify || `https://open.spotify.com/search/${q}/albums`, 'Spotify'],
@@ -647,8 +647,8 @@
           </div>
         </div>
         <div class="entry__blurb">${blurb}</div>
-        ${a.bonus ? '' : `<div class="entry__player">${player(a)}</div>`}
-        ${!a.bonus || a.apple_id || (a.links && a.links.spotify) ? listen(a) : ''}
+        ${a.bonus || a.secret ? '' : `<div class="entry__player">${player(a)}</div>`}   <!-- the bonus and the secret just link out -->
+        ${!(a.bonus || a.secret) || a.apple_id || (a.links && a.links.spotify) ? listen(a) : ''}
         ${a.apple_id ? '' : tracks(a)}
       </article>`;
     }

@@ -105,7 +105,8 @@
         "edge": 2.5
       },
       "art_worn": "assets/40/worn/weezer-green-album.jpg",
-      "art_back_worn": "assets/40/worn/weezer-green-album-back.jpg"
+      "art_back_worn": "assets/40/worn/weezer-green-album-back.jpg",
+      "worn_v": "c3250a29"
     },
     {
       "no": 18,
@@ -217,7 +218,8 @@
         "surface": 2.2
       },
       "art_worn": "assets/40/worn/finch-what-it-is-to-burn.jpg",
-      "art_back_worn": "assets/40/worn/finch-what-it-is-to-burn-back.jpg"
+      "art_back_worn": "assets/40/worn/finch-what-it-is-to-burn-back.jpg",
+      "worn_v": "7d8c13ae"
     },
     {
       "no": 10,
@@ -340,7 +342,8 @@
         "edge": 2.5
       },
       "art_worn": "assets/40/worn/turnstile-glow-on.jpg",
-      "art_back_worn": "assets/40/worn/turnstile-glow-on-back.jpg"
+      "art_back_worn": "assets/40/worn/turnstile-glow-on-back.jpg",
+      "worn_v": "d6b5107a"
     },
     {
       "no": null,
@@ -872,7 +875,8 @@
         "level": "high"
       },
       "art_worn": "assets/40/worn/oasis-what-s-the-story-morning-glory.jpg",
-      "art_back_worn": "assets/40/worn/oasis-what-s-the-story-morning-glory-back.jpg"
+      "art_back_worn": "assets/40/worn/oasis-what-s-the-story-morning-glory-back.jpg",
+      "worn_v": "7509b805"
     },
     {
       "no": 12,
@@ -989,7 +993,8 @@
         "edge": 2.5
       },
       "art_worn": "assets/40/worn/radiohead-hail-to-the-thief.jpg",
-      "art_back_worn": "assets/40/worn/radiohead-hail-to-the-thief-back.jpg"
+      "art_back_worn": "assets/40/worn/radiohead-hail-to-the-thief-back.jpg",
+      "worn_v": "692e9305"
     },
     {
       "no": 1,
@@ -1100,7 +1105,8 @@
       "live": true,
       "art_back": "assets/40/animal-collective-merriweather-post-pavilion-back.jpg",
       "art_back_src": "front design (Drew's copy) + shop sticker, scripts/make-mpp-back.py",
-      "art_back_worn": "assets/40/worn/animal-collective-merriweather-post-pavilion-back.jpg"
+      "art_back_worn": "assets/40/worn/animal-collective-merriweather-post-pavilion-back.jpg",
+      "worn_v": "d7d941cb"
     },
     {
       "no": null,
@@ -1380,7 +1386,8 @@
       "wear": {
         "level": "med"
       },
-      "art_worn": "assets/40/worn/girl-talk-feed-the-animals.jpg"
+      "art_worn": "assets/40/worn/girl-talk-feed-the-animals.jpg",
+      "worn_v": "a200112d"
     },
     {
       "no": null,
@@ -1583,7 +1590,8 @@
         "edge": 3
       },
       "art_worn": "assets/40/worn/brand-new-deja-entendu.jpg",
-      "art_back_worn": "assets/40/worn/brand-new-deja-entendu-back.jpg"
+      "art_back_worn": "assets/40/worn/brand-new-deja-entendu-back.jpg",
+      "worn_v": "ce01a0c6"
     },
     {
       "no": 8,
@@ -1688,7 +1696,8 @@
         "surface": 2.2
       },
       "art_worn": "assets/40/worn/dave-matthews-band-crash.jpg",
-      "art_back_worn": "assets/40/worn/dave-matthews-band-crash-back.jpg"
+      "art_back_worn": "assets/40/worn/dave-matthews-band-crash-back.jpg",
+      "worn_v": "034a3e7b"
     },
     {
       "no": null,
@@ -1903,7 +1912,8 @@
         "edge": 2.5
       },
       "art_worn": "assets/40/worn/alt-j-an-awesome-wave.jpg",
-      "art_back_worn": "assets/40/worn/alt-j-an-awesome-wave-back.jpg"
+      "art_back_worn": "assets/40/worn/alt-j-an-awesome-wave-back.jpg",
+      "worn_v": "7711bfc6"
     },
     {
       "no": null,
@@ -2178,7 +2188,8 @@
         "surface": 2.4
       },
       "art_worn": "assets/40/worn/ratatat-classics.jpg",
-      "art_back_worn": "assets/40/worn/ratatat-classics-back.jpg"
+      "art_back_worn": "assets/40/worn/ratatat-classics-back.jpg",
+      "worn_v": "a22c4a0a"
     },
     {
       "no": null,
@@ -2379,7 +2390,8 @@
         "lock": true
       },
       "art_worn": "assets/40/worn/incubus-morning-view.jpg",
-      "art_back_worn": "assets/40/worn/incubus-morning-view-back.jpg"
+      "art_back_worn": "assets/40/worn/incubus-morning-view-back.jpg",
+      "worn_v": "50be3c40"
     },
     {
       "no": 2,
@@ -2495,7 +2507,8 @@
         "level": "high"
       },
       "art_worn": "assets/40/worn/third-eye-blind-third-eye-blind.jpg",
-      "art_back_worn": "assets/40/worn/third-eye-blind-third-eye-blind-back.jpg"
+      "art_back_worn": "assets/40/worn/third-eye-blind-third-eye-blind-back.jpg",
+      "worn_v": "dccd61e0"
     },
     {
       "no": null,
@@ -2704,7 +2717,8 @@
         "bends": 2
       },
       "art_worn": "assets/40/worn/run-the-jewels-run-the-jewels-2.jpg",
-      "art_back_worn": "assets/40/worn/run-the-jewels-run-the-jewels-2-back.jpg"
+      "art_back_worn": "assets/40/worn/run-the-jewels-run-the-jewels-2-back.jpg",
+      "worn_v": "25cb94e3"
     },
     {
       "no": null,
@@ -2878,7 +2892,8 @@
         "level": "high",
         "edge": 4
       },
-      "art_worn": "assets/40/worn/tokyo-police-club-champ.jpg"
+      "art_worn": "assets/40/worn/tokyo-police-club-champ.jpg",
+      "worn_v": "72a187cb"
     },
     {
       "no": 6,
@@ -2990,7 +3005,8 @@
         "bends": 3
       },
       "art_worn": "assets/40/worn/blink-182-take-off-your-pants-and-jacket.jpg",
-      "art_back_worn": "assets/40/worn/blink-182-take-off-your-pants-and-jacket-back.jpg"
+      "art_back_worn": "assets/40/worn/blink-182-take-off-your-pants-and-jacket-back.jpg",
+      "worn_v": "5e02338f"
     },
     {
       "no": 11,
@@ -3083,7 +3099,8 @@
         "surface": 2.3
       },
       "art_worn": "assets/40/worn/youth-lagoon-the-year-of-hibernation.jpg",
-      "art_back_worn": "assets/40/worn/youth-lagoon-the-year-of-hibernation-back.jpg"
+      "art_back_worn": "assets/40/worn/youth-lagoon-the-year-of-hibernation-back.jpg",
+      "worn_v": "19f1ba14"
     },
     {
       "no": null,
@@ -3310,7 +3327,8 @@
         "lock": true
       },
       "art_worn": "assets/40/worn/phish-a-live-one.jpg",
-      "art_back_worn": "assets/40/worn/phish-a-live-one-back.jpg"
+      "art_back_worn": "assets/40/worn/phish-a-live-one-back.jpg",
+      "worn_v": "dc1db079"
     },
     {
       "no": 4,
@@ -3487,7 +3505,8 @@
         "edge": 2.5
       },
       "art_worn": "assets/40/worn/outkast-stankonia.jpg",
-      "art_back_worn": "assets/40/worn/outkast-stankonia-back.jpg"
+      "art_back_worn": "assets/40/worn/outkast-stankonia-back.jpg",
+      "worn_v": "9458b1a0"
     },
     {
       "no": 14,
@@ -3587,7 +3606,8 @@
         "surface": 2.3
       },
       "art_worn": "assets/40/worn/jose-gonzalez-in-our-nature.jpg",
-      "art_back_worn": "assets/40/worn/jose-gonzalez-in-our-nature-back.jpg"
+      "art_back_worn": "assets/40/worn/jose-gonzalez-in-our-nature-back.jpg",
+      "worn_v": "40aaf78d"
     },
     {
       "no": null,
@@ -3703,7 +3723,8 @@
         "surface": 2.8
       },
       "art_worn": "assets/40/worn/the-kinks-lola-versus-powerman.jpg",
-      "art_back_worn": "assets/40/worn/the-kinks-lola-versus-powerman-back.jpg"
+      "art_back_worn": "assets/40/worn/the-kinks-lola-versus-powerman-back.jpg",
+      "worn_v": "d3ed814a"
     }
   ]
 }

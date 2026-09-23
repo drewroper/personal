@@ -481,6 +481,7 @@
     const FLIP_ICON = '<svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 8a5.5 5.5 0 1 1-1.8-4.1"/><path d="M13.5 2.5v3h-3"/></svg>';
     const DATA    = test ? '../data/albums.test.json' : '../data/albums.json';
 
+    const wv = a => a.worn_v ? `?v=${a.worn_v}` : '';     // sleeve version stamp: a re-baked sleeve is fetched fresh, not from cache
     const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
     // Blurbs are plain paragraphs; _underscores_ become italics for titles.
     const inline = s => esc(s).replace(/_([^_]+)_/g, '<em>$1</em>');
@@ -544,7 +545,7 @@
 
     // The back of the record: the real back cover when we found one, else the tracklist set in mono.
     function back(a) {
-      if (WORN && a.art_back_worn) return `<img class="is-square" src="../${esc(a.art_back_worn)}" alt="" loading="lazy" />`;
+      if (WORN && a.art_back_worn) return `<img class="is-square" src="../${esc(a.art_back_worn)}${wv(a)}" alt="" loading="lazy" />`;
       if (a.art_back) return `<img src="../${esc(a.art_back)}" alt="" loading="lazy" onload="if (Math.max(this.naturalWidth, this.naturalHeight) / Math.min(this.naturalWidth, this.naturalHeight) < 1.08) this.classList.add('is-square')" />`;
       if (!a.tracks || !a.tracks.length) return '';
       const n = a.tracks.length, size = n > 22 ? ' is-xlong' : n > 14 ? ' is-long' : '';
@@ -567,7 +568,7 @@
         <div class="entry__grid">
           <button class="entry__cover-wrap" type="button" aria-label="Flip ${esc(a.title)} over" aria-pressed="false" style="display:block;width:100%;padding:0;border:0;background:none;text-align:left;">
             <div class="flip">
-              ${a.art ? `<img class="entry__cover flip__front" src="../${esc(WORN && a.art_worn ? a.art_worn : a.art)}" alt="${esc(a.title)} cover" loading="lazy" />`
+              ${a.art ? `<img class="entry__cover flip__front" src="../${esc(WORN && a.art_worn ? a.art_worn + wv(a) : a.art)}" alt="${esc(a.title)} cover" loading="lazy" />`
                       : `<div class="entry__cover entry__cover--empty flip__front" aria-label="${esc(a.title)} cover"><span>?</span></div>`}
               <div class="flip__back" aria-hidden="true">${back(a)}</div>
             </div>
@@ -1020,7 +1021,7 @@
         const byNo = new Map(slotted.map(a => [a.no, a]));
         document.getElementById('js-grid').innerHTML = Array.from({ length: meta.total }, (_, i) => {
           const a = byNo.get(i + 1);
-          if (a && isOut(a)) return `<a href="#${pad(a.no)}" title="Day ${pad(a.no)} · ${esc(a.artist)} — ${esc(a.title)}"><img src="../${esc((WORN && a.art_worn) || a.art || '')}" alt="" loading="lazy"></a>`;
+          if (a && isOut(a)) return `<a href="#${pad(a.no)}" title="Day ${pad(a.no)} · ${esc(a.artist)} — ${esc(a.title)}"><img src="../${esc((WORN && a.art_worn) ? a.art_worn + wv(a) : a.art || '')}" alt="" loading="lazy"></a>`;
           return `<span aria-hidden="true">${pad(i + 1)}</span>`;
         }).join('');
         const out = slotted.filter(isOut).length;

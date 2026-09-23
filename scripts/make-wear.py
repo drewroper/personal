@@ -870,5 +870,8 @@ if __name__ == '__main__':
         if a['slug'] in backs:
             a['art_worn'] = f"assets/40/worn/{a['slug']}.jpg"
             if backs[a['slug']]: a['art_back_worn'] = backs[a['slug']]
+            h = hashlib.sha1((WORN / f"{a['slug']}.jpg").read_bytes())
+            if backs[a['slug']]: h.update((ROOT / backs[a['slug']]).read_bytes())
+            a['worn_v'] = h.hexdigest()[:8]                  # the page adds ?v= so a re-bake is never served from cache
             a['wear'] = {**(a.get('wear') or {}), 'level': (a.get('wear') or {}).get('level', 'med')}
     data_path.write_text(json.dumps(doc, indent=2, ensure_ascii=False) + '\n')

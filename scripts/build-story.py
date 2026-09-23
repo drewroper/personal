@@ -4,6 +4,11 @@ Render Instagram story graphics (1080x1920) for the /40 countdown.
     python3 scripts/build-story.py [data.json] [--variant a|b|c|d] [--slug x ...]
                                    [--extras] [--out DIR]
                                    [--video [--riff detail-resolve|field|resolve|detail|accent ...] [--seconds 20]]
+    python3 scripts/build-story.py --story-set [--day 1]
+
+--story-set renders the three launch-day story videos into out/stories/instagram/:
+the 404040 title card, the "why" card over the dithered portrait, and one day's
+album card. Each plays once and holds its last frame (a story doesn't loop).
 
 Reads data/albums.json (or the file given), renders every slotted album —
 or just the slugs given — into out/stories/. --extras also renders the
@@ -282,6 +287,7 @@ TEXT_IN      = 0.35                      # seconds each text element takes to di
 TEXT_STAGGER = 0.15
 TEXT_OUT     = 0.4                       # seconds to dissolve out, before the cover sinks
 DURATION     = 20.0                      # set by render_video
+ONE_SHOT     = False                     # story videos: build in, then hold (no outro)
 
 
 def _t(theta):
@@ -296,7 +302,7 @@ def _reveal(cover, theta):
     t = _t(theta); n = len(REVEAL_STEPS)
     if t < RISE:
         k = t / STEP_HOLD
-    elif t > DURATION - RISE:
+    elif t > DURATION - RISE and not ONE_SHOT:
         k = (DURATION - t) / STEP_HOLD
     else:
         return cover
@@ -315,6 +321,8 @@ def _text_progress(theta, order):
     t = _t(theta)
     start = RISE + TEXT_DELAY + order * TEXT_STAGGER
     p_in = (t - start) / TEXT_IN
+    if ONE_SHOT:
+        return max(0.0, min(1.0, p_in))
     end = DURATION - RISE - TEXT_DELAY - TEXT_OUT - (2 - order) * TEXT_STAGGER
     p_out = (end + TEXT_OUT - t) / TEXT_OUT
     return max(0.0, min(1.0, p_in, p_out))
@@ -489,6 +497,130 @@ def closing(albums):
     return grid_card(albums, 40, "All forty.", "SEP 23 → NOV 1")
 
 
+# ── launch-day story set ─────────────────────────────────────────────────
+def _baseline(f, top, line_h):
+    """CSS line box → baseline: half the leading above the font's ascent."""
+    asc, desc = f.getmetrics()
+    return top + (line_h - (asc + desc)) / 2 + asc
+
+
+def _p_at(t, start, dur=TEXT_IN):
+    return max(0.0, min(1.0, (t - start) / dur))
+
+
+def story_404040(theta):
+    """Slide 1. The lime 40 dithers in, the two bone 40s slide out from behind
+    it into the stacked 404040, then the line dissolves in. Holds."""
+    t = _t(theta)
+    c = Image.new("RGB", (W, H), BG)
+    f = display(HL_SIZE)
+    x = (W - f.getlength("40")) / 2 - 8
+    cy = H / 2 - HL_SIZE * 0.62
+    off = HL_PITCH * _ease_out((t - 0.8) / HL_SLIDE)
+    layer = _text_layer(lambda d: (d.text((x, cy - off), "40", font=f, fill=LIGHT), d.text((x, cy + off), "40", font=f, fill=LIGHT))) if off > 0.5 else None
+    if layer is not None:
+        c.paste(layer, (0, 0), layer)
+    lime = dissolve(_text_layer(lambda d: d.text((x, cy), "40", font=f, fill=ACCENT)), _p_at(t, 0.15, 0.45))
+    if lime is not None:
+        c.paste(lime, (0, 0), lime)
+    line = "40 albums that shaped me, one a day, before I turn 40."
+    lf = sans(34)
+    words = dissolve(_text_layer(lambda d: d.text(((W - lf.getlength(line)) / 2, BOT - 40), line, font=lf, fill=MUTED)), _p_at(t, 1.8))
+    if words is not None:
+        c.paste(words, (0, 0), words)
+    return c
+
+
+WHY = [   # the canvas's "Intro 2 — Why (option B)", verbatim
+    ("rich", [("I turn 40 on November 1st", True), (", and I’m celebrating with the thing that’s been there for every chapter of my life so far. Music.", False)]),
+    ("lime", "Every day until my birthday, I’m sharing one album that shaped me."),
+    ("body", "I couldn’t pick my 40 favorite albums if my life depended on it. Plenty of these would make that list, and every one is in my top 100, but this list is about more than favorites."),
+    ("body", "I can still remember the first time I heard each of these, or what I was doing when I played them the most. Some of them introduced me to a new genre, or pulled me back into one I’d left behind. Some had me digging through a band’s entire catalog. And some of them just never left."),
+    ("body", "Forty albums, forty days, for forty years."),
+]
+PORTRAIT_OPACITY = 0.15
+PORTRAIT_STEPS = (14, 27, 54, 108)   # the portrait resolves coarse → fine; 108 cells across is the canvas's grid
+
+
+def _why_paragraphs():
+    """Lay out WHY like the canvas (912 wide at x 84, top 254, 40px gaps):
+    a list of (draw_fn) per paragraph, plus the bottom y."""
+    body, bold, big = sans(40), sans_md(40), display(80)
+    out, y = [], 254
+    for kind, content in WHY:
+        if kind == "lime":
+            lh = 80 * 1.04
+            lines = wrap(content, big, COL)
+            ys = [_baseline(big, y + i * lh, lh) for i in range(len(lines))]
+            out.append(lambda d, lines=lines, ys=ys: [d.text((PAD, yy), ln, font=big, fill=ACCENT, anchor="ls") for ln, yy in zip(lines, ys)])
+        else:
+            lh = 40 * 1.34
+            runs = content if kind == "rich" else [(content, False)]
+            toks = [(w, b) for txt, b in runs for w in txt.replace(" ", " \0").split("\0") if w]   # keep each word's trailing space
+            lines, cur, cw = [], [], 0.0
+            for w, b in toks:
+                fw = (bold if b else body).getlength(w)
+                if cur and cw + (bold if b else body).getlength(w.rstrip()) > COL:
+                    lines.append(cur); cur, cw = [], 0.0
+                cur.append((w, b)); cw += fw
+            if cur:
+                lines.append(cur)
+            ys = [_baseline(body, y + i * lh, lh) for i in range(len(lines))]
+            def draw(d, lines=lines, ys=ys):
+                for ln, yy in zip(lines, ys):
+                    xx = PAD
+                    for w, b in ln:
+                        ff = bold if b else body
+                        d.text((xx, yy), w, font=ff, fill=LIGHT, anchor="ls"); xx += ff.getlength(w)
+            out.append(draw)
+        y += len(lines) * lh + 40
+    return out, y - 40
+
+
+def story_why(theta):
+    """Slide 2. The dithered portrait resolves in behind the text at the canvas's
+    15% and keeps breathing; the paragraphs dissolve in one after another."""
+    t = _t(theta)
+    src = _prep(PORTRAIT, "why", lambda: square(PORTRAIT, H).crop(((H - W) // 2, 0, (H - W) // 2 + W, H)))
+    on = tuple(round(b + PORTRAIT_OPACITY * (l - b)) for l, b in zip(LIGHT, BG))
+    k = int(t / 0.2)
+    grid = PORTRAIT_STEPS[min(k, len(PORTRAIT_STEPS) - 1)]
+    c = dither(src, grid, on=on, off=BG, contrast=1.4, theta=theta if k >= len(PORTRAIT_STEPS) - 1 else None)
+    paras, _ = _why_paragraphs()
+    start = 0.7
+    for i, fn in enumerate(paras):
+        layer = dissolve(_text_layer(fn), _p_at(t, start + i * 0.3, 0.4))
+        if layer is not None:
+            c.paste(layer, (0, 0), layer)
+    mf = mono(24)
+    date = dissolve(_text_layer(lambda d: tracked(d, (PAD, _baseline(mf, 1640, 24) - mf.getmetrics()[0]), "SEP 23 → NOV 1", mf, ACCENT)), _p_at(t, start + len(paras) * 0.3, 0.4))
+    if date is not None:
+        c.paste(date, (0, 0), date)
+    return c
+
+
+PORTRAIT = None
+
+
+def story_set(data, day, out):
+    """The three launch-day story videos."""
+    global ONE_SHOT, PORTRAIT
+    ONE_SHOT = True
+    out.mkdir(parents=True, exist_ok=True)
+    PORTRAIT = Image.open(ROOT / "assets" / "portrait.jpg").convert("RGB")
+    a = next(x for x in data["albums"] if x.get("no") == day and not x.get("bonus"))
+    art = Image.open(ROOT / (a.get("art_worn") or a["art"])).convert("RGB")
+    jobs = [("1-404040", story_404040, 6),
+            ("2-why", story_why, 15),
+            (f'3-day-{day:02d}-{a["slug"]}', lambda th: variant_b(a, art, th, "detail-resolve"), 10)]
+    for name, fn, secs in jobs:
+        reset_caches()
+        p = out / f"story-{name}.mp4"
+        render_video(fn, p, secs, audio=True); print(p)
+        # a still of the held last frame, for checking
+        fn(2 * math.pi * (secs * 30 - 1) / (secs * 30)).save(out / f"story-{name}-end.png")
+
+
 # ── video ────────────────────────────────────────────────────────────────
 def ffmpeg_bin():
     try:
@@ -498,15 +630,18 @@ def ffmpeg_bin():
         return "ffmpeg"
 
 
-def render_video(frame_fn, out_path, seconds=10, fps=30):
-    """Pipe frames straight into ffmpeg. frame_fn(theta) -> PIL image."""
+def render_video(frame_fn, out_path, seconds=10, fps=30, audio=False):
+    """Pipe frames straight into ffmpeg. frame_fn(theta) -> PIL image.
+    audio=True adds a silent stereo AAC track, which Instagram handles more predictably."""
     global DURATION
     DURATION = float(seconds)
     n = seconds * fps
     cmd = [ffmpeg_bin(), "-y", "-loglevel", "error",
-           "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(fps), "-i", "-",
-           "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "20", "-preset", "medium",
-           "-movflags", "+faststart", str(out_path)]
+           "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(fps), "-i", "-"]
+    if audio:
+        cmd += ["-f", "lavfi", "-i", "anullsrc=r=44100:cl=stereo", "-c:a", "aac", "-b:a", "128k", "-shortest"]
+    cmd += ["-c:v", "libx264", "-profile:v", "high", "-pix_fmt", "yuv420p", "-crf", "18" if audio else "20", "-preset", "medium",
+            "-movflags", "+faststart", str(out_path)]
     proc = subprocess.Popen(cmd, stdin=subprocess.PIPE)
     for i in range(n):
         proc.stdin.write(frame_fn(2 * math.pi * i / n).tobytes())
@@ -527,6 +662,10 @@ def main():
     out.mkdir(parents=True, exist_ok=True)
 
     data = json.loads(data_p.read_text())
+    if "--story-set" in args:
+        day = int(args[args.index("--day") + 1]) if "--day" in args else 1
+        story_set(data, day, out if "--out" in args else ROOT / "out" / "stories" / "instagram")
+        return
     for a in data["albums"]:
         if not a.get("no") or not a.get("art"):
             continue

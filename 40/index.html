@@ -626,7 +626,7 @@
       const head = a.secret
         ? `<span class="entry__no">Secret album</span><span>You found it.</span>`
         : a.bonus
-        ? `<span class="entry__no">Bonus album</span><span>A reward for your ${EGG ? '<button class="egg" id="js-egg" type="button" aria-haspopup="dialog">curiosity</button>' : 'curiosity'}.</span>`
+        ? `<span class="entry__no">Bonus album</span><span>A reward for your <button class="egg" id="js-egg" type="button"${EGG ? ' aria-haspopup="dialog"' : ' aria-pressed="false"'}>curiosity</button>.</span>`
         : `<span class="entry__no"><a href="#${pad(a.no)}">Day ${pad(a.no)}</a></span><span>${fmtDate(a.date)}</span>`;
       return `<article class="entry" id="${a.secret ? 'secret' : a.bonus ? 'bonus' : pad(a.no)}">
         <div class="entry__head mono">${head}</div>
@@ -1165,12 +1165,24 @@
       scrollTo({ top: 0, behavior: REDUCED ? 'auto' : 'smooth' });
     });
 
-    // ── The secret album. Armed only when a record flagged `secret` is out (live by hand, or ?preview).
+    // ── The secret album. Armed only when a record flagged `secret` is out (live by hand, or ?preview);
+    //    until then "curiosity" just flips the page negative, and back.
     let EGG = null;
     function setupEgg(rec) {
       const egg = document.getElementById('js-egg'), bonus = document.getElementById('bonus');
       if (!egg) return;
       const root = document.documentElement;
+      if (!rec) {
+        const neg = on => root.classList.toggle('is-negative', on), later = (ms, fn) => setTimeout(fn, ms);
+        let on = false;
+        egg.addEventListener('click', e => {
+          e.stopPropagation(); on = !on; egg.setAttribute('aria-pressed', String(on));
+          if (REDUCED) return neg(on);
+          root.classList.add('is-rattling'); later(520, () => root.classList.remove('is-rattling'));
+          neg(on); later(90, () => neg(!on)); later(170, () => neg(on)); later(300, () => neg(!on)); later(380, () => neg(on));
+        });
+        return hint();
+      }
       const box = document.createElement('div');
       box.className = 'secret'; box.id = 'js-secret'; box.hidden = true;
       box.setAttribute('role', 'dialog'); box.setAttribute('aria-modal', 'true'); box.setAttribute('aria-label', 'Secret album');
@@ -1224,7 +1236,10 @@
       box.addEventListener('click', e => { if (e.target === box) close(); });
       addEventListener('keydown', e => { if (e.key === 'Escape' && !box.hidden) close(); });
 
+      hint();
+
       // The hint: ten seconds on the bonus, then one lime sweep across the word, once a minute.
+      function hint() {
       if (REDUCED || !bonus || !('IntersectionObserver' in window)) return;
       let first = 0, every = 0;
       const shimmer = () => { egg.classList.remove('is-shimmer'); void egg.offsetWidth; egg.classList.add('is-shimmer'); };
@@ -1233,6 +1248,7 @@
         clearTimeout(first); clearInterval(every);
         if (en.isIntersecting) first = setTimeout(() => { shimmer(); every = setInterval(shimmer, 60000); }, 10000);
       }, { threshold: .4 }).observe(bonus);
+      }
     }
 
     fetch(DATA + '?v=' + Date.now())
@@ -1293,7 +1309,7 @@
         const bonusEl = document.getElementById('js-tail-bonus'), bonusRec = albums.find(a => a.bonus);
         EGG = albums.find(a => a.secret && isOut(a)) || null;
         if (bonusEl && bonusRec) bonusEl.innerHTML = entry(Object.assign({ no: 0 }, bonusRec));
-        if (EGG) setupEgg(EGG);
+        setupEgg(EGG);   // no secret out yet: the word still flips the page
 
         const feed = document.getElementById('js-feed');
         if (!live.length) {

@@ -349,7 +349,7 @@ def variant_b(a, art, theta=None, riff="field"):
     scratch = ImageDraw.Draw(Image.new("RGB", (1, 1)))
     y_after = header(scratch, a, TOP + 60)
     cy = max(y_after + 36, 580)
-    c.paste(cover, (CX, cy), rounded(cover, 5))   # ≈2px at phone size, like the site
+    c.paste(cover, (CX, cy), rounded(cover, round(.028 * cover.width)))   # 2.8% of the width, like the site and the baked wear
 
     animate = "resolve" in riff
     pieces = [
@@ -470,7 +470,7 @@ def grid_card(albums, through=0, headline="", eyebrow="ONE A DAY · IN NO PARTIC
         a = by_no.get(i + 1)
         if a and i + 1 <= through:
             art = Image.open(ROOT / (a.get("art_worn") or a["art"])).convert("RGB")
-            t = square(art, cell); c.paste(t, (x, y), rounded(t, 4))
+            t = square(art, cell); c.paste(t, (x, y), rounded(t, max(4, round(.028 * t.width))))
         else:
             d.rectangle([x, y, x + cell - 1, y + cell - 1], outline=RULE, width=2)
             d.text((x + 12, y + 8), f"{i + 1:02d}", font=mono(20), fill=FAINT)

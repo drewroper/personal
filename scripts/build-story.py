@@ -527,13 +527,13 @@ def story_404040(theta):
 
 
 WHY = [   # the canvas's "Intro 2 — Why (option B)", as of Sep 23: lime Porca headline over four paragraphs
-    ("h1", "I turn 40 on November 1st."),
-    ("body", "Every day until my birthday, I’ll share one album that shaped me. You didn’t ask for this, so feel free to mute me, or better yet, yell at me about my album picks."),
+    ("h1", "I turn 40 in 40 days."),
+    ("body", "Every day until my birthday, I’ll share one album that shaped me. You didn’t ask for this, so feel free to mute me, or better yet, yell at me about my selections.", 883),
     ("body", "These aren’t my 40 favorite albums. I couldn’t pick those if my life depended on it. Plenty of these would make that list, and every one is in my top 100, but this list is about more than favorites."),
     ("body", "These albums are special to me in other ways: I can still remember the first time I heard each of these, or what I was doing when I played them the most. Some of them introduced me to a new genre, some had me digging through the band’s back catalog, some just weirdly fit my life at that stage."),
     ("body", "40 albums, 40 days, for 40 years."),
 ]
-WHY_H1 = 112   # px; at 96 "1st." fell to its own line
+WHY_H1 = 108   # px, with balanced wrapping (text-wrap: balance on the canvas)
 PORTRAIT_OPACITY = 0.15
 PORTRAIT_STEPS = (14, 27, 54, 108)   # the portrait resolves coarse → fine; 108 cells across is the canvas's grid
 
@@ -543,17 +543,22 @@ def _why_paragraphs():
     a list of (draw_fn) per paragraph, plus the bottom y."""
     body, bold, big = sans(40), sans_md(40), display(WHY_H1)
     out, y = [], 254
-    for kind, content in WHY:
+    for kind, content, *width in WHY:
+        colw = width[0] if width else COL
         if kind == "h1":                                             # Porca, 1px tracking, lime
             lh = WHY_H1 * 1.02
             tw = lambda t: big.getlength(t) + len(t)
             lines, cur = [], ""
             for w in content.split():
-                if cur and tw(cur + " " + w) > COL:
+                if cur and tw(cur + " " + w) > colw:
                     lines.append(cur); cur = w
                 else:
                     cur = (cur + " " + w).strip()
             lines.append(cur)
+            if len(lines) == 2:                                        # balance: the split with the shortest longer line
+                ws = content.split()
+                lines = min(([" ".join(ws[:k]), " ".join(ws[k:])] for k in range(1, len(ws))),
+                            key=lambda ls: max(tw(l) if tw(l) <= colw else 1e9 for l in ls))
             ys = [_baseline(big, y + i * lh, lh) for i in range(len(lines))]
             def draw(d, lines=lines, ys=ys):
                 for ln, yy in zip(lines, ys):
@@ -568,7 +573,7 @@ def _why_paragraphs():
             lines, cur, cw = [], [], 0.0
             for w, b in toks:
                 fw = (bold if b else body).getlength(w)
-                if cur and cw + (bold if b else body).getlength(w.rstrip()) > COL:
+                if cur and cw + (bold if b else body).getlength(w.rstrip()) > colw:
                     lines.append(cur); cur, cw = [], 0.0
                 cur.append((w, b)); cw += fw
             if cur:

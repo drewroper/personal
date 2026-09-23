@@ -427,7 +427,7 @@ def highlight_cover(theta=None):
     d.text((x, cy - off), "40", font=f, fill=LIGHT)
     d.text((x, cy + off), "40", font=f, fill=LIGHT)
     d.text((x, cy), "40", font=f, fill=ACCENT)
-    line = "Forty albums that shaped me, one a day, before I turn forty."
+    line = "40 albums that shaped me, one a day, before I turn 40."
     lf = sans(34)
     layer = _text_layer(lambda dd: dd.text(((W - lf.getlength(line)) / 2, BOT - 40), line, font=lf, fill=MUTED))
     layer = dissolve(layer, p_text)
@@ -446,8 +446,8 @@ def intro_1():
     for ln, col in (("40 albums,", LIGHT), ("40 days,", ACCENT), ("40 years.", LIGHT)):
         d.text((PAD - 4, y), ln, font=f, fill=col); y += 116
     y += 30
-    d.text((PAD, y), "Counting down forty albums that shaped me,", font=sans(34), fill=MUTED)
-    d.text((PAD, y + 46), "one a day, before I turn forty.", font=sans(34), fill=MUTED)
+    d.text((PAD, y), "Counting down 40 albums that shaped me,", font=sans(34), fill=MUTED)
+    d.text((PAD, y + 46), "one a day, before I turn 40.", font=sans(34), fill=MUTED)
     url(d, BOT - 30)
     return c
 
@@ -483,7 +483,7 @@ def intro_2(albums):
 
 
 def closing(albums):
-    return grid_card(albums, 40, "That's forty.", "SEP 23 → NOV 1 · ALL FORTY")
+    return grid_card(albums, 40, "That's 40.", "SEP 23 → NOV 1 · ALL 40")
 
 
 # ── video ────────────────────────────────────────────────────────────────

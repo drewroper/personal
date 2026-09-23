@@ -386,7 +386,11 @@
       /* Two equal halves with the divider on the centre line of the screen. The title is sized from
          the half it sits in (its widest line, "40 albums,", runs 3.97em), capped by the screen height. */
       .about { container-type: inline-size; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 0; align-content: safe center; align-items: start; padding-bottom: 48px; }   /* safe: a long blurb scrolls instead of sliding under the bar */
-      .about__lead { padding-right: 56px; }
+      .about__lead { padding-right: 56px; display: flex; flex-direction: column; }
+      /* The dates become the eyebrow over the title; the disclaimer tucks under the line it qualifies. */
+      .about__lead .about__meta { display: contents; }
+      .about__lead .about__facts { order: -1; margin: 0 0 22px; }
+      .about__lead .about__quiet { margin-top: 10px; font-size: 15px; }
       .about__title { font-size: min(170px, 18vh, calc((50cqw - 56px) / 4.02)); font-size: min(170px, 18dvh, calc((50cqw - 56px) / 4.02)); }
       .about__body { font-size: 18px; max-width: none; margin-top: 30px; }
       .about__meta { max-width: none; }

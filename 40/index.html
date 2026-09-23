@@ -157,7 +157,6 @@
     .about__facts { margin: 0; color: var(--accent); letter-spacing: .08em; text-transform: uppercase; font-family: var(--font-mono); font-size: var(--mono-size); white-space: nowrap; }
     /* Index: the 40 days, as big as the screen allows — 5 across on a phone (8 rows), 8 across from 720px. */
     .index__meta { display: flex; justify-content: space-between; gap: 16px; margin: 0 0 14px; color: var(--text-faint); }
-    .index__meta b { font-weight: 400; color: var(--accent); }
     .index .grid40 { grid-template-columns: repeat(5, 1fr); gap: 8px; width: 100%; max-width: none; }   /* phone: gutter to gutter; the panel scrolls if the screen is short */
     .index .grid40 span { font-size: 11px; }
     @media (max-height: 620px) {
@@ -437,7 +436,7 @@
         <div class="about__project" id="js-about-project" style="--i:5" hidden></div>
       </section>
       <section class="index" id="js-index" aria-label="Index" hidden>
-        <p class="index__meta mono" style="--i:0"><span>Day 01 → 40</span><span id="js-index-count"></span></p>
+        <p class="index__meta mono" style="--i:0"><span>Day 01 → 40</span></p>
         <nav class="grid40" id="js-grid" aria-label="Every day of the countdown" style="--i:1"></nav>
       </section>
     </header>
@@ -1028,8 +1027,6 @@
           if (a && isOut(a)) return `<a href="#${pad(a.no)}" title="Day ${pad(a.no)} · ${esc(a.artist)} — ${esc(a.title)}"><img src="../${esc((WORN && a.art_worn) ? a.art_worn + wv(a) : a.art || '')}" alt="" loading="lazy"></a>`;
           return `<span aria-hidden="true">${pad(i + 1)}</span>`;
         }).join('');
-        const out = slotted.filter(isOut).length;
-        document.getElementById('js-index-count').innerHTML = `<b>${out}</b> of ${meta.total} so far`;
         const last = document.querySelector('#js-grid a:nth-child(40)');
         if (BIRTHDAY && last && !REDUCED && 'IntersectionObserver' in window) {
           new IntersectionObserver((es, io) => { if (es[0].isIntersecting) { io.disconnect(); setTimeout(() => arrive(last), 500); } }, { threshold: .6 }).observe(last);

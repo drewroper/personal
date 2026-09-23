@@ -391,8 +391,7 @@
               background: rgba(12,12,13,.5); }
     .secret[hidden] { display: none; }
     .secret__panel { position: relative; width: 100%; max-width: 1200px; background: var(--bg); border: 1px solid var(--accent); border-radius: 14px;
-                     padding: 20px 20px 32px; filter: invert(1);   /* the page is negative; the record stays true */
-                     transform: rotate(var(--tilt, 0deg)); transition: transform .5s cubic-bezier(.2,1.6,.4,1); }
+                     padding: 20px 20px 32px; filter: invert(1); }   /* the page is negative; the record stays true */
     .secret__close { position: absolute; top: 14px; right: 14px; z-index: 2; font: inherit; font-family: var(--font-mono); font-size: var(--mono-size);
                      letter-spacing: .08em; text-transform: uppercase; color: var(--accent); background: none; border: 1px solid var(--accent);
                      border-radius: 999px; padding: 4px 11px; cursor: pointer; }
@@ -1181,7 +1180,7 @@
       const panel = box.firstElementChild;
       const later = (ms, fn) => setTimeout(fn, ms);
       const neg = on => root.classList.toggle('is-negative', on);
-      // The panel drops in through the same Bayer dots as the masthead, tilted, then snaps level.
+      // The panel dithers in through the same Bayer dots as the masthead, square to the page.
       const ditherPanel = (dir, done) => {
         const B = BAYER8, cell = 4, steps = 7, tile = document.createElement('canvas'); tile.width = tile.height = 8 * cell;
         const tc = tile.getContext('2d');
@@ -1208,9 +1207,8 @@
         neg(true); later(90, () => neg(false)); later(170, () => neg(true)); later(300, () => neg(false)); later(380, () => neg(true));
         later(520, () => root.classList.remove('is-rattling'));
         later(400, () => {
-          panel.style.setProperty('--tilt', `${(Math.random() < .5 ? -1 : 1) * (4 + Math.random() * 5)}deg`);
           box.hidden = false;
-          ditherPanel(1, () => { panel.style.setProperty('--tilt', '0deg'); box.querySelector('.secret__close').focus({ preventScroll: true }); });
+          ditherPanel(1, () => box.querySelector('.secret__close').focus({ preventScroll: true }));
         });
       };
       const close = () => {
@@ -1219,7 +1217,6 @@
                             const pl = box.querySelector('.pv.is-playing .pv__play'); if (pl) pl.click();   // stop its preview on the way out
                             if (opener && opener.focus) opener.focus({ preventScroll: true }); };
         if (REDUCED) return end();
-        panel.style.setProperty('--tilt', `${(Math.random() < .5 ? -1 : 1) * 6}deg`);
         ditherPanel(-1, () => { neg(false); later(80, () => neg(true)); later(160, end); });
       };
       egg.addEventListener('click', e => { e.stopPropagation(); open(); });

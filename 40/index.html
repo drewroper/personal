@@ -599,6 +599,39 @@
     const setVW = () => document.documentElement.style.setProperty('--vw', document.documentElement.clientWidth + 'px');
     setVW(); addEventListener('resize', setVW);
 
+    // The big 404040 dithers in on load: an 8×8 Bayer mask over the real text, its threshold
+    // stepping up until every cell is on, then the mask comes off and the type is just type.
+    (function ditherIn() {
+      const wm = document.querySelector('.wordmark--top');
+      if (!wm || REDUCED || !wm.style) return;
+      const B = [0,32,8,40,2,34,10,42,48,16,56,24,50,18,58,26,12,44,4,36,14,46,6,38,60,28,52,20,62,30,54,22,
+                 3,35,11,43,1,33,9,41,51,19,59,27,49,17,57,25,15,47,7,39,13,45,5,37,63,31,55,23,61,29,53,21];
+      const set = v => { wm.style.maskImage = v; wm.style.webkitMaskImage = v; };
+      const fs = parseFloat(getComputedStyle(wm).fontSize) || 100;
+      const cell = Math.max(3, Math.round(fs / 40)), STEPS = 16, DUR = 1000;
+      const tile = document.createElement('canvas'); tile.width = tile.height = 8 * cell;   // drawn full size: a scaled mask would blur
+      const tc = tile.getContext('2d');
+      const frames = Array.from({ length: STEPS + 1 }, (_, k) => {
+        tc.clearRect(0, 0, 8 * cell, 8 * cell); tc.fillStyle = '#000';
+        for (let i = 0; i < 64; i++) if (B[i] < (k / STEPS) * 64) tc.fillRect((i & 7) * cell, (i >> 3) * cell, cell, cell);
+        return `url(${tile.toDataURL()})`;
+      });
+      wm.style.maskSize = wm.style.webkitMaskSize = `${cell * 8}px ${cell * 8}px`;
+      wm.style.maskRepeat = wm.style.webkitMaskRepeat = 'repeat';
+      set(frames[0]);
+      const go = () => {
+        const t0 = performance.now();
+        const step = now => {
+          const k = Math.min(STEPS, Math.floor((now - t0) / DUR * STEPS));
+          if (k >= STEPS) { set(''); wm.style.maskSize = wm.style.webkitMaskSize = ''; return; }
+          set(frames[k]); requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      };
+      const ready = document.fonts && document.fonts.load ? document.fonts.load('400 100px Porca') : Promise.resolve();
+      ready.then(() => setTimeout(go, 120), () => setTimeout(go, 120));
+    })();
+
     // ── The tail. Scroll is the engine. 404040 stays pinned at the top; as it rises
     //    into view an extrusion dithers in beneath it, fully there by the time the
     //    wordmark reaches the top. One real screen of runway, then every wheel tick or

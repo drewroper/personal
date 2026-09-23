@@ -92,16 +92,13 @@
     .bar.is-scrolled .bar__name { opacity: 1; transform: none; pointer-events: auto; }
     @media (prefers-reduced-motion: reduce) { .bar__name { transition: none; } }
     /* Once it's there, the small 404040 takes you back to the top. */
-    a.bar__name { position: relative; border: 0; -webkit-tap-highlight-color: transparent; }
-    .bar__tip {
-      position: absolute; top: calc(100% + 13px); left: 50%; transform: translate(-50%, -3px);
-      font-family: var(--font-mono); font-size: var(--mono-size); letter-spacing: .08em; text-transform: uppercase; line-height: 1;
-      color: var(--text-muted); background: rgba(12,12,13,.92); border: 1px solid var(--rule); border-radius: 999px; padding: 5px 10px;
-      opacity: 0; pointer-events: none; transition: opacity .15s ease, transform .2s ease;
-    }
+    a.bar__name { display: grid; justify-items: center; border: 0; text-transform: none; -webkit-tap-highlight-color: transparent; }
+    .bar__word, .bar__back { grid-area: 1 / 1; }
+    .bar__back { visibility: hidden; letter-spacing: .04em; word-spacing: .1em; }   /* words get normal tracking; 404040 keeps its tight -.06em */
     @media (hover: hover) {
       a.bar__name:hover { color: var(--accent); }
-      a.bar__name:hover .bar__tip { opacity: 1; transform: translate(-50%, 0); }
+      a.bar__name:hover .bar__word { visibility: hidden; }
+      a.bar__name:hover .bar__back { visibility: visible; }
     }
     /* The wordmark: 404040 edge to edge, top of the page and bottom. Porca's
        ink sits .214em below a 1em line box's top and .237em above its bottom,
@@ -115,6 +112,12 @@
     }
     .wordmark > span { display: block; margin-top: -.214em; }
     .wordmark--top  { margin-top: 24px; margin-bottom: 20px; }
+    /* Tap a letter and it dithers to lime; tap again and it goes back. */
+    .wordmark__l { font-style: normal; position: relative; display: inline-block; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+    .wordmark__l.is-lime:not(.is-fading) { color: var(--accent); }
+    .wordmark__l::after { content: attr(data-c); position: absolute; inset: 0; color: var(--accent); pointer-events: none;
+                          -webkit-mask-image: var(--m, none); mask-image: var(--m, none); -webkit-mask-size: var(--ms); mask-size: var(--ms); visibility: hidden; }
+    .wordmark__l.is-fading::after { visibility: visible; }
     .bar__nav { justify-self: end; display: flex; align-items: center; gap: 6px; }
     /* Index: a small grid glyph beside About; opens every day of the countdown as a dropdown. */
     .bar__index {
@@ -424,7 +427,7 @@
           <path fill="currentColor" fill-rule="evenodd" d="M40.508 0H0v8.395h40.508c12.207 0 21.77 9.05 21.77 20.603 0 10.936-8.564 19.63-19.877 20.53l-6.288-7.554h4.116l.114.001c7.132 0 12.935-5.821 12.935-12.976 0-7.154-5.803-12.972-12.935-12.972H0v8.395h9.284v25.184H0V58h25.53v-8.395h-7.736v-7.631h7.307l12.064 14.492L38.496 58h2.012c16.979 0 30.28-12.739 30.28-29.002C70.788 12.737 57.487 0 40.508 0Zm-22.714 24.421h22.55c2.397 0 4.424 2.096 4.424 4.577 0 2.483-2.027 4.581-4.424 4.581h-.115H17.794v-9.158Z"/>
         </svg>
       </a>
-      <a class="bar__name" id="js-top" href="#" aria-label="404040, back to top">404040<span class="bar__tip" aria-hidden="true">Back to top</span></a>
+      <a class="bar__name" id="js-top" href="#" aria-label="404040, back to top"><span class="bar__word">404040</span><span class="bar__back" aria-hidden="true">BACK TO TOP</span></a>
       <div class="bar__nav">
         <button class="bar__index" id="js-index-btn" type="button" aria-expanded="false" aria-controls="js-index" aria-label="Index: every day of the countdown">
           <svg class="i-grid" width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><rect x=".5" y=".5" width="5" height="5" rx=".8"/><rect x="7.5" y=".5" width="5" height="5" rx=".8"/><rect x=".5" y="7.5" width="5" height="5" rx=".8"/><rect x="7.5" y="7.5" width="5" height="5" rx=".8"/></svg>
@@ -614,11 +617,12 @@
 
     // The big 404040 dithers in on load: an 8×8 Bayer mask over the real text, its threshold
     // stepping up until every cell is on, then the mask comes off and the type is just type.
+    const BAYER8 = [0,32,8,40,2,34,10,42,48,16,56,24,50,18,58,26,12,44,4,36,14,46,6,38,60,28,52,20,62,30,54,22,
+                    3,35,11,43,1,33,9,41,51,19,59,27,49,17,57,25,15,47,7,39,13,45,5,37,63,31,55,23,61,29,53,21];
     (function ditherIn() {
       const wm = document.querySelector('.wordmark--top');
       if (!wm || REDUCED || !wm.style) return;
-      const B = [0,32,8,40,2,34,10,42,48,16,56,24,50,18,58,26,12,44,4,36,14,46,6,38,60,28,52,20,62,30,54,22,
-                 3,35,11,43,1,33,9,41,51,19,59,27,49,17,57,25,15,47,7,39,13,45,5,37,63,31,55,23,61,29,53,21];
+      const B = BAYER8;
       const set = v => { wm.style.maskImage = v; wm.style.webkitMaskImage = v; };
       const cell = 2, STEPS = 12, DUR = 480;                                          // 2px dots, finer than the footer; about half a second
       const tile = document.createElement('canvas'); tile.width = tile.height = 8 * cell;   // drawn full size: a scaled mask would blur
@@ -642,6 +646,40 @@
       };
       const ready = document.fonts && document.fonts.load ? document.fonts.load('400 100px Porca') : Promise.resolve();
       ready.then(() => setTimeout(go, 120), () => setTimeout(go, 120));
+    })();
+
+    // Tap the letters of the big 404040 and they turn lime, one at a time, until the whole
+    // thing is lime. Each one dithers over in the same 2px Bayer dots; tap again to undo.
+    (function limeLetters() {
+      const wm = document.querySelector('.wordmark--top'), word = wm && wm.querySelector('span');
+      if (!word || params.has('birthday')) return;                                  // birthday mode: the tap plays the tune
+      word.innerHTML = [...word.textContent].map(c => `<i class="wordmark__l" data-c="${c}">${c}</i>`).join('');
+      const CELL = 2, STEPS = 8, DUR = 260;
+      const tile = document.createElement('canvas'); tile.width = tile.height = 8 * CELL;
+      const tc = tile.getContext('2d');
+      const frames = Array.from({ length: STEPS + 1 }, (_, k) => {
+        tc.clearRect(0, 0, 8 * CELL, 8 * CELL); tc.fillStyle = '#000';
+        for (let i = 0; i < 64; i++) if (BAYER8[i] < (k / STEPS) * 64) tc.fillRect((i & 7) * CELL, (i >> 3) * CELL, CELL, CELL);
+        return `url(${tile.toDataURL()})`;
+      });
+      wm.style.setProperty('--ms', `${8 * CELL}px ${8 * CELL}px`);
+      const show = (el, k) => el.style.setProperty('--m', k >= STEPS ? 'none' : frames[k]);
+      wm.addEventListener('click', e => {
+        const el = e.target.closest('.wordmark__l'); if (!el) return;
+        const on = !el.classList.contains('is-lime');
+        el.classList.toggle('is-lime', on);
+        if (REDUCED) { show(el, STEPS); return; }
+        el.classList.add('is-fading');
+        const t0 = performance.now(), run = el._run = (el._run || 0) + 1;
+        const step = now => {
+          if (el._run !== run) return;                                  // a quicker second tap takes over
+          const k = Math.min(STEPS, Math.floor((now - t0) / DUR * STEPS));
+          show(el, on ? k : STEPS - k);
+          if (k < STEPS) requestAnimationFrame(step);
+          else { el.classList.remove('is-fading'); if (!on) show(el, 0); }
+        };
+        requestAnimationFrame(step);
+      });
     })();
 
     // ── The tail. Scroll is the engine. 404040 stays pinned at the top; as it rises

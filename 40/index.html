@@ -326,6 +326,7 @@
     .foot__links { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 0; padding: 0; list-style: none; }
     .foot__links a { color: var(--text-muted); border-bottom-color: transparent; }
     .foot__links a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+    .foot__count span { color: var(--text-muted); font-variant-numeric: tabular-nums; }
     /* ── Birthday mode: Nov 1, or ?birthday to preview. ───────────────── */
     .confetti { position: fixed; inset: 0; z-index: 30; pointer-events: none; image-rendering: pixelated; }
     .is-birthday .wordmark { cursor: pointer; user-select: none; }
@@ -509,6 +510,7 @@
         <li><a href="/">← drewroper.com</a></li>
         <li><a href="https://claude.com/claude-code" target="_blank" rel="noopener">Made with Claude Code ↗</a></li>
         <li>Set in <a href="https://studio2am.co/products/porca-a-rounded-pixel-font" target="_blank" rel="noopener">Porca ↗</a> &amp; <a href="https://vercel.com/font" target="_blank" rel="noopener">Geist ↗</a></li>
+        <li class="foot__count" id="js-count" hidden>Visits <span></span></li>
       </ul>
     </footer>
   </main>
@@ -1164,6 +1166,23 @@
       if (location.hash) history.replaceState(null, '', location.pathname + location.search);
       scrollTo({ top: 0, behavior: REDUCED ? 'auto' : 'smooth' });
     });
+
+    // Visitor counter in the colophon, old-web style: one hit per browser session (refreshes don't
+    // count, nor do ?preview / ?test), shown zero-padded. Abacus is a free, cookieless counter; if it's
+    // down the line just stays hidden.
+    (function visits() {
+      const el = document.getElementById('js-count'); if (!el || !window.fetch) return;
+      let seen = false; try { seen = sessionStorage.getItem('40:counted') === '1'; } catch (e) {}
+      const verb = preview || seen ? 'get' : 'hit';
+      fetch(`https://abacus.jasoncameron.dev/${verb}/drewroper.com/40-visits`)
+        .then(r => r.ok ? r.json() : Promise.reject(r.status))
+        .then(({ value }) => {
+          if (!Number.isFinite(value)) return;
+          if (verb === 'hit') try { sessionStorage.setItem('40:counted', '1'); } catch (e) {}
+          el.lastElementChild.textContent = String(value).padStart(6, '0'); el.hidden = false;
+        })
+        .catch(() => {});
+    })();
 
     // ── The secret album. Armed only when a record flagged `secret` is out (live by hand, or ?preview);
     //    until then "curiosity" just flips the page negative, and back.

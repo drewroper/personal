@@ -89,8 +89,20 @@
                  font-family: var(--font-display); font-size: 22px; line-height: 1; letter-spacing: -.06em; color: var(--text);
                  opacity: 0; transform: translateY(14px); pointer-events: none;
                  transition: opacity .35s ease, transform .45s cubic-bezier(.2,.7,.2,1); }
-    .bar.is-scrolled .bar__name { opacity: 1; transform: none; }
+    .bar.is-scrolled .bar__name { opacity: 1; transform: none; pointer-events: auto; }
     @media (prefers-reduced-motion: reduce) { .bar__name { transition: none; } }
+    /* Once it's there, the small 404040 takes you back to the top. */
+    a.bar__name { position: relative; border: 0; -webkit-tap-highlight-color: transparent; }
+    .bar__tip {
+      position: absolute; top: calc(100% + 13px); left: 50%; transform: translate(-50%, -3px);
+      font-family: var(--font-mono); font-size: var(--mono-size); letter-spacing: .08em; text-transform: uppercase; line-height: 1;
+      color: var(--text-muted); background: rgba(12,12,13,.92); border: 1px solid var(--rule); border-radius: 999px; padding: 5px 10px;
+      opacity: 0; pointer-events: none; transition: opacity .15s ease, transform .2s ease;
+    }
+    @media (hover: hover) {
+      a.bar__name:hover { color: var(--accent); }
+      a.bar__name:hover .bar__tip { opacity: 1; transform: translate(-50%, 0); }
+    }
     /* The wordmark: 404040 edge to edge, top of the page and bottom. Porca's
        ink sits .214em below a 1em line box's top and .237em above its bottom,
        so the box is clipped to the ink height and the glyphs shifted up —
@@ -319,6 +331,7 @@
     /* Past the footer wordmark the 404040 repeats, each copy more eroded by dither, until nothing is left. */
     /* ── The tail: scroll pulls a pixel extrusion out of 404040 and you travel down it. ── */
     .tail { position: relative; }
+    html:not(.is-ready) .tail { visibility: hidden; }   /* until the feed renders: on an empty page the tail would be all you see */
     .tail__stage { position: sticky; top: 0; height: 100vh; height: 100dvh; overflow: hidden; }
     .tail__cv { position: absolute; inset: 0; display: block; width: 100%; height: 100%; image-rendering: pixelated; image-rendering: crisp-edges; }
     .tail__col { position: relative; height: 100%; }
@@ -411,7 +424,7 @@
           <path fill="currentColor" fill-rule="evenodd" d="M40.508 0H0v8.395h40.508c12.207 0 21.77 9.05 21.77 20.603 0 10.936-8.564 19.63-19.877 20.53l-6.288-7.554h4.116l.114.001c7.132 0 12.935-5.821 12.935-12.976 0-7.154-5.803-12.972-12.935-12.972H0v8.395h9.284v25.184H0V58h25.53v-8.395h-7.736v-7.631h7.307l12.064 14.492L38.496 58h2.012c16.979 0 30.28-12.739 30.28-29.002C70.788 12.737 57.487 0 40.508 0Zm-22.714 24.421h22.55c2.397 0 4.424 2.096 4.424 4.577 0 2.483-2.027 4.581-4.424 4.581h-.115H17.794v-9.158Z"/>
         </svg>
       </a>
-      <span class="bar__name" aria-label="40 albums, 40 days, 40 years">404040</span>
+      <a class="bar__name" id="js-top" href="#" aria-label="404040, back to top">404040<span class="bar__tip" aria-hidden="true">Back to top</span></a>
       <div class="bar__nav">
         <button class="bar__index" id="js-index-btn" type="button" aria-expanded="false" aria-controls="js-index" aria-label="Index: every day of the countdown">
           <svg class="i-grid" width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><rect x=".5" y=".5" width="5" height="5" rx=".8"/><rect x="7.5" y=".5" width="5" height="5" rx=".8"/><rect x=".5" y="7.5" width="5" height="5" rx=".8"/><rect x="7.5" y="7.5" width="5" height="5" rx=".8"/></svg>
@@ -1010,6 +1023,27 @@
       if (img.complete && img.naturalWidth) go(); else img.addEventListener('load', go, { once: true });
     }
 
+    // Reloads: the page is empty until the data lands, so the browser's own scroll restore
+    // lands on the footer. Keep the spot ourselves and put it back once the feed is in;
+    // the footer stays hidden until then.
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    addEventListener('pagehide', () => { try { sessionStorage.setItem('40:y', String(scrollY)); } catch (e) {} });
+    const navType = (performance.getEntriesByType && (performance.getEntriesByType('navigation')[0] || {}).type) || '';
+    const ready = () => {
+      let y = 0;
+      try { if (navType === 'reload') y = parseFloat(sessionStorage.getItem('40:y')) || 0; } catch (e) {}
+      if (y > 0) scrollTo({ top: y, behavior: 'instant' });
+      else if (location.hash) { const el = document.getElementById(location.hash.slice(1)); if (el) el.scrollIntoView(); }
+      document.documentElement.classList.add('is-ready');
+    };
+
+    // The small 404040 in the bar: back to the top, and drop the #day so a refresh stays there.
+    document.getElementById('js-top').addEventListener('click', e => {
+      e.preventDefault();
+      if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+      scrollTo({ top: 0, behavior: REDUCED ? 'auto' : 'smooth' });
+    });
+
     fetch(DATA + '?v=' + Date.now())
       .then(r => r.json())
       .then(({ meta, albums }) => {
@@ -1073,18 +1107,17 @@
           const n = daysBetween(today, meta.start);
           feed.innerHTML = `<b>Day 01 drops ${fmtDate(meta.start)}.</b>` +
             (n > 0 ? ` ${n} day${n === 1 ? '' : 's'} out.` : '');
+          ready();
           return;
         }
         feed.className = '';
         // Newest on top, like a blog.
         feed.innerHTML = live.slice().reverse().map(entry).join('');
-        if (location.hash) {
-          const el = document.getElementById(location.hash.slice(1));
-          if (el) el.scrollIntoView();
-        }
+        ready();
       })
       .catch(err => {
         document.getElementById('js-feed').textContent = 'Could not load albums.json — ' + err.message;
+        ready();
       });
   })();
   </script>

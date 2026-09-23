@@ -2689,7 +2689,8 @@
       "art_back_src": "http://coverartarchive.org/release/063f311e-9c81-4616-a007-b76e3df910c9/26628543683.jpg",
       "date": "2026-10-01",
       "wear": {
-        "level": "high"
+        "level": "high",
+        "bends": 2
       },
       "art_worn": "assets/40/worn/run-the-jewels-run-the-jewels-2.jpg",
       "art_back_worn": "assets/40/worn/run-the-jewels-run-the-jewels-2-back.jpg"

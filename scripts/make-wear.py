@@ -636,28 +636,32 @@ def surface_layer(slug, year, face='', mean=.5, edgew=1.0, surfw=0.0, bendw=0.0)
             du = (xx - cx2) * math.cos(th) + (yy - cy2) * math.sin(th); dv = -(xx - cx2) * math.sin(th) + (yy - cy2) * math.cos(th)
             Pi = np.maximum(Pi, XU(.12, .3) * min(1.3, k) * np.exp(-(du / r1) ** 2 - (dv / r2) ** 2))
 
-    # 3c. wear.bends: the sleeve got bent — a crease across a corner or along an edge (the Incubus
-    #     top-right), its line cracked and the ink flaked in a band beside it where the ridge rubbed.
+    # 3c. wear.bends: the sleeve got bent — a thin, broken crease line where the paper cracked along the
+    #     fold (the Incubus top-right): along an edge a little way in, or across a corner. No rubbed band.
+    bends_pi = None
     if bendw > 0:
         br = seed(slug + (face or ':face') + ':bend'); BU = br.uniform
         bd = Image.new('L', (N, N), 0); dbd = ImageDraw.Draw(bd)
         spots = list(br.permutation(8))                            # each bend its own corner or side
         for i in range(int(round(bendw))):
             spot = int(spots[i % 8])
-            if spot < 4:                                           # a corner bent over, well into the face
+            if spot < 4:                                           # across a corner
                 px, py, sx_, sy_ = [(0, 0, 1, 1), (S - 1, 0, -1, 1), (0, S - 1, 1, -1), (S - 1, S - 1, -1, -1)][spot]
-                d1, d2 = S * BU(.14, .32), S * BU(.14, .32)
+                d1, d2 = S * BU(.1, .26), S * BU(.1, .26)
                 x0, y0, x1, y1 = px + sx_ * d1, py + sy_ * (inset(d1) + 1.5), px + sx_ * (inset(d2) + 1.5), py + sy_ * d2
-            else:                                                  # a bend running along an edge, a way in
-                side = spot - 4; off = S * BU(.06, .16); c = S * BU(.1, .55); L = S * BU(.25, .45)
-                x0, y0, x1, y1 = [(c, off, c + L, off + BU(-.04, .04) * L), (c, S - off, c + L, S - off + BU(-.04, .04) * L),
-                                  (off, c, off + BU(-.04, .04) * L, c + L), (S - off, c, S - off + BU(-.04, .04) * L, c + L)][side]
-            crack(dbd, br, x0, y0, math.atan2(y1 - y0, x1 - x0), math.hypot(x1 - x0, y1 - y0), BU(.85, 1.0), 3)
+            else:                                                  # along an edge, a little way in
+                side = spot - 4; off = S * BU(.018, .06); c = S * BU(.05, .6); L = S * BU(.15, .38)
+                x0, y0, x1, y1 = [(c, off, c + L, off + BU(-.03, .03) * L), (c, S - off, c + L, S - off + BU(-.03, .03) * L),
+                                  (off, c, off + BU(-.03, .03) * L, c + L), (S - off, c, S - off + BU(-.03, .03) * L, c + L)][side]
+            hd, ln = math.atan2(y1 - y0, x1 - x0), math.hypot(x1 - x0, y1 - y0)
+            crack(dbd, br, x0, y0, hd, ln, BU(.7, .95), 2)
+            if br.random() < .5:                                   # a fold often cracks twice, side by side
+                o = BU(3, 8) * (1 if br.random() < .5 else -1)
+                crack(dbd, br, x0 - math.sin(hd) * o, y0 + math.cos(hd) * o, hd + BU(-.03, .03), ln * BU(.35, .8), BU(.5, .8), 2)
         bimg = bd.resize((S, S), Image.BOX)
         cracks = np.maximum(cracks, np.asarray(bimg).astype(np.float32) / 255)
-        ridge = np.asarray(bimg.filter(ImageFilter.GaussianBlur(BU(6, 10)))).astype(np.float32) / 255
-        bends_pi = np.clip(ridge * 8, 0, 1) * BU(.75, .95)          # the flaked band along the fold, strong
-        Pi = np.maximum(Pi, bends_pi)
+        bends_pi = np.clip(np.asarray(bimg.filter(ImageFilter.GaussianBlur(.8))).astype(np.float32) / 255 * 2.2, 0, 1) * BU(.1, .2)
+        Pi = np.maximum(Pi, bends_pi)                              # just a trace of flaking right at the line
 
     # 4. On the oldest sleeves, a small tear at one edge, showing the card.
     tear = np.zeros((S, S), np.float32)
@@ -668,7 +672,7 @@ def surface_layer(slug, year, face='', mean=.5, edgew=1.0, surfw=0.0, bendw=0.0)
         shape = np.exp(-((u - pos) / wa) ** 4 - (v / dp) ** 2)
         tear = (shape - .35 * rng.random((S, S)) - .25 * noise1(rng, S, 6)[np.clip(u, 0, S - 1).astype(np.int32)] > .45).astype(np.float32)
 
-    lay = dict(bends_pi=(bends_pi if bendw > 0 else None), stri=stri, ticks=ticks, grime=grime, Pi=Pi, Pb=Pb, esoil=esoil, Drr=Drr,
+    lay = dict(bends_pi=bends_pi, stri=stri, ticks=ticks, grime=grime, Pi=Pi, Pb=Pb, esoil=esoil, Drr=Drr,
                profs=profs, gaps=gaps, dist=dist, alongidx=alongidx, jag=jag, corners=corners, crumbs=crumbs,
                cracks=cracks, scratches=scratches, tear=tear)
     _SURF.clear(); _SURF[key] = lay

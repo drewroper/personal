@@ -385,12 +385,12 @@
       .about[hidden], .index[hidden] { display: none; }
       /* Two equal halves with the divider on the centre line of the screen. The title is sized from
          the half it sits in (its widest line, "40 albums,", runs 3.97em), capped by the screen height. */
-      .about { container-type: inline-size; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 0; align-content: center; align-items: start; }
+      .about { container-type: inline-size; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 0; align-content: safe center; align-items: start; padding-bottom: 48px; }   /* safe: a long blurb scrolls instead of sliding under the bar */
       .about__lead { padding-right: 56px; }
       .about__title { font-size: min(170px, 18vh, calc((50cqw - 56px) / 4.02)); font-size: min(170px, 18dvh, calc((50cqw - 56px) / 4.02)); }
       .about__body { font-size: 18px; max-width: none; margin-top: 30px; }
       .about__meta { max-width: none; }
-      .about__project { align-self: start; margin: 0; padding: .35em 0 .35em 56px; border: 0; border-left: 1px solid var(--rule); font-size: 17px; max-width: calc(50ch + 56px); }
+      .about__project { align-self: start; margin: 0; padding: .35em 0 .35em 56px; border: 0; border-left: 1px solid var(--rule); font-size: 16px; line-height: 1.55; max-width: calc(54ch + 56px); }
       .index .grid40 { max-width: min(100%, 1200px, calc((100vh - 170px) * 1.6)); gap: 10px; margin: 0 auto; }
       .index__meta { width: 100%; max-width: min(100%, 1200px, calc((100vh - 170px) * 1.6)); margin: 0 auto 18px; }
       .grid40 span, .index .grid40 span { font-size: 12px; }

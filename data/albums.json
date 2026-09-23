@@ -471,7 +471,8 @@
         "spotify": "https://open.spotify.com/album/3Ej2Ae8nxp06thEoPhyaLJ"
       },
       "art_back": "assets/40/nelly-country-grammar-back.jpg",
-      "art_back_src": "http://coverartarchive.org/release/14a10238-fd83-485b-9aa2-72d54a8b0356/29350705744.jpg"
+      "art_back_src": "http://coverartarchive.org/release/14a10238-fd83-485b-9aa2-72d54a8b0356/29350705744.jpg",
+      "secret": true
     },
     {
       "no": null,

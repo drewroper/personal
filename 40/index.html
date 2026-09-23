@@ -362,6 +362,44 @@
     .entry__cover--empty { display: grid; place-items: center; font-family: var(--font-display); font-size: clamp(64px, 20vw, 120px); color: var(--text-faint); letter-spacing: -.04em; }
     @media (min-width: 1024px) { .tail__bonus .entry { padding: 48px 40px 56px; } }
     @media (prefers-reduced-motion: reduce) { .tail { height: 100vh; height: 100dvh; } }
+
+    /* ── The secret album. "Curiosity" in the bonus header is a button (help cursor, nowhere else);
+       it shimmers lime once a minute after ten seconds on the bonus. Clicking it flips the whole
+       page negative, rattles it, and a record drops in through the dither. ── */
+    .egg { font: inherit; letter-spacing: inherit; text-transform: inherit; color: inherit; background: none; border: 0; padding: 0; margin: 0;
+           cursor: help; -webkit-tap-highlight-color: transparent; }
+    .egg:hover, .egg:focus-visible { color: var(--accent); outline: none; }
+    .egg.is-shimmer { color: transparent; -webkit-background-clip: text; background-clip: text;
+                      background-image: linear-gradient(100deg, var(--text-faint) 0 38%, var(--accent) 50%, var(--text-faint) 62% 100%);
+                      background-size: 260% 100%; background-position: 100% 0; animation: egg-shimmer 1.3s cubic-bezier(.4,0,.2,1) 1; }
+    @keyframes egg-shimmer { to { background-position: 0 0; } }
+    html.is-negative { filter: invert(1); }
+    .is-rattling main { animation: rattle .5s steps(1, end) 1; }
+    @keyframes rattle {
+      0%   { transform: translate(0, 0) skewX(0); }
+      12%  { transform: translate(-14px, 6px) skewX(4deg); }
+      24%  { transform: translate(18px, -10px) skewX(-6deg); }
+      36%  { transform: translate(-6px, 14px) rotate(-1deg); }
+      48%  { transform: translate(22px, 2px) skewX(3deg); }
+      60%  { transform: translate(-20px, -6px) rotate(1.2deg); }
+      72%  { transform: translate(8px, 10px) skewX(-2deg); }
+      84%  { transform: translate(-4px, -4px); }
+      100% { transform: none; }
+    }
+    .secret { position: fixed; inset: 0; z-index: 200; overflow-y: auto; -webkit-overflow-scrolling: touch;
+              display: grid; justify-items: center; align-items: start; padding: 72px var(--gutter) calc(40px + var(--sab));
+              background: rgba(12,12,13,.5); }
+    .secret[hidden] { display: none; }
+    .secret__panel { position: relative; width: 100%; max-width: 1200px; background: var(--bg); border: 1px solid var(--accent); border-radius: 14px;
+                     padding: 20px 20px 32px; filter: invert(1);   /* the page is negative; the record stays true */
+                     transform: rotate(var(--tilt, 0deg)); transition: transform .5s cubic-bezier(.2,1.6,.4,1); }
+    .secret__close { position: absolute; top: 14px; right: 14px; z-index: 2; font: inherit; font-family: var(--font-mono); font-size: var(--mono-size);
+                     letter-spacing: .08em; text-transform: uppercase; color: var(--accent); background: none; border: 1px solid var(--accent);
+                     border-radius: 999px; padding: 4px 11px; cursor: pointer; }
+    .secret .entry { border: 0; margin: 0; padding: 0; }
+    .secret .entry__head { padding-right: 88px; }
+    @media (min-width: 1024px) { .secret__panel { padding: 40px 40px 56px; } }
+
     .grid40 > * { display: block; aspect-ratio: 1; border-radius: 4px; overflow: hidden; }
     .grid40 span { border: 1px solid var(--rule); display: grid; place-items: center; font: 400 9px/1 var(--font-mono); letter-spacing: .06em; color: var(--text-faint); opacity: .8; user-select: none; }
     .grid40 span.is-today { border-color: var(--accent); color: var(--accent); }
@@ -586,10 +624,12 @@
       const blurb = a.blurb && a.blurb.length
         ? a.blurb.map(p => `<p>${inline(p)}</p>`).join('')
         : `<p class="entry__blurb--empty">Blurb still cooking.</p>`;
-      const head = a.bonus
-        ? `<span class="entry__no">Bonus album</span><span>A reward for your curiosity.</span>`
+      const head = a.secret
+        ? `<span class="entry__no">Secret album</span><span>You found it.</span>`
+        : a.bonus
+        ? `<span class="entry__no">Bonus album</span><span>A reward for your ${EGG ? '<button class="egg" id="js-egg" type="button" aria-haspopup="dialog">curiosity</button>' : 'curiosity'}.</span>`
         : `<span class="entry__no"><a href="#${pad(a.no)}">Day ${pad(a.no)}</a></span><span>${fmtDate(a.date)}</span>`;
-      return `<article class="entry" id="${a.bonus ? 'bonus' : pad(a.no)}">
+      return `<article class="entry" id="${a.secret ? 'secret' : a.bonus ? 'bonus' : pad(a.no)}">
         <div class="entry__head mono">${head}</div>
         <div class="entry__grid">
           <button class="entry__cover-wrap" type="button" aria-label="Flip ${esc(a.title)} over" aria-pressed="false" style="display:block;width:100%;padding:0;border:0;background:none;text-align:left;">
@@ -1126,6 +1166,78 @@
       scrollTo({ top: 0, behavior: REDUCED ? 'auto' : 'smooth' });
     });
 
+    // ── The secret album. Armed only when a record flagged `secret` is out (live by hand, or ?preview).
+    let EGG = null;
+    function setupEgg(rec) {
+      const egg = document.getElementById('js-egg'), bonus = document.getElementById('bonus');
+      if (!egg) return;
+      const root = document.documentElement;
+      const box = document.createElement('div');
+      box.className = 'secret'; box.id = 'js-secret'; box.hidden = true;
+      box.setAttribute('role', 'dialog'); box.setAttribute('aria-modal', 'true'); box.setAttribute('aria-label', 'Secret album');
+      box.innerHTML = `<div class="secret__panel"><button class="secret__close" type="button">Close</button>${entry(rec)}</div>`;
+      document.body.appendChild(box);
+      box.querySelectorAll('img').forEach(i => { i.loading = 'eager'; });   // ready before anyone finds it
+      const panel = box.firstElementChild;
+      const later = (ms, fn) => setTimeout(fn, ms);
+      const neg = on => root.classList.toggle('is-negative', on);
+      // The panel drops in through the same Bayer dots as the masthead, tilted, then snaps level.
+      const ditherPanel = (dir, done) => {
+        const B = BAYER8, cell = 4, steps = 7, tile = document.createElement('canvas'); tile.width = tile.height = 8 * cell;
+        const tc = tile.getContext('2d');
+        let k = 0;
+        const frame = () => {
+          const lvl = dir > 0 ? k / steps : 1 - k / steps;
+          tc.clearRect(0, 0, 8 * cell, 8 * cell); tc.fillStyle = '#000';
+          for (let i = 0; i < 64; i++) if (B[i] < lvl * 64) tc.fillRect((i & 7) * cell, (i >> 3) * cell, cell, cell);
+          const u = lvl >= 1 ? '' : `url(${tile.toDataURL()})`;
+          panel.style.maskImage = panel.style.webkitMaskImage = u;
+          panel.style.maskSize = panel.style.webkitMaskSize = u ? `${8 * cell}px ${8 * cell}px` : '';
+          if (k++ < steps) later(34, frame); else done && done();
+        };
+        frame();
+      };
+      let opener = null;
+      const open = () => {
+        if (!box.hidden) return;
+        opener = document.activeElement;
+        document.body.style.overflow = 'hidden';
+        if (REDUCED) { neg(true); box.hidden = false; box.querySelector('.secret__close').focus(); return; }
+        // Two hard flips of the negative (well under three flashes a second), a rattle, then the record.
+        root.classList.add('is-rattling');
+        neg(true); later(90, () => neg(false)); later(170, () => neg(true)); later(300, () => neg(false)); later(380, () => neg(true));
+        later(520, () => root.classList.remove('is-rattling'));
+        later(400, () => {
+          panel.style.setProperty('--tilt', `${(Math.random() < .5 ? -1 : 1) * (4 + Math.random() * 5)}deg`);
+          box.hidden = false;
+          ditherPanel(1, () => { panel.style.setProperty('--tilt', '0deg'); box.querySelector('.secret__close').focus({ preventScroll: true }); });
+        });
+      };
+      const close = () => {
+        if (box.hidden) return;
+        const end = () => { box.hidden = true; neg(false); document.body.style.overflow = ''; panel.style.maskImage = panel.style.webkitMaskImage = '';
+                            const pl = box.querySelector('.pv.is-playing .pv__play'); if (pl) pl.click();   // stop its preview on the way out
+                            if (opener && opener.focus) opener.focus({ preventScroll: true }); };
+        if (REDUCED) return end();
+        panel.style.setProperty('--tilt', `${(Math.random() < .5 ? -1 : 1) * 6}deg`);
+        ditherPanel(-1, () => { neg(false); later(80, () => neg(true)); later(160, end); });
+      };
+      egg.addEventListener('click', e => { e.stopPropagation(); open(); });
+      box.querySelector('.secret__close').addEventListener('click', close);
+      box.addEventListener('click', e => { if (e.target === box) close(); });
+      addEventListener('keydown', e => { if (e.key === 'Escape' && !box.hidden) close(); });
+
+      // The hint: ten seconds on the bonus, then one lime sweep across the word, once a minute.
+      if (REDUCED || !bonus || !('IntersectionObserver' in window)) return;
+      let first = 0, every = 0;
+      const shimmer = () => { egg.classList.remove('is-shimmer'); void egg.offsetWidth; egg.classList.add('is-shimmer'); };
+      egg.addEventListener('animationend', () => egg.classList.remove('is-shimmer'));
+      new IntersectionObserver(([en]) => {
+        clearTimeout(first); clearInterval(every);
+        if (en.isIntersecting) first = setTimeout(() => { shimmer(); every = setInterval(shimmer, 60000); }, 10000);
+      }, { threshold: .4 }).observe(bonus);
+    }
+
     fetch(DATA + '?v=' + Date.now())
       .then(r => r.json())
       .then(({ meta, albums }) => {
@@ -1182,7 +1294,9 @@
 
         // The bonus record lives in the albums list flagged `bonus`, outside the countdown and the grid.
         const bonusEl = document.getElementById('js-tail-bonus'), bonusRec = albums.find(a => a.bonus);
+        EGG = albums.find(a => a.secret && isOut(a)) || null;
         if (bonusEl && bonusRec) bonusEl.innerHTML = entry(Object.assign({ no: 0 }, bonusRec));
+        if (EGG) setupEgg(EGG);
 
         const feed = document.getElementById('js-feed');
         if (!live.length) {

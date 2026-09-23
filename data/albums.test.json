@@ -2474,6 +2474,135 @@
       "art_worn": "assets/40/worn/the-kinks-lola-versus-powerman.jpg",
       "art_back_worn": "assets/40/worn/the-kinks-lola-versus-powerman-back.jpg",
       "worn_v": "d3ed814a"
+    },
+    {
+      "no": null,
+      "slug": "nelly-country-grammar",
+      "artist": "Nelly",
+      "title": "Country Grammar",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 1440782396,
+      "apple_url": "https://music.apple.com/us/album/country-grammar/1440782396",
+      "released": "2000-06-27",
+      "year": "2000",
+      "copyright": "℗ 2000 Universal Records, a Division of UMG Recordings, Inc.",
+      "genre": "Hip-Hop/Rap",
+      "track_count": 17,
+      "runtime_ms": 4000959,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Intro (feat. Cedric the Entertainer)",
+          "ms": 81293,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/7e/14/5f/7e145f72-7fc5-4841-0a2e-1f104162dad5/mzaf_14539472049054055024.plus.aac.p.m4a"
+        },
+        {
+          "n": 2,
+          "title": "St. Louie",
+          "ms": 267573,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/07/ff/df/07ffdfe9-9619-aa8c-eabf-5936f5f1c90c/mzaf_11731533319061127993.plus.aac.p.m4a"
+        },
+        {
+          "n": 3,
+          "title": "Greed, Hate, Envy",
+          "ms": 255093,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/40/8a/e9/408ae90c-f983-03d6-cd33-877f34059ad9/mzaf_1823479229897534443.plus.aac.p.m4a"
+        },
+        {
+          "n": 4,
+          "title": "Country Grammar (Hot...)",
+          "ms": 286933,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/a9/4c/83/a94c83fb-16bf-804c-69e4-dca3f72cb182/mzaf_16696129836718723633.plus.aac.p.m4a"
+        },
+        {
+          "n": 5,
+          "title": "Steal The Show (feat. St. Lunatics)",
+          "ms": 328000,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/1d/f5/2d/1df52dbf-3783-eaf2-23aa-e1f788f6c5fa/mzaf_9258821032155916458.plus.aac.p.m4a"
+        },
+        {
+          "n": 6,
+          "title": "Interlude (feat. Cedric the Entertainer)",
+          "ms": 34373,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ec/04/9a/ec049a1e-fa7d-96c3-0bdd-c2e011851f76/mzaf_1254944553596876801.plus.aac.p.m4a"
+        },
+        {
+          "n": 7,
+          "title": "Ride Wit Me (feat. City Spud)",
+          "ms": 290133,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/02/c8/a1/02c8a14d-fd24-2930-c1ac-a07cd2e5f617/mzaf_11716973966354009594.plus.aac.p.m4a"
+        },
+        {
+          "n": 8,
+          "title": "E.I.",
+          "ms": 284493,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/96/1f/cd/961fcdac-9261-458c-d20a-ad8563e685e3/mzaf_13105106383750649301.plus.aac.p.m4a"
+        },
+        {
+          "n": 9,
+          "title": "Thicky Thick Girl",
+          "ms": 274267,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/84/77/d3/8477d341-d70e-851f-c21c-8e41761538ee/mzaf_12198060546295834951.plus.aac.p.m4a"
+        },
+        {
+          "n": 10,
+          "title": "For My (feat. Lil Wayne)",
+          "ms": 248600,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/68/05/2a/68052a03-0e03-fe4c-1c31-4a2e899ca7ea/mzaf_11563152895232347241.plus.aac.p.m4a"
+        },
+        {
+          "n": 11,
+          "title": "Utha Side",
+          "ms": 273307,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ff/62/c1/ff62c1d0-d0af-8472-d17e-cecccc35451e/mzaf_7029315838230570567.plus.aac.p.m4a"
+        },
+        {
+          "n": 12,
+          "title": "Tho Dem Wrappas",
+          "ms": 248400,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/e2/7c/0f/e27c0f81-db5d-0d8a-8460-7e39fff40c30/mzaf_7735364271298605556.plus.aac.p.m4a"
+        },
+        {
+          "n": 13,
+          "title": "Wrap Sumden",
+          "ms": 255627,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/35/ab/e2/35abe2ff-87d7-9ef4-8c28-2bd25adad447/mzaf_17630237916992316983.plus.aac.p.m4a"
+        },
+        {
+          "n": 14,
+          "title": "Batter Up (feat. Murphy Lee & Ali)",
+          "ms": 327800,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/19/f8/04/19f80463-889a-d254-9dc0-79286dde811a/mzaf_16690803942545214259.plus.aac.p.m4a"
+        },
+        {
+          "n": 15,
+          "title": "Never Let 'Em C U Sweat",
+          "ms": 254107,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/df/c5/bb/dfc5bb8d-99a8-976e-0331-bd162af31fe7/mzaf_14121571250374895093.plus.aac.p.m4a"
+        },
+        {
+          "n": 16,
+          "title": "Luven Me",
+          "ms": 247000,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/5a/cf/41/5acf4112-9c02-eddb-52a0-e42b01686b14/mzaf_15446345705649206517.plus.aac.p.m4a"
+        },
+        {
+          "n": 17,
+          "title": "Outro (feat. Cedric the Entertainer)",
+          "ms": 43960,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/8c/dd/e5/8cdde574-03c2-f9b6-d801-b5d2ec4840d7/mzaf_16610096636224729739.plus.aac.p.m4a"
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/86/ea/41/86ea41d4-5d1f-b342-da08-dd43294d8fad/06UMGIM14203.rgb.jpg/1800x1800bb.jpg",
+      "label": "Universal Records, a Division of UMG Recordings, Inc",
+      "art": "assets/40/nelly-country-grammar.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/3Ej2Ae8nxp06thEoPhyaLJ"
+      },
+      "art_back": "assets/40/nelly-country-grammar-back.jpg",
+      "art_back_src": "http://coverartarchive.org/release/14a10238-fd83-485b-9aa2-72d54a8b0356/29350705744.jpg",
+      "secret": true
     }
   ]
 }

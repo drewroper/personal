@@ -333,7 +333,8 @@
     /* Docked: once you head back up from the bonus, the screen of chaos above it goes and the record
        rides on top of the footer, so the two leave together and the page is right there above them. */
     .tail.is-docked { min-height: 0; }
-    .tail.is-docked .tail__bonus { margin-top: -100vh; margin-top: -100dvh; }
+    .tail.is-docked .tail__bonus { margin-top: calc(-100vh + var(--dock-gap, 40px)); margin-top: calc(-100dvh + var(--dock-gap, 40px)); }   /* the tail shows above it too */
+    @media (min-width: 1024px) { .tail.is-docked .tail__bonus { --dock-gap: 72px; } }
     .tail__bonus .entry { border: 1px solid var(--rule); border-radius: 14px; padding: 24px 20px 32px; background: rgba(12,12,13,.78); backdrop-filter: blur(10px) saturate(120%); -webkit-backdrop-filter: blur(10px) saturate(120%); }
     .tail__bonus .entry__head { color: var(--text-faint); }
     .tail__bonus .entry__title { font-size: min(var(--display-size), 11vw); overflow-wrap: anywhere; }

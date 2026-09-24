@@ -253,6 +253,14 @@
     .entry__blurb { max-width: var(--measure); margin: 24px 0 0; color: var(--text); font-size: 17px; line-height: 1.6; font-weight: 300; }
     .entry__blurb p { margin: 0 0 1.1em; }
     .entry__blurb p:last-child { margin-bottom: 0; }
+    /* Links in the writing: lime, with a real underline tucked close under the letters (the site-wide
+       border-bottom sits under the whole line box, too far away in body copy). */
+    .entry__blurb a, .entry__found a, .about__project a {
+      color: var(--accent); border-bottom: 0;
+      text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .16em;
+      text-decoration-color: rgba(214, 255, 56, .45); transition: text-decoration-color .15s ease;
+    }
+    .entry__blurb a:hover, .entry__found a:hover, .about__project a:hover { color: var(--accent); text-decoration-color: var(--accent); }
     .entry__blurb em { font-style: italic; }
     .entry__blurb--empty { color: var(--text-faint); }
 

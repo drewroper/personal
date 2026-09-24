@@ -1270,12 +1270,13 @@
       "art_back": "assets/40/youth-lagoon-wondrous-bughouse-back.jpg",
       "art_back_src": "https://www.discogs.com/release/4333369 (US 2xLP, FP1293-1)",
       "wear": {
-        "level": "med",
-        "edge": 3
+        "level": "high",
+        "edge": 3.5,
+        "surface": 2.8
       },
       "art_worn": "assets/40/worn/youth-lagoon-wondrous-bughouse.jpg",
       "art_back_worn": "assets/40/worn/youth-lagoon-wondrous-bughouse-back.jpg",
-      "worn_v": "e1b2cdda"
+      "worn_v": "1b99e9c1"
     },
     {
       "slug": "youth-lagoon-the-year-of-hibernation",

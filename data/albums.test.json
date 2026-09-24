@@ -1272,11 +1272,13 @@
       "wear": {
         "level": "high",
         "edge": 3.5,
-        "surface": 2.8
+        "surface": 2.8,
+        "fold": 1.2,
+        "fold_at": "tr"
       },
       "art_worn": "assets/40/worn/youth-lagoon-wondrous-bughouse.jpg",
       "art_back_worn": "assets/40/worn/youth-lagoon-wondrous-bughouse-back.jpg",
-      "worn_v": "1b99e9c1"
+      "worn_v": "93cf07ad"
     },
     {
       "slug": "youth-lagoon-the-year-of-hibernation",

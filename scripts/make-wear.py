@@ -812,6 +812,45 @@ def bake(cov, mask, k, slug, age):
     return Image.fromarray((np.clip(out, 0, 1) * 255 + .5).astype(np.uint8))
 
 
+def fold(img, slug, face, at, strength=1.0):
+    """wear.fold: the sleeve got folded over at a corner and pressed flat again, a dog-ear. Where the art
+    is too busy for a crack alone to read (Wondrous Bughouse), the fold is lit like a scan of one: a thin
+    broken white line where the ink split, a soft shadow on the inner side, and the flap sits a touch
+    lighter where it no longer lies flat. The back gets the same fold, mirrored (it is the same card)."""
+    rng = seed(slug + face + ':fold'); U = rng.uniform
+    out = np.asarray(img).astype(np.float32) / 255
+    n = out.shape[0]; k = n / 1200
+    corners = {'tl': (0, 0, 1, 1), 'tr': (n, 0, -1, 1), 'bl': (0, n, 1, -1), 'br': (n, n, -1, -1)}
+    cx, cy, sx, sy = corners[at]
+    d1, d2 = n * U(.15, .23), n * U(.15, .23)
+    x1, y1, x2, y2 = cx + sx * d1, cy - sy * 4 * k, cx - sx * 4 * k, cy + sy * d2   # a hair past both edges
+    L = math.hypot(x2 - x1, y2 - y1); ux, uy = (x2 - x1) / L, (y2 - y1) / L
+    nx, ny = -uy, ux
+    if nx * (cx - x1) + ny * (cy - y1) < 0: nx, ny = -nx, -ny     # normal points into the flap (the corner)
+    yy, xx = np.mgrid[0:n, 0:n].astype(np.float32)
+    sd = (xx - x1) * nx + (yy - y1) * ny                          # signed distance, + on the flap
+    t = np.clip(((xx - x1) * ux + (yy - y1) * uy) / L, 0, 1)
+    # 1D noise along the fold: where the ink cracked through and where it held
+    m = 64; base = rng.normal(0, 1, m + 3)
+    kern = np.array([.25, .5, .25]); base = np.convolve(np.convolve(base, kern, 'same'), kern, 'same')
+    tt = t * m; i0 = np.floor(tt).astype(int); f = tt - i0
+    brk = base[np.clip(i0, 0, m + 2)] * (1 - f) + base[np.clip(i0 + 1, 0, m + 2)] * f
+    open_ = smooth(-.15, .35, brk)                                # 0 = held, 1 = cracked
+    wob = (base[np.clip(i0 + 1, 0, m + 2)] - .0) * .6 * k         # the line isn't ruler-straight
+    s2 = sd + wob
+    a = strength
+    crack = np.exp(-(s2 / (.95 * k)) ** 2) * open_ * .8 * a
+    shadow = np.exp(-((s2 + 2.4 * k) / (1.7 * k)) ** 2) * .2 * a * (.55 + .45 * open_)
+    lift = np.where(sd > 0, np.exp(-sd / (40 * k)) * .05 + .018, 0) * a
+    out = out * (1 - shadow[..., None])
+    out = out + (1 - out) * lift[..., None]
+    out = out * (1 - crack[..., None]) + PAPER_WHITE * crack[..., None]
+    return Image.fromarray((np.clip(out, 0, 1) * 255 + .5).astype(np.uint8))
+
+
+MIRROR = {'tl': 'tr', 'tr': 'tl', 'bl': 'br', 'br': 'bl'}
+
+
 def job(a):
     slug = a['slug']
     level = (a.get('wear') or {}).get('level', 'med')
@@ -832,14 +871,19 @@ def job(a):
     mask, life, age, ring = masks[level]; k = LEVELS[level][2]
     MASKS.mkdir(parents=True, exist_ok=True)
     Image.fromarray((mask[..., :3] * 255 + .5).astype(np.uint8), 'RGB').save(MASKS / f'{slug}.png')
-    bake(cov, mask, k, slug, age).save(WORN / f'{slug}.jpg', 'JPEG', quality=88, optimize=True, progressive=True)
+    fw = float(w.get('fold', 0)); fat = w.get('fold_at', 'tr')    # per-record: a pressed-flat dog-ear
+    front = bake(cov, mask, k, slug, age)
+    if fw > 0: front = fold(front, slug, '', fat, fw)
+    front.save(WORN / f'{slug}.jpg', 'JPEG', quality=88, optimize=True, progressive=True)
     back = None
     if a.get('art_back') and (ROOT / a['art_back']).exists():
         covb = load_square(ROOT / a['art_back'], pad=True)
         lumb = float(lum_of(covb).mean())
         dens, ek, _ = LEVELS[level]
         mb = make_mask(slug, a.get('year'), dens * (1 + .3 * float(smooth(.6, .85, lumb))) * amount, ek, ':back', lumb, edgew, surfw, bendw)[0]
-        bake(covb, mb, k, slug + ':back', age).save(WORN / f'{slug}-back.jpg', 'JPEG', quality=86, optimize=True, progressive=True)
+        bk = bake(covb, mb, k, slug + ':back', age)
+        if fw > 0: bk = fold(bk, slug, ':back', MIRROR[fat], fw)
+        bk.save(WORN / f'{slug}-back.jpg', 'JPEG', quality=86, optimize=True, progressive=True)
         back = f'assets/40/worn/{slug}-back.jpg'
     if LEVELS_DIR:
         (LEVELS_DIR / 'lv').mkdir(parents=True, exist_ok=True); (LEVELS_DIR / 'art').mkdir(parents=True, exist_ok=True)

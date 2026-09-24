@@ -3109,7 +3109,8 @@
       },
       "art_worn": "assets/40/worn/youth-lagoon-wondrous-bughouse.jpg",
       "art_back_worn": "assets/40/worn/youth-lagoon-wondrous-bughouse-back.jpg",
-      "worn_v": "edb1403a"
+      "worn_v": "edb1403a",
+      "live": true
     },
     {
       "slug": "youth-lagoon-the-year-of-hibernation",

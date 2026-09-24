@@ -549,7 +549,10 @@
     const wv = a => a.worn_v ? `?v=${a.worn_v}` : '';     // sleeve version stamp: a re-baked sleeve is fetched fresh, not from cache
     const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
     // Blurbs are plain paragraphs; _underscores_ become italics for titles.
-    const inline = s => esc(s).replace(/_([^_]+)_/g, '<em>$1</em>');
+    // Blurb markup: _italic_ and [words](https://link). Escaped first, so only these two come through.
+    const inline = s => esc(s)
+      .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, (m, t, u) => `<a href="${u}" target="_blank" rel="noopener">${t}</a>`)
+      .replace(/(^|[^\w/])_([^_]+)_(?![\w])/g, '$1<em>$2</em>');
     const pad = n => String(n).padStart(2, '0');
     const fmtDate = iso => {
       const [y, m, d] = iso.split('-').map(Number);

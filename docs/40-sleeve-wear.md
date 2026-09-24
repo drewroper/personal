@@ -21,6 +21,7 @@ taste behind it, signed off on the first 21 records (Sep 23 2026). Apply it to e
 | `bends`   | 0       | creases where the sleeve got bent: a thin, broken crack line along an edge a little way in or across a corner, sometimes doubled. 2–3 is plenty |
 | `fold`    | 0       | a pressed-flat dog-ear at one corner, lit like a scan: broken white crack, soft shadow, the flap a touch lighter; mirrored on the back. For busy art that swallows `bends` (Wondrous Bughouse 1.2). `fold_at`: `tl` / `tr` / `bl` / `br` (default `tr`, where the Incubus crease sits) |
 | `amount`  | 1.2     | overall multiplier |
+| `back`    | 1.0     | the back's share of the wear. A stark white back shows every mark: Wondrous Bughouse .5. The `fold` carries through regardless |
 | `lock`    | —       | `true` = render with base settings, exactly as signed off (Incubus, Phish) |
 
 Busy all-over art (Merriweather, Wondrous Bughouse) hides wear in the middle: push `edge` (3.5–4) instead, and if it still reads clean give it a `fold`; thin `bends` vanish in busy art.

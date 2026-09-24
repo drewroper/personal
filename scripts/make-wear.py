@@ -880,7 +880,9 @@ def job(a):
         covb = load_square(ROOT / a['art_back'], pad=True)
         lumb = float(lum_of(covb).mean())
         dens, ek, _ = LEVELS[level]
-        mb = make_mask(slug, a.get('year'), dens * (1 + .3 * float(smooth(.6, .85, lumb))) * amount, ek, ':back', lumb, edgew, surfw, bendw)[0]
+        bw = float(w.get('back', 1.0))                        # per-record: the back's share of the wear (a stark white back shows it all)
+        mb = make_mask(slug, a.get('year'), dens * (1 + .3 * float(smooth(.6, .85, lumb))) * amount * bw, ek, ':back', lumb,
+                       1 + (edgew - 1) * bw, surfw * bw, bendw)[0]
         bk = bake(covb, mb, k, slug + ':back', age)
         if fw > 0: bk = fold(bk, slug, ':back', MIRROR[fat], fw)
         bk.save(WORN / f'{slug}-back.jpg', 'JPEG', quality=86, optimize=True, progressive=True)

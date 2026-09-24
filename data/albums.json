@@ -2395,7 +2395,7 @@
       "worn_v": "50be3c40"
     },
     {
-      "no": 2,
+      "no": 11,
       "slug": "third-eye-blind-third-eye-blind",
       "artist": "Third Eye Blind",
       "title": "Third Eye Blind",
@@ -2503,7 +2503,7 @@
       },
       "art_back": "assets/40/third-eye-blind-third-eye-blind-back.jpg",
       "art_back_src": "http://coverartarchive.org/release/bf333fb1-a5c4-413a-a663-43b0c603eab5/26861645942.jpg",
-      "date": "2026-09-24",
+      "date": "2026-10-03",
       "wear": {
         "level": "high"
       },
@@ -3010,7 +3010,7 @@
       "worn_v": "5e02338f"
     },
     {
-      "no": 11,
+      "no": 2,
       "slug": "youth-lagoon-the-year-of-hibernation",
       "artist": "Youth Lagoon",
       "title": "The Year of Hibernation",
@@ -3094,7 +3094,7 @@
       },
       "art_back": "assets/40/youth-lagoon-the-year-of-hibernation-back.jpg",
       "art_back_src": "https://coverartarchive.org/release/2f6ee3f5-6e5f-46e5-8dfc-4099f2713645/41279033936.jpg",
-      "date": "2026-10-03",
+      "date": "2026-09-24",
       "wear": {
         "level": "high",
         "surface": 2.3

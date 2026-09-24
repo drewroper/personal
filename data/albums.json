@@ -3011,6 +3011,99 @@
     },
     {
       "no": 2,
+      "slug": "youth-lagoon-wondrous-bughouse",
+      "artist": "Youth Lagoon",
+      "title": "Wondrous Bughouse",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 1185721411,
+      "date": "2026-09-24",
+      "apple_url": "https://music.apple.com/us/album/wondrous-bughouse/1185721411",
+      "released": "2013-01-01",
+      "year": "2013",
+      "copyright": "℗ 2013 Fat Possum Records",
+      "genre": "Alternative",
+      "track_count": 10,
+      "runtime_ms": 3051947,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Through Mind and Back",
+          "ms": 151573,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/48/88/15/488815ef-10e2-82c5-977c-c17925f870b1/mzaf_12096323887552008415.plus.aac.p.m4a"
+        },
+        {
+          "n": 2,
+          "title": "Mute",
+          "ms": 358560,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/bc/9d/d3/bc9dd382-eeb3-a856-7da6-0c7f1657c27a/mzaf_5099612805227226900.plus.aac.p.m4a"
+        },
+        {
+          "n": 3,
+          "title": "Attic Doctor",
+          "ms": 232267,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/c7/51/5b/c7515b2b-ef94-9f86-5dd2-3f59d9b573ee/mzaf_301728402362128126.plus.aac.p.m4a"
+        },
+        {
+          "n": 4,
+          "title": "The Bath",
+          "ms": 287907,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/c5/a7/cb/c5a7cb09-85aa-c1e1-e45c-869bdf7d2411/mzaf_12623955374270226487.plus.aac.p.m4a"
+        },
+        {
+          "n": 5,
+          "title": "Pelican Man",
+          "ms": 307907,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/84/98/9d/84989d8c-f68f-c1ab-caed-9b272245f97b/mzaf_5991301199317237235.plus.aac.p.m4a"
+        },
+        {
+          "n": 6,
+          "title": "Dropla",
+          "ms": 356813,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/f6/d7/a7/f6d7a7a1-fbb4-6aa8-d96a-e10a7288623b/mzaf_11313054506621763918.plus.aac.p.m4a"
+        },
+        {
+          "n": 7,
+          "title": "Sleep Paralysis",
+          "ms": 334667,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/d8/20/9e/d8209e79-ba41-e403-1f82-3df1a0c30260/mzaf_9334840039059459660.plus.aac.p.m4a"
+        },
+        {
+          "n": 8,
+          "title": "Third Dystopia",
+          "ms": 301467,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/61/36/74/61367415-96ba-a0af-b4a3-fa462ec75e49/mzaf_12045598594537586913.plus.aac.p.m4a"
+        },
+        {
+          "n": 9,
+          "title": "Raspberry Cane",
+          "ms": 400973,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/bb/a6/78/bba67814-8959-3e5a-90ff-0d638704eb2f/mzaf_5633043827726814423.plus.aac.p.m4a"
+        },
+        {
+          "n": 10,
+          "title": "Daisyphobia",
+          "ms": 319813,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/21/c5/7a/21c57a6d-5f31-dfd1-831e-bba2bca0aa22/mzaf_10129841645037498705.plus.aac.p.m4a"
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/98/29/69/982969b3-f071-2949-3635-2e5706681cf7/886446283494.jpg/1800x1800bb.jpg",
+      "label": "Fat Possum Records",
+      "art": "assets/40/youth-lagoon-wondrous-bughouse.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/0McmhRnqR8i0z4P3qk489Q"
+      },
+      "art_back": "assets/40/youth-lagoon-wondrous-bughouse-back.jpg",
+      "art_back_src": "https://www.discogs.com/release/4333369 (US 2xLP, FP1293-1)",
+      "wear": {
+        "level": "med",
+        "edge": 3
+      },
+      "art_worn": "assets/40/worn/youth-lagoon-wondrous-bughouse.jpg",
+      "art_back_worn": "assets/40/worn/youth-lagoon-wondrous-bughouse-back.jpg",
+      "worn_v": "e1b2cdda"
+    },
+    {
       "slug": "youth-lagoon-the-year-of-hibernation",
       "artist": "Youth Lagoon",
       "title": "The Year of Hibernation",
@@ -3094,7 +3187,6 @@
       },
       "art_back": "assets/40/youth-lagoon-the-year-of-hibernation-back.jpg",
       "art_back_src": "https://coverartarchive.org/release/2f6ee3f5-6e5f-46e5-8dfc-4099f2713645/41279033936.jpg",
-      "date": "2026-09-24",
       "wear": {
         "level": "high",
         "surface": 2.3

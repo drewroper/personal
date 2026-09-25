@@ -216,7 +216,7 @@
         "spotify": "https://open.spotify.com/album/28DROCResQvsdO6Hjmb32x"
       },
       "art_back": "assets/40/finch-what-it-is-to-burn-back.jpg",
-      "art_back_src": "http://coverartarchive.org/release/21024c74-097c-4415-8848-b8a6f65e9072/4691646485.jpg",
+      "art_back_src": "https://www.discogs.com/release/2140866 (US LP 2002, DTR #28.V)",
       "date": "2026-10-10",
       "wear": {
         "level": "high",
@@ -225,7 +225,7 @@
       },
       "art_worn": "assets/40/worn/finch-what-it-is-to-burn.jpg",
       "art_back_worn": "assets/40/worn/finch-what-it-is-to-burn-back.jpg",
-      "worn_v": "7d8c13ae"
+      "worn_v": "4cecb553"
     },
     {
       "no": 10,
@@ -876,14 +876,14 @@
         "spotify": "https://open.spotify.com/album/7EW77iyGMou046Z44pOrIk"
       },
       "art_back": "assets/40/oasis-what-s-the-story-morning-glory-back.jpg",
-      "art_back_src": "http://coverartarchive.org/release/f29584cc-8f94-4035-8a63-d4369f201e2a/38266290259.jpg",
+      "art_back_src": "https://www.discogs.com/release/7100395 (UK LP, Album 1995, CRE LP 189)",
       "date": "2026-09-27",
       "wear": {
         "level": "high"
       },
       "art_worn": "assets/40/worn/oasis-what-s-the-story-morning-glory.jpg",
       "art_back_worn": "assets/40/worn/oasis-what-s-the-story-morning-glory-back.jpg",
-      "worn_v": "7509b805"
+      "worn_v": "4cd5e9c9"
     },
     {
       "no": 12,
@@ -1590,7 +1590,7 @@
         "spotify": "https://open.spotify.com/album/6vDiMhyfSnTn18OY99BSQX"
       },
       "art_back": "assets/40/brand-new-deja-entendu-back.jpg",
-      "art_back_src": "http://coverartarchive.org/release/b315e122-1921-44b5-ada0-27817ad6d0bc/32846867469.jpg",
+      "art_back_src": "https://www.discogs.com/release/622155 (US LP, Album 2003, 646920140626)",
       "date": "2026-10-11",
       "wear": {
         "level": "med",
@@ -1598,7 +1598,7 @@
       },
       "art_worn": "assets/40/worn/brand-new-deja-entendu.jpg",
       "art_back_worn": "assets/40/worn/brand-new-deja-entendu-back.jpg",
-      "worn_v": "ce01a0c6"
+      "worn_v": "8ebbf8aa"
     },
     {
       "no": 8,
@@ -1912,7 +1912,7 @@
         "spotify": "https://open.spotify.com/album/6k3vC8nep1BfqAIJ81L6OL"
       },
       "art_back": "assets/40/alt-j-an-awesome-wave-back.jpg",
-      "art_back_src": "https://coverartarchive.org/release/beb58056-1b5a-4b4f-8b86-ac28b4092470/8777336088.jpg",
+      "art_back_src": "https://www.discogs.com/release/4041377 (US LP, Album, Stereo 2012, 532346-1)",
       "date": "2026-10-05",
       "wear": {
         "level": "high",
@@ -1920,7 +1920,7 @@
       },
       "art_worn": "assets/40/worn/alt-j-an-awesome-wave.jpg",
       "art_back_worn": "assets/40/worn/alt-j-an-awesome-wave-back.jpg",
-      "worn_v": "7711bfc6"
+      "worn_v": "0cc12f41"
     },
     {
       "no": null,
@@ -2188,7 +2188,7 @@
       "label": "XL Recordings Ltd",
       "art": "assets/40/ratatat-classics.jpg",
       "art_back": "assets/40/ratatat-classics-back.jpg",
-      "art_back_src": "http://coverartarchive.org/release/82a6769a-6527-4559-8d19-dbfbf93c92f1/26763472220.png",
+      "art_back_src": "https://www.discogs.com/release/834957 (UK & US LP, Album 2006, XLLP 198)",
       "date": "2026-10-07",
       "wear": {
         "level": "high",
@@ -2196,7 +2196,7 @@
       },
       "art_worn": "assets/40/worn/ratatat-classics.jpg",
       "art_back_worn": "assets/40/worn/ratatat-classics-back.jpg",
-      "worn_v": "a22c4a0a"
+      "worn_v": "a93ea3b2"
     },
     {
       "no": null,
@@ -2390,7 +2390,7 @@
         "spotify": "https://open.spotify.com/album/1rQZbncicoXyB64DqoH7OY"
       },
       "art_back": "assets/40/incubus-morning-view-back.jpg",
-      "art_back_src": "https://coverartarchive.org/release/ee6b9446-1d2b-427d-8172-7ee6dab0fd5f/8289386498.jpg",
+      "art_back_src": "https://www.discogs.com/release/4228036 (US LP, Album, Reissue 2013, 88765404101)",
       "date": "2026-10-09",
       "wear": {
         "level": "high",
@@ -2398,7 +2398,7 @@
       },
       "art_worn": "assets/40/worn/incubus-morning-view.jpg",
       "art_back_worn": "assets/40/worn/incubus-morning-view-back.jpg",
-      "worn_v": "50be3c40"
+      "worn_v": "8bcc8755"
     },
     {
       "no": 11,
@@ -2508,14 +2508,14 @@
         "spotify": "https://open.spotify.com/album/2gToC0XAblE9h3UZD6aAaQ"
       },
       "art_back": "assets/40/third-eye-blind-third-eye-blind-back.jpg",
-      "art_back_src": "http://coverartarchive.org/release/bf333fb1-a5c4-413a-a663-43b0c603eab5/26861645942.jpg",
+      "art_back_src": "https://www.discogs.com/release/6401047 (Europe LP, Album, Reissue, Stereo 2014, MOVLP1184)",
       "date": "2026-10-03",
       "wear": {
         "level": "high"
       },
       "art_worn": "assets/40/worn/third-eye-blind-third-eye-blind.jpg",
       "art_back_worn": "assets/40/worn/third-eye-blind-third-eye-blind-back.jpg",
-      "worn_v": "dccd61e0"
+      "worn_v": "ed409bc3"
     },
     {
       "no": null,
@@ -2717,7 +2717,7 @@
       "label": "Seeker Music",
       "art": "assets/40/run-the-jewels-run-the-jewels-2.jpg",
       "art_back": "assets/40/run-the-jewels-run-the-jewels-2-back.jpg",
-      "art_back_src": "http://coverartarchive.org/release/063f311e-9c81-4616-a007-b76e3df910c9/26628543683.jpg",
+      "art_back_src": "https://www.discogs.com/release/6093939 (US LP, Album, Special Edition 2014, MSAP0005LP)",
       "date": "2026-10-01",
       "wear": {
         "level": "high",
@@ -2725,7 +2725,7 @@
       },
       "art_worn": "assets/40/worn/run-the-jewels-run-the-jewels-2.jpg",
       "art_back_worn": "assets/40/worn/run-the-jewels-run-the-jewels-2-back.jpg",
-      "worn_v": "25cb94e3"
+      "worn_v": "3a4cd6dc"
     },
     {
       "no": null,
@@ -3004,7 +3004,7 @@
         "spotify": "https://open.spotify.com/album/3nHpBmW5wJXGeC3ojBkpey"
       },
       "art_back": "assets/40/blink-182-take-off-your-pants-and-jacket-back.jpg",
-      "art_back_src": "https://coverartarchive.org/release/dce5628d-fc2f-4703-9e58-7b266df478c3/36600754811.jpg",
+      "art_back_src": "https://www.discogs.com/release/410661 (Europe LP, Album 2001, 112 674-1)",
       "date": "2026-09-28",
       "wear": {
         "level": "low",
@@ -3013,7 +3013,7 @@
       },
       "art_worn": "assets/40/worn/blink-182-take-off-your-pants-and-jacket.jpg",
       "art_back_worn": "assets/40/worn/blink-182-take-off-your-pants-and-jacket-back.jpg",
-      "worn_v": "5e02338f"
+      "worn_v": "52527036"
     },
     {
       "no": 2,
@@ -3428,7 +3428,7 @@
       "label": "Elektra",
       "art": "assets/40/phish-a-live-one.jpg",
       "art_back": "assets/40/phish-a-live-one-back.jpg",
-      "art_back_src": "http://coverartarchive.org/release/b36f57fa-9fdf-4326-9dcc-49105ae7031c/17690753919.jpg",
+      "art_back_src": "https://www.discogs.com/release/11053777 (US LP, Album, Reissue, Stereo 2017, JEMP 1089)",
       "date": "2026-10-12",
       "wear": {
         "level": "med",
@@ -3436,7 +3436,7 @@
       },
       "art_worn": "assets/40/worn/phish-a-live-one.jpg",
       "art_back_worn": "assets/40/worn/phish-a-live-one-back.jpg",
-      "worn_v": "dc1db079"
+      "worn_v": "9da1bb37"
     },
     {
       "no": 4,
@@ -3606,7 +3606,7 @@
       "label": "Arista",
       "art": "assets/40/outkast-stankonia.jpg",
       "art_back": "assets/40/outkast-stankonia-back.jpg",
-      "art_back_src": "http://coverartarchive.org/release/951d7ae5-965b-3277-923d-f2da57fcd969/8976394266.jpg",
+      "art_back_src": "https://www.discogs.com/release/225181 (US LP, Album 2000, 73008-26072-1)",
       "date": "2026-09-26",
       "wear": {
         "level": "high",
@@ -3614,7 +3614,7 @@
       },
       "art_worn": "assets/40/worn/outkast-stankonia.jpg",
       "art_back_worn": "assets/40/worn/outkast-stankonia-back.jpg",
-      "worn_v": "9458b1a0"
+      "worn_v": "8c042323"
     },
     {
       "no": 14,
@@ -3706,7 +3706,7 @@
       "label": "Imperial Recordings / Mute",
       "art": "assets/40/jose-gonzalez-in-our-nature.jpg",
       "art_back": "assets/40/jose-gonzalez-in-our-nature-back.jpg",
-      "art_back_src": "http://coverartarchive.org/release/ba3d1339-f4d8-495c-b422-34c40de6d1d9/17097045330.jpg",
+      "art_back_src": "https://www.discogs.com/release/1125030 (US LP, Album 2007, MUTE 9367-1, 9367-2)",
       "date": "2026-10-06",
       "wear": {
         "level": "low",
@@ -3715,7 +3715,7 @@
       },
       "art_worn": "assets/40/worn/jose-gonzalez-in-our-nature.jpg",
       "art_back_worn": "assets/40/worn/jose-gonzalez-in-our-nature-back.jpg",
-      "worn_v": "40aaf78d"
+      "worn_v": "7a7d99ed"
     },
     {
       "no": null,

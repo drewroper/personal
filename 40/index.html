@@ -548,6 +548,10 @@
     const params  = new URLSearchParams(location.search);
     const test    = params.has('test');
     const preview = test || params.has('preview');
+    // ?preview=04 (or 04,05) previews just those days on top of what's live: a link to send a friend
+    // without showing the rest of the unpublished list. Bare ?preview still shows everything.
+    const previewDays = (params.get('preview') || '').split(',').map(Number).filter(n => n > 0);
+    const previewAll  = preview && !previewDays.length;
     const WORN    = !params.has('clean');   // worn sleeves are the default; ?clean shows the original art
     const PREVIEWS = params.get('player') !== 'embed';                        // our own preview player; ?player=embed brings back Apple's
     const PV_ICON = '<svg class="pv__go" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="round"><path d="M4.5 2.8v10.4L13 8z"/></svg><svg class="pv__pause" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"><path d="M5.5 3v10M10.5 3v10"/></svg>';
@@ -1285,7 +1289,7 @@
       .then(r => r.json())
       .then(({ meta, albums }) => {
         const slotted = albums.filter(a => a.no && a.date && !a.bonus).sort((x, y) => x.no - y.no);
-        const isOut   = a => preview || a.live === true;                 // a record is out only when marked live by hand; dates never publish anything
+        const isOut   = a => previewAll || a.live === true || (previewDays.includes(a.no) && !a.secret);                 // a record is out only when marked live by hand; dates never publish anything
         const live    = slotted.filter(isOut);
 
         // About panel: collapsed by default, since most visits are repeat

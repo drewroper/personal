@@ -123,13 +123,15 @@
       "worn_v": "034a3e7b"
     },
     {
-      "no": 11,
+      "no": 4,
       "slug": "third-eye-blind-third-eye-blind",
       "artist": "Third Eye Blind",
       "title": "Third Eye Blind",
-      "discovered": "Suspendisse nostrud nisi purus, ac irure semper, 1997.",
+      "discovered": "Summer 1997, on the radio. Really \"heard\" it a decade later.",
       "blurb": [
-        "Cupidatat sunt qui tincidunt feugiat reprehenderit esse cras. Sit fugiat sed exercitation tincidunt culpa amet varius laboris elit gravida et proident amet lorem. Ex varius ut est _Third Eye Blind_ lacus enim mattis aliquam. Lacus aliquip aliquip auctor sed tincidunt fames. Nisi sapien feugiat tempor fames senectus varius officia blandit fugiat. Adipiscing cillum ligula netus fugiat mollit ea do, aliqua vitae qui sint, ipsum labore ex ut. Proident quis labore consectetur consequat ex turpis."
+        "If you were around in the summer of 1997, this album is permanently burned into your brain. It was everywhere. On the radio, on MTV, in movies. There was no escaping it. I was 10, and like everyone else, I knew every single word to \"Semi-Charmed Life\" and \"How's It Going to Be.\" And I loved those songs. They were fun, they were loud, and they were slightly edgy for a soon-to-be 5th grader? (I obviously didn't know \"Semi-Charmed Life\" was about crystal meth...)",
+        "And that's kind of where my story with the album ended. Until college, when my roommate went on and on about how amazing the entire tracklist was and how pivotal it was to our youth. When Third Eye Blind came to the Blue Note in Columbia two days after my 23rd birthday, he convinced us all to get tickets. Was it a school night? Yes. But as a super senior, it was my obligation to go. So I loaded the album onto my 160GB iPod Classic and realized I'd never really listened past the singles.",
+        "This album has absolutely no skips. The very first track, \"Losing a Whole Year,\" is incredible, and _might_ be one of my favorite songs of all time. I became obsessed all over again, with the songs and with the feeling of summer '97. It's an album I'll play for a week straight, pretty much once a year, every year."
       ],
       "apple_id": 271978738,
       "apple_url": "https://music.apple.com/us/album/third-eye-blind/271978738",
@@ -226,14 +228,14 @@
         }
       ],
       "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/89/8f/21/898f2118-a3e1-2b4a-7481-d986d09ffc29/mzi.jbqxjhwg.jpg/1800x1800bb.jpg",
-      "label": "Elektra Entertainment, manufactured and",
+      "label": "Elektra",
       "art": "assets/40/third-eye-blind-third-eye-blind.jpg",
       "links": {
         "spotify": "https://open.spotify.com/album/2gToC0XAblE9h3UZD6aAaQ"
       },
       "art_back": "assets/40/third-eye-blind-third-eye-blind-back.jpg",
       "art_back_src": "https://www.discogs.com/release/6401047 (Europe LP, Album, Reissue, Stereo 2014, MOVLP1184)",
-      "date": "2026-10-03",
+      "date": "2026-09-26",
       "wear": {
         "level": "high"
       },
@@ -333,7 +335,7 @@
         }
       ],
       "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/04/92/e0/0492e08b-cbcc-9969-9ad6-8f5a0888068c/5051961007107.jpg/1800x1800bb.jpg",
-      "label": "Big Brother Recordings Ltd",
+      "label": "Creation Records",
       "art": "assets/40/oasis-what-s-the-story-morning-glory.jpg",
       "links": {
         "spotify": "https://open.spotify.com/album/7EW77iyGMou046Z44pOrIk"
@@ -349,7 +351,7 @@
       "worn_v": "7509b805"
     },
     {
-      "no": 4,
+      "no": 11,
       "slug": "outkast-stankonia",
       "artist": "OutKast",
       "title": "Stankonia",
@@ -519,7 +521,7 @@
       "art": "assets/40/outkast-stankonia.jpg",
       "art_back": "assets/40/outkast-stankonia-back.jpg",
       "art_back_src": "https://www.discogs.com/release/225181 (US LP, Album 2000, 73008-26072-1)",
-      "date": "2026-09-26",
+      "date": "2026-10-03",
       "wear": {
         "level": "high",
         "edge": 2.5
@@ -726,7 +728,7 @@
         }
       ],
       "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/ed/b7/8b/edb78b6a-db5a-2eb3-ea51-61bfefb9c031/16UMGIM35661.rgb.jpg/1800x1800bb.jpg",
-      "label": "Geffen Records",
+      "label": "MCA Records",
       "art": "assets/40/blink-182-take-off-your-pants-and-jacket.jpg",
       "links": {
         "spotify": "https://open.spotify.com/album/3nHpBmW5wJXGeC3ojBkpey"
@@ -937,7 +939,7 @@
         }
       ],
       "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/64/79/67/64796709-9482-2221-b1b7-64cdbe1b99f2/dj.fuppzyzi.jpg/1800x1800bb.jpg",
-      "label": "Domino Recording Co Ltd",
+      "label": "Domino",
       "art": "assets/40/animal-collective-merriweather-post-pavilion.jpg",
       "links": {
         "spotify": "https://open.spotify.com/album/5O9OXl9zAWMJTzawofxuan"
@@ -1048,7 +1050,7 @@
         }
       ],
       "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/d7/32/29/d73229cf-9692-0a67-9821-1f84ed7f3b1b/198704917011_Cover.jpg/1800x1800bb.jpg",
-      "label": "Seeker Music",
+      "label": "Mass Appeal",
       "art": "assets/40/run-the-jewels-run-the-jewels-2.jpg",
       "art_back": "assets/40/run-the-jewels-run-the-jewels-2-back.jpg",
       "art_back_src": "https://www.discogs.com/release/6093939 (US LP, Album, Special Edition 2014, MSAP0005LP)",
@@ -1171,7 +1173,7 @@
         }
       ],
       "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/bd/ed/05/bded05c9-3355-c885-3840-b9a4b427b118/075679792839.jpg/1800x1800bb.jpg",
-      "label": "Roadrunner Records Inc",
+      "label": "Roadrunner Records",
       "art": "assets/40/turnstile-glow-on.jpg",
       "links": {
         "spotify": "https://open.spotify.com/album/2NrYPcMmQBlbBxopc2XlzS"
@@ -1490,7 +1492,7 @@
         }
       ],
       "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/3c/95/1d/3c951d73-f6c6-12dd-34b4-cc95f63e210c/634904078560.png/1800x1800bb.jpg",
-      "label": "XL Recordings Ltd",
+      "label": "Parlophone",
       "art": "assets/40/radiohead-hail-to-the-thief.jpg",
       "art_back": "assets/40/radiohead-hail-to-the-thief-back.jpg",
       "art_back_src": "http://coverartarchive.org/release/f847d298-e2d8-43ed-97ed-7c7b01ff03bc/24770542667.jpg",
@@ -1607,7 +1609,7 @@
         }
       ],
       "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/14/ce/32/14ce329f-ce30-569a-725b-1b2feefdcdfc/075679959959.jpg/1800x1800bb.jpg",
-      "label": "Infectious Music Ltd",
+      "label": "Infectious Records",
       "art": "assets/40/alt-j-an-awesome-wave.jpg",
       "links": {
         "spotify": "https://open.spotify.com/album/6k3vC8nep1BfqAIJ81L6OL"
@@ -2025,7 +2027,7 @@
         }
       ],
       "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/2c/95/ec/2c95ecf2-8303-50b6-2e19-ea6b28424af9/mzi.yficmzdc.jpg/1800x1800bb.jpg",
-      "label": "Epic Records, a division of Sony Music Entertainment",
+      "label": "Epic / Immortal",
       "art": "assets/40/incubus-morning-view.jpg",
       "links": {
         "spotify": "https://open.spotify.com/album/1rQZbncicoXyB64DqoH7OY"
@@ -2139,7 +2141,7 @@
         }
       ],
       "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/42/14/a1/4214a191-3dce-85ab-ae8e-6ad7596c4df3/00042286099125.rgb.jpg/1800x1800bb.jpg",
-      "label": "Geffen Records",
+      "label": "Drive-Thru Records",
       "art": "assets/40/finch-what-it-is-to-burn.jpg",
       "links": {
         "spotify": "https://open.spotify.com/album/28DROCResQvsdO6Hjmb32x"
@@ -2242,7 +2244,7 @@
         }
       ],
       "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/55/66/86/5566866b-0c84-3f85-136f-16d2f402f5be/16CRGIM00067.rgb.jpg/1800x1800bb.jpg",
-      "label": "Triple Crown Records\\Razor & Tie",
+      "label": "Triple Crown Records",
       "art": "assets/40/brand-new-deja-entendu.jpg",
       "links": {
         "spotify": "https://open.spotify.com/album/6vDiMhyfSnTn18OY99BSQX"

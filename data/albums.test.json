@@ -242,7 +242,7 @@
       "worn_v": "dccd61e0"
     },
     {
-      "no": 3,
+      "no": 5,
       "slug": "oasis-what-s-the-story-morning-glory",
       "artist": "Oasis",
       "title": "(What's the Story) Morning Glory?",
@@ -340,7 +340,7 @@
       },
       "art_back": "assets/40/oasis-what-s-the-story-morning-glory-back.jpg",
       "art_back_src": "http://coverartarchive.org/release/f29584cc-8f94-4035-8a63-d4369f201e2a/38266290259.jpg",
-      "date": "2026-09-25",
+      "date": "2026-09-27",
       "wear": {
         "level": "high"
       },
@@ -529,14 +529,18 @@
       "worn_v": "9458b1a0"
     },
     {
-      "no": 5,
+      "no": 3,
       "slug": "weezer-green-album",
       "artist": "Weezer",
       "title": "Weezer (The Green Album)",
       "apple_id": 1440868131,
-      "discovered": "Duis quis ac culpa neque sed sapien, 2004.",
+      "discovered": "Late spring 2001, from a friend's older brother",
       "blurb": [
-        "Nulla vel mollit mattis auctor tempor mollit sint, proident vel lacus laborum irure magna labore facilisis quis, laborum proident. Consequat senectus amet enim suspendisse nulla dolore, commodo viverra in facilisis purus sint netus in qui neque pretium dolor. Sunt elit nulla commodo _Weezer (The Green Album)_ nunc nunc consequat blandit, qui magna lorem tincidunt tristique facilisis. Risus commodo non officia aliqua, irure elit. Integer cupidatat lorem non semper aute officia."
+        "I first heard this album from a friend's older brother, who had made it his entire identity. Shortly after, I made it mine. School was almost out, and I spent the whole summer blaring it. It was the summer before my freshman year of high school, and probably the best summer of my life? This is one of many 2001 albums on this list.",
+        "I'd argue the Blue Album is my favorite Weezer record. But this is the one that got me into Weezer, and the deep dive back into the Blue Album and _Pinkerton_ that followed.",
+        "I had a Green Album poster on my wall in my childhood bedroom. It's one of the only posters I can remember from that room, before I moved into the basement. I can still remember studying it up close, dissecting every sticker on Rivers' guitar. I still want that lightning bolt guitar strap to this day. That summer I got my first pair of Converse All Stars, navy blue low tops. That's what people that listen to Weezer wear, right?",
+        "I was learning bass guitar at the time, and I could play along to these songs. I'd crank them on my Frankensteined speaker system: I cut a bunch of holes in a sheet of plywood, took apart every speaker in the house, and built a massive wall of them. Just like the Marshall half stacks you can see in the album's liner notes.",
+        "This album takes me right back to that bedroom. Blue carpet, red bedframe, green album."
       ],
       "apple_url": "https://music.apple.com/us/album/weezer-green-album/1440868131",
       "released": "2001-05-15",
@@ -615,7 +619,7 @@
       },
       "art_back": "assets/40/weezer-green-album-back.jpg",
       "art_back_src": "http://coverartarchive.org/release/7a9a2617-28a7-4afd-9993-1b6a40cf6f25/32712601799.jpg",
-      "date": "2026-09-27",
+      "date": "2026-09-25",
       "wear": {
         "level": "med",
         "edge": 2.5

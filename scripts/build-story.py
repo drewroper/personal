@@ -195,6 +195,10 @@ def header(d, a, y):
     f, lines = fit(a["title"], display, 112, col, 1, 60)           # one line if it fits at 60px or more
     if len(wrap(a["title"], f, col)) > 1:
         f, lines = fit(a["title"], display, 112, col, 2, 60)       # otherwise two
+    ink = lambda ln, f: (tracked_w(ln, f, TITLE_TRACK) - f.getbbox(ln[0])[0]
+                         + f.getbbox(ln[-1])[2] - f.getlength(ln[-1]))   # the tracked line's real ink width
+    while max(ink(ln, f) for ln in lines) > COL and f.size > 60:  # the estimate above can run a hair past the cover's edge
+        f = display(f.size - 2)
     for ln in lines:
         edge_tracked(d, y, ln, f, LIGHT, em=TITLE_TRACK)
         y += int(f.size * 1.02)

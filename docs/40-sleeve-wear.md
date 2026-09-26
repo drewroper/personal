@@ -45,3 +45,12 @@ Busy all-over art (Merriweather, Wondrous Bughouse) hides wear in the middle: pu
 
 ## Favourites to match
 Incubus *Morning View* (high, locked), Phish *A Live One* (med, locked), and Third Eye Blind (high, global defaults: Drew's favourite so far). On a dark, saturated cover like TEB's red, the frost along the edges and the ring's broken arc do the work; resist adding more.
+
+## Story video backgrounds (the dithered ground behind the cover)
+
+Chosen per cover, for the most interesting dither. There is no house move to copy from one record to the next.
+
+- Busy, high-contrast covers (MPP, Wondrous Bughouse, Weezer) need nothing: the default slow drift around the centre makes its own variety.
+- A flat or low-contrast cover gets its own `story` block in albums.json. Look at the cover, pick the detail with the most shape (a logo, lettering, a hard edge), aim the zoom at it, lift `levels` if it's all one tone, and choose a move that suits that cover.
+  TEB, for example, is almost all red: aim at the 3b logo, one straight steady pan (no easing) that brings it in from the left and ends with it cropped by the top edge.
+- Always: the art covers the whole frame on every frame, and `scripts/check-story.py` passes before a video goes out.

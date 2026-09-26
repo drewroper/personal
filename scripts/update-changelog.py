@@ -41,6 +41,12 @@ TZ = ZoneInfo("America/Denver")   # a "day" is a day in Denver
 SKIP_SUBJECT = re.compile(r"^(life-log: refresh|changelog:)", re.I)
 SKIP_AUTHOR = re.compile(r"\[bot\]$")
 
+# The life log's entries are content, not site changes: it updates
+# itself, and new beers or books are it working as intended. Commits
+# that only touch its data are skipped; a new category or a change to
+# the /log page touches log.html, log.js or the fetcher, and counts.
+LOG_DATA = re.compile(r"^data/(life-log\.json$|raw-songkick/)")
+
 LIST_OPEN = re.compile(r'^(?P<indent>[ \t]*)<ol class="changelog__list">[ \t]*\n', re.M)
 ENTRY = re.compile(
     r'<li><time>(?P<time>[^<]+)</time><span class="changelog__msg">(?P<msg>.*?)</span></li>'
@@ -58,7 +64,9 @@ since the newest one, grouped by day. Write exactly one entry per day.
 What the site is:
 - / is the homepage (portrait, headline, clients chyron, work grid, colophon).
 - /log.html is a quiet life log (films, records, shows, beers, books, runs) \
-that refreshes itself from Letterboxd, Discogs, Untappd, Strava and GitHub.
+that refreshes itself from Letterboxd, Discogs, Untappd, Strava and GitHub. \
+New entries in it are the log working, not changelog news; write about the \
+log only when its page or its categories change.
 - /40 is "40 albums, 40 days", a daily countdown of records before Drew turns 40.
 - "stories:" and "build-story" commits are an offline renderer for Instagram \
 story videos, "docs:" are internal notes, "make-wear"/"fetch-*" are asset \
@@ -117,24 +125,28 @@ def days_after(last_day: str) -> dict[str, list[dict]]:
     """Commits from the days after last_day up to yesterday, by Denver day."""
     today = datetime.now(TZ).date().isoformat()
     since = datetime.fromisoformat(last_day).replace(tzinfo=TZ) + timedelta(days=1)
-    # %x1f/%x1e: unit/record separators, so bodies can hold anything.
+    # %x1e/%x1f: record/unit separators, so bodies can hold anything.
+    # --name-only lists each commit's files after its last field.
     out = subprocess.run(
         ["git", "log", "--no-merges", "--reverse",
          f"--since={since.isoformat()}",
-         "--format=%h%x1f%aI%x1f%an%x1f%s%x1f%b%x1e"],
+         "--name-only", "--format=%x1e%h%x1f%aI%x1f%an%x1f%s%x1f%b%x1f"],
         cwd=ROOT, check=True, capture_output=True, text=True,
     ).stdout
     days: dict[str, list[dict]] = {}
     for rec in out.split("\x1e"):
         if not rec.strip():
             continue
-        sha, when, author, subject, body = rec.strip("\n").split("\x1f")
+        sha, when, author, subject, body, names = rec.split("\x1f")
+        files = names.split()
         when = datetime.fromisoformat(when)
         day = when.astimezone(TZ).date().isoformat()
         # Today isn't over yet; it waits for tomorrow night's run.
         if not (last_day < day < today):
             continue
         if SKIP_SUBJECT.match(subject) or SKIP_AUTHOR.search(author):
+            continue
+        if files and all(LOG_DATA.match(f) for f in files):
             continue
         # Drop attribution trailers; they're noise for the summary.
         body = "\n".join(

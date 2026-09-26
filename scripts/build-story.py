@@ -266,20 +266,45 @@ def reset_caches():
     _CACHE.clear(); _GRAY.clear()
 
 
+def _levels(im):
+    """Stretch a low-contrast crop to full range (2nd-98th percentile of luminance), so a
+    cover that's all one tone still gives the dither something to grab."""
+    g = np.asarray(im.convert("L"), dtype=np.float32)
+    lo, hi = np.percentile(g, 2), np.percentile(g, 98)
+    if hi - lo < 8:
+        return im
+    a = (np.asarray(im, dtype=np.float32) - lo) * (255.0 / (hi - lo))
+    return Image.fromarray(np.clip(a, 0, 255).astype(np.uint8), "RGB")
+
+
+GROUND_LOOK = {}   # per-album ground: {"focus": [x, y] on the cover, "at": [x, y] on screen, "zoom": 3, "levels": bool, "tone": 1.0}
+
+
 def _ground(art, theta, riff):
-    """Full-frame dithered ground for the B family."""
+    """Full-frame dithered ground for the B family. A record's `story` settings can aim the
+    detail at a spot on the cover (a logo, a face) and lift its levels."""
+    look = GROUND_LOOK
     if "detail" in riff:
-        # A 3x detail of the cover, drifting on a small circle so it loops.
-        # Pre-shrunk to the dither grid's scale so the crop + dither is cheap.
-        big = _prep(art, "big3", lambda: square(art, W * 3))
+        # A detail of the cover (3x by default), drifting on a small circle so it loops.
+        z = float(look.get("zoom", 3)); side = int(W * z)
+        big = _prep(art, f"big{z}{look.get('levels')}", lambda: _levels(square(art, side)) if look.get("levels") else square(art, side))
+        fx, fy = look.get("focus", (.5, .5))
         t = theta or 0.0
-        cx = W + int(math.cos(t) * 90); cy = (W * 3 - H) // 2 + int(math.sin(t) * 90)
+        amp = int(90 * z / 3)
+        if "at" in look:                                  # put the focus at a spot on screen (past the art's edge = dark)
+            ax, ay = look["at"]
+            cx = int(fx * side - ax * W) + int(math.cos(t) * amp); cy = int(fy * side - ay * H) + int(math.sin(t) * amp)
+        else:
+            cx = int(fx * side - W / 2); cy = int(fy * side - H / 2)
+            cx = max(amp, min(side - W - amp, cx)) + int(math.cos(t) * amp)
+            cy = max(amp, min(side - H - amp, cy)) + int(math.sin(t) * amp)
         src = big.crop((cx, cy, cx + W, cy + H))
     else:
         # Full bleed: the cover scaled to the frame's height and centre-cropped to its width.
         src = _prep(art, "field", lambda: square(art, H).crop(((H - W) // 2, 0, (H - W) // 2 + W, H)))
     tone = GROUND_ACCENT if "accent" in riff else GROUND
-    return dither(src, 135, on=tone, off=BG, contrast=1.4, theta=theta)
+    k = float(look.get("tone", 1.0)); tone = tuple(min(255, round(b + (c - b) * k)) for c, b in zip(tone, BG))
+    return dither(src, 135, on=tone, off=BG, contrast=float(look.get("contrast", 1.4)), theta=theta)
 
 
 REVEAL_STEPS = (16, 32, 64, 128, 256)   # dither cells across the cover, coarse → fine
@@ -359,6 +384,8 @@ def variant_b(a, art, theta=None, riff="field"):
     """Field: the cover itself, blown up and dithered dim, is the ground
     behind everything, breathing. With "resolve": the cover steps out of
     its own dither first, then the type dissolves in, line by line."""
+    global GROUND_LOOK
+    GROUND_LOOK = a.get("story") or {}                   # per-record ground settings (albums.json `story`)
     c = _ground(art, theta, riff)
     cover = _prep(art, "cover", lambda: square(art, COVER))
     if "resolve" in riff and theta is not None:

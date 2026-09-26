@@ -2520,7 +2520,20 @@
       },
       "art_worn": "assets/40/worn/third-eye-blind-third-eye-blind.jpg",
       "art_back_worn": "assets/40/worn/third-eye-blind-third-eye-blind-back.jpg",
-      "worn_v": "ed409bc3"
+      "worn_v": "ed409bc3",
+      "story": {
+        "focus": [
+          0.16,
+          0.14
+        ],
+        "at": [
+          0.5,
+          0.86
+        ],
+        "zoom": 4.0,
+        "levels": true,
+        "tone": 1.35
+      }
     },
     {
       "no": null,

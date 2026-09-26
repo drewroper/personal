@@ -1,0 +1,58 @@
+name: Changelog
+
+# Rolls the day's commits up into entries for the "Last touched"
+# drawer in index.html, commits if anything was added. Runs nightly
+# and on demand. Needs the ANTHROPIC_API_KEY repo secret; without it
+# the script skips cleanly.
+
+on:
+  schedule:
+    - cron: '13 8 * * *'   # 2:13am Denver (MDT), 1:13am in winter
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: changelog
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # the script reads git log back to the newest entry
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Write new entries
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          pip install --quiet anthropic
+          python scripts/update-changelog.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name  "drewroper-changelog[bot]"
+          git config user.email "actions@drewroper.com"
+          if git diff --quiet -- index.html; then
+            echo "no changes"
+            exit 0
+          fi
+          git add index.html
+          git commit -m "changelog: entries through $(date -u +'%Y-%m-%d')"
+          for attempt in 1 2 3 4 5; do
+            if git push; then
+              exit 0
+            fi
+            echo "push rejected (attempt $attempt), rebasing on origin/$GITHUB_REF_NAME and retrying…"
+            git fetch origin "$GITHUB_REF_NAME"
+            git rebase "origin/$GITHUB_REF_NAME" || git rebase --abort
+            sleep $((attempt * 2))
+          done
+          echo "Failed to push after 5 attempts"
+          exit 1

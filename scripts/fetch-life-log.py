@@ -22,7 +22,9 @@ import urllib.request
 import xml.etree.ElementTree as ET
 from html import unescape
 from html.parser import HTMLParser
+from datetime import datetime
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT  = ROOT / "data" / "life-log.json"
@@ -128,21 +130,58 @@ def fetch_discogs():
 
 # ----- GitHub -------------------------------------------------------
 #
-# Two endpoints, both public REST:
-#   1. /users/{user}/repos — used to source repo creation dates that
-#      go back further than the events feed (which is capped at 90
-#      days). Each repo contributes a "started <repo>" item to the
-#      day it was created on.
-#   2. /users/{user}/events/public — last ~90 days. Pushes, PR opens/
-#      merges, and releases.
+# Three endpoints, all public REST:
+#   1. /users/{user}/repos: every public, non-fork repo. Each one
+#      contributes a "started <repo>" item to the day it was created.
+#   2. /repos/{repo}/commits: the default branch's full history, so
+#      commit counts go back to day one. (The events feed can't do
+#      this: it only reaches ~90 days, and since late 2025 its
+#      PushEvents no longer say how many commits a push carried.)
+#   3. /users/{user}/events/public: last ~90 days, for PR opens/merges
+#      and releases only.
 #
-# Everything is rolled up into ONE entry per day, e.g.
-#   "drewroper/personal · 12 commits, opened PR #4, released v1.0 · 14 jun"
+# Everything is rolled up into ONE entry per Denver day, e.g.
+#   "drewroper/personal · 12 commits (40, stories), merged PR #4 · 14 jun"
 # or, on a multi-repo day, the title falls back to "@drewroper" and
 # the description spans repos.
 #
 # Auth via GITHUB_TOKEN (workflow passes the runner's default) when
 # present — bumps the unauth 60 req/hr quota to 5000.
+
+GH_TZ = ZoneInfo("America/Denver")
+
+# Commits that aren't Drew's work: the hourly life-log refresh, the
+# nightly changelog, anything a [bot] authored. Merges are skipped too
+# (their branch's commits are already in the history).
+GH_SKIP_SUBJECT = re.compile(r"^(life-log: refresh|changelog: entries through)", re.I)
+
+# Commit-subject prefix -> the part of the site it touched, for the
+# "(/40, stories)" tail. None = housekeeping, not worth naming. Any
+# other prefix, or none, counts as the homepage (the early commits).
+GH_AREA = re.compile(r"^([\w./ -]{1,24}):\s")
+GH_AREAS = {
+    "40": "/40", "wear": "/40", "make-wear": "/40",
+    "fetch-backs": "/40", "fetch-albums": "/40", "fetch-previews": "/40",
+    "log": "log", "life log": "log", "life log filter": "log",
+    "stories": "stories", "build-story": "stories",
+    "docs": None, "changelog": None, "ci": None, "gitignore": None,
+}
+
+
+def _gh_area(subject):
+    subject = re.sub(r'^Revert "', "", subject)
+    m = GH_AREA.match(subject)
+    key = m.group(1).lower() if m else ""
+    return GH_AREAS.get(key, "homepage")
+
+
+def _gh_day(iso):
+    """GitHub ISO timestamp -> Denver-local YYYY-MM-DD."""
+    if not iso:
+        return ""
+    dt = datetime.fromisoformat(iso.replace("Z", "+00:00"))
+    return dt.astimezone(GH_TZ).strftime("%Y-%m-%d")
+
 
 def _gh_headers():
     h = {"User-Agent": UA, "Accept": "application/vnd.github+json"}
@@ -168,6 +207,29 @@ def _fetch_github_raw_repos():
             break
         page += 1
         time.sleep(1)
+    return out
+
+
+def _fetch_github_raw_commits(full):
+    out = []
+    page = 1
+    while True:
+        url = (f"https://api.github.com/repos/{full}/commits"
+               f"?per_page=100&page={page}")
+        req = urllib.request.Request(url, headers=_gh_headers())
+        try:
+            with urllib.request.urlopen(req, timeout=30) as r:
+                batch = json.loads(r.read())
+        except urllib.error.HTTPError as e:
+            if e.code == 409:   # empty repo
+                break
+            raise
+        if not batch:
+            break
+        out.extend(batch)
+        if len(batch) < 100:
+            break
+        page += 1
     return out
 
 
@@ -211,50 +273,65 @@ def fetch_github():
             "releases": [],    # list of tag strings
             "started": False,
             "started_blurb": None,
+            "areas": {},       # commit-subject prefix -> count
             "push_url": None,
         })
 
     # Repos (permanent record of creation days).
+    repos = []   # (full_name, default_branch)
     try:
         for repo in _fetch_github_raw_repos():
             if repo.get("fork") or repo.get("private"):
                 continue
             full    = repo.get("full_name") or repo.get("name") or ""
-            created = (repo.get("created_at") or "")[:10]
+            created = repo.get("created_at") or ""
             desc    = (repo.get("description") or "").strip()
             if not (full and created):
                 continue
-            b = bucket(created, full)
+            b = bucket(_gh_day(repo.get("created_at")), full)
             b["started"] = True
             b["started_blurb"] = desc
+            repos.append((full, repo.get("default_branch") or "main"))
     except Exception as ex:
         print(f"WARN: GitHub repos fetch failed: {ex}", file=sys.stderr)
 
-    # Events (last ~90 days).
+    # Commits (full default-branch history, per repo).
+    for full, branch in repos:
+        try:
+            for c in _fetch_github_raw_commits(full):
+                if len(c.get("parents") or []) > 1:
+                    continue
+                commit = c.get("commit") or {}
+                author = commit.get("author") or {}
+                login = (c.get("author") or {}).get("login") or ""
+                subject = (commit.get("message") or "").split("\n", 1)[0]
+                if ("[bot]" in (author.get("name") or "") or login.endswith("[bot]")
+                        or GH_SKIP_SUBJECT.match(subject)):
+                    continue
+                date = _gh_day(author.get("date"))
+                if not date:
+                    continue
+                b = bucket(date, full)
+                b["commits"] += 1
+                area = _gh_area(subject)
+                if area:
+                    b["areas"][area] = b["areas"].get(area, 0) + 1
+                b["push_url"] = (f"https://github.com/{full}/commits/{branch}"
+                                 f"?since={date}&until={date}")
+        except Exception as ex:
+            print(f"WARN: GitHub commits fetch failed for {full}: {ex}", file=sys.stderr)
+
+    # Events (last ~90 days): PRs and releases. Pushes come from the
+    # commits API above.
     try:
         for ev in _fetch_github_raw_events():
             typ = ev.get("type")
             repo_name = ((ev.get("repo") or {}).get("name") or "").strip()
-            date = (ev.get("created_at") or "")[:10]
+            date = _gh_day(ev.get("created_at"))
             payload = ev.get("payload") or {}
             if not (typ and repo_name and date):
                 continue
-            repo_url = f"https://github.com/{repo_name}"
-
-            if typ == "PushEvent":
-                distinct = payload.get("distinct_size")
-                if distinct is None:
-                    distinct = len(payload.get("commits") or []) or payload.get("size", 0)
-                if not distinct:
-                    continue
-                b = bucket(date, repo_name)
-                b["commits"] += distinct
-                head = (payload.get("head") or "")[:7]
-                before = (payload.get("before") or "")[:7]
-                if head and before:
-                    b["push_url"] = f"{repo_url}/compare/{before}...{head}"
-
-            elif typ == "PullRequestEvent":
+            if typ == "PullRequestEvent":
                 action = payload.get("action")
                 pr = payload.get("pull_request") or {}
                 if action == "closed" and pr.get("merged"):
@@ -287,12 +364,18 @@ def fetch_github():
         total_commits = sum(b["commits"] for b in active_repos.values())
         if total_commits:
             push_repos = [r for r, b in active_repos.items() if b["commits"]]
+            areas = {}
+            for b in active_repos.values():
+                for k, v in b["areas"].items():
+                    areas[k] = areas.get(k, 0) + v
+            top = sorted(areas, key=lambda k: -areas[k])[:3]
+            area_tail = f" ({', '.join(top)})" if top else ""
             if len(push_repos) == 1:
-                parts.append(f"{total_commits} commit{'s' if total_commits != 1 else ''}")
+                parts.append(f"{total_commits} commit{'s' if total_commits != 1 else ''}{area_tail}")
             else:
                 parts.append(
                     f"{total_commits} commit{'s' if total_commits != 1 else ''} "
-                    f"across {len(push_repos)} repos"
+                    f"across {len(push_repos)} repos{area_tail}"
                 )
 
         # PRs.

@@ -3,11 +3,15 @@
 Write new changelog entries for the "Last touched" drawer in index.html.
 Run by the .github/workflows/changelog.yml nightly cron.
 
-Reads the newest <time> in the changelog, collects every commit since
-then (skipping merges, bot refreshes and changelog commits), and asks
-Claude to roll them up into a few entries in the drawer's voice. The
-entries go in at the top of the list, newest first. Nothing new, no
-change.
+One entry per day: every Denver day with at least one commit gets
+exactly one entry, however small the day was, and a busy day's forty
+commits become one entry too. Only finished days are written, so a
+day is never split across two entries.
+
+Reads the newest <time> in the changelog, collects the commits from
+the days after it (skipping merges, bot refreshes and changelog
+commits), and asks Claude for one entry per day in the drawer's
+voice. The entries go in at the top of the list, newest first.
 
 Needs ANTHROPIC_API_KEY. Without it the script says so and exits 0,
 so the workflow stays green until the key is added.
@@ -22,13 +26,15 @@ import os
 import re
 import subprocess
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parent.parent
 INDEX = ROOT / "index.html"
 
 MODEL = "claude-opus-5"
+TZ = ZoneInfo("America/Denver")   # a "day" is a day in Denver
 
 # Commits that never make the changelog: the hourly life-log bot, the
 # changelog's own commits, and merges (their branches' commits count).
@@ -47,7 +53,7 @@ graphic designer in Denver. The changelog is an easter egg: a drawer under \
 "Last touched" in the site's footer, read by curious visitors.
 
 You'll get the entries already in the drawer (for voice) and the git commits \
-made since the newest one. Roll the commits up into new entries.
+since the newest one, grouped by day. Write exactly one entry per day.
 
 What the site is:
 - / is the homepage (portrait, headline, clients chyron, work grid, colophon).
@@ -56,18 +62,19 @@ that refreshes itself from Letterboxd, Discogs, Untappd, Strava and GitHub.
 - /40 is "40 albums, 40 days", a daily countdown of records before Drew turns 40.
 - "stories:" and "build-story" commits are an offline renderer for Instagram \
 story videos, "docs:" are internal notes, "make-wear"/"fetch-*" are asset \
-scripts. They aren't the site; mention them only when the result shows up on \
-the site, or as a light aside.
+scripts. They aren't the site itself, so lead with what changed on the site; \
+on a day that only touched these, say briefly what the behind-the-scenes \
+work was.
 
 How to write:
 - Match the voice of the existing entries: plain, specific, a little dry. \
 Sentences, not bullet fragments. No trailing period. Say what changed and, \
 when it matters, why. Name fonts, sizes and colours precisely; this is a \
 designer's site.
-- One entry per meaningful chunk of work, usually one per working day. Fold \
-fiddly iterations (tweak, revert, retune) into the result they led to. \
-Skip days that only touched tooling or data chores. Usually 1-4 entries; \
-zero is fine if nothing is worth a line.
+- Exactly one entry per day given, never more, never fewer. A day with one \
+small commit still gets a line (a short one is fine). A day with dozens \
+gets one entry about what it added up to: fold fiddly iterations (tweak, \
+revert, retune) into the result they led to, and lead with the biggest thing.
 - Keep each entry under about 60 words.
 - Never spoil what the site keeps hidden. On /40, name a record only if a \
 commit publishes it or marks it live; commits often name upcoming days, and \
@@ -75,8 +82,7 @@ those stay secret. Easter eggs (hidden records, secret albums, where the log \
 lives) can be hinted at, never revealed.
 - Plain text only, except _italics_ for record, book and film titles.
 
-For each entry return "through": the short hash of the newest commit it \
-covers (its timestamp becomes the entry's time), and "text"."""
+For each entry return "date" (the day, YYYY-MM-DD, as given) and "text"."""
 
 SCHEMA = {
     "type": "object",
@@ -86,10 +92,10 @@ SCHEMA = {
             "items": {
                 "type": "object",
                 "properties": {
-                    "through": {"type": "string"},
+                    "date": {"type": "string"},
                     "text": {"type": "string"},
                 },
-                "required": ["through", "text"],
+                "required": ["date", "text"],
                 "additionalProperties": False,
             },
         }
@@ -99,14 +105,18 @@ SCHEMA = {
 }
 
 
-def newest_entry_time(page: str) -> datetime:
+def newest_entry_day(page: str) -> str:
     m = ENTRY.search(page)
     if not m:
         sys.exit("no changelog entries found in index.html")
-    return datetime.strptime(m.group("time"), TIME_FMT).replace(tzinfo=timezone.utc)
+    when = datetime.strptime(m.group("time"), TIME_FMT).replace(tzinfo=timezone.utc)
+    return when.astimezone(TZ).date().isoformat()
 
 
-def commits_since(since: datetime) -> list[dict]:
+def days_after(last_day: str) -> dict[str, list[dict]]:
+    """Commits from the days after last_day up to yesterday, by Denver day."""
+    today = datetime.now(TZ).date().isoformat()
+    since = datetime.fromisoformat(last_day).replace(tzinfo=TZ) + timedelta(days=1)
     # %x1f/%x1e: unit/record separators, so bodies can hold anything.
     out = subprocess.run(
         ["git", "log", "--no-merges", "--reverse",
@@ -114,32 +124,41 @@ def commits_since(since: datetime) -> list[dict]:
          "--format=%h%x1f%aI%x1f%an%x1f%s%x1f%b%x1e"],
         cwd=ROOT, check=True, capture_output=True, text=True,
     ).stdout
-    commits = []
+    days: dict[str, list[dict]] = {}
     for rec in out.split("\x1e"):
         if not rec.strip():
             continue
         sha, when, author, subject, body = rec.strip("\n").split("\x1f")
-        when = datetime.fromisoformat(when).astimezone(timezone.utc)
-        # Entry times are to the minute, so compare at that precision:
-        # anything in the newest entry's minute is already covered.
-        if when.replace(second=0, microsecond=0) <= since or SKIP_SUBJECT.match(subject) or SKIP_AUTHOR.search(author):
+        when = datetime.fromisoformat(when)
+        day = when.astimezone(TZ).date().isoformat()
+        # Today isn't over yet; it waits for tomorrow night's run.
+        if not (last_day < day < today):
+            continue
+        if SKIP_SUBJECT.match(subject) or SKIP_AUTHOR.search(author):
             continue
         # Drop attribution trailers; they're noise for the summary.
         body = "\n".join(
             l for l in body.splitlines()
             if not re.match(r"^(Co-Authored-By|Claude-Session|Signed-off-by):", l, re.I)
         ).strip()
-        commits.append({"sha": sha, "when": when, "subject": subject, "body": body})
-    return commits
+        days.setdefault(day, []).append({
+            "sha": sha, "when": when.astimezone(timezone.utc),
+            "subject": subject, "body": body,
+        })
+    return dict(sorted(days.items()))
 
 
-def ask_claude(existing: list[str], commits: list[dict]) -> list[dict]:
+def ask_claude(existing: list[str], days: dict[str, list[dict]]) -> dict[str, str]:
     import anthropic
 
     log = "\n\n".join(
-        f"{c['sha']}  {c['when'].strftime(TIME_FMT)}  {c['subject']}"
-        + (f"\n{c['body']}" if c["body"] else "")
-        for c in commits
+        f'<day date="{day}" commits="{len(commits)}">\n'
+        + "\n".join(
+            f"{c['sha']}  {c['subject']}" + (f"\n{c['body']}" if c["body"] else "")
+            for c in commits
+        )
+        + "\n</day>"
+        for day, commits in days.items()
     )
     prompt = (
         "<existing_entries>\n" + "\n".join(existing) + "\n</existing_entries>\n\n"
@@ -162,49 +181,42 @@ def ask_claude(existing: list[str], commits: list[dict]) -> list[dict]:
     if response.stop_reason == "max_tokens":
         sys.exit("response hit max_tokens; nothing changed")
     text = next(b.text for b in response.content if b.type == "text")
-    return json.loads(text)["entries"]
+    entries = {e["date"]: e["text"] for e in json.loads(text)["entries"]}
+    if set(entries) != set(days):
+        sys.exit(f"expected entries for {sorted(days)}, got {sorted(entries)}; nothing changed")
+    return entries
 
 
-def render(entries: list[dict], commits: list[dict], indent: str) -> str:
-    when_by_sha = {c["sha"]: c["when"] for c in commits}
-    latest = commits[-1]["when"]
+def render(entries: dict[str, str], days: dict[str, list[dict]], indent: str) -> str:
     rows = []
-    for e in entries:
-        text = e["text"].strip().rstrip(".")
-        if not text:
-            continue
-        when = when_by_sha.get(e["through"].strip()[:len(commits[0]["sha"])], latest)
-        stamp = when.strftime(TIME_FMT)
+    for day in sorted(days, reverse=True):   # newest first, like the list
+        text = entries[day].strip().rstrip(".")
+        # Stamped with the day's last commit.
+        stamp = days[day][-1]["when"].strftime(TIME_FMT)
         msg = re.sub(r"(?<!\w)_(.+?)_(?!\w)", r"<em>\1</em>", html.escape(text, quote=False))
-        rows.append((when, stamp, msg))
-    rows.sort(key=lambda r: r[0], reverse=True)  # newest first, like the list
-    return "".join(
-        f'{indent}  <li><time>{stamp}</time><span class="changelog__msg">{msg}</span></li>\n'
-        for _, stamp, msg in rows
-    )
+        rows.append(f'{indent}  <li><time>{stamp}</time><span class="changelog__msg">{msg}</span></li>\n')
+    return "".join(rows)
 
 
 def main() -> None:
     dry = "--dry-run" in sys.argv
     page = INDEX.read_text()
-    since = newest_entry_time(page)
-    commits = commits_since(since)
-    if not commits:
-        print(f"nothing since {since.strftime(TIME_FMT)}")
+    last_day = newest_entry_day(page)
+    days = days_after(last_day)
+    if not days:
+        print(f"no finished days with commits after {last_day}")
         return
-    print(f"{len(commits)} commits since {since.strftime(TIME_FMT)}")
+    for day, commits in days.items():
+        print(f"{day}: {len(commits)} commits")
 
     if not os.environ.get("ANTHROPIC_API_KEY"):
         print("ANTHROPIC_API_KEY not set; skipping. Add it as a repo secret to turn this on.")
         return
 
     existing = [f"{m['time']}  {m['msg']}" for m in ENTRY.finditer(page)][:15]
-    entries = ask_claude(existing, commits)
+    entries = ask_claude(existing, days)
     m = LIST_OPEN.search(page)
-    rows = render(entries, commits, m.group("indent"))
-    if not rows:
-        print("nothing worth a line")
-        return
+    rows = render(entries, days, m.group("indent"))
     print(rows)
     if dry:
         return

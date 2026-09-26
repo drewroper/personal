@@ -43,4 +43,4 @@ Busy all-over art (Merriweather, Wondrous Bughouse) hides wear in the middle: pu
 - Make subtle moves when tuning; don't swing the whole look.
 
 ## Favourites to match
-Incubus *Morning View* (high, locked) and Phish *A Live One* (med, locked).
+Incubus *Morning View* (high, locked), Phish *A Live One* (med, locked), and Third Eye Blind (high, global defaults: Drew's favourite so far). On a dark, saturated cover like TEB's red, the frost along the edges and the ring's broken arc do the work; resist adding more.

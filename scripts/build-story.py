@@ -314,7 +314,9 @@ def _ground(art, theta, riff):
             q = min(1.0, max(0.0, _t(theta) / DURATION))
             x0 = (side - W) // 2
             x1 = min(max(int(fx * side - ax * W), lo_x), hi_x)
-            cx = int(x0 + (x1 - x0) * q); cy = min(max(int(fy * side - ay * H), lo_y), hi_y)
+            y1 = min(max(int(fy * side - ay * H), lo_y), hi_y)
+            y0 = max(lo_y, y1 - int(float(look.get("rise", 0)) * side))    # rise: the art climbs into its end spot
+            cx = int(x0 + (x1 - x0) * q); cy = int(y0 + (y1 - y0) * q)
         else:
             # Default (Days 01-03): the centre of the cover on a slow small circle. Busy covers make
             # their own variety this way; a cover that doesn't gets its own `story` move instead.

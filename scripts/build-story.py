@@ -280,7 +280,8 @@ def _levels(im):
     return Image.fromarray(np.clip(a, 0, 255).astype(np.uint8), "RGB")
 
 
-GROUND_LOOK = {}   # per-album ground: {"focus": [x, y] on the cover, "at": [x, y] on screen, "zoom": 3, "levels": bool, "tone": 1.0}
+GROUND_LOOK = {}   # per-album ground: {"focus": [x, y] on the cover, "at": [x, y] on screen, "zoom": 3, "levels": bool, "tone": 1.0,
+                  #                    "from": "center" = start centred and pan across to the focus}
 
 
 def _ground(art, theta, riff):
@@ -299,7 +300,11 @@ def _ground(art, theta, riff):
         amp = min(int(90 * z / 3), (side - W) // 2, (side - H) // 2)
         cx = min(max(int(fx * side - ax * W), amp), side - W - amp)
         cy = min(max(int(fy * side - ay * H), amp), side - H - amp)
-        if ONE_SHOT:                                      # a story plays once: one slow eased pan, up and across
+        if ONE_SHOT and look.get("from") == "center":     # start centred on the cover, travel to the focus
+            x0 = (side - W) // 2; x1 = min(max(int(fx * side - ax * W), 0), side - W)
+            q = min(1.0, max(0.0, _t(theta) / DURATION)); q = q * q * (3 - 2 * q)   # slow in, slow out
+            cx = int(x0 + (x1 - x0) * q); cy = min(max(int(fy * side - ay * H), 0), side - H)
+        elif ONE_SHOT:                                    # a story plays once: one slow eased pan, up and across
             p = _ease_out(_t(theta) / DURATION) * 2 - 1
             cx += int(p * amp * .6); cy += int(-p * amp)
         else:                                             # loops: drift on a small circle so frame N meets frame 0

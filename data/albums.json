@@ -2532,7 +2532,8 @@
         ],
         "zoom": 3.2,
         "levels": true,
-        "tone": 1.35
+        "tone": 1.35,
+        "from": "center"
       }
     },
     {

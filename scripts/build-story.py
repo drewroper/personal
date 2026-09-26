@@ -21,6 +21,9 @@ Layout rules shared by every variant:
   * Artist above title, title above cover, cover centred.
   * No URL on any card: Drew adds Instagram's link sticker (drewroper.com/40/#NN).
   * Day indicator is quiet: microcopy or a 40-dot rail.
+  * The background art never leaves the canvas: no crop, zoom or motion may expose empty
+    space past the cover's edge (Drew). _ground clamps every frame to the art.
+  * Story videos play once (ONE_SHOT): the background pans once, it doesn't loop.
 """
 
 import json
@@ -289,15 +292,18 @@ def _ground(art, theta, riff):
         z = float(look.get("zoom", 3)); side = int(W * z)
         big = _prep(art, f"big{z}{look.get('levels')}", lambda: _levels(square(art, side)) if look.get("levels") else square(art, side))
         fx, fy = look.get("focus", (.5, .5))
+        ax, ay = look.get("at", (.5, .5))                 # where on screen the focus sits
         t = theta or 0.0
-        amp = int(90 * z / 3)
-        if "at" in look:                                  # put the focus at a spot on screen (past the art's edge = dark)
-            ax, ay = look["at"]
-            cx = int(fx * side - ax * W) + int(math.cos(t) * amp); cy = int(fy * side - ay * H) + int(math.sin(t) * amp)
-        else:
-            cx = int(fx * side - W / 2); cy = int(fy * side - H / 2)
-            cx = max(amp, min(side - W - amp, cx)) + int(math.cos(t) * amp)
-            cy = max(amp, min(side - H - amp, cy)) + int(math.sin(t) * amp)
+        # RULE: the art always covers the whole frame. The crop, and every step of its motion, stays
+        # inside the cover; a focus that asks for more is pulled back to the edge, never past it.
+        amp = min(int(90 * z / 3), (side - W) // 2, (side - H) // 2)
+        cx = min(max(int(fx * side - ax * W), amp), side - W - amp)
+        cy = min(max(int(fy * side - ay * H), amp), side - H - amp)
+        if ONE_SHOT:                                      # a story plays once: one slow eased pan, up and across
+            p = _ease_out(_t(theta) / DURATION) * 2 - 1
+            cx += int(p * amp * .6); cy += int(-p * amp)
+        else:                                             # loops: drift on a small circle so frame N meets frame 0
+            cx += int(math.cos(t) * amp); cy += int(math.sin(t) * amp)
         src = big.crop((cx, cy, cx + W, cy + H))
     else:
         # Full bleed: the cover scaled to the frame's height and centre-cropped to its width.

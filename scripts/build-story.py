@@ -23,7 +23,10 @@ Layout rules shared by every variant:
   * Day indicator is quiet: microcopy or a 40-dot rail.
   * The background art never leaves the canvas: no crop, zoom or motion may expose empty
     space past the cover's edge (Drew). _ground clamps every frame to the art.
-  * Story videos play once (ONE_SHOT): the background pans once, it doesn't loop.
+  * Story videos play once (ONE_SHOT): the background drifts left at a constant speed the
+    whole time, edge to edge across the cover. It never loops and never stops.
+  * Before a story goes to Drew: scripts/check-story.py on the file, every frame. It fails on a
+    flat margin strip (art off the canvas, or a flat dark edge of the art) or a still frame.
 """
 
 import json
@@ -281,7 +284,7 @@ def _levels(im):
 
 
 GROUND_LOOK = {}   # per-album ground: {"focus": [x, y] on the cover, "at": [x, y] on screen, "zoom": 3, "levels": bool, "tone": 1.0,
-                  #                    "from": "center" = start centred and pan across to the focus}
+                  #  in a one-shot story "focus"/"at" set the drift's height; it always crosses the full width}
 
 
 def _ground(art, theta, riff):
@@ -300,13 +303,13 @@ def _ground(art, theta, riff):
         amp = min(int(90 * z / 3), (side - W) // 2, (side - H) // 2)
         cx = min(max(int(fx * side - ax * W), amp), side - W - amp)
         cy = min(max(int(fy * side - ay * H), amp), side - H - amp)
-        if ONE_SHOT and look.get("from") == "center":     # start centred on the cover, travel to the focus
-            x0 = (side - W) // 2; x1 = min(max(int(fx * side - ax * W), 0), side - W)
-            q = min(1.0, max(0.0, _t(theta) / DURATION)); q = q * q * (3 - 2 * q)   # slow in, slow out
-            cx = int(x0 + (x1 - x0) * q); cy = min(max(int(fy * side - ay * H), 0), side - H)
-        elif ONE_SHOT:                                    # a story plays once: one slow eased pan, up and across
-            p = _ease_out(_t(theta) / DURATION) * 2 - 1
-            cx += int(p * amp * .6); cy += int(-p * amp)
+        if ONE_SHOT:
+            # A story plays once and the art never stops moving (Drew): one steady drift to the left
+            # across the cover's whole width, constant speed from the first frame to the last. The
+            # crop starts at the art's left edge and ends at its right edge, so it never leaves the art.
+            q = min(1.0, max(0.0, _t(theta) / DURATION))
+            cx = int((side - W) * float(look.get("travel", 1.0)) * q)   # travel < 1 stops short of a flat dark edge
+            cy = min(max(int(fy * side - ay * H), 0), side - H)
         else:                                             # loops: drift on a small circle so frame N meets frame 0
             cx += int(math.cos(t) * amp); cy += int(math.sin(t) * amp)
         src = big.crop((cx, cy, cx + W, cy + H))

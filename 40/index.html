@@ -206,8 +206,9 @@
 
     .entry__cover {
       display: block; width: 100%; aspect-ratio: 1; object-fit: cover; margin-top: 16px;
-      background: var(--bg-raised); border: 1px solid var(--rule); border-radius: 2.8%;
+      background: var(--bg-raised); border-radius: 2.8%;
     }
+    .entry__cover--empty { border: 1px solid var(--rule); }   /* the baked sleeve carries its own edge; only the placeholder needs a line */
     /* Sleeves are rounded at 2.8% of their width (≈10px on a phone), the same proportion the wear is baked to. */
     .entry__cover-wrap { position: relative; margin-top: 16px; cursor: pointer; -webkit-tap-highlight-color: transparent; perspective: 1400px; overflow: visible; }
     /* Flip hint: the icon alone, in a small glass disc on the art. Hairline arrow to match the
@@ -226,9 +227,10 @@
     .flip__front, .flip__back { -webkit-backface-visibility: hidden; backface-visibility: hidden; }
     .flip__back {
       position: absolute; inset: 0; transform: rotateY(180deg);
-      background: var(--bg-raised); border: 1px solid var(--rule); border-radius: 2.8%; overflow: hidden;
+      background: var(--bg-raised); border-radius: 2.8%; overflow: hidden;
       display: grid; place-items: center;
     }
+    .flip__back:has(.flip__list) { border: 1px solid var(--rule); }   /* a typeset tracklist back keeps a hairline; a scanned back doesn't */
     .flip__back img { display: block; width: 100%; height: 100%; object-fit: contain; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
     .flip__back img.is-square { object-fit: cover; }
     .flip__list { margin: 0; padding: 18px 20px; width: 100%; height: 100%; box-sizing: border-box; list-style: none; display: flex; flex-direction: column; justify-content: center; font-size: 11px; line-height: 1.5; letter-spacing: .04em; text-transform: uppercase; color: var(--text-muted); }

@@ -1185,7 +1185,7 @@
     });
 
     // Visitor counter in the colophon, old-web style: one hit per browser session (refreshes don't
-    // count, nor do ?preview / ?test), shown zero-padded. Abacus is a free, cookieless counter; if it's
+    // count, nor do ?preview / ?test), shown with one leading zero (042, 0317). Abacus is a free, cookieless counter; if it's
     // down the line just stays hidden.
     (function visits() {
       const el = document.getElementById('js-count'); if (!el || !window.fetch) return;
@@ -1196,7 +1196,7 @@
         .then(({ value }) => {
           if (!Number.isFinite(value)) return;
           if (verb === 'hit') try { sessionStorage.setItem('40:counted', '1'); } catch (e) {}
-          el.lastElementChild.textContent = String(value).padStart(6, '0'); el.hidden = false;
+          el.lastElementChild.textContent = '0' + value;   // one leading zero, always el.hidden = false;
         })
         .catch(() => {});
     })();

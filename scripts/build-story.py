@@ -23,8 +23,9 @@ Layout rules shared by every variant:
   * Day indicator is quiet: microcopy or a 40-dot rail.
   * The background art never leaves the canvas: no crop, zoom or motion may expose empty
     space past the cover's edge (Drew). _ground clamps every frame to the art.
-  * Story videos play once (ONE_SHOT): the background drifts left at a constant speed the
-    whole time, edge to edge across the cover. It never loops and never stops.
+  * Story videos play once (ONE_SHOT): the background pans in one straight line at a constant
+    speed, no easing, still moving on the last frame. It never loops. With a focus it starts
+    centred and ends on the focus; without one it drifts left across the cover.
   * Before a story goes to Drew: scripts/check-story.py on the file, every frame. It fails on a
     flat margin strip (art off the canvas, or a flat dark edge of the art) or a still frame.
 """
@@ -304,14 +305,22 @@ def _ground(art, theta, riff):
         cx = min(max(int(fx * side - ax * W), amp), side - W - amp)
         cy = min(max(int(fy * side - ay * H), amp), side - H - amp)
         if ONE_SHOT:
-            # A story plays once and the art never stops moving (Drew): one steady drift to the left
-            # across the cover's whole width, constant speed from the first frame to the last. The
-            # crop starts at the art's left edge and ends at its right edge, so it never leaves the art.
+            # A story plays once and the art never stops moving (Drew): one straight, linear pan, no
+            # easing, so it is still moving on the last frame. With a focus: start centred on the cover
+            # and end with the focus at its spot on screen (TEB: the 3b logo, cropped by the top edge).
+            # Without one: drift left across the cover. Either way the crop stays inside the art, a
+            # little in from its worn edge.
+            m = int(side * .03)
+            lo_x, hi_x, lo_y, hi_y = m, side - W - m, m, side - H - m
             q = min(1.0, max(0.0, _t(theta) / DURATION))
-            cx = int((side - W) * float(look.get("travel", 1.0)) * q)   # travel < 1 stops short of a flat dark edge
-            cy = min(max(int(fy * side - ay * H), 0), side - H)
-        else:                                             # loops: drift on a small circle so frame N meets frame 0
-            cx += int(math.cos(t) * amp); cy += int(math.sin(t) * amp)
+            if "focus" in look:
+                x0, y0 = (side - W) // 2, (side - H) // 2
+                x1 = min(max(int(fx * side - ax * W), lo_x), hi_x)
+                y1 = min(max(int(fy * side - ay * H), lo_y), hi_y)
+                cx = int(x0 + (x1 - x0) * q); cy = int(y1 if look.get("hold_y", True) else y0 + (y1 - y0) * q)
+            else:
+                cx = int(lo_x + (hi_x - lo_x) * float(look.get("travel", 1.0)) * q)
+                cy = min(max(int(fy * side - ay * H), lo_y), hi_y)
         src = big.crop((cx, cy, cx + W, cy + H))
     else:
         # Full bleed: the cover scaled to the frame's height and centre-cropped to its width.

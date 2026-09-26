@@ -36,6 +36,7 @@ Busy all-over art (Merriweather, Wondrous Bughouse) hides wear in the middle: pu
 - Folds / bends: thin broken crease lines like the Incubus top-right corner. NOT a band of flaked ink
   beside the fold (that reads as rubbed ink).
 - Scratches: near-straight. Curled hairlines on black read as "dog hair".
+- Cracks: the TEB right edge is the reference (Drew: "a moment of brilliance"). A hairline that starts at the cut edge, runs in across the dark field, branches once or twice, breaks into dashes where the ink held, and fades out. Thin, crisp, pale, never a band. It comes from the edge-crack pass (short hairlines in from an edge), so it's seeded per record: don't reroll a sleeve that has one.
 - Light covers: paper tooth, handling grime at the edges, heavier wear than dark covers; no brown clouds.
 - Older records more worn; never utterly destroyed; every sleeve different.
 - Never: speckle / salt noise, grease spots, sticker residue, foxing dots, pencil-hatching striations.

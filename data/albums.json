@@ -2519,6 +2519,7 @@
         "level": "high"
       },
       "art_worn": "assets/40/worn/third-eye-blind-third-eye-blind.jpg",
+      "live": true,
       "art_back_worn": "assets/40/worn/third-eye-blind-third-eye-blind-back.jpg",
       "worn_v": "ed409bc3",
       "story": {

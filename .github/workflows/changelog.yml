@@ -2,8 +2,8 @@ name: Changelog
 
 # Writes one entry per finished day that had commits into the "Last
 # touched" drawer in index.html, commits if anything was added. Runs
-# nightly (after the Denver day ends) and on demand. Needs the ANTHROPIC_API_KEY repo secret; without it
-# the script skips cleanly.
+# nightly (after the Denver day ends) and on demand. Needs the
+# ANTHROPIC_API_KEY repo secret; without it the script skips cleanly.
 
 on:
   schedule:

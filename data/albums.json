@@ -3634,7 +3634,20 @@
       },
       "art_worn": "assets/40/worn/outkast-stankonia.jpg",
       "art_back_worn": "assets/40/worn/outkast-stankonia-back.jpg",
-      "worn_v": "8c042323"
+      "worn_v": "8c042323",
+      "story": {
+        "focus": [
+          0.1,
+          0.08
+        ],
+        "at": [
+          0.5,
+          0.06
+        ],
+        "zoom": 2.4,
+        "tone": 1.25,
+        "rise": 0.05
+      }
     },
     {
       "no": 14,

@@ -270,6 +270,10 @@
     }
     .entry__blurb a:hover, .entry__found a:hover, .about__project a:hover { color: var(--accent); text-decoration-color: var(--accent); }
     .entry__blurb em { font-style: italic; }
+    /* Lyrics: indented off a thin rule, a line per line, a step heavier than the prose around them. */
+    .lyric { margin: 0 0 1.1em; padding: .1em 0 .1em 1.1em; border-left: 2px solid var(--accent); font-weight: 500; line-height: 1.5; text-wrap: pretty; }
+    .lyric span { display: block; padding-left: 1em; text-indent: -1em; }   /* a line that wraps hangs under itself */
+    .lyric:last-child { margin-bottom: 0; }
     .entry__blurb--empty { color: var(--text-faint); }
 
     .entry__player { margin: 26px 0 0; }
@@ -573,6 +577,10 @@
     const inline = s => esc(s)
       .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, (m, t, u) => `<a href="${u}" target="_blank" rel="noopener">${t}</a>`)
       .replace(/(^|[^\w/])_([^_]+)_(?![\w])/g, '$1<em>$2</em>');
+    // A paragraph whose every line starts with "> " is a lyric: one line per line, set off from the prose.
+    const para = p => /^> /.test(p)
+      ? `<blockquote class="lyric">${p.split('\n').map(l => `<span>${inline(l.replace(/^> ?/, ''))}</span>`).join('')}</blockquote>`
+      : `<p>${inline(p)}</p>`;
     const pad = n => String(n).padStart(2, '0');
     const fmtDate = iso => {
       const [y, m, d] = iso.split('-').map(Number);
@@ -646,7 +654,7 @@
       const facts = [a.year, a.label, a.track_count && `${a.track_count} tracks`, a.runtime_ms && fmtMs(a.runtime_ms)]
         .filter(Boolean).map(f => `<span>${esc(f)}</span>`).join('');
       const blurb = a.blurb && a.blurb.length
-        ? a.blurb.map(p => `<p>${inline(p)}</p>`).join('')
+        ? a.blurb.map(para).join('')
         : `<p class="entry__blurb--empty">Blurb still cooking.</p>`;
       const head = a.secret
         ? `<span class="entry__no">Secret album</span><span>You found it.</span>`

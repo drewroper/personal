@@ -270,8 +270,10 @@
     }
     .entry__blurb a:hover, .entry__found a:hover, .about__project a:hover { color: var(--accent); text-decoration-color: var(--accent); }
     .entry__blurb em { font-style: italic; }
-    /* Lyrics: indented off a thin rule, a line per line, a step heavier than the prose around them. */
-    .lyric { margin: 0 0 1.1em; padding: .1em 0 .1em 1.1em; border-left: 1px solid var(--accent); font-weight: 500; line-height: 1.5; text-wrap: pretty; }
+    /* Lyrics: indented off a thin rule, a line per line, a step heavier than the prose around them.
+       The rule is painted as a background, not a border: iPhone Safari dropped the 1px border. */
+    .lyric { margin: 0 0 1.1em; padding: .1em 0 .1em 1.1em; font-weight: 500; line-height: 1.5; text-wrap: pretty;
+      background: linear-gradient(var(--accent), var(--accent)) left top / 1px 100% no-repeat; }
     .lyric span { display: block; padding-left: 1em; text-indent: -1em; }   /* a line that wraps hangs under itself */
     .lyric:last-child { margin-bottom: 0; }
     .entry__blurb--empty { color: var(--text-faint); }

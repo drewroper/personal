@@ -782,7 +782,7 @@
       "art_back_src": "http://coverartarchive.org/release/025eaf54-9ae7-497e-9b81-a2fed09b53ff/4136078628.jpg"
     },
     {
-      "no": 5,
+      "no": 11,
       "slug": "oasis-what-s-the-story-morning-glory",
       "artist": "Oasis",
       "title": "(What's the Story) Morning Glory?",
@@ -878,7 +878,7 @@
       },
       "art_back": "assets/40/oasis-what-s-the-story-morning-glory-back.jpg",
       "art_back_src": "https://www.discogs.com/release/7100395 (UK LP, Album 1995, CRE LP 189)",
-      "date": "2026-09-27",
+      "date": "2026-10-03",
       "wear": {
         "level": "high"
       },
@@ -3459,7 +3459,7 @@
       "worn_v": "9da1bb37"
     },
     {
-      "no": 11,
+      "no": 5,
       "slug": "outkast-stankonia",
       "artist": "OutKast",
       "title": "Stankonia",
@@ -3623,11 +3623,11 @@
         }
       ],
       "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/e0/4c/f4/e04cf460-46a5-992a-87c7-2c1aef7e3a46/730082607223.jpg/1800x1800bb.jpg",
-      "label": "Arista",
+      "label": "LaFace / Arista",
       "art": "assets/40/outkast-stankonia.jpg",
       "art_back": "assets/40/outkast-stankonia-back.jpg",
       "art_back_src": "https://www.discogs.com/release/225181 (US LP, Album 2000, 73008-26072-1)",
-      "date": "2026-10-03",
+      "date": "2026-09-27",
       "wear": {
         "level": "high",
         "edge": 2.5

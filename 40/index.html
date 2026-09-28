@@ -270,6 +270,24 @@
     }
     .entry__blurb a:hover, .entry__found a:hover, .about__project a:hover { color: var(--accent); text-decoration-color: var(--accent); }
     .entry__blurb em { font-style: italic; }
+    /* Photo links: the same lime link, a small picture glyph, and the photo as a print that pops up
+       beside the cursor (hover) or tosses into a lightbox (tap). */
+    .snap-ico { display: inline-block; margin-left: .3em; vertical-align: -.02em; }
+    a[data-snap] { cursor: zoom-in; }
+    .snap { position: fixed; left: 0; top: 0; z-index: 150; width: 250px; padding: 6px; background: var(--text); border-radius: 3px;
+      pointer-events: none; will-change: transform; box-shadow: 0 22px 44px rgba(0,0,0,.6), 0 3px 8px rgba(0,0,0,.45); }
+    .snap img, .lightbox__fig img { display: block; width: 100%; height: auto; border-radius: 1px; }
+    .snap[hidden], .lightbox[hidden] { display: none; }
+    .lightbox { position: fixed; inset: 0; z-index: 210; display: grid; place-items: center; cursor: zoom-out;
+      padding: calc(56px + env(safe-area-inset-top, 0px)) 16px calc(40px + var(--sab));
+      background: rgba(8, 8, 9, .82); opacity: 0; transition: opacity .22s ease; -webkit-tap-highlight-color: transparent; }
+    .lightbox.is-open { opacity: 1; }
+    .lightbox__fig { margin: 0; padding: 8px; background: var(--text); border-radius: 3px; box-shadow: 0 30px 60px rgba(0,0,0,.6);
+      width: min(100%, 520px, calc((100dvh - 120px) * .74));
+      transform: translateY(70px) rotate(-11deg) scale(.9); transition: transform .55s cubic-bezier(.3, 1.5, .5, 1); }
+    .lightbox.is-open .lightbox__fig { transform: rotate(var(--tilt, -2deg)); }
+    .lightbox .lightbox__close { top: calc(16px + env(safe-area-inset-top, 0px)); right: var(--gutter); }   /* the secret's pill button */
+
     /* Lyrics: indented off a thin rule, a line per line, a step heavier than the prose around them.
        The rule is painted as a background, not a border: iPhone Safari dropped the 1px border. */
     .lyric { margin: 0 0 1.1em; padding: .1em 0 .1em 1.1em; font-weight: 500; line-height: 1.5; text-wrap: pretty;
@@ -575,8 +593,10 @@
     const wv = a => a.worn_v ? `?v=${a.worn_v}` : '';     // sleeve version stamp: a re-baked sleeve is fetched fresh, not from cache
     const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
     // Blurbs are plain paragraphs; _underscores_ become italics for titles.
-    // Blurb markup: _italic_ and [words](https://link). Escaped first, so only these two come through.
+    // Blurb markup: _italic_, [words](https://link) and [words](photo:assets/…jpg). Escaped first, so only these come through.
+    const SNAP_ICO = '<svg class="snap-ico" width="12" height="10" viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="round" aria-hidden="true"><rect x=".5" y=".5" width="11" height="9" rx="1"/><path d="M2 8l3-3.2 2 2 1.4-1.3L10 8"/></svg>';
     const inline = s => esc(s)
+      .replace(/\[([^\]]+)\]\(photo:([\w./-]+)\)/g, (m, t, u) => `<a href="../${u}" data-snap aria-haspopup="dialog">${t}${SNAP_ICO}</a>`)   // a photo: pops up, not a new page
       .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, (m, t, u) => `<a href="${u}" target="_blank" rel="noopener">${t}</a>`)
       .replace(/(^|[^\w/])_([^_]+)_(?![\w])/g, '$1<em>$2</em>');
     // A paragraph whose every line starts with "> " is a lyric: one line per line, set off from the prose.
@@ -727,6 +747,106 @@
       };
       const ready = document.fonts && document.fonts.load ? document.fonts.load('400 100px Porca') : Promise.resolve();
       ready.then(() => setTimeout(go, 120), () => setTimeout(go, 120));
+    })();
+
+    // Photo links in the writing. With a mouse, the photo pops up as a print beside the cursor, dithers in
+    // through the Bayer dots, trails the pointer and swings a little with its speed. A tap (or a click)
+    // tosses the same print into a lightbox: dimmed page, photo in the middle, tap anywhere to put it down.
+    (function snaps() {
+      const HOVER = matchMedia('(hover: hover) and (pointer: fine)');
+      const CELL = 3, STEPS = 6;
+      const tiles = Array.from({ length: STEPS + 1 }, (_, k) => {
+        const t = document.createElement('canvas'); t.width = t.height = 8 * CELL; const c = t.getContext('2d'); c.fillStyle = '#000';
+        for (let i = 0; i < 64; i++) if (BAYER8[i] < (k / STEPS) * 64) c.fillRect((i & 7) * CELL, (i >> 3) * CELL, CELL, CELL);
+        return `url(${t.toDataURL()})`;
+      });
+      const dither = (el, dir, done) => {              // dir 1: in, -1: out; about 40ms a step
+        clearTimeout(el._dt);
+        if (REDUCED) { mask(el, ''); return done && done(); }
+        let k = 0;
+        const step = () => {
+          const lvl = dir > 0 ? k : STEPS - k;
+          mask(el, lvl >= STEPS ? '' : tiles[lvl]);
+          if (k++ < STEPS) el._dt = setTimeout(step, 40); else done && done();
+        };
+        step();
+      };
+      const mask = (el, u) => {
+        el.style.maskImage = el.style.webkitMaskImage = u;
+        el.style.maskSize = el.style.webkitMaskSize = u ? `${8 * CELL}px ${8 * CELL}px` : '';
+      };
+
+      // The hover print.
+      const pop = document.createElement('figure'); pop.className = 'snap'; pop.hidden = true; pop.setAttribute('aria-hidden', 'true');
+      pop.innerHTML = '<img alt="">'; document.body.appendChild(pop);
+      const img = pop.firstChild;
+      let cur = null, x = 0, y = 0, tx = 0, ty = 0, vx = 0, tilt = 0, base = 0, raf = 0;
+      const place = (mx, my) => {
+        const w = pop.offsetWidth || 262, h = pop.offsetHeight || w * 1.32, gap = 28;
+        tx = mx + gap + w > innerWidth - 12 ? mx - gap - w : mx + gap;           // right of the cursor, or left near the edge
+        ty = Math.min(Math.max(12, my - h * .55), innerHeight - h - 12);
+      };
+      const tick = () => {
+        const nx = x + (tx - x) * .22, ny = y + (ty - y) * .22;
+        vx = nx - x; x = nx; y = ny;
+        tilt += (base + Math.max(-9, Math.min(9, vx * .7)) - tilt) * .15;      // swings with the pointer, settles back
+        pop.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${tilt}deg)`;
+        raf = cur ? requestAnimationFrame(tick) : 0;
+      };
+      const show = (a, e) => {
+        cur = a; if (img.getAttribute('src') !== a.getAttribute('href')) img.src = a.getAttribute('href');
+        base = (Math.random() < .5 ? -1 : 1) * (2 + Math.random() * 3);
+        pop.hidden = false; place(e.clientX, e.clientY);
+        x = tx; y = ty + 18; tilt = base * 2.2;                                  // lands with a little drop and a twist
+        if (!raf) raf = requestAnimationFrame(tick);
+        dither(pop, 1);
+      };
+      const hide = () => {
+        if (!cur) return; cur = null;
+        dither(pop, -1, () => { if (!cur) pop.hidden = true; });
+      };
+      document.addEventListener('pointerover', e => {
+        if (!HOVER.matches || e.pointerType !== 'mouse') return;
+        const a = e.target.closest && e.target.closest('a[data-snap]');
+        if (a && a !== cur) show(a, e);
+      });
+      document.addEventListener('pointermove', e => { if (cur) place(e.clientX, e.clientY); }, { passive: true });
+      document.addEventListener('pointerout', e => {
+        if (cur && !(e.relatedTarget && cur.contains(e.relatedTarget)) && e.target.closest && e.target.closest('a[data-snap]') === cur) hide();
+      });
+      addEventListener('scroll', hide, { passive: true });
+
+      // The lightbox.
+      const box = document.createElement('div'); box.className = 'lightbox'; box.hidden = true;
+      box.setAttribute('role', 'dialog'); box.setAttribute('aria-modal', 'true');
+      box.innerHTML = '<button class="secret__close lightbox__close" type="button">Close</button><figure class="lightbox__fig"><img alt=""></figure>';
+      document.body.appendChild(box);
+      const fig = box.querySelector('.lightbox__fig'), big = fig.firstChild, closeBtn = box.firstChild;
+      let opener = null;
+      const open = a => {
+        hide(); opener = a;
+        big.src = a.getAttribute('href'); big.alt = a.textContent.trim();
+        box.setAttribute('aria-label', big.alt);
+        fig.style.setProperty('--tilt', `${(Math.random() < .5 ? -1 : 1) * (1 + Math.random() * 2.5)}deg`);
+        document.body.style.overflow = 'hidden';
+        box.hidden = false; void box.offsetWidth; box.classList.add('is-open');
+        dither(fig, 1); closeBtn.focus({ preventScroll: true });
+      };
+      const close = () => {
+        if (box.hidden || !box.classList.contains('is-open')) return;
+        box.classList.remove('is-open');
+        dither(fig, -1, () => {
+          box.hidden = true; document.body.style.overflow = '';
+          if (opener) opener.focus({ preventScroll: true });
+        });
+      };
+      document.addEventListener('click', e => {
+        const a = e.target.closest && e.target.closest('a[data-snap]');
+        if (!a || e.metaKey || e.ctrlKey || e.shiftKey) return;                 // a modified click still opens the file
+        e.preventDefault(); open(a);
+      });
+      box.addEventListener('click', close);
+      addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
     })();
 
     // Tap the letters of the big 404040 and they turn lime, one at a time, until the whole

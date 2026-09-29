@@ -348,15 +348,16 @@
         "spotify": "https://open.spotify.com/album/2NrYPcMmQBlbBxopc2XlzS"
       },
       "art_back": "assets/40/turnstile-glow-on-back.jpg",
-      "art_back_src": "http://coverartarchive.org/release/c86758fc-5447-461d-942d-a9300e4bc51f/37155210486.jpg",
+      "art_back_src": "http://coverartarchive.org/release/c86758fc-5447-461d-942d-a9300e4bc51f/37155210486.jpg (paper flattened to white: the scan was a grey, pink-cast photo of a white sleeve)",
       "date": "2026-09-28",
       "wear": {
         "level": "high",
-        "edge": 2.5
+        "edge": 2.5,
+        "back": 0.5
       },
       "art_worn": "assets/40/worn/turnstile-glow-on.jpg",
       "art_back_worn": "assets/40/worn/turnstile-glow-on-back.jpg",
-      "worn_v": "d6b5107a",
+      "worn_v": "16135773",
       "story": {
         "focus": [
           0.95,

@@ -608,7 +608,7 @@
     // A caption may hold its own [link](https://…). It rides in an attribute, so its markup characters are
     // entity-coded there (the link and italic passes below must not touch it) and rendered when the print opens.
     const attrSafe = c => c.replace(/[\[\]()_]/g, ch => `&#${ch.charCodeAt(0)};`);
-    const caption = c => esc(c).replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, (m, t, u) => `<a href="${u}" target="_blank" rel="noopener">${t}</a>`)
+    const caption = c => !c ? '' : esc(c).replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, (m, t, u) => `<a href="${u}" target="_blank" rel="noopener">${t}</a>`)
       .split('\n').map(part => `<span>${part}</span>`).join('');                          // "caption\ncredit": credit sits right, same line
     const inline = s => esc(s)
       .replace(/\[([^\]]+)\]\(photo:([\w./-]+)(?: &quot;([\s\S]+?)&quot;)?\)/g, (m, t, u, c) =>                          // a photo (with an optional "caption"): pops up, not a new page

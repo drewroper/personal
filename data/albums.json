@@ -3480,7 +3480,7 @@
       "label": "Elektra",
       "art": "assets/40/phish-a-live-one.jpg",
       "art_back": "assets/40/phish-a-live-one-back.jpg",
-      "art_back_src": "https://www.discogs.com/release/11053777 (US LP, Album, Reissue, Stereo 2017, JEMP 1089)",
+      "art_back_src": "https://www.discogs.com/release/11053777 (US LP, Album, Reissue, Stereo 2017, JEMP 1089) (colour matched to the front: the photo was far brighter and bluer than the print)",
       "date": "2026-09-29",
       "wear": {
         "level": "med",
@@ -3488,7 +3488,7 @@
       },
       "art_worn": "assets/40/worn/phish-a-live-one.jpg",
       "art_back_worn": "assets/40/worn/phish-a-live-one-back.jpg",
-      "worn_v": "9da1bb37",
+      "worn_v": "8543ce0c",
       "story": {
         "focus": [
           0.9,

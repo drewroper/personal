@@ -285,6 +285,15 @@ def _levels(im):
     return Image.fromarray(np.clip(a, 0, 255).astype(np.uint8), "RGB")
 
 
+def _floor(im, f):
+    """Lift the blacks to `f` (0-255) so a cover's pure-black stretches still dither to a sparse
+    texture instead of a flat, dead-looking band (Phish, A Live One)."""
+    if not f:
+        return im
+    a = np.asarray(im, dtype=np.float32)
+    return Image.fromarray(np.clip(f + a * (255 - f) / 255, 0, 255).astype(np.uint8), "RGB")
+
+
 GROUND_LOOK = {}   # per-album ground: {"focus": [x, y] on the cover, "at": [x, y] on screen, "zoom": 3, "levels": bool, "tone": 1.0,
                   #  in a one-shot story "focus"/"at" set the drift's height; it always crosses the full width}
 
@@ -296,7 +305,7 @@ def _ground(art, theta, riff):
     if "detail" in riff:
         # A detail of the cover (3x by default), drifting on a small circle so it loops.
         z = float(look.get("zoom", 3)); side = int(W * z)
-        big = _prep(art, f"big{z}{look.get('levels')}", lambda: _levels(square(art, side)) if look.get("levels") else square(art, side))
+        big = _prep(art, f"big{z}{look.get('levels')}{look.get('floor', 0)}", lambda: _floor(_levels(square(art, side)) if look.get("levels") else square(art, side), look.get("floor", 0)))
         fx, fy = look.get("focus", (.5, .5))
         ax, ay = look.get("at", (.5, .5))                 # where on screen the focus sits
         t = theta or 0.0

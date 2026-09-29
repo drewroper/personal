@@ -760,7 +760,7 @@
       "worn_v": "5e02338f"
     },
     {
-      "no": 7,
+      "no": 20,
       "slug": "girl-talk-feed-the-animals",
       "artist": "Girl Talk",
       "title": "Feed the Animals",
@@ -851,7 +851,7 @@
       ],
       "track_count": 14,
       "runtime_ms": 3201000,
-      "date": "2026-09-29",
+      "date": "2026-10-12",
       "wear": {
         "level": "med"
       },
@@ -2275,7 +2275,7 @@
       "worn_v": "ce01a0c6"
     },
     {
-      "no": 20,
+      "no": 7,
       "slug": "phish-a-live-one",
       "artist": "Phish",
       "title": "A Live One",
@@ -2373,7 +2373,7 @@
       "art": "assets/40/phish-a-live-one.jpg",
       "art_back": "assets/40/phish-a-live-one-back.jpg",
       "art_back_src": "https://www.discogs.com/release/11053777 (US LP, Album, Reissue, Stereo 2017, JEMP 1089)",
-      "date": "2026-10-12",
+      "date": "2026-09-29",
       "wear": {
         "level": "med",
         "lock": true

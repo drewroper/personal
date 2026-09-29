@@ -16,6 +16,135 @@
   "albums": [
     {
       "no": 8,
+      "slug": "diiv-is-the-is-are",
+      "artist": "DIIV",
+      "title": "Is the Is Are",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 6790434051,
+      "label": "Captured Tracks",
+      "date": "2026-09-30",
+      "apple_url": "https://music.apple.com/us/album/is-the-is-are/6790434051",
+      "released": "2016-02-05",
+      "year": "2016",
+      "copyright": "℗ 2016 Captured Tracks",
+      "genre": "Alternative",
+      "track_count": 17,
+      "runtime_ms": 3807289,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Out of Mind",
+          "ms": 188050,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/94/df/d9/94dfd942-dbe5-937d-ea46-c1d132e9e208/mzaf_5533957371486911767.plus.aac.p.m4a"
+        },
+        {
+          "n": 2,
+          "title": "Under the Sun",
+          "ms": 227000,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/10/f0/27/10f027cd-7b74-7f87-051b-8d984d4df59f/mzaf_15254595927237576322.plus.aac.p.m4a"
+        },
+        {
+          "n": 3,
+          "title": "Bent (Roi's Song)",
+          "ms": 340366,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ad/ba/03/adba03fe-f9be-cf83-28dd-2faa3c47d40c/mzaf_10836406646794993581.plus.aac.p.m4a"
+        },
+        {
+          "n": 4,
+          "title": "Dopamine",
+          "ms": 235566,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/09/3b/30/093b307c-776c-5a0c-39d3-813173cd5647/mzaf_17458957054237316802.plus.aac.p.m4a"
+        },
+        {
+          "n": 5,
+          "title": "Blue Boredom (feat. Sky Ferreira)",
+          "ms": 153299,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/f1/f9/bb/f1f9bb35-7a42-90df-6c77-934a008f7359/mzaf_8873652855095094904.plus.aac.p.m4a"
+        },
+        {
+          "n": 6,
+          "title": "Valentine",
+          "ms": 197889,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/d1/f9/e7/d1f9e727-a481-5e18-cc88-a942b2c2debd/mzaf_5935139516308575751.plus.aac.p.m4a"
+        },
+        {
+          "n": 7,
+          "title": "Yr Not Far",
+          "ms": 199229,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/21/28/d6/2128d6ec-b739-74de-faf2-57da9b1c16e0/mzaf_7700190012960115414.plus.aac.p.m4a"
+        },
+        {
+          "n": 8,
+          "title": "Take Your Time",
+          "ms": 298349,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/13/60/0b/13600b36-95f8-d97b-2218-8a44980bf9f5/mzaf_10317640239391992631.plus.aac.p.m4a"
+        },
+        {
+          "n": 9,
+          "title": "Is the Is Are",
+          "ms": 188589,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/c2/7c/90/c27c90ea-8ab7-7e4d-49a3-e92030894b3a/mzaf_11321372845635214121.plus.aac.p.m4a"
+        },
+        {
+          "n": 10,
+          "title": "Mire (Grant's Song)",
+          "ms": 334832,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/e3/fc/7a/e3fc7a34-9d3d-7425-b5c7-37ad1698cb14/mzaf_14897425484796313524.plus.aac.p.m4a"
+        },
+        {
+          "n": 11,
+          "title": "Incarnate Devil",
+          "ms": 282591,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/bc/45/8c/bc458c84-1b9c-54e0-01b9-6fa93c432669/mzaf_9217125438769258029.plus.aac.p.m4a"
+        },
+        {
+          "n": 12,
+          "title": "(F**k)",
+          "ms": 16545,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/00/ba/45/00ba450b-e078-f487-9795-e8b44bd4ee88/mzaf_13250026295392762897.plus.aac.p.m4a"
+        },
+        {
+          "n": 13,
+          "title": "Healthy Moon",
+          "ms": 251630,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/a3/47/df/a347df9c-f400-b179-746e-0b881007b23b/mzaf_9265304077204200110.plus.aac.p.m4a"
+        },
+        {
+          "n": 14,
+          "title": "Loose Ends",
+          "ms": 192548,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/91/9a/2e/919a2ef6-5076-109e-1319-63cfca3601ac/mzaf_12448758087887763812.plus.aac.p.m4a"
+        },
+        {
+          "n": 15,
+          "title": "(Napa)",
+          "ms": 104097,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/c8/1c/bc/c81cbcef-6294-f3e8-f2f9-a05425ddc9e0/mzaf_11217897212592009454.plus.aac.p.m4a"
+        },
+        {
+          "n": 16,
+          "title": "Dust",
+          "ms": 274077,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/65/70/bc/6570bc72-eb53-2716-a3aa-243ed70fd843/mzaf_3498446104644485277.plus.aac.p.m4a"
+        },
+        {
+          "n": 17,
+          "title": "Waste of Breath",
+          "ms": 322632,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/13/dd/ae/13ddae94-1ec1-76e9-b207-a1422022011e/mzaf_12950203617290206061.plus.aac.p.m4a"
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/1e/2f/f6/1e2ff6f7-6ea4-4ff4-b9f3-13f4d0c3e708/cover.jpg/1800x1800bb.jpg",
+      "art": "assets/40/diiv-is-the-is-are.jpg",
+      "art_back": "assets/40/diiv-is-the-is-are-back.jpg",
+      "art_back_src": "https://www.discogs.com/release/8040863 (US LP, Album 2016, CT-231; paper tone matched to the front)",
+      "wear": {
+        "level": "med"
+      }
+    },
+    {
+      "no": 21,
       "slug": "dave-matthews-band-crash",
       "artist": "Dave Matthews Band",
       "title": "Crash",
@@ -113,14 +242,14 @@
       "art": "assets/40/dave-matthews-band-crash.jpg",
       "art_back": "assets/40/dave-matthews-band-crash-back.jpg",
       "art_back_src": "http://coverartarchive.org/release/c4335abe-ac67-44c6-87f5-b452d62b07d9/20335839949.jpg",
-      "date": "2026-09-30",
       "wear": {
         "level": "med",
         "surface": 2.2
       },
       "art_worn": "assets/40/worn/dave-matthews-band-crash.jpg",
       "art_back_worn": "assets/40/worn/dave-matthews-band-crash-back.jpg",
-      "worn_v": "034a3e7b"
+      "worn_v": "034a3e7b",
+      "date": "2026-10-13"
     },
     {
       "no": 4,

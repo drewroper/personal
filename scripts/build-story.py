@@ -271,7 +271,7 @@ def _prep(art, key, fn):
 
 
 def reset_caches():
-    _CACHE.clear(); _GRAY.clear()
+    _CACHE.clear(); _GRAY.clear(); _REVEAL_SRC.clear()
 
 
 def _levels(im):
@@ -348,6 +348,9 @@ def _t(theta):
     return theta / (2 * math.pi) * DURATION
 
 
+_REVEAL_SRC = {}
+
+
 def _reveal(cover, theta):
     """The cover resolves out of its own dither in hard steps — each step
     halves the cell size, so it's one-bit the whole way and never mushy.
@@ -359,9 +362,23 @@ def _reveal(cover, theta):
         k = (DURATION - t) / STEP_HOLD
     else:
         return cover
+    # A pale, low-contrast cover (Glow On's pink sky) dithers to near-white and shows nothing
+    # until the colour snaps in. Its `story.reveal` stretches the tones for the reveal only
+    # (`floor` keeps the sky a light grey, so the step to colour isn't a jump) and can start
+    # finer (`from`: cells across the first step). Every other cover resolves exactly as before.
+    rv = GROUND_LOOK.get("reveal") or {}
+    steps = tuple(max(g, int(rv.get("from", 0))) for g in REVEAL_STEPS)       # same count, so the timing never moves
+    src = cover
+    if rv:
+        key = (id(cover), rv.get("floor", 0))
+        if key not in _REVEAL_SRC:
+            f = float(rv.get("floor", 0))
+            a = np.asarray(_levels(cover), dtype=np.float32)
+            _REVEAL_SRC[key] = Image.fromarray(np.clip(f + a * (255 - f) / 255, 0, 255).astype(np.uint8), "RGB")
+        src = _REVEAL_SRC[key]
     if k < n:
-        return dither(cover, REVEAL_STEPS[int(max(k, 0))], on=LIGHT, off=BG, contrast=1.2, theta=theta)
-    fine = dither(cover, REVEAL_STEPS[-1], on=LIGHT, off=BG, contrast=1.2, theta=theta)
+        return dither(src, steps[int(max(k, 0))], on=LIGHT, off=BG, contrast=1.2, theta=theta)
+    fine = dither(src, steps[-1], on=LIGHT, off=BG, contrast=1.2, theta=theta)
     x = min(1.0, (k - n) * STEP_HOLD / SNAP)
     return Image.blend(fine, cover, x * x * (3 - 2 * x))
 

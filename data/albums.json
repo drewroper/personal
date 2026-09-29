@@ -368,7 +368,11 @@
         ],
         "zoom": 2.4,
         "levels": true,
-        "tone": 1.3
+        "tone": 1.3,
+        "reveal": {
+          "from": 32,
+          "floor": 70
+        }
       }
     },
     {

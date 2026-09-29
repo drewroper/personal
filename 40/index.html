@@ -816,23 +816,31 @@
         pop.style.transform = `translate3d(${px}px, ${py}px, 0) rotate(${tilt}deg)`;
         raf = cur ? requestAnimationFrame(tick) : 0;
       };
+      let mx = 0, my = 0;
       const show = (a, e) => {
-        cur = a; if (img.getAttribute('src') !== a.getAttribute('href')) img.src = a.getAttribute('href');
-        cap.innerHTML = caption(a.dataset.caption || '');
+        cur = a; mx = e.clientX; my = e.clientY;
+        const src = a.getAttribute('href');
         base = (Math.random() < .5 ? -1 : 1) * (2 + Math.random() * 3);
-        pop.hidden = false; pw = pop.offsetWidth; ph = pop.offsetHeight || pw * 1.4;
-        const fit = () => {                                                      // a landscape photo gets a wider print
-          pop.style.width = img.naturalWidth > img.naturalHeight ? '400px' : '';
+        // The print only appears once its own photo is in, so the last one never flashes up first.
+        const go = () => {
+          if (cur !== a) return;
+          cap.innerHTML = caption(a.dataset.caption || '');
+          pop.style.visibility = '';
+          pop.style.width = img.naturalWidth > img.naturalHeight ? '400px' : '';   // a landscape photo gets a wider print
           pw = pop.offsetWidth; ph = pop.offsetHeight;
+          place(mx, my);
+          x = tx; y = ty + 18; tilt = base * 2.2;                                // lands with a little drop and a twist
+          if (!raf) raf = requestAnimationFrame(tick);
+          dither(pop, 1);
         };
-        if (img.complete && img.naturalWidth) fit(); else img.onload = () => { if (cur) fit(); };   // first hover: size once the photo is in
-        place(e.clientX, e.clientY);
-        x = tx; y = ty + 18; tilt = base * 2.2;                                  // lands with a little drop and a twist
-        if (!raf) raf = requestAnimationFrame(tick);
-        dither(pop, 1);
+        pop.hidden = false;
+        if (img.getAttribute('src') === src && img.complete && img.naturalWidth) return go();
+        pop.style.visibility = 'hidden';
+        img.onload = go; img.src = src;
       };
       const hide = () => {
         if (!cur) return; cur = null;
+        if (pop.style.visibility === 'hidden') { pop.hidden = true; return; }  // never shown: nothing to dither out
         dither(pop, -1, () => { if (!cur) pop.hidden = true; });
       };
       document.addEventListener('pointerover', e => {
@@ -840,7 +848,7 @@
         const a = e.target.closest && e.target.closest('a[data-snap]');
         if (a && a !== cur) show(a, e);
       });
-      document.addEventListener('pointermove', e => { if (cur) place(e.clientX, e.clientY); }, { passive: true });
+      document.addEventListener('pointermove', e => { if (cur) { mx = e.clientX; my = e.clientY; place(mx, my); } }, { passive: true });
       document.addEventListener('pointerout', e => {
         if (cur && !(e.relatedTarget && cur.contains(e.relatedTarget)) && e.target.closest && e.target.closest('a[data-snap]') === cur) hide();
       });
@@ -856,17 +864,19 @@
       const open = a => {
         hide(); opener = a;
         bigCap.innerHTML = caption(a.dataset.caption || '');
-        big.src = a.getAttribute('href'); big.alt = bigCap.textContent || a.textContent.trim();
-        const fitBig = () => {                                                   // as big as the screen allows, portrait or landscape
+        const src = a.getAttribute('href'); big.alt = bigCap.textContent || a.textContent.trim();
+        const ready = () => {                                                    // as big as the screen allows, portrait or landscape
           const ar = big.naturalWidth / big.naturalHeight || .74;
           fig.style.width = `min(100%, ${ar > 1 ? 760 : 520}px, calc((100dvh - 150px) * ${ar.toFixed(3)}))`;
+          fig.style.visibility = ''; dither(fig, 1);
         };
-        if (big.complete && big.naturalWidth) fitBig(); else big.onload = fitBig;
         box.setAttribute('aria-label', big.alt);
         fig.style.setProperty('--tilt', `${(Math.random() < .5 ? -1 : 1) * (1 + Math.random() * 2.5)}deg`);
         document.body.style.overflow = 'hidden';
         box.hidden = false; void box.offsetWidth; box.classList.add('is-open');
-        dither(fig, 1); closeBtn.focus({ preventScroll: true });
+        closeBtn.focus({ preventScroll: true });
+        if (big.getAttribute('src') === src && big.complete && big.naturalWidth) ready();
+        else { fig.style.visibility = 'hidden'; big.onload = ready; big.src = src; }   // no flash of the last photo
       };
       const close = () => {
         if (box.hidden || !box.classList.contains('is-open')) return;

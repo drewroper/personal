@@ -281,6 +281,10 @@
       letter-spacing: .02em; line-height: 1.3; color: #3a3935; text-wrap: balance; }   /* written on the print's border */
     .lightbox__fig figcaption { margin-top: 9px; }
     .snap figcaption:empty, .lightbox__fig figcaption:empty { display: none; }
+    .snap figcaption a, .lightbox__fig figcaption a { color: inherit; border-bottom: 0; text-decoration: underline;
+      text-decoration-thickness: 1px; text-underline-offset: .18em; text-decoration-color: rgba(58, 57, 53, .45); }
+    .lightbox__fig figcaption a { cursor: pointer; }
+    .lightbox__fig figcaption a:hover { color: var(--bg); text-decoration-color: currentColor; }
     .snap[hidden], .lightbox[hidden] { display: none; }
     .lightbox { position: fixed; inset: 0; z-index: 210; display: grid; place-items: center; cursor: zoom-out;
       padding: calc(56px + env(safe-area-inset-top, 0px)) 16px calc(40px + var(--sab));
@@ -597,11 +601,16 @@
     const wv = a => a.worn_v ? `?v=${a.worn_v}` : '';     // sleeve version stamp: a re-baked sleeve is fetched fresh, not from cache
     const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
     // Blurbs are plain paragraphs; _underscores_ become italics for titles.
-    // Blurb markup: _italic_, [words](https://link) and [words](photo:assets/…jpg "Caption"). Escaped first, so only these come through.
+    // Blurb markup: _italic_, [words](https://link) and [words](photo:assets/…jpg "Caption, [links](https://…) ok"). Escaped first, so only these come through.
     const SNAP_ICO = '<svg class="snap-ico" width="12" height="10" viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="round" aria-hidden="true"><rect x=".5" y=".5" width="11" height="9" rx="1"/><path d="M2 8l3-3.2 2 2 1.4-1.3L10 8"/></svg>';
+    // A caption may hold its own [link](https://…). It rides in an attribute, so its markup characters are
+    // entity-coded there (the link and italic passes below must not touch it) and rendered when the print opens.
+    const attrSafe = c => c.replace(/[\[\]()_]/g, ch => `&#${ch.charCodeAt(0)};`);
+    const caption = c => esc(c).replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, (m, t, u) => `<a href="${u}" target="_blank" rel="noopener">${t}</a>`)
+      .replace(/\n/g, '<br>');                                                             // a new line, e.g. for a photo credit
     const inline = s => esc(s)
-      .replace(/\[([^\]]+)\]\(photo:([\w./-]+)(?: &quot;(.+?)&quot;)?\)/g, (m, t, u, c) =>                          // a photo (with an optional "caption"): pops up, not a new page
-        `<a href="../${u}" data-snap${c ? ` data-caption="${c}"` : ''} aria-haspopup="dialog">${t}${SNAP_ICO}</a>`)
+      .replace(/\[([^\]]+)\]\(photo:([\w./-]+)(?: &quot;([\s\S]+?)&quot;)?\)/g, (m, t, u, c) =>                          // a photo (with an optional "caption"): pops up, not a new page
+        `<a href="../${u}" data-snap${c ? ` data-caption="${attrSafe(c)}"` : ''} aria-haspopup="dialog">${t}${SNAP_ICO}</a>`)
       .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, (m, t, u) => `<a href="${u}" target="_blank" rel="noopener">${t}</a>`)
       .replace(/(^|[^\w/])_([^_]+)_(?![\w])/g, '$1<em>$2</em>');
     // A paragraph whose every line starts with "> " is a lyric: one line per line, set off from the prose.
@@ -807,7 +816,7 @@
       };
       const show = (a, e) => {
         cur = a; if (img.getAttribute('src') !== a.getAttribute('href')) img.src = a.getAttribute('href');
-        cap.textContent = a.dataset.caption || '';
+        cap.innerHTML = caption(a.dataset.caption || '');
         base = (Math.random() < .5 ? -1 : 1) * (2 + Math.random() * 3);
         pop.hidden = false; pw = pop.offsetWidth; ph = pop.offsetHeight || pw * 1.4;
         if (!img.complete) img.onload = () => { if (cur) ph = pop.offsetHeight; };  // first hover: height once the photo is in
@@ -840,8 +849,8 @@
       let opener = null;
       const open = a => {
         hide(); opener = a;
-        big.src = a.getAttribute('href'); big.alt = a.dataset.caption || a.textContent.trim();
-        bigCap.textContent = a.dataset.caption || '';
+        bigCap.innerHTML = caption(a.dataset.caption || '');
+        big.src = a.getAttribute('href'); big.alt = bigCap.textContent || a.textContent.trim();
         box.setAttribute('aria-label', big.alt);
         fig.style.setProperty('--tilt', `${(Math.random() < .5 ? -1 : 1) * (1 + Math.random() * 2.5)}deg`);
         document.body.style.overflow = 'hidden';
@@ -861,7 +870,7 @@
         if (!a || e.metaKey || e.ctrlKey || e.shiftKey) return;                 // a modified click still opens the file
         e.preventDefault(); open(a);
       });
-      box.addEventListener('click', close);
+      box.addEventListener('click', e => { if (!e.target.closest('figcaption a')) close(); });   // the credit link opens; anywhere else puts it down
       addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
     })();
 

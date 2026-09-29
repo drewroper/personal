@@ -821,7 +821,11 @@
         cap.innerHTML = caption(a.dataset.caption || '');
         base = (Math.random() < .5 ? -1 : 1) * (2 + Math.random() * 3);
         pop.hidden = false; pw = pop.offsetWidth; ph = pop.offsetHeight || pw * 1.4;
-        if (!img.complete) img.onload = () => { if (cur) ph = pop.offsetHeight; };  // first hover: height once the photo is in
+        const fit = () => {                                                      // a landscape photo gets a wider print
+          pop.style.width = img.naturalWidth > img.naturalHeight ? '400px' : '';
+          pw = pop.offsetWidth; ph = pop.offsetHeight;
+        };
+        if (img.complete && img.naturalWidth) fit(); else img.onload = () => { if (cur) fit(); };   // first hover: size once the photo is in
         place(e.clientX, e.clientY);
         x = tx; y = ty + 18; tilt = base * 2.2;                                  // lands with a little drop and a twist
         if (!raf) raf = requestAnimationFrame(tick);
@@ -853,6 +857,11 @@
         hide(); opener = a;
         bigCap.innerHTML = caption(a.dataset.caption || '');
         big.src = a.getAttribute('href'); big.alt = bigCap.textContent || a.textContent.trim();
+        const fitBig = () => {                                                   // as big as the screen allows, portrait or landscape
+          const ar = big.naturalWidth / big.naturalHeight || .74;
+          fig.style.width = `min(100%, ${ar > 1 ? 760 : 520}px, calc((100dvh - 150px) * ${ar.toFixed(3)}))`;
+        };
+        if (big.complete && big.naturalWidth) fitBig(); else big.onload = fitBig;
         box.setAttribute('aria-label', big.alt);
         fig.style.setProperty('--tilt', `${(Math.random() < .5 ? -1 : 1) * (1 + Math.random() * 2.5)}deg`);
         document.body.style.overflow = 'hidden';

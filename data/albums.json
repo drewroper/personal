@@ -3382,14 +3382,14 @@
       "slug": "phish-a-live-one",
       "artist": "Phish",
       "title": "A Live One",
-      "discovered": "7th grade, via a neighbor's older brother and a Honda Civic bumper sticker.",
+      "discovered": "Sometime in 7th grade",
       "blurb": [
-        "And now for something completely different. This is the band I get the most shit for from my friends, and 25 years later I'm still not budging. Blame it on going to a private middle school where everyone seemed to have an older brother into The Samples, Phish, DMB and The String Cheese Incident. I never stood a chance.",
-        "Our neighbor's older brother followed Phish around the country and had a Phish sticker on his 1990 Civic. I stared at that thing for years with no idea what it meant. Then I finally started listening, and it all clicked. Pretty soon there was [a Phish poster](photo:assets/40/photos/phish-poster.jpg \"The poster from my basement bedroom\") in my basement bedroom, one of three band posters in a sea of snowboarding posters and stickers.",
-        "This album takes me right back to mowing the grass for my allowance with my Sony Walkman and those behind-the-ear headphones. It's a two-disc set, and disc one got way more time in my CD player. In my defense, disc two has a 31-minute \"Tweezer\" on it. That's a big ask for a 7th grader. I never did save up enough for the five-disc changer for my car.",
-        "I memorized all 21 minutes of \"You Enjoy Myself.\" Every melody, every bass line, every section. When I got my license, I'd drive my friends around in my Jeep playing whatever emo or rap they wanted. Then I'd drop off the last one and crank YEM the whole way home. Nobody had to know.",
-        "For the record, we did not name our firstborn after \"Wilson.\" But it's a nice homage to an absolute banger. (It opens disc two, the one that got less play. Sorry, buddy.)",
-        "Phish is probably the only band on this list I've never seen live, which is extra ironic for a live album. I'll fix that one day. I'll be the 40-year-old first-timer air-bassing his way through all 21 minutes of YEM."
+        "And now for something completely different. This is the band I get the most shit for from my friends, and nearly 30 years later I'm still not budging. Blame it on going to a private middle school where everyone seemed to have an older brother into The Samples, Phish, DMB, and The String Cheese Incident. I never stood a chance.",
+        "Even our neighbor followed Phish around the country and had a Phish sticker on his 1990 Civic. I stared at that thing for years with no idea what it meant. Pretty soon there was [a Phish poster](photo:assets/40/photos/phish-poster.jpg \"The poster from my basement bedroom\") in my basement bedroom, one of three band posters in a sea of snowboarding posters and stickers.",
+        "This album takes me right back to mowing the grass for my allowance with my Sony Walkman and those behind-the-ear headphones. It's a two-disc set, and disc one got way more time in my CD player. In my defense, disc two has a 31-minute \"Tweezer\" on it. That's a big ask for a 7th grader.",
+        "I memorized all 21 minutes of \"You Enjoy Myself.\" When I got my license, I'd drive my friends around in my Jeep playing whatever emo or rap they wanted. Then I'd drop off the last one and crank YEM for the ride home. Nobody had to know. (I never did save up for a five-disc changer, so disc one got spun until it skipped.)",
+        "_For the record: we did not name our firstborn after \"Wilson.\" But it's a nice homage to an absolute banger. It's the first track on disc two, the one that got less play. Sorry, buddy._",
+        "Phish is probably the only band on this list I've never seen live, which is extra ironic for a live album. I'll fix that one day, and I'll be the 40-year-old first-timer slapping air bass through every minute of YEM."
       ],
       "links": {
         "spotify": "https://open.spotify.com/album/4UTjy2dLYT8i8ItyboijlW"
@@ -3502,7 +3502,8 @@
         "levels": true,
         "tone": 1.4,
         "floor": 28
-      }
+      },
+      "live": true
     },
     {
       "no": 5,

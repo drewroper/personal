@@ -274,7 +274,7 @@
        beside the cursor (hover) or tosses into a lightbox (tap). */
     .snap-ico { display: inline-block; margin-left: .3em; vertical-align: -.02em; }
     a[data-snap] { cursor: zoom-in; }
-    .snap { position: fixed; left: 0; top: 0; z-index: 150; width: 280px; padding: 6px; background: var(--text); border-radius: 3px;
+    .snap { position: fixed; left: 0; top: 0; margin: 0; z-index: 150; width: 280px; padding: 6px; background: var(--text); border-radius: 3px;
       pointer-events: none; will-change: transform; box-shadow: 0 22px 44px rgba(0,0,0,.6), 0 3px 8px rgba(0,0,0,.45); }
     .snap img, .lightbox__fig img { display: block; width: 100%; height: auto; border-radius: 1px; }
     .snap figcaption, .lightbox__fig figcaption { margin: 7px 1px 1px; font-family: var(--font-mono); font-size: var(--mono-size);
@@ -785,24 +785,33 @@
       const pop = document.createElement('figure'); pop.className = 'snap'; pop.hidden = true; pop.setAttribute('aria-hidden', 'true');
       pop.innerHTML = '<img alt=""><figcaption></figcaption>'; document.body.appendChild(pop);
       const img = pop.firstChild, cap = pop.lastChild;
-      let cur = null, x = 0, y = 0, tx = 0, ty = 0, vx = 0, tilt = 0, base = 0, raf = 0;
+      let cur = null, x = 0, y = 0, tx = 0, ty = 0, vx = 0, tilt = 0, base = 0, raf = 0, pw = 292, ph = 400;
+      const EDGE = 16;                                                           // the print never goes nearer the window edge than this
+      const vw = () => document.documentElement.clientWidth, vh = () => document.documentElement.clientHeight;
       const place = (mx, my) => {
-        const w = pop.offsetWidth || 262, h = pop.offsetHeight || w * 1.32, gap = 28;
-        tx = mx + gap + w > innerWidth - 12 ? mx - gap - w : mx + gap;           // right of the cursor, or left near the edge
-        ty = Math.min(Math.max(12, my - h * .55), innerHeight - h - 12);
+        const gap = 28;
+        tx = mx + gap + pw > vw() - EDGE ? mx - gap - pw : mx + gap;             // right of the cursor, or left near the edge
+        ty = my - ph * .55;
       };
+      const clamp = (v, lo, hi) => Math.min(Math.max(v, lo), Math.max(lo, hi));
       const tick = () => {
         const nx = x + (tx - x) * .22, ny = y + (ty - y) * .22;
         vx = nx - x; x = nx; y = ny;
         tilt += (base + Math.max(-9, Math.min(9, vx * .7)) - tilt) * .15;      // swings with the pointer, settles back
-        pop.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${tilt}deg)`;
+        // Kept inside the window, tilt included: a turned print is wider and taller than its box.
+        const r = tilt * Math.PI / 180, c = Math.abs(Math.cos(r)), sn = Math.abs(Math.sin(r));
+        const ex = (pw * c + ph * sn - pw) / 2, ey = (pw * sn + ph * c - ph) / 2;
+        const px = clamp(x, EDGE + ex, vw() - pw - EDGE - ex), py = clamp(y, EDGE + ey, vh() - ph - EDGE - ey);
+        pop.style.transform = `translate3d(${px}px, ${py}px, 0) rotate(${tilt}deg)`;
         raf = cur ? requestAnimationFrame(tick) : 0;
       };
       const show = (a, e) => {
         cur = a; if (img.getAttribute('src') !== a.getAttribute('href')) img.src = a.getAttribute('href');
         cap.textContent = a.dataset.caption || '';
         base = (Math.random() < .5 ? -1 : 1) * (2 + Math.random() * 3);
-        pop.hidden = false; place(e.clientX, e.clientY);
+        pop.hidden = false; pw = pop.offsetWidth; ph = pop.offsetHeight || pw * 1.4;
+        if (!img.complete) img.onload = () => { if (cur) ph = pop.offsetHeight; };  // first hover: height once the photo is in
+        place(e.clientX, e.clientY);
         x = tx; y = ty + 18; tilt = base * 2.2;                                  // lands with a little drop and a twist
         if (!raf) raf = requestAnimationFrame(tick);
         dither(pop, 1);

@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 """A week of Instagram stories side by side, playing in sync, on one 16:9 video (for Slack).
 
-  scripts/build-week.py 2 8          # days 02-08 -> out/stories/week/days-02-08.mp4 (+ a still)
+  scripts/build-week.py 2 8                  # days 02-08 -> out/stories/week/days-02-08.mp4 (+ a still)
+  scripts/build-week.py 2 8 --stagger 0.5    # each story starts half a second after the one before
 
 Reads the finished story videos in out/stories/instagram/ (story-day-NN-*.mp4; Day 01 is
 story-3-day-01-*.mp4), scales each to a phone-shaped tile with the story's own rounded
 corners and a hairline edge, and lays them in one row under a small header. Every story
-starts on the same frame, so the build-ins and drifts line up and the system shows.
+starts on the same frame, so the build-ins and drifts line up and the system shows. With
+--stagger, each phone waits dark for its turn, so the build-ins ripple left to right; the
+video runs long enough for the last one to finish, and the early ones hold their last frame.
 """
 import subprocess, sys
 from pathlib import Path
@@ -36,6 +39,7 @@ def story_file(day):
 
 def main():
     a, b = (int(x) for x in sys.argv[1:3])
+    stagger = float(sys.argv[sys.argv.index("--stagger") + 1]) if "--stagger" in sys.argv else 0.0
     days = list(range(a, b + 1))
     n = len(days)
     tw = (W - 2 * MARGIN - (n - 1) * GAP) // n
@@ -69,7 +73,8 @@ def main():
     readers = [subprocess.Popen([ff, "-loglevel", "error", "-i", str(story_file(day)),
                                  "-vf", f"scale={tw}:{th}:flags=lanczos", "-f", "rawvideo", "-pix_fmt", "rgb24", "-"],
                                 stdout=subprocess.PIPE) for day in days]
-    out = ROOT / "out" / "stories" / "week" / f"days-{a:02d}-{b:02d}.mp4"
+    out = ROOT / "out" / "stories" / "week" / (f"days-{a:02d}-{b:02d}" + ("-staggered" if stagger else "") + ".mp4")
+    delay = round(stagger * FPS)                                  # frames between one phone and the next
     out.parent.mkdir(parents=True, exist_ok=True)
     enc = subprocess.Popen([ff, "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}",
                             "-r", str(FPS), "-i", "-",
@@ -79,16 +84,19 @@ def main():
                             "-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709", "-color_range", "tv",
                             "-movflags", "+faststart", str(out)], stdin=subprocess.PIPE)
     bg = frame0[top:top + th].astype(np.float32)
+    held = [None] * n                                             # each phone's latest frame
     last = None
-    for f in range(FPS * SECS):
+    for f in range(FPS * SECS + delay * (n - 1)):
         frame = frame0.copy()
         for i, rd in enumerate(readers):
+            if f < i * delay:
+                continue                                          # not its turn yet: an empty, dark phone
             buf = rd.stdout.read(tw * th * 3)
-            if len(buf) < tw * th * 3:
-                continue                                          # a shorter story holds its last frame
-            tile = np.frombuffer(buf, np.uint8).reshape(th, tw, 3).astype(np.float32)
-            under = bg[:, xs[i]:xs[i] + tw]
-            frame[top:top + th, xs[i]:xs[i] + tw] = (tile * mk + under * (1 - mk)).astype(np.uint8)
+            if len(buf) == tw * th * 3:
+                tile = np.frombuffer(buf, np.uint8).reshape(th, tw, 3).astype(np.float32)
+                held[i] = (tile * mk + bg[:, xs[i]:xs[i] + tw] * (1 - mk)).astype(np.uint8)
+            if held[i] is not None:                               # finished: hold the last frame
+                frame[top:top + th, xs[i]:xs[i] + tw] = held[i]
         enc.stdin.write(frame.tobytes()); last = frame
     enc.stdin.close(); enc.wait()
     for rd in readers: rd.wait()

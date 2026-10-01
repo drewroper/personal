@@ -1099,7 +1099,7 @@
       "worn_v": "d7d941cb"
     },
     {
-      "no": 9,
+      "no": 15,
       "slug": "run-the-jewels-run-the-jewels-2",
       "artist": "Run the Jewels",
       "title": "Run the Jewels 2",
@@ -1197,7 +1197,7 @@
       "art": "assets/40/run-the-jewels-run-the-jewels-2.jpg",
       "art_back": "assets/40/run-the-jewels-run-the-jewels-2-back.jpg",
       "art_back_src": "https://www.discogs.com/release/6093939 (US LP, Album, Special Edition 2014, MSAP0005LP)",
-      "date": "2026-10-01",
+      "date": "2026-10-07",
       "wear": {
         "level": "high",
         "bends": 2
@@ -1872,7 +1872,7 @@
       "worn_v": "40aaf78d"
     },
     {
-      "no": 15,
+      "no": 9,
       "slug": "ratatat-classics",
       "artist": "Ratatat",
       "title": "Classics",
@@ -1964,7 +1964,7 @@
       "art": "assets/40/ratatat-classics.jpg",
       "art_back": "assets/40/ratatat-classics-back.jpg",
       "art_back_src": "https://www.discogs.com/release/834957 (UK & US LP, Album 2006, XLLP 198)",
-      "date": "2026-10-07",
+      "date": "2026-10-01",
       "wear": {
         "level": "high",
         "surface": 2.4

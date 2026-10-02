@@ -2965,7 +2965,8 @@
         "levels": true,
         "tone": 1.15,
         "rise": 0.05
-      }
+      },
+      "live": true
     },
     {
       "no": null,

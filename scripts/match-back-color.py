@@ -6,7 +6,8 @@ shifted, or vignetted).
 
 Finds the ground (pixels close to the back's own ground colour), measures it locally so a vignette
 or uneven light is flattened too, and moves it to the target. Type and art keep their colours; their
-antialiased edges move only as far as they are made of the ground. Used for Run the Jewels 2.
+antialiased edges move only as far as they are made of the ground. Used for Run the Jewels 2
+(its back measured 196,34,53 against the front's 226,42,40).
 """
 import sys
 import numpy as np

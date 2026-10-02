@@ -921,3 +921,5 @@ if __name__ == '__main__':
             a['worn_v'] = h.hexdigest()[:8]                  # the page adds ?v= so a re-bake is never served from cache
             a['wear'] = {**(a.get('wear') or {}), 'level': (a.get('wear') or {}).get('level', 'med')}
     data_path.write_text(json.dumps(doc, indent=2, ensure_ascii=False) + '\n')
+    import subprocess                                         # the page serves WebP copies: keep them in step
+    subprocess.run([sys.executable, str(ROOT / 'scripts' / 'make-webp.py')], check=True)

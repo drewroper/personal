@@ -8,6 +8,7 @@
   <meta name="theme-color" content="#0c0c0d" />
   <link rel="icon" type="image/svg+xml" href="../assets/dr-logo.svg" />
   <link rel="preload" href="../assets/fonts/GeistPixel-Square.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="../assets/fonts/Porca.woff2" as="font" type="font/woff2" crossorigin />
   <meta property="og:title" content="40 albums · 40 days" />
   <meta property="og:description" content="40 albums that shaped me, one a day, before I turn 40." />
   <meta property="og:url" content="https://drewroper.com/40" />
@@ -22,7 +23,7 @@
        11px for labels and metadata. The About H1 is Porca, self-hosted. */
     @font-face {
       font-family: 'Porca'; font-weight: 400; font-display: swap;
-      src: url('../assets/fonts/Porca.otf') format('opentype');
+      src: url('../assets/fonts/Porca.woff2') format('woff2'), url('../assets/fonts/Porca.otf') format('opentype');
     }
     /* Geist Pixel (Square), Vercel x basement.studio, SIL OFL: every mono label on the page. */
     @font-face {
@@ -600,7 +601,17 @@
     const FLIP_ICON = '<svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 8a5.5 5.5 0 1 1-1.8-4.1"/><path d="M13.5 2.5v3h-3"/></svg>';
     const DATA    = test ? '../data/albums.test.json' : '../data/albums.json';
 
-    const wv = a => a.worn_v ? `?v=${a.worn_v}` : '';     // sleeve version stamp: a re-baked sleeve is fetched fresh, not from cache
+    const wv = a => a.worn_v ? `?v=${a.worn_v}` : '';
+    // A worn sleeve as WebP at the size the screen needs (1200px desktop/Retina, 800px phones, 360px grid);
+    // the JPEG stays the master. sizes: the cover's rendered width on each layout.
+    const SIZES_COVER = '(min-width: 1024px) 540px, min(calc(100vw - 40px), 640px)';
+    const SIZES_GRID  = '(min-width: 720px) 160px, 20vw';
+    const sleeve = (path, a, sizes, small = 800) => {
+      const v = wv(a), w = (path.match(/^assets\/40\/worn\/(.+)\.jpg$/) || [])[1];
+      if (!w) return `src="../${esc(path)}${v}"`;
+      const u = n => `../assets/40/worn/webp/${esc(w)}${n ? '-' + n : ''}.webp${v}`;
+      return `src="${u(0)}" srcset="${u(small)} ${small}w, ${u(0)} 1200w" sizes="${sizes}"`;
+    };     // sleeve version stamp: a re-baked sleeve is fetched fresh, not from cache
     const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
     // Blurbs are plain paragraphs; _underscores_ become italics for titles.
     // Blurb markup: _italic_, [words](https://link) and [words](photo:assets/…jpg "Caption, [links](https://…) ok"). Escaped first, so only these come through.
@@ -679,7 +690,7 @@
 
     // The back of the record: the real back cover when we found one, else the tracklist set in mono.
     function back(a) {
-      if (WORN && a.art_back_worn) return `<img class="is-square" src="../${esc(a.art_back_worn)}${wv(a)}" alt="" loading="lazy" />`;
+      if (WORN && a.art_back_worn) return `<img class="is-square" ${sleeve(a.art_back_worn, a, SIZES_COVER)} alt="" loading="lazy" />`;
       if (a.art_back) return `<img src="../${esc(a.art_back)}" alt="" loading="lazy" onload="if (Math.max(this.naturalWidth, this.naturalHeight) / Math.min(this.naturalWidth, this.naturalHeight) < 1.08) this.classList.add('is-square')" />`;
       if (!a.tracks || !a.tracks.length) return '';
       const n = a.tracks.length, size = n > 22 ? ' is-xlong' : n > 14 ? ' is-long' : '';
@@ -704,7 +715,7 @@
         <div class="entry__grid">
           <button class="entry__cover-wrap" type="button" aria-label="Flip ${esc(a.title)} over" aria-pressed="false" style="display:block;width:100%;padding:0;border:0;background:none;text-align:left;">
             <div class="flip">
-              ${a.art ? `<img class="entry__cover flip__front" src="../${esc(WORN && a.art_worn ? a.art_worn + wv(a) : a.art)}" alt="${esc(a.title)} cover" loading="lazy" />`
+              ${a.art ? `<img class="entry__cover flip__front" ${WORN && a.art_worn ? sleeve(a.art_worn, a, SIZES_COVER) : `src="../${esc(a.art)}"`} alt="${esc(a.title)} cover" loading="lazy" />`
                       : `<div class="entry__cover entry__cover--empty flip__front" aria-label="${esc(a.title)} cover"><span>?</span></div>`}
               <div class="flip__back" aria-hidden="true">${back(a)}</div>
             </div>
@@ -1515,7 +1526,7 @@
         const byNo = new Map(slotted.map(a => [a.no, a]));
         document.getElementById('js-grid').innerHTML = Array.from({ length: meta.total }, (_, i) => {
           const a = byNo.get(i + 1);
-          if (a && isOut(a)) return `<a href="#${pad(a.no)}" title="Day ${pad(a.no)} · ${esc(a.artist)} — ${esc(a.title)}"><img src="../${esc((WORN && a.art_worn) ? a.art_worn + wv(a) : a.art || '')}" alt="" loading="lazy"></a>`;
+          if (a && isOut(a)) return `<a href="#${pad(a.no)}" title="Day ${pad(a.no)} · ${esc(a.artist)} — ${esc(a.title)}"><img ${WORN && a.art_worn ? sleeve(a.art_worn, a, SIZES_GRID, 360) : `src="../${esc(a.art || '')}"`} alt="" loading="lazy"></a>`;
           return `<span aria-hidden="true">${pad(i + 1)}</span>`;
         }).join('');
         const last = document.querySelector('#js-grid a:nth-child(40)');

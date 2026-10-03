@@ -3070,7 +3070,7 @@
       "art_back_src": "https://www.discogs.com/release/33131748 (US 2LP, Album, Reissue, Repress 2025, 602475681908)",
       "wear": {
         "level": "high",
-        "edge": 3.5,
+        "edge": 2.45,
         "surface": 2.4,
         "bends": 2,
         "fold": 1.2,
@@ -3078,7 +3078,7 @@
       },
       "art_worn": "assets/40/worn/brand-new-the-devil-and-god-are-raging-inside-me.jpg",
       "art_back_worn": "assets/40/worn/brand-new-the-devil-and-god-are-raging-inside-me-back.jpg",
-      "worn_v": "e8eeab49",
+      "worn_v": "b4e39a97",
       "links": {
         "spotify": "https://open.spotify.com/album/2YnqAuFmC2r8JeQVOIozTy"
       },

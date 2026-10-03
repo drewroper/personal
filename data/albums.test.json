@@ -1207,13 +1207,11 @@
       "worn_v": "25cb94e3"
     },
     {
-      "no": 11,
       "slug": "brand-new-the-devil-and-god-are-raging-inside-me",
       "artist": "Brand New",
       "title": "The Devil and God Are Raging Inside Me",
       "discovered": "",
       "blurb": [],
-      "date": "2026-10-03",
       "apple_id": 1440754537,
       "apple_url": "https://music.apple.com/us/album/the-devil-and-god-are-raging-inside-me/1440754537",
       "released": "2006-01-01",
@@ -2396,7 +2394,7 @@
       "worn_v": "7d8c13ae"
     },
     {
-      "no": 19,
+      "no": 11,
       "slug": "brand-new-deja-entendu",
       "artist": "Brand New",
       "title": "Deja Entendu",
@@ -2488,7 +2486,7 @@
       },
       "art_back": "assets/40/brand-new-deja-entendu-back.jpg",
       "art_back_src": "https://www.discogs.com/release/622155 (US LP, Album 2003, 646920140626)",
-      "date": "2026-10-11",
+      "date": "2026-10-03",
       "wear": {
         "level": "med",
         "edge": 3

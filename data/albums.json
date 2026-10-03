@@ -1527,12 +1527,21 @@
       "art_back_src": "https://coverartarchive.org/release/9108adbb-b065-408b-9f59-c1af1f4a241a/11144526053.jpg"
     },
     {
-      "no": 19,
+      "no": 11,
       "slug": "brand-new-deja-entendu",
       "artist": "Brand New",
       "title": "Deja Entendu",
-      "discovered": "",
-      "blurb": [],
+      "discovered": "2003, age 16",
+      "blurb": [
+        "Tonight I'm seeing Brand New at the Aragon in Chicago on the _Devil and God_ 20th anniversary tour. Yes, I realize this post isn't about _Devil and God_. It's about the album that started my unhealthy obsession with this band.",
+        "Nothing hit me harder at the time than _Deja Entendu_. It came out in 2003, still in the honeymoon period with my car, when I'd go out of my way to cruise around just to listen to music. I already knew every word to _Your Favorite Weapon_, but \"Jude Law and a Semester Abroad\" had nothing on the energy and intensity of this record. It felt grown up.",
+        "This was peak early-2000s me: skate and snowboard culture, emo, and plenty of teen angst. Winamp was always open, and I downloaded every _Deja_ demo and live song I could find on Kazaa. (LimeWire? BearShare? I'm dating myself.)",
+        "I remember catching the video for \"The Quiet Things That No One Ever Knows\" on what must have been MTV2. Vinnie's stupid hat. The car crash. Even the blue-green hue of the color grade has stuck with me.",
+        "It was the only thing in my CD player at Hidden Valley, and if you've been to that ditch outside St. Louis, you know most of your time is spent on the lifts. This album got a lot of chairlift time.",
+        "The original 2003 vinyl was 1,000 copies and near impossible to find. Twelve years later, it finally got repressed as a Record Store Day exclusive, limited to 1,400 copies. My buddy Jim and I got in line at 10 p.m. the night before with a cooler of beer. We ordered pizza, met fellow record enthusiasts, and stayed up all night being stupid. We had no idea how many copies they'd have, but we were first in line, so we knew we'd get at least one.",
+        "That night took the obsession to diabolical levels, much to Megan's disgust. My \"emo\" buddies are always happy to fuel it. Misery loves company.",
+        "Nowadays this one's more about nostalgia than actually listening to it. _The Devil and God Are Raging Inside Me_ is the one I'd rather put on. But _Deja_ stopped me in my tracks at 16, so it had to be the one on this list."
+      ],
       "apple_id": 1440928946,
       "apple_url": "https://music.apple.com/us/album/deja-entendu/1440928946",
       "released": "2003-06-17",
@@ -1617,14 +1626,28 @@
       },
       "art_back": "assets/40/brand-new-deja-entendu-back.jpg",
       "art_back_src": "https://www.discogs.com/release/622155 (US LP, Album 2003, 646920140626)",
-      "date": "2026-10-11",
+      "date": "2026-10-03",
       "wear": {
         "level": "med",
         "edge": 3
       },
       "art_worn": "assets/40/worn/brand-new-deja-entendu.jpg",
       "art_back_worn": "assets/40/worn/brand-new-deja-entendu-back.jpg",
-      "worn_v": "8ebbf8aa"
+      "worn_v": "8ebbf8aa",
+      "story": {
+        "focus": [
+          0.5,
+          0.75
+        ],
+        "at": [
+          0.5,
+          0.85
+        ],
+        "zoom": 3.0,
+        "levels": true,
+        "rise": 0.2,
+        "floor": 40
+      }
     },
     {
       "no": 8,
@@ -2968,7 +2991,6 @@
       "live": true
     },
     {
-      "no": 11,
       "slug": "brand-new-the-devil-and-god-are-raging-inside-me",
       "artist": "Brand New",
       "title": "The Devil and God Are Raging Inside Me",
@@ -2980,7 +3002,6 @@
         "I haven't wanted to listen to _Deja_ in years. I'll never get sick of _Devil and God_.",
         "I saw them play it front to back on the 10-year anniversary run in Milwaukee in 2016. Today I'm seeing the 20th anniversary tour at the Aragon in Chicago. Seeing this album every ten years is becoming a thing."
       ],
-      "date": "2026-10-03",
       "apple_id": 1440754537,
       "apple_url": "https://music.apple.com/us/album/the-devil-and-god-are-raging-inside-me/1440754537",
       "released": "2006-11-21",

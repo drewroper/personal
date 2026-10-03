@@ -3092,10 +3092,10 @@
           0.2
         ],
         "zoom": 3.0,
-        "levels": true,
         "tone": 1.15,
         "rise": 0.05,
-        "floor": 30
+        "floor": 30,
+        "contrast": 0.9
       }
     },
     {

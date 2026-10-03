@@ -387,7 +387,7 @@
       }
     },
     {
-      "no": 11,
+      "no": 15,
       "slug": "oasis-what-s-the-story-morning-glory",
       "artist": "Oasis",
       "title": "(What's the Story) Morning Glory?",
@@ -485,7 +485,7 @@
       },
       "art_back": "assets/40/oasis-what-s-the-story-morning-glory-back.jpg",
       "art_back_src": "https://www.discogs.com/release/7100395 (UK LP, Album 1995, CRE LP 189)",
-      "date": "2026-10-03",
+      "date": "2026-10-07",
       "wear": {
         "level": "high"
       },
@@ -774,7 +774,7 @@
       "worn_v": "c3250a29"
     },
     {
-      "no": 15,
+      "no": 22,
       "slug": "blink-182-take-off-your-pants-and-jacket",
       "artist": "blink-182",
       "title": "Take Off Your Pants and Jacket",
@@ -878,7 +878,7 @@
       },
       "art_back": "assets/40/blink-182-take-off-your-pants-and-jacket-back.jpg",
       "art_back_src": "https://www.discogs.com/release/410661 (Europe LP, Album 2001, 112 674-1)",
-      "date": "2026-10-07",
+      "date": "2026-10-14",
       "wear": {
         "level": "low",
         "surface": 0.5,
@@ -1205,6 +1205,100 @@
       "art_worn": "assets/40/worn/run-the-jewels-run-the-jewels-2.jpg",
       "art_back_worn": "assets/40/worn/run-the-jewels-run-the-jewels-2-back.jpg",
       "worn_v": "25cb94e3"
+    },
+    {
+      "no": 11,
+      "slug": "brand-new-the-devil-and-god-are-raging-inside-me",
+      "artist": "Brand New",
+      "title": "The Devil and God Are Raging Inside Me",
+      "discovered": "",
+      "blurb": [],
+      "date": "2026-10-03",
+      "apple_id": 1440754537,
+      "apple_url": "https://music.apple.com/us/album/the-devil-and-god-are-raging-inside-me/1440754537",
+      "released": "2006-01-01",
+      "year": "2006",
+      "copyright": "℗ 2006 Interscope Records",
+      "genre": "Rock",
+      "track_count": 12,
+      "runtime_ms": 3286108,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Sowing Season (Yeah)",
+          "ms": 270733,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/dd/b5/ec/ddb5ec26-6762-385a-6941-3e5ee698f2a7/mzaf_9232869503211887614.plus.aac.p.m4a"
+        },
+        {
+          "n": 2,
+          "title": "Millstone",
+          "ms": 256667,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/6d/c8/55/6dc85525-dd6c-c4e9-9c0f-16c710b0b929/mzaf_6117429981748019008.plus.aac.p.m4a"
+        },
+        {
+          "n": 3,
+          "title": "Jesus Christ",
+          "ms": 318267,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/fd/e5/3e/fde53e47-0cff-1a8f-3e15-f4dd299da97c/mzaf_4737227843866327832.plus.aac.p.m4a"
+        },
+        {
+          "n": 4,
+          "title": "Degausser",
+          "ms": 324907,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/50/7c/37/507c37f0-1560-94bf-2f95-e51839c95aca/mzaf_13773337331725511173.plus.aac.p.m4a"
+        },
+        {
+          "n": 5,
+          "title": "Limousine",
+          "ms": 462293,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/d9/ab/ed/d9abed85-0827-bc1c-39e2-7f6854c60c4b/mzaf_11113356475294257309.plus.aac.p.m4a"
+        },
+        {
+          "n": 6,
+          "title": "You Won't Know",
+          "ms": 341667,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/17/cf/2f/17cf2f6c-5999-170b-66ed-25b2465550ac/mzaf_6867606541533269789.plus.aac.p.m4a"
+        },
+        {
+          "n": 7,
+          "title": "Welcome to Bangkok",
+          "ms": 185800,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/44/29/0a/44290a0b-d45e-a034-5a9c-c06ac5f568ae/mzaf_3028761936876658973.plus.aac.p.m4a"
+        },
+        {
+          "n": 8,
+          "title": "Not the Sun",
+          "ms": 188533,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/88/7b/57/887b5770-d2fc-4b26-ef94-49df145a34b9/mzaf_14776674378145455093.plus.aac.p.m4a"
+        },
+        {
+          "n": 9,
+          "title": "Luca",
+          "ms": 308667,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/0a/28/d2/0a28d215-897e-fed1-a725-347b95feea32/mzaf_3418185340628090886.plus.aac.p.m4a"
+        },
+        {
+          "n": 10,
+          "title": "Untitled",
+          "ms": 124107,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/6f/84/08/6f840818-c851-f15b-08ea-78621f91cdd6/mzaf_4960999091704952965.plus.aac.p.m4a"
+        },
+        {
+          "n": 11,
+          "title": "Archers",
+          "ms": 253560,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/b0/15/9b/b0159b83-794e-a8e2-5fab-66ac5de72132/mzaf_14437202671485026058.plus.aac.p.m4a"
+        },
+        {
+          "n": 12,
+          "title": "Handcuffs",
+          "ms": 250907,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/18/ff/27/18ff274d-f303-b090-73eb-3f94b93e354a/mzaf_7242199296212331834.plus.aac.p.m4a"
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/8a/08/bf/8a08bf74-a1ba-104e-55c1-b60bf7f4c4d0/00602517132542.rgb.jpg/1800x1800bb.jpg",
+      "label": "Interscope Records",
+      "art": "assets/40/brand-new-the-devil-and-god-are-raging-inside-me.jpg"
     },
     {
       "no": 6,

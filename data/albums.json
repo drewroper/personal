@@ -807,7 +807,7 @@
       "art_back_src": "http://coverartarchive.org/release/025eaf54-9ae7-497e-9b81-a2fed09b53ff/4136078628.jpg"
     },
     {
-      "no": 11,
+      "no": 15,
       "slug": "oasis-what-s-the-story-morning-glory",
       "artist": "Oasis",
       "title": "(What's the Story) Morning Glory?",
@@ -903,7 +903,7 @@
       },
       "art_back": "assets/40/oasis-what-s-the-story-morning-glory-back.jpg",
       "art_back_src": "https://www.discogs.com/release/7100395 (UK LP, Album 1995, CRE LP 189)",
-      "date": "2026-10-03",
+      "date": "2026-10-07",
       "wear": {
         "level": "high"
       },
@@ -2968,6 +2968,132 @@
       "live": true
     },
     {
+      "no": 11,
+      "slug": "brand-new-the-devil-and-god-are-raging-inside-me",
+      "artist": "Brand New",
+      "title": "The Devil and God Are Raging Inside Me",
+      "discovered": "November 2006",
+      "blurb": [
+        "_Deja Entendu_ got me into Brand New, and it shaped a lot of my early-2000s music taste. That was the band I thought I knew.",
+        "So when _The Devil and God Are Raging Inside Me_ came out in November 2006, my sophomore year at Mizzou, I wasn't ready for it. I didn't give it the time of day. I was ready to leave my emo-ness behind. (Same fall as Ratatat's _Classics_, if you're keeping track.)",
+        "It took developing an unhealthy obsession with _Daisy_ to actually go back. Most people hate _Daisy_. I loved the energy. And somewhere in my late 20s, _Devil and God_ finally clicked.",
+        "I haven't wanted to listen to _Deja_ in years. I'll never get sick of _Devil and God_.",
+        "I saw them play it front to back on the 10-year anniversary run in Milwaukee in 2016. Today I'm seeing the 20th anniversary tour at the Aragon in Chicago. Seeing this album every ten years is becoming a thing."
+      ],
+      "date": "2026-10-03",
+      "apple_id": 1440754537,
+      "apple_url": "https://music.apple.com/us/album/the-devil-and-god-are-raging-inside-me/1440754537",
+      "released": "2006-11-21",
+      "year": "2006",
+      "copyright": "℗ 2006 Interscope Records",
+      "genre": "Rock",
+      "track_count": 12,
+      "runtime_ms": 3286108,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Sowing Season (Yeah)",
+          "ms": 270733,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/dd/b5/ec/ddb5ec26-6762-385a-6941-3e5ee698f2a7/mzaf_9232869503211887614.plus.aac.p.m4a"
+        },
+        {
+          "n": 2,
+          "title": "Millstone",
+          "ms": 256667,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/6d/c8/55/6dc85525-dd6c-c4e9-9c0f-16c710b0b929/mzaf_6117429981748019008.plus.aac.p.m4a"
+        },
+        {
+          "n": 3,
+          "title": "Jesus Christ",
+          "ms": 318267,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/fd/e5/3e/fde53e47-0cff-1a8f-3e15-f4dd299da97c/mzaf_4737227843866327832.plus.aac.p.m4a"
+        },
+        {
+          "n": 4,
+          "title": "Degausser",
+          "ms": 324907,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/50/7c/37/507c37f0-1560-94bf-2f95-e51839c95aca/mzaf_13773337331725511173.plus.aac.p.m4a"
+        },
+        {
+          "n": 5,
+          "title": "Limousine",
+          "ms": 462293,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/d9/ab/ed/d9abed85-0827-bc1c-39e2-7f6854c60c4b/mzaf_11113356475294257309.plus.aac.p.m4a"
+        },
+        {
+          "n": 6,
+          "title": "You Won't Know",
+          "ms": 341667,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/17/cf/2f/17cf2f6c-5999-170b-66ed-25b2465550ac/mzaf_6867606541533269789.plus.aac.p.m4a"
+        },
+        {
+          "n": 7,
+          "title": "Welcome to Bangkok",
+          "ms": 185800,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/44/29/0a/44290a0b-d45e-a034-5a9c-c06ac5f568ae/mzaf_3028761936876658973.plus.aac.p.m4a"
+        },
+        {
+          "n": 8,
+          "title": "Not the Sun",
+          "ms": 188533,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/88/7b/57/887b5770-d2fc-4b26-ef94-49df145a34b9/mzaf_14776674378145455093.plus.aac.p.m4a"
+        },
+        {
+          "n": 9,
+          "title": "Luca",
+          "ms": 308667,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/0a/28/d2/0a28d215-897e-fed1-a725-347b95feea32/mzaf_3418185340628090886.plus.aac.p.m4a"
+        },
+        {
+          "n": 10,
+          "title": "Untitled",
+          "ms": 124107,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/6f/84/08/6f840818-c851-f15b-08ea-78621f91cdd6/mzaf_4960999091704952965.plus.aac.p.m4a"
+        },
+        {
+          "n": 11,
+          "title": "Archers",
+          "ms": 253560,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/b0/15/9b/b0159b83-794e-a8e2-5fab-66ac5de72132/mzaf_14437202671485026058.plus.aac.p.m4a"
+        },
+        {
+          "n": 12,
+          "title": "Handcuffs",
+          "ms": 250907,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/18/ff/27/18ff274d-f303-b090-73eb-3f94b93e354a/mzaf_7242199296212331834.plus.aac.p.m4a"
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/8a/08/bf/8a08bf74-a1ba-104e-55c1-b60bf7f4c4d0/00602517132542.rgb.jpg/1800x1800bb.jpg",
+      "label": "Interscope Records",
+      "art": "assets/40/brand-new-the-devil-and-god-are-raging-inside-me.jpg",
+      "art_back": "assets/40/brand-new-the-devil-and-god-are-raging-inside-me-back.jpg",
+      "art_back_src": "https://www.discogs.com/release/33131748 (US 2LP, Album, Reissue, Repress 2025, 602475681908)",
+      "wear": {
+        "level": "med"
+      },
+      "art_worn": "assets/40/worn/brand-new-the-devil-and-god-are-raging-inside-me.jpg",
+      "art_back_worn": "assets/40/worn/brand-new-the-devil-and-god-are-raging-inside-me-back.jpg",
+      "worn_v": "e8f15f30",
+      "links": {
+        "spotify": "https://open.spotify.com/album/2YnqAuFmC2r8JeQVOIozTy"
+      },
+      "story": {
+        "focus": [
+          0.05,
+          0.17
+        ],
+        "at": [
+          0.5,
+          0.2
+        ],
+        "zoom": 3.0,
+        "levels": true,
+        "tone": 1.15,
+        "rise": 0.05,
+        "floor": 30
+      }
+    },
+    {
       "no": null,
       "slug": "the-hotelier-home-like-noplace-is-there",
       "artist": "The Hotelier",
@@ -3143,7 +3269,7 @@
       "worn_v": "72a187cb"
     },
     {
-      "no": 15,
+      "no": 40,
       "slug": "blink-182-take-off-your-pants-and-jacket",
       "artist": "blink-182",
       "title": "Take Off Your Pants and Jacket",
@@ -3245,7 +3371,7 @@
       },
       "art_back": "assets/40/blink-182-take-off-your-pants-and-jacket-back.jpg",
       "art_back_src": "https://www.discogs.com/release/410661 (Europe LP, Album 2001, 112 674-1)",
-      "date": "2026-10-07",
+      "date": "2026-11-01",
       "wear": {
         "level": "low",
         "surface": 0.5,

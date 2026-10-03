@@ -1633,7 +1633,7 @@
       },
       "art_worn": "assets/40/worn/brand-new-deja-entendu.jpg",
       "art_back_worn": "assets/40/worn/brand-new-deja-entendu-back.jpg",
-      "worn_v": "8ebbf8aa",
+      "worn_v": "f03efa46",
       "story": {
         "focus": [
           0.5,
@@ -1647,7 +1647,8 @@
         "levels": true,
         "rise": 0.2,
         "floor": 40
-      }
+      },
+      "live": true
     },
     {
       "no": 8,

@@ -10,6 +10,7 @@ on:
 
 permissions:
   contents: write
+  actions: write   # to start the Deploy site workflow after pushing
 
 concurrency:
   group: life-log
@@ -37,6 +38,7 @@ jobs:
         run: python scripts/fetch-life-log.py
 
       - name: Commit if changed
+        id: commit
         run: |
           git config user.name  "drewroper-life-log[bot]"
           git config user.email "actions@drewroper.com"
@@ -51,6 +53,7 @@ jobs:
           # with a rebase a few times before giving up.
           for attempt in 1 2 3 4 5; do
             if git push; then
+              echo "pushed=true" >> "$GITHUB_OUTPUT"
               exit 0
             fi
             echo "push rejected (attempt $attempt), rebasing on origin/$GITHUB_REF_NAME and retrying…"
@@ -60,3 +63,10 @@ jobs:
           done
           echo "Failed to push after 5 attempts"
           exit 1
+
+      # A push made with GITHUB_TOKEN doesn't start other workflows, so deploy explicitly.
+      - name: Deploy
+        if: steps.commit.outputs.pushed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run pages.yml --ref "$GITHUB_REF_NAME"

@@ -1,0 +1,36 @@
+name: Deploy site
+
+# Publishes the repo as-is to GitHub Pages on every push to the live branch, and on demand.
+# Replaces Pages' own "deploy from a branch" build, which stopped picking up pushes made from
+# Claude Code sessions (Oct 2, 2026). Needs Settings → Pages → Source: "GitHub Actions".
+# No Jekyll step: the site never used it (.nojekyll). life-log and changelog commit with
+# GITHUB_TOKEN, which can't start a push-triggered run, so they dispatch this one after pushing.
+
+on:
+  push:
+    branches: [claude/landing-page-redesign-5EUNV]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false   # let a deploy that has started finish; the next one queues
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - id: deployment
+        uses: actions/deploy-pages@v4

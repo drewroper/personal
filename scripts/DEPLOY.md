@@ -16,3 +16,14 @@ Pages sometimes skips the build for a git push (seen Oct 2, 2026: every git push
 session that afternoon, no GitHub incident). A commit made through the GitHub API (the contents
 endpoint, or the web editor) starts a build when a push didn't. Re-saving the source branch under
 Settings → Pages also forces one.
+
+## Kick log
+
+Builds started with an API commit to this file, after a git push didn't deploy:
+
+- 2026-10-02 19:31 UTC: Day 10 swap, RTJ2 blurb and chart
+- 2026-10-02 23:00 UTC: Day 10, "[timing TBD]" removed
+- 2026-10-02 23:03 UTC: Day 10, "ridiculous" to "wild"
+- 2026-10-02 23:05 UTC: Day 10 live
+- 2026-10-03 00:10 UTC: Last.fm chart title
+- 2026-10-03 00:14 UTC: Day 10, Killer Mike and the features merged into one paragraph

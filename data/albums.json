@@ -4178,7 +4178,8 @@
           "from": 32,
           "floor": 70
         }
-      }
+      },
+      "live": true
     },
     {
       "no": null,

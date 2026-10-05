@@ -294,6 +294,15 @@ def _floor(im, f):
     return Image.fromarray(np.clip(f + a * (255 - f) / 255, 0, 255).astype(np.uint8), "RGB")
 
 
+def _ceil(im, c):
+    """Pull the whites down to `c` (0-255) so a pale cover's paper still dithers to a texture
+    instead of solid rows (José González, In Our Nature). The counterpart of _floor."""
+    if c >= 255:
+        return im
+    a = np.asarray(im, dtype=np.float32)
+    return Image.fromarray(np.clip(a * c / 255, 0, 255).astype(np.uint8), "RGB")
+
+
 GROUND_LOOK = {}   # per-album ground: {"focus": [x, y] on the cover, "at": [x, y] on screen, "zoom": 3, "levels": bool, "tone": 1.0,
                   #  in a one-shot story "focus"/"at" set the drift's height; it always crosses the full width}
 
@@ -305,7 +314,7 @@ def _ground(art, theta, riff):
     if "detail" in riff:
         # A detail of the cover (3x by default), drifting on a small circle so it loops.
         z = float(look.get("zoom", 3)); side = int(W * z)
-        big = _prep(art, f"big{z}{look.get('levels')}{look.get('floor', 0)}", lambda: _floor(_levels(square(art, side)) if look.get("levels") else square(art, side), look.get("floor", 0)))
+        big = _prep(art, f"big{z}{look.get('levels')}{look.get('floor', 0)}{look.get('ceil', 255)}", lambda: _ceil(_floor(_levels(square(art, side)) if look.get("levels") else square(art, side), look.get("floor", 0)), look.get("ceil", 255)))
         fx, fy = look.get("focus", (.5, .5))
         ax, ay = look.get("at", (.5, .5))                 # where on screen the focus sits
         t = theta or 0.0

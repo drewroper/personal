@@ -912,7 +912,7 @@
       "worn_v": "4cd5e9c9"
     },
     {
-      "no": 12,
+      "no": 14,
       "slug": "radiohead-hail-to-the-thief",
       "artist": "Radiohead",
       "title": "Hail to the Thief",
@@ -1020,7 +1020,7 @@
       "art": "assets/40/radiohead-hail-to-the-thief.jpg",
       "art_back": "assets/40/radiohead-hail-to-the-thief-back.jpg",
       "art_back_src": "http://coverartarchive.org/release/f847d298-e2d8-43ed-97ed-7c7b01ff03bc/24770542667.jpg",
-      "date": "2026-10-04",
+      "date": "2026-10-06",
       "wear": {
         "level": "high",
         "edge": 2.5
@@ -4054,7 +4054,7 @@
       "live": true
     },
     {
-      "no": 14,
+      "no": 12,
       "slug": "jose-gonzalez-in-our-nature",
       "artist": "José González",
       "title": "In Our Nature",
@@ -4144,7 +4144,7 @@
       "art": "assets/40/jose-gonzalez-in-our-nature.jpg",
       "art_back": "assets/40/jose-gonzalez-in-our-nature-back.jpg",
       "art_back_src": "https://www.discogs.com/release/1125030 (US LP, Album 2007, MUTE 9367-1, 9367-2)",
-      "date": "2026-10-06",
+      "date": "2026-10-04",
       "wear": {
         "level": "low",
         "edge": 4,
@@ -4152,7 +4152,27 @@
       },
       "art_worn": "assets/40/worn/jose-gonzalez-in-our-nature.jpg",
       "art_back_worn": "assets/40/worn/jose-gonzalez-in-our-nature-back.jpg",
-      "worn_v": "7a7d99ed"
+      "worn_v": "7a7d99ed",
+      "story": {
+        "focus": [
+          0.45,
+          0.32
+        ],
+        "at": [
+          0.5,
+          0.1
+        ],
+        "zoom": 2.8,
+        "levels": true,
+        "tone": 1.3,
+        "rise": 0.2,
+        "contrast": 1.1,
+        "ceil": 160,
+        "reveal": {
+          "from": 32,
+          "floor": 70
+        }
+      }
     },
     {
       "no": null,

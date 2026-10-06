@@ -4336,7 +4336,8 @@
         "tone": 1.2,
         "rise": 0.24,
         "ceil": 190
-      }
+      },
+      "live": true
     },
     {
       "no": null,

@@ -2011,7 +2011,7 @@
       "art_back_src": "http://coverartarchive.org/release/c46205bc-adb2-48d8-8e8e-b05e54109c86/14063280413.jpg"
     },
     {
-      "no": 13,
+      "no": 19,
       "slug": "alt-j-an-awesome-wave",
       "artist": "alt-J",
       "title": "An Awesome Wave",
@@ -2119,7 +2119,7 @@
       },
       "art_back": "assets/40/alt-j-an-awesome-wave-back.jpg",
       "art_back_src": "https://www.discogs.com/release/4041377 (US LP, Album, Stereo 2012, 532346-1)",
-      "date": "2026-10-05",
+      "date": "2026-10-11",
       "wear": {
         "level": "high",
         "edge": 2.5
@@ -4179,6 +4179,161 @@
         }
       },
       "live": true
+    },
+    {
+      "no": 13,
+      "slug": "nilufer-yanya-miss-universe",
+      "artist": "Nilüfer Yanya",
+      "title": "Miss Universe",
+      "discovered": "",
+      "blurb": [
+        "_Miss Universe_ is my \"Covid\" album. It came out in March 2019, but it will never not remind me of the 2020 shutdown.",
+        "In November 2019, I went to Pitchfork Paris. Nilüfer was playing on my actual birthday, and that's what convinced me to go. I got to say hi and told her she was the reason I came. She looked confused and asked, \"Why?\"",
+        "Then Covid happened. Suddenly I had tons of time to listen to music, and this album never left my rotation. It's still one of my most-played albums ever.",
+        "There was life before Covid and life after Covid. This album sits right on that line as a sort of weird bridge between the two realities we all had to accept."
+      ],
+      "date": "2026-10-05",
+      "apple_id": 1449868978,
+      "apple_url": "https://music.apple.com/us/album/miss-universe/1449868978",
+      "released": "2019-03-22",
+      "year": "2019",
+      "copyright": "℗ 2019 ATO Records, LLC. All Rights Reserved",
+      "genre": "Alternative",
+      "track_count": 17,
+      "runtime_ms": 3184404,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Wway Health ™",
+          "ms": 58597,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/d3/2d/61/d32d6167-35ef-bd61-6b42-c24a20055ab9/mzaf_1866483963976506708.plus.aac.p.m4a"
+        },
+        {
+          "n": 2,
+          "title": "In Your Head",
+          "ms": 207633,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/44/cc/26/44cc2623-aca0-c7a9-cd2e-9b57b1f03156/mzaf_18210915646305283784.plus.aac.p.m4a"
+        },
+        {
+          "n": 3,
+          "title": "Paralysed",
+          "ms": 266319,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/78/e2/f2/78e2f208-8f42-e78d-3170-1c61f5beb78a/mzaf_13164368031877330273.plus.aac.p.m4a"
+        },
+        {
+          "n": 4,
+          "title": "Angels",
+          "ms": 236470,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/bc/7b/db/bc7bdb74-8beb-b160-331f-cb177615551c/mzaf_4810408893540070075.plus.aac.p.m4a"
+        },
+        {
+          "n": 5,
+          "title": "Experience?",
+          "ms": 66723,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/1c/f5/38/1cf53857-b688-3d5b-3170-aa5a0d253258/mzaf_9377064403414022007.plus.aac.p.m4a"
+        },
+        {
+          "n": 6,
+          "title": "Paradise",
+          "ms": 238219,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/bb/dc/c8/bbdcc8cc-ab58-767f-0aed-d50037472650/mzaf_16585268322077190457.plus.aac.p.m4a"
+        },
+        {
+          "n": 7,
+          "title": "Baby Blu",
+          "ms": 281171,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/7a/b9/de/7ab9de29-02c9-76f2-02ba-da8cc19eb09d/mzaf_17173477512819205166.plus.aac.p.m4a"
+        },
+        {
+          "n": 8,
+          "title": "Warning",
+          "ms": 21319,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/8e/56/71/8e56713c-f4a9-64ae-104a-9418e254803c/mzaf_17080740060030080274.plus.aac.p.m4a"
+        },
+        {
+          "n": 9,
+          "title": "Heat Rises",
+          "ms": 206133,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/58/8a/c6/588ac623-3d4b-8aac-b906-76404ee3d59b/mzaf_16822128414129511685.plus.aac.p.m4a"
+        },
+        {
+          "n": 10,
+          "title": "Melt",
+          "ms": 262533,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/8d/12/20/8d1220c6-3945-bc3d-410a-a51f7a4b7496/mzaf_4918639351294194120.plus.aac.p.m4a"
+        },
+        {
+          "n": 11,
+          "title": "“Sparkle” GOD HELP ME",
+          "ms": 91794,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/fd/ff/35/fdff353d-4ef0-1460-d01b-eb170955b955/mzaf_8105585588873895571.plus.aac.p.m4a"
+        },
+        {
+          "n": 12,
+          "title": "Safety Net",
+          "ms": 272714,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/46/49/fa/4649fabd-a16f-ad0d-f2b3-f7946ceb0552/mzaf_4908898430482167852.plus.aac.p.m4a"
+        },
+        {
+          "n": 13,
+          "title": "Tears",
+          "ms": 196413,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/4f/03/5c/4f035c32-aed4-f6c8-3c15-54043be98a51/mzaf_3230335474630361198.plus.aac.p.m4a"
+        },
+        {
+          "n": 14,
+          "title": "Monsters Under the Bed",
+          "ms": 252953,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/75/2c/64/752c64c0-fd86-985a-c7da-9deab045473d/mzaf_14774171597777032536.plus.aac.p.m4a"
+        },
+        {
+          "n": 15,
+          "title": "The Unordained",
+          "ms": 202305,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/e6/a6/cf/e6a6cf5e-9457-449d-b602-bf80ca13f69c/mzaf_5748351775005507884.plus.aac.p.m4a"
+        },
+        {
+          "n": 16,
+          "title": "Give Up Function",
+          "ms": 41010,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/23/a7/db/23a7db65-aef8-f57b-f179-d52ebeaa5beb/mzaf_6376220749214982027.plus.aac.p.m4a"
+        },
+        {
+          "n": 17,
+          "title": "Heavyweight Champion of the Year",
+          "ms": 282098,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/1d/fb/8b/1dfb8bae-4b35-683b-4d7e-d8a8fd0bc41e/mzaf_7966759466099187176.plus.aac.p.m4a"
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/c4/be/da/c4bedabb-7887-2ff6-1964-d835ebb47b67/187.jpg/1800x1800bb.jpg",
+      "label": "ATO Records",
+      "art": "assets/40/nilufer-yanya-miss-universe.jpg",
+      "wear": {
+        "level": "med"
+      },
+      "art_back": "assets/40/nilufer-yanya-miss-universe-back.jpg",
+      "art_back_src": "https://www.discogs.com/release/13390501 (US LP, Album 2019, ATO Records)",
+      "links": {
+        "spotify": "https://open.spotify.com/album/1kodX6YjT66DyInfVS6aGv"
+      },
+      "art_worn": "assets/40/worn/nilufer-yanya-miss-universe.jpg",
+      "art_back_worn": "assets/40/worn/nilufer-yanya-miss-universe-back.jpg",
+      "worn_v": "be45787c",
+      "story": {
+        "focus": [
+          0.3,
+          0.3
+        ],
+        "at": [
+          0.5,
+          0.11
+        ],
+        "zoom": 2.9,
+        "levels": true,
+        "tone": 1.2,
+        "rise": 0.24,
+        "ceil": 190
+      }
     },
     {
       "no": null,

@@ -1621,7 +1621,7 @@
       "worn_v": "19f1ba14"
     },
     {
-      "no": 14,
+      "no": 23,
       "slug": "radiohead-hail-to-the-thief",
       "artist": "Radiohead",
       "title": "Hail to the Thief",
@@ -1731,7 +1731,7 @@
       "art": "assets/40/radiohead-hail-to-the-thief.jpg",
       "art_back": "assets/40/radiohead-hail-to-the-thief-back.jpg",
       "art_back_src": "http://coverartarchive.org/release/f847d298-e2d8-43ed-97ed-7c7b01ff03bc/24770542667.jpg",
-      "date": "2026-10-06",
+      "date": "2026-10-15",
       "wear": {
         "level": "high",
         "edge": 2.5
@@ -2086,6 +2086,118 @@
       "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/c4/be/da/c4bedabb-7887-2ff6-1964-d835ebb47b67/187.jpg/1800x1800bb.jpg",
       "label": "ATO Records, LLC. All Rights Reserved",
       "art": "assets/40/nilufer-yanya-miss-universe.jpg"
+    },
+    {
+      "no": 14,
+      "slug": "green-day-dookie",
+      "artist": "Green Day",
+      "title": "Dookie",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 1160081985,
+      "date": "2026-10-06",
+      "apple_url": "https://music.apple.com/us/album/dookie/1160081985",
+      "released": "1994-02-01",
+      "year": "1994",
+      "copyright": "℗ 1994 Reprise Records",
+      "genre": "Alternative",
+      "track_count": 15,
+      "runtime_ms": 2305536,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Burnout",
+          "ms": 127187,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/1a/30/99/1a309963-7f56-04b4-1c82-7ccdf761ea4f/mzaf_1377127822159981117.plus.aac.p.m4a"
+        },
+        {
+          "n": 2,
+          "title": "Having a Blast",
+          "ms": 164427,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/d5/a2/9f/d5a29f29-9577-b748-50f3-b87152da1985/mzaf_12166779642092271222.plus.aac.p.m4a"
+        },
+        {
+          "n": 3,
+          "title": "Chump",
+          "ms": 173693,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/d9/25/e6/d925e6fa-2827-8244-2b87-08370629bf85/mzaf_11741414060763828216.plus.aac.p.m4a"
+        },
+        {
+          "n": 4,
+          "title": "Longview",
+          "ms": 238707,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/63/4e/29/634e299d-480c-f0e7-8144-b344feaeeb3a/mzaf_6521262034611187466.plus.aac.p.m4a"
+        },
+        {
+          "n": 5,
+          "title": "Welcome to Paradise",
+          "ms": 224133,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/1d/42/c8/1d42c894-c013-52aa-dc34-3c8e11e62d57/mzaf_15619154471616725059.plus.aac.p.m4a"
+        },
+        {
+          "n": 6,
+          "title": "Pulling Teeth",
+          "ms": 150680,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/21/ee/e2/21eee2e1-c46f-5fae-70c5-05ee11ecf345/mzaf_17703695769988884566.plus.aac.p.m4a"
+        },
+        {
+          "n": 7,
+          "title": "Basket Case",
+          "ms": 182916,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/d3/2b/fe/d32bfe59-ce6f-2130-7445-589be60c4b17/mzaf_14529423277593289725.plus.aac.p.m4a"
+        },
+        {
+          "n": 8,
+          "title": "She",
+          "ms": 133910,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/c4/e7/5a/c4e75a36-a04a-6c22-c067-ac4ed16b4a55/mzaf_11722632162682221063.plus.aac.p.m4a"
+        },
+        {
+          "n": 9,
+          "title": "Sassafras Roots",
+          "ms": 157347,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/4c/a2/b9/4ca2b953-3fe0-c97b-dcd9-4206821e6718/mzaf_16137455519005222872.plus.aac.p.m4a"
+        },
+        {
+          "n": 10,
+          "title": "When I Come Around",
+          "ms": 177773,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/95/cf/a4/95cfa46a-4bd1-6c80-bd35-8e3a2230f7bc/mzaf_7404057727951184752.plus.aac.p.m4a"
+        },
+        {
+          "n": 11,
+          "title": "Coming Clean",
+          "ms": 94813,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/23/c8/05/23c805ff-9c1a-daf7-6a12-dce14419c24c/mzaf_10593790754135946627.plus.aac.p.m4a"
+        },
+        {
+          "n": 12,
+          "title": "Emenius Sleepus",
+          "ms": 103760,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/d4/f8/98/d4f898f8-087b-f9d5-3425-833f89b39ed4/mzaf_14253026912253349399.plus.aac.p.m4a"
+        },
+        {
+          "n": 13,
+          "title": "In the End",
+          "ms": 106267,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/bc/5b/9b/bc5b9be8-f99b-5a6f-97c2-7c08a1ed8b9d/mzaf_9823930403751051044.plus.aac.p.m4a"
+        },
+        {
+          "n": 14,
+          "title": "F.O.D.",
+          "ms": 172280,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/16/68/43/16684385-b933-f856-ea94-e6345585af81/mzaf_3447625805654293841.plus.aac.p.m4a"
+        },
+        {
+          "n": 15,
+          "title": "All By Myself",
+          "ms": 97643,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/6f/63/1e/6f631ead-583d-5b4e-027e-47529fda5be1/mzaf_3392510118981956377.plus.aac.p.m4a"
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/88/83/e7/8883e74b-1b7c-0725-09de-21e4e00d54b5/093624915713.jpg/1800x1800bb.jpg",
+      "label": "Reprise Records",
+      "art": "assets/40/green-day-dookie.jpg"
     },
     {
       "no": 9,

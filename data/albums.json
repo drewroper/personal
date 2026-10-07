@@ -4478,7 +4478,8 @@
         ],
         "zoom": 3.0,
         "rise": 0.25
-      }
+      },
+      "live": true
     },
     {
       "no": null,

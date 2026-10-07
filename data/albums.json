@@ -4345,8 +4345,11 @@
       "slug": "green-day-dookie",
       "artist": "Green Day",
       "title": "Dookie",
-      "discovered": "",
-      "blurb": [],
+      "discovered": "I don't know, I was like 8",
+      "blurb": [
+        "this album makes me want to drink ten surge sodas and play crash bandicoot.",
+        "that's it. that's the blurb."
+      ],
       "wear": {
         "level": "high",
         "edge": 3,

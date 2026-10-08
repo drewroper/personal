@@ -387,7 +387,7 @@
       }
     },
     {
-      "no": 15,
+      "no": 24,
       "slug": "oasis-what-s-the-story-morning-glory",
       "artist": "Oasis",
       "title": "(What's the Story) Morning Glory?",
@@ -485,7 +485,7 @@
       },
       "art_back": "assets/40/oasis-what-s-the-story-morning-glory-back.jpg",
       "art_back_src": "https://www.discogs.com/release/7100395 (UK LP, Album 1995, CRE LP 189)",
-      "date": "2026-10-07",
+      "date": "2026-10-16",
       "wear": {
         "level": "high"
       },
@@ -2198,6 +2198,100 @@
       "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/88/83/e7/8883e74b-1b7c-0725-09de-21e4e00d54b5/093624915713.jpg/1800x1800bb.jpg",
       "label": "Reprise Records",
       "art": "assets/40/green-day-dookie.jpg"
+    },
+    {
+      "no": 15,
+      "slug": "jungle-jungle",
+      "artist": "Jungle",
+      "title": "Jungle",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 872853887,
+      "date": "2026-10-07",
+      "apple_url": "https://music.apple.com/us/album/jungle/872853887",
+      "released": "2014-07-14",
+      "year": "2014",
+      "copyright": "℗ 2014 XL Recordings Ltd",
+      "genre": "Electronic",
+      "track_count": 12,
+      "runtime_ms": 2351335,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "The Heat",
+          "ms": 196053,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/0a/18/16/0a181620-5b1d-c6cb-f8d7-b84991203b93/mzaf_18372772886595585670.plus.aac.p.m4a"
+        },
+        {
+          "n": 2,
+          "title": "Accelerate",
+          "ms": 184538,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/af/5f/fe/af5ffed0-a2fb-7671-e109-87677257815a/mzaf_12873809001475389362.plus.aac.p.m4a"
+        },
+        {
+          "n": 3,
+          "title": "Busy Earnin'",
+          "ms": 181773,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/4b/14/a8/4b14a896-9a84-bc6b-d1ca-4df6c3d4a698/mzaf_15823456587411599604.plus.aac.p.m4a"
+        },
+        {
+          "n": 4,
+          "title": "Platoon",
+          "ms": 192405,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/7c/28/38/7c28385a-09a3-28e1-0fcd-4efb1c2f9012/mzaf_1417618981782769462.plus.aac.p.m4a"
+        },
+        {
+          "n": 5,
+          "title": "Drops",
+          "ms": 173627,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/17/9b/09/179b0922-40b6-3c51-cf61-dea715ae6150/mzaf_11372554153894689651.plus.aac.p.m4a"
+        },
+        {
+          "n": 6,
+          "title": "Time",
+          "ms": 213614,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/85/e4/d3/85e4d392-9ebe-b037-dadd-ef00ad27334c/mzaf_17059843927918395817.plus.aac.p.m4a"
+        },
+        {
+          "n": 7,
+          "title": "Smoking Pixels",
+          "ms": 107011,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/11/31/69/1131690e-9a65-2d58-56d6-570542052e11/mzaf_3688962153838756117.plus.aac.p.m4a"
+        },
+        {
+          "n": 8,
+          "title": "Julia",
+          "ms": 195294,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/b8/f5/39/b8f539af-9da4-db03-71e1-8a119d42d38f/mzaf_3549990788419429503.plus.aac.p.m4a"
+        },
+        {
+          "n": 9,
+          "title": "Crumbler",
+          "ms": 182026,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/7e/d2/b4/7ed2b427-d4bf-2c43-85b8-e771283b45a4/mzaf_12339654862939412090.plus.aac.p.m4a"
+        },
+        {
+          "n": 10,
+          "title": "Son of a Gun",
+          "ms": 208634,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/0d/20/dc/0d20dc6c-10c1-2a6d-e456-52e256e2dfd6/mzaf_1975599572920010489.plus.aac.p.m4a"
+        },
+        {
+          "n": 11,
+          "title": "Lucky I Got What I Want",
+          "ms": 256806,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/2f/7c/f1/2f7cf1f9-b9d9-51d5-9f4a-7af89123e965/mzaf_12308754368403759211.plus.aac.p.m4a"
+        },
+        {
+          "n": 12,
+          "title": "Lemonade Lake",
+          "ms": 259554,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/b0/38/aa/b038aa53-8346-e798-100b-86e032e3ea67/mzaf_11629351349664045620.plus.aac.p.m4a"
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/c1/05/54/c105548a-9e3b-071f-05a8-01bc689c1b37/634904164768.png/1800x1800bb.jpg",
+      "label": "XL Recordings Ltd",
+      "art": "assets/40/jungle-jungle.jpg"
     },
     {
       "no": 9,

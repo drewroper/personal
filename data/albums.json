@@ -4606,7 +4606,8 @@
         "rise": 0.25,
         "floor": 95,
         "contrast": 1.0
-      }
+      },
+      "live": true
     },
     {
       "no": null,

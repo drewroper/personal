@@ -4491,13 +4491,13 @@
       "label": "Reprise Records",
       "art": "assets/40/green-day-dookie.jpg",
       "art_back": "assets/40/green-day-dookie-back.jpg",
-      "art_back_src": "https://www.discogs.com/release/14799539 (US LP, Album, Reissue, Repress 2020, Reprise)",
+      "art_back_src": "https://www.discogs.com/release/2103788 (US LP, Album 1994, Reprise 9 45529-1; original pressing, Ernie still on the back)",
       "links": {
         "spotify": "https://open.spotify.com/album/4uG8q3GPuWHQlRbswMIRS6"
       },
       "art_worn": "assets/40/worn/green-day-dookie.jpg",
       "art_back_worn": "assets/40/worn/green-day-dookie-back.jpg",
-      "worn_v": "e95d7d12",
+      "worn_v": "cb1d0a67",
       "story": {
         "focus": [
           0.5,

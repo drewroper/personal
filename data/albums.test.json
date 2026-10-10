@@ -2406,7 +2406,7 @@
       ],
       "apple_id": 1881439477,
       "apple_url": "https://music.apple.com/us/album/champ/1881439477",
-      "released": "2010-01-01",
+      "released": "2010-06-08",
       "year": "2010",
       "copyright": "℗ 2010 Mom+Pop",
       "genre": "Alternative",
@@ -2492,7 +2492,9 @@
         "edge": 4
       },
       "art_worn": "assets/40/worn/tokyo-police-club-champ.jpg",
-      "worn_v": "72a187cb"
+      "worn_v": "72a187cb",
+      "art_back": "assets/40/tokyo-police-club-champ-back.jpg",
+      "art_back_src": "https://www.discogs.com/release/2373382 (Canada LP, Album 2010, Dine Alone Records, DAV025)"
     },
     {
       "no": 16,

@@ -3320,10 +3320,11 @@
       "date": "2026-10-09",
       "wear": {
         "level": "high",
-        "edge": 4
+        "edge": 2.4,
+        "surface": 3.2
       },
       "art_worn": "assets/40/worn/tokyo-police-club-champ.jpg",
-      "worn_v": "9abe9640",
+      "worn_v": "2a00d2dc",
       "art_back": "assets/40/tokyo-police-club-champ-back.jpg",
       "art_back_src": "https://www.discogs.com/release/2373382 (Canada LP, Album 2010, Dine Alone Records, DAV025)",
       "art_back_worn": "assets/40/worn/tokyo-police-club-champ-back.jpg",

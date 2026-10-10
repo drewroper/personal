@@ -2515,7 +2515,7 @@
       }
     },
     {
-      "no": 17,
+      "no": 16,
       "slug": "incubus-morning-view",
       "artist": "Incubus",
       "title": "Morning View",
@@ -2523,7 +2523,7 @@
       "blurb": [],
       "apple_id": 271792608,
       "apple_url": "https://music.apple.com/us/album/morning-view/271792608",
-      "released": "2001-10-22",
+      "released": "2001-10-23",
       "year": "2001",
       "copyright": "℗ 2001 Epic Records, a division of Sony Music Entertainment",
       "genre": "Alternative",
@@ -2617,14 +2617,29 @@
       },
       "art_back": "assets/40/incubus-morning-view-back.jpg",
       "art_back_src": "https://www.discogs.com/release/4228036 (US LP, Album, Reissue 2013, 88765404101)",
-      "date": "2026-10-09",
+      "date": "2026-10-08",
       "wear": {
         "level": "high",
         "lock": true
       },
       "art_worn": "assets/40/worn/incubus-morning-view.jpg",
       "art_back_worn": "assets/40/worn/incubus-morning-view-back.jpg",
-      "worn_v": "8bcc8755"
+      "worn_v": "8bcc8755",
+      "story": {
+        "focus": [
+          0.75,
+          0.33
+        ],
+        "at": [
+          0.5,
+          0.1
+        ],
+        "zoom": 3.0,
+        "levels": true,
+        "rise": 0.1,
+        "floor": 40,
+        "ceil": 175
+      }
     },
     {
       "no": 4,
@@ -3199,7 +3214,7 @@
       "art": "assets/40/the-hotelier-home-like-noplace-is-there.jpg"
     },
     {
-      "no": 16,
+      "no": 17,
       "slug": "tokyo-police-club-champ",
       "artist": "Tokyo Police Club",
       "title": "Champ",
@@ -3287,7 +3302,7 @@
       "links": {
         "spotify": "https://open.spotify.com/album/7HLzs8Qao2pl7qFEbY7SJo"
       },
-      "date": "2026-10-08",
+      "date": "2026-10-09",
       "wear": {
         "level": "high",
         "edge": 4

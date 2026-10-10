@@ -2527,7 +2527,7 @@
         "Dirk Lance was one of my favorite bass players, and I was still learning the bass in 2001. The bass lines on this album changed my life (not hyperbole). I practiced these songs until my fingers hurt. \"Are You In?\" and \"Have You Ever\" were, and still are, some of my favorites to play. I figured if I could play Incubus bass lines, I must be progressing. Turns out this is when I peaked. But I was hooked.",
         "I had a gigantic album release poster on my wall. I must have gotten it off eBay, but it was huge, and I loved everything about it: the tilted angle of the photo, the bright orange type. I was into graphic design before I even knew what graphic design was.",
         "When they announced their St. Louis stop, I bought tickets in person at Streetside Records the day they went on sale. I waited for the store to open and was first in line (okay I was the only one in line). I couldn't miss them. On September 12, 2002, they played UMB Bank Pavilion. It was the first time I had seats there instead of the lawn, and I picked stage left on purpose so I could be on Dirk's side. I was close enough to see the sweat on his face. I laminated the ticket stub so I could keep it forever.",
-        "Meg and I went to the 25th anniversary show last year, and trust me, Brandon still has the abs."
+        "Meg and I saw them play _Morning View_ in full at Ball Arena in 2024, and trust me, Brandon still has the abs."
       ],
       "apple_id": 271792608,
       "apple_url": "https://music.apple.com/us/album/morning-view/271792608",
@@ -2647,7 +2647,8 @@
         "rise": 0.1,
         "floor": 40,
         "ceil": 175
-      }
+      },
+      "live": true
     },
     {
       "no": 4,

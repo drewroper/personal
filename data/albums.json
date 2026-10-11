@@ -3378,7 +3378,8 @@
         "rise": 0.15,
         "floor": 60,
         "contrast": 1.2
-      }
+      },
+      "live": true
     },
     {
       "no": 20,

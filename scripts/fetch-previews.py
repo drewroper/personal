@@ -4,6 +4,10 @@
 Looks each album up on the iTunes lookup API by apple_id, orders its songs by disc and track,
 and matches them to our tracklist by position, falling back to title when the counts differ.
 
+A record Apple doesn't carry (no apple_id, e.g. Girl Talk's Feed the Animals) takes Spotify's
+30-second clips instead, read from its album embed page (no key needed). Same matching rules;
+a track Spotify has no clip for stays unplayable.
+
   scripts/fetch-previews.py
 """
 import json, re, time, urllib.request
@@ -21,6 +25,24 @@ def lookup(apple_id):
                 res = json.load(r)['results']
             songs = [x for x in res if x.get('wrapperType') == 'track' and x.get('kind') == 'song']
             return sorted(songs, key=lambda x: (x.get('discNumber', 1), x.get('trackNumber', 0)))
+        except Exception:
+            time.sleep(2 ** i)
+    return []
+
+
+def spotify_songs(url):
+    """The album's tracks from Spotify's embed page, shaped like iTunes results for attach()."""
+    m = re.search(r'album/([A-Za-z0-9]+)', url or '')
+    if not m:
+        return []
+    req = urllib.request.Request(f'https://open.spotify.com/embed/album/{m.group(1)}', headers={'User-Agent': 'Mozilla/5.0'})
+    for i in range(4):
+        try:
+            with urllib.request.urlopen(req, timeout=20) as r:
+                page = r.read().decode()
+            data = json.loads(re.search(r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>', page, re.S).group(1))
+            tracks = data['props']['pageProps']['state']['data']['entity']['trackList']
+            return [{'trackName': t['title'], 'previewUrl': (t.get('audioPreview') or {}).get('url')} for t in tracks]
         except Exception:
             time.sleep(2 ** i)
     return []
@@ -46,9 +68,13 @@ if __name__ == '__main__':
     doc = json.loads(main_path.read_text())
     got = {}
     for a in doc['albums']:
-        if not a.get('apple_id'):
+        if a.get('apple_id'):
+            songs = lookup(a['apple_id'])
+        elif (a.get('links') or {}).get('spotify'):
+            songs = spotify_songs(a['links']['spotify'])
+        else:
             continue
-        n = attach(a, lookup(a['apple_id']))
+        n = attach(a, songs)
         got[a['slug']] = [t.get('preview') for t in a.get('tracks') or []]
         print(f"{a['slug']:52} {n}/{len(a.get('tracks') or [])}")
         time.sleep(.3)

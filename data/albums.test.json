@@ -889,105 +889,6 @@
       "worn_v": "5e02338f"
     },
     {
-      "no": 20,
-      "slug": "girl-talk-feed-the-animals",
-      "artist": "Girl Talk",
-      "title": "Feed the Animals",
-      "discovered": "Aliqua malesuada esse viverra voluptate semper, 2010.",
-      "blurb": [
-        "Enim nulla sit do suspendisse viverra cras nisi fugiat non, ipsum feugiat mollit mollit, qui ad ac id nulla. Veniam viverra irure fugiat voluptate magna semper vitae adipiscing tincidunt aute. Ullamco fugiat aliqua risus irure feugiat irure amet, ut occaecat curabitur. Voluptate porttitor semper _Feed the Animals_ officia exercitation ligula netus cillum gravida. Integer eiusmod quis consequat sint, suspendisse cras curabitur, ex in, aute quis elit esse nulla mollit. Et pulvinar magna aute, tristique veniam facilisis semper neque malesuada viverra sit excepteur. Fames magna esse tempor, minim sit duis tincidunt minim aliqua senectus."
-      ],
-      "apple_id": 0,
-      "links": {
-        "spotify": "https://open.spotify.com/album/1B5Lwt0D1ZetRreaCBYobP"
-      },
-      "year": "2008",
-      "released": "2008-06-19",
-      "label": "Illegal Art",
-      "genre": "Mashup",
-      "art": "assets/40/girl-talk-feed-the-animals.jpg",
-      "tracks": [
-        {
-          "n": 1,
-          "title": "Play Your Part (Pt. 1)",
-          "ms": 284000
-        },
-        {
-          "n": 2,
-          "title": "Shut The Club Down",
-          "ms": 186000
-        },
-        {
-          "n": 3,
-          "title": "Still Here",
-          "ms": 237000
-        },
-        {
-          "n": 4,
-          "title": "What It's All About",
-          "ms": 254000
-        },
-        {
-          "n": 5,
-          "title": "Set It Off",
-          "ms": 221000
-        },
-        {
-          "n": 6,
-          "title": "No Pause",
-          "ms": 192000
-        },
-        {
-          "n": 7,
-          "title": "Like This",
-          "ms": 201000
-        },
-        {
-          "n": 8,
-          "title": "Give Me A Beat",
-          "ms": 252000
-        },
-        {
-          "n": 9,
-          "title": "Hands In The Air",
-          "ms": 260000
-        },
-        {
-          "n": 10,
-          "title": "In Step",
-          "ms": 203000
-        },
-        {
-          "n": 11,
-          "title": "Let Me See You",
-          "ms": 243000
-        },
-        {
-          "n": 12,
-          "title": "Here's The Thing",
-          "ms": 285000
-        },
-        {
-          "n": 13,
-          "title": "Don't Stop",
-          "ms": 178000
-        },
-        {
-          "n": 14,
-          "title": "Play Your Part (Pt. 2)",
-          "ms": 205000
-        }
-      ],
-      "track_count": 14,
-      "runtime_ms": 3201000,
-      "date": "2026-10-12",
-      "wear": {
-        "level": "med"
-      },
-      "art_worn": "assets/40/worn/girl-talk-feed-the-animals.jpg",
-      "worn_v": "a200112d"
-    },
-    {
       "no": 1,
       "slug": "animal-collective-merriweather-post-pavilion",
       "artist": "Animal Collective",
@@ -2498,6 +2399,107 @@
     },
     {
       "no": 18,
+      "slug": "girl-talk-feed-the-animals",
+      "artist": "Girl Talk",
+      "title": "Feed the Animals",
+      "discovered": "Aliqua malesuada esse viverra voluptate semper, 2010.",
+      "blurb": [
+        "Enim nulla sit do suspendisse viverra cras nisi fugiat non, ipsum feugiat mollit mollit, qui ad ac id nulla. Veniam viverra irure fugiat voluptate magna semper vitae adipiscing tincidunt aute. Ullamco fugiat aliqua risus irure feugiat irure amet, ut occaecat curabitur. Voluptate porttitor semper _Feed the Animals_ officia exercitation ligula netus cillum gravida. Integer eiusmod quis consequat sint, suspendisse cras curabitur, ex in, aute quis elit esse nulla mollit. Et pulvinar magna aute, tristique veniam facilisis semper neque malesuada viverra sit excepteur. Fames magna esse tempor, minim sit duis tincidunt minim aliqua senectus."
+      ],
+      "apple_id": 0,
+      "links": {
+        "spotify": "https://open.spotify.com/album/1B5Lwt0D1ZetRreaCBYobP"
+      },
+      "year": "2008",
+      "released": "2008-06-19",
+      "label": "Illegal Art",
+      "genre": "Mashup",
+      "art": "assets/40/girl-talk-feed-the-animals.jpg",
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Play Your Part (Pt. 1)",
+          "ms": 284786
+        },
+        {
+          "n": 2,
+          "title": "Shut The Club Down",
+          "ms": 186706
+        },
+        {
+          "n": 3,
+          "title": "Still Here",
+          "ms": 237093
+        },
+        {
+          "n": 4,
+          "title": "What It's All About",
+          "ms": 254693
+        },
+        {
+          "n": 5,
+          "title": "Set It Off",
+          "ms": 221840
+        },
+        {
+          "n": 6,
+          "title": "No Pause",
+          "ms": 192173
+        },
+        {
+          "n": 7,
+          "title": "Like This",
+          "ms": 201093
+        },
+        {
+          "n": 8,
+          "title": "Give Me A Beat",
+          "ms": 252200
+        },
+        {
+          "n": 9,
+          "title": "Hands In The Air",
+          "ms": 260279
+        },
+        {
+          "n": 10,
+          "title": "In Step",
+          "ms": 203280
+        },
+        {
+          "n": 11,
+          "title": "Let Me See You",
+          "ms": 243800
+        },
+        {
+          "n": 12,
+          "title": "Here's The Thing",
+          "ms": 285480
+        },
+        {
+          "n": 13,
+          "title": "Don't Stop",
+          "ms": 178173
+        },
+        {
+          "n": 14,
+          "title": "Play Your Part (Pt. 2)",
+          "ms": 205186
+        }
+      ],
+      "track_count": 14,
+      "runtime_ms": 3206782,
+      "wear": {
+        "level": "med"
+      },
+      "art_worn": "assets/40/worn/girl-talk-feed-the-animals.jpg",
+      "worn_v": "a200112d",
+      "date": "2026-10-10",
+      "art_back": "assets/40/girl-talk-feed-the-animals-back.jpg",
+      "art_back_src": "Plain black, as on the LP (Discogs 22611584, IA117LP gatefold; sample list and tracklist are inside) and the 2008 CD (Discogs 1526648); rendered flat, no scan"
+    },
+    {
+      "no": 20,
       "slug": "t-i-king",
       "artist": "T.I.",
       "title": "King",
@@ -2507,7 +2509,6 @@
       "wear": {
         "level": "high"
       },
-      "date": "2026-10-10",
       "apple_url": "https://music.apple.com/us/album/king/1258976262",
       "released": "2006-03-28",
       "year": "2006",
@@ -2626,7 +2627,8 @@
         "spotify": "https://open.spotify.com/album/0JE9TV4FzzTScTS0lJBeph"
       },
       "art_back": "assets/40/t-i-king-back.jpg",
-      "art_back_src": "https://www.discogs.com/release/762994 (US LP, Album 2006, Atlantic 83800-1; shot through shrinkwrap, haze pulled down to match the front)"
+      "art_back_src": "https://www.discogs.com/release/762994 (US LP, Album 2006, Atlantic 83800-1; shot through shrinkwrap, haze pulled down to match the front)",
+      "date": "2026-10-12"
     },
     {
       "no": 16,

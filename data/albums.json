@@ -116,7 +116,7 @@
       "live": true
     },
     {
-      "no": 18,
+      "no": 24,
       "slug": "finch-what-it-is-to-burn",
       "artist": "Finch",
       "title": "What It Is to Burn",
@@ -218,7 +218,6 @@
       },
       "art_back": "assets/40/finch-what-it-is-to-burn-back.jpg",
       "art_back_src": "https://www.discogs.com/release/2140866 (US LP 2002, DTR #28.V)",
-      "date": "2026-10-10",
       "wear": {
         "level": "high",
         "edge": 2.5,
@@ -226,7 +225,8 @@
       },
       "art_worn": "assets/40/worn/finch-what-it-is-to-burn.jpg",
       "art_back_worn": "assets/40/worn/finch-what-it-is-to-burn-back.jpg",
-      "worn_v": "4cecb553"
+      "worn_v": "4cecb553",
+      "date": "2026-10-16"
     },
     {
       "no": 6,
@@ -3342,6 +3342,155 @@
         "ceil": 185
       },
       "live": true
+    },
+    {
+      "no": 18,
+      "slug": "t-i-king",
+      "artist": "T.I.",
+      "title": "King",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 1258976262,
+      "wear": {
+        "level": "high"
+      },
+      "date": "2026-10-10",
+      "apple_url": "https://music.apple.com/us/album/king/1258976262",
+      "released": "2006-03-28",
+      "year": "2006",
+      "copyright": "℗ 2006 Grand Hustle, LLC | Cinq Recordings",
+      "genre": "Rap",
+      "track_count": 17,
+      "runtime_ms": 4234230,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "King Back",
+          "ms": 252547,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/cb/8b/a9/cb8ba99a-bacf-9c16-25de-812781970a19/mzaf_4307055909337847436.plus.aac.p.m4a"
+        },
+        {
+          "n": 2,
+          "title": "Front Back (feat. UGK)",
+          "ms": 222853,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/38/38/32/3838322b-e9c5-8015-2656-5d10548e4e02/mzaf_9698655454136343659.plus.aac.p.m4a"
+        },
+        {
+          "n": 3,
+          "title": "What You Know",
+          "ms": 274333,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/79/03/d2/7903d26b-4870-d314-e824-a967d0e8fde7/mzaf_5630732472980695552.plus.aac.p.m4a"
+        },
+        {
+          "n": 4,
+          "title": "I'm Talkin' to You",
+          "ms": 305621,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/9f/b0/e1/9fb0e112-706f-33a5-75d2-220827c8fa56/mzaf_7380751204133932524.plus.aac.p.m4a"
+        },
+        {
+          "n": 5,
+          "title": "Live in the Sky (feat. Jamie Foxx)",
+          "ms": 346080,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ec/a6/45/eca64528-adcf-957f-d80d-e33ce2c9f6d2/mzaf_4710634027430520708.plus.aac.p.m4a"
+        },
+        {
+          "n": 6,
+          "title": "Ride Wit Me",
+          "ms": 244533,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/7b/70/fb/7b70fbcb-4326-5e53-c4c1-cf4bc493aaa9/mzaf_10827606400659810008.plus.aac.p.m4a"
+        },
+        {
+          "n": 7,
+          "title": "Why You Wanna",
+          "ms": 215000,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/5f/5c/a5/5f5ca55b-0b1f-07c6-63db-7c5a5e28702b/mzaf_364787686396018406.plus.aac.p.m4a"
+        },
+        {
+          "n": 8,
+          "title": "Get It",
+          "ms": 220960,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/f6/0e/e1/f60ee149-5ffe-e67b-627e-88650c068c37/mzaf_7388414910903685136.plus.aac.p.m4a"
+        },
+        {
+          "n": 9,
+          "title": "Top Back",
+          "ms": 282413,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/52/35/d2/5235d201-ab71-17f6-5dce-e7f3fb58886d/mzaf_13512175131334902436.plus.aac.p.m4a"
+        },
+        {
+          "n": 10,
+          "title": "I'm Straight (feat. B.G. and Young Jeezy)",
+          "ms": 280218,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/2c/5a/c1/2c5ac1f5-c7f4-d32f-2909-b3670da777cb/mzaf_14420566399158021883.plus.aac.p.m4a"
+        },
+        {
+          "n": 11,
+          "title": "Undertaker (feat. Young Buck, Young Dro & DJ Drama)",
+          "ms": 253093,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ae/d9/51/aed9515e-511d-e4b6-8d87-6c94ec576691/mzaf_6166189049817629255.plus.aac.p.m4a"
+        },
+        {
+          "n": 12,
+          "title": "Stand Up Guy",
+          "ms": 196013,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/cc/46/60/cc466041-0417-1121-a502-7f94bb2a930e/mzaf_5551969577356774219.plus.aac.p.m4a"
+        },
+        {
+          "n": 13,
+          "title": "You Know Who",
+          "ms": 174627,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ec/df/2e/ecdf2e6f-99c6-4d9a-6bf3-d4bedc110e59/mzaf_14541645560935308062.plus.aac.p.m4a"
+        },
+        {
+          "n": 14,
+          "title": "Goodlife (feat. Pharrell & Common)",
+          "ms": 222192,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/17/d1/69/17d16977-0ed1-9058-3bd1-d84545ef1776/mzaf_14824767268449035963.plus.aac.p.m4a"
+        },
+        {
+          "n": 15,
+          "title": "Hello (feat. Governor)",
+          "ms": 214880,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/34/c3/34/34c334a7-acf4-a2d0-ef03-53f53b0ea8bb/mzaf_10989526173728669751.plus.aac.p.m4a"
+        },
+        {
+          "n": 16,
+          "title": "Told You So",
+          "ms": 262707,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/3d/94/02/3d9402f6-2c04-86d0-5fc7-698c1384e810/mzaf_10381990461311306293.plus.aac.p.m4a"
+        },
+        {
+          "n": 17,
+          "title": "Bankhead (feat. P$C & Young Dro)",
+          "ms": 266160,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/41/0b/a4/410ba45d-8daf-bb95-32a7-e06ad244c349/mzaf_15078088968764786341.plus.aac.p.m4a"
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/25/a5/3c/25a53c93-d890-adaf-ca84-afa15065c220/075678380068_cover.jpg/1800x1800bb.jpg",
+      "label": "Grand Hustle / Atlantic",
+      "art": "assets/40/t-i-king.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/0JE9TV4FzzTScTS0lJBeph"
+      },
+      "art_back": "assets/40/t-i-king-back.jpg",
+      "art_back_src": "https://www.discogs.com/release/762994 (US LP, Album 2006, Atlantic 83800-1; shot through shrinkwrap, haze pulled down to match the front)",
+      "art_worn": "assets/40/worn/t-i-king.jpg",
+      "art_back_worn": "assets/40/worn/t-i-king-back.jpg",
+      "worn_v": "4b10cedb",
+      "story": {
+        "focus": [
+          0.68,
+          0.7
+        ],
+        "at": [
+          0.45,
+          0.86
+        ],
+        "zoom": 3.0,
+        "rise": 0.2,
+        "floor": 95,
+        "contrast": 1.0
+      }
     },
     {
       "no": 40,

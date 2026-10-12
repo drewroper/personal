@@ -1941,92 +1941,6 @@
     },
     {
       "no": null,
-      "slug": "coldplay-parachutes",
-      "artist": "Coldplay",
-      "title": "Parachutes",
-      "discovered": "",
-      "blurb": [],
-      "apple_id": 1122782080,
-      "apple_url": "https://music.apple.com/us/album/parachutes/1122782080",
-      "released": "2000-07-10",
-      "year": "2000",
-      "copyright": "℗ 2000 Parlophone Records Ltd, a Warner Music Group Company",
-      "genre": "Alternative",
-      "track_count": 10,
-      "runtime_ms": 2506643,
-      "tracks": [
-        {
-          "n": 1,
-          "title": "Don't Panic",
-          "ms": 137225,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/0b/1b/e2/0b1be29c-df3f-38e5-3dfd-9609d71319fd/mzaf_5477629674077666453.plus.aac.p.m4a"
-        },
-        {
-          "n": 2,
-          "title": "Shiver",
-          "ms": 299265,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/31/fa/3a/31fa3a0a-6fe7-1182-9868-977779c75ede/mzaf_2064396575924830937.plus.aac.p.m4a"
-        },
-        {
-          "n": 3,
-          "title": "Spies",
-          "ms": 318268,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/f2/93/7f/f2937fcd-a20e-f935-e3c4-61b012761310/mzaf_8241766698500181435.plus.aac.p.m4a"
-        },
-        {
-          "n": 4,
-          "title": "Sparks",
-          "ms": 227094,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/47/db/ce/47dbce82-d89c-0897-0da7-26d06ae7e2f2/mzaf_14852507599380441353.plus.aac.p.m4a"
-        },
-        {
-          "n": 5,
-          "title": "Yellow",
-          "ms": 269208,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/66/f3/1a/66f31a76-a6ed-cb4c-f353-23310a7ae9a8/mzaf_10593596652344378873.plus.aac.p.m4a"
-        },
-        {
-          "n": 6,
-          "title": "Trouble",
-          "ms": 270731,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/25/e9/92/25e9922c-1808-4198-4c94-ff8a58475dd9/mzaf_16674087831264377666.plus.aac.p.m4a"
-        },
-        {
-          "n": 7,
-          "title": "Parachutes",
-          "ms": 46228,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/b1/3b/01/b13b0158-50bb-9805-39df-db74e7e3cb71/mzaf_12781329602745406076.plus.aac.p.m4a"
-        },
-        {
-          "n": 8,
-          "title": "High Speed",
-          "ms": 254049,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/20/0f/21/200f216c-06ff-be2e-35a1-b4aace9ec0f9/mzaf_16967014479333589611.plus.aac.p.m4a"
-        },
-        {
-          "n": 9,
-          "title": "We Never Change",
-          "ms": 249327,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/b4/be/f4/b4bef467-c460-69e0-15c9-9ca3e74db70f/mzaf_18394338411513600749.plus.aac.p.m4a"
-        },
-        {
-          "n": 10,
-          "title": "Everything's Not Lost",
-          "ms": 435248,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/60/43/ff/6043ffda-cd72-d0bc-e980-b772aff2e726/mzaf_8068562242161653667.plus.aac.p.m4a"
-        }
-      ],
-      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/f5/93/8c/f5938c49-964c-31d1-4b33-78b634f71fb7/190295978075.jpg/1800x1800bb.jpg",
-      "label": "Parlophone Records Ltd, a Warner Music Group Company",
-      "art": "assets/40/coldplay-parachutes.jpg",
-      "links": {
-        "spotify": "https://open.spotify.com/album/6ZG5lRT77aJ3btmArcykra"
-      },
-      "art_back": "assets/40/coldplay-parachutes-back.jpg",
-      "art_back_src": "http://coverartarchive.org/release/16a32e03-6d97-43a4-a19e-80e79567854a/19420035366.jpg"
-    },
-    {
-      "no": null,
       "slug": "lord-huron-lonesome-dreams",
       "artist": "Lord Huron",
       "title": "Lonesome Dreams",
@@ -3405,6 +3319,114 @@
     },
     {
       "no": 20,
+      "slug": "coldplay-parachutes",
+      "artist": "Coldplay",
+      "title": "Parachutes",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 1122782080,
+      "apple_url": "https://music.apple.com/us/album/parachutes/1122782080",
+      "released": "2000-07-10",
+      "year": "2000",
+      "copyright": "℗ 2000 Parlophone Records Ltd, a Warner Music Group Company",
+      "genre": "Alternative",
+      "track_count": 10,
+      "runtime_ms": 2506643,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Don't Panic",
+          "ms": 137225,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/0b/1b/e2/0b1be29c-df3f-38e5-3dfd-9609d71319fd/mzaf_5477629674077666453.plus.aac.p.m4a"
+        },
+        {
+          "n": 2,
+          "title": "Shiver",
+          "ms": 299265,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/31/fa/3a/31fa3a0a-6fe7-1182-9868-977779c75ede/mzaf_2064396575924830937.plus.aac.p.m4a"
+        },
+        {
+          "n": 3,
+          "title": "Spies",
+          "ms": 318268,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/f2/93/7f/f2937fcd-a20e-f935-e3c4-61b012761310/mzaf_8241766698500181435.plus.aac.p.m4a"
+        },
+        {
+          "n": 4,
+          "title": "Sparks",
+          "ms": 227094,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/47/db/ce/47dbce82-d89c-0897-0da7-26d06ae7e2f2/mzaf_14852507599380441353.plus.aac.p.m4a"
+        },
+        {
+          "n": 5,
+          "title": "Yellow",
+          "ms": 269208,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/66/f3/1a/66f31a76-a6ed-cb4c-f353-23310a7ae9a8/mzaf_10593596652344378873.plus.aac.p.m4a"
+        },
+        {
+          "n": 6,
+          "title": "Trouble",
+          "ms": 270731,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/25/e9/92/25e9922c-1808-4198-4c94-ff8a58475dd9/mzaf_16674087831264377666.plus.aac.p.m4a"
+        },
+        {
+          "n": 7,
+          "title": "Parachutes",
+          "ms": 46228,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/b1/3b/01/b13b0158-50bb-9805-39df-db74e7e3cb71/mzaf_12781329602745406076.plus.aac.p.m4a"
+        },
+        {
+          "n": 8,
+          "title": "High Speed",
+          "ms": 254049,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/20/0f/21/200f216c-06ff-be2e-35a1-b4aace9ec0f9/mzaf_16967014479333589611.plus.aac.p.m4a"
+        },
+        {
+          "n": 9,
+          "title": "We Never Change",
+          "ms": 249327,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/b4/be/f4/b4bef467-c460-69e0-15c9-9ca3e74db70f/mzaf_18394338411513600749.plus.aac.p.m4a"
+        },
+        {
+          "n": 10,
+          "title": "Everything's Not Lost",
+          "ms": 435248,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/60/43/ff/6043ffda-cd72-d0bc-e980-b772aff2e726/mzaf_8068562242161653667.plus.aac.p.m4a"
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/f5/93/8c/f5938c49-964c-31d1-4b33-78b634f71fb7/190295978075.jpg/1800x1800bb.jpg",
+      "label": "Parlophone",
+      "art": "assets/40/coldplay-parachutes.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/6ZG5lRT77aJ3btmArcykra"
+      },
+      "art_back": "assets/40/coldplay-parachutes-back.jpg",
+      "art_back_src": "http://coverartarchive.org/release/16a32e03-6d97-43a4-a19e-80e79567854a/19420035366.jpg",
+      "date": "2026-10-12",
+      "wear": {
+        "level": "high"
+      },
+      "art_worn": "assets/40/worn/coldplay-parachutes.jpg",
+      "art_back_worn": "assets/40/worn/coldplay-parachutes-back.jpg",
+      "worn_v": "85bd5e98",
+      "story": {
+        "focus": [
+          0.45,
+          0.5
+        ],
+        "at": [
+          0.5,
+          0.15
+        ],
+        "zoom": 2.6,
+        "rise": 0.25,
+        "levels": true,
+        "floor": 60,
+        "contrast": 1.2
+      }
+    },
+    {
+      "no": 26,
       "slug": "t-i-king",
       "artist": "T.I.",
       "title": "King",
@@ -3550,7 +3572,7 @@
         "floor": 95,
         "contrast": 1.0
       },
-      "date": "2026-10-12"
+      "date": "2026-10-18"
     },
     {
       "no": 40,

@@ -681,20 +681,21 @@ def surface_layer(slug, year, face='', mean=.5, edgew=1.0, surfw=0.0, bendw=0.0)
     return lay
 
 
-def make_mask(slug, year, dens=1.0, edgek=1.0, face='', mean=.5, edgew=1.0, surfw=0.0, bendw=0.0):
+def make_mask(slug, year, dens=1.0, edgek=1.0, face='', mean=.5, edgew=1.0, surfw=0.0, bendw=0.0, ringw=1.0):
     """dens and edgek scale the amount of wear without moving any of it, so every level is the same sleeve.
     face '' is the front, ':back' the back (the ring mirrored, everything else its own). mean is the
     cover's mean luminance (pale stock is handled differently).
     Returns channels: 0 abrasion (exposed paper), 1 crushed edge (card), 2 dirt (shows on light ink),
-    3 the rim's impression line, 4 the rim's stipple, 5 grey grain in rubbed white stock."""
+    3 the rim's impression line, 4 the rim's stipple, 5 grey grain in rubbed white stock.
+    ringw scales everything the disc did (ring, its inner band, rim line, rub bars); 1.0 leaves it as drawn."""
     R = ring_layer(slug, year)
     L = surface_layer(slug, year, face, mean, edgew, surfw, bendw)
     edgek = edgek * (1 + .45 * (edgew - 1))         # and a wider crushed strip and corners
     fl = (lambda a: a[:, ::-1]) if face else (lambda a: a)      # the disc presses both faces, mirrored
     T, Trub, V, Vb, Tc = fl(R['T']), fl(R['Trub']), fl(R['V']), fl(R['Vb']), fl(R['Tc'])
-    Pi = np.maximum(fl(R['Pi']), L['Pi'])
-    Pb = np.maximum(fl(R['Pb']), L['Pb'])
-    Pbc = fl(R['Pbc'])
+    Pi = np.maximum(fl(R['Pi']) * ringw, L['Pi'])
+    Pb = np.maximum(fl(R['Pb']) * ringw, L['Pb'])
+    Pbc = fl(R['Pbc']) * ringw
     light = mean > .62
     light_old = light and R['age'] > 40
     scuff = light and not light_old                  # young and mid-aged pale stock: a bar scuffs rather than soils
@@ -727,7 +728,7 @@ def make_mask(slug, year, dens=1.0, edgek=1.0, face='', mean=.5, edgew=1.0, surf
     Pall = np.maximum.reduce([Pi, Pb, Pbc]) * dens
     dense = smooth(.06, .22, Pall) if light else smooth(.12, .35, Pall)             # only a real rub holds grime
     kg = (.8 if light else .7) * (.3 + .7 * float(smooth(10, 25, R['age'])))      # and a young sleeve has gathered little
-    kr = 1 if light_old else (.7 if scuff else 1) * (1 - .45 * smooth(.1, .3, fl(R['Pi'])))   # a ring's core on pale ink: scuffed, not pencilled
+    kr = 1 if light_old else (.7 if scuff else 1) * (1 - .45 * smooth(.1, .3, fl(R['Pi']) * ringw))   # a ring's core on pale ink: scuffed, not pencilled
     dirt = np.maximum(ab_i * kg * kr, ab_b * kg * (.35 / .8 if scuff else 1)) * L['grime'] * dense
     dirt = np.maximum(dirt, L['cracks'] * (.45 if light else .8) * lk)             # (on white a crack is a hairline, not a vein)
     dirt = np.maximum(dirt, L['scratches'] * .25 * lk)
@@ -736,10 +737,10 @@ def make_mask(slug, year, dens=1.0, edgek=1.0, face='', mean=.5, edgew=1.0, surf
     if L['esoil'].any():
         dirt = np.maximum(dirt, down(flakes(L['esoil'] * dens, Tc[::-1])) * .55)
     Tf = np.clip((V - .66) / .3, .03, 1)                                                # fibre-fine: the line breaks into grain, not dashes
-    dline = down(flakes(fl(R['Dl']) * (.45 + .55 * dens), Tf))
-    dst = down(flakes(fl(R['Ds']) * dens, Tc))
-    rub = np.minimum(np.maximum(fl(R['Pb']), .6 * Pbc), 1)                           # the rub bars leave grey grain too,
-    soil = np.maximum(fl(R['soil']), rub * (.12 if scuff else .3))                  # but only a little on a younger pale sleeve
+    dline = down(flakes(fl(R['Dl']) * ringw * (.45 + .55 * dens), Tf))
+    dst = down(flakes(fl(R['Ds']) * ringw * dens, Tc))
+    rub = np.minimum(np.maximum(fl(R['Pb']) * ringw, .6 * Pbc), 1)                           # the rub bars leave grey grain too,
+    soil = np.maximum(fl(R['soil']) * ringw, rub * (.12 if scuff else .3))                  # but only a little on a younger pale sleeve
     dsoil = down(flakes(soil * dens, Tc))
     out = np.stack([mask, edge, dirt, dline, dst, dsoil], -1)
     out *= (L['Drr'] >= -1.5)[..., None]             # outside the rounded outline: the art, untouched (if anything shows it unclipped)
@@ -861,13 +862,14 @@ def job(a):
     edgew = float(w.get('edge', g['edge']))                   # per-record: more edge wear where the art hides the rest
     surfw = float(w.get('surface', g['surface']))             # per-record: more scratches, rubs, folds on the face
     bendw = float(w.get('bends', 0))                          # per-record: creases where the sleeve got bent
+    ringw = float(w.get('ring', 1.0))                         # per-record: how hard the disc's ring and rub bars read (0 = no ring)
     cov = load_square(ROOT / a['art'])
     lum = float(lum_of(cov).mean())
     tone = 1 + .3 * float(smooth(.6, .85, lum))           # light covers carry heavier wear
     masks = {}
     for lv in (LEVELS if LEVELS_DIR else [level]):
         dens, ek, _ = LEVELS[lv]
-        masks[lv] = make_mask(slug, a.get('year'), dens * tone * amount, ek, '', lum, edgew, surfw, bendw)
+        masks[lv] = make_mask(slug, a.get('year'), dens * tone * amount, ek, '', lum, edgew, surfw, bendw, ringw)
     mask, life, age, ring = masks[level]; k = LEVELS[level][2]
     MASKS.mkdir(parents=True, exist_ok=True)
     Image.fromarray((mask[..., :3] * 255 + .5).astype(np.uint8), 'RGB').save(MASKS / f'{slug}.png')
@@ -882,7 +884,7 @@ def job(a):
         dens, ek, _ = LEVELS[level]
         bw = float(w.get('back', 1.0))                        # per-record: the back's share of the wear (a stark white back shows it all)
         mb = make_mask(slug, a.get('year'), dens * (1 + .3 * float(smooth(.6, .85, lumb))) * amount * bw, ek, ':back', lumb,
-                       1 + (edgew - 1) * bw, surfw * bw, bendw)[0]
+                       1 + (edgew - 1) * bw, surfw * bw, bendw, ringw)[0]
         bk = bake(covb, mb, k, slug + ':back', age)
         if fw > 0: bk = fold(bk, slug, ':back', MIRROR[fat], fw)
         bk.save(WORN / f'{slug}-back.jpg', 'JPEG', quality=86, optimize=True, progressive=True)

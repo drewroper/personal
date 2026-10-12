@@ -22,9 +22,12 @@ taste behind it, signed off on the first 21 records (Sep 23 2026). Apply it to e
 | `fold`    | 0       | a pressed-flat dog-ear at one corner, lit like a scan: broken white crack, soft shadow, the flap a touch lighter; mirrored on the back. For busy art that swallows `bends` (Wondrous Bughouse 1.2). `fold_at`: `tl` / `tr` / `bl` / `br` (default `tr`, where the Incubus crease sits) |
 | `amount`  | 1.2     | overall multiplier |
 | `back`    | 1.0     | the back's share of the wear. A stark white back shows every mark: Wondrous Bughouse .5. The `fold` carries through regardless |
+| `ring`    | 1.0     | how hard the disc reads: the ring, its inner band, the rim line and the rub bars, front and back. `0` = no ring. On a flat black field a broad "flake" ring reads as salt speckle: Parachutes `0` |
 | `lock`    | —       | `true` = render with base settings, exactly as signed off (Incubus, Phish) |
 
 Busy all-over art (Merriweather, Wondrous Bughouse) hides wear in the middle: push `edge` (3.5–4) instead, and if it still reads clean give it a `fold`; thin `bends` vanish in busy art.
+
+Flat black covers show every white fleck as noise. Start at `med`, and if the ring or the face's rub patches read as speckle, drop them: Parachutes is `{level: med, ring: 0, surface: .5}` (Drew: "the wear around the record ring looks very fake"). Edge frost, chipped corners and a few straight scratches carry it.
 
 ## What reads as real (Drew's notes, in their words where possible)
 

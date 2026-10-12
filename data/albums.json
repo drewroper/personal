@@ -3417,11 +3417,13 @@
       "art_back_src": "http://coverartarchive.org/release/16a32e03-6d97-43a4-a19e-80e79567854a/19420035366.jpg",
       "date": "2026-10-12",
       "wear": {
-        "level": "high"
+        "level": "med",
+        "ring": 0,
+        "surface": 0.5
       },
       "art_worn": "assets/40/worn/coldplay-parachutes.jpg",
       "art_back_worn": "assets/40/worn/coldplay-parachutes-back.jpg",
-      "worn_v": "85bd5e98",
+      "worn_v": "59162a06",
       "story": {
         "focus": [
           0.45,

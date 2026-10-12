@@ -2694,7 +2694,9 @@
       "art_back_src": "http://coverartarchive.org/release/16a32e03-6d97-43a4-a19e-80e79567854a/19420035366.jpg",
       "date": "2026-10-12",
       "wear": {
-        "level": "high"
+        "level": "med",
+        "ring": 0,
+        "surface": 0.5
       }
     },
     {

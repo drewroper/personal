@@ -3330,8 +3330,13 @@
       "slug": "coldplay-parachutes",
       "artist": "Coldplay",
       "title": "Parachutes",
-      "discovered": "",
-      "blurb": [],
+      "discovered": "Fall 2001, freshman year of high school",
+      "blurb": [
+        "Like everyone else, I'd heard \"Yellow\" everywhere. But in ninth grade English class, a friend told me I needed to listen to the full album. I loved it from the moment I heard it, and I fell back in love with it a few years later when \"Don't Panic\" showed up in _Garden State_.",
+        "It kicked off years of loving Coldplay, even after _The 40-Year-Old Virgin_ made hating Coldplay cool. (I do not associate with anything after _X&Y_.)",
+        "Then this album took on a whole new meaning. Megan put it on her birthing playlist when we had Wilson. He wasn't born to \"Sparks,\" but it was on the playlist, and it's the one song that reminds me most of her pregnancy.",
+        "Two years later, we played this album while [Wilson colored all over the walls](photo:assets/40/photos/parachutes-wilson-walls.jpg \"Wilson on the walls, before the renovation\") we were about to tear down for our renovation. It's one of the happiest feelings I've ever had."
+      ],
       "apple_id": 1122782080,
       "apple_url": "https://music.apple.com/us/album/parachutes/1122782080",
       "released": "2000-07-10",
@@ -3431,7 +3436,8 @@
         "levels": true,
         "floor": 60,
         "contrast": 1.2
-      }
+      },
+      "live": true
     },
     {
       "no": 26,

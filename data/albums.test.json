@@ -2695,7 +2695,7 @@
       "date": "2026-10-12",
       "wear": {
         "level": "med",
-        "ring": 0,
+        "ring": 0.3,
         "surface": 0.5
       }
     },

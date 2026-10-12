@@ -3208,8 +3208,15 @@
       "slug": "death-cab-for-cutie-plans",
       "artist": "Death Cab for Cutie",
       "title": "Plans",
-      "discovered": "",
-      "blurb": [],
+      "discovered": "Release day, 2005",
+      "blurb": [
+        "_Plans_ came out right as my freshman year of college started. I bought it on iTunes with gift cards I got for graduation. New friends, new experiences, a new home, and the freshman blues hit me hard. I was only two hours from St. Louis, but I was homesick, even if I was pretending I wasn't. Fall always got me down, and this album couldn't have fit my mood better.",
+        "It's a record about change, distance and losing people, and how plans rarely go to plan. Pretty fitting for an 18-year-old who had no idea what he was doing.",
+        "Hudson Hall. Pizza from Rollins. Rushing the field after we beat Nebraska. My dad's blue Camaro. Feeling lost and always awkward.",
+        "This is another example of an album on this list that might not be considered a band's \"best album,\" but it's probably my favorite. I loved _Transatlanticism_, but something about _Plans_, fall in mid-Missouri and living on a beautiful campus (and also living on Facebook) hit me hard because of where I was in life.",
+        "The tempo shift in the middle of \"Different Names for the Same Thing\" is probably my favorite part of the album. The first time I heard it, I thought, ah, this is just a sad piano song, and I'm not really into those. I almost skipped to the next track. Then, right around the two-minute mark, it completely took over. \"Crooked Teeth\" is another favorite. Ben Gibbard is an absolute treasure.",
+        "This album still gives me a little ache every time I hear it because of where it takes me."
+      ],
       "apple_id": 966379289,
       "apple_url": "https://music.apple.com/us/album/plans/966379289",
       "released": "2005-08-30",
@@ -3315,7 +3322,8 @@
         "levels": true,
         "floor": 50,
         "contrast": 1.3
-      }
+      },
+      "live": true
     },
     {
       "no": 20,

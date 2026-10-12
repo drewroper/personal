@@ -715,98 +715,6 @@
       "art_back_src": "http://coverartarchive.org/release/e3f030dc-6e02-4a5f-a81d-aca200cb1413/16445057100.jpg"
     },
     {
-      "no": null,
-      "slug": "death-cab-for-cutie-plans",
-      "artist": "Death Cab for Cutie",
-      "title": "Plans",
-      "discovered": "",
-      "blurb": [],
-      "apple_id": 966379289,
-      "apple_url": "https://music.apple.com/us/album/plans/966379289",
-      "released": "2005-08-29",
-      "year": "2005",
-      "copyright": "℗ 2005 Atlantic Recording Corporation for the United States and WEA International Inc. for the world outside of the United States. A Warner Music Group Company",
-      "genre": "Alternative",
-      "track_count": 11,
-      "runtime_ms": 2664063,
-      "tracks": [
-        {
-          "n": 1,
-          "title": "Marching Bands of Manhattan",
-          "ms": 252073,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/2c/51/e1/2c51e19a-98db-2ea9-9f63-166ab1432d8a/mzaf_16432002916196288156.plus.aac.p.m4a"
-        },
-        {
-          "n": 2,
-          "title": "Soul Meets Body",
-          "ms": 230905,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/e0/b9/63/e0b963e3-9504-c7db-f777-38573b6f5419/mzaf_4825372690870556242.plus.aac.p.m4a"
-        },
-        {
-          "n": 3,
-          "title": "Summer Skin",
-          "ms": 194228,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/d3/a1/3a/d3a13a2a-bade-e6fb-1282-3cfc24796101/mzaf_5991940237538404131.plus.aac.p.m4a"
-        },
-        {
-          "n": 4,
-          "title": "Different Names for the Same Thing",
-          "ms": 308507,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/5a/f2/c3/5af2c3a4-613d-366b-2453-aaa99bc3e892/mzaf_16934234839535267013.plus.aac.p.m4a"
-        },
-        {
-          "n": 5,
-          "title": "I Will Follow You Into the Dark",
-          "ms": 189395,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/6c/6c/1b/6c6c1b47-67f2-c8eb-7d38-bfc679607702/mzaf_7721064291825982239.plus.aac.p.m4a"
-        },
-        {
-          "n": 6,
-          "title": "Your Heart Is an Empty Room",
-          "ms": 219364,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/9f/1d/ed/9f1ded65-1367-4676-8777-97532ee2e829/mzaf_8747434029766427597.plus.aac.p.m4a"
-        },
-        {
-          "n": 7,
-          "title": "Someday You Will Be Loved",
-          "ms": 191427,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/0b/86/eb/0b86eb6f-cfa6-b4b2-a220-c37401b86368/mzaf_7130496332482472594.plus.aac.p.m4a"
-        },
-        {
-          "n": 8,
-          "title": "Crooked Teeth",
-          "ms": 203661,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/22/e2/a7/22e2a71e-1735-4840-0853-6c595c8ada4c/mzaf_7730157229107592065.plus.aac.p.m4a"
-        },
-        {
-          "n": 9,
-          "title": "What Sarah Said",
-          "ms": 380920,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/c6/34/c3/c634c3d2-fc3f-8c89-40df-24aed72740f4/mzaf_2261974168640663633.plus.aac.p.m4a"
-        },
-        {
-          "n": 10,
-          "title": "Brothers On a Hotel Bed",
-          "ms": 271100,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/24/0c/e9/240ce986-7b4c-1d42-03ea-db901cd87f41/mzaf_18217791236903273522.plus.aac.p.m4a"
-        },
-        {
-          "n": 11,
-          "title": "Stable Song",
-          "ms": 222483,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/c6/cc/53/c6cc5320-a4a8-118f-8156-f2e715f5d5cb/mzaf_336584835846730297.plus.aac.p.m4a"
-        }
-      ],
-      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/03/0d/0c/030d0c02-4186-a22a-ada6-a13348069d8d/075679930491.jpg/1800x1800bb.jpg",
-      "label": "Atlantic Recording Corporation for the United States and WEA International Inc. for the world outside of the United States. A Warner Music Group Company",
-      "art": "assets/40/death-cab-for-cutie-plans.jpg",
-      "links": {
-        "spotify": "https://open.spotify.com/album/1NFGnxmeIEBakre4DvLaJq"
-      },
-      "art_back": "assets/40/death-cab-for-cutie-plans-back.jpg",
-      "art_back_src": "http://coverartarchive.org/release/025eaf54-9ae7-497e-9b81-a2fed09b53ff/4136078628.jpg"
-    },
-    {
       "no": 23,
       "slug": "oasis-what-s-the-story-morning-glory",
       "artist": "Oasis",
@@ -1914,7 +1822,7 @@
       "art_back_src": "http://coverartarchive.org/release/c46205bc-adb2-48d8-8e8e-b05e54109c86/14063280413.jpg"
     },
     {
-      "no": 19,
+      "no": 25,
       "slug": "alt-j-an-awesome-wave",
       "artist": "alt-J",
       "title": "An Awesome Wave",
@@ -2022,14 +1930,14 @@
       },
       "art_back": "assets/40/alt-j-an-awesome-wave-back.jpg",
       "art_back_src": "https://www.discogs.com/release/4041377 (US LP, Album, Stereo 2012, 532346-1)",
-      "date": "2026-10-11",
       "wear": {
         "level": "high",
         "edge": 2.5
       },
       "art_worn": "assets/40/worn/alt-j-an-awesome-wave.jpg",
       "art_back_worn": "assets/40/worn/alt-j-an-awesome-wave-back.jpg",
-      "worn_v": "0cc12f41"
+      "worn_v": "0cc12f41",
+      "date": "2026-10-17"
     },
     {
       "no": null,
@@ -3380,6 +3288,120 @@
         "contrast": 1.2
       },
       "live": true
+    },
+    {
+      "no": 19,
+      "slug": "death-cab-for-cutie-plans",
+      "artist": "Death Cab for Cutie",
+      "title": "Plans",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 966379289,
+      "apple_url": "https://music.apple.com/us/album/plans/966379289",
+      "released": "2005-08-30",
+      "year": "2005",
+      "copyright": "℗ 2005 Atlantic Recording Corporation for the United States and WEA International Inc. for the world outside of the United States. A Warner Music Group Company",
+      "genre": "Alternative",
+      "track_count": 11,
+      "runtime_ms": 2664063,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Marching Bands of Manhattan",
+          "ms": 252073,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/2c/51/e1/2c51e19a-98db-2ea9-9f63-166ab1432d8a/mzaf_16432002916196288156.plus.aac.p.m4a"
+        },
+        {
+          "n": 2,
+          "title": "Soul Meets Body",
+          "ms": 230905,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/e0/b9/63/e0b963e3-9504-c7db-f777-38573b6f5419/mzaf_4825372690870556242.plus.aac.p.m4a"
+        },
+        {
+          "n": 3,
+          "title": "Summer Skin",
+          "ms": 194228,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/d3/a1/3a/d3a13a2a-bade-e6fb-1282-3cfc24796101/mzaf_5991940237538404131.plus.aac.p.m4a"
+        },
+        {
+          "n": 4,
+          "title": "Different Names for the Same Thing",
+          "ms": 308507,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/5a/f2/c3/5af2c3a4-613d-366b-2453-aaa99bc3e892/mzaf_16934234839535267013.plus.aac.p.m4a"
+        },
+        {
+          "n": 5,
+          "title": "I Will Follow You Into the Dark",
+          "ms": 189395,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/6c/6c/1b/6c6c1b47-67f2-c8eb-7d38-bfc679607702/mzaf_7721064291825982239.plus.aac.p.m4a"
+        },
+        {
+          "n": 6,
+          "title": "Your Heart Is an Empty Room",
+          "ms": 219364,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/9f/1d/ed/9f1ded65-1367-4676-8777-97532ee2e829/mzaf_8747434029766427597.plus.aac.p.m4a"
+        },
+        {
+          "n": 7,
+          "title": "Someday You Will Be Loved",
+          "ms": 191427,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/0b/86/eb/0b86eb6f-cfa6-b4b2-a220-c37401b86368/mzaf_7130496332482472594.plus.aac.p.m4a"
+        },
+        {
+          "n": 8,
+          "title": "Crooked Teeth",
+          "ms": 203661,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/22/e2/a7/22e2a71e-1735-4840-0853-6c595c8ada4c/mzaf_7730157229107592065.plus.aac.p.m4a"
+        },
+        {
+          "n": 9,
+          "title": "What Sarah Said",
+          "ms": 380920,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/c6/34/c3/c634c3d2-fc3f-8c89-40df-24aed72740f4/mzaf_2261974168640663633.plus.aac.p.m4a"
+        },
+        {
+          "n": 10,
+          "title": "Brothers On a Hotel Bed",
+          "ms": 271100,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/24/0c/e9/240ce986-7b4c-1d42-03ea-db901cd87f41/mzaf_18217791236903273522.plus.aac.p.m4a"
+        },
+        {
+          "n": 11,
+          "title": "Stable Song",
+          "ms": 222483,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/c6/cc/53/c6cc5320-a4a8-118f-8156-f2e715f5d5cb/mzaf_336584835846730297.plus.aac.p.m4a"
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/03/0d/0c/030d0c02-4186-a22a-ada6-a13348069d8d/075679930491.jpg/1800x1800bb.jpg",
+      "label": "Atlantic / Barsuk",
+      "art": "assets/40/death-cab-for-cutie-plans.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/1NFGnxmeIEBakre4DvLaJq"
+      },
+      "art_back": "assets/40/death-cab-for-cutie-plans-back.jpg",
+      "art_back_src": "https://www.discogs.com/release/8373983 (US 2xLP 2005, Barsuk bark47; shot through shrinkwrap, haze pulled down)",
+      "date": "2026-10-11",
+      "wear": {
+        "level": "high"
+      },
+      "art_worn": "assets/40/worn/death-cab-for-cutie-plans.jpg",
+      "art_back_worn": "assets/40/worn/death-cab-for-cutie-plans-back.jpg",
+      "worn_v": "2885a802",
+      "story": {
+        "focus": [
+          0.28,
+          0.66
+        ],
+        "at": [
+          0.5,
+          0.86
+        ],
+        "zoom": 3.0,
+        "rise": 0.2,
+        "levels": true,
+        "floor": 50,
+        "contrast": 1.3
+      }
     },
     {
       "no": 20,

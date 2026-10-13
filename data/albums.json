@@ -116,7 +116,6 @@
       "live": true
     },
     {
-      "no": 24,
       "slug": "finch-what-it-is-to-burn",
       "artist": "Finch",
       "title": "What It Is to Burn",
@@ -225,8 +224,7 @@
       },
       "art_worn": "assets/40/worn/finch-what-it-is-to-burn.jpg",
       "art_back_worn": "assets/40/worn/finch-what-it-is-to-burn-back.jpg",
-      "worn_v": "4cecb553",
-      "date": "2026-10-16"
+      "worn_v": "4cecb553"
     },
     {
       "no": 6,
@@ -715,7 +713,6 @@
       "art_back_src": "http://coverartarchive.org/release/e3f030dc-6e02-4a5f-a81d-aca200cb1413/16445057100.jpg"
     },
     {
-      "no": 23,
       "slug": "oasis-what-s-the-story-morning-glory",
       "artist": "Oasis",
       "title": "(What's the Story) Morning Glory?",
@@ -811,7 +808,6 @@
       },
       "art_back": "assets/40/oasis-what-s-the-story-morning-glory-back.jpg",
       "art_back_src": "https://www.discogs.com/release/7100395 (UK LP, Album 1995, CRE LP 189)",
-      "date": "2026-10-15",
       "wear": {
         "level": "high"
       },
@@ -820,7 +816,6 @@
       "worn_v": "4cd5e9c9"
     },
     {
-      "no": 22,
       "slug": "radiohead-hail-to-the-thief",
       "artist": "Radiohead",
       "title": "Hail to the Thief",
@@ -928,7 +923,6 @@
       "art": "assets/40/radiohead-hail-to-the-thief.jpg",
       "art_back": "assets/40/radiohead-hail-to-the-thief-back.jpg",
       "art_back_src": "http://coverartarchive.org/release/f847d298-e2d8-43ed-97ed-7c7b01ff03bc/24770542667.jpg",
-      "date": "2026-10-14",
       "wear": {
         "level": "high",
         "edge": 2.5
@@ -1618,7 +1612,6 @@
       "live": true
     },
     {
-      "no": 21,
       "slug": "dave-matthews-band-crash",
       "artist": "Dave Matthews Band",
       "title": "Crash",
@@ -1720,8 +1713,7 @@
       },
       "art_worn": "assets/40/worn/dave-matthews-band-crash.jpg",
       "art_back_worn": "assets/40/worn/dave-matthews-band-crash-back.jpg",
-      "worn_v": "034a3e7b",
-      "date": "2026-10-13"
+      "worn_v": "034a3e7b"
     },
     {
       "no": null,
@@ -1822,7 +1814,6 @@
       "art_back_src": "http://coverartarchive.org/release/c46205bc-adb2-48d8-8e8e-b05e54109c86/14063280413.jpg"
     },
     {
-      "no": 25,
       "slug": "alt-j-an-awesome-wave",
       "artist": "alt-J",
       "title": "An Awesome Wave",
@@ -1936,8 +1927,7 @@
       },
       "art_worn": "assets/40/worn/alt-j-an-awesome-wave.jpg",
       "art_back_worn": "assets/40/worn/alt-j-an-awesome-wave-back.jpg",
-      "worn_v": "0cc12f41",
-      "date": "2026-10-17"
+      "worn_v": "0cc12f41"
     },
     {
       "no": null,
@@ -3441,7 +3431,6 @@
       "live": true
     },
     {
-      "no": 26,
       "slug": "t-i-king",
       "artist": "T.I.",
       "title": "King",
@@ -3586,8 +3575,7 @@
         "rise": 0.2,
         "floor": 95,
         "contrast": 1.0
-      },
-      "date": "2026-10-18"
+      }
     },
     {
       "no": 40,

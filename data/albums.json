@@ -1814,6 +1814,7 @@
       "art_back_src": "http://coverartarchive.org/release/c46205bc-adb2-48d8-8e8e-b05e54109c86/14063280413.jpg"
     },
     {
+      "no": 21,
       "slug": "alt-j-an-awesome-wave",
       "artist": "alt-J",
       "title": "An Awesome Wave",
@@ -1927,7 +1928,24 @@
       },
       "art_worn": "assets/40/worn/alt-j-an-awesome-wave.jpg",
       "art_back_worn": "assets/40/worn/alt-j-an-awesome-wave-back.jpg",
-      "worn_v": "0cc12f41"
+      "worn_v": "0cc12f41",
+      "date": "2026-10-13",
+      "story": {
+        "focus": [
+          0.78,
+          0.62
+        ],
+        "at": [
+          0.5,
+          0.88
+        ],
+        "zoom": 2.6,
+        "rise": 0.25,
+        "levels": true,
+        "floor": 60,
+        "contrast": 1.25,
+        "tone": 1.2
+      }
     },
     {
       "no": null,
@@ -2947,7 +2965,7 @@
         "_Champ_ is one of those albums where I couldn't name a single other song or album by the band. But this one hooked me from the moment I heard it.",
         "It came out the summer before my last semester of college. I was in the home stretch of my design program, I knew I'd be a graphic designer, and I had my sights set on Chicago. I couldn't wait to get there.",
         "This album takes me right back to my first apartment there, and the winter of my internship. I was on my own, truly for the first time, in a city I wasn't raised in and had barely visited, but I knew I wanted to be there. Cold walks down Division to my internship. Picante burritos. [PBR](photo:assets/40/photos/champ-pbr-bike.jpg \"The water bottle holder. Used as intended. Chicago 2011\"). I was learning how to really be an adult in a city that became my adopted home and still holds a special place in my heart.",
-        "That summer I met a girl at Lollapalooza. We flirted the only logical way you could in 2010: on Twitter. \"Bambi\" was one of the first songs I ever sent her. She ended up becoming my wife. I guess this album hooked her too.",
+        "That summer I met a girl at Lollapalooza. We flirted the only logical way you could in 2010: on Twitter. \"Bambi\" was one of the first songs I ever sent her, in a tweet on December 13, 2010. She ended up becoming my wife. I guess this album hooked her too.",
         "From the first few notes of \"Favourite Food,\" it punches me in the gut and puts a knot in my chest. It's one of the few albums that gives me a positive, visceral reaction every time, because it marks such a clear, and special, place in my life."
       ],
       "apple_id": 1881439477,

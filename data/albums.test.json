@@ -144,7 +144,7 @@
       }
     },
     {
-      "no": 21,
+      "no": 26,
       "slug": "dave-matthews-band-crash",
       "artist": "Dave Matthews Band",
       "title": "Crash",
@@ -249,7 +249,7 @@
       "art_worn": "assets/40/worn/dave-matthews-band-crash.jpg",
       "art_back_worn": "assets/40/worn/dave-matthews-band-crash-back.jpg",
       "worn_v": "034a3e7b",
-      "date": "2026-10-13"
+      "date": "2026-10-18"
     },
     {
       "no": 4,
@@ -1642,7 +1642,7 @@
       "worn_v": "692e9305"
     },
     {
-      "no": 26,
+      "no": 21,
       "slug": "alt-j-an-awesome-wave",
       "artist": "alt-J",
       "title": "An Awesome Wave",
@@ -1759,7 +1759,7 @@
       "art_worn": "assets/40/worn/alt-j-an-awesome-wave.jpg",
       "art_back_worn": "assets/40/worn/alt-j-an-awesome-wave-back.jpg",
       "worn_v": "7711bfc6",
-      "date": "2026-10-18"
+      "date": "2026-10-13"
     },
     {
       "no": 12,

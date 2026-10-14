@@ -1818,8 +1818,12 @@
       "slug": "alt-j-an-awesome-wave",
       "artist": "alt-J",
       "title": "An Awesome Wave",
-      "discovered": "",
-      "blurb": [],
+      "discovered": "September 2012",
+      "blurb": [
+        "I found _An Awesome Wave_ on Rdio in September 2012, which was about a day too late to see them at the Empty Bottle. The album cover intrigued me, \"Breezeblocks\" convinced me, and \"Something Good\" hooked me. It was weird and wonderful from the first ten seconds of \"Intro,\" and I think only The xx has a better debut intro track... but it's close.",
+        "By December I was telling friends it was my album of the year. When Rdio shut down in 2015, the [goodbye page](photo:assets/40/photos/rdio-farewell-2015.jpg \"Rdio's goodbye page, December 2015\") said I'd logged 1,853 hours on the app, with _An Awesome Wave_ as my most played album and \"Something Good\" as my most played song.",
+        "This is the album that reminds me most of our first apartment in Denver, living with my brother and our insane one-year-old border collie. I got the album on vinyl at their show at the Bluebird a couple of months after we moved here, and it's one of the first records I ever owned."
+      ],
       "apple_id": 558262493,
       "apple_url": "https://music.apple.com/us/album/an-awesome-wave/558262493",
       "released": "2012-05-25",
@@ -1945,7 +1949,8 @@
         "floor": 60,
         "contrast": 1.25,
         "tone": 1.2
-      }
+      },
+      "live": true
     },
     {
       "no": null,

@@ -34,3 +34,5 @@ jobs:
           path: .
       - id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          timeout: 1500000   # 25 min; Pages sometimes sits on a deploy past the 10-min default (Oct 14, 2026)

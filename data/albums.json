@@ -116,14 +116,20 @@
       "live": true
     },
     {
+      "no": 22,
       "slug": "finch-what-it-is-to-burn",
       "artist": "Finch",
       "title": "What It Is to Burn",
-      "discovered": "",
-      "blurb": [],
+      "discovered": "Spring 2002, freshman year",
+      "blurb": [
+        "The Drive-Thru Records era got me good. The bands, the personalities, the behind-the-scenes DVDs I watched about a thousand times. It was almost like it was built in a lab for me. Of all the bands from that stage of emo, Finch was my favorite. The pop punk I loved in 2001 turned into pure post-hardcore, and I made _What It Is to Burn_ my entire identity from the second semester of freshman year until _Deja Entendu_ came out at the end of sophomore year.",
+        "I was in a hilarious band with my buddies from high school. We changed our name half a dozen times, practiced all the time, and played maybe a handful of shows. Mostly we played Finch covers in Rob's basement and got yelled at to turn it down every ten minutes. Shoutout M.C.A. fam.",
+        "In June 2003 they played Pointfest at Riverport on a tiny stage by the entrance, and their crowd was massive. We were front row, and the crowd went back as far as I could see. Somehow a few friends and I ended up at their tour bus after the show and met R2K, Nate and the bassist, Derek. I asked Derek how he got his hair so wild (kind of a Robert Smith thing), and he told me to just never wash it. I took that advice a little too far and didn't wash my hair for about a month. It was disgusting, and it looked nothing like his. I should have known better than to take grooming advice from a guy who lived on a tour bus.",
+        "I saw them again at the Creepy Crawl, and a few years later at Pop's in Sauget. The real Finch heads will remember there were two versions of this album. The first pressings ended with the original demo of \"What It Is to Burn,\" which was longer and more orchestral, and later pressings swapped in the shorter re-recording that became the single. I liked the original way better."
+      ],
       "apple_id": 1440743253,
       "apple_url": "https://music.apple.com/us/album/what-it-is-to-burn/1440743253",
-      "released": "2002-01-01",
+      "released": "2002-03-12",
       "year": "2002",
       "copyright": "℗ 2002 Geffen Records",
       "genre": "Alternative",
@@ -210,7 +216,7 @@
         }
       ],
       "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/42/14/a1/4214a191-3dce-85ab-ae8e-6ad7596c4df3/00042286099125.rgb.jpg/1800x1800bb.jpg",
-      "label": "Drive-Thru Records",
+      "label": "Drive-Thru / MCA",
       "art": "assets/40/finch-what-it-is-to-burn.jpg",
       "links": {
         "spotify": "https://open.spotify.com/album/28DROCResQvsdO6Hjmb32x"
@@ -224,7 +230,22 @@
       },
       "art_worn": "assets/40/worn/finch-what-it-is-to-burn.jpg",
       "art_back_worn": "assets/40/worn/finch-what-it-is-to-burn-back.jpg",
-      "worn_v": "4cecb553"
+      "worn_v": "4cecb553",
+      "date": "2026-10-14",
+      "story": {
+        "focus": [
+          0.12,
+          0.5
+        ],
+        "at": [
+          0.3,
+          0.55
+        ],
+        "zoom": 2.8,
+        "rise": 0.25,
+        "levels": true,
+        "contrast": 1.2
+      }
     },
     {
       "no": 6,

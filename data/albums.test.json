@@ -774,7 +774,7 @@
       "worn_v": "c3250a29"
     },
     {
-      "no": 22,
+      "no": 25,
       "slug": "blink-182-take-off-your-pants-and-jacket",
       "artist": "blink-182",
       "title": "Take Off Your Pants and Jacket",
@@ -878,7 +878,7 @@
       },
       "art_back": "assets/40/blink-182-take-off-your-pants-and-jacket-back.jpg",
       "art_back_src": "https://www.discogs.com/release/410661 (Europe LP, Album 2001, 112 674-1)",
-      "date": "2026-10-14",
+      "date": "2026-10-17",
       "wear": {
         "level": "low",
         "surface": 0.5,
@@ -2946,7 +2946,7 @@
       "worn_v": "50be3c40"
     },
     {
-      "no": 25,
+      "no": 22,
       "slug": "finch-what-it-is-to-burn",
       "artist": "Finch",
       "title": "What It Is to Burn",
@@ -2956,7 +2956,7 @@
       ],
       "apple_id": 1440743253,
       "apple_url": "https://music.apple.com/us/album/what-it-is-to-burn/1440743253",
-      "released": "2002-01-01",
+      "released": "2002-03-12",
       "year": "2002",
       "copyright": "℗ 2002 Geffen Records",
       "genre": "Alternative",
@@ -3043,7 +3043,7 @@
         }
       ],
       "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/42/14/a1/4214a191-3dce-85ab-ae8e-6ad7596c4df3/00042286099125.rgb.jpg/1800x1800bb.jpg",
-      "label": "Drive-Thru Records",
+      "label": "Drive-Thru / MCA",
       "art": "assets/40/finch-what-it-is-to-burn.jpg",
       "links": {
         "spotify": "https://open.spotify.com/album/28DROCResQvsdO6Hjmb32x"
@@ -3058,7 +3058,7 @@
       "art_worn": "assets/40/worn/finch-what-it-is-to-burn.jpg",
       "art_back_worn": "assets/40/worn/finch-what-it-is-to-burn-back.jpg",
       "worn_v": "7d8c13ae",
-      "date": "2026-10-17"
+      "date": "2026-10-14"
     },
     {
       "no": 11,

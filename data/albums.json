@@ -122,10 +122,13 @@
       "title": "What It Is to Burn",
       "discovered": "Spring 2002, freshman year",
       "blurb": [
-        "The Drive-Thru Records era got me good. The bands, the personalities, the behind-the-scenes DVDs I watched about a thousand times. It was almost like it was built in a lab for me. Of all the bands from that stage of emo, Finch was my favorite. The pop punk I loved in 2001 turned into pure post-hardcore, and I made _What It Is to Burn_ my entire identity from the second semester of freshman year until _Deja Entendu_ came out at the end of sophomore year.",
-        "I was in a hilarious band with my buddies from high school. We changed our name half a dozen times, practiced all the time, and played maybe a handful of shows. Mostly we played Finch covers in Rob's basement and got yelled at to turn it down every ten minutes. Shoutout M.C.A. fam.",
-        "In June 2003 they played Pointfest at Riverport on a tiny stage by the entrance, and their crowd was massive. We were front row, and the crowd went back as far as I could see. Somehow a few friends and I ended up at their tour bus after the show and met R2K, Nate and the bassist, Derek. I asked Derek how he got his hair so wild (kind of a Robert Smith thing), and he told me to just never wash it. I took that advice a little too far and didn't wash my hair for about a month. It was disgusting, and it looked nothing like his. I should have known better than to take grooming advice from a guy who lived on a tour bus.",
-        "I saw them again at the Creepy Crawl, and a few years later at Pop's in Sauget. The real Finch heads will remember there were two versions of this album. The first pressings ended with the original demo of \"What It Is to Burn,\" which was longer and more orchestral, and later pressings swapped in the shorter re-recording that became the single. I liked the original way better."
+        "_What It Is to Burn_ didn't just shape me. I made it my entire identity, from the second semester of freshman year until _Deja Entendu_ came out at the end of sophomore year.",
+        "The Drive-Thru Records era got me good. The bands, the personalities, the behind-the-scenes DVDs I watched about a thousand times. It was almost like it was built in a lab for me. The pop punk I loved in 2001 evolved into pure post-hardcore, and Finch was my favorite band to come out of that whole stage of emo. \"Post Script\" is still my favorite song on the album. I practiced those harmonics for hours to get them just right.",
+        "I was in a hilarious band with my buddies from high school. We changed our name half a dozen times, practiced constantly, and played maybe a handful of \"shows.\" Mostly we played Finch covers in Rob's basement and got yelled at to turn it down every ten minutes. Shoutout to my Waffle House Punk/Flatline/My City Arson fam.",
+        "I first saw them in February 2003 at Mississippi Nights with The Used, My Chemical Romance and The Movielife. That lineup is insane, and it's still one of my favorite shows of all time. That June they played Pointfest on a tiny stage by the entrance to Riverport, and their crowd was massive. We were front row, and the crowd stretched back as far as I could see.",
+        "After the show, a few friends and I somehow ended up at their tour bus (no idea how) and met R2K, Nate and the bassist, Derek. I asked Derek how he got his hair so crazy and wild, kind of a Robert Smith thing, and he told me to just never wash it. I took that advice. A little too far. I didn't wash my hair for like a month. It was disgusting, and it looked nothing like his. I should have known better than to take grooming advice from a guy who lived on a tour bus.",
+        "Real Finch heads will remember there was never just one version of these songs. Between the _Falling Into Place_ EP, the Drive-Thru comps and the original demo of \"What It Is to Burn\" (longer, more orchestral, later swapped for the shorter re-recording that became the single), there were different versions of almost every song floating around. My burned mix CDs pulled from all of those sources, so I was mixing versions indefinitely. I still like the original \"What It Is to Burn\" way better.",
+        "These days, one of the most prized records in my collection is the 2013 Hot Topic reissue on teal marble vinyl, one of 1,500. The cover art is extremely pixelated, and the labels call the album _What Is It to Burn_."
       ],
       "apple_id": 1440743253,
       "apple_url": "https://music.apple.com/us/album/what-it-is-to-burn/1440743253",
@@ -245,7 +248,8 @@
         "rise": 0.25,
         "levels": true,
         "contrast": 1.2
-      }
+      },
+      "live": true
     },
     {
       "no": 6,

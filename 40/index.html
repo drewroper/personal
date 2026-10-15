@@ -271,6 +271,7 @@
     }
     .entry__blurb a:hover, .entry__found a:hover, .about__project a:hover { color: var(--accent); text-decoration-color: var(--accent); }
     .entry__blurb em { font-style: italic; }
+    .entry__blurb strong { font-weight: 500; }
     /* Photo links: the same lime link, a small picture glyph, and the photo as a print that pops up
        beside the cursor (hover) or tosses into a lightbox (tap). */
     .snap-ico { display: inline-block; margin-left: .3em; vertical-align: -.02em; }
@@ -614,7 +615,7 @@
     };     // sleeve version stamp: a re-baked sleeve is fetched fresh, not from cache
     const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
     // Blurbs are plain paragraphs; _underscores_ become italics for titles.
-    // Blurb markup: _italic_, [words](https://link) and [words](photo:assets/…jpg "Caption, [links](https://…) ok"). Escaped first, so only these come through.
+    // Blurb markup: _italic_, **bold**, [words](https://link) and [words](photo:assets/…jpg "Caption, [links](https://…) ok"). Escaped first, so only these come through.
     const SNAP_ICO = '<svg class="snap-ico" width="12" height="10" viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="round" aria-hidden="true"><rect x=".5" y=".5" width="11" height="9" rx="1"/><path d="M2 8l3-3.2 2 2 1.4-1.3L10 8"/></svg>';
     // A caption may hold its own [link](https://…). It rides in an attribute, so its markup characters are
     // entity-coded there (the link and italic passes below must not touch it) and rendered when the print opens.
@@ -625,7 +626,8 @@
       .replace(/\[([^\]]+)\]\(photo:([\w./-]+)(?: &quot;([\s\S]+?)&quot;)?\)/g, (m, t, u, c) =>                          // a photo (with an optional "caption"): pops up, not a new page
         `<a href="../${u}" data-snap${c ? ` data-caption="${attrSafe(c)}"` : ''} aria-haspopup="dialog">${t}${SNAP_ICO}</a>`)
       .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, (m, t, u) => `<a href="${u}" target="_blank" rel="noopener">${t}</a>`)
-      .replace(/(^|[^\w/])_([^_]+)_(?![\w])/g, '$1<em>$2</em>');
+      .replace(/(^|[^\w/])_([^_]+)_(?![\w])/g, '$1<em>$2</em>')
+      .replace(/\*\*([^*]+?)\*\*/g, '<strong>$1</strong>');
     // A paragraph whose every line starts with "> " is a lyric: one line per line, set off from the prose.
     const para = p => /^> /.test(p)
       ? `<blockquote class="lyric">${p.split('\n').map(l => `<span>${inline(l.replace(/^> ?/, ''))}</span>`).join('')}</blockquote>`

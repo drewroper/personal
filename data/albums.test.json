@@ -387,7 +387,7 @@
       }
     },
     {
-      "no": 24,
+      "no": 29,
       "slug": "oasis-what-s-the-story-morning-glory",
       "artist": "Oasis",
       "title": "(What's the Story) Morning Glory?",
@@ -485,7 +485,7 @@
       },
       "art_back": "assets/40/oasis-what-s-the-story-morning-glory-back.jpg",
       "art_back_src": "https://www.discogs.com/release/7100395 (UK LP, Album 1995, CRE LP 189)",
-      "date": "2026-10-16",
+      "date": "2026-10-21",
       "wear": {
         "level": "high"
       },
@@ -774,7 +774,7 @@
       "worn_v": "c3250a29"
     },
     {
-      "no": 25,
+      "no": 30,
       "slug": "blink-182-take-off-your-pants-and-jacket",
       "artist": "blink-182",
       "title": "Take Off Your Pants and Jacket",
@@ -878,7 +878,7 @@
       },
       "art_back": "assets/40/blink-182-take-off-your-pants-and-jacket-back.jpg",
       "art_back_src": "https://www.discogs.com/release/410661 (Europe LP, Album 2001, 112 674-1)",
-      "date": "2026-10-17",
+      "date": "2026-10-22",
       "wear": {
         "level": "low",
         "surface": 0.5,
@@ -1522,7 +1522,7 @@
       "worn_v": "19f1ba14"
     },
     {
-      "no": 23,
+      "no": 28,
       "slug": "radiohead-hail-to-the-thief",
       "artist": "Radiohead",
       "title": "Hail to the Thief",
@@ -1632,7 +1632,7 @@
       "art": "assets/40/radiohead-hail-to-the-thief.jpg",
       "art_back": "assets/40/radiohead-hail-to-the-thief-back.jpg",
       "art_back_src": "http://coverartarchive.org/release/f847d298-e2d8-43ed-97ed-7c7b01ff03bc/24770542667.jpg",
-      "date": "2026-10-15",
+      "date": "2026-10-20",
       "wear": {
         "level": "high",
         "edge": 2.5
@@ -3061,6 +3061,381 @@
       "date": "2026-10-14"
     },
     {
+      "no": 23,
+      "slug": "the-postal-service-give-up",
+      "artist": "The Postal Service",
+      "title": "Give Up",
+      "discovered": "2003, in the snowboarding movie _Lame_",
+      "blurb": [
+        "I knew who Death Cab was, so I knew Ben Gibbard and co., but I had no idea The Postal Service was even happening, and I don't think anyone really saw it coming. The first time I heard _Give Up_ was in a snowboarding movie. \"Such Great Heights\" is Bobby Meeks' part in _Lame_, the 2003 Robot Food film, and I watched that movie a hundred times with my brothers.",
+        "I've always loved the band name. They made the album by physically mailing tracks back and forth, so they called themselves The Postal Service (even though I later learned they actually sent everything FedEx or UPS. Frauds.).",
+        "It was perfect snowboarding music, and it was the first time I really liked \"electronic\" music. I was _fully_ in my emo phase at the time, but this album opened my eyes to a world of other genres.",
+        "_Give Up_ also gave me one of the best rejections of my life. A girl I liked told me she wasn't interested in me anymore by sending me \"Nothing Better\" over AIM. It still stings a little how good that burn was.",
+        "The album kept growing on me over the years. Meg and I saw them play it at Sasquatch for the 10th anniversary. The shitty old iPhone videos don't do it justice."
+      ],
+      "apple_id": 597936899,
+      "label": "Sub Pop",
+      "links": {
+        "spotify": "https://open.spotify.com/album/1BSwkKATGVCMgNuN8ve7mz"
+      },
+      "apple_url": "https://music.apple.com/us/album/give-up-deluxe-10th-anniversary-edition/597936899",
+      "released": "2003-02-18",
+      "year": "2003",
+      "copyright": "℗ 2013 Sub Pop Records",
+      "genre": "Electronic",
+      "track_count": 10,
+      "runtime_ms": 2697588,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "The District Sleeps Alone Tonight",
+          "ms": 283747,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/57/70/1c/57701cf9-d9d2-922e-4ea2-70f6eba7d7c7/mzaf_15757421390864505004.plus.aac.p.m4a"
+        },
+        {
+          "n": 2,
+          "title": "Such Great Heights",
+          "ms": 266507,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/51/7a/24/517a24a1-77ac-a125-eeca-0a7ec53e7aa7/mzaf_7211860906425247841.plus.aac.p.m4a"
+        },
+        {
+          "n": 3,
+          "title": "Sleeping In",
+          "ms": 261093,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ca/1d/c5/ca1dc573-4a06-cc00-cce5-ae99eba424b4/mzaf_11976522840754129648.plus.aac.p.m4a"
+        },
+        {
+          "n": 4,
+          "title": "Nothing Better",
+          "ms": 226627,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/e4/53/84/e45384f5-dad9-3060-e997-1b51175b519f/mzaf_17697824129526332431.plus.aac.p.m4a"
+        },
+        {
+          "n": 5,
+          "title": "Recycled Air",
+          "ms": 269507,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/fb/45/6f/fb456fa4-a3c6-8fb4-1891-bea315354422/mzaf_8578369149062282567.plus.aac.p.m4a"
+        },
+        {
+          "n": 6,
+          "title": "Clark Gable",
+          "ms": 294400,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/32/d8/8c/32d88c5b-b591-a247-5fd1-72f729cf28dc/mzaf_8983148689219214646.plus.aac.p.m4a"
+        },
+        {
+          "n": 7,
+          "title": "We Will Become Silhouettes",
+          "ms": 300547,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/32/cf/aa/32cfaa87-6968-b8da-907f-2c9a44d719b4/mzaf_1388131224802593880.plus.aac.p.m4a"
+        },
+        {
+          "n": 8,
+          "title": "This Place Is a Prison",
+          "ms": 234387,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ad/da/fb/addafb3c-8a52-4038-4531-874c9c5ce22d/mzaf_4528924544399029886.plus.aac.p.m4a"
+        },
+        {
+          "n": 9,
+          "title": "Brand New Colony",
+          "ms": 252653,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/37/bb/86/37bb868c-056a-8829-594c-75961588dc0c/mzaf_4219370310664347301.plus.aac.p.m4a"
+        },
+        {
+          "n": 10,
+          "title": "Natural Anthem",
+          "ms": 308120,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/52/38/a7/5238a783-e523-953f-2e0b-06988a8ce126/mzaf_11995424237160371926.plus.aac.p.m4a"
+        }
+      ],
+      "art_remote": "http://coverartarchive.org/release/e0340e83-26fe-378f-b526-e9bce43835c0/3374938495.jpg",
+      "art": "assets/40/the-postal-service-give-up.jpg",
+      "wear": {
+        "level": "high"
+      },
+      "art_worn": "assets/40/worn/the-postal-service-give-up.jpg",
+      "worn_v": "e5c85898",
+      "date": "2026-10-15",
+      "story": {
+        "focus": [
+          0.32,
+          0.72
+        ],
+        "at": [
+          0.5,
+          0.5
+        ],
+        "zoom": 3.2,
+        "rise": 0.35,
+        "levels": true,
+        "floor": 75,
+        "ceil": 205,
+        "contrast": 1.3
+      },
+      "art_back": "assets/40/the-postal-service-give-up-back.jpg",
+      "art_back_src": "https://www.discogs.com/release/2291316 (US 2xLP 2004, Sub Pop SP 595; first US vinyl, no 2003 LP exists)",
+      "art_back_worn": "assets/40/worn/the-postal-service-give-up-back.jpg"
+    },
+    {
+      "no": 24,
+      "slug": "pup-the-dream-is-over",
+      "artist": "PUP",
+      "title": "The Dream Is Over",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 1880813057,
+      "label": "SideOneDummy",
+      "links": {
+        "spotify": "https://open.spotify.com/album/7lelUe4aaCQmOMJKsQvirf"
+      },
+      "apple_url": "https://music.apple.com/us/album/the-dream-is-over/1880813057",
+      "released": "2016-05-27",
+      "year": "2016",
+      "copyright": "℗ 2016 SideOneDummy Records",
+      "genre": "Alternative",
+      "track_count": 10,
+      "runtime_ms": 1836652,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "If This Tour Doesn't Kill You, I Will",
+          "ms": 138813,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/62/95/b5/6295b55d-61a0-cbe6-0cbb-23158e8bb9d8/mzaf_11033078518281710288.plus.aac.p.m4a"
+        },
+        {
+          "n": 2,
+          "title": "DVP",
+          "ms": 148893,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/68/d0/e2/68d0e2a5-dcca-5052-9143-ebd29320216c/mzaf_11790584033396924615.plus.aac.p.m4a"
+        },
+        {
+          "n": 3,
+          "title": "Doubts",
+          "ms": 180347,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/6b/f4/86/6bf486d6-d19b-6aaf-273b-d1d9b5f49c35/mzaf_15032017069563375566.plus.aac.p.m4a"
+        },
+        {
+          "n": 4,
+          "title": "Sleep In The Heat",
+          "ms": 201520,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/5a/8e/51/5a8e51aa-56ce-bb28-7b73-a2d1a20ce25e/mzaf_8270036864816597486.plus.aac.p.m4a"
+        },
+        {
+          "n": 5,
+          "title": "The Coast",
+          "ms": 233213,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/98/16/4f/98164f32-9481-29a4-665b-4ce921fad1a2/mzaf_14839593203024656536.plus.aac.p.m4a"
+        },
+        {
+          "n": 6,
+          "title": "Old Wounds",
+          "ms": 139627,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/c1/d7/9c/c1d79c58-c71c-32a4-3761-73255b193340/mzaf_60743194842995727.plus.aac.p.m4a"
+        },
+        {
+          "n": 7,
+          "title": "My Life Is Over and I Couldn't Be Happier",
+          "ms": 146493,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/34/b4/ae/34b4ae19-b38c-cf42-19d7-1759f82dae44/mzaf_1965931404967515891.plus.aac.p.m4a"
+        },
+        {
+          "n": 8,
+          "title": "Can't Win",
+          "ms": 187053,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/09/53/17/0953172b-5562-6896-bf56-4ddd114fd521/mzaf_16924450631502481944.plus.aac.p.m4a"
+        },
+        {
+          "n": 9,
+          "title": "Familiar Patterns",
+          "ms": 219840,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/91/1f/a4/911fa4d2-5de6-8f78-75e4-5851f4c3217e/mzaf_7056409338371895057.plus.aac.p.m4a"
+        },
+        {
+          "n": 10,
+          "title": "Pine Point",
+          "ms": 240853,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ef/2e/75/ef2e7598-dbc8-6b45-29df-01c97625f950/mzaf_17081353512333441827.plus.aac.p.m4a"
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/d6/c5/8b/d6c58ba1-e9dd-a1d8-6e39-3dee78ce73d6/109690.jpg/1800x1800bb.jpg",
+      "art": "assets/40/pup-the-dream-is-over.jpg",
+      "wear": {
+        "level": "med"
+      },
+      "art_worn": "assets/40/worn/pup-the-dream-is-over.jpg",
+      "worn_v": "f77b7d2a",
+      "date": "2026-10-16",
+      "story": {
+        "focus": [
+          0.7,
+          0.55
+        ],
+        "at": [
+          0.5,
+          0.5
+        ],
+        "zoom": 2.8,
+        "rise": 0.15,
+        "levels": true,
+        "floor": 60,
+        "ceil": 210,
+        "contrast": 1.2
+      },
+      "art_back": "assets/40/pup-the-dream-is-over-back.jpg",
+      "art_back_src": "https://www.discogs.com/release/8582273 (US LP 2016, SideOneDummy SD1615-1, clear/red splatter webstore variant, Drew's pressing; paper matched to the front's white)",
+      "art_back_worn": "assets/40/worn/pup-the-dream-is-over-back.jpg"
+    },
+    {
+      "no": 25,
+      "slug": "nelly-country-grammar",
+      "artist": "Nelly",
+      "title": "Country Grammar",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 1434909202,
+      "apple_url": "https://music.apple.com/us/album/country-grammar/1434909202",
+      "released": "2000-06-27",
+      "year": "2000",
+      "copyright": "A Republic Records Release; ℗ 2000 UMG Recordings, Inc.",
+      "genre": "Pop",
+      "track_count": 17,
+      "runtime_ms": 4002424,
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/c9/91/fe/c991fe22-20db-ec1c-1a34-0ba31a51f8ee/06UMGIM08344.rgb.jpg/1800x1800bb.jpg",
+      "label": "Fo' Reel / Universal",
+      "art": "assets/40/nelly-country-grammar.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/3Ej2Ae8nxp06thEoPhyaLJ"
+      },
+      "art_back": "assets/40/nelly-country-grammar-back.jpg",
+      "art_back_src": "https://www.discogs.com/release/1349494 (US 2xLP 2001, Universal 012 157 743-1, gatefold back)",
+      "secret": true,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Intro (feat. Cedric the Entertainer)",
+          "ms": 81267,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/34/c0/75/34c07593-976b-402b-1be7-1153d7626359/mzaf_11030609196776281600.plus.aac.p.m4a"
+        },
+        {
+          "n": 2,
+          "title": "St. Louie",
+          "ms": 267360,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/e1/01/b5/e101b559-e066-d2ba-c995-098f8025c241/mzaf_12855980435307150107.plus.aac.p.m4a"
+        },
+        {
+          "n": 3,
+          "title": "Greed Hate Envy",
+          "ms": 255187,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/5f/20/42/5f204222-0f38-38f6-66c8-b4381dac717d/mzaf_1542116526551857352.plus.aac.p.m4a"
+        },
+        {
+          "n": 4,
+          "title": "Country Grammar (Hot Shit)",
+          "ms": 287000,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/84/37/97/84379717-207b-927b-c5da-b223edb7b38c/mzaf_1180893642361906198.plus.aac.p.m4a"
+        },
+        {
+          "n": 5,
+          "title": "Steal the Show (feat. St. Lunatics)",
+          "ms": 327267,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/94/44/5b/94445b0e-8197-570b-4785-d968bf748c99/mzaf_18207224656356018936.plus.aac.p.m4a"
+        },
+        {
+          "n": 6,
+          "title": "Interlude (feat. Cedric the Entertainer)",
+          "ms": 33200,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/3e/56/9f/3e569f8a-a7fe-0087-dcbb-234de6f8d2d0/mzaf_1112696722117719181.plus.aac.p.m4a"
+        },
+        {
+          "n": 7,
+          "title": "Ride Wit Me (feat. City Spud)",
+          "ms": 291782,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/63/25/4e/63254ed5-43d1-8eed-0d84-8c18a6d263e0/mzaf_400229723648166602.plus.aac.p.m4a"
+        },
+        {
+          "n": 8,
+          "title": "E.I.",
+          "ms": 285907,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/a0/62/b1/a062b12a-4325-7a30-4318-e3f9e97394df/mzaf_12619689833522287173.plus.aac.p.m4a"
+        },
+        {
+          "n": 9,
+          "title": "Thicky Thick Girl",
+          "ms": 274321,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/69/34/72/6934726d-b37d-a1a5-fb93-0c0e879e0ea5/mzaf_16299420246081657076.plus.aac.p.m4a"
+        },
+        {
+          "n": 10,
+          "title": "For My (feat. Lil Wayne)",
+          "ms": 248533,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/c8/e7/03/c8e703d2-c3f2-423d-5c70-22612363ea2c/mzaf_13499280935613756186.plus.aac.p.m4a"
+        },
+        {
+          "n": 11,
+          "title": "Utha Side",
+          "ms": 273307,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/83/ce/a4/83cea42e-8f20-f16d-cbcc-82e2bf541dbe/mzaf_9934578834115924003.plus.aac.p.m4a"
+        },
+        {
+          "n": 12,
+          "title": "Tho Dem Wraps",
+          "ms": 248467,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/cf/6b/07/cf6b07d3-9570-5bc4-3de0-bbbfd434769f/mzaf_16585442198480399806.plus.aac.p.m4a"
+        },
+        {
+          "n": 13,
+          "title": "Wrap Sumden",
+          "ms": 255733,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/39/4d/15/394d156d-2e74-a820-96db-867750fedb94/mzaf_7307021205243297227.plus.aac.p.m4a"
+        },
+        {
+          "n": 14,
+          "title": "Batter Up (feat. Murphy Lee & Ali)",
+          "ms": 327933,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ef/05/6d/ef056db3-b6c0-bcde-ac41-1ee18635ca28/mzaf_7552565050377873266.plus.aac.p.m4a"
+        },
+        {
+          "n": 15,
+          "title": "Never Let 'Em C U Sweat",
+          "ms": 254227,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/1f/eb/91/1feb9110-1395-1081-4254-757d479ed4d6/mzaf_7946036071490791161.plus.aac.p.m4a"
+        },
+        {
+          "n": 16,
+          "title": "Luven Me",
+          "ms": 247133,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/48/87/86/488786b2-38ff-7b0e-0afe-275497ccfd0d/mzaf_161758255162551299.plus.aac.p.m4a"
+        },
+        {
+          "n": 17,
+          "title": "Outro (feat. Cedric the Entertainer)",
+          "ms": 43800,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/6c/cb/65/6ccb6507-accb-6ee8-9d85-28b4f1755340/mzaf_5973303312910368776.plus.aac.p.m4a"
+        }
+      ],
+      "wear": {
+        "level": "high"
+      },
+      "art_worn": "assets/40/worn/nelly-country-grammar.jpg",
+      "art_back_worn": "assets/40/worn/nelly-country-grammar-back.jpg",
+      "worn_v": "a2e2e48e",
+      "date": "2026-10-17",
+      "story": {
+        "focus": [
+          0.82,
+          0.2
+        ],
+        "at": [
+          0.5,
+          0.5
+        ],
+        "zoom": 2.6,
+        "rise": 0.1,
+        "floor": 40,
+        "ceil": 195,
+        "contrast": 1.8
+      }
+    },
+    {
       "no": 11,
       "slug": "brand-new-deja-entendu",
       "artist": "Brand New",
@@ -3486,135 +3861,6 @@
       "art_worn": "assets/40/worn/the-kinks-lola-versus-powerman.jpg",
       "art_back_worn": "assets/40/worn/the-kinks-lola-versus-powerman-back.jpg",
       "worn_v": "d3ed814a"
-    },
-    {
-      "no": null,
-      "slug": "nelly-country-grammar",
-      "artist": "Nelly",
-      "title": "Country Grammar",
-      "discovered": "",
-      "blurb": [],
-      "apple_id": 1440782396,
-      "apple_url": "https://music.apple.com/us/album/country-grammar/1440782396",
-      "released": "2000-06-27",
-      "year": "2000",
-      "copyright": "℗ 2000 Universal Records, a Division of UMG Recordings, Inc.",
-      "genre": "Hip-Hop/Rap",
-      "track_count": 17,
-      "runtime_ms": 4000959,
-      "tracks": [
-        {
-          "n": 1,
-          "title": "Intro (feat. Cedric the Entertainer)",
-          "ms": 81293,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/7e/14/5f/7e145f72-7fc5-4841-0a2e-1f104162dad5/mzaf_14539472049054055024.plus.aac.p.m4a"
-        },
-        {
-          "n": 2,
-          "title": "St. Louie",
-          "ms": 267573,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/07/ff/df/07ffdfe9-9619-aa8c-eabf-5936f5f1c90c/mzaf_11731533319061127993.plus.aac.p.m4a"
-        },
-        {
-          "n": 3,
-          "title": "Greed, Hate, Envy",
-          "ms": 255093,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/40/8a/e9/408ae90c-f983-03d6-cd33-877f34059ad9/mzaf_1823479229897534443.plus.aac.p.m4a"
-        },
-        {
-          "n": 4,
-          "title": "Country Grammar (Hot...)",
-          "ms": 286933,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/a9/4c/83/a94c83fb-16bf-804c-69e4-dca3f72cb182/mzaf_16696129836718723633.plus.aac.p.m4a"
-        },
-        {
-          "n": 5,
-          "title": "Steal The Show (feat. St. Lunatics)",
-          "ms": 328000,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/1d/f5/2d/1df52dbf-3783-eaf2-23aa-e1f788f6c5fa/mzaf_9258821032155916458.plus.aac.p.m4a"
-        },
-        {
-          "n": 6,
-          "title": "Interlude (feat. Cedric the Entertainer)",
-          "ms": 34373,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ec/04/9a/ec049a1e-fa7d-96c3-0bdd-c2e011851f76/mzaf_1254944553596876801.plus.aac.p.m4a"
-        },
-        {
-          "n": 7,
-          "title": "Ride Wit Me (feat. City Spud)",
-          "ms": 290133,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/02/c8/a1/02c8a14d-fd24-2930-c1ac-a07cd2e5f617/mzaf_11716973966354009594.plus.aac.p.m4a"
-        },
-        {
-          "n": 8,
-          "title": "E.I.",
-          "ms": 284493,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/96/1f/cd/961fcdac-9261-458c-d20a-ad8563e685e3/mzaf_13105106383750649301.plus.aac.p.m4a"
-        },
-        {
-          "n": 9,
-          "title": "Thicky Thick Girl",
-          "ms": 274267,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/84/77/d3/8477d341-d70e-851f-c21c-8e41761538ee/mzaf_12198060546295834951.plus.aac.p.m4a"
-        },
-        {
-          "n": 10,
-          "title": "For My (feat. Lil Wayne)",
-          "ms": 248600,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/68/05/2a/68052a03-0e03-fe4c-1c31-4a2e899ca7ea/mzaf_11563152895232347241.plus.aac.p.m4a"
-        },
-        {
-          "n": 11,
-          "title": "Utha Side",
-          "ms": 273307,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ff/62/c1/ff62c1d0-d0af-8472-d17e-cecccc35451e/mzaf_7029315838230570567.plus.aac.p.m4a"
-        },
-        {
-          "n": 12,
-          "title": "Tho Dem Wrappas",
-          "ms": 248400,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/e2/7c/0f/e27c0f81-db5d-0d8a-8460-7e39fff40c30/mzaf_7735364271298605556.plus.aac.p.m4a"
-        },
-        {
-          "n": 13,
-          "title": "Wrap Sumden",
-          "ms": 255627,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/35/ab/e2/35abe2ff-87d7-9ef4-8c28-2bd25adad447/mzaf_17630237916992316983.plus.aac.p.m4a"
-        },
-        {
-          "n": 14,
-          "title": "Batter Up (feat. Murphy Lee & Ali)",
-          "ms": 327800,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/19/f8/04/19f80463-889a-d254-9dc0-79286dde811a/mzaf_16690803942545214259.plus.aac.p.m4a"
-        },
-        {
-          "n": 15,
-          "title": "Never Let 'Em C U Sweat",
-          "ms": 254107,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/df/c5/bb/dfc5bb8d-99a8-976e-0331-bd162af31fe7/mzaf_14121571250374895093.plus.aac.p.m4a"
-        },
-        {
-          "n": 16,
-          "title": "Luven Me",
-          "ms": 247000,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/5a/cf/41/5acf4112-9c02-eddb-52a0-e42b01686b14/mzaf_15446345705649206517.plus.aac.p.m4a"
-        },
-        {
-          "n": 17,
-          "title": "Outro (feat. Cedric the Entertainer)",
-          "ms": 43960,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/8c/dd/e5/8cdde574-03c2-f9b6-d801-b5d2ec4840d7/mzaf_16610096636224729739.plus.aac.p.m4a"
-        }
-      ],
-      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/86/ea/41/86ea41d4-5d1f-b342-da08-dd43294d8fad/06UMGIM14203.rgb.jpg/1800x1800bb.jpg",
-      "label": "Universal Records, a Division of UMG Recordings, Inc",
-      "art": "assets/40/nelly-country-grammar.jpg",
-      "links": {
-        "spotify": "https://open.spotify.com/album/3Ej2Ae8nxp06thEoPhyaLJ"
-      },
-      "art_back": "assets/40/nelly-country-grammar-back.jpg",
-      "art_back_src": "http://coverartarchive.org/release/14a10238-fd83-485b-9aa2-72d54a8b0356/29350705744.jpg",
-      "secret": true
     }
   ]
 }

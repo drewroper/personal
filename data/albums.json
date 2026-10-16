@@ -422,7 +422,7 @@
         "spotify": "https://open.spotify.com/album/3Ej2Ae8nxp06thEoPhyaLJ"
       },
       "art_back": "assets/40/nelly-country-grammar-back.jpg",
-      "art_back_src": "http://coverartarchive.org/release/14a10238-fd83-485b-9aa2-72d54a8b0356/29350705744.jpg",
+      "art_back_src": "https://www.discogs.com/release/1349494 (US 2xLP 2001, Universal 012 157 743-1, gatefold back)",
       "secret": true,
       "tracks": [
         {
@@ -533,8 +533,23 @@
       },
       "art_worn": "assets/40/worn/nelly-country-grammar.jpg",
       "art_back_worn": "assets/40/worn/nelly-country-grammar-back.jpg",
-      "worn_v": "a4e3a20a",
-      "date": "2026-10-17"
+      "worn_v": "a2e2e48e",
+      "date": "2026-10-17",
+      "story": {
+        "focus": [
+          0.82,
+          0.2
+        ],
+        "at": [
+          0.5,
+          0.5
+        ],
+        "zoom": 2.6,
+        "rise": 0.1,
+        "floor": 40,
+        "ceil": 195,
+        "contrast": 1.8
+      }
     },
     {
       "no": null,
@@ -5071,10 +5086,11 @@
       "title": "Give Up",
       "discovered": "2003, in the snowboarding movie _Lame_",
       "blurb": [
-        "I knew who Death Cab was, so I knew Ben Gibbard and co., but I had no idea The Postal Service was even happening. The first time I heard _Give Up_ was in a snowboarding movie. \"Such Great Heights\" is Bobby Meeks' part in _Lame_, the 2003 Robot Food film, and I watched that movie a hundred times with my brothers.",
-        "Turns out almost nobody saw it coming. The album came out on Sub Pop with basically no promotion and spread by word of mouth until it became the label's second-best seller ever, behind Nirvana's _Bleach_.",
-        "It was perfect snowboarding music, and it was the first time I really \"liked\" electronic music. _Transatlanticism_ came out eight months later and became a favorite too.",
-        "The album kept growing on me over the years. Ten years after it came out, Megan and I saw them play it at Sasquatch for the 10th anniversary."
+        "I knew who Death Cab was, so I knew Ben Gibbard and co., but I had no idea The Postal Service was even happening, and I don't think anyone really saw it coming. The first time I heard _Give Up_ was in a snowboarding movie. \"Such Great Heights\" is Bobby Meeks' part in _Lame_, the 2003 Robot Food film, and I watched that movie a hundred times with my brothers.",
+        "I've always loved the band name. They made the album by physically mailing tracks back and forth, so they called themselves The Postal Service (even though I later learned they actually sent everything FedEx or UPS. Frauds.).",
+        "It was perfect snowboarding music, and it was the first time I really liked \"electronic\" music. I was _fully_ in my emo phase at the time, but this album opened my eyes to a world of other genres.",
+        "_Give Up_ also gave me one of the best rejections of my life. A girl I liked told me she wasn't interested in me anymore by sending me \"Nothing Better\" over AIM. It still stings a little how good that burn was.",
+        "The album kept growing on me over the years. Meg and I saw them play it at Sasquatch for the 10th anniversary. The shitty old iPhone videos don't do it justice."
       ],
       "apple_id": 597936899,
       "label": "Sub Pop",
@@ -5156,7 +5172,7 @@
         "level": "high"
       },
       "art_worn": "assets/40/worn/the-postal-service-give-up.jpg",
-      "worn_v": "36a719fb",
+      "worn_v": "e5c85898",
       "date": "2026-10-15",
       "story": {
         "focus": [
@@ -5173,7 +5189,10 @@
         "floor": 75,
         "ceil": 205,
         "contrast": 1.3
-      }
+      },
+      "art_back": "assets/40/the-postal-service-give-up-back.jpg",
+      "art_back_src": "https://www.discogs.com/release/2291316 (US 2xLP 2004, Sub Pop SP 595; first US vinyl, no 2003 LP exists)",
+      "art_back_worn": "assets/40/worn/the-postal-service-give-up-back.jpg"
     },
     {
       "no": 24,
@@ -5262,8 +5281,27 @@
         "level": "med"
       },
       "art_worn": "assets/40/worn/pup-the-dream-is-over.jpg",
-      "worn_v": "de51b917",
-      "date": "2026-10-16"
+      "worn_v": "f77b7d2a",
+      "date": "2026-10-16",
+      "story": {
+        "focus": [
+          0.7,
+          0.55
+        ],
+        "at": [
+          0.5,
+          0.5
+        ],
+        "zoom": 2.8,
+        "rise": 0.15,
+        "levels": true,
+        "floor": 60,
+        "ceil": 210,
+        "contrast": 1.2
+      },
+      "art_back": "assets/40/pup-the-dream-is-over-back.jpg",
+      "art_back_src": "https://www.discogs.com/release/8582273 (US LP 2016, SideOneDummy SD1615-1, clear/red splatter webstore variant, Drew's pressing; paper matched to the front's white)",
+      "art_back_worn": "assets/40/worn/pup-the-dream-is-over-back.jpg"
     }
   ]
 }

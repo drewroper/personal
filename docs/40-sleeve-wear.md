@@ -26,6 +26,7 @@ day). Build a record by slug and give it its `no` (the date follows from it) onl
 | `back`    | 1.0     | the back's share of the wear. A stark white back shows every mark: Wondrous Bughouse .5. The `fold` carries through regardless |
 | `ring`    | 1.0     | how hard the disc reads: the ring, its inner band, the rim line and the rub bars, front and back. `0` = no ring. On a flat black field a broad "flake" ring reads as salt speckle at full strength: Parachutes `.3` |
 | `lock`    | —       | `true` = render with base settings, exactly as signed off (Incubus, Phish) |
+| `age`     | release year | years of play, used in place of the record's age: a record worn harder than its date says. Age gates the ring's impression line, grey grain in rubbed white stock and grimy cut edges, so a young white sleeve otherwise stays near-clean. PUP *The Dream Is Over* (2016, played constantly) `25` |
 
 Busy all-over art (Merriweather, Wondrous Bughouse) hides wear in the middle: push `edge` (3.5–4) instead, and if it still reads clean give it a `fold`; thin `bends` vanish in busy art.
 

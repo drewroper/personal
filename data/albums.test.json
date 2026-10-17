@@ -3269,10 +3269,14 @@
       "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/d6/c5/8b/d6c58ba1-e9dd-a1d8-6e39-3dee78ce73d6/109690.jpg/1800x1800bb.jpg",
       "art": "assets/40/pup-the-dream-is-over.jpg",
       "wear": {
-        "level": "med"
+        "level": "high",
+        "age": 25,
+        "edge": 3,
+        "surface": 2.5,
+        "back": 0.6
       },
       "art_worn": "assets/40/worn/pup-the-dream-is-over.jpg",
-      "worn_v": "f77b7d2a",
+      "worn_v": "3b778a77",
       "date": "2026-10-16",
       "story": {
         "focus": [

@@ -857,6 +857,8 @@ def job(a):
     level = (a.get('wear') or {}).get('level', 'med')
     level = level if level in LEVELS else 'med'
     w = a.get('wear') or {}
+    year = a.get('year')
+    if w.get('age'): year = str(2026 - int(w['age']))     # per-record: years of play, for a record worn harder than its date says
     g = {'amount': 1.0, 'edge': 1.0, 'surface': 0.0} if w.get('lock') else GLOBAL     # lock: exactly as signed off
     amount = float(w.get('amount', g['amount']))
     edgew = float(w.get('edge', g['edge']))                   # per-record: more edge wear where the art hides the rest
@@ -869,7 +871,7 @@ def job(a):
     masks = {}
     for lv in (LEVELS if LEVELS_DIR else [level]):
         dens, ek, _ = LEVELS[lv]
-        masks[lv] = make_mask(slug, a.get('year'), dens * tone * amount, ek, '', lum, edgew, surfw, bendw, ringw)
+        masks[lv] = make_mask(slug, year, dens * tone * amount, ek, '', lum, edgew, surfw, bendw, ringw)
     mask, life, age, ring = masks[level]; k = LEVELS[level][2]
     MASKS.mkdir(parents=True, exist_ok=True)
     Image.fromarray((mask[..., :3] * 255 + .5).astype(np.uint8), 'RGB').save(MASKS / f'{slug}.png')
@@ -883,7 +885,7 @@ def job(a):
         lumb = float(lum_of(covb).mean())
         dens, ek, _ = LEVELS[level]
         bw = float(w.get('back', 1.0))                        # per-record: the back's share of the wear (a stark white back shows it all)
-        mb = make_mask(slug, a.get('year'), dens * (1 + .3 * float(smooth(.6, .85, lumb))) * amount * bw, ek, ':back', lumb,
+        mb = make_mask(slug, year, dens * (1 + .3 * float(smooth(.6, .85, lumb))) * amount * bw, ek, ':back', lumb,
                        1 + (edgew - 1) * bw, surfw * bw, bendw, ringw)[0]
         bk = bake(covb, mb, k, slug + ':back', age)
         if fw > 0: bk = fold(bk, slug, ':back', MIRROR[fat], fw)

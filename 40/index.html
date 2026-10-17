@@ -306,6 +306,12 @@
       background: linear-gradient(var(--accent), var(--accent)) left top / 1px 100% no-repeat; }
     .lyric span { display: block; padding-left: 1em; text-indent: -1em; }   /* a line that wraps hangs under itself */
     .lyric:last-child { margin-bottom: 0; }
+    /* Lists: a run of "- " lines, each hanging under a short lime dash (the lyric rule's cousin). */
+    .blurb-list { margin: 0 0 1.1em; padding: 0; list-style: none; }
+    .blurb-list li { position: relative; padding-left: 1.2em; text-wrap: pretty; }
+    .blurb-list li + li { margin-top: .5em; }
+    .blurb-list li::before { content: ''; position: absolute; left: 0; top: .8em; width: .55em; height: 1px; background: var(--accent); }
+    .blurb-list:last-child { margin-bottom: 0; }
     .entry__blurb--empty { color: var(--text-faint); }
 
     .entry__player { margin: 26px 0 0; }
@@ -629,8 +635,11 @@
       .replace(/(^|[^\w/])_([^_]+)_(?![\w])/g, '$1<em>$2</em>')
       .replace(/\*\*([^*]+?)\*\*/g, '<strong>$1</strong>');
     // A paragraph whose every line starts with "> " is a lyric: one line per line, set off from the prose.
+    // A paragraph whose every line starts with "- " is a list.
     const para = p => /^> /.test(p)
       ? `<blockquote class="lyric">${p.split('\n').map(l => `<span>${inline(l.replace(/^> ?/, ''))}</span>`).join('')}</blockquote>`
+      : /^- /.test(p)
+      ? `<ul class="blurb-list">${p.split('\n').map(l => `<li>${inline(l.replace(/^- ?/, ''))}</li>`).join('')}</ul>`
       : `<p>${inline(p)}</p>`;
     const pad = n => String(n).padStart(2, '0');
     const fmtDate = iso => {

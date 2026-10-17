@@ -635,11 +635,12 @@
       .replace(/(^|[^\w/])_([^_]+)_(?![\w])/g, '$1<em>$2</em>')
       .replace(/\*\*([^*]+?)\*\*/g, '<strong>$1</strong>');
     // A paragraph whose every line starts with "> " is a lyric: one line per line, set off from the prose.
-    // A paragraph whose every line starts with "- " is a list.
+    // A paragraph whose every line starts with "- " is a list. Both split only where the next line
+    // starts with its marker, so a photo caption's own "\n" (caption, then credit) stays inside its line.
     const para = p => /^> /.test(p)
-      ? `<blockquote class="lyric">${p.split('\n').map(l => `<span>${inline(l.replace(/^> ?/, ''))}</span>`).join('')}</blockquote>`
+      ? `<blockquote class="lyric">${p.split(/\n(?=>)/).map(l => `<span>${inline(l.replace(/^> ?/, ''))}</span>`).join('')}</blockquote>`
       : /^- /.test(p)
-      ? `<ul class="blurb-list">${p.split('\n').map(l => `<li>${inline(l.replace(/^- ?/, ''))}</li>`).join('')}</ul>`
+      ? `<ul class="blurb-list">${p.split(/\n(?=- )/).map(l => `<li>${inline(l.replace(/^- ?/, ''))}</li>`).join('')}</ul>`
       : `<p>${inline(p)}</p>`;
     const pad = n => String(n).padStart(2, '0');
     const fmtDate = iso => {

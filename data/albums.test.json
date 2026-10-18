@@ -147,7 +147,7 @@
       }
     },
     {
-      "no": 26,
+      "no": 31,
       "slug": "dave-matthews-band-crash",
       "artist": "Dave Matthews Band",
       "title": "Crash",
@@ -252,7 +252,7 @@
       "art_worn": "assets/40/worn/dave-matthews-band-crash.jpg",
       "art_back_worn": "assets/40/worn/dave-matthews-band-crash-back.jpg",
       "worn_v": "034a3e7b",
-      "date": "2026-10-18"
+      "date": "2026-10-23"
     },
     {
       "no": 4,
@@ -3882,6 +3882,117 @@
       "art_worn": "assets/40/worn/the-kinks-lola-versus-powerman.jpg",
       "art_back_worn": "assets/40/worn/the-kinks-lola-versus-powerman-back.jpg",
       "worn_v": "d3ed814a"
+    },
+    {
+      "no": 26,
+      "slug": "fatboy-slim-you-ve-come-a-long-way-baby",
+      "artist": "Fatboy Slim",
+      "title": "You've Come a Long Way, Baby",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 714916269,
+      "label": "Skint / Astralwerks",
+      "links": {},
+      "apple_url": "https://music.apple.com/us/album/youve-come-a-long-way-baby/714916269",
+      "released": "1998-10-19",
+      "year": "1998",
+      "copyright": "℗ 1998 Skint Records",
+      "genre": "Alternative",
+      "track_count": 11,
+      "runtime_ms": 3724200,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Right Here, Right Now",
+          "ms": 387707,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/46/1a/52/461a5253-a7d4-31a4-3fc1-7eac97619d48/mzaf_10480718032877791920.plus.aac.p.m4a"
+        },
+        {
+          "n": 2,
+          "title": "The Rockafeller Skank",
+          "ms": 413880,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/59/c7/ad/59c7adc8-7a5a-6c6c-e945-efcd9ee85576/mzaf_7786793989842571998.plus.aac.p.m4a"
+        },
+        {
+          "n": 3,
+          "title": "In Heaven",
+          "ms": 234880,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/3f/17/6c/3f176cb6-30e3-7ca9-ec3c-9d5bf389f8b5/mzaf_18233950244672956217.plus.aac.p.m4a"
+        },
+        {
+          "n": 4,
+          "title": "Gangster Trippin'",
+          "ms": 320053,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/32/01/ca/3201ca1f-0a7f-78fb-ee22-0715c396a0a8/mzaf_12091534435220314038.plus.aac.p.m4a"
+        },
+        {
+          "n": 5,
+          "title": "Build It Up - Tear It Down",
+          "ms": 305440,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/7a/08/20/7a0820f0-8a65-c3f4-0f4c-04042c770535/mzaf_10878204439779914368.plus.aac.p.m4a"
+        },
+        {
+          "n": 6,
+          "title": "Kalifornia",
+          "ms": 353400,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ae/fe/55/aefe5596-9b21-a66a-8400-be84f4de4faf/mzaf_155047195564914764.plus.aac.p.m4a"
+        },
+        {
+          "n": 7,
+          "title": "Soul Surfing",
+          "ms": 296453,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/08/6a/5b/086a5bdc-7d3e-6a3d-e114-fa652ae299c4/mzaf_4156735169860790534.plus.aac.p.m4a"
+        },
+        {
+          "n": 8,
+          "title": "You're Not from Brighton",
+          "ms": 320693,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/db/c6/79/dbc67916-da48-4e18-2f3d-c1b9203ad8ef/mzaf_13378122804973389765.plus.aac.p.m4a"
+        },
+        {
+          "n": 9,
+          "title": "Praise You",
+          "ms": 323240,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/48/1e/ba/481ebaf4-9ba6-355a-b760-49b6cc2a34f4/mzaf_4358950247187892693.plus.aac.p.m4a"
+        },
+        {
+          "n": 10,
+          "title": "Love Island",
+          "ms": 318307,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/d9/08/09/d908098a-3f8b-5fab-1b6a-b3a02dadc6e7/mzaf_16080938216346314987.plus.aac.p.m4a"
+        },
+        {
+          "n": 11,
+          "title": "Acid 8000",
+          "ms": 450147,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/bf/dc/8b/bfdc8b98-1943-6e9e-2319-8381d53b47b5/mzaf_7755154269101802121.plus.aac.p.m4a"
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/45/1a/16/451a1673-1aa4-63e7-cfca-8a44ce9d0779/14ULAIM03599.rgb.jpg/1800x1800bb.jpg",
+      "art": "assets/40/fatboy-slim-you-ve-come-a-long-way-baby.jpg",
+      "wear": {
+        "level": "high",
+        "edge": 3.5,
+        "surface": 2.2
+      },
+      "date": "2026-10-18",
+      "art_worn": "assets/40/worn/fatboy-slim-you-ve-come-a-long-way-baby.jpg",
+      "worn_v": "3166e48a",
+      "story": {
+        "focus": [
+          0.16,
+          0.17
+        ],
+        "at": [
+          0.5,
+          0.4
+        ],
+        "zoom": 3.4,
+        "rise": 0.2,
+        "floor": 30,
+        "ceil": 220,
+        "contrast": 1.7
+      }
     }
   ]
 }

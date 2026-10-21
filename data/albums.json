@@ -2690,7 +2690,7 @@
         "spotify": "https://open.spotify.com/album/5nkUSlIhtoJZMOUlB0sNCp"
       },
       "art_back": "assets/40/fall-out-boy-from-under-the-cork-tree-back.jpg",
-      "art_back_src": "http://coverartarchive.org/release/5aac11da-dad6-485c-b7f2-6fe330693095/32666815993.jpg",
+      "art_back_src": "https://www.discogs.com/release/34602667 (US LP 2025, Island/UMe 602478197796; original 13-track maroon back, perspective-corrected, ground matched to the 2005 US CD B0004140-02)",
       "date": "2026-10-19",
       "wear": {
         "level": "high",
@@ -2698,7 +2698,7 @@
       },
       "art_worn": "assets/40/worn/fall-out-boy-from-under-the-cork-tree.jpg",
       "art_back_worn": "assets/40/worn/fall-out-boy-from-under-the-cork-tree-back.jpg",
-      "worn_v": "563e8c57",
+      "worn_v": "1aee4e7f",
       "story": {
         "focus": [
           0.8,

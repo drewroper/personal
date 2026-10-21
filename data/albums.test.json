@@ -2703,7 +2703,7 @@
       }
     },
     {
-      "no": 27,
+      "no": 32,
       "slug": "t-i-king",
       "artist": "T.I.",
       "title": "King",
@@ -2832,7 +2832,7 @@
       },
       "art_back": "assets/40/t-i-king-back.jpg",
       "art_back_src": "https://www.discogs.com/release/762994 (US LP, Album 2006, Atlantic 83800-1; shot through shrinkwrap, haze pulled down to match the front)",
-      "date": "2026-10-19"
+      "date": "2026-10-24"
     },
     {
       "no": 16,
@@ -4007,6 +4007,136 @@
       "art_back_src": "https://www.discogs.com/release/14276 (US 2xLP 1998, Astralwerks ASW 66247-1)",
       "art_back_worn": "assets/40/worn/fatboy-slim-you-ve-come-a-long-way-baby-back.jpg",
       "live": true
+    },
+    {
+      "no": 27,
+      "slug": "fall-out-boy-from-under-the-cork-tree",
+      "artist": "Fall Out Boy",
+      "title": "From Under the Cork Tree",
+      "discovered": "Spring 2005, the \"Sugar, We're Goin Down\" video on MTV",
+      "blurb": [
+        "_From Under the Cork Tree_ was THE summer before freshman year of college record for me. It's probably the only album that can immediately take me back to those few months before I went away to Mizzou.",
+        "Everyone heard \"Sugar, We're Goin Down\" that spring, but the album didn't really hit me until we went to Destin the first week of August. I played it on the beach, then on repeat the whole drive back to St. Louis.",
+        "It came with me to Mizzou that fall. One night I asked my dorm mate Chris, \"What is a loaded god complex?\" and without missing a beat he said, \"I don't know, but it's got a cocker and puller!\" That silly little quote is cemented in my brain for eternity. (Chris would eventually officiate our wedding.)",
+        "In November, Chris and I drove from Columbia to see them at the Pageant on the Nintendo Fusion Tour with The Starting Line, Motion City Soundtrack, Boys Night Out, and Panic! at the Disco. That lineup was absolutely perfect for that moment in time. And I [caught a drumstick](photo:assets/40/photos/fob-pageant-drumstick-2005.jpg \"The Pageant, November 13, 2005\").",
+        "I still can't believe this album is 20 years old."
+      ],
+      "apple_id": 1440748840,
+      "apple_url": "https://music.apple.com/us/album/from-under-the-cork-tree/1440748840",
+      "released": "2005-05-03",
+      "year": "2005",
+      "copyright": "℗ 2005 The Island Def Jam Music Group",
+      "genre": "Alternative",
+      "track_count": 13,
+      "runtime_ms": 2579440,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Our Lawyer Made Us Change the Name of This Song So We Wouldn't Get Sued",
+          "ms": 188547,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/f5/42/b4/f542b4fe-4b67-2f73-00a0-e8526460c32e/mzaf_13310825064013515882.plus.aac.p.m4a"
+        },
+        {
+          "n": 2,
+          "title": "Of All the Gin Joints In All the World",
+          "ms": 191160,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/0c/8f/5e/0c8f5e29-8078-1592-9f87-662e24b1451e/mzaf_9363748722555213276.plus.aac.p.m4a"
+        },
+        {
+          "n": 3,
+          "title": "Dance, Dance",
+          "ms": 180267,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/73/de/4b/73de4bc9-1d96-4ee5-06c1-de950e9a9998/mzaf_3539830352754754263.plus.aac.p.m4a"
+        },
+        {
+          "n": 4,
+          "title": "Sugar, We're Goin Down",
+          "ms": 229093,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/43/37/be/4337be11-1013-d9ac-c9d0-d2c0bdbfb2e9/mzaf_6612085569817974027.plus.aac.p.m4a"
+        },
+        {
+          "n": 5,
+          "title": "Nobody Puts Baby In the Corner",
+          "ms": 200747,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/b3/f4/c5/b3f4c54e-26dc-95f8-1b1c-b1aa9e97f8f1/mzaf_10042926196000883629.plus.aac.p.m4a"
+        },
+        {
+          "n": 6,
+          "title": "I've Got a Dark Alley and a Bad Idea That Says You Should Shut Your Mouth (Summer Song)",
+          "ms": 190520,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/8a/dc/d7/8adcd7b6-b083-192d-cbe6-74e202fd9fe5/mzaf_15673901821112468377.plus.aac.p.m4a"
+        },
+        {
+          "n": 7,
+          "title": "7 Minutes In Heaven (Atavan Halen)",
+          "ms": 182707,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ba/a2/14/baa21465-823d-2b95-7fc0-65987654c366/mzaf_15090903192752845724.plus.aac.p.m4a"
+        },
+        {
+          "n": 8,
+          "title": "Sophomore Slump or Comeback of the Year",
+          "ms": 203760,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/5b/71/43/5b714320-eccd-c250-06ad-329654de0520/mzaf_12492587362086661612.plus.aac.p.m4a"
+        },
+        {
+          "n": 9,
+          "title": "Champagne for My Real Friends, Real Pain for My Sham Friends",
+          "ms": 203813,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/43/51/f9/4351f916-f7d3-63b2-3083-a7f212a0f84b/mzaf_3136599806530133960.plus.aac.p.m4a"
+        },
+        {
+          "n": 10,
+          "title": "I Slept With Someone In Fall Out Boy and All I Got Was This Stupid Song Written About Me",
+          "ms": 211493,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/13/0e/9b/130e9b2f-f2be-cbb5-5a32-c5706524c003/mzaf_16813765438362015477.plus.aac.p.m4a"
+        },
+        {
+          "n": 11,
+          "title": "A Little Less Sixteen Candles, a Little More \"Touch Me\"",
+          "ms": 169027,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/40/9d/72/409d721f-d01e-4369-bc0b-80b659130812/mzaf_893747788586496069.plus.aac.p.m4a"
+        },
+        {
+          "n": 12,
+          "title": "Get Busy Living or Get Busy Dying (Do Your Part to Save the Scene and Stop Going to Shows)",
+          "ms": 207653,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/c8/e1/1f/c8e11f6e-ca77-3ed3-5c62-ef3198bae934/mzaf_7107914758582612861.plus.aac.p.m4a"
+        },
+        {
+          "n": 13,
+          "title": "Xo",
+          "ms": 220653,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/75/b0/25/75b02562-ec7f-016c-e908-7ae97f5e7684/mzaf_1572837825637621972.plus.aac.p.m4a"
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/ea/ff/60/eaff603f-d108-2815-3dce-db39b990635f/06UMGIM11830.rgb.jpg/1800x1800bb.jpg",
+      "label": "Island",
+      "art": "assets/40/fall-out-boy-from-under-the-cork-tree.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/5nkUSlIhtoJZMOUlB0sNCp"
+      },
+      "art_back": "assets/40/fall-out-boy-from-under-the-cork-tree-back.jpg",
+      "art_back_src": "http://coverartarchive.org/release/5aac11da-dad6-485c-b7f2-6fe330693095/32666815993.jpg",
+      "date": "2026-10-19",
+      "wear": {
+        "level": "high",
+        "edge": 2.5
+      },
+      "story": {
+        "focus": [
+          0.8,
+          0.07
+        ],
+        "at": [
+          0.5,
+          0.15
+        ],
+        "zoom": 3.0,
+        "rise": 0.1,
+        "floor": 30,
+        "ceil": 220,
+        "contrast": 1.6
+      }
     }
   ]
 }

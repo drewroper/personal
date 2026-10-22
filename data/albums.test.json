@@ -4161,8 +4161,14 @@
       "artist": "The Strokes",
       "title": "Is This It",
       "apple_id": 266376953,
-      "discovered": "",
-      "blurb": [],
+      "discovered": "Summer 2001?",
+      "blurb": [
+        "I really don't remember where or when I discovered this album. I think my brother Dean had the CD (who knows how he got it), and I probably stole it shortly after he brought it home. But I remember having it, and I remember that iconic logo on the disc. I love that logo. I'm pretty sure they ripped it off from something, and the graphic designer in me should be angry about that, but it's perfection.",
+        "_Room on Fire_ also rips, and it might be my favorite of their first two albums, but nothing beats the feeling this record gave me back then. The glamorous rock 'n' roll life, leather jackets, ripping cigs, living in New York. My St. Louis suburban brain could never fathom that lifestyle.",
+        "I thought [_Meet Me in the Bathroom_](photo:assets/40/photos/strokes-mmitb-poster.jpg \"Meet Me in the Bathroom, 2022\nVia [TMDB](https://www.themoviedb.org/movie/913792-meet-me-in-the-bathroom)\") was a slightly \"meh\" documentary, but all that home footage of The Strokes took me right back to Sony Handycams and early-2000s skate videos. It felt like a DIY band with a DIY sound, and the riffs were infectious. This album transports me back to that time. A simpler time.",
+        "I finally saw them at Red Rocks on August 14, 2023. Julian was drunk as hell and rambling away, just as I wanted him to be. But then the songs would kick in, and he'd snap back into the insane performer he is.",
+        "I've put this album on repeat about once a quarter, every year, since it came out. It has no skips, it's so raw, and fun, and I've never gotten sick of it. Neither will you."
+      ],
       "date": "2026-10-20",
       "apple_url": "https://music.apple.com/us/album/is-this-it/266376953",
       "released": "2001-07-30",
@@ -4265,7 +4271,8 @@
         "floor": 20,
         "ceil": 235,
         "contrast": 1.5
-      }
+      },
+      "live": true
     }
   ]
 }

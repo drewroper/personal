@@ -868,7 +868,24 @@
       },
       "art_worn": "assets/40/worn/oasis-what-s-the-story-morning-glory.jpg",
       "art_back_worn": "assets/40/worn/oasis-what-s-the-story-morning-glory-back.jpg",
-      "worn_v": "4cd5e9c9"
+      "worn_v": "4cd5e9c9",
+      "no": 29,
+      "date": "2026-10-21",
+      "story": {
+        "focus": [
+          0.85,
+          0.88
+        ],
+        "at": [
+          0.6,
+          0.8
+        ],
+        "zoom": 3.2,
+        "rise": 0.15,
+        "floor": 20,
+        "ceil": 235,
+        "contrast": 1.5
+      }
     },
     {
       "slug": "radiohead-hail-to-the-thief",

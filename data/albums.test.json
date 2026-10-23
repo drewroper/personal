@@ -792,7 +792,7 @@
       "worn_v": "c3250a29"
     },
     {
-      "no": 30,
+      "no": 34,
       "slug": "blink-182-take-off-your-pants-and-jacket",
       "artist": "blink-182",
       "title": "Take Off Your Pants and Jacket",
@@ -896,7 +896,7 @@
       },
       "art_back": "assets/40/blink-182-take-off-your-pants-and-jacket-back.jpg",
       "art_back_src": "https://www.discogs.com/release/410661 (Europe LP, Album 2001, 112 674-1)",
-      "date": "2026-10-22",
+      "date": "2026-10-26",
       "wear": {
         "level": "low",
         "surface": 0.5,
@@ -4273,6 +4273,106 @@
         "contrast": 1.5
       },
       "live": true
+    },
+    {
+      "no": 30,
+      "slug": "cloud-nothings-here-and-nowhere-else",
+      "artist": "Cloud Nothings",
+      "title": "Here and Nowhere Else",
+      "apple_id": 1764324705,
+      "discovered": "",
+      "blurb": [
+        "I'm one of the only people I know who really loves the first Cloud Nothings record. It was fun and fast, and I listened to it a ton that first year I was in Chicago.",
+        "Then they changed their sound to something much harder and more intense. There was no avoiding it, and _Attack on Memory_ is a fantastic record. But _Here and Nowhere Else_ struck the balance I was looking for at the time: energy, intensity, and fun.",
+        "A month after it came out, Jim and I saw them at Lincoln Hall. [Consequence of Sound reviewed the show](https://consequence.net/2014/05/live-review-cloud-nothings-at-chicagos-lincoln-hall-53/), and the reviewer called out two guys in Cardinals gear shoving and shouting along to every word. That was us.",
+        "I've seen them maybe a dozen times since, and whenever they play songs from this album, they're the best songs of the show. \"Pattern Walks\" is the one I want to see live more than any other. The ending is a cacophony of noise, and I've never seen another drummer smack the shit out of the drums like their drummer. He's like a Muppet back there going ham on those things."
+      ],
+      "date": "2026-10-22",
+      "apple_url": "https://music.apple.com/us/album/here-and-nowhere-else-10th-anniversary/1764324705",
+      "released": "2014-04-01",
+      "year": "2014",
+      "copyright": "℗ 2014 Carpark Records",
+      "genre": "Alternative",
+      "track_count": 8,
+      "runtime_ms": 1889078,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Now Hear In",
+          "ms": 210834,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/d3/45/f8/d345f809-e654-6901-83df-b64039a4aa61/mzaf_4093725549040848165.plus.aac.p.m4a"
+        },
+        {
+          "n": 2,
+          "title": "Quieter Today",
+          "ms": 184096,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/c7/43/e7/c743e755-6ed6-aa96-b101-2411dd691255/mzaf_9872825594452487079.plus.aac.p.m4a"
+        },
+        {
+          "n": 3,
+          "title": "Psychic Trauma",
+          "ms": 172569,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/af/c4/9f/afc49f01-a9a2-60a9-a985-40d28656c872/mzaf_1464424415159866044.plus.aac.p.m4a"
+        },
+        {
+          "n": 4,
+          "title": "Just See Fear",
+          "ms": 188876,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/88/52/48/8852487a-3494-f4d6-63ae-83ad9582fe13/mzaf_12529980061691981975.plus.aac.p.m4a"
+        },
+        {
+          "n": 5,
+          "title": "Giving Into Seeing",
+          "ms": 228793,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/92/64/ba/9264ba2c-f541-2989-74ca-1272fa6e15e6/mzaf_888553740558318077.plus.aac.p.m4a"
+        },
+        {
+          "n": 6,
+          "title": "No Thoughts",
+          "ms": 184912,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/eb/c3/30/ebc330cb-3f3a-2734-df8a-a6abbb26a012/mzaf_5441225327576133455.plus.aac.p.m4a"
+        },
+        {
+          "n": 7,
+          "title": "Pattern Walks",
+          "ms": 443689,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ee/e3/2e/eee32efc-6983-0ea7-f731-09a6ef8e83d5/mzaf_11466836441074348330.plus.aac.p.m4a"
+        },
+        {
+          "n": 8,
+          "title": "I'm Not Part Of Me",
+          "ms": 275309,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/49/a8/36/49a8362c-b13b-dad7-9160-eebc239536e6/mzaf_16221800761948865221.plus.aac.p.m4a"
+        }
+      ],
+      "art_remote": "https://cdn.shopify.com/s/files/1/0805/4266/2938/files/677517009255.jpg",
+      "label": "Carpark",
+      "art": "assets/40/cloud-nothings-here-and-nowhere-else.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/0hLNDK6qqmScdwxU7kvnXn"
+      },
+      "art_back": "assets/40/cloud-nothings-here-and-nowhere-else-back.jpg",
+      "art_back_src": "https://www.discogs.com/release/5538523 (US LP 2014, Carpark CAK92)",
+      "wear": {
+        "level": "med",
+        "ring": 0.3,
+        "surface": 0.5
+      },
+      "story": {
+        "focus": [
+          0.5,
+          0.58
+        ],
+        "at": [
+          0.5,
+          0.45
+        ],
+        "zoom": 3.0,
+        "rise": 0.22,
+        "floor": 45,
+        "ceil": 215,
+        "contrast": 1.15
+      }
     }
   ]
 }

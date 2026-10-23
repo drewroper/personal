@@ -771,8 +771,16 @@
       "slug": "oasis-what-s-the-story-morning-glory",
       "artist": "Oasis",
       "title": "(What's the Story) Morning Glory?",
-      "discovered": "",
-      "blurb": [],
+      "discovered": "The Paynes' house, Fall of 1995",
+      "blurb": [
+        "This album needs no introduction.",
+        "My dad wouldn't let us have the CD because the last song talked about getting high. So, like most good albums of my youth, I heard it at a friend's house. I remember a few of us singing \"Champagne Supernova\" in my friend's bathroom without a single clue what any of it meant. In my defense, [Noel doesn't know what it means either](https://stereogum.com/2100547/oasis-champagne-supernova-noel-gallagher/news).",
+        "Oasis were arguably the biggest band on the planet, but beyond this one, I didn't really listen to their other albums until college. Junior or senior year of high school, I went back and listened to the whole thing instead of just the singles. \"Hello\" and \"Morning Glory\" were darker and moodier than I remembered, and I'd never realized how amazing those songs were back in elementary school. (Because, duh.)",
+        "Then in college I got really into their live album, _Familiar to Millions_. \"Fuckin' in the Bushes\" became my ultimate pump-up song, and I put it on our lacrosse warm-up mix that we played before every game. That's when I really discovered \"Supersonic\" and \"Acquiesce,\" which sent me back to _Definitely Maybe_ and _The Masterplan_, both of which came out when I was way too young for them. I got to experience it all in one big, gigantic chunk, right when I had the most time to listen to music: college.",
+        "I've been a staunch defender of Oasis ever since. They're hilarious. They're annoying. They're everything rock 'n' roll stars should be. So naturally, when they announced they were getting back together, it was my chance to finally see them.",
+        "If you hung out with me at all last year, Oasis was all I could talk about. I revisited every album, talked about them nonstop, and got way too into Liam's Twitter.",
+        "I saw them at [Soldier Field in Chicago](photo:assets/40/photos/oasis-soldier-field-2025.jpg \"Soldier Field, August 28, 2025\"), and it was easily a top five concert of my life. No, top three. The energy, the production, the sound. It was perfect."
+      ],
       "apple_id": 1517447039,
       "apple_url": "https://music.apple.com/us/album/whats-the-story-morning-glory/1517447039",
       "released": "1995-10-02",
@@ -885,7 +893,8 @@
         "floor": 20,
         "ceil": 235,
         "contrast": 1.5
-      }
+      },
+      "live": true
     },
     {
       "slug": "radiohead-hail-to-the-thief",
@@ -5632,8 +5641,10 @@
       "blurb": [
         "I'm one of the only people I know who really loves the first Cloud Nothings record. It was fun and fast, and I listened to it a ton that first year I was in Chicago.",
         "Then they changed their sound to something much harder and more intense. There was no avoiding it, and _Attack on Memory_ is a fantastic record. But _Here and Nowhere Else_ struck the balance I was looking for at the time: energy, intensity, and fun.",
+        "2014 was a big year of music for me. I'd gone freelance, moved back to Chicago, and felt free in one of the best cities on the planet. So it's no coincidence this is another 2014 album.",
         "A month after it came out, Jim and I saw them at Lincoln Hall. [Consequence of Sound reviewed the show](https://consequence.net/2014/05/live-review-cloud-nothings-at-chicagos-lincoln-hall-53/), and the reviewer called out two guys in Cardinals gear shoving and shouting along to every word. That was us.",
-        "I've seen them maybe a dozen times since, and whenever they play songs from this album, they're the best songs of the show. \"Pattern Walks\" is the one I want to see live more than any other. The ending is a cacophony of noise, and I've never seen another drummer smack the shit out of the drums like their drummer. He's like a Muppet back there going ham on those things."
+        "I've seen them maybe a dozen times since, and whenever they play songs from this album, they're the best songs of the show. \"Pattern Walks\" is the one I want to see live more than any other. The ending is a cacophony of noise, and I've never seen another drummer smack the shit out of the drums like their drummer. He's like a Muppet back there going ham on those things.",
+        "Five albums later, Cloud Nothings still hasn't missed."
       ],
       "date": "2026-10-22",
       "apple_url": "https://music.apple.com/us/album/here-and-nowhere-else-10th-anniversary/1764324705",
@@ -5723,7 +5734,8 @@
         "floor": 45,
         "ceil": 215,
         "contrast": 1.15
-      }
+      },
+      "live": true
     }
   ]
 }

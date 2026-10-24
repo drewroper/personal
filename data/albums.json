@@ -676,12 +676,15 @@
       "art_back_src": "https://coverartarchive.org/release/06438d71-3a7d-3f41-9338-3dc08351e19f/35213268731.jpg"
     },
     {
-      "no": null,
+      "no": 32,
       "slug": "portugal-the-man-the-satanic-satanist",
       "artist": "Portugal. The Man",
       "title": "The Satanic Satanist",
       "discovered": "",
-      "blurb": [],
+      "blurb": [
+        "I can't remember the first time I heard Portugal. The Man, but I know it was _The Satanic Satanist_, and I was in love by the end of it. The instrumentation, the hooks, the melodies. Then they turned around and put out _American Ghetto_ the next year, and _In the Mountain in the Cloud_ the year after that. Three albums in three years. They couldn't miss.",
+        "That fall was my last semester at Mizzou, and I was making gig posters for pretty much anyone who'd let me. My buddy Paule and I did one for their show at Mojo's in Columbia: [Sisyphus pushing his boulder up a mountain](photo:assets/40/photos/ptm-sisyphus-poster-2010.jpg \"Our poster for Forrest Rose Park, October 6, 2010\"), inspired by \"1000 Years.\" [Tickets were twelve bucks](photo:assets/40/photos/ptm-mojos-ticket-2010.jpg \"Forrest Rose Park at Mojo's, October 6, 2010\"). I made a bunch of gig posters in college, but this was the first time a band reached out to compliment me on one. They even signed a copy for me, which the venue then kept. Thieves."
+      ],
       "apple_id": 1537511193,
       "apple_url": "https://music.apple.com/us/album/the-satanic-satanist/1537511193",
       "released": "2009-07-21",
@@ -759,13 +762,38 @@
         }
       ],
       "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/8e/38/27/8e3827fb-ef98-d3fb-54e5-4269f7c27066/cover.jpg/1800x1800bb.jpg",
-      "label": "Approaching AIRballoons",
+      "label": "Equal Vision",
       "art": "assets/40/portugal-the-man-the-satanic-satanist.jpg",
       "links": {
         "spotify": "https://open.spotify.com/album/04V5tTHMYIGBzcYxGMgRFn"
       },
       "art_back": "assets/40/portugal-the-man-the-satanic-satanist-back.jpg",
-      "art_back_src": "http://coverartarchive.org/release/e3f030dc-6e02-4a5f-a81d-aca200cb1413/16445057100.jpg"
+      "art_back_src": "http://coverartarchive.org/release/e3f030dc-6e02-4a5f-a81d-aca200cb1413/16445057100.jpg",
+      "date": "2026-10-24",
+      "wear": {
+        "level": "high",
+        "edge": 3.5
+      },
+      "art_worn": "assets/40/worn/portugal-the-man-the-satanic-satanist.jpg",
+      "art_back_worn": "assets/40/worn/portugal-the-man-the-satanic-satanist-back.jpg",
+      "worn_v": "f139d1c8",
+      "live": true,
+      "story": {
+        "focus": [
+          0.82,
+          0.18
+        ],
+        "at": [
+          0.5,
+          0.3
+        ],
+        "zoom": 2.8,
+        "rise": 0.2,
+        "levels": true,
+        "floor": 40,
+        "ceil": 220,
+        "contrast": 1.8
+      }
     },
     {
       "slug": "oasis-what-s-the-story-morning-glory",
@@ -900,8 +928,14 @@
       "slug": "radiohead-hail-to-the-thief",
       "artist": "Radiohead",
       "title": "Hail to the Thief",
-      "discovered": "",
-      "blurb": [],
+      "discovered": "Spring 2003, the \"There There\" video",
+      "blurb": [
+        "WHAT? _Hail to the Thief_? Yes, _Hail to the Thief_. Not _Kid A_, _OK Computer_, or _In Rainbows_. I love those albums too, but for some reason this one is my favorite Radiohead album. Maybe it's because it's another album that lived in the CD player in my Jeep. Maybe it's because it was dark and moody. Or maybe it's because it's just plain incredible.",
+        "The first time I heard it was the \"There There\" video. I already knew I liked Radiohead, but this sounded creepy, and it intrigued me.",
+        "I love the album art. It was one of the CDs in my massive CD binder that I actually bought instead of downloaded. A prestigious honor.",
+        "I wish the instrumental bridge in \"We Suck Young Blood\" was a hundred minutes long. It's my favorite part of the album, and it's so short. In 2012 I [tweeted](https://x.com/R_O_P_E_R/status/212683240694218752) that it \"might be my favorite 20 seconds of any Radiohead song ever.\"",
+        "I saw them on the _In Rainbows_ tour with, guess who, Jim, at UMB Bank Pavilion (technically the Verizon Wireless Amphitheater by then) on May 14, 2008. We showed up without tickets, somehow scored unused friends and family tickets, and [ended up with seats](photo:assets/40/photos/radiohead-ticket-2008.jpg \"Verizon Wireless Amphitheater, May 14, 2008\"). It's one of the best light and stage shows I've ever seen. I've seen them since at Coachella in 2012 and Lollapalooza in 2016. Incredible live band."
+      ],
       "apple_id": 1097863576,
       "links": {
         "spotify": "https://open.spotify.com/album/5mzoI3VH0ZWk1pLFR6RoYy"
@@ -1010,7 +1044,25 @@
       },
       "art_worn": "assets/40/worn/radiohead-hail-to-the-thief.jpg",
       "art_back_worn": "assets/40/worn/radiohead-hail-to-the-thief-back.jpg",
-      "worn_v": "692e9305"
+      "worn_v": "692e9305",
+      "no": 31,
+      "date": "2026-10-23",
+      "live": true,
+      "story": {
+        "focus": [
+          0.72,
+          0.5
+        ],
+        "at": [
+          0.5,
+          0.5
+        ],
+        "zoom": 3.0,
+        "rise": 0.15,
+        "floor": 20,
+        "ceil": 235,
+        "contrast": 1.5
+      }
     },
     {
       "no": 1,

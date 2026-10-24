@@ -147,7 +147,7 @@
       }
     },
     {
-      "no": 31,
+      "no": 35,
       "slug": "dave-matthews-band-crash",
       "artist": "Dave Matthews Band",
       "title": "Crash",
@@ -252,7 +252,7 @@
       "art_worn": "assets/40/worn/dave-matthews-band-crash.jpg",
       "art_back_worn": "assets/40/worn/dave-matthews-band-crash-back.jpg",
       "worn_v": "034a3e7b",
-      "date": "2026-10-23"
+      "date": "2026-10-27"
     },
     {
       "no": 4,
@@ -1547,13 +1547,17 @@
       "worn_v": "19f1ba14"
     },
     {
-      "no": 33,
+      "no": 31,
       "slug": "radiohead-hail-to-the-thief",
       "artist": "Radiohead",
       "title": "Hail to the Thief",
-      "discovered": "Voluptate neque adipiscing auctor laboris proident, 2004.",
+      "discovered": "Spring 2003, the \"There There\" video",
       "blurb": [
-        "Facilisis sint magna officia nunc pariatur cupidatat, netus fugiat magna officia. Netus esse magna est id fugiat officia esse. Adipiscing dolor aute amet netus integer est commodo netus aute neque pretium, sit vel varius aliquip anim officia labore. Gravida senectus pariatur pretium tincidunt consequat sint ipsum sed nisi irure, porttitor pulvinar dolore vel cillum ac. Curabitur excepteur ad senectus mattis ligula feugiat _Hail to the Thief_ ut sint cras gravida exercitation gravida pulvinar consequat fames tempor. Vel veniam purus viverra non consectetur aliquip lorem morbi neque. Qui potenti ullamco, vitae turpis laboris ac pariatur aute excepteur aliquam egestas, purus minim."
+        "WHAT? _Hail to the Thief_? Yes, _Hail to the Thief_. Not _Kid A_, _OK Computer_, or _In Rainbows_. I love those albums too, but for some reason this one is my favorite Radiohead album. Maybe it's because it's another album that lived in the CD player in my Jeep. Maybe it's because it was dark and moody. Or maybe it's because it's just plain incredible.",
+        "The first time I heard it was the \"There There\" video. I already knew I liked Radiohead, but this sounded creepy, and it intrigued me.",
+        "I love the album art. It was one of the CDs in my massive CD binder that I actually bought instead of downloaded. A prestigious honor.",
+        "I wish the instrumental bridge in \"We Suck Young Blood\" was a hundred minutes long. It's my favorite part of the album, and it's so short. In 2012 I [tweeted](https://x.com/R_O_P_E_R/status/212683240694218752) that it \"might be my favorite 20 seconds of any Radiohead song ever.\"",
+        "I saw them on the _In Rainbows_ tour with, guess who, Jim, at UMB Bank Pavilion (technically the Verizon Wireless Amphitheater by then) on May 14, 2008. We showed up without tickets, somehow scored unused friends and family tickets, and [ended up with seats](photo:assets/40/photos/radiohead-ticket-2008.jpg \"Verizon Wireless Amphitheater, May 14, 2008\"). It's one of the best light and stage shows I've ever seen. I've seen them since at Coachella in 2012 and Lollapalooza in 2016. Incredible live band."
       ],
       "apple_id": 1097863576,
       "links": {
@@ -1657,14 +1661,30 @@
       "art": "assets/40/radiohead-hail-to-the-thief.jpg",
       "art_back": "assets/40/radiohead-hail-to-the-thief-back.jpg",
       "art_back_src": "http://coverartarchive.org/release/f847d298-e2d8-43ed-97ed-7c7b01ff03bc/24770542667.jpg",
-      "date": "2026-10-25",
+      "date": "2026-10-23",
       "wear": {
         "level": "high",
         "edge": 2.5
       },
       "art_worn": "assets/40/worn/radiohead-hail-to-the-thief.jpg",
       "art_back_worn": "assets/40/worn/radiohead-hail-to-the-thief-back.jpg",
-      "worn_v": "692e9305"
+      "worn_v": "692e9305",
+      "live": true,
+      "story": {
+        "focus": [
+          0.72,
+          0.5
+        ],
+        "at": [
+          0.5,
+          0.5
+        ],
+        "zoom": 3.0,
+        "rise": 0.15,
+        "floor": 20,
+        "ceil": 235,
+        "contrast": 1.5
+      }
     },
     {
       "no": 21,
@@ -2725,7 +2745,7 @@
       }
     },
     {
-      "no": 32,
+      "no": 36,
       "slug": "t-i-king",
       "artist": "T.I.",
       "title": "King",
@@ -2854,7 +2874,7 @@
       },
       "art_back": "assets/40/t-i-king-back.jpg",
       "art_back_src": "https://www.discogs.com/release/762994 (US LP, Album 2006, Atlantic 83800-1; shot through shrinkwrap, haze pulled down to match the front)",
-      "date": "2026-10-24"
+      "date": "2026-10-28"
     },
     {
       "no": 16,
@@ -4384,6 +4404,123 @@
         "contrast": 1.15
       },
       "live": true
+    },
+    {
+      "no": 32,
+      "slug": "portugal-the-man-the-satanic-satanist",
+      "artist": "Portugal. The Man",
+      "title": "The Satanic Satanist",
+      "discovered": "",
+      "blurb": [
+        "I can't remember the first time I heard Portugal. The Man, but I know it was _The Satanic Satanist_, and I was in love by the end of it. The instrumentation, the hooks, the melodies. Then they turned around and put out _American Ghetto_ the next year, and _In the Mountain in the Cloud_ the year after that. Three albums in three years. They couldn't miss.",
+        "That fall was my last semester at Mizzou, and I was making gig posters for pretty much anyone who'd let me. My buddy Paule and I did one for their show at Mojo's in Columbia: [Sisyphus pushing his boulder up a mountain](photo:assets/40/photos/ptm-sisyphus-poster-2010.jpg \"Our poster for Forrest Rose Park, October 6, 2010\"), inspired by \"1000 Years.\" [Tickets were twelve bucks](photo:assets/40/photos/ptm-mojos-ticket-2010.jpg \"Forrest Rose Park at Mojo's, October 6, 2010\"). I made a bunch of gig posters in college, but this was the first time a band reached out to compliment me on one. They even signed a copy for me, which the venue then kept. Thieves."
+      ],
+      "apple_id": 1537511193,
+      "apple_url": "https://music.apple.com/us/album/the-satanic-satanist/1537511193",
+      "released": "2009-07-21",
+      "year": "2009",
+      "copyright": "℗ 2009 Approaching AIRballoons",
+      "genre": "Alternative",
+      "track_count": 11,
+      "runtime_ms": 2084428,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "People Say",
+          "ms": 179360,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/91/49/b6/9149b6aa-ece4-18a5-3baf-8d5c452dbb87/mzaf_17487265051063949706.plus.aac.p.m4a"
+        },
+        {
+          "n": 2,
+          "title": "Work All Day",
+          "ms": 178947,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/1c/ea/ce/1ceace1f-20d3-11f9-7f29-b938df78e0db/mzaf_4280492644488880976.plus.aac.p.m4a"
+        },
+        {
+          "n": 3,
+          "title": "Lovers In Love",
+          "ms": 193960,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/6b/a1/57/6ba157a2-3632-9b3b-c8d2-17b73d75b2ff/mzaf_6172400120756323799.plus.aac.p.m4a"
+        },
+        {
+          "n": 4,
+          "title": "The Sun",
+          "ms": 181667,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/e6/34/33/e6343399-0ca9-a56b-ccf0-f8be2c577bd5/mzaf_13155985574402271793.plus.aac.p.m4a"
+        },
+        {
+          "n": 5,
+          "title": "The Home",
+          "ms": 176840,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/c6/1d/b3/c61db37d-eaca-8988-0b79-54469bbb5b22/mzaf_5198178718618041484.plus.aac.p.m4a"
+        },
+        {
+          "n": 6,
+          "title": "The Woods",
+          "ms": 191947,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/51/a7/bf/51a7bf60-9c8a-a968-92f5-a56a8f143f77/mzaf_1263995011952871035.plus.aac.p.m4a"
+        },
+        {
+          "n": 7,
+          "title": "Guns and Dogs",
+          "ms": 164520,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/0f/45/db/0f45dbc8-ec09-8769-ce9b-092ee6d79d9b/mzaf_1662389936091462194.plus.aac.p.m4a"
+        },
+        {
+          "n": 8,
+          "title": "Do You",
+          "ms": 174933,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/92/34/20/923420c9-e9b7-0f64-adfb-598c9822d56d/mzaf_913958166811612053.plus.aac.p.m4a"
+        },
+        {
+          "n": 9,
+          "title": "Everyone Is Golden",
+          "ms": 225867,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/2f/d1/bb/2fd1bbb5-e1d2-4b3b-6e77-a689f12649d6/mzaf_4422208300068029225.plus.aac.p.m4a"
+        },
+        {
+          "n": 10,
+          "title": "Let You Down",
+          "ms": 137307,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/38/10/a3/3810a332-64c4-24f5-eef5-19b534f78b8c/mzaf_6207380194050266634.plus.aac.p.m4a"
+        },
+        {
+          "n": 11,
+          "title": "Mornings",
+          "ms": 279080,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ab/14/e6/ab14e654-050d-d0fe-f485-a5f91a89e23b/mzaf_5351078634058528651.plus.aac.p.m4a"
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/8e/38/27/8e3827fb-ef98-d3fb-54e5-4269f7c27066/cover.jpg/1800x1800bb.jpg",
+      "label": "Equal Vision",
+      "art": "assets/40/portugal-the-man-the-satanic-satanist.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/04V5tTHMYIGBzcYxGMgRFn"
+      },
+      "art_back": "assets/40/portugal-the-man-the-satanic-satanist-back.jpg",
+      "art_back_src": "http://coverartarchive.org/release/e3f030dc-6e02-4a5f-a81d-aca200cb1413/16445057100.jpg",
+      "date": "2026-10-24",
+      "wear": {
+        "level": "high",
+        "edge": 3.5
+      },
+      "live": true,
+      "story": {
+        "focus": [
+          0.82,
+          0.18
+        ],
+        "at": [
+          0.5,
+          0.3
+        ],
+        "zoom": 2.8,
+        "rise": 0.2,
+        "levels": true,
+        "floor": 40,
+        "ceil": 220,
+        "contrast": 1.8
+      }
     }
   ]
 }

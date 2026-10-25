@@ -4522,6 +4522,118 @@
         "ceil": 220,
         "contrast": 1.8
       }
+    },
+    {
+      "no": 33,
+      "slug": "lord-huron-lonesome-dreams",
+      "artist": "Lord Huron",
+      "title": "Lonesome Dreams",
+      "discovered": "",
+      "blurb": [
+        "This is the album that reminds me of Colorado the most. 2013 was our first year living here, and it felt like we were in a different part of the state every weekend. If Megan and I were driving anywhere, this album was on.",
+        "That June we saw them at Snowmass Mammoth Fest, then went to their after show somewhere in Snowmass Village. We showed up about a half hour before anyone else, while the band was still setting up, so naturally we did tequila shots with them. Then we were front row the whole night. It was an incredible time."
+      ],
+      "apple_id": 1758066410,
+      "links": {
+        "spotify": "https://open.spotify.com/album/2ZDjruwuzzzT8JMJRXvLtl"
+      },
+      "apple_url": "https://music.apple.com/us/album/lonesome-dreams-bonus-track-version/1758066410",
+      "released": "2012-10-09",
+      "year": "2012",
+      "copyright": "℗ 2012 IAMSOUND Records",
+      "genre": "Rock",
+      "track_count": 10,
+      "runtime_ms": 2715760,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Ends of the Earth",
+          "ms": 284147,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/0a/d3/e1/0ad3e161-bf53-fe6f-4339-64b65429ad8a/mzaf_2890789783632773498.plus.aac.p.m4a"
+        },
+        {
+          "n": 2,
+          "title": "Time to Run",
+          "ms": 323973,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ad/c8/b6/adc8b629-8b91-1dfa-eef9-6e904f076b48/mzaf_3299926069562894668.plus.aac.p.m4a"
+        },
+        {
+          "n": 3,
+          "title": "Lonesome Dreams",
+          "ms": 255573,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/8a/0d/87/8a0d87ae-5e0b-52dc-ac70-1109cadeab5f/mzaf_16903535744493837426.plus.aac.p.m4a"
+        },
+        {
+          "n": 4,
+          "title": "The Ghost on the Shore",
+          "ms": 277240,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/18/35/7c/18357c95-7e86-402c-c4d6-1086d027d5de/mzaf_10548727457403290275.plus.aac.p.m4a"
+        },
+        {
+          "n": 5,
+          "title": "She Lit a Fire",
+          "ms": 270667,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/40/ed/6e/40ed6e1f-85af-558f-f3ea-9ae18b6e838d/mzaf_18392160472627325859.plus.aac.p.m4a"
+        },
+        {
+          "n": 6,
+          "title": "I Will Be Back One Day",
+          "ms": 205907,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/6a/dc/fd/6adcfdb9-9128-94ac-0b07-1a0fce2fbcc1/mzaf_6935789810996138173.plus.aac.p.m4a"
+        },
+        {
+          "n": 7,
+          "title": "The Man Who Lives Forever",
+          "ms": 318813,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/dc/a2/88/dca2887f-a42e-b328-abd0-8254ae52a72a/mzaf_6549636010602617217.plus.aac.p.m4a"
+        },
+        {
+          "n": 8,
+          "title": "Lullaby",
+          "ms": 240080,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/74/97/18/749718ac-45fa-ac55-5eb6-42b41b4646b8/mzaf_18313717192020057750.plus.aac.p.m4a"
+        },
+        {
+          "n": 9,
+          "title": "Brother (Last Ride)",
+          "ms": 240000,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/a7/8c/8b/a78c8b45-776f-ec0e-fad4-2e89fa6e2ada/mzaf_9538007176143055065.plus.aac.p.m4a"
+        },
+        {
+          "n": 10,
+          "title": "In the Wind",
+          "ms": 299360,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/8a/8e/95/8a8e95e2-c72a-526e-f777-37273922b013/mzaf_6413061859228701113.plus.aac.p.m4a"
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/f3/b6/00/f3b600c3-e128-6fe6-8f0a-162145c2d4be/886443581227_Cover.jpg/1800x1800bb.jpg",
+      "label": "IAMSOUND",
+      "art": "assets/40/lord-huron-lonesome-dreams.jpg",
+      "date": "2026-10-25",
+      "art_back": "assets/40/lord-huron-lonesome-dreams-back.jpg",
+      "art_back_src": "https://cdn.shopify.com/s/files/1/1487/4550/files/IMG_9436.jpg?v=1750432837",
+      "wear": {
+        "level": "high",
+        "edge": 2.5
+      },
+      "art_worn": "assets/40/worn/lord-huron-lonesome-dreams.jpg",
+      "art_back_worn": "assets/40/worn/lord-huron-lonesome-dreams-back.jpg",
+      "worn_v": "d4e4fbf5",
+      "story": {
+        "focus": [
+          0.505,
+          0.62
+        ],
+        "at": [
+          0.5,
+          0.55
+        ],
+        "zoom": 3.4,
+        "rise": 0.25,
+        "floor": 20,
+        "ceil": 235,
+        "contrast": 1.3
+      }
     }
   ]
 }

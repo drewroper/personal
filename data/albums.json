@@ -769,7 +769,7 @@
         "spotify": "https://open.spotify.com/album/04V5tTHMYIGBzcYxGMgRFn"
       },
       "art_back": "assets/40/portugal-the-man-the-satanic-satanist-back.jpg",
-      "art_back_src": "http://coverartarchive.org/release/e3f030dc-6e02-4a5f-a81d-aca200cb1413/16445057100.jpg",
+      "art_back_src": "https://www.popsike.pics/pix/20251031/306577566109_1.jpg",
       "date": "2026-10-24",
       "wear": {
         "level": "high",
@@ -777,7 +777,7 @@
       },
       "art_worn": "assets/40/worn/portugal-the-man-the-satanic-satanist.jpg",
       "art_back_worn": "assets/40/worn/portugal-the-man-the-satanic-satanist-back.jpg",
-      "worn_v": "f139d1c8",
+      "worn_v": "872d3e40",
       "live": true,
       "story": {
         "focus": [

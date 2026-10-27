@@ -911,6 +911,125 @@
       "live": true
     },
     {
+      "no": 34,
+      "slug": "foxing-nearer-my-god",
+      "artist": "Foxing",
+      "title": "Nearer My God",
+      "discovered": "Release day, August 10, 2018",
+      "blurb": [
+        "Foxing are from St. Louis, and they should be 100 times more famous than they are. It was impossible to be an emo kid from STL and not have \"Rory\" pop up in your group chats. They haven't put out a bad record, and IMO _Nearer My God_ is the best of the bunch. It was my number one album of 2018.",
+        "My buddy Tall Kyle was in a band with two of the guys when they were younger, which, by association, makes me very cool. I've seen them more times than I can count between Chicago and Denver, including a UMS set where Conor was absolutely furious with the crowd. Before one show at Subterranean, Jim (of course) dragged us to the brand-new ✨Taco Bell Cantina✨ on Milwaukee Ave. We got the boozy slushies and immediately regretted it. I've never been sicker at a show, and then we went to see Mac DeMarco at Metro for the second half of a double feature. I even flew to Chicago to see them on my 38th birthday."
+      ],
+      "apple_id": 1406947177,
+      "label": "Triple Crown",
+      "date": "2026-10-26",
+      "apple_url": "https://music.apple.com/us/album/nearer-my-god/1406947177",
+      "released": "2018-08-10",
+      "year": "2018",
+      "copyright": "℗ 2018 Round Hill Records LLC",
+      "genre": "Alternative",
+      "track_count": 12,
+      "runtime_ms": 3395066,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Grand Paradise",
+          "ms": 286933,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/cf/ea/0a/cfea0aef-7945-d053-e3d2-d34d6d521e2f/mzaf_7827732410147794113.plus.aac.p.m4a"
+        },
+        {
+          "n": 2,
+          "title": "Slapstick",
+          "ms": 269440,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/a7/06/0f/a7060f63-7c83-d1d8-ee2f-841c74bc4b21/mzaf_16988788459834788191.plus.aac.p.m4a"
+        },
+        {
+          "n": 3,
+          "title": "Lich Prince",
+          "ms": 286813,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/fd/d6/82/fdd68250-db8e-dc5b-79ba-c3209d1d560c/mzaf_10197761236623742748.plus.aac.p.m4a"
+        },
+        {
+          "n": 4,
+          "title": "Gameshark",
+          "ms": 283093,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/33/91/26/339126ba-6c12-43f6-195c-a5e04ed25b1a/mzaf_718284365769635588.plus.aac.p.m4a"
+        },
+        {
+          "n": 5,
+          "title": "Nearer My God",
+          "ms": 215693,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/0d/cc/f5/0dccf520-dd21-9454-ac33-052d36a215ae/mzaf_9605742061453837930.plus.aac.p.m4a"
+        },
+        {
+          "n": 6,
+          "title": "Five Cups",
+          "ms": 547527,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/0c/93/8c/0c938c5c-948a-c15b-4dd8-a78e6231be96/mzaf_9772559736879536902.plus.aac.p.m4a"
+        },
+        {
+          "n": 7,
+          "title": "Heartbeats",
+          "ms": 242920,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/79/c9/93/79c99316-b609-6a04-a480-cfd31098156d/mzaf_13046324632348889196.plus.aac.p.m4a"
+        },
+        {
+          "n": 8,
+          "title": "Trapped in Dillard's",
+          "ms": 229563,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/8e/4d/e5/8e4de596-7fa4-f811-9945-c0fe2ec2265b/mzaf_17465420460667331177.plus.aac.p.m4a"
+        },
+        {
+          "n": 9,
+          "title": "Bastardizer",
+          "ms": 252960,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/6e/c0/be/6ec0bee3-63f4-bb79-4a2d-91b0985aa6e6/mzaf_8730909143577133860.plus.aac.p.m4a"
+        },
+        {
+          "n": 10,
+          "title": "Crown Candy",
+          "ms": 248241,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/0b/99/9b/0b999b37-6162-6069-13e9-5d3ec726e733/mzaf_8918395260059293691.plus.aac.p.m4a"
+        },
+        {
+          "n": 11,
+          "title": "Won't Drown",
+          "ms": 297290,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/94/ca/b4/94cab47b-7027-ac10-4b88-6e7b09bbb292/mzaf_11502164392920493338.plus.aac.p.m4a"
+        },
+        {
+          "n": 12,
+          "title": "Lambert",
+          "ms": 234593,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/71/ff/7d/71ff7deb-03ba-635f-7dcb-7118d7193a0d/mzaf_5314518788755340311.plus.aac.p.m4a"
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/29/5d/6a/295d6a06-c8d1-6a26-f5ed-64db7ca520b4/dj.whhhzhls.jpg/1800x1800bb.jpg",
+      "art": "assets/40/foxing-nearer-my-god.jpg",
+      "wear": {
+        "level": "med",
+        "ring": 0.3,
+        "surface": 0.5
+      },
+      "art_worn": "assets/40/worn/foxing-nearer-my-god.jpg",
+      "worn_v": "1e5a3f1d",
+      "story": {
+        "focus": [
+          0.55,
+          0.72
+        ],
+        "at": [
+          0.5,
+          0.55
+        ],
+        "zoom": 3.2,
+        "rise": 0.25,
+        "floor": 45,
+        "ceil": 215,
+        "contrast": 1.2
+      }
+    },
+    {
       "slug": "oasis-what-s-the-story-morning-glory",
       "artist": "Oasis",
       "title": "(What's the Story) Morning Glory?",

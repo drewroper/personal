@@ -926,7 +926,7 @@
       "apple_url": "https://music.apple.com/us/album/nearer-my-god/1406947177",
       "released": "2018-08-10",
       "year": "2018",
-      "copyright": "℗ 2018 Round Hill Records LLC",
+      "copyright": "℗ 2018 Triple Crown Records",
       "genre": "Alternative",
       "track_count": 12,
       "runtime_ms": 3395066,
@@ -1012,7 +1012,7 @@
         "surface": 0.5
       },
       "art_worn": "assets/40/worn/foxing-nearer-my-god.jpg",
-      "worn_v": "1e5a3f1d",
+      "worn_v": "13b80316",
       "story": {
         "focus": [
           0.55,
@@ -1027,7 +1027,14 @@
         "floor": 45,
         "ceil": 215,
         "contrast": 1.2
-      }
+      },
+      "art_back": "assets/40/foxing-nearer-my-god-back.jpg",
+      "art_back_src": "https://www.discogs.com/release/12368635",
+      "links": {
+        "spotify": "https://open.spotify.com/album/6l3mTuQHtjeqoyYWkTxld8"
+      },
+      "art_back_worn": "assets/40/worn/foxing-nearer-my-god-back.jpg",
+      "live": true
     },
     {
       "slug": "oasis-what-s-the-story-morning-glory",

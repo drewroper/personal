@@ -1113,13 +1113,40 @@
         },
         {
           "n": 10,
-          "title": "Beth / Rest",
+          "title": "Beth/Rest",
           "ms": 316800,
           "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/69/c7/e4/69c7e4d2-2b7d-708d-37a3-3741a59ae85e/mzaf_16966744491306893795.plus.aac.p.m4a"
         }
       ],
-      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/ac/f9/a6/acf9a654-55d3-29b8-cac0-fef50ac5a5be/mzi.gshakpry.jpg/1800x1800bb.jpg",
-      "art": "assets/40/bon-iver-bon-iver-bon-iver.jpg"
+      "art_remote": "https://static.qobuz.com/images/covers/69/35/0656605213569_org.jpg",
+      "art": "assets/40/bon-iver-bon-iver-bon-iver.jpg",
+      "art_back": "assets/40/bon-iver-bon-iver-bon-iver-back.jpg",
+      "art_back_src": "https://coverartarchive.org/release/80d950a5-6b91-41f5-94f6-beb7eaa890ed/26218974482.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/2LpfNj3vB5rOXfaawLcOBg"
+      },
+      "wear": {
+        "level": "med",
+        "edge": 2.5
+      },
+      "story": {
+        "focus": [
+          0.42,
+          0.53
+        ],
+        "at": [
+          0.5,
+          0.55
+        ],
+        "zoom": 3.2,
+        "rise": 0.25,
+        "floor": 20,
+        "ceil": 235,
+        "contrast": 1.3
+      },
+      "art_worn": "assets/40/worn/bon-iver-bon-iver-bon-iver.jpg",
+      "art_back_worn": "assets/40/worn/bon-iver-bon-iver-bon-iver-back.jpg",
+      "worn_v": "9d996133"
     },
     {
       "no": 36,
@@ -1135,7 +1162,7 @@
       "apple_url": "https://music.apple.com/us/album/home-like-noplace-is-there/1559320070",
       "released": "2014-02-25",
       "year": "2014",
-      "copyright": "℗ 2014 Dreams of Field",
+      "copyright": "℗ 2014 The Hotelier",
       "genre": "Rock",
       "track_count": 9,
       "runtime_ms": 2174987,
@@ -1195,10 +1222,34 @@
           "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ac/79/4b/ac794ba7-8367-b6c9-64ec-6df4c1dcafa0/mzaf_17731704220488860959.plus.aac.p.m4a"
         }
       ],
-      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/b4/02/f4/b402f4ba-dcbe-bc76-cf35-ff0cfdba1124/634457054646.jpg/1800x1800bb.jpg",
-      "label": "Dreams of Field",
+      "art_remote": "https://f4.bcbits.com/img/a1570207516_0.jpg",
+      "label": "Tiny Engines",
       "art": "assets/40/the-hotelier-home-like-noplace-is-there.jpg",
-      "date": "2026-10-28"
+      "date": "2026-10-28",
+      "art_back": "assets/40/the-hotelier-home-like-noplace-is-there-back.jpg",
+      "art_back_src": "https://cdn.shopify.com/s/files/1/0566/5105/5295/products/the-hotelier-home-like-noplace-is-there-opaque-orange-vinyl-us-vinyl-lp-album-record-803400c.jpg?v=1708100439",
+      "wear": {
+        "level": "high",
+        "edge": 2.5
+      },
+      "story": {
+        "focus": [
+          0.38,
+          0.55
+        ],
+        "at": [
+          0.5,
+          0.55
+        ],
+        "zoom": 3.4,
+        "rise": 0.3,
+        "floor": 35,
+        "ceil": 210,
+        "contrast": 1.1
+      },
+      "art_worn": "assets/40/worn/the-hotelier-home-like-noplace-is-there.jpg",
+      "art_back_worn": "assets/40/worn/the-hotelier-home-like-noplace-is-there-back.jpg",
+      "worn_v": "c24d0c09"
     },
     {
       "slug": "oasis-what-s-the-story-morning-glory",

@@ -1040,6 +1040,167 @@
       "live": true
     },
     {
+      "no": 35,
+      "slug": "bon-iver-bon-iver-bon-iver",
+      "artist": "Bon Iver",
+      "title": "Bon Iver, Bon Iver",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 438685974,
+      "label": "Jagjaguwar",
+      "date": "2026-10-27",
+      "apple_url": "https://music.apple.com/us/album/bon-iver-bon-iver/438685974",
+      "released": "2011-06-21",
+      "year": "2011",
+      "copyright": "℗ 2011 Jagjaguwar",
+      "genre": "Alternative",
+      "track_count": 10,
+      "runtime_ms": 2368866,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Perth",
+          "ms": 262080,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/53/69/ff/5369ff24-63cd-e99d-09be-daa700e04094/mzaf_15724053844967916242.plus.aac.p.m4a"
+        },
+        {
+          "n": 2,
+          "title": "Minnesota, WI",
+          "ms": 232440,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/3d/1b/5c/3d1b5c4a-5364-7388-182d-13b42271156a/mzaf_15145373539958165118.plus.aac.p.m4a"
+        },
+        {
+          "n": 3,
+          "title": "Holocene",
+          "ms": 336613,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/89/fb/8d/89fb8d90-25fe-a859-60e7-4464aa0fd98c/mzaf_754194167290958559.plus.aac.p.m4a"
+        },
+        {
+          "n": 4,
+          "title": "Towers",
+          "ms": 188040,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/13/89/1a/13891a13-fde7-2f4c-16c2-9c1c530b155b/mzaf_3849937104472624157.plus.aac.p.m4a"
+        },
+        {
+          "n": 5,
+          "title": "Michicant",
+          "ms": 225733,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/20/17/58/201758dc-d40e-3861-071e-97349c677614/mzaf_3734595263828189886.plus.aac.p.m4a"
+        },
+        {
+          "n": 6,
+          "title": "Hinnom, TX",
+          "ms": 165013,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/f6/98/85/f6988530-ca60-cba1-277d-69abfe76351c/mzaf_4742752686632432241.plus.aac.p.m4a"
+        },
+        {
+          "n": 7,
+          "title": "Wash.",
+          "ms": 298587,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/8a/0e/15/8a0e156e-621a-f32e-d2fc-d115d218345d/mzaf_7596275016358778450.plus.aac.p.m4a"
+        },
+        {
+          "n": 8,
+          "title": "Calgary",
+          "ms": 250200,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/fd/2e/51/fd2e5113-5721-e94b-cbf2-8638375281ee/mzaf_17543302665293247303.plus.aac.p.m4a"
+        },
+        {
+          "n": 9,
+          "title": "Lisbon, OH",
+          "ms": 93360,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/d5/81/0d/d5810d65-d83f-5764-2363-2fa07dc8f365/mzaf_12539983940734275030.plus.aac.p.m4a"
+        },
+        {
+          "n": 10,
+          "title": "Beth / Rest",
+          "ms": 316800,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/69/c7/e4/69c7e4d2-2b7d-708d-37a3-3741a59ae85e/mzaf_16966744491306893795.plus.aac.p.m4a"
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/ac/f9/a6/acf9a654-55d3-29b8-cac0-fef50ac5a5be/mzi.gshakpry.jpg/1800x1800bb.jpg",
+      "art": "assets/40/bon-iver-bon-iver-bon-iver.jpg"
+    },
+    {
+      "no": 36,
+      "slug": "the-hotelier-home-like-noplace-is-there",
+      "artist": "The Hotelier",
+      "title": "Home, Like Noplace Is There",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 1559320070,
+      "links": {
+        "spotify": "https://open.spotify.com/album/172GEyILIzsGA8PJqrsHmL"
+      },
+      "apple_url": "https://music.apple.com/us/album/home-like-noplace-is-there/1559320070",
+      "released": "2014-02-25",
+      "year": "2014",
+      "copyright": "℗ 2014 Dreams of Field",
+      "genre": "Rock",
+      "track_count": 9,
+      "runtime_ms": 2174987,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "An Introduction to the Album",
+          "ms": 272547,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/a4/f8/d4/a4f8d4b2-6910-8a4d-a1f3-48b44e94a236/mzaf_8127046597442588611.plus.aac.p.m4a"
+        },
+        {
+          "n": 2,
+          "title": "The Scope of All of This Rebuilding",
+          "ms": 146480,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/60/e8/1f/60e81f66-cbcd-2200-ae95-70f29408f71a/mzaf_7246572079872628725.plus.aac.p.m4a"
+        },
+        {
+          "n": 3,
+          "title": "In Framing",
+          "ms": 179627,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/d2/72/6f/d2726f8c-4c5f-f449-d2f7-e5d48602227d/mzaf_2441644833604091276.plus.aac.p.m4a"
+        },
+        {
+          "n": 4,
+          "title": "Your Deep Rest",
+          "ms": 227213,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/0e/45/27/0e45270e-0239-068b-9a37-63d575fe6dfb/mzaf_301381378496691464.plus.aac.p.m4a"
+        },
+        {
+          "n": 5,
+          "title": "Among the Wildflowers",
+          "ms": 348893,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/d6/6b/56/d66b56c0-b412-148c-fe32-b29a3e3d28ed/mzaf_12590129040553918293.plus.aac.p.m4a"
+        },
+        {
+          "n": 6,
+          "title": "Life in Drag",
+          "ms": 141880,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/15/2b/9d/152b9de6-17a3-29ba-3beb-5f6599b22b1c/mzaf_4785723595051077966.plus.aac.p.m4a"
+        },
+        {
+          "n": 7,
+          "title": "Housebroken",
+          "ms": 290867,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/14/a5/20/14a5200b-2194-5483-6b01-a2159468546b/mzaf_6816243116504426796.plus.aac.p.m4a"
+        },
+        {
+          "n": 8,
+          "title": "Discomfort Revisited",
+          "ms": 239573,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/68/18/d0/6818d08e-8977-5e3d-77ec-774603f858f6/mzaf_8857997484737678409.plus.aac.p.m4a"
+        },
+        {
+          "n": 9,
+          "title": "Dendron",
+          "ms": 327907,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ac/79/4b/ac794ba7-8367-b6c9-64ec-6df4c1dcafa0/mzaf_17731704220488860959.plus.aac.p.m4a"
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/b4/02/f4/b402f4ba-dcbe-bc76-cf35-ff0cfdba1124/634457054646.jpg/1800x1800bb.jpg",
+      "label": "Dreams of Field",
+      "art": "assets/40/the-hotelier-home-like-noplace-is-there.jpg",
+      "date": "2026-10-28"
+    },
+    {
       "slug": "oasis-what-s-the-story-morning-glory",
       "artist": "Oasis",
       "title": "(What's the Story) Morning Glory?",
@@ -3202,84 +3363,6 @@
         "floor": 30,
         "contrast": 0.9
       }
-    },
-    {
-      "no": null,
-      "slug": "the-hotelier-home-like-noplace-is-there",
-      "artist": "The Hotelier",
-      "title": "Home, Like Noplace Is There",
-      "discovered": "",
-      "blurb": [],
-      "apple_id": 1559320070,
-      "links": {
-        "spotify": "https://open.spotify.com/album/172GEyILIzsGA8PJqrsHmL"
-      },
-      "apple_url": "https://music.apple.com/us/album/home-like-noplace-is-there/1559320070",
-      "released": "2014-02-25",
-      "year": "2014",
-      "copyright": "℗ 2014 Dreams of Field",
-      "genre": "Rock",
-      "track_count": 9,
-      "runtime_ms": 2174987,
-      "tracks": [
-        {
-          "n": 1,
-          "title": "An Introduction to the Album",
-          "ms": 272547,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/a4/f8/d4/a4f8d4b2-6910-8a4d-a1f3-48b44e94a236/mzaf_8127046597442588611.plus.aac.p.m4a"
-        },
-        {
-          "n": 2,
-          "title": "The Scope of All of This Rebuilding",
-          "ms": 146480,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/60/e8/1f/60e81f66-cbcd-2200-ae95-70f29408f71a/mzaf_7246572079872628725.plus.aac.p.m4a"
-        },
-        {
-          "n": 3,
-          "title": "In Framing",
-          "ms": 179627,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/d2/72/6f/d2726f8c-4c5f-f449-d2f7-e5d48602227d/mzaf_2441644833604091276.plus.aac.p.m4a"
-        },
-        {
-          "n": 4,
-          "title": "Your Deep Rest",
-          "ms": 227213,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/0e/45/27/0e45270e-0239-068b-9a37-63d575fe6dfb/mzaf_301381378496691464.plus.aac.p.m4a"
-        },
-        {
-          "n": 5,
-          "title": "Among the Wildflowers",
-          "ms": 348893,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/d6/6b/56/d66b56c0-b412-148c-fe32-b29a3e3d28ed/mzaf_12590129040553918293.plus.aac.p.m4a"
-        },
-        {
-          "n": 6,
-          "title": "Life in Drag",
-          "ms": 141880,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/15/2b/9d/152b9de6-17a3-29ba-3beb-5f6599b22b1c/mzaf_4785723595051077966.plus.aac.p.m4a"
-        },
-        {
-          "n": 7,
-          "title": "Housebroken",
-          "ms": 290867,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/14/a5/20/14a5200b-2194-5483-6b01-a2159468546b/mzaf_6816243116504426796.plus.aac.p.m4a"
-        },
-        {
-          "n": 8,
-          "title": "Discomfort Revisited",
-          "ms": 239573,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/68/18/d0/6818d08e-8977-5e3d-77ec-774603f858f6/mzaf_8857997484737678409.plus.aac.p.m4a"
-        },
-        {
-          "n": 9,
-          "title": "Dendron",
-          "ms": 327907,
-          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ac/79/4b/ac794ba7-8367-b6c9-64ec-6df4c1dcafa0/mzaf_17731704220488860959.plus.aac.p.m4a"
-        }
-      ],
-      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/b4/02/f4/b402f4ba-dcbe-bc76-cf35-ff0cfdba1124/634457054646.jpg/1800x1800bb.jpg",
-      "label": "Dreams of Field",
-      "art": "assets/40/the-hotelier-home-like-noplace-is-there.jpg"
     },
     {
       "no": 17,

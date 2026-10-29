@@ -1044,8 +1044,11 @@
       "slug": "bon-iver-bon-iver-bon-iver",
       "artist": "Bon Iver",
       "title": "Bon Iver, Bon Iver",
-      "discovered": "",
-      "blurb": [],
+      "discovered": "Summer 2011",
+      "blurb": [
+        "_For Emma, Forever Ago_ and the _Blood Bank_ EP were core listening for any self-loathing sad boi like myself. I loved _For Emma_, but the self-titled record felt bigger and more complete to me. It brought everything together into a falsetto masterpiece of feels. I started my first \"real\" big boy job about a week after it came out, and it was the soundtrack to my L rides for months. I'm not in love with anything he's done since, but the Volcano Choir records are a fantastic companion to the first two Bon Iver albums.",
+        "I took French in high school, so I know how to pronounce it correctly. I've gotten in fights over this. It's very important to me. It's also perfect winter music, and I got to see them at the UIC Pavilion in December 2011 with Megan and my roommate Kelsey. Kelsey had tears in her eyes, so I asked if she was okay. \"No, of course not. I just saw Bon Iver.\""
+      ],
       "apple_id": 438685974,
       "label": "Jagjaguwar",
       "date": "2026-10-27",
@@ -1146,15 +1149,21 @@
       },
       "art_worn": "assets/40/worn/bon-iver-bon-iver-bon-iver.jpg",
       "art_back_worn": "assets/40/worn/bon-iver-bon-iver-bon-iver-back.jpg",
-      "worn_v": "9d996133"
+      "worn_v": "9d996133",
+      "live": true
     },
     {
       "no": 36,
       "slug": "the-hotelier-home-like-noplace-is-there",
       "artist": "The Hotelier",
       "title": "Home, Like Noplace Is There",
-      "discovered": "",
-      "blurb": [],
+      "discovered": "July 2014",
+      "blurb": [
+        "In the summer of 2014 I was on a contract at Dropbox, working super late nights and living in corporate housing for about two months. I was having a blast at work, but it was hard being away from Megan and Henry. I kept hearing about this album from my emo brethren in our group chat, so one night I put it on in the office while I was working on an installation. I was hooked three and a half minutes into the first song, right at the \"FUCK!!\" Hard to ignore a hook like that.",
+        "This record opened a new chapter in my life. It was emo revival, and it brought emo back into my life again. I spent college, and the few years after in Chicago, exploring more genres and styles than I ever had before, but this album single-handedly reminded me of who I was.",
+        "Yes, another 2014 album. This one got me back into loud, energetic, and unapologetic music. After it, bands like PUP, Hop Along, The World Is a Beautiful Place & I Am No Longer Afraid to Die, Turnstile, Oso Oso, Dogleg, Fiddlehead, Glitterer, and Teen Mortgage started showing up on my albums of the year lists, which meant new emo bands on my lists for the first time in nearly a decade. Would I have gotten into them without the Hotelier? Maybe. But _Home, Like Noplace Is There_ set something off in me that only the loudest, most energetic music could satisfy.",
+        "Ironically, almost everyone would say _Goodness_ is the Hotelier's masterpiece, and I just couldn't get into it. The mix hurts my ears! I am sensitive! _Home_ is the only record of theirs that does anything for me."
+      ],
       "apple_id": 1559320070,
       "links": {
         "spotify": "https://open.spotify.com/album/172GEyILIzsGA8PJqrsHmL"
@@ -1249,7 +1258,8 @@
       },
       "art_worn": "assets/40/worn/the-hotelier-home-like-noplace-is-there.jpg",
       "art_back_worn": "assets/40/worn/the-hotelier-home-like-noplace-is-there-back.jpg",
-      "worn_v": "c24d0c09"
+      "worn_v": "c24d0c09",
+      "live": true
     },
     {
       "slug": "oasis-what-s-the-story-morning-glory",

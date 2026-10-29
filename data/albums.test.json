@@ -799,7 +799,7 @@
       "worn_v": "c3250a29"
     },
     {
-      "no": 37,
+      "no": null,
       "slug": "blink-182-take-off-your-pants-and-jacket",
       "artist": "blink-182",
       "title": "Take Off Your Pants and Jacket",
@@ -4986,6 +4986,139 @@
       "art_back_worn": "assets/40/worn/the-hotelier-home-like-noplace-is-there-back.jpg",
       "worn_v": "c24d0c09",
       "live": true
+    },
+    {
+      "no": 37,
+      "slug": "disclosure-settle",
+      "artist": "Disclosure",
+      "title": "Settle",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 1440859266,
+      "date": "2026-10-29",
+      "apple_url": "https://music.apple.com/us/album/settle/1440859266",
+      "released": "2013-06-03",
+      "year": "2013",
+      "copyright": "℗ 2013 Universal Island Records",
+      "genre": "Electronic",
+      "track_count": 14,
+      "runtime_ms": 3665656,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Intro",
+          "ms": 59094,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/4b/2f/c2/4b2fc2e6-6bfe-b87d-8a0d-d9b4a359d3d6/mzaf_14932610993279071626.plus.aac.p.m4a"
+        },
+        {
+          "n": 2,
+          "title": "When a Fire Starts to Burn",
+          "ms": 283974,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/94/1c/55/941c5530-253a-4bab-a044-1ee619679481/mzaf_6369122803133208370.plus.aac.p.m4a"
+        },
+        {
+          "n": 3,
+          "title": "Latch (feat. Sam Smith)",
+          "ms": 256907,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/0a/db/4b/0adb4b0f-7e7b-6387-699d-a8a363dceae5/mzaf_12182231802224632282.plus.aac.p.m4a"
+        },
+        {
+          "n": 4,
+          "title": "F for You",
+          "ms": 269080,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/f3/35/18/f3351814-062a-6365-13be-0d75fcd70b3c/mzaf_3188322639078734574.plus.aac.p.m4a"
+        },
+        {
+          "n": 5,
+          "title": "White Noise (feat. AlunaGeorge)",
+          "ms": 278080,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/30/1f/54/301f5473-a970-0467-8916-e83dbd50ae7d/mzaf_13686974639601421079.plus.aac.p.m4a"
+        },
+        {
+          "n": 6,
+          "title": "Defeated No More (feat. Edward Macfarlane)",
+          "ms": 369280,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/3e/34/a3/3e34a3eb-4e64-5eb9-51ad-c401c883170d/mzaf_7796927122606417772.plus.aac.p.m4a"
+        },
+        {
+          "n": 7,
+          "title": "Stimulation",
+          "ms": 322760,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/0c/0a/56/0c0a56ad-e856-a087-c840-ac7ef1e93c48/mzaf_12987705503005043113.plus.aac.p.m4a"
+        },
+        {
+          "n": 8,
+          "title": "Voices (feat. Sasha Keable)",
+          "ms": 245360,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/f5/11/89/f511890f-ef35-3eaa-5dd0-971fdf01df37/mzaf_16400241928147790080.plus.aac.p.m4a"
+        },
+        {
+          "n": 9,
+          "title": "Second Chance",
+          "ms": 142560,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/c1/46/ff/c146ff2e-8c6c-5692-73c2-c978f594336d/mzaf_5002059559753282684.plus.aac.p.m4a"
+        },
+        {
+          "n": 10,
+          "title": "Grab Her!",
+          "ms": 315600,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ad/d4/c8/add4c866-dfbc-73c7-1493-b146448c37f1/mzaf_3410568878690797718.plus.aac.p.m4a"
+        },
+        {
+          "n": 11,
+          "title": "You & Me (feat. Eliza Doolittle)",
+          "ms": 269400,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/58/3b/b6/583bb67f-d58e-6c6e-c22e-6a37ff9e3d70/mzaf_18394019393542843419.plus.aac.p.m4a"
+        },
+        {
+          "n": 12,
+          "title": "January (feat. Jamie Woon)",
+          "ms": 355774,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/85/37/b7/8537b74b-f8aa-bd25-648c-835df22b9b16/mzaf_12479703868975206954.plus.aac.p.m4a"
+        },
+        {
+          "n": 13,
+          "title": "Confess to Me (feat. Jessie Ware)",
+          "ms": 251267,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/3b/35/71/3b357180-e114-d68a-54f3-61d4aef80857/mzaf_1721205634147915581.plus.aac.p.m4a"
+        },
+        {
+          "n": 14,
+          "title": "Help Me Lose My Mind (feat. London Grammar)",
+          "ms": 246520,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/a5/ef/7f/a5ef7f41-8717-7915-efb4-f69d7fdde43c/mzaf_13349827391855808038.plus.aac.p.m4a"
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/c3/eb/3e/c3eb3efb-bc90-d5ac-c7c3-a047b08af582/13UMGIM46983.rgb.jpg/1800x1800bb.jpg",
+      "label": "PMR / Island",
+      "art": "assets/40/disclosure-settle.jpg",
+      "art_back": "assets/40/disclosure-settle-back.jpg",
+      "art_back_src": "https://cdn.shopify.com/s/files/1/0566/5105/5295/products/disclosure-settle-180gm-uk-2-lp-vinyl-record-double-602537394883-717645c.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/1lM5IfaqcIsXd6UCV3aDSs"
+      },
+      "wear": {
+        "level": "med",
+        "edge": 2.5
+      },
+      "story": {
+        "focus": [
+          0.6,
+          0.5
+        ],
+        "at": [
+          0.5,
+          0.5
+        ],
+        "zoom": 3.4,
+        "rise": 0.3,
+        "floor": 20,
+        "ceil": 225,
+        "contrast": 1.2
+      },
+      "art_worn": "assets/40/worn/disclosure-settle.jpg",
+      "art_back_worn": "assets/40/worn/disclosure-settle-back.jpg",
+      "worn_v": "b479bd33"
     }
   ]
 }

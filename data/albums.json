@@ -1273,9 +1273,9 @@
       "apple_url": "https://music.apple.com/us/album/settle/1440859266",
       "released": "2013-06-03",
       "year": "2013",
-      "copyright": "℗ 2013 Universal Island Records, a division of Universal Music Operations Limited",
+      "copyright": "℗ 2013 Universal Island Records",
       "genre": "Electronic",
-      "track_count": 15,
+      "track_count": 14,
       "runtime_ms": 3665656,
       "tracks": [
         {
@@ -1286,19 +1286,19 @@
         },
         {
           "n": 2,
-          "title": "When A Fire Starts To Burn",
+          "title": "When a Fire Starts to Burn",
           "ms": 283974,
           "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/94/1c/55/941c5530-253a-4bab-a044-1ee619679481/mzaf_6369122803133208370.plus.aac.p.m4a"
         },
         {
           "n": 3,
-          "title": "Latch",
+          "title": "Latch (feat. Sam Smith)",
           "ms": 256907,
           "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/0a/db/4b/0adb4b0f-7e7b-6387-699d-a8a363dceae5/mzaf_12182231802224632282.plus.aac.p.m4a"
         },
         {
           "n": 4,
-          "title": "F For You",
+          "title": "F for You",
           "ms": 269080,
           "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/f3/35/18/f3351814-062a-6365-13be-0d75fcd70b3c/mzaf_3188322639078734574.plus.aac.p.m4a"
         },
@@ -1352,7 +1352,7 @@
         },
         {
           "n": 13,
-          "title": "Confess To Me (feat. Jessie Ware)",
+          "title": "Confess to Me (feat. Jessie Ware)",
           "ms": 251267,
           "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/3b/35/71/3b357180-e114-d68a-54f3-61d4aef80857/mzaf_1721205634147915581.plus.aac.p.m4a"
         },
@@ -1364,8 +1364,35 @@
         }
       ],
       "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/c3/eb/3e/c3eb3efb-bc90-d5ac-c7c3-a047b08af582/13UMGIM46983.rgb.jpg/1800x1800bb.jpg",
-      "label": "Universal Island Records, a division of Universal Music Operations Limited",
-      "art": "assets/40/disclosure-settle.jpg"
+      "label": "PMR / Island",
+      "art": "assets/40/disclosure-settle.jpg",
+      "art_back": "assets/40/disclosure-settle-back.jpg",
+      "art_back_src": "https://cdn.shopify.com/s/files/1/0566/5105/5295/products/disclosure-settle-180gm-uk-2-lp-vinyl-record-double-602537394883-717645c.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/1lM5IfaqcIsXd6UCV3aDSs"
+      },
+      "wear": {
+        "level": "med",
+        "edge": 2.5
+      },
+      "story": {
+        "focus": [
+          0.6,
+          0.5
+        ],
+        "at": [
+          0.5,
+          0.5
+        ],
+        "zoom": 3.4,
+        "rise": 0.3,
+        "floor": 20,
+        "ceil": 225,
+        "contrast": 1.2
+      },
+      "art_worn": "assets/40/worn/disclosure-settle.jpg",
+      "art_back_worn": "assets/40/worn/disclosure-settle-back.jpg",
+      "worn_v": "b479bd33"
     },
     {
       "slug": "oasis-what-s-the-story-morning-glory",

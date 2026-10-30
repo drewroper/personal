@@ -1504,6 +1504,175 @@
       "worn_v": "32d664f8"
     },
     {
+      "no": 39,
+      "slug": "dave-matthews-band-the-central-park-concert",
+      "artist": "Dave Matthews Band",
+      "title": "The Central Park Concert",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 269582331,
+      "apple_url": "https://music.apple.com/us/album/the-central-park-concert-live-in-central-park/269582331",
+      "released": "2003-11-18",
+      "year": "2003",
+      "copyright": "℗ 2003 Bama Rags Recordings, LLC.",
+      "genre": "Rock",
+      "track_count": 20,
+      "runtime_ms": 9881881,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Don't Drink the Water",
+          "ms": 609747,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/82/3d/50/823d50e3-cb66-046b-527d-170ec11bcb1a/mzaf_7987986391492421959.plus.aac.p.m4a"
+        },
+        {
+          "n": 2,
+          "title": "So Much to Say",
+          "ms": 254653,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/64/04/a8/6404a87e-7f73-9348-882d-674172aa442b/mzaf_15774918701337376042.plus.aac.p.m4a"
+        },
+        {
+          "n": 3,
+          "title": "Too Much",
+          "ms": 401573,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ff/82/74/ff827465-6481-f4cf-a789-ee4a91eb2406/mzaf_8344475047761807058.plus.aac.p.m4a"
+        },
+        {
+          "n": 4,
+          "title": "Granny",
+          "ms": 272880,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/9a/81/56/9a8156a4-7803-27e6-0a34-1cb45dfa8d2c/mzaf_3019148109869540590.plus.aac.p.m4a"
+        },
+        {
+          "n": 5,
+          "title": "Crush",
+          "ms": 679987,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/01/56/23/015623b6-7e28-6583-3494-28bfaf5e0b27/mzaf_17051096514460187173.plus.aac.p.m4a"
+        },
+        {
+          "n": 6,
+          "title": "When the World Ends",
+          "ms": 234440,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/7a/ef/01/7aef01c9-abe7-01cd-33ba-a5f76a07536b/mzaf_8827826321325371806.plus.aac.p.m4a"
+        },
+        {
+          "n": 7,
+          "title": "Dancing Nancies",
+          "ms": 587893,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/94/d9/af/94d9af83-a3aa-514f-3f70-2ae647b7caf0/mzaf_4086331360212706026.plus.aac.p.m4a"
+        },
+        {
+          "n": 8,
+          "title": "Warehouse",
+          "ms": 580667,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/fb/d9/99/fbd999fd-36db-01b4-2ca7-dcfe9af0628f/mzaf_12544880295496899480.plus.aac.p.m4a"
+        },
+        {
+          "n": 9,
+          "title": "Ants Marching",
+          "ms": 351440,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/d1/20/8a/d1208a91-374d-c10f-59e3-de539a8900a9/mzaf_10311516953217656091.plus.aac.p.m4a"
+        },
+        {
+          "n": 10,
+          "title": "Rhyme and Reason",
+          "ms": 336693,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/2b/6a/70/2b6a7014-df37-e1c1-8579-d0afe9cde23e/mzaf_5231782096033842098.plus.aac.p.m4a"
+        },
+        {
+          "n": 11,
+          "title": "Two Step",
+          "ms": 1136547,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/88/92/cf/8892cf7d-2819-23e8-7511-19eb9c19dd74/mzaf_11881362296836130645.plus.aac.p.m4a"
+        },
+        {
+          "n": 12,
+          "title": "Help Myself",
+          "ms": 323560,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/10/7a/29/107a299e-797f-e218-223a-ad85c26a30c7/mzaf_16161427352863263072.plus.aac.p.m4a"
+        },
+        {
+          "n": 13,
+          "title": "Cortez, the Killer",
+          "ms": 652707,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/b0/8a/08/b08a0848-75be-6887-7c9a-9d06747ed91a/mzaf_230330553291945076.plus.aac.p.m4a"
+        },
+        {
+          "n": 14,
+          "title": "Jimi Thing",
+          "ms": 999413,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/c8/b7/6c/c8b76ca1-1ced-d64c-9710-451622ba318e/mzaf_15228062047711404136.plus.aac.p.m4a"
+        },
+        {
+          "n": 15,
+          "title": "What Would You Say",
+          "ms": 327267,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/7b/bd/b9/7bbdb9d8-6423-e58c-230e-49489ef17a84/mzaf_1645736213167642614.plus.aac.p.m4a"
+        },
+        {
+          "n": 16,
+          "title": "Where Are You Going",
+          "ms": 233907,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/fd/85/d2/fd85d2ad-6d8c-e87d-3ae8-2a01d9ae7500/mzaf_7828039899860395020.plus.aac.p.m4a"
+        },
+        {
+          "n": 17,
+          "title": "All Along the Watchtower",
+          "ms": 779453,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/56/1d/6c/561d6c4e-511f-48a7-2fa6-f8f9afaa6a70/mzaf_10372540776032851659.plus.aac.p.m4a"
+        },
+        {
+          "n": 18,
+          "title": "Grey Street",
+          "ms": 298747,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/f5/e6/f6/f5e6f6d6-8124-9d0c-729b-d4812e5c71fa/mzaf_6534483604304661437.plus.aac.p.m4a"
+        },
+        {
+          "n": 19,
+          "title": "What You Are",
+          "ms": 400827,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/e7/27/24/e7272412-7d19-b5ec-8056-b0099f0fe2e5/mzaf_14639840940607398773.plus.aac.p.m4a"
+        },
+        {
+          "n": 20,
+          "title": "Stay (Wasting Time)",
+          "ms": 419480,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/42/83/16/428316df-96a4-389d-409d-a3310eb8e217/mzaf_4123259148296565990.plus.aac.p.m4a"
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music111/v4/de/96/29/de96299a-636d-dd0a-7344-1f3190c737e3/dj.olksbijc.jpg/9999x9999-100.jpg",
+      "label": "RCA / Bama Rags",
+      "art": "assets/40/dave-matthews-band-the-central-park-concert.jpg",
+      "links": {
+        "spotify": "https://open.spotify.com/album/4znO5YEgsOir5NRP73TrRD"
+      },
+      "date": "2026-10-31",
+      "art_back": "assets/40/dave-matthews-band-the-central-park-concert-back.jpg",
+      "art_back_src": "https://www.discogs.com/release/9590297",
+      "wear": {
+        "level": "med",
+        "edge": 2.0
+      },
+      "story": {
+        "focus": [
+          0.3,
+          0.45
+        ],
+        "at": [
+          0.5,
+          0.5
+        ],
+        "zoom": 3.2,
+        "rise": 0.3,
+        "floor": 45,
+        "ceil": 215,
+        "contrast": 1.15
+      },
+      "art_worn": "assets/40/worn/dave-matthews-band-the-central-park-concert.jpg",
+      "art_back_worn": "assets/40/worn/dave-matthews-band-the-central-park-concert-back.jpg",
+      "worn_v": "94ec41e4"
+    },
+    {
       "no": null,
       "slug": "disclosure-settle",
       "artist": "Disclosure",

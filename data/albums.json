@@ -1263,13 +1263,221 @@
     },
     {
       "no": 37,
+      "slug": "geese-getting-killed",
+      "artist": "Geese",
+      "title": "Getting Killed",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 1818548779,
+      "label": "Partisan",
+      "date": "2026-10-29",
+      "apple_url": "https://music.apple.com/us/album/getting-killed/1818548779",
+      "released": "2025-09-26",
+      "year": "2025",
+      "copyright": "℗ 2025 Partisan Records / Play It Again Sam",
+      "genre": "Alternative",
+      "track_count": 11,
+      "runtime_ms": 2739350,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "Trinidad",
+          "ms": 224824,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/e5/d5/e4/e5d5e443-e37c-32de-a4dd-701ded1a098c/mzaf_10288425552413074897.plus.aac.p.m4a"
+        },
+        {
+          "n": 2,
+          "title": "Cobra",
+          "ms": 185153,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/87/7a/68/877a68c8-41e7-bafb-451e-fb84456c75ea/mzaf_3789148779264821860.plus.aac.p.m4a"
+        },
+        {
+          "n": 3,
+          "title": "Husbands",
+          "ms": 248229,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/9b/c3/ee/9bc3eedc-d47c-43d6-9953-0f338cdeb694/mzaf_10681992617464334681.plus.aac.p.m4a"
+        },
+        {
+          "n": 4,
+          "title": "Getting Killed",
+          "ms": 284532,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/bf/d6/37/bfd637e4-1812-9260-c68e-3b7fd29132c7/mzaf_4871771623982716919.plus.aac.p.m4a"
+        },
+        {
+          "n": 5,
+          "title": "Islands of Men",
+          "ms": 354139,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/39/82/41/39824178-da78-02c2-0c30-fc10a6c57529/mzaf_15787038078960462954.plus.aac.p.m4a"
+        },
+        {
+          "n": 6,
+          "title": "100 Horses",
+          "ms": 226356,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/7c/9a/6a/7c9a6aef-5392-26a1-acd0-a24865a32f82/mzaf_6767150333154326439.plus.aac.p.m4a"
+        },
+        {
+          "n": 7,
+          "title": "Half Real",
+          "ms": 202202,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ec/98/da/ec98dad2-2cf3-8912-14aa-304aa12b53fe/mzaf_3746411475444900560.plus.aac.p.m4a"
+        },
+        {
+          "n": 8,
+          "title": "Au Pays du Cocaine",
+          "ms": 210946,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/fc/e3/56/fce35668-19c4-e079-ab4a-20a06aa47beb/mzaf_9028386241704691142.plus.aac.p.m4a"
+        },
+        {
+          "n": 9,
+          "title": "Bow Down",
+          "ms": 208287,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/90/38/c0/9038c0bb-314b-7d40-3d0b-7e0d56b1e322/mzaf_1459941527940803901.plus.aac.p.m4a"
+        },
+        {
+          "n": 10,
+          "title": "Taxes",
+          "ms": 197662,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/a2/90/67/a290675e-246b-6a4f-978b-76376dbca022/mzaf_17012130112191688969.plus.aac.p.m4a"
+        },
+        {
+          "n": 11,
+          "title": "Long Island City Here I Come",
+          "ms": 397020,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/88/a2/67/88a26768-c623-cbd0-c9cd-3e70e0f30398/mzaf_11121312484352348479.plus.aac.p.m4a"
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/0b/b8/f1/0bb8f1d7-1df0-20c0-9539-51d08058eeb1/5400863191436_Cover.jpg/1800x1800bb.jpg",
+      "art": "assets/40/geese-getting-killed.jpg",
+      "wear": {
+        "level": "low",
+        "edge": 1.5
+      },
+      "story": {
+        "focus": [
+          0.5,
+          0.5
+        ],
+        "at": [
+          0.5,
+          0.5
+        ],
+        "zoom": 3.6,
+        "rise": 0.35,
+        "floor": 30,
+        "ceil": 215,
+        "contrast": 1.25
+      },
+      "art_worn": "assets/40/worn/geese-getting-killed.jpg",
+      "worn_v": "0bd55a15"
+    },
+    {
+      "no": 38,
+      "slug": "manchester-orchestra-mean-everything-to-nothing",
+      "artist": "Manchester Orchestra",
+      "title": "Mean Everything to Nothing",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 309370699,
+      "date": "2026-10-30",
+      "apple_url": "https://music.apple.com/us/album/mean-everything-to-nothing/309370699",
+      "released": "2009-04-17",
+      "year": "2009",
+      "copyright": "℗ 2009 Sony Music Entertainment",
+      "genre": "Alternative",
+      "track_count": 13,
+      "runtime_ms": 3367427,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "The Only One",
+          "ms": 159187,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/db/9e/5d/db9e5df5-69ea-5f01-b6c2-169311158e8b/mzaf_4596321025450369961.plus.aac.p.m4a"
+        },
+        {
+          "n": 2,
+          "title": "Shake It Out",
+          "ms": 311440,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/00/f5/02/00f502c3-3556-cfe3-01b3-21a016e6e6f4/mzaf_17264499092539645991.plus.aac.p.m4a"
+        },
+        {
+          "n": 3,
+          "title": "I've Got Friends",
+          "ms": 297493,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ff/91/a7/ff91a77e-07d1-1fe1-bc37-0fa0e3b9e78a/mzaf_18002840958672537119.plus.aac.p.m4a"
+        },
+        {
+          "n": 4,
+          "title": "Pride",
+          "ms": 347600,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/56/6c/b7/566cb7bf-71c7-92fa-c137-753343f7f11c/mzaf_4728252935590645764.plus.aac.p.m4a"
+        },
+        {
+          "n": 5,
+          "title": "In My Teeth",
+          "ms": 282160,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/09/44/0d/09440def-1317-fe12-7082-f67dd8453aef/mzaf_10855430754125979102.plus.aac.p.m4a"
+        },
+        {
+          "n": 6,
+          "title": "100 Dollars",
+          "ms": 102427,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/bb/26/ba/bb26ba80-ce4c-58a7-b33b-d90a1accbf28/mzaf_6212557787818899723.plus.aac.p.m4a"
+        },
+        {
+          "n": 7,
+          "title": "I Can Feel a Hot One",
+          "ms": 259347,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/5f/99/c9/5f99c901-cfad-4a94-966d-0ec632fdd177/mzaf_9460151114446349742.plus.aac.p.m4a"
+        },
+        {
+          "n": 8,
+          "title": "My Friend Marcus",
+          "ms": 221093,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/e9/4e/76/e94e7641-63db-15fe-1a97-c1ff6078beb1/mzaf_8725417050058069309.plus.aac.p.m4a"
+        },
+        {
+          "n": 9,
+          "title": "Tony The Tiger",
+          "ms": 189240,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/53/d2/43/53d24317-3edd-f13d-8811-e6c2b47ebe5e/mzaf_7528589205681312560.plus.aac.p.m4a"
+        },
+        {
+          "n": 10,
+          "title": "Everything To Nothing",
+          "ms": 337680,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/23/70/a5/2370a5c9-afa1-300e-c909-8df9d233fb1e/mzaf_3393591598698745635.plus.aac.p.m4a"
+        },
+        {
+          "n": 11,
+          "title": "The River",
+          "ms": 358520,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/33/fd/73/33fd733a-d0db-8c86-def2-0f98dcb29932/mzaf_11458487277512673132.plus.aac.p.m4a"
+        },
+        {
+          "n": 12,
+          "title": "Jimmy, He Whispers",
+          "ms": 249560,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/a4/99/20/a499209a-db92-aa34-25c1-c29de72535eb/mzaf_11992553094159250811.plus.aac.p.m4a"
+        },
+        {
+          "n": 13,
+          "title": "Go",
+          "ms": 251680,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/28/38/c8/2838c862-cebc-33da-f0f8-0f7188a2cb06/mzaf_11332638882919576336.plus.aac.p.m4a"
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/f0/68/56/f068561d-3a5c-5573-0a8a-4afe3a43552b/884977080605.jpg/1800x1800bb.jpg",
+      "label": "Sony Music Entertainment",
+      "art": "assets/40/manchester-orchestra-mean-everything-to-nothing.jpg"
+    },
+    {
+      "no": null,
       "slug": "disclosure-settle",
       "artist": "Disclosure",
       "title": "Settle",
       "discovered": "",
       "blurb": [],
       "apple_id": 1440859266,
-      "date": "2026-10-29",
       "apple_url": "https://music.apple.com/us/album/settle/1440859266",
       "released": "2013-06-03",
       "year": "2013",

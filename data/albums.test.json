@@ -147,7 +147,7 @@
       }
     },
     {
-      "no": 38,
+      "no": null,
       "slug": "dave-matthews-band-crash",
       "artist": "Dave Matthews Band",
       "title": "Crash",
@@ -5107,6 +5107,127 @@
         "spotify": "https://open.spotify.com/album/0eeXb23yMW6EaIgm63xxPC"
       },
       "art_back_worn": "assets/40/worn/geese-getting-killed-back.jpg"
+    },
+    {
+      "no": 38,
+      "slug": "manchester-orchestra-mean-everything-to-nothing",
+      "artist": "Manchester Orchestra",
+      "title": "Mean Everything to Nothing",
+      "discovered": "",
+      "blurb": [],
+      "apple_id": 309370699,
+      "date": "2026-10-30",
+      "apple_url": "https://music.apple.com/us/album/mean-everything-to-nothing/309370699",
+      "released": "2009-04-21",
+      "year": "2009",
+      "copyright": "℗ 2009 Sony Music Entertainment",
+      "genre": "Alternative",
+      "track_count": 12,
+      "runtime_ms": 3115747,
+      "tracks": [
+        {
+          "n": 1,
+          "title": "The Only One",
+          "ms": 159187,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/db/9e/5d/db9e5df5-69ea-5f01-b6c2-169311158e8b/mzaf_4596321025450369961.plus.aac.p.m4a"
+        },
+        {
+          "n": 2,
+          "title": "Shake It Out",
+          "ms": 311440,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/00/f5/02/00f502c3-3556-cfe3-01b3-21a016e6e6f4/mzaf_17264499092539645991.plus.aac.p.m4a"
+        },
+        {
+          "n": 3,
+          "title": "I've Got Friends",
+          "ms": 297493,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ff/91/a7/ff91a77e-07d1-1fe1-bc37-0fa0e3b9e78a/mzaf_18002840958672537119.plus.aac.p.m4a"
+        },
+        {
+          "n": 4,
+          "title": "Pride",
+          "ms": 347600,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/56/6c/b7/566cb7bf-71c7-92fa-c137-753343f7f11c/mzaf_4728252935590645764.plus.aac.p.m4a"
+        },
+        {
+          "n": 5,
+          "title": "In My Teeth",
+          "ms": 282160,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/09/44/0d/09440def-1317-fe12-7082-f67dd8453aef/mzaf_10855430754125979102.plus.aac.p.m4a"
+        },
+        {
+          "n": 6,
+          "title": "100 Dollars",
+          "ms": 102427,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/bb/26/ba/bb26ba80-ce4c-58a7-b33b-d90a1accbf28/mzaf_6212557787818899723.plus.aac.p.m4a"
+        },
+        {
+          "n": 7,
+          "title": "I Can Feel a Hot One",
+          "ms": 259347,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/5f/99/c9/5f99c901-cfad-4a94-966d-0ec632fdd177/mzaf_9460151114446349742.plus.aac.p.m4a"
+        },
+        {
+          "n": 8,
+          "title": "My Friend Marcus",
+          "ms": 221093,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/e9/4e/76/e94e7641-63db-15fe-1a97-c1ff6078beb1/mzaf_8725417050058069309.plus.aac.p.m4a"
+        },
+        {
+          "n": 9,
+          "title": "Tony the Tiger",
+          "ms": 189240,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/53/d2/43/53d24317-3edd-f13d-8811-e6c2b47ebe5e/mzaf_7528589205681312560.plus.aac.p.m4a"
+        },
+        {
+          "n": 10,
+          "title": "Everything to Nothing",
+          "ms": 337680,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/23/70/a5/2370a5c9-afa1-300e-c909-8df9d233fb1e/mzaf_3393591598698745635.plus.aac.p.m4a"
+        },
+        {
+          "n": 11,
+          "title": "The River",
+          "ms": 358520,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/33/fd/73/33fd733a-d0db-8c86-def2-0f98dcb29932/mzaf_11458487277512673132.plus.aac.p.m4a"
+        },
+        {
+          "n": 12,
+          "title": "Jimmy, He Whispers",
+          "ms": 249560,
+          "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/a4/99/20/a499209a-db92-aa34-25c1-c29de72535eb/mzaf_11992553094159250811.plus.aac.p.m4a"
+        }
+      ],
+      "art_remote": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/f0/68/56/f068561d-3a5c-5573-0a8a-4afe3a43552b/884977080605.jpg/1800x1800bb.jpg",
+      "label": "Favorite Gentlemen / Canvasback",
+      "art": "assets/40/manchester-orchestra-mean-everything-to-nothing.jpg",
+      "art_back": "assets/40/manchester-orchestra-mean-everything-to-nothing-back.jpg",
+      "art_back_src": "https://www.discogs.com/release/2926948",
+      "links": {
+        "spotify": "https://open.spotify.com/album/5piFSrg34mjWz2mprT1a4s"
+      },
+      "wear": {
+        "level": "high",
+        "edge": 2.5
+      },
+      "story": {
+        "focus": [
+          0.4,
+          0.55
+        ],
+        "at": [
+          0.5,
+          0.5
+        ],
+        "zoom": 3.6,
+        "rise": 0.35,
+        "floor": 30,
+        "ceil": 220,
+        "contrast": 1.25
+      },
+      "art_worn": "assets/40/worn/manchester-orchestra-mean-everything-to-nothing.jpg",
+      "art_back_worn": "assets/40/worn/manchester-orchestra-mean-everything-to-nothing-back.jpg",
+      "worn_v": "32d664f8"
     },
     {
       "no": null,

@@ -1519,7 +1519,7 @@
       "discovered": "October 2001",
       "blurb": [
         "I've flip-flopped on which DMB album to post since the day I decided to do this list, but deep down it was always going to be a live one. The run from _Live at Red Rocks_ (’97) to _Listener Supported_ (’99) to _Live in Chicago_ (’01) to _Folsom Field_ (’02) to _The Central Park Concert_ (’03) fed an entire generation of teenage DMB fans like me. A live album is also the only way to squeeze the three best DMB albums (_Under the Table and Dreaming_, _Crash_, and _Before These Crowded Streets_) into one. And you get the interludes, like \"Anyone Seen the Bridge?\", which as a bass player still gives me goosebumps every time I hear it.",
-        "I bought this one on CD, loved the album art and the CD design, and played the hell out of it. Then I found [the entire Chicago show](photo:assets/40/photos/dmb-chicago-1998-last-stop.jpg \"“The Last Stop,” United Center, Chicago, December 19, 1998\nVia [YouTube](https://www.youtube.com/watch?v=yOgHBMujTCw)\") on some Napster-esque site, stitched three separate videos together, and married the audio from the CD to the video in Windows Movie Maker on my family's living room computer. I was a freshman in high school. And Maceo Parker's sax solo on \"What Would You Say\"? I have it memorized.",
+        "I bought this one on CD, loved the album art and the CD design, and played the hell out of it. It's still one of the few DMB albums without a band or venue photo on the cover, just an old 1955 photo of Chicago pedestrians battling the wind on an icy street. I also think it's the reason I still write my dates with periods, like 12.19.98. Then I found [the entire Chicago show](photo:assets/40/photos/dmb-chicago-1998-last-stop.jpg \"“The Last Stop,” United Center, Chicago, December 19, 1998\nVia [YouTube](https://www.youtube.com/watch?v=yOgHBMujTCw)\") on some Napster-esque site, stitched three separate videos together, and married the audio from the CD to the video in Windows Movie Maker on my family's living room computer. I kept the webcast audio for all the intros and stage banter, then faded in the CD audio once each song started. I was a freshman in high school. Turns out that footage was from the first DMB show ever webcast live. And Maceo Parker's sax solo on \"What Would You Say\"? I have it memorized.",
         "I've seen DMB over 40 times and lost count. My favorite \"Watchtower\" is still the Central Park one, though. I have the photographers' contact sheets from that show in my flat file, wax pencil and all."
       ],
       "apple_id": 269600026,
@@ -1670,7 +1670,10 @@
         "contrast": 1.3
       },
       "art_worn": "assets/40/worn/dave-matthews-band-live-in-chicago-12-19-98.jpg",
-      "worn_v": "bacf3944"
+      "worn_v": "6b9924e9",
+      "art_back": "assets/40/dave-matthews-band-live-in-chicago-12-19-98-back.jpg",
+      "art_back_src": "https://coverartarchive.org/release/2adeb86e-b044-4b06-a655-80f90851bd76/44585898373.jpg",
+      "art_back_worn": "assets/40/worn/dave-matthews-band-live-in-chicago-12-19-98-back.jpg"
     },
     {
       "no": null,

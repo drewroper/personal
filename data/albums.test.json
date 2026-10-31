@@ -5113,8 +5113,15 @@
       "slug": "manchester-orchestra-mean-everything-to-nothing",
       "artist": "Manchester Orchestra",
       "title": "Mean Everything to Nothing",
-      "discovered": "",
-      "blurb": [],
+      "discovered": "April 2009",
+      "blurb": [
+        "This was the first I'd ever heard of Manchester Orchestra. The album has incredible riffs and powerful hooks, and it was another record I put on in the print lab at Mizzou to get me through those all-night sessions.",
+        "This album became my workout record. My pump-up record. My record with all the feels. I was 22, I'd just signed up for an extra year and a half of college, and most of my friends were graduating that May without me. I had no idea what this budding graphic design major would bring me, or if it was worth the extra time spent in CoMo. \"Everything to Nothing\" is my favorite track: that riff, the power of those guitars, and a chorus that said pretty much verbatim what I was thinking.",
+        "> I don't know what to do\n> Not anymore\n> Not anymore",
+        "It got me through a lot of different moments during that time in my life.",
+        "The album also kept that emo fire going right when I was moving away from it in college. For years, they were my bridge from the Brand New and Taking Back Sunday days to The Hotelier. This album kicked off a nearly decade-long love affair with this band, and I even converted Megan. They always seemed to be on tour, and I feel like I've seen them ten times, all over the place.",
+        "In 2015 a group of us went back to Columbia for homecoming, and Manchester Orchestra playing the Blue Note that night was a big part of the appeal for me. After a full day of tailgating, I dragged everyone to the show. We were all a mess. Their sound has changed a lot since, and _A Black Mile to the Surface_ was the last record of theirs I really liked. But from their 2006 debut through that one, that's five albums I love, which is a lot for any band. That run, and the respect I have for them, earned them this spot."
+      ],
       "apple_id": 309370699,
       "date": "2026-10-30",
       "apple_url": "https://music.apple.com/us/album/mean-everything-to-nothing/309370699",
@@ -5227,7 +5234,8 @@
       },
       "art_worn": "assets/40/worn/manchester-orchestra-mean-everything-to-nothing.jpg",
       "art_back_worn": "assets/40/worn/manchester-orchestra-mean-everything-to-nothing-back.jpg",
-      "worn_v": "32d664f8"
+      "worn_v": "32d664f8",
+      "live": true
     },
     {
       "no": 39,

@@ -4919,7 +4919,8 @@
         "floor": 45,
         "ceil": 215,
         "contrast": 1.15
-      }
+      },
+      "live": true
     },
     {
       "no": 2,

@@ -385,7 +385,7 @@
     .foot__links a { color: var(--text-muted); border-bottom-color: transparent; }
     .foot__links a:hover { color: var(--accent); border-bottom-color: var(--accent); }
     .foot__count span { color: var(--text-muted); font-variant-numeric: tabular-nums; }
-    /* ── Birthday mode: Nov 1, or ?birthday to preview. ───────────────── */
+    /* ── Birthday mode: ?birthday. The confetti alone also runs for everyone on Nov 1. ── */
     .confetti { position: fixed; inset: 0; z-index: 30; pointer-events: none; image-rendering: pixelated; }
     .is-birthday .wordmark { cursor: pointer; user-select: none; }
     .is-birthday .wordmark.is-playing > span { animation: hop .28s steps(2, jump-none) infinite; }
@@ -1273,7 +1273,8 @@
     });
 
     // ── Birthday mode ────────────────────────────────────────────────────
-    const BIRTHDAY = params.has('birthday');                  // by hand only for now; nothing on this page switches on by date
+    const BIRTHDAY = params.has('birthday');                  // the whole mode (the tune on the wordmark, the 40th cell's pulse): by hand only
+    const CONFETTI = BIRTHDAY || today === '2026-11-01';      // the confetti alone runs for everyone on the birthday itself, Denver time
     // ?worn, ?worn=light, ?worn=heavy — each record's own sleeve wear over its cover (a test for now).
     if (WORN) document.body.classList.add('is-worn');
     if (BIRTHDAY) document.body.classList.add('is-birthday');
@@ -1330,8 +1331,8 @@
       setTimeout(() => el.classList.remove('is-playing'), (t - ac.currentTime) * 1000);
     }
 
+    if (CONFETTI) startConfetti();
     if (BIRTHDAY) {
-      startConfetti();
       document.querySelectorAll('.wordmark').forEach(w => { w.setAttribute('role', 'button'); w.removeAttribute('aria-hidden'); w.setAttribute('aria-label', 'Play Happy Birthday'); w.tabIndex = 0;
         w.addEventListener('click', () => chiptune(w)); w.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') chiptune(w); }); });
     }

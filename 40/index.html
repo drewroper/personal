@@ -1274,7 +1274,10 @@
 
     // ── Birthday mode ────────────────────────────────────────────────────
     const BIRTHDAY = params.has('birthday');                  // the whole mode (the tune on the wordmark, the 40th cell's pulse): by hand only
-    const CONFETTI = BIRTHDAY || today === '2026-11-01';      // the confetti alone runs for everyone on the birthday itself, Denver time
+    // The confetti alone runs for everyone on the birthday itself: from midnight in Denver until midnight
+    // on the West Coast, so it's still on for anyone out there through their Nov 1 (Drew).
+    const westCoastDay = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Los_Angeles', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+    const CONFETTI = BIRTHDAY || today === '2026-11-01' || westCoastDay === '2026-11-01';
     // ?worn, ?worn=light, ?worn=heavy — each record's own sleeve wear over its cover (a test for now).
     if (WORN) document.body.classList.add('is-worn');
     if (BIRTHDAY) document.body.classList.add('is-birthday');
